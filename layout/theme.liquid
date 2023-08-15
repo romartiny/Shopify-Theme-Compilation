@@ -1,0 +1,106 @@
+<!doctype html>
+<html class="no-js" lang="{{ shop.locale }}" {% if settings.rtl %}dir="rtl"{% endif %}>
+<head>
+  {%- capture metaTags -%}
+    <meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="{{ settings.mob_browser }}">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="canonical" href="{{ canonical_url }}">
+  	<link rel="dns-prefetch" href="https://{{shop.domain}}" crossorigin>
+    <link rel="dns-prefetch" href="https://{{shop.permanent_domain}}" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.shopify.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.shopifycdn.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" crossorigin>
+  	<link rel="preconnect" href="https//fonts.shopifycdn.com/" crossorigin>
+    <link rel="preconnect" href="https//cdn.shopify.com" crossorigin>
+  	<link rel="preconnect" href="https://monorail-edge.shopifysvc.com">
+  	<link rel="preconnect" href="https//ajax.googleapis.com">
+  
+  	{% if settings.rtl %}
+    	<link rel="preload" as="style" href="{{ 'themeRtl.css' | asset_url }}">
+  	{% else %}
+  		<link rel="preload" as="style" href="{{ 'theme.css' | asset_url }}">
+  	{% endif %}
+  
+  	<link rel="preload" href="{{ 'jquery.min.js' | asset_url }}" as="script">
+  	<link rel="preload" href="{{ 'vendor.min.js' | asset_url }}" as="script">
+
+    {%- if settings.favicon != blank -%}<link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">{%- endif -%}
+    {%- if settings.favicon_retina != blank -%}<link rel="apple-touch-icon-precomposed" type="image/png" sizes="152x152" href="{{ settings.favicon_retina | img_url: '152x' }}">{%- endif -%}
+
+  	{%- capture seo_title -%}
+      {%- if request.page_type == 'search' and search.performed == true -%}
+        {{ 'general.search.heading' | t: count: search.results_count }}: {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
+      {%- else -%}
+        {{ page_title }}
+      {%- endif -%}
+      {%- if current_tags -%}{%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}{%- endif -%}
+      {%- if current_page != 1 -%} &ndash; {{ 'general.meta.page' | t: page: current_page }}{%- endif -%}
+      {%- assign escaped_page_title = page_title | escape -%}
+      {%- unless escaped_page_title contains shop.name -%}&ndash; {{ shop.name }}{%- endunless -%}
+    {%- endcapture -%}
+    <title>{{ seo_title | strip }}</title>
+  	{%- if page_description -%}<meta name="description" content="{{ page_description | escape }}">{%- endif -%}
+  	{%- render 'social-meta-tags' -%}
+  {%- endcapture -%}
+  {{metaTags  }}
+
+  {%- capture mainjs -%}
+  	{%- render 'head-css' -%}
+  	{% if settings.rtl %}
+    	<link rel="stylesheet" href="{{ 'themeRtl.css' | asset_url }}" type="text/css" media="all">
+  	{% else %}
+  		<link rel="stylesheet" href="{{ 'theme.css' | asset_url }}" type="text/css" media="all">
+  	{% endif %}
+  	
+  	<script src="{{ 'jquery.min.js' | asset_url }}"defer="defer"></script>
+	<script>
+		var theme = {
+			strings:{
+				addToCart:{{ 'products.product.add_to_cart' | t | json }},soldOut:{{ 'products.product.sold_out' | t | json }},unavailable:{{ 'products.product.unavailable' | t | json }},showMore:{{ 'general.filters.show_more' | t | json }},showLess:{{ 'general.filters.show_less' | t | json }}
+			},
+			mlcurrency:{%- if settings.show_multiple_currencies and settings.currency_opt == 'script' -%}true{%- else -%}false{% endif %},moneyFormat:{{ shop.money_format | json }},currencyFormat:{{ settings.currency_format | json }},shopCurrency:{{ shop.currency | json }},autoCurrencies:{{ settings.auto_currencies }},money_currency_format:{{ shop.money_with_currency_format | strip_html | json }},money_format:{{ shop.money_format | strip_html | json }},
+			ajax_cart:{{settings.ajax_cart }},fixedHeader:{{settings.show_sticky_header }},animation:{{settings.enable_site_animation }},animationMobile:{{settings.site_animation_mobile }},searchresult:{{ 'general.search.all' | t | json }},wlAvailable:{{ 'products.wishlist.available' | t | json }},rtl:{{ settings.rtl }},days:{{ 'date_formats.short_names.days' | t | json }},hours:{{ 'date_formats.short_names.hours' | t | json }},minuts:{{ 'date_formats.short_names.minuts' | t | json }},seconds:{{ 'date_formats.short_names.seconds' | t | json }},
+		};
+		document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+		var Metatheme = {{shop.metafields.mytheme.Avone |json}},thm = 'Avone', shpeml = '{{shop.email}}', dmn = window.location.hostname;
+	</script>
+	<script src="{{ 'vendor.min.js' | asset_url }}" defer="defer"></script>
+  {%- endcapture -%}
+  {{mainjs | strip_newlines | remove: "	" }}
+  
+  {%- comment -%}{{ content_for_header }}{%- endcomment -%}
+  {%- render 'header-content' -%}
+  
+  {%- if settings.show_language -%}
+	{%- include 'weglot_hreftags' -%}
+	{%- include 'weglot_switcher' -%}
+  {%- endif -%}
+</head>
+<body id="{{ page_title | handle }}" class="template-{{ template | split: '.' | first }} {%- if settings.rtl -%}rtl {%- endif -%}lazyload"
+	{%- if settings.bodybg_img %} data-bgset="{% include 'bgset', image: settings.bodybg_img %}" data-sizes="auto" data-parent-fit="cover" style="background-image:url('{{ settings.bodybg_img | img_url: '50x50' }});"{%- endif -%}>
+	{%- if settings.enable_age_varification -%}{% render 'age-check' %}{%- endif -%}
+    {%- if settings.layout_style == "boxedlayout" -%}<div class="page-wrapper layout-boxed">{%- endif -%}
+  		{%- include 'header' -%}
+    	{%- if settings.top-information-bar -%}{% section 'top-info-panel' %}{%- endif -%}
+		<main id="PageContainer" class="main-content {{ template | split: '.' | first }}" id="MainContent" role="main">{{ content_for_layout }}</main>
+    	{%- section 'footer' -%}
+  	{% if settings.layout_style == "boxedlayout" %}</div>{% endif %}
+	{% section 'custom-colors' %}
+
+<!-- js -->
+<script src="{{ 'option_selection.js' | shopify_asset_url }}" defer="defer"></script>
+{%- if template.directory == 'customers' -%}<script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>{%- endif -%}
+{%- if content_for_layout contains 'data-stellar-background-ratio' -%}<script src="{{ 'stellar.js' | asset_url }}" defer></script>{%- endif -%}
+{%- if content_for_layout contains 'grid-masonary' -%}<script src="{{ 'masonry.js' | asset_url }}" defer="defer"></script>{%- endif -%}
+{%- if settings.show_multiple_currencies and settings.currency_opt == 'script' -%}{%- render 'currencies' -%}{%- endif -%}
+{%- if settings.enable_site_animation -%}<script src="{{ 'wow.min.js' | asset_url }}" async></script>{%- endif -%}
+<script src="{{ 'theme.min.js' | asset_url }}" defer="defer"></script>
+
+{%- render 'theme-modals' -%}
+{%- if settings.show_sticky_arrow -%}<span id="site-scroll"><i class="ad ad-arw-up" aria-hidden="true"></i></span>{%- endif -%}
+<script src="{{ 'script-loader.js' | asset_url }}" defer></script>
+</body>
+</html>
