@@ -1,0 +1,176 @@
+<div data-section-id="{{ section.id }}"  data-section-type="home-product-grid-type-4" class="home-product-grid-type-4" style="float:left;width:100%;background:{{ section.settings.bg_color }}">
+ {%- assign collection = collections[section.settings.collection] -%}
+ {%- assign limit = section.settings.grid | times: section.settings.rows -%}
+    <div class="dt-sc-hr-invisible-large"></div> 
+
+  <div class="container">
+  {%- assign tp = section.settings.total_products  -%}
+  <div class="full_width_tab load-wrapper">  
+     
+      {% if section.settings.title != blank or section.settings.small_title  %}
+      <div class="section-header section-header--small">
+        <div class="border-title wow swing">
+          {% endif %}  
+          
+          {% if section.settings.title != blank %}
+          <h3 class="section-header__title" style="color:{{ section.settings.title_clr }};">    
+            {{ section.settings.title }}
+          </h3>
+          {% endif %}  
+          {% if section.settings.small_title != blank %}
+          <h4 style="color:{{ section.settings.text_clr }};">{{ section.settings.small_title }}</h4>{% endif %}  
+          {% if section.settings.title != blank or section.settings.small_title  %}
+          
+        </div>
+      </div>
+    
+    <div class="dt-sc-hr-invisible-small"></div>
+      {% endif %}      
+  		 {% case section.settings.grid %}
+            {% when '2' %}
+            {%- assign grid_item_width = 'wide--one-half post-large--one-half large--one-half medium--one-half small-grid__item' -%}
+            {% when '3' %}
+            {%- assign grid_item_width = 'wide--one-third post-large--one-third large--one-third medium--one-half small-grid__item' -%}
+            {% when '4' %}
+            {%- assign grid_item_width = 'wide--one-quarter post-large--one-quarter large--one-half medium--one-half small-grid__item' -%}
+            {% when '5' %}
+            {%- assign grid_item_width = 'wide--one-fifth post-large--one-quarter large--one-third medium--one-half small-grid__item' -%}            
+            {% endcase %}  
+      <ul class="grid-uniform type4__items">
+        {% for product in collection.products limit:limit   %}
+        {% include 'product-grid-item', grid_item_width:grid_item_width %}          
+        {% endfor %}
+      </ul>
+    </div>
+    
+  </div>
+  <style>
+    {% if section.settings.heading_image_need %} .home-product-grid-type-4 .border-title:after {  content:"";background-image:url({{ section.settings.heading_image | img_url: 'master' }});display:inline-block;background-repeat:no-repeat;width:135px;height:57px;} {% endif %}
+
+  </style>
+  <div class="dt-sc-hr-invisible-large"></div> 
+</div>
+
+
+
+{% schema %}
+{
+  "name": "Featured products",
+  "class": "index-section",
+  "settings": [  
+
+
+{
+      "type": "color",
+      "id": "bg_color",
+      "label": "Bg Color",
+      "default":"#f7f7f7"
+      },
+		{
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "New arrivals"
+      },	
+      {
+      "type": "color",
+      "id": "title_clr",
+      "label": "Title Color",
+      "default":"#000"
+      },
+{
+      "type": "checkbox",
+      "id": "heading_image_need",
+      "label": "Show Heading Image ?"
+      
+    },	
+{
+      "type": "image_picker",
+      "id": "heading_image",
+      "label": "Image",
+	  "info": "Size: 133x56"
+      
+    },	
+      {
+      "type": "text",
+      "id": "small_title",
+      "label": "Small Heading"
+      },	
+     {
+      "type": "color",
+      "id": "text_clr",
+      "label": "Text color",
+      "default":"#000"
+      },
+    {
+      "id": "collection",
+      "type": "collection",
+      "label": "Collection"
+    },
+
+    {
+      "type": "select",
+      "id": "grid",
+      "label": "Products per row",
+      "default": "3",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        }
+      ]
+    },
+{
+        "type": "select",
+        "id": "rows",
+        "label": "Rows per page (grid only)",
+        "default": "2",
+        "options": [
+			{
+            "value": "1",
+            "label": "1"
+          },
+          {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          },
+          {
+            "value": "5",
+            "label": "5"
+          }          
+        ]
+      }
+  
+  ],
+  "presets": [
+    {
+     "name": "Featured products",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+

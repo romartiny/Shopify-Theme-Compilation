@@ -1,0 +1,433 @@
+{% if section.settings.show_team_section != blank %}
+<div class="grid-uniform team-block">
+  <div class="container">
+    {% assign num_footer_columns = 0 %}      
+    {% if section.settings.team_1_image != blank %}
+    {% assign team_column_width = team_column_width | plus: 1 %}
+    {% endif %}
+
+    {% if section.settings.team_2_image != blank %}
+    {% assign team_column_width = team_column_width | plus: 1 %}
+    {% endif %}
+
+    {% if section.settings.team_3_image != blank %}
+    {% assign team_column_width = team_column_width | plus: 1 %}
+    {% endif %}
+    {% if section.settings.team_4_image != blank %}
+    {% assign team_column_width = team_column_width | plus: 1 %}
+    {% endif %}
+    {% if section.settings.meet_our_team != blank or section.settings.team_subheading != blank %}
+    <div class="main-heading">
+
+      {% if section.settings.meet_our_team != blank %} <h3 style="color:{{ section.settings.heading_color }}">  {{section.settings.meet_our_team}}</h3>{% endif %}
+      {% if section.settings.team_subheading != blank %}
+      <h4 style="color:{{ section.settings.subheading_color }}">  {{section.settings.team_subheading}}</h4>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    {% case team_column_width %}
+    {% when 0 %}
+    {% when 1 %}
+    {% assign team_column_width = 'text-left' %}
+    {% when 2 %}
+    {% assign team_column_width = 'wide--one-half post-large--one-half large--one-half medium--one-half' %}
+    {% when 3 %}
+    {% assign team_column_width = 'wide--one-third post-large--one-third large--one-half medium--one-half' %}    
+    {% when 4 %}
+    {% assign team_column_width = 'wide--one-quarter post-large--one-half large--one-half medium--one-half' %}  
+    {% endcase %}
+    <ul class="ch-grid">
+      {% if section.settings.team_1_image != blank %}
+      <li class="grid__item {{ team_column_width }} wow fadeInUp">
+        <div class="team-section">  
+          <div class="ch-item" style="background-image: url('{{ section.settings.team_1_image | img_url: "master" }}');">	
+            <div class="ch-info-wrap">
+              <div class="ch-info">
+                <div class="ch-info-front ch-img-1" style="background-image: url('{{ section.settings.team_1_image | img_url: "master" }}');"></div>
+
+                <div class="ch-info-back">
+                  <div class="team-detail">
+
+
+                    <ul class="ourteam-social rounded-border">
+                      {% if section.settings.team_1_fb != blank %}<li><a class="fa fa-twitter" href="{{ section.settings.team_1_fb }}" title="Twitter"></a></li>{% endif %}
+                      {% if section.settings.team_1_tw != blank %}<li><a class="fa fa-facebook" href="{{ section.settings.team_1_tw }}" title="Facebook"></a></li>{% endif %}
+                      {% if section.settings.team_1_gp != blank %}<li><a class="fa fa-google-plus" href="{{ section.settings.team_1_gp }}" title="Google"></a></li>{% endif %}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% if section.settings.team_1_name != blank %}
+          <h6>{{ section.settings.team_1_name  }}</h6>
+          {% endif %}								
+          {% if section.settings.team_1_job != blank %}
+          <span>{{ section.settings.team_1_job  }}</span>
+          {% endif %} 
+        </div>
+      </li>
+      {% endif %}
+      {% if section.settings.team_2_image != blank %}
+      <li class="grid__item {{ team_column_width }} wow fadeInUp">
+        <div class="team-section">  
+          <div class="ch-item" style="background-image: url('{{ section.settings.team_2_image | img_url: "master" }}');">
+            <div class="ch-info-wrap">
+              <div class="ch-info">
+                <div class="ch-thumb ch-img-1" style="background-image: url('{{ section.settings.team_2_image | img_url: "master" }}');"></div>
+                <div class="ch-info-back">
+                  <div class="team-detail">
+
+                    <ul class="ourteam-social rounded-border">
+                      {% if section.settings.team_2_fb != blank %}<li><a class="fa fa-twitter" href="{{ section.settings.team_2_fb }}" title="Twitter"></a></li>{% endif %}
+                      {% if section.settings.team_2_tw != blank %}<li><a class="fa fa-facebook" href="{{ section.settings.team_2_tw }}" title="Facebook"></a></li>{% endif %}
+                      {% if section.settings.team_2_gp != blank %}<li><a class="fa fa-google-plus" href="{{ section.settings.team_2_gp }}" title="Google"></a></li>{% endif %}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% if section.settings.team_2_name != blank %}
+          <h6>{{ section.settings.team_2_name  }}</h6>
+          {% endif %}								
+          {% if section.settings.team_2_job != blank %}
+          <span>{{ section.settings.team_1_job  }}</span>{% endif %} 
+        </div>
+      </li>
+      {% endif %}
+      {% if section.settings.team_3_image != blank %}
+      <li class="grid__item {{ team_column_width }} wow fadeInUp">
+        <div class="team-section">  
+          <div class="ch-item" style="background-image: url('{{ section.settings.team_3_image | img_url: "master" }}');">	
+            <div class="ch-info-wrap">
+              <div class="ch-info">
+                <div class="ch-thumb ch-img-1" style="background-image: url('{{ section.settings.team_3_image | img_url: "master" }}');"></div>
+                <div class="ch-info-back">
+                  <div class="team-detail">
+
+                    <ul class="ourteam-social rounded-border">
+                      {% if section.settings.team_3_fb != blank %}<li><a class="fa fa-twitter" href="{{ section.settings.team_3_fb }}" title="Twitter"></a></li>{% endif %}
+                      {% if section.settings.team_3_tw != blank %}<li><a class="fa fa-facebook" href="{{ section.settings.team_3_tw }}" title="Facebook"></a></li>{% endif %}
+                      {% if section.settings.team_3_gp != blank %}<li><a class="fa fa-google-plus" href="{{ section.settings.team_3_gp }}" title="Google"></a></li>{% endif %}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% if section.settings.team_3_name != blank %}
+          <h6>{{ section.settings.team_3_name  }}</h6>
+          {% endif %}								
+          {% if section.settings.team_3_job != blank %}
+          <span>{{ section.settings.team_3_job  }}</span>
+          {% endif %}
+        </div>
+      </li>
+      {% endif %}
+      {% if section.settings.team_4_image != blank %}
+      <li class="grid__item wide--one-quarter lap-large--one-half post-large--one-half large--one-half medium--one-half small-grid__item wow fadeInUp">
+
+        <div class="team-section">  
+          <div class="ch-item" style="background-image: url('{{ section.settings.team_3_image | img_url: "master" }}');">	
+            <div class="ch-info-wrap">
+              <div class="ch-info">
+                <div class="ch-thumb ch-img-1" style="background-image: url('{{ section.settings.team_4_image | img_url: "master" }}');"></div>
+                <div class="ch-info-back">
+                  <div class="team-detail">
+
+                    <ul class="ourteam-social rounded-border">
+                      {% if section.settings.team_4_fb != blank %}<li><a class="fa fa-twitter" href="{{ section.settings.team_4_fb }}" title="Twitter"></a></li>{% endif %}
+                      {% if section.settings.team_4_tw != blank %}<li><a class="fa fa-facebook" href="{{ section.settings.team_4_tw }}" title="Facebook"></a></li>{% endif %}
+                      {% if section.settings.team_4_gp != blank %}<li><a class="fa fa-google-plus" href="{{ section.settings.team_4_gp }}" title="Google"></a></li>{% endif %}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% if section.settings.team_4_name != blank %}
+          <h6>{{ section.settings.team_4_name  }}</h6>
+          {% endif %}								
+          {% if section.settings.team_4_job != blank %}
+          <span>{{ section.settings.team_4_job  }}</span>
+          {% endif %}
+        </div>
+      </li>
+      {% endif %}
+    </ul>
+
+
+
+    <style>
+      .team-block .ourteam-social a.fa-facebook:hover { background: {{ section.settings.team_fb_color }};}
+      .team-block .ourteam-social a.fa-twitter:hover { background: {{ section.settings.team_tw_color }};}
+      .team-block .ourteam-social a.fa-google-plus:hover { background: {{ section.settings.team_gp_color }};}
+      .ourteam { position:relative;}
+      .ourteam .ourteam-details {transition: 0.3s linear;}
+      .team-section h6{color: {{ section.settings.team_name_color }};}
+
+      .team-section span{color: {{ section.settings.team_job_color }};}
+
+      .team-block .ourteam-social a {  border:none;color:{{ section.settings.socialicon_hover_color }};background:{{ section.settings.socialicon_bg_color }};}
+
+      .team-block .ourteam-social a:hover{color:{{ section.settings.socialicon_color }};}
+
+      .team-block .ch-info .ch-info-back {background-color: {{ section.settings.image_hover_bg | color_modify: 'alpha', 0.9 }}; }
+      
+      .about-us .ch-info>div { box-shadow:0 0 0 2px {{ section.settings.border_color  }}; }
+      
+      
+    </style>
+
+
+  </div>
+</div>
+{% endif %}
+
+{% schema %}
+{
+"name": "About Page - Team",
+"settings": [
+
+{
+"type": "header",
+"content": "Block Five - Meet Our Team"
+},
+{
+"type": "checkbox",
+"id": "show_team_section",
+"label": "Display  This Section"
+},
+{
+"type": "text",
+"id": "meet_our_team",
+"label": "Heading"          
+}, 
+{
+"type": "color",
+"id": "heading_color",
+"label": "Heading Color",
+"default": "#000"          
+},
+{
+"type": "text",
+"id": "team_subheading",
+"label": "Sub Heading"          
+}, 
+{
+"type": "color",
+"id": "subheading_color",
+"label": "SubHeading Color",
+"default": "#000"          
+},
+{
+"type": "color",
+"id": "team_name_color",
+"label": "Name color",
+"default": "#000"          
+},
+
+
+{
+"type": "color",
+"id": "team_job_color",
+"label": "Designation color",
+"default": "#000"                    
+},
+
+
+{
+"type": "color",
+"id": "team_fb_color",
+"label": "Facebook color",
+"default": "#3b5998"                    
+},
+{	
+"type": "color",
+"id": "team_tw_color",
+"label": "Twitter color",
+"default": "#4099FF"                    
+},
+{	
+"type": "color",
+"id": "team_gp_color",
+"label": "Google Plus color",
+"default": "#d34836"                    
+},
+{	
+"type": "color",
+"id": "socialicon_bg_color",
+"label": "Social Icon Bg color",
+"default": "#d34836"                    
+},
+{	
+"type": "color",
+"id": "socialicon_hover_color",
+"label": "Social Icon color",
+"default": "#d34836"                    
+},
+{	
+"type": "color",
+"id": "socialicon_color",
+"label": "Social Icon Hover color",
+"default": "#d34836"                    
+},
+{	
+"type": "color",
+"id": "image_hover_bg",
+"label": "Hover background color",
+"default": "#d34836"                    
+},
+{	
+"type": "color",
+"id": "border_color",
+"label": "Border Color",
+"default": "#000"                    
+},
+
+{
+"type": "image_picker",
+"id": "team_1_image",
+"label": "Image",
+"info": "Size: 420x644"
+},
+{
+"type": "text",
+"id": "team_1_name",
+"label": "Name"          
+},
+{
+"type": "text",
+"id": "team_1_job",
+"label": "Designation"          
+},
+
+{
+"type": "text",
+"id": "team_1_fb",
+"label": "Facebook"          
+},
+{	
+"type": "text",
+"id": "team_1_tw",
+"label": "Twitter"          
+},
+{	
+"type": "text",
+"id": "team_1_gp",
+"label": "Google Plus"          
+},
+{
+"type": "image_picker",
+"id": "team_2_image",
+"label": "Image"  ,
+"info": "Size: 540x540"
+},
+{
+"type": "text",
+"id": "team_2_name",
+"label": "Name"          
+},
+{
+"type": "text",
+"id": "team_2_job",
+"label": "Designation"          
+},
+{
+"type": "textarea",
+"id": "team_2_desc",
+"label": "Description"          
+},
+{
+"type": "text",
+"id": "team_2_fb",
+"label": "Facebook"          
+},
+{	
+"type": "text",
+"id": "team_2_tw",
+"label": "Twitter"          
+},
+{	
+"type": "text",
+"id": "team_2_gp",
+"label": "Google Plus"          
+},
+{
+"type": "image_picker",
+"id": "team_3_image",
+"label": "Image" ,
+"info": "Size: 540x540"
+},
+{
+"type": "text",
+"id": "team_3_name",
+"label": "Name"          
+},
+{
+"type": "text",
+"id": "team_3_job",
+"label": "Designation"          
+},
+{
+"type": "textarea",
+"id": "team_3_desc",
+"label": "Description"          
+},
+{
+"type": "text",
+"id": "team_3_fb",
+"label": "Facebook"          
+},
+{	
+"type": "text",
+"id": "team_3_tw",
+"label": "Twitter"          
+},
+{	
+"type": "text",
+"id": "team_3_gp",
+"label": "Google Plus"          
+},
+{
+"type": "image_picker",
+"id": "team_4_image",
+"label": "Image" ,
+"info": "Size: 540x540"
+},
+{
+"type": "text",
+"id": "team_4_name",
+"label": "Name"          
+},
+{
+"type": "text",
+"id": "team_4_job",
+"label": "Designation"          
+},
+{
+"type": "textarea",
+"id": "team_4_desc",
+"label": "Description"          
+},
+{
+"type": "text",
+"id": "team_4_fb",
+"label": "Facebook"          
+},
+{	
+"type": "text",
+"id": "team_4_tw",
+"label": "Twitter"          
+},
+{	
+"type": "text",
+"id": "team_4_gp",
+"label": "Google Plus"          
+}
+
+]
+}
+{% endschema %}

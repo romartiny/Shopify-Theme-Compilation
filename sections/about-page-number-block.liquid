@@ -1,0 +1,146 @@
+{% if section.settings.show_5_section != blank %}
+  <div class="grid-uniform section-four">
+    <div class="container">
+      <div class="grid__item">
+         {% if section.blocks.size > 0 %}      
+        {% for block in section.blocks %}
+        {% case section.blocks.size %}
+        {% when 1 %}
+        {%- assign block_width = 'one-whole text-center' -%}
+        {% when 2 %}
+        {%- assign block_width = 'wide--one-half post-large--one-half large--one-half medium--one-half small-grid__item' -%}
+        {% when 3 %}
+        {%- assign block_width = 'wide--one-third post-large--one-third large--one-half medium--one-half small-grid__item' -%}
+        {% when 4 %}
+        {%- assign block_width = 'wide--one-quarter post-large--one-quarter large--one-half medium--one-half small-grid__item' -%}
+        {% endcase %}
+        <div class="grid__item {{ block_width }} wow fadeInUp"  data-wow-delay="{{ settings.time_lazy_load }}ms">
+          <div class="number-block">
+            {% if block.settings.section_4_iconclsone != blank %}
+            <div class="number-icon">
+              <span class=" {{block.settings.section_4_iconclsone }}"> </span>
+            </div>
+            {% endif %}
+            <div class="number-detail">
+              {% if block.settings.section_4_numberone != blank %}
+              <span style="color:{{ block.settings.section_4_numberone_clr }}"> {{block.settings.section_4_numberone }}</span>
+              {% endif %}   
+              {% if block.settings.section_4_titleone != blank %}
+              <h5 style="color:{{ block.settings.section_4_titleone_clr }}">{{block.settings.section_4_titleone }}</h5>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+         {% endfor %}
+        {% endif %}
+        
+      </div>
+    </div>
+    
+    
+    <style>
+
+      .number-block:hover .number-icon{background:{{section.settings.section_4_iconborder}};}
+
+
+
+      .section-four .number-block:hover::after{box-shadow: 0 0 0 1px {{section.settings.section_4_iconborder}};}
+
+      .section-four .number-icon::after{  box-shadow: 0 0 0 1px {{section.settings.section_4_iconbgcolor}};}
+
+      .section-four .number-icon span{color:{{section.settings.section_4_iconcolor}};}
+
+      .section-four .number-icon{background:{{section.settings.section_4_iconbgcolor}};}
+      .section-four {background:{{section.settings.section_4_bgcolor}};}
+
+
+
+
+
+  .about-us .number-icon {border: 5px solid #fff;}
+    </style>
+  </div>
+  {% endif %}
+
+
+{% schema %}
+{
+"name": "About Page - Counter",
+"max_blocks":4,
+"settings": [
+
+
+
+{
+"type": "checkbox",
+"id": "show_5_section",
+"label": "Display  This Section"
+},
+{
+"type": "color",
+"id": "section_4_bgcolor",
+"label": "Bg color",
+"default": "#000"
+},
+{
+"type": "color",
+"id": "section_4_iconbgcolor",
+"label": "Icon bg color",
+"default": "#000"
+},
+{
+"type": "color",
+"id": "section_4_iconcolor",
+"label": "Icon  color",
+"default": "#000"
+},
+{
+"type": "color",
+"id": "section_4_iconborder",
+"label": "Icon border color",
+"default": "#000"
+
+}
+],
+
+"blocks": [
+{
+"type": "text",
+"name": "support block",
+"settings": [
+
+{
+"type": "text",
+"id": "section_4_iconclsone",
+"label": "Icon class",
+"default": "fa fa-newspaper-o"
+},
+{
+"type": "text",
+"id": "section_4_numberone",
+"label": "Number",
+"default": "94+"
+},
+{
+"type": "color",
+"id": "section_4_numberone_clr",
+"label": "Color",
+"default": "#000"
+},
+{
+"type": "text",
+"id": "section_4_titleone",
+"label": "Heading",
+"default": "title..."
+},
+{
+"type": "color",
+"id": "section_4_titleone_clr",
+"label": "Color",
+"default": "#000"
+}
+]
+}
+]
+}
+{% endschema %}

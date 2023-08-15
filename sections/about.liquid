@@ -1,0 +1,224 @@
+
+
+
+<div data-section-id="{{ section.id }}"  data-section-type="About section">
+
+
+  {% if section.settings.show_3_section != blank %}
+  <div class="grid-uniform section-five">
+    <div class="container">
+      {% if section.settings.section_5_mainheading != blank or section.settings.section_5_subheading != blank %}
+      <div class="main-heading">
+        
+        {% if section.settings.section_5_mainheading %}
+        <h3>  {{section.settings.section_5_mainheading}}</h3>
+        {% endif %}
+        {% if section.settings.section_5_subheading != blank %}
+        <h4>  {{section.settings.section_5_subheading}}</h4>
+        {% endif %}
+      </div>
+      {% endif %}
+      <div class="grid__item">
+        {% if section.settings.section_5_imageone != blank %}
+        <div class="grid__item wide--one-third post-large--one-third large--one-third medium--one-third small--grid__item">
+          <div class="about-img-section">
+            <img src="{{ section.settings.section_5_imageone | img_url: '1024x1024' }}" alt="" title="" /> 
+            <h6 style="color:{{ section.settings.title_color }}">{{ section.settings.title_1 }}</h6>
+          </div>
+        </div>
+        {% endif %}
+        {% if section.settings.section_5_imagetwo != blank %}
+        <div class="grid__item wide--one-third post-large--one-third large--one-third medium--one-third small--grid__item">
+          <div class="about-img-section">
+            <img src="{{ section.settings.section_5_imagetwo | img_url: '1024x1024' }}" alt="" title="" /> 
+            <h6 style="color:{{ section.settings.title_color }}">{{ section.settings.title_2 }}</h6>
+          </div>
+        </div>
+        {% endif %}
+        {% if section.settings.section_5_imagethree != blank %}
+        <div class="grid__item wide--one-third post-large--one-third large--one-third medium--one-third small--grid__item">
+          <div class="about-img-section">
+            <img src="{{ section.settings.section_5_imagethree | img_url: '1024x1024' }}" alt="" title="" /> 
+            <h6 style="color:{{ section.settings.title_color }}">{{ section.settings.title_3 }}</h6>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+      <div class="grid__item">
+        {% if section.settings.section_5_imagefour != blank %}
+        <div class="grid__item wide--one-third post-large--one-third large--one-third medium--one-third small--grid__item">
+          <div class="about-img-section">
+            <img src="{{ section.settings.section_5_imagefour | img_url: '1024x1024' }}" alt="" title="" />
+            <h6 style="color:{{ section.settings.title_color }}">{{ section.settings.title_4 }}</h6>
+          </div>
+        </div>
+        {% endif %}
+        {% if section.settings.section_5_imagefive != blank %}
+        <div class="grid__item wide--one-third post-large--one-third large--one-third medium--one-third small--grid__item">
+          <div class="about-img-section">
+            <img src="{{ section.settings.section_5_imagefive | img_url: '1024x1024' }}" alt="" title="" /> 
+            <h6 style="color:{{ section.settings.title_color }}">{{ section.settings.title_5 }}</h6>
+          </div>
+        </div>
+        {% endif %}
+        {% if section.settings.section_5_imagesix != blank %}
+        <div class="grid__item wide--one-third post-large--one-third large--one-third medium--one-third small--grid__item">
+          <div class="about-img-section">
+            <img src="{{ section.settings.section_5_imagesix | img_url: '1024x1024' }}" alt="" title="" /> 
+            <h6 style="color:{{ section.settings.title_color }}"> {{ section.settings.title_6 }}</h6>
+
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+      <div class="dt-sc-hr-invisible-large"></div>
+
+</div>
+
+<style>
+  .section-five .main-heading h3 {color:{{section.settings.mainheading_color}};}
+
+  .section-five .main-heading  h4{color:{{section.settings.subheading_color}};margin:0 0 5px;}
+
+  .section-five .about-img-section::after {background: {{section.settings.section_5_hoverbg}};}
+
+</style>
+
+{% schema %}
+{
+"name": "About Page - Gallery",
+"settings": [
+
+{
+"type": "header",
+"content": "BLock One"
+},
+{
+"type": "checkbox",
+"id": "show_3_section",
+"label": "Display  This Section"
+},
+{
+"type": "text",
+"id": "section_5_mainheading",
+"label": "Main Heading",
+"default": "Title...."
+},
+{
+"type": "color",
+"id": "mainheading_color",
+"label": "Heading color",
+"default": "#000"
+},
+{	
+"type": "text",
+"id": "section_5_subheading",
+"label": "Sub Heading",
+"default": "Sub Title..."
+},
+
+{
+"type": "color",
+"id": "subheading_color",
+"label": "Sub Heading color",
+"default": "#000"
+},
+{
+"type": "color",
+"id": "section_5_hoverbg",
+"default":"#000",
+"label": "Img hover bg"
+},
+{
+"type": "color",
+"id": "title_color",
+"default":"#000",
+"label": "Title Color"
+},
+{
+"type": "image_picker",
+"id": "section_5_imageone",
+"label": "Image",
+"info": "Size: 800x696"
+},
+{	
+"type": "text",
+"id": "title_1",
+"label": "Heading",
+"default": "Title"
+},
+{
+"type": "image_picker",
+"id": "section_5_imagetwo",
+"label": "Image",
+"info": "Size: 800x696"
+},
+{	
+"type": "text",
+"id": "title_2",
+"label": "Heading",
+"default": "Title"
+},
+{
+"type": "image_picker",
+"id": "section_5_imagethree",
+"label": "Image",
+"info": "Size: 800x696"
+},
+{	
+"type": "text",
+"id": "title_3",
+"label": "Heading",
+"default": "Title"
+},
+{
+"type": "image_picker",
+"id": "section_5_imagefour",
+"label": "Image",
+"info": "Size: 540x540"
+},
+{	
+"type": "text",
+"id": "title_4",
+"label": "Heading",
+"default": "Title"
+},
+{
+"type": "image_picker",
+"id": "section_5_imagefive",
+"label": "Image",
+"info": "Size: 540x540"
+},
+{	
+"type": "text",
+"id": "title_5",
+"label": "Heading",
+"default": "Title"
+},
+{
+"type": "image_picker",
+"id": "section_5_imagesix",
+"label": "Image",
+"info": "Size: 540x540"
+},
+{	
+"type": "text",
+"id": "title_6",
+"label": "Heading",
+"default": "Title"
+}
+
+
+
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

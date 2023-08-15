@@ -1,0 +1,407 @@
+<div data-section-id="{{ section.id }}" data-section-type="grid-banner-type-6-mission" class="grid-banner-type-6-mission">  
+  <div class="grid-uniform">        
+    {% if section.blocks.size > 0 %}      
+    {% for block in section.blocks %} 
+    <div class="section-two grid_row-flex">
+      <div class="grid__item wow fadeInLeft wide--one-half post-large--one-half large--one-half medium--grid__item small-grid__item grid_column_container"> 
+        <div class="grid_column-inner" style="background:{{ section.settings.left_bg }}">
+          <div class="block-content block-content--{{ block.id }}">              
+            {% if block.settings.title != blank %}                        
+            <h3 style="color:{{ section.settings.title_color }}">{{ block.settings.title }}</h3>        
+            {% endif %}   
+            {% if block.settings.sub_title != blank %}                         
+            <h4 style="color:{{ section.settings.sub_title_color }}">{{ block.settings.sub_title }}</h4>        
+            {% endif %} 
+            {% if block.settings.desc != blank %}                         
+            <p style="color:{{ section.settings.desc_color }}">{{ block.settings.desc }}</p>        
+            {% endif %} 
+            {% if block.settings.llink != blank %}<a href="{{ block.settings.llink }}" style="" class="btn">{{ block.settings.button }}<div class="overlay"></div></a>{% endif%}
+          </div>  
+        </div>
+      </div>
+      <div  class="grid__item wow fadeInRight wide--one-half post-large--one-half large--one-half medium--grid__item small-grid__item grid_column_container">  
+        <div class="grid_column-inner" style="background:{{ section.settings.right_bg }}">
+          <div  class="grid__item">
+          <div  class="grid__item wide--one-half post-large--one-half large--one-half medium--grid__item small-grid__item row-1"> 
+            <div class="img-content flip-hover"> 
+              <div class="icon-wrapper" style="background-image:url({{ block.settings.r1image | img_url: 'large' }})">
+                
+
+              </div>
+              <div class="icon-content" style=" background: {{ section.settings.content_bg_color }}; background: -webkit-linear-gradient(45deg,  {{ section.settings.content_bg_color_2 }} 0%, {{ section.settings.content_bg_color }} 100%); background: -o-linear-gradient(45deg,  {{ section.settings.content_bg_color_2 }} 0%, {{ section.settings.content_bg_color }} 100%); background: linear-gradient(45deg,  {{ section.settings.content_bg_color_2 }} 0%, {{ section.settings.content_bg_color }} 100%);">
+                <div class="icon-content-center">
+                {% if block.settings.r1title != blank %}                        
+                <h5 style="color:{{ section.settings.right_title_color }}">{{ block.settings.r1title }}</h5>        
+                {% endif %}   
+                {% if block.settings.r1sub_title != blank %}                         
+                <h6 style="color:{{ section.settings.right_subtitle_color }}">{{ block.settings.r1sub_title }}</h6>        
+                {% endif %} 
+                {% if block.settings.r1desc != blank %}                         
+                <p style="color:{{ section.settings.right_time_color }}">{{ block.settings.r1desc }}</p>        
+                {% endif %} 
+                </div>
+              </div>
+            </div>
+            <div class="img-content flip-hover" style="margin-bottom:10%;"> 
+              <div class="icon-wrapper" style="background-image:url({{ block.settings.r2image | img_url: 'large' }})">
+                
+
+              </div>
+              <div class="icon-content" style=" background: {{ section.settings.content_bg_color }}; background: -webkit-linear-gradient(45deg,  {{ section.settings.content_bg_color_2 }} 0%, {{ section.settings.content_bg_color }} 100%); background: -o-linear-gradient(45deg,  {{ section.settings.content_bg_color_2 }} 0%, {{ section.settings.content_bg_color }} 100%); background: linear-gradient(45deg,  {{ section.settings.content_bg_color_2 }} 0%, {{ section.settings.content_bg_color }} 100%);margin-bottom:0;">
+                <div class="icon-content-center">
+                {% if block.settings.r2title != blank %}                        
+                <h5 style="color:{{ section.settings.right_title_color }}">{{ block.settings.r2title }}</h5>        
+                {% endif %}   
+                {% if block.settings.r2sub_title != blank %}                         
+                <h6 style="color:{{ section.settings.right_subtitle_color }}">{{ block.settings.r2sub_title }}</h6>        
+                {% endif %} 
+                {% if block.settings.r2desc != blank %}                         
+                <p style="color:{{ section.settings.right_time_color }}">{{ block.settings.r2desc }}</p>        
+                {% endif %} 
+
+              </div>
+              </div>
+            </div>
+          </div>
+          <div  class="grid__item wide--one-half post-large--one-half large--one-half medium--grid__item small-grid__item row-2"> 
+
+            <div class="img-content flip-hover"> 
+              <div class="icon-wrapper" style="background-image:url({{ block.settings.r3image | img_url: 'large' }})">
+                
+
+              </div>
+              <div class="icon-content" style=" background: {{ section.settings.content_bg_color }}; background: -webkit-linear-gradient(45deg,  {{ section.settings.content_bg_color_2 }} 0%, {{ section.settings.content_bg_color }} 100%); background: -o-linear-gradient(45deg,  {{ section.settings.content_bg_color_2 }} 0%, {{ section.settings.content_bg_color }} 100%); background: linear-gradient(45deg,  {{ section.settings.content_bg_color_2 }} 0%, {{ section.settings.content_bg_color }} 100%);">
+                <div class="icon-content-center">
+                {% if block.settings.r3title != blank %}                        
+                <h5 style="color:{{ section.settings.right_title_color }}">{{ block.settings.r3title }}</h5>        
+                {% endif %}   
+                {% if block.settings.r3sub_title != blank %}                         
+                <h6 style="color:{{ section.settings.right_subtitle_color }}">{{ block.settings.r3sub_title }}</h6>        
+                {% endif %} 
+                {% if block.settings.r3desc != blank %}                         
+                <p style="color:{{ section.settings.right_time_color }}">{{ block.settings.r3desc }}</p>        
+                {% endif %} 
+                </div>
+              </div>
+            </div>
+           
+
+            <div class="img-content flip-hover" style="margin-bottom:10%;"> 
+              <div class="icon-wrapper" style="background-image:url({{ block.settings.r4image | img_url: 'large' }})">
+                
+
+              </div>
+              <div class="icon-content" style=" background: {{ section.settings.content_bg_color }}; background: -webkit-linear-gradient(45deg,  {{ section.settings.content_bg_color_2 }} 0%, {{ section.settings.content_bg_color }} 100%); background: -o-linear-gradient(45deg,  {{ section.settings.content_bg_color_2 }} 0%, {{ section.settings.content_bg_color }} 100%); background: linear-gradient(45deg,  {{ section.settings.content_bg_color_2 }} 0%, {{ section.settings.content_bg_color }} 100%);">
+                <div class="icon-content-center">
+                {% if block.settings.r4title != blank %}                        
+                <h5 style="color:{{ section.settings.right_title_color }}">{{ block.settings.r4title }}</h5>        
+                {% endif %}   
+                {% if block.settings.r4sub_title != blank %}                         
+                <h6 style="color:{{ section.settings.right_subtitle_color }}">{{ block.settings.r4sub_title }}</h6>        
+                {% endif %} 
+                {% if block.settings.r4desc != blank %}                         
+                <p style="color:{{ section.settings.right_time_color }}">{{ block.settings.r4desc }}</p>        
+                {% endif %} 
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>      
+    {% endfor %}
+    {% endif %}
+
+    {% for block in section.blocks %} 
+    <style>
+
+      .grid-banner-type-6-mission .block-content--{{ block.id }} .btn { background: {{ block.settings.button_bg }} ;color: {{ block.settings.button_text }};}
+      .grid-banner-type-6-mission .block-content--{{ block.id }} .btn:hover { background:{{ block.settings.button_hover_bg }};color: {{ block.settings.button_hover_text }};border-color: {{ block.settings.button_hover_bg }};}
+      .grid-banner-type-6-mission .block-content--{{ block.id }} .btn:hover:after, .grid-banner-type-6-mission .block-content--{{ block.id }} .btn:hover:before,.grid-banner-type-6-mission .block-content--{{ block.id }} .btn:active:after, .grid-banner-type-6-mission .block-content--{{ block.id }} .btn:active:before { border-color: {{ block.settings.button_bg }}; }
+
+     
+
+    </style>
+    {% endfor %}
+
+    
+    
+
+  </div>
+</div>
+{% schema %}
+{
+"name": "Mission",
+"class": "index-section",
+
+"settings": [
+{
+"type": "color",
+"id": "left_bg",
+"label": "Left Section Bg",
+"default":"#fff"	
+},
+{
+"type": "color",
+"id": "right_bg",
+"label": "Right Section Bg",
+"default":"#f7f7f7"	
+}, 
+{
+"type": "color",
+"id": "title_color",
+"label": "Heading color",
+"default":"#000"	
+}, 	
+{
+"type": "color",
+"id": "sub_title_color",
+"label": "Sub heading",
+"default":"#000"	
+},
+{
+"type": "color",
+"id": "desc_color",
+"label": "Description",
+"default":"#000"	
+},
+
+{
+"type": "color",
+"id": "content_bg_color",
+"label": "Content Bg Gradiant 1",
+"default":"#333"	
+},
+{
+"type": "color",
+"id": "content_bg_color_2",
+"label": "Content Bg Gradiant 2",
+"default":"#000"	
+},
+
+{
+"type": "color",
+"id": "right_title_color",
+"label": "Title Color",
+"default":"#000"	
+},
+{
+"type": "color",
+"id": "right_subtitle_color",
+"label": "Day Color",
+"default":"#000"	
+},
+{
+"type": "color",
+"id": "right_time_color",
+"label": "Time Color",
+"default":"#000"	
+}
+
+],
+"blocks": [
+{
+"type": "Image",
+"name": "Image",
+"settings": [ 
+{
+"type": "text",
+"id": "title",
+"label": "Heading",
+"default": "Left Title"	
+},
+
+{
+"type": "text",
+"id": "sub_title",
+"label": "Sub heading",
+"default": "Left Caption"	
+},
+
+{
+"type": "textarea",
+"id": "desc",
+"label": "Left Text",
+"default": "Left Text"	
+},
+
+{
+"type": "text",
+"id": "button",
+"label": "Button",
+"default": "More about us"	
+},
+{
+"type": "color",
+"id": "button_bg",
+"label": "Button Bg",
+"default": "#d3ad69"	
+},
+{
+"type": "color",
+"id": "button_text",
+"label": "Button Text",
+"default": "#fff"	
+},
+{
+"type": "color",
+"id": "button_hover_bg",
+"label": "Button Hover Bg",
+"default": "#000"	
+},
+{
+"type": "color",
+"id": "button_hover_text",
+"label": "Button Hover Text",
+"default": "#fff"	
+},
+{
+"type": "text",
+"id": "llink",
+"label": "Link"          
+},
+{
+"type": "image_picker",
+"id": "r1image",
+"label": "Image",
+"info": "Size: 600x412"
+},
+{
+"type": "text",
+"id": "r1title",
+"label": "Right Title",
+"default": "Headinge"	
+},
+
+{
+"type": "text",
+"id": "r1sub_title",
+"label": "Left Caption",
+"default": "Sub heading"	
+},
+
+{
+"type": "textarea",
+"id": "r1desc",
+"label": "Right Text",
+"default": "Right Text"	
+},
+{
+"type": "text",
+"id": "r1link",
+"label": "Link"          
+},
+{
+"type": "image_picker",
+"id": "r2image",
+"label": "Image",
+"info": "Size: 600x412"
+},
+{
+"type": "text",
+"id": "r2title",
+"label": "Right Title",
+"default": "Headinge"	
+},
+
+{
+"type": "text",
+"id": "r2sub_title",
+"label": "Right Caption",
+"default": "Sub heading"	
+},
+
+{
+"type": "textarea",
+"id": "r2desc",
+"label": "Right Text",
+"default": "Right Text"	
+},
+{
+"type": "text",
+"id": "r2link",
+"label": "Link"          
+},
+{
+"type": "image_picker",
+"id": "r3image",
+"label": "Image",
+"info": "Size: 600x412"
+},
+{
+"type": "text",
+"id": "r3title",
+"label": "Right Title",
+"default": "Headinge"	
+},
+
+{
+"type": "text",
+"id": "r3sub_title",
+"label": "Right Caption",
+"default": "Sub heading"	
+},
+
+{
+"type": "textarea",
+"id": "r3desc",
+"label": "Right Text",
+"default": "Right Text"	
+},
+{
+"type": "text",
+"id": "r3link",
+"label": "Link"          
+},
+{
+"type": "image_picker",
+"id": "r4image",
+"label": "Image",
+"info": "Size: 600x412"
+},
+{
+"type": "text",
+"id": "r4title",
+"label": "Right Title",
+"default": "Headinge"	
+},
+
+{
+"type": "text",
+"id": "r4sub_title",
+"label": "Right Caption",
+"default": "Sub heading"	
+},
+
+{
+"type": "textarea",
+"id": "r4desc",
+"label": "Right Text",
+"default": "Right Text"	
+},
+{
+"type": "text",
+"id": "r4link",
+"label": "Link"          
+}
+]
+}
+],
+"presets": [
+{
+"name": "Mission",
+"category": "Image",
+"blocks": [
+{
+"type": "Image"
+},
+{
+"type": "Image"
+}        
+]
+}
+]
+}
+{% endschema %}

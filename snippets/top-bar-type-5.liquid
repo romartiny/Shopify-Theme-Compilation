@@ -1,0 +1,36 @@
+
+<div class="top_bar top-bar-type-5" style="background:{{ section.settings.top_bar_bg }};">  
+  <div class="container">
+    <div class="header_social top_bar_left">
+      <ul class="menu_bar_right grid__item">
+        <li class="header_currency">
+          <ul class="tbl-list">
+            <li class="currency dropdown-parent uppercase currency-block">
+              {% if section.settings.display_currency %}    
+              {% include 'currencies-switcher' %}
+              {% endif %}
+            </li>
+          </ul>
+        </li>    
+        {% if section.settings.header_phone_value != blank %}
+        <li class="medium-down--hide phone_no"><i class="{{ section.settings.header_phone_class }}"></i><span> {{ section.settings.header_phone_value }}</span></li>
+        {% endif %}
+        {% if section.settings.header_date != blank %}
+        <li class="medium-down--hide"><i class="{{ section.settings.header_time_class }}"></i><span> {{ section.settings.header_date }}</span></li>
+        {% endif %}
+      </ul>
+    </div>
+    <div class="top_bar_menu">      
+      <ul class="menu_bar_right grid__item wide--one-sixth post-large--one-sixth">
+        {% if section.settings.header_mail_value != blank %}
+        <li class="medium-down--hide"><i class="{{ section.settings.header_mail_label_class }}"></i> <a href="mailto:{{ section.settings.header_mail_value }}"> {{ section.settings.header_mail_value }}</a></li>
+        {% endif %}
+        {% if section.settings.display_header_social %}
+        <li class="header_social">     
+          {% include 'social-links-type-6' %}
+        </li>
+        {% endif %}      
+      </ul>        
+    </div>
+  </div>
+</div>

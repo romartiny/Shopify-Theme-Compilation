@@ -1,0 +1,165 @@
+<div data-section-id="{{ section.id }}"  data-section-type="border-icon-section" class="border-icon-section" style="float:left;width:100%;background:{{section.settings.icon_wrapper_bg}};">  
+  <div class="container">
+          <div class="dt-sc-hr-invisible-large"></div>
+ {% if section.settings.main_title != blank or section.settings.main_subheading != blank %}
+      <div class="main-heading">
+        
+        {% if section.settings.main_title %}
+        <h3 style="color:{{ section.settings.mainheading_color }}">  {{section.settings.main_title}}</h3>
+        {% endif %}
+        {% if section.settings.main_subheading != blank %}
+        <h4 style="color:{{ section.settings.subheading_color }}">  {{section.settings.main_subheading}}</h4>
+        {% endif %}
+      </div>
+      {% endif %}
+    <div class="grid-uniform">
+      <ul class="icon_block">         
+        {% if section.blocks.size > 0 %}      
+        {% for block in section.blocks %}
+        {% case section.blocks.size %}
+        {% when 1 %}
+        {%- assign block_width = 'one-whole text-center' -%}
+        {% when 2 %}
+        {%- assign block_width = 'wide--one-half post-large--one-half large--one-half medium--one-half small-grid__item' -%}
+        {% when 3 %}
+        {%- assign block_width = 'wide--one-third post-large--one-third large--one-half medium--one-half small-grid__item' -%}
+        {% when 4 %}
+        {%- assign block_width = 'wide--one-quarter post-large--one-quarter large--one-half medium--one-half small-grid__item' -%}
+        {% endcase %}
+        <li class="grid__item {{ block_width }} wow fadeInUp"  data-wow-delay="{{ settings.time_lazy_load }}ms">
+          <div class="icon_section">                      
+            <div class="icon_inner">             
+              {% if block.settings.title != blank  %}  
+              <h4 style="color:{{ block.settings.title_clr }};">{{ block.settings.title }}</h4>
+              {% endif %}    
+              {% if  block.settings.image_1 != blank %}
+              <div class="icon_img">  
+                <img src="{{  block.settings.image_1 | img_url: "master" }}" alt="{{  block.settings.title }}" />
+              </div>
+              {% endif %}  
+              <div class="icon_text">                   
+                {% if block.settings.desc != blank  %}  
+                <p class="desc" style="color:{{ block.settings.desc_clr }};">{{ block.settings.desc }}</p>
+                {% endif %} 
+              </div> 
+               {% if block.settings.btn_text != blank  %}
+              <a href="{{block.settings.btn_text_link}}" class="btn">{{block.settings.btn_text}}</a>
+                {% endif %} 
+            </div>
+          </div> 
+          <style>
+
+          {{ section.id }}  .border-icon-section .icon_text a:hover { color:{{ block.settings.link_hover_text_clr }}; } 
+
+            .border-icon-section .icon_section{  background:{{section.settings.icon_border_clr}};}
+
+
+
+            
+          </style>
+        </li>  
+        {% endfor %}
+        {% endif %}
+      </ul>
+      <div class="dt-sc-hr-invisible-large"></div>
+    </div>
+  </div>  
+</div>
+
+{% schema %}
+{
+"name": "Border Icon Section",
+
+"max_blocks":4,
+"settings": [
+
+{
+"type": "color",
+"id": "icon_wrapper_bg",
+"label": "Bg Color",
+"default": "#000"   
+},
+{
+"type": "text",
+"id": "main_title",
+"label": "Main Heading",
+"default": "Title...."
+},
+{
+"type": "color",
+"id": "mainheading_color",
+"label": "Heading color",
+"default": "#000"
+},
+{	
+"type": "text",
+"id": "main_subheading",
+"label": "Sub Heading",
+"default": "Sub Title..."
+},
+
+{
+"type": "color",
+"id": "subheading_color",
+"label": "Sub Heading color",
+"default": "#000"
+},
+{
+"type": "color",
+"id": "icon_border_clr",
+"label": "Bg Color",
+"default": "#fff"   
+}
+
+
+],
+"blocks": [
+{
+"type": "text",
+"name": "support block",
+"settings": [ 
+{
+"type": "image_picker",
+"id": "image_1",
+"label": "Icon",
+"info": "Size: 300x300"
+},
+{
+"type": "text",
+"id": "title",
+"label": "Heading"          
+},
+{
+"type": "color",
+"id": "title_clr",
+"label": "Heading",
+"default": "#000"   
+},    
+{
+"type": "textarea",
+"id": "desc",
+"label": "Description"          
+}, 
+{
+"type": "color",
+"id": "desc_clr",
+"label": "Description",
+"default": "#000"   
+},
+{
+"type": "text",
+"id": "btn_text",
+"label": "Button Text"          
+},
+{
+"type": "url",
+"id": "btn_text_link",
+"label": "Button Link"          
+}
+
+]
+}
+]
+
+}
+{% endschema %}

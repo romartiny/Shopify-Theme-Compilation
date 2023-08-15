@@ -1,0 +1,149 @@
+<div data-section-id="{{ section.id }}" data-section-type="wide-banner-type-2" class="wide-banner-type-2">  
+  <div class="grid-uniform">          
+    <div class="wide-banner-type-2-block parallax"  {% if section.settings.image_1 != blank %}  style="background-image:url('{{ section.settings.image_1 | img_url: 'master' }}');background-repeat:no-repeat;background-size:cover;"{% endif%}>      
+      <div class="wide-banner-type-2-content"> 
+        <div class="wide-banner-type-2-section" style="border:2px dashed {{ section.settings.border_color }}">
+          <div class="wide-banner-type-2-rounded">
+            {% if section.settings.logo != blank %} 
+            <img style="margin:auto auto 15px;text-align:center;display:block;" src="{{ section.settings.logo | img_url: '100' }}');" alt="{{ section.settings.title_1 }}">      
+            {% endif%}      
+            
+
+            {% if section.settings.title_1 != blank %}
+            <h3 style="color:{{ section.settings.title_color }}">{{ section.settings.title_1 }}</h3>
+            {% endif %}
+            {% if section.settings.titleshadow_1 != blank %}
+            <h4 style="color:{{ section.settings.shadowtext_color }}">{{ section.settings.titleshadow_1 }}</h4>
+            {% endif %}
+            {% if section.settings.text_1 != blank %}
+            <p style="color:{{ section.settings.text_color }}">{{ section.settings.text_1 }}</p>
+            {% endif %}
+            {% if section.settings.button_1 != blank %}
+            <a class="btn" href="{{ section.settings.link_1 }}" style="color:{{ section.settings.button_txt_color }};border:none;background-color:{{ section.settings.button_bg_color }};">{{ section.settings.button_1 }}</a>    
+            {% endif %}         
+          </div>
+        </div> 
+      </div>
+      <style>
+        .wide-banner-type-2 .wide-banner-type-2-content { background:{{ section.settings.bg_color }}; }
+        .wide-banner-type-2-content a.btn:hover { background-color:{{ section.settings.hover_button_bg_color }} !important; color:{{ section.settings.hover_button_txt_color }} !important;}
+        .wide-banner-type-2 .wide-banner-type-2-content h2 span { color:{{ section.settings.title_2_color }};}
+      </style>
+    </div>
+
+  </div>
+</div>
+{% schema %}
+{
+"name": "Wide Banner",
+"class": "index-section",
+"settings": [
+{
+"type": "image_picker",
+"id": "image_1",
+"label": "Image",
+"info": "Size: 1920x1200"
+},
+{
+"type": "color",
+"id": "bg_color",
+"label":"Round Bg color",
+"default": "#000"
+},
+{
+"type": "color",
+"id": "border_color",
+"label":"Border color",
+"default": "#000"
+},
+{
+"type": "image_picker",
+"id": "logo",
+"label": "Banner Logo",
+"info": "Size: 1920x1286"
+},
+{
+"type": "text",
+"id": "title_1",
+"label": "Heading"
+},
+{
+"type": "color",
+"id": "title_color",
+"label":"Title color",
+"default": "#000"
+},
+{
+"type": "color",
+"id": "title_2_color",
+"label":"Title second color",
+"default": "#000"
+},
+{
+"type": "textarea",
+"id": "text_1",
+"label": "Description"
+},
+{
+"type": "color",
+"id": "text_color",
+"label":"Text color",
+"default": "#000"
+},
+{
+"type": "text",
+"id": "titleshadow_1",
+"label": "Sub Heading"
+},
+{
+"type": "color",
+"id": "shadowtext_color",
+"label":"Text color",
+"default": "#000"
+},
+{
+"type": "text",
+"id": "button_1",
+"label": "Button text"
+},
+{
+"type": "color",
+"id": "button_bg_color",
+"label":"Background color",
+"default": "#000"
+},
+{
+"type": "color",
+"id": "button_txt_color",
+"label":"Text color",
+"default": "#fff"
+},
+{
+"type": "color",
+"id": "hover_button_bg_color",
+"label":"Hover Background color",
+"default": "#000"
+},
+{
+"type": "color",
+"id": "hover_button_txt_color",
+"label":"Hover Text color",
+"default": "#fff"
+},
+{
+"type": "url",
+"id": "link_1",
+"label": "Link URL"
+}
+],
+"presets": [
+{
+"name": "Wide Banner",
+"category": "Image",
+"blocks": []
+}
+]
+}
+{% endschema %}
+
+

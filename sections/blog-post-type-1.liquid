@@ -1,0 +1,368 @@
+<div data-section-id="{{ section.id }}"  data-section-type="blog-post-type-1" class="blog-post-type-1" style="float:left;width:100%;background-color:{{ section.settings.bg_Color }}; {% if section.settings.image_1 != blank %} background-image:url('{{ section.settings.image_1 | img_url:'master' }}');background-repeat:no-repeat;background-position:top center; {% endif %}">
+  <div class="dt-sc-hr-invisible-large"></div>
+  <div class="container">
+    <div class="blog-post">
+       <div class="grid">
+        {% if section.settings.title != blank   or section.settings.text != blank %}
+        <div class="section-header section-header--small text-center">
+            
+          <div class="border-title wow pulse"> 
+             {% if section.settings.text != blank   %}
+          <h3 style="color:{{ section.settings.text_clr }};">{{ section.settings.text }}</h3>
+          {% endif %}
+            {% if section.settings.title != blank %}
+             <h4 style="color:{{ section.settings.title_clr }};">{{ section.settings.title }}</h4>  
+             {% endif %}
+          </div>
+           <div class="dt-sc-hr-invisible-very-small"></div>
+
+         
+        </div>
+        {% endif %} 
+        <div class="grid__item wide--two-thirds post-large--two-thirds large--two-thirds medium--grid__item small-grid__item wow fadeInLeft"> 
+        <div class="home-blog blog-section">        
+          {%- assign blog = blogs[section.settings.blog] -%}
+ 		 {% unless blog.articles_count == 0 %}          
+          {% for article in blogs[section.settings.blog].articles limit:1   %}   
+          <div class="article-item grid__item">
+            <div class="article">
+              <div class="home-blog-image grid__item">
+                {% if article.image %}
+                <a href="{{ article.url }}">
+                  <img src="{{ article.image.src | img_url: 'master' }}" alt="{{ article.title }}" />
+                </a>
+                {% endif %}
+              </div>
+              <div class="blog-description grid__item" style="background-color:{{ section.settings.blog_cnt_bg }};">
+                <div class="blogs-sub-title">
+                  {% if section.settings.show_featured_date %}   
+                  <p class="blog-date" style="color:{{ section.settings.blog_date_clr }};">
+                    <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}"><span class="date"><i style="color:{{ section.settings.date_color }}">{{ article.published_at | date: '%d' }} </i> &#47; {{ article.published_at | date: '%b' }} </span></time>    		 
+                  </p>
+                  {% endif %}  
+
+                  {% if article.comments_enabled? %}
+                  {% assign number_of_comments = article.comments_count %}
+                  {% if section.settings.blog_comment %}
+                  <p class="comments-count">{{  number_of_comments }} {{ 'blogs.comments.comments' | t }}</p>
+                  {% endif %}
+                  {% endif %}
+                  <p class="author" style="color:{{ section.settings.blog_author_text }}">
+                    {% if section.settings.blog_author_enable %}            
+                    <i class="zmdi zmdi-account"></i>
+                    <span> {{ article.author }}</span>
+                    {% endif %}
+                  </p>
+
+                </div>
+                <div class="home-blog-content blog-detail">
+
+                  <h4><a href="{{ article.url }}" style="color:{{ section.settings.title_blog_clr }};">{{ article.title }}</a></h4>
+                  {% if section.settings.blog_description %}
+                  <p style="color:{{ section.settings.blog_desc_clr }};">{{ article.content | strip_html | truncate:100 }}</p>
+                  {% endif %}
+
+                  {% if section.settings.btn != blank %}
+                  <div class="blog-btn">
+                    <a class="btn" style="color:{{ section.settings.btn_txt }};"  href="{{ article.url }}">{{ section.settings.btn }}</a>
+                  </div>
+                  {% endif %}
+                </div>
+
+              </div>
+            </div>  
+
+
+          </div>
+          {% endfor %}
+          {% endunless %}
+          {% if  blog.articles_count == 0 %}
+          {% for i in (1..2) %}
+          <div class="article-item grid__item">
+            <div class="article">
+              <div class="home-blog-image grid__item wide--one-half post-large--one-half large--one-half"> 
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+              <div class="blog-description grid__item wide--one-half post-large--one-half large--one-half">  
+                <div class="blogs-sub-title">
+                  <p class="blog-date">
+                    <time datetime="2016-11-01"><span class="date">Jan 01 , 2017</span></time>
+                  </p>
+                  <div class="home-blog-content blog-detail">
+                    <h4><a href="#">Sample post {{ i }}</a></h4>
+
+
+                    <p class="author">
+
+                      <i class="zmdi zmdi-account"></i>
+                      <span> Author Name</span>
+
+                    </p>
+                    <div class="blog-btn">
+                      <a class="btn" href="#">Read more <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+        </div>
+         </div>
+          <div class="grid__item wide--one-third post-large--one-third large--one-third medium--grid__item small-grid__item wow fadeInRight"> 
+            <div class="home-blog blog-section right-section">        
+          {%- assign blog = blogs[section.settings.blog] -%}
+ 		 {% unless blog.articles_count == 0 %}          
+          {% for article in blogs[section.settings.blog].articles limit:2 offset:1   %}   
+          <div class="article-item grid__item">
+            <div class="article">             
+              <div class="blog-description grid__item" style=background-color:{{ section.settings.blog_cnt_bg }};>
+                <div class="blogs-sub-title">
+                  {% if section.settings.show_featured_date %}   
+                  <p class="blog-date" style="color:{{ section.settings.blog_date_clr }};">
+                    <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}"><span class="date"><i style="color:{{ section.settings.date_color }}">{{ article.published_at | date: '%d' }} </i> &#47; {{ article.published_at | date: '%b' }} </span></time>    		 
+                  </p>
+                  {% endif %}  
+
+                  {% if article.comments_enabled? %}
+                  {% assign number_of_comments = article.comments_count %}
+                  {% if section.settings.blog_comment %}
+                  <p class="comments-count">{{  number_of_comments }} {{ 'blogs.comments.comments' | t }}</p>
+                  {% endif %}
+                  {% endif %}
+                  <p class="author" style="color:{{ section.settings.blog_author_text }}">
+                    {% if section.settings.blog_author_enable %}            
+                    <i class="zmdi zmdi-account"></i>
+                    <span> {{ article.author }}</span>
+                    {% endif %}
+                  </p>
+
+                </div>
+                <div class="home-blog-content blog-detail">
+                  <h4><a href="{{ article.url }}" style="color:{{ section.settings.title_blog_clr }};">{{ article.title }}</a></h4>
+                  {% if section.settings.blog_description %}
+                  <p style="color:{{ section.settings.blog_desc_clr }};">{{ article.content | strip_html | truncate:100 }}</p>
+                  {% endif %}
+
+                  {% if section.settings.btn != blank %}
+                  <div class="blog-btn">
+                    <a class="btn" style="color:{{ section.settings.btn_txt }};"  href="{{ article.url }}">{{ section.settings.btn }}</a>
+                  </div>
+                  {% endif %}
+                </div>
+
+              </div>
+            </div>  
+
+
+          </div>
+          {% endfor %}
+          {% endunless %}
+          {% if  blog.articles_count == 0 %}
+          {% for i in (1..2) %}
+          <div class="article-item grid__item">
+            <div class="article">
+              <div class="home-blog-image grid__item wide--one-half post-large--one-half large--one-half"> 
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+              <div class="blog-description grid__item wide--one-half post-large--one-half large--one-half">  
+                <div class="blogs-sub-title">
+                  <p class="blog-date">
+                    <time datetime="2016-11-01"><span class="date">Jan 01 , 2017</span></time>
+                  </p>
+                  <div class="home-blog-content blog-detail">
+                    <h4><a href="#">Sample post {{ i }}</a></h4>
+
+
+                    <p class="author">
+
+                      <i class="zmdi zmdi-account"></i>
+                      <span> Author Name</span>
+
+                    </p>
+                    <div class="blog-btn">
+                      <a class="btn" href="#">Read more <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+            
+        </div>
+         </div>
+    </div>    
+    <style>
+      
+      .blog-post-type-1 .comments-count { color:{{ section.settings.blog_comment_text }}; }
+      .blog-post-type-1 .comments-count:before { background:{{ section.settings.blog_comment_text }}; }
+      .blog-post-type-1  { background:{{ section.settings.blog_bg }}; }
+      
+      .blog-post-type-1 .btn { background: {{ section.settings.button_bg }} ;color: {{ section.settings.button_text }};}
+      .blog-post-type-1 .btn:hover { background:{{ section.settings.button_hover_bg }};color: {{ section.settings.button_hover_text }};border-color: {{ section.settings.button_hover_bg }};}
+      .blog-post-type-1 .btn:hover:after, .blog-post-type-1 .btn:hover:before,.blog-post-type-1 .btn:active:after, .blog-post-type-1 .btn:active:before { border-color: {{ section.settings.button_bg }}; }
+
+    </style>
+  </div>
+  </div>
+
+</div>
+
+{% schema %}
+{
+"name": "Blog Post",
+"settings": [
+{
+"type": "color",
+"id": "blog_bg",
+"label": "Blog Bg",
+"default": "#000"
+},
+{
+"type": "image_picker",
+"id": "image_1",
+"label": "Bg Image",
+"info": "Size: 1920x1082"
+
+},
+{
+"type": "text",
+"id": "title",
+"label": "Heading"
+},
+{
+"type": "color",
+"id": "title_clr",
+"label": "Heading",
+"default": "#000"
+},
+{
+"type": "text",
+"id": "text",
+"label": "Description"
+},
+{
+"type": "color",
+"id": "text_clr",
+"label": "Description",
+"default": "#000"
+},
+{
+"type": "blog",
+"id": "blog",
+"label": "Select blog"
+},
+{
+"type": "color",
+"id": "blog_cnt_bg",
+"label": "Blog Content Bg",
+"default": "#fff"
+},
+{
+"type": "color",
+"id": "title_blog_clr",
+"label": "Title color",
+"default": "#000"
+},
+{
+"type": "color",
+"id": "title_hover_clr",
+"label": "Hover color",
+"default": "#000"
+},
+{
+"type": "checkbox",
+"id": "show_featured_date",
+"label": "Show date"
+},
+{
+"type": "color",
+"id": "date_color",
+"label": "Date Color",
+"default": "#000"
+},
+{
+"type": "color",
+"id": "blog_date_clr",
+"label": "Month Color",
+"default": "#000"
+},
+
+{
+"type": "checkbox",
+"id": "blog_author_enable",
+"label": "Show author"
+},
+{
+"type": "color",
+"id": "blog_author_text",
+"label": "Author Color",
+"default": "#000"
+},
+{
+"type": "checkbox",
+"id": "blog_comment",
+"label": "Show Comment"
+},
+{
+"type": "color",
+"id": "blog_comment_text",
+"label": "Comment Color",
+"default": "#000"
+},
+{
+"type": "checkbox",
+"id": "blog_description",
+"label": "Show description"
+},
+{
+"type": "color",
+"id": "blog_desc_clr",
+"label": "Description Color",
+"default": "#000"
+},
+{
+"type": "text",
+"id": "btn",
+"label": "Button",
+"default": "Read more"
+},
+{
+"type": "color",
+"id": "button_bg",
+"label": "Button Bg",
+"default": "#d3ad69"	
+},
+{
+"type": "color",
+"id": "button_text",
+"label": "Button Text",
+"default": "#fff"	
+},
+{
+"type": "color",
+"id": "button_hover_bg",
+"label": "Button Hover Bg",
+"default": "#000"	
+},
+{
+"type": "color",
+"id": "button_hover_text",
+"label": "Button Hover Text",
+"default": "#fff"	
+}
+
+
+],
+"presets": [
+{
+"name": "Blog Post",
+"category": "blog"
+}
+]
+}
+{% endschema %}
+

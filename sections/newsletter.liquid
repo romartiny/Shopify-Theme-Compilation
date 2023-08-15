@@ -1,0 +1,112 @@
+<div data-section-id="{{ section.id }}"  data-section-type="newsletter-block">  
+<div class="newsletter-section" style="float:left;width:100%;padding:70px 0;background:{{ section.settings.bg_color }}">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="newsletter-form-section" style="background:{{ section.settings.inner_bg_color }}">
+    <div class="grid__item wide--two-thirds post-large--two-thirds large--two-thirds medium--grid__item small-grid__item">
+    {% if section.settings.title != blank or section.settings.text != blank %}
+    <div class="border-title">
+       {% endif %}
+      <h4 class="newslet_title" style="color:{{ section.settings.title_color }};">
+     
+      {{ section.settings.title }}
+      </h4>
+    
+    {% if section.settings.text != blank %}
+    
+      <h4 style="color:{{ section.settings.text_color }};"> {{ section.settings.text }}</h4>
+   
+    {% endif %}
+      {% if section.settings.title != blank or section.settings.text != blank %}
+    </div>
+    {% endif %}
+    </div>
+        <div class="grid__item wide--one-third post-large--one-third large--one-third medium--grid__item small-grid__item" style="margin:auto;text-align:center;">
+
+    {% if settings.newsletter_form_action != blank %}
+  <form action="{{ settings.newsletter_form_action }}" method="post"  name="mc-embedded-subscribe-form" target="_blank" class="input-group mc-embedded-subscribe-form">
+     <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" name="EMAIL" class="mail" aria-label="{{ 'general.newsletter_form.newsletter_email' | t }}">
+      <button type="submit" class="btn subscribe" name="subscribe" value=""> <i class="fa fa-chevron-right"></i></button>    
+  </form>
+{% else %}
+    {% form 'customer' %}
+      {% if form.posted_successfully? %}
+        <p class="note form-success">{{ 'general.newsletter_form.mailing_list_success_message' | t }}</p>
+		{% else %}
+        <div class="input-group">
+          <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" name="contact[email]" class="mail" aria-label="{{ 'general.newsletter_form.newsletter_email' | t }}" >
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <button type="submit" class="btn subscribe" name="subscribe" value=""><i class="fa fa-chevron-right"></i></button>          
+        </div>
+      {% endif %}
+       {{ form.errors | default_errors }}
+    {% endform %}  
+{% endif %}
+  </div>
+  </div>
+</div>
+  </div>
+</div>
+<style>
+  .newsletter-section form { background:{{ section.settings.form_bg }}; } 
+</style>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "class": "index-section",  
+  "settings": [
+{
+  	"type": "color",
+      "id": "bg_color",
+      "label": "Bg",
+      "default": "#f7f7f7"
+    },
+{
+  	"type": "color",
+      "id": "inner_bg_color",
+      "label": "Inner Bg",
+      "default": "#121212"
+    },
+
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Newsletter"
+    },
+{
+  	"type": "color",
+      "id": "title_color",
+      "label": "Heading",
+      "default": "#000"
+    },
+ 	{
+      "type": "textarea",
+      "id": "text",
+      "label": "Description",
+     "default": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit."
+    },
+	{
+	"type": "color",
+      "id": "text_color",
+      "label": "Description",
+      "default": "#000"
+    },
+{
+  	"type": "color",
+      "id": "form_bg",
+      "label": "Form Bg",
+      "default": "#fff"
+    }
+	
+  ],  
+  "presets": [
+    {
+      "name": "Newsletter",
+      "category": "Form",
+      "blocks": [ ]
+    }
+  ]
+}
+{% endschema %}

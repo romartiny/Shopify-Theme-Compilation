@@ -1,0 +1,244 @@
+
+<div data-section-id="{{ section.id }}"  data-section-type="img-carousel-type" class="img-carousel-type">
+   {% if section.settings.maintitle != blank  %}
+  <div class="section-header section-header--small">
+    <div class="border-title">
+      {% if section.settings.maintitle != blank %} <h2 style="color:{{ section.settings.maintitle_clr }};">{{ section.settings.maintitle }}</h2>{% endif %}   
+    </div>
+  </div>
+  <div class="dt-sc-hr-invisible-small"></div>
+  {% endif %} 
+  <div class="container">
+    <div class="grid__item">
+      {% if section.settings.left_img != blank %} 
+      <div class="grid__item wide--one-half post-large--one-half large--one-whole medium--one-whole small-grid__item " >
+        <div class="left-img">
+          <img src="{{  section.settings.left_img | img_url: "master" }}" alt="{{ section.settings.img_title }}" />
+        </div>
+      </div>
+      {% endif %} 
+      <div class="grid__item wide--one-half post-large--one-half large--one-whole medium--one-whole small-grid__item img-section" style="background-image:url({{section.settings.abot_bg_img | img_url: 'master' }});background-repeat: no-repeat;background-position: 0 65%;">
+        <div class="img-content">
+          {% if section.settings.title_1 != blank %} 
+          <h3 style="color:{{ section.settings.title_1_clr }};">{{ section.settings.title_1 }}</h3>
+          {% endif %} 
+          {% if section.settings.desc != blank %} 
+          <p style="color:{{ section.settings.desc_clr }};">{{ section.settings.desc }}</p>
+          <div class="dt-sc-hr-invisible-very-small"></div>
+          {% endif %} 
+          {% if section.settings.subdesc != blank %} 
+          <p style="color:{{ section.settings.subdesc_clr }};">{{ section.settings.subdesc }}</p>
+          {% endif %} 
+        </div>
+        <div class="img-wrapper" style="background:{{section.settings.img_block_bg}};">
+          <div class=" owl-carousel owl-theme" id="img_carousel">
+            {% if section.blocks.size > 0 %}  
+            {% for block in section.blocks %} 
+            <div class="img-block">       
+              <img src="{{block.settings.small_img| img_url: "master" }}" alt="{{ block.settings.img_title }}" />
+            </div>   
+            {% endfor %}
+            {% endif %}
+          </div>
+          <div class="nav_article"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dt-sc-hr-invisible-large"></div>
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var article_item = $(".img-carousel-type #img_carousel");
+    article_item.owlCarousel({
+      items:1,
+      loop:true,
+      nav:true,
+      autoPlay: false,
+      dots: false,
+      navContainer: ".img-carousel-type .nav_article",
+      navText: [' <a class="prev active"><i class="fa fa-angle-left" aria-hidden="true"></i></a>','<a class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>'],
+      responsive:{
+        0:{
+          items: 1
+        },
+        600:{
+          items:1
+        },
+        700:{
+          items:2
+        },
+
+        1000:{
+          items: 3
+        }
+      }
+    });
+  });
+</script>
+
+
+
+
+<style>
+
+
+  .img-carousel-type .img-section {box-shadow: 0 0 5px 1px {{section.settings.boxshadow_clr}};}
+  
+  .img-carousel-type .nav_article a{background:{{section.settings.arrow_bg_clr}};color:{{section.settings.arrow_txt_clr}};}
+
+  .img-carousel-type .nav_article a:hover{background:{{section.settings.arrow_hoverbg_clr}};color:{{section.settings.arrow_hovertxt_clr}};}
+
+  .img-carousel-type .img-content h3::before{background:{{section.settings.title_1_border}};}
+
+</style>
+
+
+
+
+
+{% schema %}
+{
+"name": "Introduction",
+"class": "index-section",
+"settings": [
+{
+"type": "text",
+"id": "maintitle",
+"label": "Heading"
+},
+{
+"type": "color",
+"id": "maintitle_clr",
+"label": "Heading",
+"default": "#000"
+},
+{
+"type": "image_picker",
+"id": "left_img",
+"label": "left Image",
+"info": "Size: 800x810"
+},
+{
+"type": "text",
+"id": "img_title",
+"label": "Img Alt"
+},
+{
+"type": "image_picker",
+"id": "abot_bg_img",
+"label": "About Bg Image",
+"info": "Size: 1920x1000"
+},
+{
+"type": "text",
+"id": "title_1",
+"label": "Title"
+},
+{
+"type": "color",
+"id": "title_1_clr",
+"label": "Title Color",
+"default": "#000"
+},
+{
+"type": "color",
+"id": "title_1_border",
+"label": "Title Border Color",
+"default": "#000"
+},
+{
+"type": "textarea",
+"id": "desc",
+"label": "Desc"
+},
+{
+"type": "color",
+"id": "desc_clr",
+"label": "Desc Color",
+"default": "#000"
+},
+{
+"type": "textarea",
+"id": "subdesc",
+"label": "Desc"
+},
+{
+"type": "color",
+"id": "subdesc_clr",
+"label": "Sub Desc Color",
+"default": "#000"
+},
+{
+"type": "text",
+"id": "title",
+"label": "Heading"
+},
+{
+"type": "color",
+"id": "title_clr",
+"label": "Heading",
+"default": "#000"
+},
+{
+"type": "color",
+"id": "arrow_bg_clr",
+"label": "Arrow Bg Color",
+"default": "#000"   
+},
+{
+"type": "color",
+"id": "arrow_txt_clr",
+"label": "Arrow Text Color",
+"default": "#000"   
+},
+{
+"type": "color",
+"id": "arrow_hoverbg_clr",
+"label": "Arrow Hover Bg Color",
+"default": "#000"   
+},
+{
+"type": "color",
+"id": "arrow_hovertxt_clr",
+"label": "Arrow Hover Text Color",
+"default": "#000"   
+},
+{
+"type": "color",
+"id": "img_block_bg",
+"label": "Img Block Bg",
+"default": "#000"   
+},
+{
+"type": "color",
+"id": "boxshadow_clr",
+"label": "Boxshadow Color",
+"default": "#000"
+}
+],
+"blocks": [
+{
+"type": "Image",
+"name":"Img Carousel Type",
+"settings": [
+{
+"type": "image_picker",
+"id": "small_img",
+"label": "image",
+"info": "Size: 800x696"
+}
+]
+}
+]
+}
+{% endschema %}
+
+
+
