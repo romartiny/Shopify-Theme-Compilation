@@ -1,0 +1,81 @@
+{% section 'article-template' %}
+
+
+{% if blog.comments_enabled? %}
+    {% paginate article.comments by 50 %}
+        {% if article.comments != blank %}
+        <div id="comments" class="container cf padded-row">
+            <h4 class="align-centre">{{ 'blogs.comments.title' | t }}</h4>
+            
+            {% comment %} Loop through approved comments: {% endcomment %}        
+            {% for comment in article.comments reversed %}
+                <div class="comment spaced-row {% if forloop.first %}first{% endif %}">
+                  <div class="gravatar">
+                    <img src="//www.gravatar.com/avatar/{{ comment.email | remove: ' ' | strip_newlines | downcase | md5 }}?d=https:{{ 'gravatar_def.png' | asset_url | url_escape }}" alt="{{ comment.author }}" />
+                  </div>
+                  <div class="detail">
+                    <p class="author">{{ 'blogs.comments.author_meta' | t: author: comment.author }}</p>
+                    <div class="text">{{ comment.content }}</div>
+                  </div>
+                </div>
+            {% endfor %}
+          
+            {% comment %} Show a comment that was *just* submitted {% endcomment %}
+            {% if comment and comment.created_at %}
+                <div class="comment spaced-row">
+                  <div class="gravatar">
+                    <img src="//www.gravatar.com/avatar/{{ comment.email | remove: ' ' | strip_newlines | downcase | md5 }}?d=https:{{ 'gravatar_def.png' | asset_url | url_escape }}" alt="{{ comment.author }}" />
+                  </div>
+                  <div class="detail">
+                    <p class="author">{{ 'blogs.comments.author_meta' | t: author: comment.author }}</p>
+                    <div class="text">{{ comment.content }}</div>
+                  </div>
+                </div>
+            {% endif %}
+        </div> <!-- /#comments -->
+        
+        <div class="container pagination-row">{% include 'pagination-control' %}</div>
+        {% endif %}
+    {% endpaginate %}
+    
+    <div id="template" class="container cf form">
+        {% form article %}
+        <h4 id="add-comment-title">{{ 'blogs.comments.form_title' | t }}</h4>
+        
+        {% if form.posted_successfully? %}
+        <p>{{ 'blogs.comments.success' | t }}</p>
+        {% endif %}
+        
+        {% if blog.moderated? %}
+        <p>{{ 'blogs.comments.moderated' | t }}</p>
+        {% endif %}
+        
+        {% if form.errors %}
+            <ul class="errors">
+            {% for field in form.errors %}
+                <li>{{ field | capitalize }} {{ form.errors.messages[field] }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    
+        <div class="large_form{% if form.errors contains 'author' %} has-error{% endif %}">
+            <label for="comment_author">{{ 'blogs.comments.name' | t }}</label>
+            <input type="text" id="comment_author" name="comment[author]" size="40" value="{{form.author}}" />
+        </div>
+        <div class="large_form{% if form.errors contains 'email' %} has-error{% endif %}">
+            <label for="comment_email">{{ 'blogs.comments.email' | t }}</label>
+            <input type="text" id="comment_email" name="comment[email]" size="40" value="{{form.email}}" />
+        </div>
+        <div class="large_form{% if form.errors contains 'body' %} has-error{% endif %}">
+            <label for="comment_body">{{ 'blogs.comments.message' | t }}</label>
+            <textarea id="comment_body" name="comment[body]" cols="40" rows="5">{{form.body}}</textarea>
+        </div>
+        
+        <div class="action_bottom">
+            <input type="submit" value="{{ 'blogs.comments.post' | t }}" id="comment-submit" class="btn" />
+        </div>
+      
+        {% endform %}
+    </div> <!-- /.form -->
+{% endif %}
+

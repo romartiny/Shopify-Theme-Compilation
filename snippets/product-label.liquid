@@ -1,0 +1,23 @@
+{% unless settings.prod_block_label_loc == 'hide' %}
+
+{% if product-label.available == false %}
+	<span class="productlabel soldout"><span>{{ 'products.labels.sold_out' | t }}</span></span>
+{% else %}
+
+  {% assign inv_mngmt_size = product-label.variants.first.inventory_management | size %}
+  {% assign limit_as_int = settings.prod_stock_warn_limit | plus: 0 %}
+  {% if product-label.compare_at_price > product-label.price %}
+    <span class="productlabel sale"><span>{{ 'products.labels.sale' | t }}</span></span>
+  {% elsif settings.prod_stock_warn_show and product-label.variants.size == 1 and inv_mngmt_size > 0 and product-label.variants.first.inventory_quantity > 0 and product-label.variants.first.inventory_quantity < limit_as_int %}
+    <span class="productlabel general"><span>{{ 'products.labels.only_x_left' | t: quantity: product-label.variants.first.inventory_quantity }}</span></span>
+  {% else %}
+    {% for tag in product-label.tags %}
+      {% if tag contains 'meta-label-' %}
+        <span class="productlabel general"><span>{{ tag | remove: 'meta-label-' }}</span></span>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+{% endif %}
+
+{% endunless %}

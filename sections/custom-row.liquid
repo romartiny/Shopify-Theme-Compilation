@@ -1,0 +1,368 @@
+<div class="container fully-spaced-row cf section-id-{{ section.id }}" data-section-type="custom-row">
+  <div class="flexible-layout valign-{{ section.settings.alignment }}">
+    {% for block in section.blocks %}
+
+    {% if block.type == 'image' %}
+    {% assign text_scale_mult = '1' %}
+    {% if block.settings.width == 'quarter' %}{% assign text_scale_mult = '4' %}
+    {% elsif block.settings.width == 'third' %}{% assign text_scale_mult = '3' %}
+    {% elsif block.settings.width == 'half' %}{% assign text_scale_mult = '2' %}
+    {% elsif block.settings.width == 'two-thirds' %}{% assign text_scale_mult = '1.5' %}
+    {% elsif block.settings.width == 'three-quarters' %}{% assign text_scale_mult = '1.333' %}
+    {% endif %}
+
+    <div class="column-{{ block.settings.width }} scaled-text-base block-id-{{ block.id }}" data-scaled-text-multiplier="{{ text_scale_mult }}" {{ block.shopify_attributes }}>
+      <div class="image-block slide">
+        {% if block.settings.link_url != blank %}<a href="{{ block.settings.link_url }}">{% endif %}
+
+        {% if block.settings.image == blank %}
+        <div class="placeholder-image {% if block.settings.text != blank %}dark{% endif %}">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+        {% else %}
+        {{ block.settings.image | img_url: '1024x' | img_tag }}
+        {% endif %}
+
+        {% if block.settings.text != blank %}
+        <div class="overlay-text overlay-centre">
+          <div class="inner">
+            <div class="text">
+              <div class="">
+                <div>{{ block.settings.text | escape }}</div>
+                {% if block.settings.subtext != blank %}<div class="second-line">{{ block.settings.subtext | escape }}</div>{% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if block.settings.link_url != blank %}</a>{% endif %}
+      </div>
+    </div>
+    
+    {% else %}
+
+    <div class="column-{{ block.settings.width }}" {{ block.shopify_attributes }}>
+      {% if block.type == 'text' %}
+      {% if block.settings.title != blank %}
+      <h1 class="majortitle in-content">{{ block.settings.title | escape }}</h1>
+      {% endif %}
+
+      <div class="user-content">{{ block.settings.text }}</div>
+
+      {% elsif block.type == 'video' %}
+      <div class="video-container" data-video-id="{{ block.settings.video_url.id }}" data-video-type="{{ block.settings.video_url.type }}">
+      </div>
+
+      {% elsif block.type == 'html' %}
+      <div class="custom-html">
+        {{ block.settings.code }}
+      </div>
+
+      {% endif %}
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+<style type="text/css">
+  {% for block in section.blocks %}
+  {% if block.type == 'image' and block.settings.text != blank %}
+  .section-id-{{ section.id }} .block-id-{{ block.id }} .overlay-text .text > div {
+    color: {{ block.settings.overlay_color }};
+    background: {{ block.settings.overlay_bg | hex_to_rgba: 0.5 }};
+  }
+  {% endif %}
+  {% endfor %}
+</style>
+
+
+{% schema %}
+  {
+    "name": "Custom content",
+	"max_blocks": 5,
+    "settings": [
+      {
+        "type": "select",
+        "id": "alignment",
+        "label": "Vertical alignment",
+        "default": "top",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "middle",
+            "label": "Middle"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ]
+	  }
+	],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "select",
+            "id": "width",
+            "label": "Width",
+            "default": "half",
+            "options": [
+              {
+                "value": "quarter",
+                "label": "25%"
+              },
+              {
+                "value": "third",
+                "label": "33%"
+              },
+              {
+                "value": "half",
+                "label": "50%"
+              },
+              {
+                "value": "two-thirds",
+                "label": "66%"
+              },
+              {
+                "value": "three-quarters",
+                "label": "75%"
+              },
+              {
+                "value": "full",
+                "label": "100%"
+              }
+            ]
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+		  {
+            "type": "url",
+            "id": "link_url",
+            "label": "Link"
+          },
+		  {
+            "type": "header",
+            "content": "Caption"
+          },
+		  {
+            "type": "text",
+            "id": "text",
+            "label": "Caption"
+          },
+		  {
+            "type": "text",
+            "id": "subtext",
+            "label": "Caption line 2"
+          },
+          {
+            "type": "color",
+            "id": "overlay_color",
+            "label": "Color",
+            "default": "#ffffff"
+          },
+          {
+            "type": "color",
+            "id": "overlay_bg",
+            "label": "Background",
+            "default": "rgba(0,0,0,0)"
+          }
+		]
+	  },
+	  {
+        "type": "text",
+        "name": "Text",
+        "settings": [
+          {
+            "type": "select",
+            "id": "width",
+            "label": "Width",
+            "default": "half",
+            "options": [
+              {
+                "value": "quarter",
+                "label": "25%"
+              },
+              {
+                "value": "third",
+                "label": "33%"
+              },
+              {
+                "value": "half",
+                "label": "50%"
+              },
+              {
+                "value": "two-thirds",
+                "label": "66%"
+              },
+              {
+                "value": "three-quarters",
+                "label": "75%"
+              },
+              {
+                "value": "full",
+                "label": "100%"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text"
+          }
+		]
+	  },
+	  {
+        "type": "video",
+        "name": "Embedded video",
+        "settings": [
+          {
+            "type": "select",
+            "id": "width",
+            "label": "Width",
+            "default": "half",
+            "options": [
+              {
+                "value": "quarter",
+                "label": "25%"
+              },
+              {
+                "value": "third",
+                "label": "33%"
+              },
+              {
+                "value": "half",
+                "label": "50%"
+              },
+              {
+                "value": "two-thirds",
+                "label": "66%"
+              },
+              {
+                "value": "three-quarters",
+                "label": "75%"
+              },
+              {
+                "value": "full",
+                "label": "100%"
+              }
+            ]
+          },
+		  {
+            "id": "video_url",
+            "type": "video_url",
+            "label": "Video URL",
+            "accept": ["youtube", "vimeo"],
+			"info": "Supports Youtube and Vimeo",
+            "default": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc"
+          }
+		]
+	  },
+	  {
+        "type": "html",
+        "name": "Custom HTML",
+        "settings": [
+          {
+            "type": "select",
+            "id": "width",
+            "label": "Width",
+            "default": "half",
+            "options": [
+              {
+                "value": "quarter",
+                "label": "25%"
+              },
+              {
+                "value": "third",
+                "label": "33%"
+              },
+              {
+                "value": "half",
+                "label": "50%"
+              },
+              {
+                "value": "two-thirds",
+                "label": "66%"
+              },
+              {
+                "value": "three-quarters",
+                "label": "75%"
+              },
+              {
+                "value": "full",
+                "label": "100%"
+              }
+            ]
+          },
+          {
+            "type": "textarea",
+            "id": "code",
+            "label": "HTML"
+          }
+		]
+	  }
+	],
+	"presets": [
+      {
+        "name": "Custom content",
+		"category": "Advanced layout",
+		"settings": {
+			"alignment": "middle"
+		},
+		"blocks": [
+		  {
+            "type": "image",
+			"settings": {
+			  "width": "half"
+			}
+          },
+          {
+            "type": "text",
+			"settings": {
+              "title": "Welcome",
+              "text": "<p>Use this text to share information about your store with your customers.</p><p>Describe products, share announcements, or welcome customers to your store.</p>",
+			  "width": "half"
+			}
+          }
+		]
+      },
+	  {
+        "name": "Image row",
+		"category": "Image",
+		"blocks": [
+          {
+            "type": "image",
+			"settings": {
+			  "width": "third"
+			}
+          },
+		  {
+            "type": "image",
+			"settings": {
+			  "width": "third"
+			}
+          },
+		  {
+            "type": "image",
+			"settings": {
+			  "width": "third"
+			}
+          }
+        ]
+	  }
+	]
+  }
+{% endschema %}

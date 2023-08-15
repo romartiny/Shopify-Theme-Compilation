@@ -1,0 +1,9 @@
+<div class="container cf">
+  <div class="page-header cf">
+    <h1 class="majortitle">{{ page.title }}</h1>
+    <div class="social-area">{% include 'social-sharing' with page %}</div>
+  </div>
+  <div class="user-content row-spacing {% if settings.lightbox_imgs %}lightboximages{% endif %}">
+    {{ page.content }}
+  </div>
+</div>

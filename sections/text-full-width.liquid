@@ -1,0 +1,57 @@
+<div class="container fully-spaced-row cf">
+  <div class="align-{{ section.settings.alignment }}">
+    {% if section.settings.title != blank %}
+    <h1 class="majortitle in-content">{{ section.settings.title | escape }}</h1>
+    {% endif %}
+
+    <div class="user-content">{{ section.settings.text }}</div>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Full width text",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+		"default": "Rich text"
+      },
+	  {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+		"default": "<p>Use this text to share information about your store with your customers.</p><p>Describe products, share announcements, or welcome customers to your store.</p>"
+      },
+      {
+        "type": "select",
+        "id": "alignment",
+        "label": "Alignment",
+		"default": "center",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+		  {
+            "value": "center",
+            "label": "Center"
+          },
+		  {
+            "value": "right",
+            "label": "Right"
+          }
+        ]
+      }
+	],
+	"presets": [
+	  {
+		"name": "Rich text",
+        "category": "Text",
+        "settings": {}
+	  }
+	]
+  }
+{% endschema %}

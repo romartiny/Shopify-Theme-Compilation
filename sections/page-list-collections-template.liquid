@@ -1,0 +1,65 @@
+<div data-section-type="page-list-collections-template">
+  <div class="container">
+    <div class="page-header cf">
+      <h1 class="majortitle">
+        {{ page.title }}
+      </h1>
+
+      {% if page.content != blank %}
+      <div class="user-content lightly-spaced-row {% if settings.lightbox_imgs %}lightboximages{% endif %}">
+        {{ page.content }}
+      </div>
+      {% endif %}
+
+      <div class="social-area desktop-only">
+        {% include 'social-sharing' %}
+      </div>
+    </div>
+  </div>
+
+
+  {% unless settings.use_fullwidth_layout %}<div class="container">{% endunless %}
+  <div class="collection-listing overlay-mode-{{ section.settings.overlay_mode }}">
+    {% for link in linklists[page.handle].links %}
+    {% if link.type == 'collection_link' %}
+    {% assign collection = link.object %}
+    {% include 'collection-block' %}
+    {% endif %}
+    {% endfor %}
+  </div>
+  {% unless settings.use_fullwidth_layout %}</div>{% endunless %}
+</div>
+
+
+{% schema %}
+  {
+    "name": "Collection lists",
+    "settings": [
+		{
+          "type": "select",
+          "id": "overlay_mode",
+          "label": "Overlay position",
+          "info": "Shows collection name and product count",
+		  "default": "m",
+          "options": [
+            {
+              "value": "none",
+              "label": "Do not show"
+            },
+            {
+              "value": "t",
+              "label": "Top"
+            },
+            {
+              "value": "m",
+              "label": "Middle"
+            },
+            {
+              "value": "b",
+              "label": "Bottom"
+            }
+          ]
+        }
+	]
+  }
+{% endschema %}

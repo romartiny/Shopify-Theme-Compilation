@@ -1,0 +1,111 @@
+<div class="slide full-width-image section-id-{{ section.id }}" data-section-type="text-image-overlay">
+  {% unless settings.use_fullwidth_layout %}<div class="container">{% endunless %}
+  
+  <div class="scaled-text-base">
+    <a class="img-cont" href="{{ section.settings.link_url }}">
+      {% if section.settings.image == blank %}
+      <div class="placeholder-image placeholder--banner {% if section.settings.title != blank or section.settings.text != blank %}dark{% endif %}">
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+      {% else %}
+      <img src="{{ section.settings.image | img_url: '2048x' }}" alt="{{ section.settings.image.alt | escape }}" />
+      {% endif %}
+      
+      {% if section.settings.title != blank or section.settings.text != blank %}
+      <div class="overlay-text overlay-{{ section.settings.position }}">
+        <div class="inner">
+          <div class="text">
+            <div class="scaled-text">
+              <div>{{ section.settings.title | escape }}</div>
+              <div class="second-line">{{ section.settings.text | escape }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </a>
+  </div>
+  
+  {% unless settings.use_fullwidth_layout %}</div>{% endunless %}
+</div>
+
+<style type="text/css">
+  .section-id-{{ section.id }} .overlay-text .text > div {
+    color: {{ section.settings.overlay_color }};
+    background: {{ section.settings.overlay_bg | hex_to_rgba: 0.5 }};
+  }
+</style>
+
+
+{% schema %}
+  {
+    "name": "Image with text overlay",
+    "settings": [
+	  {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image",
+        "info": "1200 x 400px (recommended)"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+		"default": "Image with text overlay"
+      },
+      {
+        "type": "text",
+        "id": "text",
+        "label": "Subheading"
+      },
+      {
+        "type": "select",
+        "id": "position",
+        "label": "Text alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "centre",
+            "label": "Centre"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+		"default": "centre"
+      },
+      {
+        "type": "color",
+        "id": "overlay_color",
+        "label": "Text color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "overlay_bg",
+        "label": "Overlay background",
+        "default": "#464654"
+      },
+      {
+        "type": "url",
+        "id": "link_url",
+        "label": "Link"
+      }
+	],
+	"presets": [
+	  {
+		"name": "Image with text overlay",
+        "category": "Image",
+        "settings": {
+          "text": "",
+		  "position": "centre",
+          "link_url": ""
+        }
+	  }
+	]
+  }
+{% endschema %}

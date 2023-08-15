@@ -1,0 +1,69 @@
+<div class="padded-row cf" data-section-type="instagram">
+  {% unless settings.use_fullwidth_layout %}<div class="container">{% endunless %}
+  
+  {% if section.settings.title != blank %}
+  <h1 class="hometitle h4-style align-center">{{ section.settings.title | escape }}</h1>
+  {% endif %}
+
+  {% if section.settings.account != blank %}
+  <div class="view-all align-center">
+    <a target="_blank" href="https://www.instagram.com/{{ section.settings.account | remove: '@' }}">@{{ section.settings.account | remove: '@' | escape }}</a>
+  </div>
+  {% endif %}
+
+  {% unless section.settings.access_token == blank %}
+  
+  <div class="willstagram {% if settings.use_fullwidth_layout %}willstagram--uncontained{% endif %} {% unless section.settings.show_margins %}willstagram--no-margins{% endunless %}" data-user_id="self" data-count="25" data-access_token="{{ section.settings.access_token | escape }}"></div>
+  
+  {% else %}
+  <div class="willstagram willstagram-placeholder {% if settings.use_fullwidth_layout %}willstagram--uncontained{% endif %} {% unless section.settings.show_margins %}willstagram--no-margins{% endunless %}">
+    <div class="items">
+      {% for i in (1..12) %}<div class="item">
+          <div class="placeholder-image">{{ 'image' | placeholder_svg_tag }}</div>
+        </div>{% endfor %}
+    </div>
+  </div>
+  {% endunless %}
+  
+  {% unless settings.use_fullwidth_layout %}</div>{% endunless %}
+</div>
+
+
+{% schema %}
+  {
+    "name": "Instagram feed",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+		"default": "Instagram feed"
+      },
+	  {
+        "type": "text",
+        "id": "account",
+        "label": "Account name"
+      },
+      {
+        "type": "text",
+        "id": "access_token",
+        "label": "Access token",
+        "info": "Required - [get your access token](http:\/\/cleanthemes.co.uk\/pages\/instagram-integration)"
+      },
+	  {
+        "type": "checkbox",
+        "id": "show_margins",
+        "label": "Show margins",
+		"default": true
+      }
+	],
+	"presets": [
+	  {
+		"name": "Instagram feed",
+        "category": "Social media",
+        "settings": {
+        }
+	  }
+	]
+  }
+{% endschema %}

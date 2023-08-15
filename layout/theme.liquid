@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+  <!-- Symmetry 3.0.11 -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <meta name="theme-color" content="{{ settings.btn_col }}">
+  
+  {% if settings.favicon != blank and settings.favicon contains '.png' %}
+  <link rel="shortcut icon" href="{{ settings.favicon | img_url: 'master' }}" type="image/png" />
+  {% elsif settings.favicon != blank and settings.favicon contains '.ico' %}
+  <link rel="shortcut icon" href="{{ settings.favicon | img_url: 'master' }}" type="image/x-icon" />
+  {% endif %}
+  
+  <title>
+    {{ page_title }}{% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+  </title>
+  {% if page_description %}
+  <meta name="description" content="{{ page_description | escape }}" />
+  {% endif %}
+  <link rel="canonical" href="{{ canonical_url }}" />
+  
+  {% include 'opengraph-tags' %}
+  {% include 'twitter-card' %}
+  
+  {% include 'google-fonts-import' %}
+  
+  {{ 'styles.scss.css' | asset_url | stylesheet_tag }}
+  
+  {% if template contains 'customers' %}
+    {{ "shopify_common.js" | shopify_asset_url | script_tag }}
+    {{ "customer_area.js"  | shopify_asset_url | script_tag }}
+  {% endif %}
+  
+  {{ '//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js' | script_tag }}
+  {{ 'api.jquery.js' | shopify_asset_url | script_tag }}
+<script>
+  Shopify.money_format = {{ shop.money_format | json }};
+  window.theme = window.theme || {};
+  theme.money_format = {{ shop.money_format | json }};
+  theme.productData = {};
+  document.documentElement.className = document.documentElement.className.replace('no-js', '');
+</script>
+
+  {{ content_for_header }}
+  <link href="https://fonts.googleapis.com/css?family=Codystar|El+Messiri|Suravaram" rel="stylesheet">
+</head>
+
+<body class="template-{{ template | split: '.' | first }}">
+  
+  {% section 'header' %}
+  <div id="content">
+    <div class="container cf">
+      
+      {{ content_for_layout }}
+      
+    </div><!-- /.container -->
+  </div><!-- /#content -->
+
+  <div id="pagefooter">
+    {% section 'cross-page-promos' %}
+
+    {% section 'footer' %}
+  </div><!-- /#pagefooter -->
+  
+  {{ 'vendor.js'  | asset_url | script_tag }}
+  {{ 'theme.js'  | asset_url | script_tag }}
+  
+  {% include 'currencies' %}
+  
+
+{% include 'swymSnippet' %}
+
+</body>
+</html>

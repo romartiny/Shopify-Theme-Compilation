@@ -1,0 +1,126 @@
+<div data-section-type="blog-template">
+  {% paginate blog.articles by 10 %}
+  <div class="container">
+    <div class="page-header cf">
+      <h1 class="majortitle">{{ blog.title }}</h1>
+
+      {% assign show_tags = false %}
+      {% for tag in blog.all_tags %}
+      {% unless tag contains 'meta-' %}{% assign show_tags = true %}{% endunless %}
+      {% endfor %}
+
+      <div class="filters">
+        {% if show_tags %}
+        <a href="#" data-toggle-target=".tags.nav-row">{{ 'blogs.filtering.filter' | t }} <span class="state">+</span></a>
+        {% endif %}
+      </div><!-- /.filters -->
+
+      <div class="social-area">
+        {% include 'social-sharing' with blog %}
+        <a class="rsslink" href="{{ blog.url }}.atom" title="{{ blog.title | escape }} RSS">{% include 'svg-rss' %}</a>
+      </div>
+    </div>
+  </div><!-- /.pagetitle -->
+
+  {% if show_tags %}
+  {% assign current_tags_size = current_tags | size %}
+  <div class="tags nav-row spaced-row {% if current_tags_size == 0 %}hidden{% endif %}">
+    <ul>
+      {% for tag in blog.all_tags %}
+      {% unless tag contains 'meta-' %}
+      {% if current_tags contains tag %}
+      <li class="active">{{ tag | append: ' <span class="x">&times;</span>' | link_to_remove_tag: tag }}</li>
+      {% else %}
+      <li>{{ tag | link_to_tag: tag }}</li>
+      {% endif %}
+      {% endunless %}
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <div class="article-list">
+
+    {% for article in blog.articles %}
+
+    <div class="article">
+      <div class="container">
+
+        {% if article.image %}
+        <div class="article-image">{{ article.image | img_url: '1024x' | img_tag: article.image.alt | link_to: article.url }}</div>
+        {% endif %}
+
+        <h2>{{ article.title | link_to: article.url }}</h2>
+
+        <div class="user-content {% if settings.lightbox_imgs %}lightboximages{% endif %}">
+          {{ article.excerpt_or_content }}
+        </div>
+
+        <div class="meta">
+          <span class="iconmeta time">
+            {% if section.settings.show_date %}
+            {{ article.published_at | date: format: 'month_date_year' }}
+            {% endif %}
+            {% if section.settings.show_author %}
+            <span class="author">{{ 'blogs.article.author' | t: author: article.author }}</span>
+            {% endif %}
+          </span>
+
+          {% if section.settings.show_article_tags %}
+          {% capture tag_markup %}
+          <div class="iconmeta tags">
+            <span class="label">{{ 'blogs.article.tags' | t }}:</span>
+            {% for tag in article.tags %}
+            {% unless tag contains 'meta-' %}
+            {{ tag | link_to_tag: tag }}
+            {% endunless %}
+            {% endfor %}
+          </div>
+          {% endcapture %}
+          {% if tag_markup contains '</a>' %}{{ tag_markup }}{% endif %}
+          {% endif %}
+        </div>
+
+        <div class="continue-reading">{{ 'blogs.article.read_more_html' | t | link_to: article.url }}</div>
+
+      </div><!-- /.container -->
+    </div><!-- /.article -->
+
+    {% else %}
+
+    <div class="container"><h5 class="align-centre fully-spaced-row">{{ 'blogs.general.no_matches' | t }}</h5></div>
+
+    {% endfor %}
+  </div>
+
+  <div class="container pagination-row">{% include 'pagination-control' %}</div>
+
+  {% endpaginate %}
+</div>
+
+
+{% schema %}
+  {
+    "name": "Blog pages",
+    "settings": [
+	  {
+        "type": "checkbox",
+        "id": "show_date",
+        "label": "Show date",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_author",
+        "label": "Show author",
+        "default": true
+      },
+	  {
+        "type": "checkbox",
+        "id": "show_article_tags",
+        "label": "Show tags underneath articles",
+        "default": true
+      }
+	]
+  }
+{% endschema %}

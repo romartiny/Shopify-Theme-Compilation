@@ -1,0 +1,51 @@
+
+<div class="section-signup section-id-{{ section.id }}">
+  <div class="container strongly-padded-row align-center">
+<div><img src="//cdn.shopify.com/s/files/1/1779/2733/files/oie_cRG6iBmD5Syt.png?v=1492325604" alt="" style="display: block; margin-left: auto; margin-right: auto;" /></div>
+  <div></div>
+    <h1 class="hometitle h4-style in-content">{{ section.settings.title | escape }}</h1>
+
+    <div class="user-content">{{ section.settings.text }}</div>
+
+    {% include 'signup-form' %}
+
+  </div>
+</div>
+
+<style type="text/css">
+  .section-id-{{ section.id }} {
+    background: {{ section.settings.background_color }};
+  }
+</style>
+
+{% schema %}
+  {
+    "name": "Newsletter signup",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+		"default": "Signup for our newsletter"
+      },
+	  {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#ffffff"
+      }
+	],
+	"presets": [
+	  {
+		"name": "Newsletter signup",
+        "category": "Newsletter signup",
+        "settings": {}
+	  }
+	]
+  }
+{% endschema %}

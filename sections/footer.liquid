@@ -1,0 +1,54 @@
+{% if linklists[section.settings.menu_linklist].links.size > 0 %}
+<div class="nav-row">
+  {% include 'main-navigation' with section.settings.menu_linklist %}
+</div><!-- /.nav-row -->
+{% endif %}
+
+<div class="lower cf">
+  {% if section.settings.show_social_icons %}
+  {% include 'social-icons' %}
+  {% endif %}
+
+  {% if section.settings.signup_show %}
+  <div class="interact">
+    {% include 'signup-form' %}
+  </div><!-- /.interact -->
+  {% endif %}
+
+  <div class="copyright">
+    <span class="copy">&copy; {{ "now" | date: "%Y" }} {{ shop.name | link_to: '/' }}.</span>
+
+
+  <div class="payment-methods">
+    {% for type in shop.enabled_payment_types %}
+    <img src="{{ type | payment_type_img_url }}" />
+    {% endfor %}
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "menu_linklist",
+        "label": "Menu",
+		"default": "footer"
+      },
+	  {
+        "type": "checkbox",
+        "id": "show_social_icons",
+        "label": "Show social icons",
+		"default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "signup_show",
+        "label": "Show newsletter signup",
+		"default": true
+      }
+    ]
+  }
+{% endschema %}

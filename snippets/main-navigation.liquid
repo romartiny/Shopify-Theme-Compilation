@@ -1,0 +1,8 @@
+<div class="multi-level-nav">
+  <div class="tier-1">
+    {% include 'recursive-navigation-helper' with main-navigation %}
+
+    {{ extra_navigation_items }}
+    {% assign extra_navigation_items = '' %}
+  </div>
+</div>

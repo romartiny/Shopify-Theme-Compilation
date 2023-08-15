@@ -1,0 +1,301 @@
+<div data-section-type="collection-template">
+{% paginate collection.products by section.settings.coll_num_per_page %}
+
+<div class="container">
+  <div class="page-header cf">
+    {% if section.settings.coll_desc_pos == 'below' %}
+    <h1 class="majortitle">{{ collection.title | escape }}</h1>
+    {% endif %}
+
+    {% if collection.description != blank %}
+    <div class="user-content lightly-spaced-row {% if settings.lightbox_imgs %}lightboximages{% endif %}">
+      {{ collection.description }}
+    </div>
+    {% endif %}
+
+    {% if section.settings.coll_desc_pos == 'above' %}
+    <h1 class="majortitle">{{ collection.title | escape }}</h1>
+    {% endif %}
+
+    {% comment %} Which tags should we show, and group them into categories {% endcomment %}
+    {% assign show_normal_filter = false %}
+    {% assign show_custom_filter_1 = false %}
+    {% assign show_custom_filter_2 = false %}
+
+    {% if section.settings.show_tagfilt_custom1 %}
+    {% assign custom_tag_arr1 = section.settings.tagfilt_custom1_tags | replace: ', ',',' | split: ',' %}
+    {% capture filter1_html %}
+    {% for tag in collection.all_tags %}
+      {% unless tag contains 'meta-' %}
+      {% if custom_tag_arr1 contains tag %}
+        {% assign show_custom_filter_1 = true %}
+        {% if current_tags contains tag %}
+        <li class="active" data-tag="{{tag | handleize}}">{{ tag | append: ' <span class="x">&times;</span>' | link_to_remove_tag: tag }}</li>
+        {% else %}
+        <li data-tag="{{tag | handleize}}">{{ tag | link_to_add_tag: tag }}</li>
+        {% endif %}
+      {% endif %}
+      {% endunless %}
+    {% endfor %}
+    {% endcapture %}
+    {% endif %}
+    
+    {% if section.settings.show_tagfilt_custom2 %}
+    {% assign custom_tag_arr2 = section.settings.tagfilt_custom2_tags | replace: ', ',',' | split: ',' %}
+    {% capture filter2_html %}
+    {% for tag in collection.all_tags %}
+      {% unless tag contains 'meta-' %}
+      {% if custom_tag_arr2 contains tag %}
+        {% assign show_custom_filter_2 = true %}
+        {% if current_tags contains tag %}
+        <li class="active" data-tag="{{tag | handleize}}">{{ tag | append: ' <span class="x">&times;</span>' | link_to_remove_tag: tag }}</li>
+        {% else %}
+        <li data-tag="{{tag | handleize}}">{{ tag | link_to_add_tag: tag }}</li>
+        {% endif %}
+      {% endif %}
+      {% endunless %}
+    {% endfor %}
+    {% endcapture %}
+    {% endif %}
+    
+    {% if section.settings.coll_show_tags %}
+    {% capture filter_html %}
+    {% for tag in collection.all_tags %}
+      {% unless tag contains 'meta-' or custom_tag_arr1 contains tag or custom_tag_arr2 contains tag %}
+        {% assign show_normal_filter = true %}
+        {% if current_tags contains tag %}
+        <li class="active" data-tag="{{tag | handleize}}">{{ tag | append: ' <span class="x">&times;</span>' | link_to_remove_tag: tag }}</li>
+        {% else %}
+        <li data-tag="{{tag | handleize}}">{{ tag | link_to_add_tag: tag }}</li>
+        {% endif %}
+      {% endunless %}
+    {% endfor %}
+    {% endcapture %}
+    {% endif %}
+
+
+    <div class="filters">
+      {% if show_normal_filter %}
+      <a href="#" class="tags" data-toggle-target=".tags.nav-row.cat-normal">{{ 'collections.filtering.filter' | t }} <span class="state">+</span></a>
+      {% endif %}
+
+      {% if show_custom_filter_1 %}
+      <a href="#" class="tags" data-toggle-target=".tags.nav-row.cat-custom-1">{{ section.settings.tagfilt_custom1_name | escape }} <span class="state">+</span></a>
+      {% endif %}
+      
+      {% if show_custom_filter_2 %}
+      <a href="#" class="tags" data-toggle-target=".tags.nav-row.cat-custom-2">{{ section.settings.tagfilt_custom2_name | escape }} <span class="state">+</span></a>
+      {% endif %}
+
+      {% if section.settings.coll_show_sort %}
+      <span class="sort tags">
+        <label for="sort-by">{{ 'collections.sorting.title' | t }}</label> 
+        <select id="sort-by" data-initval="{{ collection.sort_by | default: collection.default_sort_by  }}">
+          {% if section.settings.coll_show_feat %}<option value="manual">{{ 'collections.sorting.featured' | t }}</option>{% endif %}
+          <option value="price-ascending">{{ 'collections.sorting.price_ascending' | t }}</option>
+          <option value="price-descending">{{ 'collections.sorting.price_descending' | t }}</option>
+          <option value="title-ascending">{{ 'collections.sorting.az' | t }}</option>
+          <option value="title-descending">{{ 'collections.sorting.za' | t }}</option>
+          <option value="created-ascending">{{ 'collections.sorting.date_ascending' | t }}</option>
+          <option value="created-descending">{{ 'collections.sorting.date_descending' | t }}</option>
+          <option value="best-selling">{{ 'collections.sorting.best_selling' | t }}</option>
+        </select>
+      </span>
+      {% endif %}
+
+      {% if section.settings.coll_gridstream_toggle %}
+      <span class="view-as">
+        <span class="view-as-label">{{ 'collections.general.view' | t }}</span>
+        <a id="view-as-tiles" {% if section.settings.coll_gridstream_mode == 'grid' %}class="active"{% endif %} href="#">{{ 'collections.general.grid' | t }} <div class="fluff1"></div><div class="fluff2"></div><div class="fluff3"></div><div class="fluff4"></div></a>
+        <a id="view-as-stream" {% if section.settings.coll_gridstream_mode == 'stream' %}class="active"{% endif %} href="#">{{ 'collections.general.list' | t }} <div class="fluff"></div></a>
+      </span>
+      {% endif %}
+    </div><!-- /.filters -->
+
+
+    <div class="social-area">
+      {% include 'social-sharing' %}
+    </div>
+  </div><!-- /.page-header -->
+</div><!-- /.container -->
+
+<div class="multi-tag-row">
+  {% if show_normal_filter %}
+  <div class="tags nav-row cat-normal {% unless filter_html contains 'class="active"' %}hidden{% endunless %}">
+    <ul>
+      {{ filter_html }}
+    </ul>
+  </div>
+  {% endif %}
+  
+  {% if show_custom_filter_1 %}
+  <div class="tags nav-row cat-custom-1 {% unless filter1_html contains 'class="active"' %}hidden{% endunless %}">
+    <ul>
+      {{ filter1_html }}
+    </ul>
+  </div>
+  {% endif %}
+  
+  {% if show_custom_filter_2 %}
+  <div class="tags nav-row cat-custom-2 {% unless filter2_html contains 'class="active"' %}hidden{% endunless %}">
+    <ul>
+      {{ filter2_html }}
+    </ul>
+  </div>
+  {% endif %}
+</div><!-- /.multi-tag-row -->
+
+{% if collection.products.size == 0 %}
+    <div class="container"><h5 class="align-centre fully-spaced-row">{{ 'collections.general.no_matches' | t }}</h5></div>
+{% else %}
+    {% unless settings.use_fullwidth_layout %}<div class="container">{% endunless %}
+
+    <div class="collection-listing{% if section.settings.coll_gridstream_mode == 'stream' %}-stream{% endif %} cf">
+      <div class="product-list">
+        {% for product in collection.products %}
+        {% include 'product-block' with product %}
+        {% endfor %}
+      </div>
+    </div>
+    
+    {% unless settings.use_fullwidth_layout %}</div>{% endunless %}
+{% endif %}
+
+<div class="container pagination-row">{% include 'pagination-control' %}</div>
+
+{% endpaginate %}
+</div>
+
+
+{% schema %}
+  {
+    "name": "Collection pages",
+    "settings": [
+      {
+        "type": "select",
+        "id": "coll_desc_pos",
+        "label": "Description position",
+        "options": [
+          {
+            "value": "below",
+            "label": "Below collection title"
+          },
+          {
+            "value": "above",
+            "label": "Above collection title"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "coll_show_sort",
+        "label": "Show 'sort by' dropdown",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "coll_show_feat",
+        "label": "Show 'Featured' in sort by",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "coll_show_tags",
+        "label": "Show ungrouped tags",
+        "default": true
+      },
+	  {
+        "type": "header",
+        "content": "Tag group 1"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_tagfilt_custom1",
+        "label": "Show",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "tagfilt_custom1_name",
+        "label": "Name"
+      },
+      {
+        "type": "text",
+        "id": "tagfilt_custom1_tags",
+        "label": "Tags to include",
+        "info": "Separate with commas"
+      },
+      {
+        "type": "header",
+        "content": "Tag group 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_tagfilt_custom2",
+        "label": "Show",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "tagfilt_custom2_name",
+        "label": "Name"
+      },
+      {
+        "type": "text",
+        "id": "tagfilt_custom2_tags",
+        "label": "Tags to include",
+        "info": "Separate with commas"
+      },
+      {
+        "type": "header",
+        "content": "Layout"
+      },
+      {
+        "type": "select",
+        "id": "coll_num_per_page",
+        "label": "Number of products to show per page",
+        "options": [
+          {
+            "value": "16",
+            "label": "16"
+          },
+          {
+            "value": "24",
+            "label": "24"
+          },
+          {
+            "value": "32",
+            "label": "32"
+          },
+          {
+            "value": "40",
+            "label": "40"
+          }
+        ],
+        "default": "16"
+      },
+      {
+        "type": "select",
+        "id": "coll_gridstream_mode",
+        "label": "Show products in a grid or a list",
+        "options": [
+          {
+            "value": "grid",
+            "label": "Grid"
+          },
+          {
+            "value": "stream",
+            "label": "List"
+          }
+        ],
+        "default": "grid"
+      },
+      {
+        "type": "checkbox",
+        "id": "coll_gridstream_toggle",
+        "label": "Show toggle for grid and list views",
+        "default": true
+      }
+	]
+  }
+{% endschema %}

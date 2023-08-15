@@ -1,0 +1,185 @@
+{% assign product_block_image_size = '480x' %}
+
+{% if collection %}
+    {% capture product_url %}{{ product.url | within: collection }}{% endcapture %}
+{% else %}
+    {% capture product_url %}{{ product.url }}{% endcapture %}
+{% endif %}
+
+<div data-product-id="{{ product.id }}" class="product-block detail-mode-{{ settings.prod_hov_type }} {% unless settings.prod_thumb_variable_width %}fixed-width{% endunless %}">
+  <div class="block-inner">
+    <a class="product-link" href="{{ product_url }}">
+      <div class="image-cont">
+        <div class="image-label-wrap">
+          {{ product.featured_image | product_img_url: product_block_image_size | img_tag: product.featured_image.alt }}
+          {% include 'product-label' with product %}
+        </div>
+      </div>
+
+      <div class="product-info">
+        <div class="inner">
+          <div class="innerer">
+            <div class="title">{{ product.title }}</div>
+            <div class="dash">-</div>
+
+            {% if product.compare_at_price_max > product.price %}
+            <div class="reducedfrom"><span class="amount">{{ product.compare_at_price_max | money }}</span></div>
+            {% endif %}
+            <span class="price">
+              {% if product.price_varies %}
+              <span class="from">{{ 'products.listing.from' | t }}</span>
+              {% endif %}
+              {{ product.price | money }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+  
+  <div class="product-detail">
+    <a href="#" class="close-detail">X</a>
+    <div class="container inner cf">
+
+      <div class="gallery layout-column-half-left {% if product.images.size > 1 %}has-thumbnails{% endif %}">
+        {% assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
+        
+        <div class="main-image">
+          <a href="{{ product_url }}">
+            <img src="{{ 'blank.gif' | asset_url }}" data-src="{{ featured_image | product_img_url: '1024x1024' }}" alt="{{ featured_image.alt | escape }}"/>
+          </a>
+        </div>
+
+        {% if product.images.size > 1 %}
+        <div class="thumbnails">
+          {{ 'products.quick_buy.images' | t }}
+
+          {% for image in product.images %}
+          / 
+          <a {% if image.src == featured_image.src %} class="active" {% endif %} title="{{ image.alt | escape }}" 
+             href="{{ image | product_img_url: '1024x1024' }}" 
+             data-full-size-url="{{ image | product_img_url: 'master' }}">
+            <span>{{ forloop.index }}</span>
+          </a>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="detail layout-column-half-right">
+        {% include 'product-label' with product %}
+
+        <h2 class="h1-style title"><a href="{{ product_url }}">{{ product.title }}</a></h2>
+
+        {% assign variant = product.selected_or_first_available_variant  %}
+        <h2 class="h4-style price-area">
+          {% if product.variants.size == 1 and product.compare_at_price_max > product.price_min %}
+          <span class="was-price">{{ variant.compare_at_price | money }}</span>
+          {% endif %}
+          <span class="price">{{ variant.price | money }}</span>
+        </h2>
+
+
+        {% if settings.prod_show_vendor %}
+        {% comment %}
+        Do we have a collection that has the same name as our product vendor name?
+        If we do, let's have the vendor link point to it.
+        If not, we will point to the automatic vendor collection.
+        {% endcomment %}
+        {% assign product_vendor_handle = product.vendor | handle %}
+        {% if collections[product_vendor_handle].handle == product_vendor_handle %}
+        {% assign vendor_url = collections[product_vendor_handle].url %}
+        {% else %}
+        {% assign vendor_url = product.vendor | url_for_vendor %}
+        {% endif %}
+        <p class="vendor">{{ 'products.product.vendor' | t }} {{ product.vendor | link_to: vendor_url }}</p>
+        {% endif %}
+
+        {% if settings.prod_show_sku %}
+        <div class="sku {% if product.selected_or_first_available_variant.sku == blank %}sku--no-sku{% endif %}">{{ 'products.product.sku' | t }} <span class="sku__value">{{ product.selected_or_first_available_variant.sku }}</span></div>
+        {% endif %}
+
+        <div class="product-form section">
+          {% if product.available %}
+
+          <form class="form" action="/cart/add" method="post" enctype="multipart/form-data" data-product-id="{{ product.id }}">
+            <div class="input-row">
+              {% if product.variants.size > 1 %}
+
+              <div class="option-selectors">
+                {% for option in product.options_with_values %}
+                <div class="selector-wrapper cf">
+                  <label {% if option.name == 'default' %}class="hidden"{% endif %} for="option-{{ forloop.index0 }}">
+                    {{ option.name }}
+                  </label>
+                  <select id="option-{{ forloop.index0 }}">
+                    {% for value in option.values %}
+                    <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>
+                      {{ value }}
+                    </option>
+                    {% endfor %}
+                  </select>
+                </div>
+                {% endfor %}
+              </div>
+
+              <select name="id" class="original-selector">
+                {% for variant in product.variants %}
+                <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected"{% endif %}>{{ variant.title | escape }}</option>
+                {% endfor %}
+              </select>
+
+
+              {% else %}
+              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" />
+
+              {% unless product.variants.first.title contains 'Default' %}
+              <label class="singleopt">
+                {% for option in product.options %}
+                {% assign opt_idx = 'option' | append: forloop.index %}
+                {{ option }}: {{ product.variants.first[opt_idx] }}<br/>
+                {% endfor %}
+              </label>
+              {% endunless %}
+
+              {% endif %}
+            </div>
+            <div class="input-row quantity-submit-row">
+              <input id="quantity" class="select-on-focus" name="quantity" value="1" size="2" />
+              <input type="submit" value="{{ 'products.product.add_to_cart' | t }}" />
+            </div>
+          
+            {% if product.variants.size == 1 %}
+            {% if product.variants.first.inventory_management == 'shopify' and product.variants.first.inventory_quantity < 1 %}
+            <div class="backorder">
+              <p><span class="selected-variant">{{ product.title }}</span> {{ 'products.product.backorder' | t }}</p>
+            </div>
+            {% endif %}
+            {% else %}
+            <div class="backorder hidden">
+              <p><span class="selected-variant"></span> {{ 'products.product.backorder' | t }}</p>
+            </div>
+            {% endif %}
+          </form>
+
+          {% else %}
+
+          <p><em>{{ 'products.product.product_unavailable' | t }}</em></p>
+
+          {% endif %}
+        </div>
+
+        {% comment %} UN-COMMENT THE CODE BELOW TO SHOW A SMALL EXCERPT OF THE DESCRIPTION {% endcomment %}
+
+        {% comment %}
+        <div class="description user-content">{{ product.description | strip_html | truncate: 150 }}</div>
+        {% endcomment %}
+
+        <a class="more" href="{{ product_url }}">{{ 'products.quick_buy.read_more' | t }} &rarr;</a>
+      </div>
+
+      <script>theme.productData[{{ product.id }}] = {{ product | json }};</script>
+
+    </div>
+  </div>
+</div>

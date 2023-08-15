@@ -1,0 +1,22 @@
+{% layout none %}
+{% comment %} Inspired by: http://ecommerce.shopify.com/c/ecommerce-design/t/diy-implementing-autocomplete-with-search-144104 {% endcomment %}
+{% paginate search.results by 10 %}
+ {% capture output %}
+ {% for result in search.results %}
+        {% assign resultURL = result.url %}
+		{% if result.images and result.images.size > 0 %}
+        {% assign thumbURL = result.images[0] | product_img_url: '48x48' %}
+        {% else %}
+		{% assign thumbURL = '' %}
+        {% endif %}
+
+        {"title":{{ result.title | json }},
+           "url":{{ result.url   | json }},
+         "thumb":{{ thumbURL     | json }},
+            "id":{{result.id}} }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+{% endcapture %}
+
+{% comment %} Output the json object {% endcomment %}
+{"results_total":{{paginate.items}},"results":[{{ output | strip_newlines }}]}
+{% endpaginate %}

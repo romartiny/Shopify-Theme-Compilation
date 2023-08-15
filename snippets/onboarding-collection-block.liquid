@@ -1,0 +1,20 @@
+<div class="product-block collection-block">
+  <div class="block-inner">
+    <div class="product-link">
+
+      <div class="image-cont">
+        {% capture placeholder_svg_name %}collection-{{ forloop.index }}{% endcapture %}
+        <div class="placeholder-image">{{ placeholder_svg_name | placeholder_svg_tag }}</div>
+      </div>
+
+      <div class="product-info">
+        <span class="productlabel general">
+          <span>
+            <span class="title">{{ 'onboarding.collection.collection_title' | t }}</span>
+            <span class="count">{{ 'collections.general.product_count' | t: count: 0 }}</span>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

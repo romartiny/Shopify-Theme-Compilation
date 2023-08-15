@@ -1,0 +1,57 @@
+<div class="sharing social-links">
+  
+  <span class="label">{{ 'general.social.label' | t }}</span>
+  
+  
+  {% if template contains 'product' %}
+  
+  {% assign url_to_share = shop.url | append: product.url %}
+  {% capture img_to_share %}http:{{ product.featured_image | product_img_url: 'master' }}{% endcapture %}
+  {% assign title_to_share = product.title %}
+
+  {% elsif template contains 'collections' %}
+  {% assign url_to_share = shop.url | append: '/collections' %}
+  {% assign img_to_share = false %}
+  {% assign title_to_share = page_title %}
+  
+  {% elsif template contains 'collection' %}
+  
+  {% assign url_to_share = shop.url | append: collection.url %}
+  {% if collection.image %}
+  {% capture img_to_share %}http:{{ collection.image | img_url: 'master' }}{% endcapture %}
+  {% else %}
+  {% assign img_to_share = false %}
+  {% endif %}
+  {% assign title_to_share = collection.title %}
+  
+  {% else %}
+  {% assign url_to_share = shop.url | append: social-sharing.url %}
+  {% assign img_to_share = false %}
+  
+  {% if template contains 'article' %}
+  {% if article and article.image %}
+    {% assign img_to_share = article.image | img_url: 'master' %}
+  {% endif %}
+  {% endif %}
+  
+  {% assign title_to_share = social-sharing.title %}
+  {% endif %}
+
+  {% capture social_check_out %}{{ 'general.social.check_out_html' | t: title: title_to_share }}{% endcapture %}
+  {% assign social_check_out_urlescaped = social_check_out | url_param_escape | replace: ";", "%3B" %}
+  <ul>
+
+    <li class="facebook"><a title="{{ 'general.social.on_facebook' | t | escape }}" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ url_to_share | url_param_escape }}">{% include 'svg-facebook' %}</a></li>
+
+    <li class="twitter"><a title="{{ 'general.social.on_twitter' | t | escape }}" target="_blank" href="https://twitter.com/intent/tweet?text={{ social_check_out_urlescaped }}: {{ url_to_share | url_param_escape }}">{% include 'svg-twitter'%}</a></li>
+
+    {% if img_to_share != false %}
+    <li class="pinterest"><a title="{{ 'general.social.on_pinterest' | t | escape }}" target="_blank" href="//pinterest.com/pin/create/button/?url={{ url_to_share | url_param_escape }}&amp;media={{ img_to_share | url_param_escape }}&amp;description={{ title_to_share | url_param_escape }}">{% include 'svg-pinterest' %}</a></li>
+    {% endif %}
+
+    <li class="google"><a title="{{ 'general.social.on_google' | t | escape }}" target="_blank" href="https://plus.google.com/share?url={{ url_to_share | url_param_escape }}">{% include 'svg-google-plus' %}</a></li>
+
+    <li class="email"><a title="{{ 'general.social.by_email' | t | escape }}" href="mailto:?subject={{ social_check_out | url_param_escape }}&amp;body={{ social_check_out | url_param_escape }}:%0D%0A%0D%0A{{ url_to_share | url_param_escape }}">{% include 'svg-email' %}</a></li>
+
+  </ul>
+</div>

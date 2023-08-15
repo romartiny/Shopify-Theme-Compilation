@@ -1,0 +1,26 @@
+<div class="product-block {% unless settings.prod_thumb_variable_width %}fixed-width{% endunless %} collection-block" {{ custom_attrs }}>
+  <div class="block-inner">
+    <a class="product-link" href="{{ collection.url }}">
+
+      <div class="image-cont">
+        {% if collection.image %}
+        <img src="{{ collection.image.src | collection_img_url: 'x600' }}" alt="{{ collection.image.alt | escape }}">
+        {% else %}
+        <img src="{{ collection.products.first.featured_image | product_img_url: 'x600' }}" alt="{{ collection.products.first.featured_image.alt | escape }}">
+        {% endif %}
+      </div>
+
+      <div class="product-info">
+        <span class="productlabel general">
+          <span>
+            <span class="title">{{ collection.title }}</span>
+            {% if collection.all_products_count > 0 %}
+            <span class="count">{{ 'collections.general.product_count' | t: count: collection.all_products_count }}</span>
+            {% endif %}
+          </span>
+        </span>
+      </div>
+      
+    </a>
+  </div>
+</div>

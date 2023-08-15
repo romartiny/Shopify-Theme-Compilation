@@ -1,0 +1,107 @@
+{% if article.image and section.settings.show_featured_image %}
+<div class="article-image align-center {% unless settings.use_fullwidth_layout %}container{% endunless %}">{{ article.image | img_url: '2048x2048' | img_tag: article.image.alt }}</div>
+{% endif %}
+
+<div class="container">
+    <div class="page-header cf">
+      <h1 class="majortitle">{{ article.title }}</h1>
+
+      <div class="social-area">
+        {% include 'social-sharing' with article %}
+        <a class="rsslink" href="{{ blog.url }}.atom" title="{{ blog.title | escape }} RSS"><i class="icon-rss"></i></a>
+      </div>
+    </div>
+</div><!-- /.pagetitle -->
+
+<div class="article">
+  <div class="container">
+    
+    <div class="user-content spaced-row {% if settings.lightbox_imgs %}lightboximages{% endif %}">
+      {{ article.content }}
+    </div>
+
+    <div class="meta">
+      <span class="iconmeta time">
+        {% if section.settings.show_date %}
+        {{ article.published_at | date: format: 'month_date_year' }}
+        {% endif %}
+        {% if section.settings.show_author %}
+        <span class="author">{{ 'blogs.article.author' | t: author: article.author }}</span>
+        {% endif %}
+      </span>
+      
+      {% if section.settings.show_article_tags %}
+      {% capture tag_markup %}
+      <div class="iconmeta tags">
+        <span class="label">{{ 'blogs.article.tags' | t }}:</span>
+        {% for tag in article.tags %}
+        {% unless tag contains 'meta-' %}
+        {{ tag | link_to_tag: tag }}
+        {% endunless %}
+        {% endfor %}
+      </div>
+      {% endcapture %}
+      {% if tag_markup contains '</a>' %}{{ tag_markup }}{% endif %}
+      {% endif %}
+      
+      <div class="iconmeta meta-share-mob">{% include 'social-sharing' with article %}</div>
+    </div>
+    
+    <div class="pagination-row pagination-row-tabular">
+      <div class="inner">
+        <span class="prev">
+          {% if blog.previous_article %}
+          <a href="{{ blog.previous_article }}"><i class="icon-arrow3-left"></i> <span>{{ 'blogs.article.older_post' | t }}</span></a>
+          {% endif %}
+        </span>
+
+        <span class="back">{{ 'blogs.article.back_to_blog' | t: blog: blog.title | link_to: blog.url }}</span>
+
+        <span class="next">
+          {% if blog.next_article %}
+          <a href="{{ blog.next_article }}"><span>{{ 'blogs.article.newer_post' | t }}</span> <i class="icon-arrow3-right"></i></a>
+          {% endif %}
+        </span>
+      </div>
+    </div>
+    
+  </div><!-- /.container -->
+</div><!-- /.article -->
+
+{% schema %}
+  {
+    "name": "Article pages",
+    "settings": [
+	  {
+        "type": "checkbox",
+        "id": "show_featured_image",
+        "label": "Show featured image",
+        "default": true
+      },
+	  {
+        "type": "checkbox",
+        "id": "show_date",
+        "label": "Show date",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_author",
+        "label": "Show author",
+        "default": true
+      },
+	  {
+        "type": "checkbox",
+        "id": "show_article_tags",
+        "label": "Show article tags",
+        "default": true
+      }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,17 @@
+{% if paginate.pages > 1 %}
+    <div class="pagination">
+        {% if paginate.previous %}
+            <a class="prev" href="{{ paginate.previous.url }}">&laquo; {{ 'general.pagination.previous' | t }}</a>
+        {% else %}
+            <span class="prev">&laquo; {{ 'general.pagination.previous' | t }}</span>
+        {% endif %}
+        
+        <span class="pagecount">{{ 'general.pagination.page_number' | t: current: paginate.current_page, total: paginate.pages }}</span>
+        
+        {% if paginate.next %}
+            <a class="next" href="{{ paginate.next.url }}">{{ 'general.pagination.next' | t }} &raquo;</a>
+        {% else %}
+            <span class="next">{{ 'general.pagination.next' | t }} &raquo;</span>
+        {% endif %}
+    </div>
+{% endif %}

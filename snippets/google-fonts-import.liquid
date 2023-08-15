@@ -1,0 +1,14 @@
+{% comment %} Google Fonts {% endcomment %}
+{% assign gfonts = '' %}
+{% for i in (1..5) %}
+{% capture font_setting_index %}{% cycle 'font_group': 'font_fam_base', 'font_fam_headings', 'font_fam_shoptitle', 'font_fam_nav', 'font_fam_special' %}{% endcapture %}
+{% capture font_setting_cust_index %}{{ font_setting_index }}_cust{% endcapture %}
+{% assign font_family_split = settings[font_setting_index] | split: '|' %}
+{% assign curr_font_family = settings[font_setting_index] %}
+{% if font_family_split.first == 'GWF' %}
+{% assign gfonts = gfonts | append: '|' | append: font_family_split.last %}
+{% endif %}
+{% endfor %}
+{% if gfonts != '' %}
+<link href="//fonts.googleapis.com/css?family={{ gfonts | remove_first: '|' | replace: ' ', '+' | replace: "'", '' }}" rel="stylesheet" type="text/css">
+{% endif %}

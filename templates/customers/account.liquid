@@ -1,0 +1,77 @@
+<div id="admin_header">
+  <div class="action_link action_return note" id='return_to_store'><a href="{{ shop.url }}">{{ 'customer.general.return' | t }}</a></div>
+  <h2 class="title">{{ 'customer.account.title' | t }}</h2>
+</div>
+
+<div id="customer_sidebar">
+  <div id="customer_detail" class="group">
+    <h5 class="name">{{ customer.name }}</h5>
+    <p class="email note">{{ customer.email }}</p>
+    <div class="address note">
+      {% if customer.default_address != nil %}
+        <p>{{ customer.default_address.address1 }}</p>
+        {% if customer.default_address.address2 != "" %}
+          <p>{{ customer.default_address.address2 }}</p>
+        {% endif %}
+        <p>{{ customer.default_address.city}}, {% if address.province_code %}{{customer.default_address.province_code}}, {% endif %}{{customer.default_address.country}}</p>
+        <p>{{ customer.default_address.zip}}</p>
+        <p>{{ customer.default_address.phone }}</p>
+      {% endif %}
+      <a id="view_address" href="/account/addresses">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a>
+    </div>
+
+  </div>
+</div>
+
+<div id="customer_orders">
+  {% paginate customer.orders by 20 %}
+  {% if customer.orders.size != 0 %}
+  <table class="responsive-table">
+    <thead>
+      <tr>
+        <th class="order_number">{{ 'customer.orders.order_number' | t }}</th>
+        <th class="date">{{ 'customer.orders.date' | t }}</th>
+        <th class="payment_status">{{ 'customer.orders.payment_status' | t }}</th>
+        <th class="fulfillment_status">{{ 'customer.orders.fulfillment_status' | t }}</th>
+        <th class="total">{{ 'customer.orders.total' | t }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in customer.orders %}
+      <tr class="{% if order.cancelled %}cancelled_order{% endif %}">
+        <td class="responsive-table__cell-head">
+          <span class="responsive-table__cell-label">{{ 'customer.orders.order_number' | t }}</span>
+          {{ order.name | link_to: order.customer_url }}
+          <span class="mobile-only-ib">- {{ order.created_at | date: format: 'month_date_year' }}</span>
+          <span class="responsive-table__cell-head__icon">{% include 'svg-chevron-right' %}</span>
+        </td>
+        <td class="desktop-only">
+          <span class="note">{{ order.created_at | date: format: 'month_date_year' }}</span>
+        </td>
+        <td class="responsive-table__first-mobile-cell">
+          <span class="responsive-table__cell-label">{{ 'customer.orders.payment_status' | t }}</span>
+          <span class="status_{{ order.financial_status }}">{{ order.financial_status_label }}</span>
+        </td>
+        <td>
+          <span class="responsive-table__cell-label">{{ 'customer.orders.fulfillment_status' | t }}</span>
+          <span class="status_{{ order.fulfillment_status }}">{{ order.fulfillment_status_label }}</span>
+        </td>
+        <td>
+          <span class="responsive-table__cell-label">{{ 'customer.orders.total' | t }}</span>
+          <span class="total money">{{ order.total_price | money }}</span>
+          
+          <div class="responsive-table__more">
+            <a href="{{ order.customer_url }}">{{ 'customer.orders.full_details_html' | t }}</a>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+    <p>{{ 'customer.orders.none' | t }}</p>
+  {% endif %}
+  
+  <div class="pagination-row">{% include 'pagination-control' %}</div>
+  {% endpaginate %}
+</div>

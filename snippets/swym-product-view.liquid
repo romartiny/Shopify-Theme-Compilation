@@ -1,0 +1,50 @@
+{% comment %} First time code {% endcomment %}
+{% if swym-product-view-init %}
+{% else %}
+<script>
+
+</script>
+<style>
+  /* Hide when not loaded */
+  .swym-button.swym-add-to-wishlist-view-product:not(.swym-loaded){
+    display: none;
+  }
+</style>
+{% assign swym-product-view-init = true %}
+{% endif %}
+{% if product %}
+<script>
+if(!window.SwymViewProducts){
+  window.SwymViewProducts = {};
+}
+if(!window.SwymWatchProducts){
+  window.SwymWatchProducts = {};
+}
+(function(et){
+    var collections = {{product.type | json}};
+    var variants = [], currentVariant, variantPrice = {{ product.price}}/100;
+    {% for variant in product.variants %}
+    {% if variant.selected %}
+    currentVariant = "{{variant.id}}";variants.push({ {{ product.selected_variant.title | json }} :"{{ variant.id }}"});variantPrice = {{ product.selected_variant.price}}/100;
+    {% break %}
+    {% endif %}
+    {% endfor %}
+    if (variants.length == 0){
+      currentVariant = "{{product.variants[0].id}}";variants.push({ {{ product.variants[0].title | json }} :"{{ product.variants[0].id }}"});variantPrice = {{ product.variants[0].price}}/100;
+    }
+    var product_data = {
+      empi:"{{ product.id }}",epi : currentVariant,
+      dt	:{{ product.title | json }},du	:"{{ shop.url }}{{ product.url }}",
+      ct 	:collections,pr 	: variantPrice,
+      iu	:{{ product.featured_image | json }},variants:variants
+    };
+    SwymViewProducts[{{product.handle | json}}] = SwymViewProducts[{{product.id | json}}] = product_data;
+    var o = {};
+    {% for variant in product.variants %}
+      o[{{variant.id | json}}] = {"id": {{variant.id | json}},"inventory_management": {{variant.inventory_management | json}},"inventory_quantity": {{variant.inventory_quantity | json}},"title": {{variant.title | json}}};
+    {% endfor %}
+    SwymWatchProducts[{{product.handle | json}}] = SwymWatchProducts[{{product.id | json}}] = o;
+  })();
+
+</script>
+{% endif %}

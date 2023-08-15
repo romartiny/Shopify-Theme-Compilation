@@ -1,0 +1,70 @@
+{% paginate search.results by 24 %}
+
+<div class="container">
+{% if search.performed %}
+    <div class="padded-row cf">
+        <div class="layout-column-half-left">
+          {% if search.performed %}
+          	<h1 class="majortitle">{{ 'general.search.your_search_html' | t: terms: search.terms }}</h1>
+            <h5>{{ 'general.search.results_with_count' | t: count: search.results_count }}</h5>
+          {% endif %}
+        </div>
+        
+        <div class="layout-column-half-right align-right">
+            <form id="search-form" name="search" action="/search">
+              <h1 class="majortitle">{{ 'general.search.search_again' | t }}</h1>
+              <input type="text" id="q" name="q" value="" /><input type="submit" class="compact" value="&rarr;" />
+              <input type="hidden" name="type" value="{{ settings.search_type }}" />
+            </form>
+        </div>
+    </div>
+{% else %}
+    <div class="page-header">
+        <h1 class="majortitle">{{ 'general.search.title' | t }}</h1>
+        <div class="align-center">
+            <form id="search-form" name="search" action="/search">
+              <input type="text" id="q" name="q" value="" /><input type="submit" class="compact" value="&rarr;" />
+              <input type="hidden" name="type" value="{{ settings.search_type }}" />
+            </form>
+        </div>
+    </div>
+{% endif %}
+</div>
+
+{% if search.performed %}
+{% unless settings.use_fullwidth_layout %}<div class="container">{% endunless %}
+<div class="row-spacing cf">
+    {% if search.results == empty %}
+        <p class="align-center">{{ 'general.search.no_results' | t }}</p>
+    {% else %}
+        <div class="collection-listing cf">
+          {% for item in search.results %}
+            {% if item.featured_image %}
+          		{% assign product = item %}
+                {% include 'product-block' with item %}
+            {% else %}
+                <div class="product-block page-block">
+                    <div class="block-inner">
+                        {% if item.object_type == 'article' and item.image %}
+                        <div class="article-image">{{ item.image | img_url: 'compact' | img_tag | link_to: item.url }}</div>
+                        {% endif %}
+                        <div class="text-cont">
+                          <h4><a href="{{ item.url }}">{{ item.title }}</a></h4>
+                          {% unless item.object_type == 'article' and item.image %}
+                          <p><a href="{{ item.url }}">{{ item.content | strip_html | truncatewords: 20 | highlight: search.terms }}</a></p>
+                          {% endunless %}
+                          <a href="{{ item.url }}">{{ 'general.search.read_more' | t }} &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+    {% endif %}
+</div>
+{% unless settings.use_fullwidth_layout %}</div>{% endunless %}
+{% endif %}
+
+<div class="container pagination-row">{% include 'pagination-control' %}</div>
+
+{% endpaginate %}

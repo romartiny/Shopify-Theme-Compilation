@@ -1,0 +1,130 @@
+{% assign blog = blogs[section.settings.blog] %}
+
+<div class="container padded-row blog-row" data-section-type="featured-blog">
+  {% unless blog.empty? %}
+  
+  <h1 class="hometitle h4-style align-center"><a href="{{ blog.url }}">{{ blog.title }}</a></h1>
+  
+  {% if blog.articles.size == 0 %}
+  
+  <p class="align-center">{{ 'onboarding.blog.empty' | t }}</p>
+  
+  {% else %}
+  <div class="article-layout cf">
+    {% for article in blog.articles limit: 3 %}
+    <div class="article article-layout__column">
+      {% if article.image and section.settings.show_featured_image %}
+      <div class="article-image" {% if section.settings.crop_image %}data-crop-img="{{ section.settings.crop_style }}"{% endif %}>
+        {{ article.image | img_url: '900x' | img_tag: article.image.alt | link_to: article.url }}
+      </div>
+      {% endif %}
+
+      <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+      
+      <div class="user-content">
+        {{ article.excerpt_or_content }}
+      </div>
+      
+      <div class="meta">
+        <span class="iconmeta time">
+          {{ article.published_at | date: format: 'month_date_year' }}
+          <span class="author">{{ 'blogs.article.author' | t: author: article.author }}</span>
+        </span>
+      </div>
+      
+      <div class="continue-reading"><a href="{{ article.url }}">{{ 'blogs.article.read_more_html' | t }}</a></div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  
+  {% else %}
+  
+  <h1 class="hometitle h4-style align-center">{{ 'onboarding.blog.title' | t }}</h1>
+  <div class="article-layout cf">
+    {% for i in (1..3) %}
+    <div class="article article-layout__column">
+      {% if section.settings.show_featured_image %}
+      <div class="article-image">
+        <div class="placeholder-image">{{ 'image' | placeholder_svg_tag }}</div>
+      </div>
+      {% endif %}
+
+      <h3>{{ 'onboarding.article.title' | t }}</h3>
+      
+      <div class="user-content">
+        {{ 'onboarding.article.excerpt' | t }}
+      </div>
+      
+      <div class="meta">
+        <span class="iconmeta time">
+          {{ 'now' | date: format: 'month_date_year' }}
+          <span class="author">{{ 'onboarding.article.author' | t }}</span>
+        </span>
+      </div>
+      
+      <div class="continue-reading">{{ 'blogs.article.read_more_html' | t }}</div>
+    </div>
+    {% endfor %}
+  </div>
+  
+  {% endunless %}
+</div>
+
+
+{% schema %}
+  {
+    "name": "Blog posts",
+    "settings": [
+	  {
+        "type": "blog",
+        "id": "blog",
+        "label": "Blog"
+      },
+	  {
+        "type": "header",
+        "content": "Featured image"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_featured_image",
+        "label": "Show",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "crop_image",
+        "label": "Crop",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "crop_style",
+        "label": "Crop style",
+        "options": [
+          {
+            "value": "1-1",
+            "label": "Square"
+          },
+          {
+            "value": "3-4",
+            "label": "Portrait"
+          },
+          {
+            "value": "16-9",
+            "label": "Landscape"
+          }
+        ],
+        "default": "16-9"
+      }
+	],
+	"presets": [
+	  {
+		"name": "Blog posts",
+        "category": "Blog",
+        "settings": {
+        }
+	  }
+	]
+  }
+{% endschema %}

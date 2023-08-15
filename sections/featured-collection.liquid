@@ -1,0 +1,92 @@
+{% assign product_limit = 20 %}
+{% assign collection = collections[section.settings.collection] %}
+
+<div class="{% if section.settings.use_carousel %}collection-slider-row{% else %}padded-row{% endif %} section-id-{{ section.id }}" data-section-type="featured-collection">
+  {% unless settings.use_fullwidth_layout %}<div class="container {% unless section.settings.use_carousel %}uncontain-desktop-down{% endunless %}">{% endunless %}
+  
+  <div class="{% if section.settings.use_carousel %}collection-slider{% endif %}">
+    <h1 class="hometitle h4-style align-center has-paging">
+      {% if section.settings.use_carousel %}<a class="prev" href="#">{% include 'svg-chevron-left' %}</a>{% endif %}
+      <a href="{{ collection.url }}"><span>{{ section.settings.title | escape }}</span></a>
+      {% if section.settings.use_carousel %}<a class="next" href="#">{% include 'svg-chevron-right' %}</a>{% endif %}
+    </h1>
+    
+    <div class="view-all align-center">
+      <a href="{{ collection.url }}">{{ 'home_page.products.see_all' | t }}</a>
+    </div>
+
+    <div class="collection-listing">
+      <div class="product-list {% if section.settings.use_carousel %}carousel {% unless settings.use_fullwidth_layout %}fixed-mode{% endunless %}{% endif %}">
+        {% if section.settings.collection == blank %}
+        
+        {% for i in (1..6) %}
+        {% include 'onboarding-product-block' %}
+        {% endfor %}
+        
+        {% else %}
+        
+        {% for product in collection.products limit: product_limit %}
+        {% include 'product-block' with product %}
+        {% endfor %}
+        
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  
+  {% unless settings.use_fullwidth_layout %}</div>{% endunless %}
+  
+  {% if settings.prod_thumb_detail_show and section.settings.use_carousel %}
+  <div class="collection-listing slider-collection-listing">
+    <div class="product-detail"></div>
+  </div>
+  {% endif %}
+</div>
+
+<style type="text/css">
+  .section-id-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+  }
+</style>
+
+
+{% schema %}
+  {
+    "name": "Featured collection",
+    "settings": [
+		{
+			"type": "text",
+			"id": "title",
+			"label": "Heading",
+			"default": "Best selling"
+		},
+		{
+			"type": "collection",
+			"id": "collection",
+			"label": "Collection"
+		},
+		{
+			"type": "checkbox",
+			"id": "use_carousel",
+			"label": "Enable carousel"
+		},
+		{
+			"type": "color",
+			"id": "background_color",
+			"label": "Background color",
+			"default": "#f5f5f5"
+		}
+	],
+	"presets": [
+	  {
+		"name": "Featured collection",
+        "category": "Collection",
+        "settings": {
+          "title": "Featured collection",
+		  "collection": "",
+          "use_carousel": true
+        }
+	  }
+	]
+  }
+{% endschema %}

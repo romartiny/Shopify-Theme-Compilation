@@ -1,0 +1,119 @@
+<div class="collection-slider-row for-collections section-id-{{ section.id }}" data-section-type="featured-collections">
+  {% unless settings.use_fullwidth_layout %}<div class="container {% unless section.settings.use_carousel %}uncontain-desktop-down{% endunless %}">{% endunless %}
+  <div class="collection-slider">
+    <h1 class="hometitle h4-style align-center has-paging">
+      {% if section.settings.use_carousel %}<a class="prev" href="#">{% include 'svg-chevron-left' %}</a>{% endif %}
+      <span>{{ section.settings.title | escape }}</span>
+      {% if section.settings.use_carousel %}<a class="next" href="#">{% include 'svg-chevron-right' %}</a>{% endif %}
+    </h1>
+    <div class="collection-listing overlay-mode-{{ section.settings.overlay_mode }}">
+      <div class="product-list {% if section.settings.use_carousel %}carousel {% unless settings.use_fullwidth_layout %}fixed-mode{% endunless %}{% endif %}">
+        {% if section.blocks.size > 0 %}
+        
+        {% for block in section.blocks %}
+        {% assign collection = collections[block.settings.collection] %}
+        {% unless collection == blank %}
+        {% include 'collection-block', custom_attrs: block.shopify_attributes %}
+        
+        {% else %}
+        
+        {% include 'onboarding-collection-block' %}
+        {% endunless %}
+        {% endfor %}
+        
+        {% else %}
+        
+        {% for i in (1..6) %}
+        {% include 'onboarding-collection-block' %}
+        {% endfor %}
+        
+        {% endif %}
+      </div>
+    </div>
+  </div><!-- /.collection-listing -->
+  {% unless settings.use_fullwidth_layout %}</div>{% endunless %}
+</div>
+
+<style type="text/css">
+  .section-id-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+  }
+</style>
+
+
+{% schema %}
+  {
+    "name": "Collection list",
+	"max_blocks": 20,
+    "settings": [
+		{
+			"type": "text",
+			"id": "title",
+			"label": "Title",
+			"default": "Collection list"
+		},
+		{
+			"type": "checkbox",
+			"id": "use_carousel",
+			"label": "Enable carousel",
+			"default": true
+		},
+		{
+			"type": "color",
+			"id": "background_color",
+			"label": "Background color",
+			"default": "#f5f5f5"
+		},
+		{
+          "type": "select",
+          "id": "overlay_mode",
+          "label": "Overlay position",
+          "info": "Shows collection name and product count",
+		  "default": "m",
+          "options": [
+            {
+              "value": "none",
+              "label": "Do not show"
+            },
+            {
+              "value": "t",
+              "label": "Top"
+            },
+            {
+              "value": "m",
+              "label": "Middle"
+            },
+            {
+              "value": "b",
+              "label": "Bottom"
+            }
+          ]
+        }
+	],
+	"blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+          {
+              "type": "collection",
+              "id": "collection",
+              "label": "Collection"
+          }
+		]
+	  }
+	],
+	"presets": [
+	  {
+		"name": "Collection list",
+        "category": "Collection",
+        "settings": {
+          "title": "Collection list",
+          "overlay_mode": "m"
+        },
+		"blocks": [
+		]
+	  }
+	]
+  }
+{% endschema %}
