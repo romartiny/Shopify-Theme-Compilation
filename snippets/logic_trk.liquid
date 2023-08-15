@@ -1,0 +1,38 @@
+{% assign string1 = '' %}
+        {% assign collectionArray = string1 | split:','%}
+        {%if collectionArray != blank %}
+            {% if template contains 'product' %}
+              <div class='product_fb' style='display:none;'>
+                {%- for field in collectionArray -%}
+                  {% assign pixelCode = field | split:'#' %}
+                  {%for collection in product.collections %}
+                    {%assign colURL = collection.url | remove:'/collections/'%}
+                    {%if pixelCode[0] == colURL %}
+                        <p data-pixelId='{{pixelCode[1]}}'>{{pixelCode[0]}}</p>
+                    {%endif%}
+                  {%endfor%}
+                {%- endfor -%}
+              </div>
+           {% else template contains 'cart' %}
+              {%if cart.item_count > 0 %}
+                {% assign pixelArr = '' %}
+                    {%- for field in collectionArray -%}
+                        {% assign pixelCode = field | split:'#' %}
+                        {% for item in cart.items %}
+                            {%for collection in item.product.collections %}
+                                {%if pixelCode[0] == collection.handle %}
+                                {%assign temp = pixelCode[1] | append:',' %}
+                                {%assign pixelArr = pixelArr | append:temp %}
+                                {%endif%}
+                            {%endfor%}
+                        {%endfor%}
+                    {%endfor%}
+                {%assign pixelArr = pixelArr | split:',' | uniq %}
+                <div class='cart_fb' style='display:none;'>
+                    {% for pixel in pixelArr %}
+                      <p>{{pixel}}</p>
+                    {%endfor%}
+                  </div>
+                {%endif%}
+            {%endif%}
+        {%endif%}
