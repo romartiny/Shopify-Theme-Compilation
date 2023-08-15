@@ -1,0 +1,336 @@
+{% assign autoplay_speed = 0 %}
+{% if section.settings.autoplay %}
+  {% assign autoplay_speed = section.settings.autoplay_speed | times: 1000 %}
+{% endif %}
+
+{% if section.settings.enable and section.blocks.size > 0 %}
+  {% assign image_size = '' %}
+  {% if section.settings.layout == 'full-width' %}
+    {% assign image_size = '1440x600' %}
+  {% elsif section.settings.layout == 'full-window' %}
+    {% assign image_size = '2048x2048' %}
+  {% endif %}
+
+  <div
+    class="home-slideshow-wrapper {{ section.settings.layout }} {{ section.settings.transition }}"
+    {% if section.settings.layout == 'full-window' %}
+      data-full-window-slideshow
+    {% endif %}
+    data-slideshow-autoplay="{{ autoplay_speed }}"
+    data-section-id="{{ section.id }}"
+    data-section-type="slideshow">
+
+    <div class="home-slideshow-loader"></div>
+
+    {% if section.blocks.size > 1 %}
+      <a class="home-slideshow-navigation home-slideshow-previous icon icon-angle-left" href="#" tabindex="0"></a>
+      <a class="home-slideshow-navigation home-slideshow-next icon icon-angle-right" href="#" tabindex="0"></a>
+
+      <div class="home-slideshow-pagination">
+        {% for block in section.blocks %}
+          {%- capture pagination_class -%}
+            pagination-list-item
+            pagination-slide-{{ forloop.index }}
+            {% if forloop.first %}active{% endif %}
+          {%- endcapture %}
+          <span
+            data-slide-id="home-slide-{{ forloop.index }}"
+            class="{{ pagination_class | strip_newlines }}">
+            <span></span>
+          </span>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div class="home-slideshow" data-slideshow-content>
+      {% for block in section.blocks %}
+        {% assign slide_image = block.settings.image | img_url: image_size %}
+        {% capture current %}{% cycle 1, 2 %}{% endcapture %}
+
+        {% assign has_content = true %}
+        {% assign onboarding = false %}
+        {% if
+          block.settings.title == blank and
+          block.settings.subtitle == blank and
+          block.settings.cta == blank and
+          block.settings.button == blank %}
+          {% assign has_content = false %}
+          {% assign onboarding = true %}
+        {% endif %}
+
+        {% unless block.settings.image %}
+          {% assign placeholder_image_style = 'lifestyle-' | append: current %}
+          {%- capture slide_image -%}
+            {%-
+              include 'placeholder_svg_uri',
+              placeholder: placeholder_image_style
+            -%}
+          {%- endcapture -%}
+        {% endunless %}
+
+        {%- capture block_class -%}
+          home-slide
+          home-slide-{{ forloop.index }}
+          {% if forloop.first %}active{% endif %}
+          text-aligned-{{ block.settings.alignment }}
+          overlay
+          overlay-{{ block.settings.overlay_style }}
+          overlay-opacity-{{ block.settings.overlay_opacity | divided_by: 10 }}
+        {%- endcapture %}
+        <div
+          id="home-slide-{{ forloop.index }}"
+          class="{{ block_class | strip_newlines }}"
+          {% if section.settings.slideshow-layout == 'full-window' %}
+            style="background-image: url('{{ slide_image }}');"
+          {% endif %}
+          data-slide-text="{{ block.settings.text_style }}"
+          data-slide="{{ forloop.index }}"
+          {{ block.shopify_attributes }}>
+
+          <div
+            class="slide-image-container"
+            style="background-image:url('{{ slide_image }}')">
+
+            {% if block.settings.url != blank and block.settings.image %}
+              <a class="slide-image-link" href="{{ block.settings.url }}">
+            {% endif %}
+
+            {% if block.settings.image %}
+              <img
+                class="slide-image"
+                alt="{{ block.settings.image.alt | escape }}"
+                src="{{ slide_image }}">
+            {% else %}
+              {{ placeholder_image_style | placeholder_svg_tag: 'placeholder-svg slide-image' }}
+            {% endif %}
+
+            {% if block.settings.url != blank and block.settings.image %}
+              </a>
+            {% endif %}
+          </div>
+
+          {% if block.settings.cta == blank and block.settings.url != blank %}
+            <a class="slide-image-link" href="{{ block.settings.url }}">
+          {% endif %}
+
+          {% if has_content %}
+            <div class="slide-text {{ block.settings.text_style }}">
+              {% if block.settings.title != blank %}
+                <h2>{{ block.settings.title | escape }}</h2>
+              {% endif %}
+
+              {% if block.settings.subtitle != blank %}
+                <h3>{{ block.settings.subtitle | escape }}</h3>
+              {% endif %}
+
+              {% if block.settings.cta != blank and block.settings.url != blank %}
+                <a class="button outline" href="{{ block.settings.url }}">
+                  <span>{{ block.settings.cta | escape }}</span>
+                  <span class="icon icon-arrow-right"></span>
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          {% if block.settings.cta == blank and block.settings.url != blank %}
+            </a>
+          {% endif %}
+
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Slideshow",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "full-width",
+          "label": "Full width"
+        },
+        {
+          "value": "full-window",
+          "label": "Full window"
+        }
+      ],
+      "default": "full-width",
+      "info": "[Style examples](https:\/\/www.pixelunion.net\/wp-content\/uploads\/2015\/11\/slideshowLayouts.png)"
+    },
+    {
+      "type": "select",
+      "id": "transition",
+      "label": "Transition",
+      "options": [
+        {
+          "value": "transition-slide",
+          "label": "Slide"
+        },
+        {
+          "value": "transition-fade",
+          "label": "Fade"
+        }
+      ],
+      "default": "transition-fade"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 5,
+      "max": 10,
+      "step": 1,
+      "unit": "sec",
+      "label": "Change slides every",
+      "default": 7
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Auto rotate slides",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Text alignment",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "select",
+          "id": "text_style",
+          "label": "Text style",
+          "options": [
+            {
+              "value": "light",
+              "label": "Light"
+            },
+            {
+              "value": "dark",
+              "label": "Dark"
+            }
+          ],
+          "default": "light"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "overlay_style",
+          "label": "Overlay",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "gradient",
+              "label": "Gradient"
+            },
+            {
+              "value": "primary",
+              "label": "Primary color"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary color"
+            },
+            {
+              "value": "black",
+              "label": "Black"
+            }
+          ],
+          "default": "gradient"
+        },
+        {
+          "type": "range",
+          "id": "overlay_opacity",
+          "label": "Overlay opacity",
+          "min": 10,
+          "max": 90,
+          "step": 10,
+          "unit": "%",
+          "default": 70
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Slideshow"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subheading",
+          "default": "Introduce customers to your shop with lifestyle imagery and product photography."
+        },
+        {
+          "type": "text",
+          "id": "cta",
+          "label": "Button text"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "slide",
+        "settings": {
+          "title": "Slideshow",
+          "subtitle": "Introduce customers to your shop with lifestyle imagery and product photography."
+        }
+      },
+      {
+        "type": "slide",
+        "settings": {
+          "title": "Slideshow",
+          "subtitle": "Introduce customers to your shop with lifestyle imagery and product photography."
+        }
+      }
+    ]
+  }
+}
+
+{% endschema %}

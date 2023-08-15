@@ -1,0 +1,264 @@
+{% assign media_layout = section.settings.media_layout %}
+
+{% assign has_content = false %}
+{% assign has_cta = false %}
+
+{%- if section.settings.title != blank or section.settings.text != blank -%}
+  {% assign has_content = true %}
+{%- endif -%}
+
+{%- if section.settings.button_text != blank and section.settings.button_link != blank -%}
+  {% assign has_cta = true %}
+  {% assign has_content = true %}
+{%- endif -%}
+
+{% if section.settings.video_url != blank %}
+  {% assign section.settings.video_url = true %}
+{% endif %}
+
+{% if media_layout == 'image-highlight' %}
+  {%- capture feature_image -%}
+    {% if section.settings.image %}
+      <img
+        class="home-full-width-media"
+        src="{{ section.settings.image | img_url: '2048x2048' }}"
+        alt="{{ section.settings.image.alt | escape }}">
+    {% else %}
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'home-full-width-media placeholder-svg' }}
+    {% endif %}
+  {%- endcapture -%}
+{% endif %}
+
+{%- capture section_class -%}
+  style-{{ section.settings.style }}
+  module-wrapper
+  {% if section.settings.video_url == blank and section.settings.media_layout == video-highlight %}border{% endif %}
+{%- endcapture -%}
+
+{%- capture content_class -%}
+  module
+  home-full-width-feature
+
+  {% if media_layout != 'none' %}
+    has-media
+  {% endif %}
+
+  {% if media_layout == 'video-highlight' %}
+    no-content
+  {% elsif media_layout == 'image-highlight' %}
+    {% if has_content %}
+      has-content
+    {% else %}
+      no-content
+    {% endif %}
+  {% endif %}
+{%- endcapture -%}
+
+
+<div
+  class="{{ section_class | strip_newlines }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="full-width-feature">
+
+  <div class="{{ content_class | strip_newlines }}">
+    {% if section.settings.media_layout == 'none' or section.settings.media_layout == 'image-highlight' %}
+      {% if section.settings.title != blank %}
+        <div class="module-header home-full-width-header">
+          <h2 class="module-title home-full-width-module-title">
+            {{ section.settings.title | escape }}
+          </h2>
+        </div>
+      {% endif %}
+
+      {% if section.settings.text != blank or has_cta %}
+        <div class="module-body home-full-width-body">
+          {% if section.settings.text != blank %}
+            <div class="module-content home-full-width-content home-full-width-body-item">
+              {{ section.settings.text }}
+            </div>
+          {% endif %}
+
+          {% if has_cta %}
+            <div class="module-cta home-full-width-cta home-full-width-body-item">
+              <a class="button" href="{{ section.settings.button_link }}">
+                {{ section.settings.button_text | escape }}
+              </a>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+    {% endif %}
+
+    {% if section.settings.media_layout == 'image-highlight' %}
+      {% if section.settings.button_link != blank %}
+        <a href="{{ section.settings.button_link }}">
+      {% endif %}
+
+      {{ feature_image }}
+
+      {% if section.settings.button_link != blank %}
+        </a>
+      {% endif %}
+    {% endif %}
+
+    {% if section.settings.media_layout == 'video-highlight' %}
+      <div
+        class="video-wrapper {% if section.settings.image == blank %}no-image{% endif %}"
+        data-video-wrapper
+        {% if section.settings.image != blank %}
+          style="background-image:url('{{ section.settings.image | img_url: '1440x800' }}')"
+        {% endif %}
+        >
+        <div class="video-wrapper-overlay" data-video-overlay>
+          <div class="video-wrapper-text-container">
+            {% if section.settings.title != blank %}
+              <div class="module-title video-wrapper-title">
+                <h3>
+                  {{ section.settings.title | escape }}
+                </h3>
+              </div>
+            {% endif %}
+
+            {% if section.settings.text != blank %}
+              <div class="module-subtitle video-wrapper-subtitle">
+                {{ section.settings.text }}
+              </div>
+            {% endif %}
+
+            <a class="video-wrapper-button" data-overlay-play>
+              <span class="video-wrapper-triangle"></span>
+            </a>
+          </div>
+        </div>
+
+        <div class="full-width-video {{ section.settings.media_layout }}">
+          {% if section.settings.video_url != blank %}
+            {%- capture video_code -%}
+              {% if section.settings.video_url.type == "youtube" %}
+                <iframe src="//www.youtube.com/embed/{{ section.settings.video_url.id }}?rel=0&showinfo=0&vq=720" width="850" height="480" frameborder="0" allowfullscreen></iframe>
+              {% endif %}
+              {% if section.settings.video_url.type == "vimeo" %}
+                <iframe src="//player.vimeo.com/video/{{ section.settings.video_url.id }}?byline=0&portrait=0&badge=0" width="850" height="480" frameborder="0" allowfullscreen></iframe>
+              {% endif %}
+            {%- endcapture -%}
+          {% else %}
+            {%- capture video_code -%}
+              <iframe
+                src="//www.youtube.com/embed/_9VUPq3SxOc?rel=0"
+                width="850"
+                height="480"
+                frameborder="0"></iframe>
+            {%- endcapture -%}
+          {% endif %}
+
+          {{ video_code }}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Full width media",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "This section is designed to showcase your product philosophy. Display a Full width feature, either as an image or a video. Expand on the feature with a title, text, and a call to action button."
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Background style",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        },
+        {
+          "value": "color",
+          "label": "Color"
+        },
+        {
+          "value": "gradient",
+          "label": "Gradient"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Full width media"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Display a full width feature that can contain a large image, or video, and an optional call to action button.</p>"
+    },
+    {
+      "type": "select",
+      "id": "media_layout",
+      "label": "Media type",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "image-highlight",
+          "label": "Image"
+        },
+        {
+          "value": "video-highlight",
+          "label": "Video"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "Youtube or Vimeo link",
+      "accept": ["youtube", "vimeo"]
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "info": "This button is only visible when 'Media type' is set to Image"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Advanced content",
+      "name": "Full width media",
+      "settings": {
+        "title": "Full width media",
+        "text": "<p>Display a full width feature that can contain a large image, or video, and an optional call to action button.</p>",
+        "media_layout": "video-highlight",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "button_text": "This button is only visible when 'Media type' is set to Image",
+        "button_link": "shopify:\/\/collections"
+      }
+    }
+  ]
+}
+{% endschema %}

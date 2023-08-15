@@ -1,0 +1,160 @@
+{% assign grid_size = section.blocks.size %}
+{% if section.blocks.size > 4 %}
+  {% assign grid_size = 3 %}
+{% elsif section.blocks.size == 4 %}
+  {% assign grid_size = 2 %}
+{% endif %}
+
+{% if section.blocks.size > 0 or section.settings.title != blank %}
+  <div class="module-wrapper style-{{ section.settings.style }} border">
+    <div class="module home-collections">
+
+      {% if section.settings.title != blank %}
+        <div class="module-header home-collections-header">
+          <h3 class="module-title">
+            {{ section.settings.title | escape }}
+          </h3>
+
+          {% if section.settings.subtitle != blank %}
+            <div class="module-subtitle">
+              {{ section.settings.subtitle | escape }}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if section.blocks.size > 0 %}
+        <div class="module-body home-collections-body">
+          <div class="list compact crop image-contain column-{{ grid_size }}">
+
+            {% for block in section.blocks %}
+              {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+
+              {% assign collection = collections[block.settings.collection] %}
+              {% assign collection_title = collection.title %}
+              {% assign collection_url = collection.url %}
+
+              {% assign featured_image = false %}
+              {% assign featured_image_alt = '' %}
+
+              {% if collection.empty? %}
+                {% assign collection_title = 'onboarding.collection_list.title' | t %}
+                {% assign collection_url = '#' %}
+              {% else %}
+                {% if collection.image %}
+                  {% assign featured_image = collection %}
+                  {% assign featured_image_alt = collection.image.alt | escape %}
+                {% elsif collection.products.first.featured_image %}
+                  {% assign featured_image = collection.products.first.featured_image %}
+                  {% assign featured_image_alt = collection.title | escape %}
+                {% endif %}
+              {% endif %}
+
+              <div class="list-item">
+                <a class="list-container" href="{{ collection_url }}">
+
+                  <div class="list-image-wrapper">
+                    {% if collection.empty? or featured_image == false %}
+                      {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg list-image' }}
+                    {% else %}
+                      <img
+                        class="list-image"
+                        src="{{ featured_image | img_url: '600x600' }}"
+                        alt="{{ featured_image_alt | escape }}">
+                    {% endif %}
+                  </div>
+
+                  <div class="list-text-wrapper">
+                    <div class="list-title">
+                      {{ collection_title }}
+                    </div>
+
+                    {% if section.settings.show_product_count and collection.products_count > 0 %}
+                      <div class="list-meta">
+                        {{ 'collections.collection.product_count' | t: count: collection.products_count }}
+                      </div>
+                    {% endif %}
+                  </div>
+
+                </a>
+              </div>
+            {% endfor %}
+
+          </div>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+{% endif %}
+{% schema %}
+{
+  "name": "Collection list",
+  "max_blocks": 9,
+  "settings": [
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Background style",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Collection list"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subheading"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_count",
+      "label": "Show product count",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "id": "collection",
+          "type": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "category": "Collection",
+      "name": "Collection list",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
