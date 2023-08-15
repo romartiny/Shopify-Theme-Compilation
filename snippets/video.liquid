@@ -1,0 +1,72 @@
+
+  <div class="container wrapper">
+
+  {% if section.settings.enable_video_1 and section.settings.enable_video_2 %}
+
+
+<div class="grid product-single">
+
+  <div class="grid__item medium-up--six-twelfths  text-center">
+    <h2 class="section-header__center video_title video_1">{{  section.settings.video_title_1 }}</h2>
+    <p><div class="video-wrapper">
+     <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ section.settings.video_link_1 }}?autoplay={{ section.settings.video_type_1 }}&controls={{ section.settings.video_controls_1 }}" frameborder="0" allowfullscreen></iframe>
+    
+    </div></p>
+    
+    <h5 class="title">{{  section.settings.video_text_1 }}</h5>
+  </div>
+  
+  <div class="grid__item medium-up--six-twelfths text-center">
+      <h2 class="section-header__center video_title video_2">{{  section.settings.video_title_2 }}</h2>
+    <p>
+    <div class="video-wrapper"> 
+ <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ section.settings.video_link_2 }}?autoplay={{ section.settings.video_type_2 }}&controls={{ section.settings.video_controls_2 }}" frameborder="0" allowfullscreen></iframe>
+    
+    </div></p>
+    
+    <h5 class="title">{{  section.settings.video_text_2 }}</h5>
+  </div>
+  
+</div>
+
+    {% elsif section.settings.enable_video_1 %}
+
+<div class="grid product-single">
+
+  <div class="grid__item text-center">
+    <h2 class="section-header__center video_title video_1">{{  section.settings.video_title_1 }}</h2>
+    <p><div class="video-wrapper">           
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ section.settings.video_link_1 }}?autoplay={{ section.settings.video_type_1 }}&controls={{ section.settings.video_controls_1 }}" frameborder="0" allowfullscreen></iframe>
+    </div>
+    </p>
+    
+    <h5 class="title ">{{  section.settings.video_text_1 }}</h5>
+  </div>
+  
+ 
+  
+</div>
+
+    {% elsif section.settings.enable_video_2 %}
+
+<div class="grid product-single">
+
+  
+  
+  <div class="grid__item text-center">
+      <h2 class="section-header__center video_title video_2">{{  section.settings.video_title_2 }}</h2>
+    <p><div class="video-wrapper">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ section.settings.video_link_2 }}?autoplay={{ section.settings.video_type_2 }}&controls={{ section.settings.video_controls_2 }}" frameborder="0" allowfullscreen></iframe>
+    
+    </div></p>
+    
+    <h5 class="title">{{  section.settings.video_text_2 }}</h5>
+  </div>
+  
+</div>
+
+  {% endif %}
+
+</div>
+
+

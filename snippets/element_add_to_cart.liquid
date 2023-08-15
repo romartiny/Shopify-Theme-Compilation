@@ -1,0 +1,116 @@
+  {% assign price_var=current_variant.price | withoutmoney %}  
+            
+   <div class="grid__item row_grid_qnt">
+   
+     
+   {% if section.settings.show_quantity_selector1 %}
+      <div class="grid__item pad_zero  small-whole {% if section.settings.image_size == "full"  %} full-qty {% endif %} {% if section.settings.image_size == "large"  %} large {% endif %} {% if section.settings.image_size == "medium" or section.settings.image_size == "small" %} cst-small-qty {% endif %}  medium-up--two-tenths product-form__item product-form__item--quantity">
+       	<div class="qty_selector">
+        <input type='button' value='-' class='qtyminus' field='quantity' />
+        <input type="number" id="Quantity" name="quantity" value="1" min="1" class="product-form__input qty" pattern="[0-9]*">
+        <input type='button' value='+' class='qtyplus' field='quantity' />
+        </div>
+      </div>
+     {% assign quantitygrid='grid__item medium-up--eight-tenths  small-whole pad_zero' %} 
+     
+                  <!-- allow setting after quantity-->
+       {% if section.settings.move_product_desc == 'move_product_desc_quantity' %}
+       
+            {% if section.settings.product_description %}
+
+                 <div class="product-description rte clear-bt" itemprop="description">
+                {% if product.description contains '<!-- split -->' %}
+                {% assign mycontent = product.content | split:'<!-- split -->' %}
+                {{ mycontent[0] }}
+                {% else %}
+                {{ product.description }}
+                {% endif %}
+                 </div>
+
+            {% endif %}
+
+      {% endif %}
+            
+           
+     {% else %}
+     
+     {% assign quantitygrid='grid' %}  
+     
+     {% endif %}
+     
+       <div class="{{quantitygrid}} {% if section.settings.image_size == "full"  %} full-btn {% endif %} {% if section.settings.image_size == "large"  %} large {% endif %} {% if section.settings.image_size == "medium" or section.settings.image_size == "small" %} cst-small-crtbtn {% endif %}">
+         
+
+           {% if price_var == 0 %}          
+              
+                <button type="submit" name="add" id="AddToCartZero" class="btn medium-up--five-eighths">
+                <span id="AddToCartText">{{ section.settings.add_to_cart_button_text_zero_price }} </span>
+                </button>
+            
+            {% else %}          
+                 {% assign zeroCost='' %}  
+                      
+                 <button type="submit" name="add" id="AddToCart" class="btn medium-up--five-eighths">
+                 <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }} </span>
+                 </button>
+
+             {% endif %}
+        </div>        
+     </div>
+                                         
+                <!-- allow setting after add to cart-->
+       {% if section.settings.move_product_desc == 'move_product_desc_addtocart' %}
+       
+          {% if section.settings.product_description %}
+
+             <div class="product-description rte" itemprop="description">
+            {% if product.description contains '<!-- split -->' %}
+            {% assign mycontent = product.content | split:'<!-- split -->' %}
+            {{ mycontent[0] }}
+            {% else %}
+            {{ product.description }}
+            {% endif %}
+             </div>
+
+          {% endif %}
+        
+      {% endif %}
+         
+<script>
+  // This button will increment the value
+    $('.qtyplus').click(function(e){
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        fieldName = $(this).attr('field');
+        // Get its current value
+        var currentVal = parseInt($('input[name='+fieldName+']').val());
+        // If is not undefined
+        if (!isNaN(currentVal)) {
+            // Increment
+            $('input[name='+fieldName+']').val(currentVal + 1);
+        } else {
+            // Otherwise put a 0 there
+            $('input[name='+fieldName+']').val(0);
+        }
+    });
+    // This button will decrement the value till 0
+    $(".qtyminus").click(function(e) {
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        fieldName = $(this).attr('field');
+        // Get its current value
+        var currentVal = parseInt($('input[name='+fieldName+']').val());
+        // If it isn't undefined or its greater than 0
+        if (!isNaN(currentVal) && currentVal > 0) {
+            // Decrement one
+            $('input[name='+fieldName+']').val(currentVal - 1);
+        } else {
+            // Otherwise put a 0 there
+            $('input[name='+fieldName+']').val(0);
+        }
+    });
+
+</script>
+            <!-- for skip add to cart code-->

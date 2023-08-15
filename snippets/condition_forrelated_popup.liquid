@@ -1,0 +1,23 @@
+      {% assign loop_brk = 0 %}
+{% for collection in product.collections %}
+{%- assign   collectio_with_dash = collection.title | replace: ' ', '-' | downcase -%}
+ 
+    {% for block in section.blocks %}
+
+
+                {% if collectio_with_dash == block.settings.upsell_related_collection %}
+                
+                                  {%- assign collection1 = collections[block.settings.show_upsell_related_collection] -%}
+                       {% assign loop_brk = 1 %}
+                                 {% break %}
+                {% endif %}
+
+                {% if loop_brk == 1 %}
+                {% break %}
+                {% endif %}
+
+    {% endfor %}
+
+
+             
+        {% endfor %}

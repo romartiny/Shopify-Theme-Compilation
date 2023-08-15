@@ -1,0 +1,74 @@
+      <script>      
+						Number.prototype.padLeft = function(base,chr){
+                         var  len = (String(base || 10).length - String(this).length)+1;
+                         return len > 0? new Array(len).join(chr || '0')+this : this;
+                              }
+   
+                           // setting time reset every day
+                  var resttime_{{ section.id }}="{{section.settings.enable_timer_reset_every_day}}";
+                     
+                     /*  var resttime_{{ section.id }}="10:10:10"; */
+                        var someDate = new Date();	
+						var ddNextDays = someDate.getDate()+1;
+						var dd = someDate.getDate();
+						var mm = someDate.getMonth()+ 1;
+						var y = someDate.getFullYear();
+                        var H=someDate.getHours().padLeft(); 
+                        var m=someDate.getMinutes().padLeft(); 
+                        var s=someDate.getSeconds().padLeft(); 
+					
+				       var NextDate = new Date(Date.now()+1*24*60*60*1000);
+
+                      var ddN = NextDate.getDate();
+				      var mmN = NextDate.getMonth()+ 1;
+				      var yN = NextDate.getFullYear();
+
+				        var nextdayDate = yN+'/'+mmN+'/'+ddN;
+				        var startdayDate = y + '/'+ mm + '/'+ dd;
+				        var NowTime=H+':'+m+':'+s;
+						var TargetDate_{{ section.id }}=nextdayDate+" "+resttime_{{ section.id }};
+						var StartDate_{{ section.id }}=startdayDate+" "+resttime_{{ section.id }};
+					    var timeDate_{{ section.id }}='';
+        
+						if(NowTime < resttime_{{ section.id }}) {
+						timeDate_{{ section.id }}=StartDate_{{ section.id }};
+						} else{
+						
+						timeDate_{{ section.id }}=TargetDate_{{ section.id }};
+						}
+               
+                 // start time with time diff.
+        
+                  var remainderTimeset ="86400";    
+                 var remainderTime= remainderTimeset*1000;
+        
+                 var ddd = new Date();
+                 ddd.setTime(ddd.getTime());
+                 var startTime1=ddd.toGMTString();	                    
+                 var date1 = new Date(startTime1);
+                 var date2 = new Date(timeDate_{{ section.id }});
+                 var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+                 var diffDays_{{ section.id }} = Math.ceil(timeDiff / (1000)); 
+                 $(".timer_time_reset_day_{{ section.id }}").val(diffDays_{{ section.id }});    
+                //  alert(diffDays_{{ section.id }});
+                  // left number
+ 
+            var left_number=$(".total_stock_left_num_{{ section.id }}").val();
+
+           var getSecond=remainderTimeset/left_number;
+               var nowLeftnumber=diffDays_{{ section.id }}/getSecond;
+           if(nowLeftnumber <= 1){
+            nowLeftnumber=1;
+            }        
+             $(".reset_day_Left_number_{{ section.id }}").val(nowLeftnumber);
+
+             $(".count_lft_{{ section.id }}").text(Math.round(Number(nowLeftnumber)));
+
+             var secondDiff=parseInt(diffDays_{{ section.id }})+4;
+       
+              setTimeout(function(){
+              location.reload(true);
+              }, secondDiff*1000)
+
+      
+</script>

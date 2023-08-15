@@ -1,0 +1,620 @@
+<style>
+{% if settings.footer_box_border_enable %}
+
+.footer__module{
+border: 0px solid !important;
+}
+
+
+
+{% endif %}
+  #subscribe {
+      background: none repeat scroll 0 0 {{ section.settings.newletterbtncolor }} !important;
+    color: {{ section.settings.newletterbtntxtcolor }};
+      font-family:{{ section.settings.button_1_font_family}} ; 
+}
+  </style>
+{% if section.settings.footer_border_enable %}
+
+{% endif %}
+
+
+
+<footer class="site-footer" role="contentinfo">
+  <div class="page-width">
+
+  <div class="container wrapper">
+
+    
+    <div class="footer__row">
+      
+      <div class="grid__item medium-up--two-twelfths ftr ">
+      
+      
+             {% if linklists[section.settings.footer].links.size > 0  %} 
+	  <div class="link_box">
+        <h3 class="footer__title">{{ section.settings.footer_2_heading }}</h3>
+        
+		<ul class="footer__linklist list--unstyled">
+            {% for link in linklists[section.settings.footer].links %}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endfor %}
+        </ul>
+       
+	   </div>
+		 {% endif %}  
+		 
+		      {% if linklists[section.settings.footer-1].links.size > 0  %} 
+	  <div class="link_box">
+        <h3 class="footer__title">{{ section.settings.footer_3_heading }}</h3>
+        
+		<ul class="footer__linklist list--unstyled">
+            {% for link in linklists[section.settings.footer-1].links %}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endfor %}
+        </ul>
+       
+	   </div>
+		 {% endif %}  
+		 
+		 
+		      {% if linklists[section.settings.footer-2].links.size > 0  %} 
+	  <div class="link_box">
+        <h3 class="footer__title">{{ section.settings.footer_4_heading }}</h3>
+        
+		<ul class="footer__linklist list--unstyled">
+            {% for link in linklists[section.settings.footer-2].links %}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endfor %}
+        </ul>
+       
+	   </div>
+		 {% endif %}  
+		
+        <div>&nbsp;</div>
+        
+      </div>
+    
+      
+      <div class="grid__item medium-up--six-twelfths">
+             {% if section.settings.footer_logo_enable %}
+              <a href="/">        
+              <img  class="footer__logo" src="{{ section.settings.footer_logo | img_url: '300x87' }}" alt="{{ shop.name }}" itemprop="logo">       
+      
+                
+              </a> 
+             {% endif %}
+        
+              <div>
+                <h3 class="footer__title">{{ section.settings.footer-4-heading }}</h3>
+               <p>{{ section.settings.footer-4-content}}</p>
+
+
+              </div>
+        
+      </div>
+       
+    
+      <div class="grid__item medium-up--four-twelfths">
+        
+        
+         {% if section.settings.footer_newsletter_enable %}
+             <h3 class="footer__title">{{ 'layout.footer.newsletter_title' | t }}</h3>
+              {% if settings.newsletter_form_action != blank %}
+                {% assign form_action = section.settings.newsletter_form_action %}
+              {% else %}
+                {% assign form_action = '#' %}
+              {% endif %}
+       
+       
+         <form action="{{ form_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" class="footer__form">
+                <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" name="EMAIL" id="mail" class="footer__input" aria-label="{{ 'general.newsletter_form.newsletter_email' | t }}" autocorrect="off" autocapitalize="off">             
+                <input type="submit" class="footer__submit" name="subscribe" id="subscribe" value="{{ 'general.newsletter_form.submit' | t }}">
+        </form>
+        {% endif %}
+        
+        
+        
+        
+           <div class="footer-social">
+        {% if settings.footer_social_enable %}
+        <h3 class="footer__title">{{ 'layout.footer.menu_heading.follow_us' | t }}</h3>
+        <ul class="footer__social list--unstyled">
+         
+        
+         {% if settings.social_twitter_link != blank %}
+                    <li class="social__item">
+                      <a target="_blank" class="icon-fallback-text" href="{{ settings.social_twitter_link }}" title="{{ shop.name }} on Twitter">
+                       
+                          <i class="fa fa-twitter" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                  {% endif %}
+                  {% if settings.social_facebook_link != blank %}
+                    <li class="social__item">
+                      <a target="_blank" class="icon-fallback-text" href="{{settings.social_facebook_link }}" title="{{ shop.name }} on Facebook">
+                        
+                         <i class="fa fa-facebook" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                  {% endif %}
+                    {% if settings.social_youtube_link != blank %}
+                    <li class="social__item">
+                      <a target="_blank" class="icon-fallback-text" href="{{ settings.social_youtube_link }}" title="{{ shop.name }} on Youtube">
+                         <i class="fa fa-youtube" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                  {% endif %}
+                   {% if settings.social_instagram_link != blank %}
+                    <li class="social__item">
+                      <a target="_blank" class="icon-fallback-text" href="{{ settings.social_instagram_link }}" title="{{ shop.name }} on Instagram">
+                        
+                         <i class="fa fa-instagram" aria-hidden="true"></i>
+                        
+                      </a>
+                    </li>
+                  {% endif %}
+        
+                   {% if settings.social_pinterest_link != blank %}
+                  <li class="social__item">
+                      <a target="_blank" class="icon-fallback-text" href="{{ settings.social_pinterest_link }}" title="{{ shop.name }} on Pinterest">
+                           
+                          <i class="fa fa-pinterest" aria-hidden="true"></i>
+
+                      </a>
+                    </li>
+                  {% endif %}
+                
+        
+        </ul>   {% endif %}
+      </div>
+        
+        
+        
+        
+        
+        
+        
+      </div>
+  
+    
+    
+    </div>
+    <div class="footer__misc">
+      <p class="footer__copyright"> <a href="{{ section.settings.buttom-footer-4-heading_link }}">{{ section.settings.buttom-footer-4-heading }}</a> / <a target="_top" rel="nofollow" href="{{ section.settings.buttom-footer-4-content_link }}">{{ section.settings.buttom-footer-4-content}}</a> </p>
+      
+      <ul class="inline-list payment-icons">
+                     {% if section.settings.pay_discover %}   
+                 <li>
+                    <span class="icon-fallback-text" title="{{ 'discover' | replace: '_',' '}}">
+                     {% include 'icon-discover' %}
+                      <span class="fallback-text">{{ 'discover' | replace: '_',' '}}</span>
+                    </span>
+                  </li>
+           {% endif %}
+		   
+		      {% if section.settings.pay_diners_club %}   
+                 <li>
+                    <span class="icon-fallback-text" title="{{ 'diners_club' | replace: '_',' '}}">
+                  {% include 'icon-diners_club' %}
+                      <span class="fallback-text">{{ 'diners_club' | replace: '_',' '}}</span>
+                    </span>
+                  </li>
+           {% endif %}
+		   
+		     {% if section.settings.pay_american_express %}   
+                 <li>
+                    <span class="icon-fallback-text" title="{{ 'american_express' | replace: '_',' '}}">
+                     {% include 'icon-american_express' %}
+                      <span class="fallback-text">{{ 'american_express' | replace: '_',' '}}</span>
+                    </span>
+                  </li>
+           {% endif %}
+		   
+		    {% if section.settings.pay_paypal %}   
+                 <li>
+                    <span class="icon-fallback-text" title="{{ 'paypal' | replace: '_',' '}}">
+                    {% include 'icon-paypal' %}
+                      <span class="fallback-text">{{ 'paypal' | replace: '_',' '}}</span>
+                    </span>
+                  </li>
+           {% endif %}
+		   
+		      {% if section.settings.pay_master %}   
+                 <li>
+                    <span class="icon-fallback-text">
+                    {% include 'icon-master' %}
+                      <span class="fallback-text">{{ 'master' | replace: '_',' '}}</span>
+                    </span>
+                  </li>
+           {% endif %}
+		   
+		      {% if section.settings.pay_visa %}   
+                 <li>
+                    <span class="icon-fallback-text" title="{{ 'visa' | replace: '_',' '}}">
+                     {% include 'icon-visa' %}
+                      <span class="fallback-text">{{ 'visa' | replace: '_',' '}}</span>
+                    </span>
+                  </li>
+           {% endif %}
+        
+      </ul>
+   
+      
+    </div>
+    {% if template == 'product' %}
+    <div class="grid__item medium-up--two-twelfths ftr hide-lg"><div>&nbsp;</div> </div>
+    <div class="grid__item medium-up--two-twelfths ftr hide-lg"><div>&nbsp;</div> </div>
+    <div class="grid__item medium-up--two-twelfths ftr hide-lg"><div>&nbsp;</div> </div>
+    <div class="grid__item medium-up--two-twelfths ftr hide-lg"><div>&nbsp;</div> </div>
+    <div class="grid__item medium-up--two-twelfths ftr hide-lg"><div>&nbsp;</div> </div>
+    {% endif %}
+    
+  </div>
+
+
+      </div>
+</footer>
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "header",
+        "content": "About my shop"
+      },
+      {
+        "type": "text",
+        "id": "footer-4-heading",
+        "label": "Heading",
+		"default": "ABOUT MY SHOP"
+      },
+      {
+        "type": "textarea",
+        "id": "footer-4-content",
+        "label": "content",
+		"default": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters"
+      },
+      {
+        "type": "header",
+        "content": "MEnu"
+      },
+      {
+        "type": "text",
+        "id": "footer_2_heading",
+        "label": "Heading",
+		"default": "QUICK LINKS"
+      },
+      {
+        "type": "link_list",
+        "id": "footer",
+        "label": "Menu list",
+		"default": "footer"
+      },
+      {
+        "type": "header",
+        "content": "Newsletter"
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_newsletter_enable",
+        "label": "Show newsletter field",
+		"default": true
+      },
+      {
+        "type": "color",
+        "id": "newletterbtncolor",
+        "label": "Newsletter button color",
+        "default":"#38b60f"
+      },
+        {
+        "type": "color",
+        "id": "newletterbtntxtcolor",
+        "label": "Newsletter button text color",
+        "default":"#fff"
+      },
+        {
+        "type": "select",
+        "id": "button_1_font_family",
+        "label": "Button font-fmaily",
+        "options": [
+          {
+            "value": "Arial",
+            "label": "default theme font family"
+          },
+          {
+            "value": "Anton",
+            "label": "Anton"
+          },
+          {
+            "value": "Arimo",
+            "label": "Arimo"
+          },
+          {
+            "value": "Arvo",
+            "label": "Arvo"
+          },
+          {
+            "value": "Baloo Bhai",
+            "label": "Baloo Bhai"
+          },
+          {
+            "value": "Baloo Bhaina",
+            "label": "Baloo Bhaina"
+          },
+          {
+            "value": "Bitter",
+            "label": "Bitter"
+          },
+          {
+            "value": "Bree Serif",
+            "label": "Bree Serif"
+          },
+          {
+            "value": "Cabin",
+            "label": "Cabin"
+          },
+          {
+            "value": "Catamaran",
+            "label": "Catamaran"
+          },
+          {
+            "value": "David Libre",
+            "label": "David Libre"
+          },
+          {
+            "value": "Dosis",
+            "label": "Dosis"
+          },
+          {
+            "value": "Droid Sans",
+            "label": "Droid Sans"
+          },
+          {
+            "value": "Droid Serif",
+            "label": "Droid Serif"
+          },
+          {
+            "value": "Ek Mukta",
+            "label": "Ek Mukta"
+          },
+          {
+            "value": "Fjalla One",
+            "label": "Fjalla One"
+          },
+          {
+            "value": "Hind",
+            "label": "Hind"
+          },
+          {
+            "value": "Inconsolata",
+            "label": "Inconsolata"
+          },
+          {
+            "value": "Indie Flower",
+            "label": "Indie Flower"
+          },
+          {
+            "value": "Lato",
+            "label": "Lato"
+          },
+          {
+            "value": "Libre Baskerville",
+            "label": "Libre Baskerville"
+          },
+          {
+            "value": "Lobster",
+            "label": "Lobster"
+          },
+          {
+            "value": "Lora",
+            "label": "Lora"
+          },
+          {
+            "value": "Merriweather",
+            "label": "Merriweather"
+          },
+          {
+            "value": "Modak",
+            "label": "Modak"
+          },
+          {
+            "value": "Montserrat",
+            "label": "Montserrat"
+          },
+          {
+            "value": "Muli",
+            "label": "Muli"
+          },
+          {
+            "value": "Noto Sans",
+            "label": "Noto Sans"
+          },
+          {
+            "value": "Noto Serif",
+            "label": "Noto Serif"
+          },
+          {
+            "value": "Nunito",
+            "label": "Nunito"
+          },
+          {
+            "value": "Open Sans Condensed",
+            "label": "Open Sans Condensed"
+          },
+          {
+            "value": "Oswald",
+            "label": "Oswald"
+          },
+          {
+            "value": "Oxygen",
+            "label": "Oxygen"
+          },
+          {
+            "value": "PT Sans",
+            "label": "PT Sans"
+          },
+          {
+            "value": "PT Sans Narrow",
+            "label": "PT Sans Narrow"
+          },
+          {
+            "value": "PT Serif",
+            "label": "PT Serif"
+          },
+          {
+            "value": "Pavanam",
+            "label": "Pavanam"
+          },
+          {
+            "value": "Playfair Display",
+            "label": "Playfair Display"
+          },
+          {
+            "value": "Poppins",
+            "label": "Poppins"
+          },
+          {
+            "value": "Raleway",
+            "label": "Raleway"
+          },
+          {
+            "value": "Roboto",
+            "label": "Roboto"
+          },
+          {
+            "value": "Roboto Condensed",
+            "label": "Roboto Condensed"
+          },
+          {
+            "value": "Roboto Slab",
+            "label": "Roboto Slab"
+          },
+          {
+            "value": "Slabo",
+            "label": "Slabo"
+          },
+          {
+            "value": "Source Sans Pro",
+            "label": "Source Sans Pro"
+          },
+          {
+            "value": "Teko",
+            "label": "Teko"
+          },
+          {
+            "value": "Titillium Web",
+            "label": "Titillium Web"
+          },
+          {
+            "value": "Ubuntu",
+            "label": "Ubuntu"
+          },
+          {
+            "value": "Yanone Kaffeesatz",
+            "label": "Yanone Kaffeesatz"
+          },
+          {
+            "value": "Yatra One",
+            "label": "Yatra One"
+          }
+         ]
+        },
+
+      {
+        "type": "text",
+        "id": "newsletter_form_action",
+        "label": "MailChimp form action URL",
+        "info": "[Where do I find my MailChimp form action URL?](http:\/\/docs.shopify.com\/support\/configuration\/store-customization\/where-do-i-get-my-mailchimp-form-action)"
+      },
+      {
+        "type": "header",
+        "content": "Footer logo"
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_logo_enable",
+        "label": "enable footer logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "footer_logo",
+        "label": "Footer Logo"
+      },
+      {
+        "type": "header",
+        "content": "Payment icons"
+      },
+
+      {
+        "type": "checkbox",
+        "id": "pay_visa",
+        "label": "Show Visa",
+		"default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_master",
+        "label": "Show Mastercard",
+		"default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_american_express",
+        "label": "Show American Express",
+		"default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_paypal",
+        "label": "Show PayPal",
+		"default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_diners_club",
+        "label": "Show Diners Club",
+		"default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_discover",
+        "label": "Show Discover",
+		"default": true
+      },
+      {
+        "type": "header",
+        "content": "Footer bottom text"
+      },
+      {
+        "type": "text",
+        "id": "buttom-footer-4-heading",
+        "label": "bottom Heading",
+		"default": "Booster Theme"
+      },
+      {
+        "type": "text",
+        "id": "buttom-footer-4-heading_link",
+        "label": "bottom Heading link",
+		"default": "www.boostertheme.com",
+        "info": "eg:https:\/\/www.shopify.in"
+      },
+      {
+        "type": "text",
+        "id": "buttom-footer-4-content",
+        "label": "bottom content",
+		"default": "Copyright 2017+"
+      },
+      {
+        "type": "text",
+        "id": "buttom-footer-4-content_link",
+        "label": "bottom content link",
+		"default": "www.boostertheme.com",
+        "info": "eg:https:\/\/www.shopify.in"
+      }
+ 
+ 
+
+    ]
+  }
+{% endschema %}

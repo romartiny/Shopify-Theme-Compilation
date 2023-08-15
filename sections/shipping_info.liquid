@@ -1,0 +1,968 @@
+<style>
+  
+ #shopify-section-{{section.id}} .block-heading{
+    font-size: {{section.settings.heading_font_size}}px !important;
+    font-family: {{section.settings.heading_font_style}} !important;
+}
+  
+#shopify-section-{{section.id}} .block-caption{
+    font-size: {{section.settings.text_font_size}}px !important;
+    font-family: {{section.settings.text_font_style}} !important;
+}  
+  
+  
+</style>
+<div id="shopify-section-[id]" class="shopify-section sale_button shipping_info_page">
+  <div class="container wrapper">
+  
+  
+  <div class="row" id="bottom_blocks">
+ 
+  <div class="grid__item medium-up--one-half">
+    <div data-delay="300" data-animate="fadeInLeft " class="bottom-block fadeInLeft animated">
+      <div class="block-logo">
+        {% if section.settings.footer_above_logo1 %}
+           <img alt="" src="{{ section.settings.footer_above_logo1 | img_url: '120x120'}}" class="swing">       
+        {% else %}
+           <img alt="" src=" {{ "footer_above_logo.png" |asset_url}}" class="swing">
+        {% endif %}
+        
+      </div>
+      
+      <div class="block-content">
+        <div class="block-heading">{{ section.settings.footer_above_header1 }}</div>
+        <p class="block-caption">{{ section.settings.footer_above_text1 }}</p>
+      </div>
+    </div>
+  </div>
+  
+  
+    
+  <div class="grid__item medium-up--one-half left_img">
+    <div data-delay="300" data-animate="fadeInRight " class="bottom-block fadeInRight animated">
+      
+      <div class="block-logo">
+        
+        
+          {% if section.settings.footer_above_logo2 %}
+           <img alt="" src="{{ section.settings.footer_above_logo2 | img_url: '120x120'}}" class="swing">       
+        {% else %}
+           <img alt="" src=" {{"footer_above_logo2.png" | asset_url}}" class="swing">
+        {% endif %}
+        
+      </div>
+      
+      <div class="block-content">
+        <div class="block-heading">{{ section.settings.footer_above_header2 }}</div>
+        <p class="block-caption">{{ section.settings.footer_above_text2 }}</p>
+      </div>
+       
+     
+    </div>
+  </div>
+  
+
+
+</div>
+  
+  
+  </div>
+  
+</div>
+
+
+
+
+
+{% schema %}
+  {
+    "name": "Shipping info",
+      "settings": [
+       {
+        "type": "header",
+        "content": "Text settings"
+       },
+        {
+        "type": "select",
+        "id": "heading_font_style",
+        "label": "Heading font style",
+        "options": [
+          {
+            "value": "Arial",
+            "label": "default theme font family"
+          },
+          {
+            "value": "Anton",
+            "label": "Anton"
+          },
+          {
+            "value": "Arimo",
+            "label": "Arimo"
+          },
+          {
+            "value": "Arvo",
+            "label": "Arvo"
+          },
+          {
+            "value": "Baloo Bhai",
+            "label": "Baloo Bhai"
+          },
+          {
+            "value": "Baloo Bhaina",
+            "label": "Baloo Bhaina"
+          },
+          {
+            "value": "Bitter",
+            "label": "Bitter"
+          },
+          {
+            "value": "Bree Serif",
+            "label": "Bree Serif"
+          },
+          {
+            "value": "Cabin",
+            "label": "Cabin"
+          },
+          {
+            "value": "Catamaran",
+            "label": "Catamaran"
+          },
+          {
+            "value": "David Libre",
+            "label": "David Libre"
+          },
+          {
+            "value": "Dosis",
+            "label": "Dosis"
+          },
+          {
+            "value": "Droid Sans",
+            "label": "Droid Sans"
+          },
+          {
+            "value": "Droid Serif",
+            "label": "Droid Serif"
+          },
+          {
+            "value": "Ek Mukta",
+            "label": "Ek Mukta"
+          },
+          {
+            "value": "Fjalla One",
+            "label": "Fjalla One"
+          },
+          {
+            "value": "Hind",
+            "label": "Hind"
+          },
+          {
+            "value": "Inconsolata",
+            "label": "Inconsolata"
+          },
+          {
+            "value": "Indie Flower",
+            "label": "Indie Flower"
+          },
+          {
+            "value": "Lato",
+            "label": "Lato"
+          },
+          {
+            "value": "Libre Baskerville",
+            "label": "Libre Baskerville"
+          },
+          {
+            "value": "Lobster",
+            "label": "Lobster"
+          },
+          {
+            "value": "Lora",
+            "label": "Lora"
+          },
+          {
+            "value": "Merriweather",
+            "label": "Merriweather"
+          },
+          {
+            "value": "Modak",
+            "label": "Modak"
+          },
+          {
+            "value": "Montserrat",
+            "label": "Montserrat"
+          },
+          {
+            "value": "Muli",
+            "label": "Muli"
+          },
+          {
+            "value": "Noto Sans",
+            "label": "Noto Sans"
+          },
+          {
+            "value": "Noto Serif",
+            "label": "Noto Serif"
+          },
+          {
+            "value": "Nunito",
+            "label": "Nunito"
+          },
+          {
+            "value": "Open Sans Condensed",
+            "label": "Open Sans Condensed"
+          },
+          {
+            "value": "Oswald",
+            "label": "Oswald"
+          },
+          {
+            "value": "Oxygen",
+            "label": "Oxygen"
+          },
+          {
+            "value": "PT Sans",
+            "label": "PT Sans"
+          },
+          {
+            "value": "PT Sans Narrow",
+            "label": "PT Sans Narrow"
+          },
+          {
+            "value": "PT Serif",
+            "label": "PT Serif"
+          },
+          {
+            "value": "Pavanam",
+            "label": "Pavanam"
+          },
+          {
+            "value": "Playfair Display",
+            "label": "Playfair Display"
+          },
+          {
+            "value": "Poppins",
+            "label": "Poppins"
+          },
+          {
+            "value": "Raleway",
+            "label": "Raleway"
+          },
+          {
+            "value": "Roboto",
+            "label": "Roboto"
+          },
+          {
+            "value": "Roboto Condensed",
+            "label": "Roboto Condensed"
+          },
+          {
+            "value": "Roboto Slab",
+            "label": "Roboto Slab"
+          },
+          {
+            "value": "Slabo",
+            "label": "Slabo"
+          },
+          {
+            "value": "Source Sans Pro",
+            "label": "Source Sans Pro"
+          },
+          {
+            "value": "Teko",
+            "label": "Teko"
+          },
+          {
+            "value": "Titillium Web",
+            "label": "Titillium Web"
+          },
+          {
+            "value": "Ubuntu",
+            "label": "Ubuntu"
+          },
+          {
+            "value": "Yanone Kaffeesatz",
+            "label": "Yanone Kaffeesatz"
+          },
+          {
+            "value": "Yatra One",
+            "label": "Yatra One"
+          }
+         ]
+        },
+         {
+        "type": "select",
+        "id": "heading_font_size",
+        "label": "Heading font size",
+        "default": "14",
+        "options": [
+          {
+            "value": "12",
+            "label": "12"
+          },
+          {
+            "value": "13",
+            "label": "13"
+          },
+          {
+            "value": "14",
+            "label": "14"
+          },
+          {
+            "value": "15",
+            "label": "15"
+          },
+          {
+            "value": "16",
+            "label": "16"
+          },
+          {
+            "value": "17",
+            "label": "17"
+          },
+          {
+            "value": "18",
+            "label": "18"
+          },
+          {
+            "value": "19",
+            "label": "19"
+          },
+          {
+            "value": "20",
+            "label": "20"
+          },
+          {
+            "value": "21",
+            "label": "21"
+          },
+          {
+            "value": "22",
+            "label": "22"
+          },
+          {
+            "value": "23",
+            "label": "23"
+          },
+          {
+            "value": "24",
+            "label": "24"
+          },
+          {
+            "value": "25",
+            "label": "25"
+          },
+          {
+            "value": "26",
+            "label": "26"
+          },
+          {
+            "value": "28",
+            "label": "28"
+          },
+          {
+            "value": "29",
+            "label": "29"
+          },
+          {
+            "value": "30",
+            "label": "30"
+          },
+          {
+            "value": "31",
+            "label": "31"
+          },
+          {
+            "value": "32",
+            "label": "32"
+          },
+          {
+            "value": "33",
+            "label": "33"
+          },
+          {
+            "value": "34",
+            "label": "34"
+          },
+          {
+            "value": "35",
+            "label": "35"
+          },
+          {
+            "value": "36",
+            "label": "36"
+          },
+          {
+            "value": "37",
+            "label": "37"
+          },
+          {
+            "value": "38",
+            "label": "38"
+          },
+          {
+            "value": "39",
+            "label": "39"
+          },
+          {
+            "value": "40",
+            "label": "40"
+          },
+          {
+            "value": "41",
+            "label": "42"
+          },
+          {
+            "value": "42",
+            "label": "42"
+          },
+          {
+            "value": "43",
+            "label": "43"
+          },
+          {
+            "value": "44",
+            "label": "44"
+          },
+          {
+            "value": "45",
+            "label": "45"
+          },
+          {
+            "value": "46",
+            "label": "46"
+          },
+          {
+            "value": "47",
+            "label": "47"
+          },
+          {
+            "value": "48",
+            "label": "48"
+          },
+          {
+            "value": "49",
+            "label": "49"
+          },
+          {
+            "value": "50",
+            "label": "50"
+          },
+          {
+            "value": "51",
+            "label": "51"
+          },
+          {
+            "value": "52",
+            "label": "52"
+          },
+          {
+            "value": "53",
+            "label": "53"
+          },
+          {
+            "value": "54",
+            "label": "54"
+          },
+          {
+            "value": "55",
+            "label": "55"
+          },
+          {
+            "value": "56",
+            "label": "56"
+          },
+          {
+            "value": "57",
+            "label": "57"
+          },
+          {
+            "value": "58",
+            "label": "58"
+          },
+          {
+            "value": "59",
+            "label": "59"
+          },
+          {
+            "value": "60",
+            "label": "60"
+          }
+
+
+
+
+
+        ]
+      },
+
+        {
+        "type": "select",
+        "id": "text_font_style",
+        "label": "Text font style",
+        "options": [
+          {
+            "value": "Arial",
+            "label": "default theme font family"
+          },
+          {
+            "value": "Anton",
+            "label": "Anton"
+          },
+          {
+            "value": "Arimo",
+            "label": "Arimo"
+          },
+          {
+            "value": "Arvo",
+            "label": "Arvo"
+          },
+          {
+            "value": "Baloo Bhai",
+            "label": "Baloo Bhai"
+          },
+          {
+            "value": "Baloo Bhaina",
+            "label": "Baloo Bhaina"
+          },
+          {
+            "value": "Bitter",
+            "label": "Bitter"
+          },
+          {
+            "value": "Bree Serif",
+            "label": "Bree Serif"
+          },
+          {
+            "value": "Cabin",
+            "label": "Cabin"
+          },
+          {
+            "value": "Catamaran",
+            "label": "Catamaran"
+          },
+          {
+            "value": "David Libre",
+            "label": "David Libre"
+          },
+          {
+            "value": "Dosis",
+            "label": "Dosis"
+          },
+          {
+            "value": "Droid Sans",
+            "label": "Droid Sans"
+          },
+          {
+            "value": "Droid Serif",
+            "label": "Droid Serif"
+          },
+          {
+            "value": "Ek Mukta",
+            "label": "Ek Mukta"
+          },
+          {
+            "value": "Fjalla One",
+            "label": "Fjalla One"
+          },
+          {
+            "value": "Hind",
+            "label": "Hind"
+          },
+          {
+            "value": "Inconsolata",
+            "label": "Inconsolata"
+          },
+          {
+            "value": "Indie Flower",
+            "label": "Indie Flower"
+          },
+          {
+            "value": "Lato",
+            "label": "Lato"
+          },
+          {
+            "value": "Libre Baskerville",
+            "label": "Libre Baskerville"
+          },
+          {
+            "value": "Lobster",
+            "label": "Lobster"
+          },
+          {
+            "value": "Lora",
+            "label": "Lora"
+          },
+          {
+            "value": "Merriweather",
+            "label": "Merriweather"
+          },
+          {
+            "value": "Modak",
+            "label": "Modak"
+          },
+          {
+            "value": "Montserrat",
+            "label": "Montserrat"
+          },
+          {
+            "value": "Muli",
+            "label": "Muli"
+          },
+          {
+            "value": "Noto Sans",
+            "label": "Noto Sans"
+          },
+          {
+            "value": "Noto Serif",
+            "label": "Noto Serif"
+          },
+          {
+            "value": "Nunito",
+            "label": "Nunito"
+          },
+          {
+            "value": "Open Sans Condensed",
+            "label": "Open Sans Condensed"
+          },
+          {
+            "value": "Oswald",
+            "label": "Oswald"
+          },
+          {
+            "value": "Oxygen",
+            "label": "Oxygen"
+          },
+          {
+            "value": "PT Sans",
+            "label": "PT Sans"
+          },
+          {
+            "value": "PT Sans Narrow",
+            "label": "PT Sans Narrow"
+          },
+          {
+            "value": "PT Serif",
+            "label": "PT Serif"
+          },
+          {
+            "value": "Pavanam",
+            "label": "Pavanam"
+          },
+          {
+            "value": "Playfair Display",
+            "label": "Playfair Display"
+          },
+          {
+            "value": "Poppins",
+            "label": "Poppins"
+          },
+          {
+            "value": "Raleway",
+            "label": "Raleway"
+          },
+          {
+            "value": "Roboto",
+            "label": "Roboto"
+          },
+          {
+            "value": "Roboto Condensed",
+            "label": "Roboto Condensed"
+          },
+          {
+            "value": "Roboto Slab",
+            "label": "Roboto Slab"
+          },
+          {
+            "value": "Slabo",
+            "label": "Slabo"
+          },
+          {
+            "value": "Source Sans Pro",
+            "label": "Source Sans Pro"
+          },
+          {
+            "value": "Teko",
+            "label": "Teko"
+          },
+          {
+            "value": "Titillium Web",
+            "label": "Titillium Web"
+          },
+          {
+            "value": "Ubuntu",
+            "label": "Ubuntu"
+          },
+          {
+            "value": "Yanone Kaffeesatz",
+            "label": "Yanone Kaffeesatz"
+          },
+          {
+            "value": "Yatra One",
+            "label": "Yatra One"
+          }
+         ]
+        },
+         {
+        "type": "select",
+        "id": "text_font_size",
+        "label": "Text font size",
+        "default": "14",
+        "options": [
+          {
+            "value": "12",
+            "label": "12"
+          },
+          {
+            "value": "13",
+            "label": "13"
+          },
+          {
+            "value": "14",
+            "label": "14"
+          },
+          {
+            "value": "15",
+            "label": "15"
+          },
+          {
+            "value": "16",
+            "label": "16"
+          },
+          {
+            "value": "17",
+            "label": "17"
+          },
+          {
+            "value": "18",
+            "label": "18"
+          },
+          {
+            "value": "19",
+            "label": "19"
+          },
+          {
+            "value": "20",
+            "label": "20"
+          },
+          {
+            "value": "21",
+            "label": "21"
+          },
+          {
+            "value": "22",
+            "label": "22"
+          },
+          {
+            "value": "23",
+            "label": "23"
+          },
+          {
+            "value": "24",
+            "label": "24"
+          },
+          {
+            "value": "25",
+            "label": "25"
+          },
+          {
+            "value": "26",
+            "label": "26"
+          },
+          {
+            "value": "28",
+            "label": "28"
+          },
+          {
+            "value": "29",
+            "label": "29"
+          },
+          {
+            "value": "30",
+            "label": "30"
+          },
+          {
+            "value": "31",
+            "label": "31"
+          },
+          {
+            "value": "32",
+            "label": "32"
+          },
+          {
+            "value": "33",
+            "label": "33"
+          },
+          {
+            "value": "34",
+            "label": "34"
+          },
+          {
+            "value": "35",
+            "label": "35"
+          },
+          {
+            "value": "36",
+            "label": "36"
+          },
+          {
+            "value": "37",
+            "label": "37"
+          },
+          {
+            "value": "38",
+            "label": "38"
+          },
+          {
+            "value": "39",
+            "label": "39"
+          },
+          {
+            "value": "40",
+            "label": "40"
+          },
+          {
+            "value": "41",
+            "label": "42"
+          },
+          {
+            "value": "42",
+            "label": "42"
+          },
+          {
+            "value": "43",
+            "label": "43"
+          },
+          {
+            "value": "44",
+            "label": "44"
+          },
+          {
+            "value": "45",
+            "label": "45"
+          },
+          {
+            "value": "46",
+            "label": "46"
+          },
+          {
+            "value": "47",
+            "label": "47"
+          },
+          {
+            "value": "48",
+            "label": "48"
+          },
+          {
+            "value": "49",
+            "label": "49"
+          },
+          {
+            "value": "50",
+            "label": "50"
+          },
+          {
+            "value": "51",
+            "label": "51"
+          },
+          {
+            "value": "52",
+            "label": "52"
+          },
+          {
+            "value": "53",
+            "label": "53"
+          },
+          {
+            "value": "54",
+            "label": "54"
+          },
+          {
+            "value": "55",
+            "label": "55"
+          },
+          {
+            "value": "56",
+            "label": "56"
+          },
+          {
+            "value": "57",
+            "label": "57"
+          },
+          {
+            "value": "58",
+            "label": "58"
+          },
+          {
+            "value": "59",
+            "label": "59"
+          },
+          {
+            "value": "60",
+            "label": "60"
+          }
+
+
+
+
+
+        ]
+      },
+
+
+       {
+        "type": "header",
+        "content": "Image #1"
+       },
+      {
+        "type": "image_picker",
+        "id": "footer_above_logo1",
+        "label": "Footer Above image #1"
+      },
+      {
+        "type": "text",
+        "id": "footer_above_header1",
+        "label": "Header #1",
+        "default":"Always Free Shipping USA"
+      },
+      {
+        "type": "text",
+        "id": "footer_above_text1",
+        "label": "Text #1",
+        "default": "You can put any information you want in this area" 
+      },
+      {
+        "type": "header",
+        "content": "Image #2"
+      },
+      {
+        "type": "image_picker",
+        "id": "footer_above_logo2",
+        "label": "Footer Above image #2"
+      },
+      {
+        "type": "text",
+        "id": "footer_above_header2",
+        "label": "Header #2",
+        "default":"Please Call Us For More Information"
+      },
+      {
+        "type": "text",
+        "id": "footer_above_text2",
+        "label": "Text #2",
+        "default": "You can put any information you want in this area" 
+      }
+    ],
+   "presets": [
+      {
+        "name": "Shipping info setting",
+        "category": "Shipping info"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

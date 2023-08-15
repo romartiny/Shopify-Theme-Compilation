@@ -1,0 +1,236 @@
+<style> .alert.alert-success.alert-header-strip {
+    background-color: {{ section.settings.header_strip_bg }};
+    
+}
+  .alert.alert-success.alert-header-strip a , .commom_colord, i.fa.fa-chevron-down.menu_arrow_pc{
+     color: {{ section.settings.header_strip_color }} !important;
+    font-size:{{ section.settings.title_font_size }}px !important;
+  }
+  .top-hedr, .mng-header{
+      font-family: {{ section.settings.heading_font_family }} !important;
+
+  }
+  .site-header_cart {
+    background: {{ section.settings.header_desktop_cart_bg }};
+  } 
+a.cart-page-link.site-header__cart-toggle.js-drawer-open-right, .site-header_cart .alert.alert-success.alert-header-strip a, .site-header_cart .commom_colord {
+       color: {{ section.settings.header_desktop_cart_fontcolor }} !important;
+  }
+  i.fa.fa-shopping-cart.commom_colord{
+  color: {{ section.settings.header_desktop_cart_color }} !important;
+    background:none !important;
+  }
+</style>
+
+{% if settings.header_strip_hide_mobile %}
+    {% assign on_mobile_hide_strip = "mobile_hide_strip" %}
+
+{% else %}
+{% assign on_mobile_hide_strip = "" %}
+{% endif %}
+
+
+{% if settings.header_strip_hide_right_mobile %}
+    {% assign on_mobile_hide_right_strip = "strip_hide_right_mobile" %}
+    {% assign left_text_center_mobile="left_text_center_mobile" %} 
+
+{% else %}
+
+ {% assign on_mobile_hide_right_strip = "" %}
+ {% assign left_text_center_mobile="" %}
+
+{% endif %}
+
+
+
+    <div class="{{ on_mobile_hide_strip }} grid--full grid--table small--hide">
+          <div class="grid__item1">
+            <div class="alert alert-success alert-header-strip">
+             
+              <div class="{{ left_text_center_mobile }} top-hedr">
+                <ul>
+                  <li>
+             
+        
+            <div class="site-header__search small--hide">
+              {% include 'search-form' %}
+            </div>
+       
+
+          <button type="button" class="btn--link site-header__search-toggle js-drawer-open-top medium-up--hide">
+            {% include 'icon-search' %}
+            <span class="icon__fallback-text">{{ 'layout.navigation.search' | t }}</span>
+          </button>
+          
+                  </li>
+                   {% if settings.show_multiple_currencies %}
+                  <li>
+                    {% include 'currency-picker' %}
+                  </li>
+                  {% endif %}
+                  <li>  {% if shop.customer_accounts_enabled %}
+            {% if customer %}
+              <a href="/account" class="site-header__account">
+               <i class="fa fa-user commom_colord"></i>
+                <span class="icon__fallback-text commom_colord">{{ 'layout.customer.account' | t }}</span>
+              </a>
+            {% else %}
+              <a href="/account/login" class="site-header__account">
+                <i class="fa fa-user  commom_colord"></i>
+                <span class="icon__fallback-text  commom_colord">{{ 'layout.customer.log_in' | t }}</span>
+              </a>
+            {% endif %}
+          {% endif %}</li>
+                  <li> 
+                    {% comment %}
+                    <a href="/cart" class="site-header__cart">
+            {% include 'icon-cart' %}
+            <span class="visually-hidden commom_colord">{{ 'layout.cart.title' | t }}</span>
+       
+            {% if cart.item_count > 0 %}
+              <div id="CartCount" class="site-header__cart-count mng-cart-amt">
+                <span class="commom_colord">{{ cart.item_count }}</span>
+                <span class="icon__fallback-text medium-up--hide commom_colord">{{ 'layout.cart.items_count' | t: count: cart.item_count }}</span>
+              </div>
+            {% endif %}
+          </a>                   
+                   {% endcomment %}       
+                    
+                    
+                    
+                    
+           <div class="site-header_cart"> 
+          
+              <a href="/cart" class="cart-page-link site-header__cart-toggle js-drawer-open-right" aria-controls="CartDrawer" aria-expanded="false">
+                <i class="fa fa-shopping-cart commom_colord" aria-hidden="true"></i>
+                <span id="CartCount" 
+                      class="cart-count header-bar__cart-count{% if cart.item_count == 0 %} hidden-count{% endif %}  commom_colord">
+                  {{ cart.item_count }}</span>
+          {% comment %}      {{ 'layout.cart.items_count' | t: count: cart.item_count }} {% endcomment %}
+         <span class="items_manage header-bar__cart-count{% if cart.item_count == 0 %} hidden-count{% endif %}  commom_colord">
+           {% if cart.item_count <= 1 %} {{ 'layout.cart.items_count.one' | t: count: cart.item_count }} {% else %}   {{ 'layout.cart.items_count.other' | t: count: cart.item_count }} {% endif %}</span>
+      -<span class="commom_colord" id="CartCost">{{ cart.total_price | money }}</span>
+              
+              </a>
+            
+                
+                
+              </div>          
+                    
+                  
+</li>
+                </ul>              
+              </div>
+             
+              <div class="{{ on_mobile_hide_right_strip }} mng-header">
+                <ul>
+                  {% if settings.footer_social_enable %}
+                  <li>
+                    
+                   <ul class="social_header">
+              
+              {% if settings.social_twitter_link != blank %}
+                    <li>
+                      <a target="_blank" class="icon-fallback-text" href="{{ settings.social_twitter_link }}" title="{{ shop.name }} on Twitter">
+                        <span class="fa fa-twitter" aria-hidden="true"></span>
+                    
+                      </a>
+                    </li>
+                  {% endif %}
+                  {% if settings.social_facebook_link != blank %}
+                    <li>
+                      <a target="_blank" class="icon-fallback-text" href="{{ settings.social_facebook_link }}" title="{{ shop.name }} on Facebook">
+                        <span class="fa fa-facebook" aria-hidden="true"></span>
+                    
+                      </a>
+                    </li>
+                  {% endif %}
+                    {% if settings.social_youtube_link != blank %}
+                    <li>
+                      <a target="_blank" class="icon-fallback-text" href="{{ settings.social_youtube_link }}" title="{{ shop.name }} on Youtube">
+                        <span class="fa fa-youtube" aria-hidden="true"></span>
+                       
+                      </a>
+                    </li>
+                  {% endif %}
+                   {% if settings.social_instagram_link != blank %}
+                    <li>
+                      <a target="_blank" class="icon-fallback-text" href="{{ settings.social_instagram_link }}" title="{{ shop.name }} on Instagram">
+                        <span class="fa fa-instagram" aria-hidden="true"></span>
+                        
+                      </a>
+                    </li>
+                  {% endif %}
+                     
+                      {% if settings.social_pinterest_link != blank %}
+                    <li>
+                      <a target="_blank" class="icon-fallback-text" href="{{ settings.social_pinterest_link }}" title="{{ shop.name }} on Pinterest">
+                        <span class="fa fa-pinterest" aria-hidden="true"></span>
+                 
+                      </a>
+                    </li>
+                  {% endif %}
+                
+                
+            
+              </ul>
+            
+                  </li>
+                  {% endif %}
+                  
+                  {% if section.settings.header_strip_text_contact != blank  %}   <li><a class="mng-phone" href="#" data-title="{{section.settings.header_strip_text_contact }}"><span class="fa fa-phone"></span></a><a class="mng-menuicon" href="tel:{{ section.settings.header_strip_text_contact }}">{{ section.settings.header_strip_text_contact }}</a></li>
+                  {% endif %}
+                  
+                  {% if section.settings.header_strip_text_link_name != blank  %}  <li><a class="mng-menuicon" href="{{ section.settings.header_strip_text_link_url }}"><b>{{ section.settings.header_strip_text_link_name }}</b></a></li>
+                 {% endif %}
+                                
+                  
+                 {% if section.settings.header_strip_text_email != blank  %}  <li><a class="mng-phone" href="#" data-title="{{ section.settings.header_strip_text_email }}"><span class="fa fa-envelope"></span></a><a class="mng-menuicon" href="mailto:{{ section.settings.header_strip_text_email }}">{{ section.settings.header_strip_text_email }}</a></li>
+                 {% endif %} 
+                  
+               
+                </ul>
+              </div>
+            </div>
+            
+      </div>
+    
+    </div>
+
+{% if section.settings.header_strip %}
+    {% endif %}
+    
+   
+<script>
+$( "a.mng-phone" ).hover(
+  function() {   
+   var title = $(this).attr("data-title");
+    $('<div/>', {
+        text: title,
+        class: 'menu-iconbox'
+    }).appendTo(this); 
+  }, function() {
+    $(document).find("div.menu-iconbox").remove();
+  }
+);
+
+</script>
+
+
+
+<script>
+/*
+$(function() {
+ 
+   // $('.carcustommobile span').css('font-size', '19px');
+  // alert($('.carcustommobile span').height());
+  //  alert( $('.carcustommobile').height());
+
+    while( $('.carcustommobile span').height() > $('.carcustommobile').height() ) {
+        $('.carcustommobile span').css('font-size', (parseInt($('.carcustommobile span').css('font-size')) - 1) + "px" );
+    }
+   
+});
+*/
+</script>
+

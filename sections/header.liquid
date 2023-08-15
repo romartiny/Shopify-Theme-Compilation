@@ -1,0 +1,1250 @@
+{% if section.settings.message %}
+  <style>
+    .notification-bar {
+      background-color: {{ section.settings.color_bg }};
+    }
+
+    .notification-bar__message {
+      color: {{ section.settings.color_text }};
+    }
+  </style>
+{% endif %}
+
+<div data-section-id="{{ section.id }}" data-section-type="header-section">
+
+    {% if section.settings.disable_header_strip != true %}
+    <div class="notification-bar">  
+   {%  include 'header_strip' %}
+    </div>
+  
+  
+  
+   {% endif %}
+  <!-- menu -->
+    {% include 'menu_mobile'  %}
+    {% include 'menu_desktop' %}
+  
+  
+ 
+  {% if section.settings.align_logo == 'center' %}
+  <nav class="small--hide border-bottom" id="AccessibleNav" role="navigation">
+    {% include 'site-nav', nav_alignment: 'site-nav--centered' %}
+  </nav>
+  {% endif %}
+  <style>
+    {% if section.settings.logo != blank %}
+      .site-header__logo-image {
+        max-width: {{ section.settings.logo_max_width | escape }}px;
+      }
+    {% endif %}
+
+    {% if section.settings.align_logo == 'left' %}
+      .site-header__logo-image {
+        margin: 0;
+      }
+    {% endif %}
+        .site-nav>li>.site-nav__link,.site-nav--mobile>li>.site-nav__link {
+font-family: {{ section.settings.Menu_font_family }};
+    }
+  .mobile-nav > .mobile-nav__item a{
+  font-family: {{ section.settings.Menu_font_family }} !important;
+  }
+  </style>
+</div>
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+ 
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      },
+      {
+        "type": "text",
+        "id": "logo_max_width",
+        "label": "Custom logo width (in pixels)",
+        "default": "100"
+      },
+      {
+        "type": "link_list",
+        "id": "main_linklist",
+        "label": "Menu",
+        "default": "main-menu"
+      }, 
+	  {
+        "type": "select",
+        "id": "Menu_font_family",
+        "label": "Menu font family",
+        "options": [
+          {
+            "value": "'Oswald', sans-serif",
+            "label": "default theme font family"
+          },
+          {
+            "value": "Anton",
+            "label": "Anton"
+          },
+          {
+            "value": "Arimo",
+            "label": "Arimo"
+          },
+          {
+            "value": "Arvo",
+            "label": "Arvo"
+          },
+          {
+            "value": "Baloo Bhai",
+            "label": "Baloo Bhai"
+          },
+          {
+            "value": "Baloo Bhaina",
+            "label": "Baloo Bhaina"
+          },
+          {
+            "value": "Bitter",
+            "label": "Bitter"
+          },
+          {
+            "value": "Bree Serif",
+            "label": "Bree Serif"
+          },
+          {
+            "value": "Cabin",
+            "label": "Cabin"
+          },
+          {
+            "value": "Catamaran",
+            "label": "Catamaran"
+          },
+          {
+            "value": "David Libre",
+            "label": "David Libre"
+          },
+          {
+            "value": "Dosis",
+            "label": "Dosis"
+          },
+          {
+            "value": "Droid Sans",
+            "label": "Droid Sans"
+          },
+          {
+            "value": "Droid Serif",
+            "label": "Droid Serif"
+          },
+          {
+            "value": "Ek Mukta",
+            "label": "Ek Mukta"
+          },
+          {
+            "value": "Fjalla One",
+            "label": "Fjalla One"
+          },
+          {
+            "value": "Hind",
+            "label": "Hind"
+          },
+          {
+            "value": "Inconsolata",
+            "label": "Inconsolata"
+          },
+          {
+            "value": "Indie Flower",
+            "label": "Indie Flower"
+          },
+          {
+            "value": "Lato",
+            "label": "Lato"
+          },
+          {
+            "value": "Libre Baskerville",
+            "label": "Libre Baskerville"
+          },
+          {
+            "value": "Lobster",
+            "label": "Lobster"
+          },
+          {
+            "value": "Lora",
+            "label": "Lora"
+          },
+          {
+            "value": "Merriweather",
+            "label": "Merriweather"
+          },
+          {
+            "value": "Modak",
+            "label": "Modak"
+          },
+          {
+            "value": "Montserrat",
+            "label": "Montserrat"
+          },
+          {
+            "value": "Muli",
+            "label": "Muli"
+          },
+          {
+            "value": "Noto Sans",
+            "label": "Noto Sans"
+          },
+          {
+            "value": "Noto Serif",
+            "label": "Noto Serif"
+          },
+          {
+            "value": "Nunito",
+            "label": "Nunito"
+          },
+          {
+            "value": "Open Sans Condensed",
+            "label": "Open Sans Condensed"
+          },
+          {
+            "value": "Oswald",
+            "label": "Oswald"
+          },
+          {
+            "value": "Oxygen",
+            "label": "Oxygen"
+          },
+          {
+            "value": "PT Sans",
+            "label": "PT Sans"
+          },
+          {
+            "value": "PT Sans Narrow",
+            "label": "PT Sans Narrow"
+          },
+          {
+            "value": "PT Serif",
+            "label": "PT Serif"
+          },
+          {
+            "value": "Pavanam",
+            "label": "Pavanam"
+          },
+          {
+            "value": "Playfair Display",
+            "label": "Playfair Display"
+          },
+          {
+            "value": "Poppins",
+            "label": "Poppins"
+          },
+          {
+            "value": "Raleway",
+            "label": "Raleway"
+          },
+          {
+            "value": "Roboto",
+            "label": "Roboto"
+          },
+          {
+            "value": "Roboto Condensed",
+            "label": "Roboto Condensed"
+          },
+          {
+            "value": "Roboto Slab",
+            "label": "Roboto Slab"
+          },
+          {
+            "value": "Slabo",
+            "label": "Slabo"
+          },
+          {
+            "value": "Source Sans Pro",
+            "label": "Source Sans Pro"
+          },
+          {
+            "value": "Teko",
+            "label": "Teko"
+          },
+          {
+            "value": "Titillium Web",
+            "label": "Titillium Web"
+          },
+          {
+            "value": "Ubuntu",
+            "label": "Ubuntu"
+          },
+          {
+            "value": "Yanone Kaffeesatz",
+            "label": "Yanone Kaffeesatz"
+          },
+          {
+            "value": "Yatra One",
+            "label": "Yatra One"
+          }
+        ]
+        },
+      {
+        "type": "header",
+        "content": "Header Top Text Strip on desktop"
+      },
+     {
+        "type":"checkbox",
+        "id":"disable_header_strip",
+        "label":"disable header strip"
+     },
+     {
+       "type": "select",
+       "id": "title_font_size",
+       "label": "Content font size",
+       "default": "14",
+       "options": [
+         {
+           "value": "12",
+           "label": "12"
+         },
+         {
+           "value": "13",
+           "label": "13"
+         },
+         {
+           "value": "14",
+           "label": "14"
+         },
+         {
+           "value": "15",
+           "label": "15"
+         },
+         {
+           "value": "16",
+           "label": "16"
+         },
+         {
+           "value": "17",
+           "label": "17"
+         },
+         {
+           "value": "18",
+           "label": "18"
+         },
+         {
+           "value": "19",
+           "label": "19"
+         },
+         {
+           "value": "20",
+           "label": "20"
+         },
+         {
+           "value": "21",
+           "label": "21"
+         },
+         {
+           "value": "22",
+           "label": "22"
+         },
+         {
+           "value": "23",
+           "label": "23"
+         },
+         {
+           "value": "24",
+           "label": "24"
+         },
+         {
+           "value": "25",
+           "label": "25"
+         },
+         {
+           "value": "26",
+           "label": "26"
+         },
+         {
+           "value": "28",
+           "label": "28"
+         },
+         {
+           "value": "29",
+           "label": "29"
+         },
+         {
+           "value": "30",
+           "label": "30"
+         },
+         {
+           "value": "31",
+           "label": "31"
+         },
+         {
+           "value": "32",
+           "label": "32"
+         },
+         {
+           "value": "33",
+           "label": "33"
+         },
+         {
+           "value": "34",
+           "label": "34"
+         },
+         {
+           "value": "35",
+           "label": "35"
+         },
+         {
+           "value": "36",
+           "label": "36"
+         },
+         {
+           "value": "37",
+           "label": "37"
+         },
+         {
+           "value": "38",
+           "label": "38"
+         },
+         {
+           "value": "39",
+           "label": "39"
+         },
+         {
+           "value": "40",
+           "label": "40"
+         },
+         {
+           "value": "41",
+           "label": "42"
+         },
+         {
+           "value": "42",
+           "label": "42"
+         },
+         {
+           "value": "43",
+           "label": "43"
+         },
+         {
+           "value": "44",
+           "label": "44"
+         },
+         {
+           "value": "45",
+           "label": "45"
+         },
+         {
+           "value": "46",
+           "label": "46"
+         },
+         {
+           "value": "47",
+           "label": "47"
+         },
+         {
+           "value": "48",
+           "label": "48"
+         },
+         {
+           "value": "49",
+           "label": "49"
+         },
+         {
+           "value": "50",
+           "label": "50"
+         },
+         {
+           "value": "51",
+           "label": "51"
+         },
+         {
+           "value": "52",
+           "label": "52"
+         },
+         {
+           "value": "53",
+           "label": "53"
+         },
+         {
+           "value": "54",
+           "label": "54"
+         },
+         {
+           "value": "55",
+           "label": "55"
+         },
+         {
+           "value": "56",
+           "label": "56"
+         },
+         {
+           "value": "57",
+           "label": "57"
+         },
+         {
+           "value": "58",
+           "label": "58"
+         },
+         {
+           "value": "59",
+           "label": "59"
+         },
+         {
+           "value": "60",
+           "label": "60"
+         }
+       ]
+        },
+        {
+        "type": "select",
+        "id": "heading_font_family",
+        "label": "content font family",
+        "options": [
+          {
+            "value": "'Oswald', sans-serif",
+            "label": "default theme font family"
+          },
+          {
+            "value": "Anton",
+            "label": "Anton"
+          },
+          {
+            "value": "Arimo",
+            "label": "Arimo"
+          },
+          {
+            "value": "Arvo",
+            "label": "Arvo"
+          },
+          {
+            "value": "Baloo Bhai",
+            "label": "Baloo Bhai"
+          },
+          {
+            "value": "Baloo Bhaina",
+            "label": "Baloo Bhaina"
+          },
+          {
+            "value": "Bitter",
+            "label": "Bitter"
+          },
+          {
+            "value": "Bree Serif",
+            "label": "Bree Serif"
+          },
+          {
+            "value": "Cabin",
+            "label": "Cabin"
+          },
+          {
+            "value": "Catamaran",
+            "label": "Catamaran"
+          },
+          {
+            "value": "David Libre",
+            "label": "David Libre"
+          },
+          {
+            "value": "Dosis",
+            "label": "Dosis"
+          },
+          {
+            "value": "Droid Sans",
+            "label": "Droid Sans"
+          },
+          {
+            "value": "Droid Serif",
+            "label": "Droid Serif"
+          },
+          {
+            "value": "Ek Mukta",
+            "label": "Ek Mukta"
+          },
+          {
+            "value": "Fjalla One",
+            "label": "Fjalla One"
+          },
+          {
+            "value": "Hind",
+            "label": "Hind"
+          },
+          {
+            "value": "Inconsolata",
+            "label": "Inconsolata"
+          },
+          {
+            "value": "Indie Flower",
+            "label": "Indie Flower"
+          },
+          {
+            "value": "Lato",
+            "label": "Lato"
+          },
+          {
+            "value": "Libre Baskerville",
+            "label": "Libre Baskerville"
+          },
+          {
+            "value": "Lobster",
+            "label": "Lobster"
+          },
+          {
+            "value": "Lora",
+            "label": "Lora"
+          },
+          {
+            "value": "Merriweather",
+            "label": "Merriweather"
+          },
+          {
+            "value": "Modak",
+            "label": "Modak"
+          },
+          {
+            "value": "Montserrat",
+            "label": "Montserrat"
+          },
+          {
+            "value": "Muli",
+            "label": "Muli"
+          },
+          {
+            "value": "Noto Sans",
+            "label": "Noto Sans"
+          },
+          {
+            "value": "Noto Serif",
+            "label": "Noto Serif"
+          },
+          {
+            "value": "Nunito",
+            "label": "Nunito"
+          },
+          {
+            "value": "Open Sans Condensed",
+            "label": "Open Sans Condensed"
+          },
+          {
+            "value": "Oswald",
+            "label": "Oswald"
+          },
+          {
+            "value": "Oxygen",
+            "label": "Oxygen"
+          },
+          {
+            "value": "PT Sans",
+            "label": "PT Sans"
+          },
+          {
+            "value": "PT Sans Narrow",
+            "label": "PT Sans Narrow"
+          },
+          {
+            "value": "PT Serif",
+            "label": "PT Serif"
+          },
+          {
+            "value": "Pavanam",
+            "label": "Pavanam"
+          },
+          {
+            "value": "Playfair Display",
+            "label": "Playfair Display"
+          },
+          {
+            "value": "Poppins",
+            "label": "Poppins"
+          },
+          {
+            "value": "Raleway",
+            "label": "Raleway"
+          },
+          {
+            "value": "Roboto",
+            "label": "Roboto"
+          },
+          {
+            "value": "Roboto Condensed",
+            "label": "Roboto Condensed"
+          },
+          {
+            "value": "Roboto Slab",
+            "label": "Roboto Slab"
+          },
+          {
+            "value": "Slabo",
+            "label": "Slabo"
+          },
+          {
+            "value": "Source Sans Pro",
+            "label": "Source Sans Pro"
+          },
+          {
+            "value": "Teko",
+            "label": "Teko"
+          },
+          {
+            "value": "Titillium Web",
+            "label": "Titillium Web"
+          },
+          {
+            "value": "Ubuntu",
+            "label": "Ubuntu"
+          },
+          {
+            "value": "Yanone Kaffeesatz",
+            "label": "Yanone Kaffeesatz"
+          },
+          {
+            "value": "Yatra One",
+            "label": "Yatra One"
+          }
+        ]
+        },
+      {
+        "type": "color",
+        "id": "header_strip_bg",
+        "label": "Strip Background Color",
+        "default": "#3d4246"
+        
+      },
+      {
+        "type": "color",
+        "id": "header_strip_color",
+        "label": "Strip Text Color",
+        "default": "#ff0000"
+      },
+       {
+        "type": "color",
+        "id": "header_desktop_cart_bg",
+        "label": "cart background",
+        "default": "#05B200"
+        
+      },
+      {
+        "type": "color",
+        "id": "header_desktop_cart_color",
+        "label": "cart Color",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "header_desktop_cart_fontcolor",
+        "label": "Cart text color",
+        "default": "#fff"
+      },
+      {
+        "type": "text",
+        "id": "header_strip_text_contact",
+        "label": "Strip Contact Phone Number",
+        "default": "044-4444-4444"
+      },
+      {
+        "type": "text",
+        "id": "header_strip_text_email",
+        "label": "Strip Support Email",
+        "default" : "my@shop.myshop"
+      },
+      {
+        "type": "text",
+        "id": "header_strip_text_link_name",
+        "label": "Strip Link Title",
+         "default" : "Contact"
+        
+      },
+      {
+        "type": "text",
+        "id": "header_strip_text_link_url",
+        "label": "Strip link",
+        "info":"for ex : https://www.xyz.com/"
+      }, 
+      {
+        "type": "header",
+        "content": "Mobile header"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_mobile",
+        "label": "Mobile logo",
+        "info": "This logo will only appear on the mobile version of your store. Maximum logo dimensions are 360px wide by 100px high. The uploaded file will be resized to fit within those constraints."
+      },
+      {
+        "type": "select",
+        "id": "mobile_logo_size",
+        "label": "Logo size in %",
+        "options": [
+          {
+            "value": "35%",
+            "label": "35"
+          },
+          {
+            "value": "50%",
+            "label": "50"
+          },
+          {
+            "value": "60%",
+            "label": "60"
+          },
+          {
+            "value": "70%",
+            "label": "70"
+          },
+          {
+            "value": "75%",
+            "label": "75"
+          },
+          {
+            "value": "90%",
+            "label": "90"
+          },
+          {
+            "value": "100%",
+            "label": "100"
+          }
+        ]
+      },
+        {
+        "type": "select",
+        "id": "mobile_heading_font_family",
+        "label": "header content font family",
+        "options": [
+          {
+            "value": "'Oswald', sans-serif",
+            "label": "default theme font family"
+          },
+          {
+            "value": "Anton",
+            "label": "Anton"
+          },
+          {
+            "value": "Arimo",
+            "label": "Arimo"
+          },
+          {
+            "value": "Arvo",
+            "label": "Arvo"
+          },
+          {
+            "value": "Baloo Bhai",
+            "label": "Baloo Bhai"
+          },
+          {
+            "value": "Baloo Bhaina",
+            "label": "Baloo Bhaina"
+          },
+          {
+            "value": "Bitter",
+            "label": "Bitter"
+          },
+          {
+            "value": "Bree Serif",
+            "label": "Bree Serif"
+          },
+          {
+            "value": "Cabin",
+            "label": "Cabin"
+          },
+          {
+            "value": "Catamaran",
+            "label": "Catamaran"
+          },
+          {
+            "value": "David Libre",
+            "label": "David Libre"
+          },
+          {
+            "value": "Dosis",
+            "label": "Dosis"
+          },
+          {
+            "value": "Droid Sans",
+            "label": "Droid Sans"
+          },
+          {
+            "value": "Droid Serif",
+            "label": "Droid Serif"
+          },
+          {
+            "value": "Ek Mukta",
+            "label": "Ek Mukta"
+          },
+          {
+            "value": "Fjalla One",
+            "label": "Fjalla One"
+          },
+          {
+            "value": "Hind",
+            "label": "Hind"
+          },
+          {
+            "value": "Inconsolata",
+            "label": "Inconsolata"
+          },
+          {
+            "value": "Indie Flower",
+            "label": "Indie Flower"
+          },
+          {
+            "value": "Lato",
+            "label": "Lato"
+          },
+          {
+            "value": "Libre Baskerville",
+            "label": "Libre Baskerville"
+          },
+          {
+            "value": "Lobster",
+            "label": "Lobster"
+          },
+          {
+            "value": "Lora",
+            "label": "Lora"
+          },
+          {
+            "value": "Merriweather",
+            "label": "Merriweather"
+          },
+          {
+            "value": "Modak",
+            "label": "Modak"
+          },
+          {
+            "value": "Montserrat",
+            "label": "Montserrat"
+          },
+          {
+            "value": "Muli",
+            "label": "Muli"
+          },
+          {
+            "value": "Noto Sans",
+            "label": "Noto Sans"
+          },
+          {
+            "value": "Noto Serif",
+            "label": "Noto Serif"
+          },
+          {
+            "value": "Nunito",
+            "label": "Nunito"
+          },
+          {
+            "value": "Open Sans Condensed",
+            "label": "Open Sans Condensed"
+          },
+          {
+            "value": "Oswald",
+            "label": "Oswald"
+          },
+          {
+            "value": "Oxygen",
+            "label": "Oxygen"
+          },
+          {
+            "value": "PT Sans",
+            "label": "PT Sans"
+          },
+          {
+            "value": "PT Sans Narrow",
+            "label": "PT Sans Narrow"
+          },
+          {
+            "value": "PT Serif",
+            "label": "PT Serif"
+          },
+          {
+            "value": "Pavanam",
+            "label": "Pavanam"
+          },
+          {
+            "value": "Playfair Display",
+            "label": "Playfair Display"
+          },
+          {
+            "value": "Poppins",
+            "label": "Poppins"
+          },
+          {
+            "value": "Raleway",
+            "label": "Raleway"
+          },
+          {
+            "value": "Roboto",
+            "label": "Roboto"
+          },
+          {
+            "value": "Roboto Condensed",
+            "label": "Roboto Condensed"
+          },
+          {
+            "value": "Roboto Slab",
+            "label": "Roboto Slab"
+          },
+          {
+            "value": "Slabo",
+            "label": "Slabo"
+          },
+          {
+            "value": "Source Sans Pro",
+            "label": "Source Sans Pro"
+          },
+          {
+            "value": "Teko",
+            "label": "Teko"
+          },
+          {
+            "value": "Titillium Web",
+            "label": "Titillium Web"
+          },
+          {
+            "value": "Ubuntu",
+            "label": "Ubuntu"
+          },
+          {
+            "value": "Yanone Kaffeesatz",
+            "label": "Yanone Kaffeesatz"
+          },
+          {
+            "value": "Yatra One",
+            "label": "Yatra One"
+          }
+        ]
+        },
+        {
+        "type": "select",
+        "id": "mobile_nav_font_family",
+        "label": "navigation font family",
+        "options": [
+          {
+            "value": "'Oswald', sans-serif",
+            "label": "default theme font family"
+          },
+          {
+            "value": "Anton",
+            "label": "Anton"
+          },
+          {
+            "value": "Arimo",
+            "label": "Arimo"
+          },
+          {
+            "value": "Arvo",
+            "label": "Arvo"
+          },
+          {
+            "value": "Baloo Bhai",
+            "label": "Baloo Bhai"
+          },
+          {
+            "value": "Baloo Bhaina",
+            "label": "Baloo Bhaina"
+          },
+          {
+            "value": "Bitter",
+            "label": "Bitter"
+          },
+          {
+            "value": "Bree Serif",
+            "label": "Bree Serif"
+          },
+          {
+            "value": "Cabin",
+            "label": "Cabin"
+          },
+          {
+            "value": "Catamaran",
+            "label": "Catamaran"
+          },
+          {
+            "value": "David Libre",
+            "label": "David Libre"
+          },
+          {
+            "value": "Dosis",
+            "label": "Dosis"
+          },
+          {
+            "value": "Droid Sans",
+            "label": "Droid Sans"
+          },
+          {
+            "value": "Droid Serif",
+            "label": "Droid Serif"
+          },
+          {
+            "value": "Ek Mukta",
+            "label": "Ek Mukta"
+          },
+          {
+            "value": "Fjalla One",
+            "label": "Fjalla One"
+          },
+          {
+            "value": "Hind",
+            "label": "Hind"
+          },
+          {
+            "value": "Inconsolata",
+            "label": "Inconsolata"
+          },
+          {
+            "value": "Indie Flower",
+            "label": "Indie Flower"
+          },
+          {
+            "value": "Lato",
+            "label": "Lato"
+          },
+          {
+            "value": "Libre Baskerville",
+            "label": "Libre Baskerville"
+          },
+          {
+            "value": "Lobster",
+            "label": "Lobster"
+          },
+          {
+            "value": "Lora",
+            "label": "Lora"
+          },
+          {
+            "value": "Merriweather",
+            "label": "Merriweather"
+          },
+          {
+            "value": "Modak",
+            "label": "Modak"
+          },
+          {
+            "value": "Montserrat",
+            "label": "Montserrat"
+          },
+          {
+            "value": "Muli",
+            "label": "Muli"
+          },
+          {
+            "value": "Noto Sans",
+            "label": "Noto Sans"
+          },
+          {
+            "value": "Noto Serif",
+            "label": "Noto Serif"
+          },
+          {
+            "value": "Nunito",
+            "label": "Nunito"
+          },
+          {
+            "value": "Open Sans Condensed",
+            "label": "Open Sans Condensed"
+          },
+          {
+            "value": "Oswald",
+            "label": "Oswald"
+          },
+          {
+            "value": "Oxygen",
+            "label": "Oxygen"
+          },
+          {
+            "value": "PT Sans",
+            "label": "PT Sans"
+          },
+          {
+            "value": "PT Sans Narrow",
+            "label": "PT Sans Narrow"
+          },
+          {
+            "value": "PT Serif",
+            "label": "PT Serif"
+          },
+          {
+            "value": "Pavanam",
+            "label": "Pavanam"
+          },
+          {
+            "value": "Playfair Display",
+            "label": "Playfair Display"
+          },
+          {
+            "value": "Poppins",
+            "label": "Poppins"
+          },
+          {
+            "value": "Raleway",
+            "label": "Raleway"
+          },
+          {
+            "value": "Roboto",
+            "label": "Roboto"
+          },
+          {
+            "value": "Roboto Condensed",
+            "label": "Roboto Condensed"
+          },
+          {
+            "value": "Roboto Slab",
+            "label": "Roboto Slab"
+          },
+          {
+            "value": "Slabo",
+            "label": "Slabo"
+          },
+          {
+            "value": "Source Sans Pro",
+            "label": "Source Sans Pro"
+          },
+          {
+            "value": "Teko",
+            "label": "Teko"
+          },
+          {
+            "value": "Titillium Web",
+            "label": "Titillium Web"
+          },
+          {
+            "value": "Ubuntu",
+            "label": "Ubuntu"
+          },
+          {
+            "value": "Yanone Kaffeesatz",
+            "label": "Yanone Kaffeesatz"
+          },
+          {
+            "value": "Yatra One",
+            "label": "Yatra One"
+          }
+        ]
+        },
+	  {
+        "type": "color",
+        "id": "header_background_mobile",
+        "label": "Mobile Header Background",
+        "default": "#ff0000"
+      },
+      {
+        "type": "color",
+        "id": "Top_header_background_mobile",
+        "label": "Mobile Top Left Header Background",
+        "default": "#ff0000"
+      },
+        {
+          "type": "color",
+          "id": "hamburger_color_set",
+          "label": "Hamburger & User Icon & Currency Color",
+         "default": "#929292"
+       },    
+      {
+        "type": "color",
+        "id": "cartcount_mobile_color",
+        "label": "Cart Counter Font Color",
+         "default": "#929292"
+      },
+      {
+        "type": "color",
+        "id": "cartcount_bg_mobile_color",
+        "label": "Cart Counter Background",
+         "default" : "#929292"
+      }
+  
+
+    ]
+  }
+{% endschema %}

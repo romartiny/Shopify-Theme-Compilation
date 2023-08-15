@@ -1,0 +1,69 @@
+      <script>
+						Number.prototype.padLeft = function(base,chr){
+                         var  len = (String(base || 10).length - String(this).length)+1;
+                         return len > 0? new Array(len).join(chr || '0')+this : this;
+                              }
+   
+                           // setting time reset every day
+                        var resttime="{{settings.enable_timer_reset_every_day}}";
+						var someDate = new Date();	
+						var ddNextDays = someDate.getDate()+1;
+						var dd = someDate.getDate();
+						var mm = someDate.getMonth()+ 1;
+						var y = someDate.getFullYear();
+                        var H=someDate.getHours().padLeft(); 
+                        var m=someDate.getMinutes().padLeft(); 
+                        var s=someDate.getSeconds().padLeft(); 
+					    var NextDate = new Date(Date.now()+1*24*60*60*1000);
+                        var ddN = NextDate.getDate();
+				        var mmN = NextDate.getMonth()+ 1;
+				        var yN = NextDate.getFullYear();
+
+				        var nextdayDate = yN+'/'+mmN+'/'+ddN;
+				        var startdayDate = y + '/'+ mm + '/'+ dd;
+				       var NowTime=H+':'+m+':'+s;
+						var TargetDate=nextdayDate+" "+resttime;
+						var StartDate=startdayDate+" "+resttime;
+						 var timeDate='';
+						if(NowTime < resttime) {
+						timeDate=StartDate;
+						} else{
+						
+						timeDate=TargetDate;
+						}
+     
+                 // start time with time diff.
+        
+        var remainderTimeset ="86400";    
+         remainderTime= remainderTimeset*1000;
+        
+                 var ddd = new Date();
+                 ddd.setTime(ddd.getTime());
+                 var startTime1=ddd.toGMTString();	                    
+                 var date1 = new Date(startTime1);
+                 var date2 = new Date(timeDate);
+                 var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+                 var diffDays = Math.ceil(timeDiff / (1000)); 
+                 $(".timer_time_reset_day").val(diffDays);    
+               //  alert(diffDays);
+                  // left number
+ 
+            var left_number=$(".total_stock_left_num").val();
+
+           var getSecond=remainderTimeset/left_number;
+               var nowLeftnumber=diffDays/getSecond;
+        if(nowLeftnumber <= 1){
+          nowLeftnumber=1;
+        }        
+             $(".reset_day_Left_number").val(nowLeftnumber);
+
+             $("#counter_left").text(Math.round(Number(nowLeftnumber)));
+ 
+             var secondDiff=parseInt(diffDays) + 4;
+       
+              setTimeout(function(){
+              location.reload(true);
+              }, secondDiff*1000)
+
+        
+</script>

@@ -1,0 +1,42 @@
+<div class="page-width">
+  <div class="grid">
+    <div class="grid__item medium-up--five-sixths medium-up--push-one-twelfth">
+      <div class="section-header text-center">
+        <h1>{{ page.title }}</h1>
+      </div>
+      
+
+      
+      
+   <script type="text/javascript" src="//harshen.github.io/jquery-countdownTimer/LIB/jquery-2.0.3.js"></script>
+<script type="text/javascript" src="//harshen.github.io/jquery-countdownTimer/jquery.countdownTimer.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//harshen.github.io/jquery-countdownTimer/CSS/jquery.countdownTimer.css" />  
+    
+	           
+      
+      
+    <table style="border:0px;">
+                                <tr>
+                                    <td colspan="8"><span id="future_date"></span></td>
+                                </tr>
+                            </table>
+
+
+                            <script>
+                                $(function(){
+                                    $('#future_date').countdowntimer({
+                                        dateAndTime : "2020/01/01 00:00:00",
+                                        size : "lg",
+                                        regexpMatchFormat: "([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})",
+      					regexpReplaceWith: "$1<sup class='displayformat'>days</sup> / $2<sup class='displayformat'>hours</sup> / $3<sup class='displayformat'>minutes</sup> / $4<sup class='displayformat'>seconds</sup>"
+                                    });
+                                });
+                            </script>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>

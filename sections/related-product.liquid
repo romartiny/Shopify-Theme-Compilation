@@ -1,0 +1,156 @@
+   <style>
+     .btn.return-link{
+    background: none repeat scroll 0 0 {{ section.settings.related_btn_bg_color }};
+    color: {{ section.settings.related_text_color }}; 
+  }
+  .btn.return-link:hover,
+ .btn.return-link:focus {
+    background: none repeat scroll 0 0 {{ section.settings.related_btn_bg_color_hover }} !important;
+  }
+</style>
+{% include 'related-product' %}   
+{% if collection %}
+  <div class="text-center return-link-wrapper">
+    <a href="{{ collection.url }}" class="btn btn--has-icon-before return-link">
+      {% include 'icon-arrow-left' %}
+      {{ 'products.product.back_to_collection' | t: title: collection.title }}
+    </a>
+  </div>
+{% endif %}
+{% schema %}
+  {
+    "name": "related product",
+    "settings": [
+{
+        "type":"header",
+        "content":"Related product"
+      },
+       {
+      "type": "checkbox",
+      "id": "show_related_products",
+      "label": "Show related products",
+      "default": true
+       },
+       {
+      "type": "select",
+      "id": "related_grid_num",
+      "label": "Products per row (Desktop)",
+      "default": "4",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        }
+      ]
+    },
+
+    {
+      "type": "select",
+      "id": "related_grid_row",
+      "label": "Number of rows (Desktop)",
+      "default": "1",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        }
+      ]
+    },
+      {
+        "type": "radio",
+        "id": "sale_button_option",
+        "default": "sale_button_option_one",
+        "options": [
+          {
+            "value": "sale_button_option_one",
+            "label": "Option 1"
+          },
+          {
+            "value": "sale_button_option_two",
+            "label": "Option 2"
+          },
+          {
+            "value": "sale_button_option_three",
+            "label": "Option 3"
+          },
+          {
+            "value": "sale_button_option_four",
+            "label": "Option 4"
+          },
+		  {
+            "value": "sale_button_option_five",
+            "label": "Option 5"
+          },
+		  {
+            "value": "sale_button_option_six",
+            "label": "Option 6"
+          }
+        ],
+        "label": "Off Button Style Option"
+      },
+      {
+        "type": "color",
+        "id": "sale_button_option_one_color",
+        "label": "Off Button Background Color",
+        "default": "#2acb13"
+      },
+{
+        "type": "header",
+        "content": "Related Button Setting"
+      },
+      {
+        "type": "color",
+        "id": "related_btn_bg_color",
+        "label": "Related button color",
+        "info": "Related Button Color",
+        "default": "#11c600"
+      },
+      {
+        "type": "color",
+        "id": "related_btn_bg_color_hover",
+        "label": "Related button:Hover",
+        "info": "Related Button Color hover",
+         "default": "#6fd056"
+      },
+      {
+        "type": "color",
+        "id": "related_text_color",
+        "label": "Related button text color",
+        "default": "#f2f2f2"
+      }
+
+],
+   "presets": [
+      {
+        "name": "related product",
+        "category": "related product"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

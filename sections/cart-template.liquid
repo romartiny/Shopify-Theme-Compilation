@@ -1,0 +1,1771 @@
+<style>
+  .checkout_btn{
+    background-color:{{ section.settings.checkout_bg_color }};
+    font-size:{{ section.settings.checkout_button_font_size }}px !important;
+    font-family:{{ section.settings.checkout_button_font_family }}!important;
+  }
+  .checkout_btn:hover{
+    background-color:{{ section.settings.checkout_bg_hover_color }} !important;
+  }
+  
+  .timer_box samp {
+     color: {{ section.settings.cart_timer_color }} !important;
+ }
+  .cart__subtotal-title , .cart__subtotal  span{
+    color:{{section.settings.price_color}} !important;
+    font-size:{{section.settings.price_font}}px !important;
+    font-family:{{section.settings.price_fontfamily}} !important;
+  }
+</style>
+<div class="page-width" data-section-id="{{ section.id }}" data-section-type="cart-template">
+    {% if cart.item_count > 0 %}
+  <form action="/cart" method="post" id="update_cart" novalidate   class="cart small--hide desktopcartnew">
+  
+
+    <div class="section-header text-center">
+       {% if section.settings.up_checkout_button_enable %}
+   
+    <input  type="submit" name="checkout" class="top_checkout checkout_btn btn" value="{{ 'cart.general.checkout' | t }}">
+   {% endif %}
+      <h1>{{ 'cart.general.title' | t }}</h1>
+   
+    </div>
+    {% if section.settings.cart_enable %}
+{{ 'jquery.countdownTimer_2hours.js' | asset_url | script_tag }}  
+  
+  {% endif %}
+  
+    <table class="cart-table full table--responsive">
+   
+      <thead class="cart__row cart__header-labels">
+        <th colspan="2" class="text-center set-align crt">{{ 'cart.label.product' | t }}</th>
+        <th class="text-center quantity_cart set-align">{{ 'cart.label.quantity' | t }}</th>
+        <th class="text-left price_cart">{{ 'cart.label.price' | t }}</th>
+        <th class="text-left total_cart">{{ 'cart.label.total' | t }}</th>       
+      </thead>
+  
+      <tbody>
+        {% for item in cart.items %}
+        
+          {% if item.variant.compare_at_price > item.variant.price %}
+          {% assign saving = item.variant.compare_at_price | minus: item.variant.price | times: item.quantity %}
+          {% assign was = item.variant.compare_at_price |  times: item.quantity %}
+          {% assign total_saving = saving | plus: total_saving %}
+          {% assign total_saving_was = was | plus: total_saving_was %}
+        
+          {% endif %} 
+        
+        
+       
+          <tr class="cart__row table__section">
+            <td class="order_product_cart" data-label="{{ 'customer.order.product' | t }}">
+              <a href="{{ item.url | within: collections.all }}" class="cart__image">
+                {% comment %}
+                  More image size options at:
+                    - http://docs.shopify.com/themes/filters/product-img-url
+                {% endcomment %}
+                <img class="nav-bar desktop_nav" src="{{ item | img_url: 'small' }}" alt="{{ item.title | escape }}">
+                <img class="nav-bar mobile_nav" src="{{ item | img_url: 'large' }}" alt="{{ item.title | escape }}">
+
+              </a>
+            </td>
+            <td class="product_title_cart">
+              <a href="{{ item.url }}" class="h5">
+                {{ item.product.title }}
+              </a>
+              {% comment %}
+              {% unless item.variant.title contains 'Default' %}
+                <br>
+                <small>{{ item.variant.title }}</small>
+              {% endunless %}
+              
+              {% endcomment %}
+              
+              
+                              {% unless item.variant.title contains 'Default' %}
+                  <div class="cart__meta-text">
+                    {% for option in item.product.options %}
+                      {{ option }}: {{ item.variant.options[forloop.index0] }}<br/>
+                    {% endfor %}
+                  </div>
+                {% endunless %}
+
+              {% if section.settings.cart_vendor_enable %}
+                <p>{{ item.vendor }}</p>
+              {% endif %}
+
+              {% comment %}
+                Optional, loop through custom product line items if available
+
+                For more info on line item properties, visit:
+                  - http://docs.shopify.com/support/your-store/products/how-do-I-collect-additional-information-on-the-product-page-Like-for-a-monogram-engraving-or-customization
+              
+             
+              {% assign property_size = item.properties | size %}
+              {% if property_size > 0 %}
+                {% for p in item.properties %}
+                  {% unless p.last == blank %}
+                    {{ p.first }}:
+
+                    {% comment %}
+                      Check if there was an uploaded file associated
+                    {% endcomment %}
+                    {% if p.last contains '/uploads/' %}
+                      <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+                    {% else %}
+                      {{ p.last }}
+                    {% endif %}
+
+                    <br>
+                  {% endunless %}
+                {% endfor %}
+              {% endif %}
+
+              {% endcomment %}
+
+              
+              {% for free in item.properties %}
+              {% assign freeitemParent = free.last  %}
+              {% endfor %}
+              
+              
+              
+              <a data="{{ item.product.id }}" href="javascript:;"  class="cart__remove cardesktop">
+                <small>{{ 'cart.general.remove' | t }}</small>
+              </a>
+              
+            </td>
+           
+              {% assign  freeItem=all_products[settings.free_product].selected_or_first_available_variant.id %}
+
+          
+            {% if item.properties.free_product == 'true' %}
+            
+            
+            <td class="quantity_cart" data-label="{{ 'cart.label.quantity' | t }}">
+            <!--  <input type="number" readonly name="updates[]" class="text_cart_box free_{{ freeitemParent | first }}" id="updates_{{ item.id }}" value="{{ item.quantity }}" min='0'>
+           -->
+             <div class="cart_quantity not_click_btn">
+                   <!-- <a class="plus-minus"><i class='iconsh cart_minus'></i></a>-->
+                    <input name="updates[]" readonly class="text_cart_box free_{{ item.properties.free_product_parent_id }}" id="updates_{{ item.id }}" type="number" value="{{ item.quantity }}" min="0" size="3" />
+                  <!-- <a class="plus-minus" ><i class='iconsh cart_plus'></i></a>-->
+
+              </div>
+            
+            
+            </td> 
+            {% else %}
+            <td class="quantity_cart" data-label="{{ 'cart.label.quantity' | t }}">
+             <!-- <input type="number" name="updates[]" class="text_cart_box offerUpdate" id="updates_{{ item.id }}" value="{{ item.quantity }}" min="0">
+           -->
+            <div class="cart_quantity">
+                  <!-- <a class="plus-minus" onclick="DTextBox_AddToIntValue_{{ item.id }}('updates_{{ item.id }}',-1)"><i class='iconsh cart_minus'></i></a> -->
+                    <input name="updates[]" class="text_cart_box offerUpdate" data="{{item.product.id }}" id="updates_{{ item.id }}" type="number" value="{{ item.quantity }}" min="0" size="3" itemref="{{item.properties.upsellcheckquantity}}"/>
+                   <!-- <a class="plus-minus" onclick="DTextBox_AddToIntValue_{{ item.id }}('updates_{{ item.id }}',+1)"><i class='iconsh cart_plus'></i></a> -->
+
+              </div>
+              
+              
+          <script>
+
+                  function DTextBox_AddToIntValue_{{ item.id }}(targetId,addToValue)
+                  {
+                      var input = document.getElementById(targetId);
+                      var textInt = parseInt(input.value);
+                      if(isNaN(textInt))
+                      {
+                          textInt = 0;
+                      }
+                      
+                    
+                     var total_quantity= textInt + addToValue;
+                   //input.value=total_quantity;
+                    
+                   if(total_quantity<=0){
+                        input.value=0;
+                    } else{
+                       input.value=total_quantity;
+                    }
+                    
+                   
+                    
+                  }
+
+          </script> 
+            
+            </td>
+            
+            {% endif %}
+            
+         
+            
+            <td class="price_cart" data-label="{{ 'cart.label.price' | t }}">
+           {{ item.price | money }}
+              
+              <input type="button" name="update" class="btn--secondary mobileedit " value="edit">
+            </td>
+            
+            <td  class="total_cart" data-label="{{ 'cart.label.total' | t }}" class="text-right">
+              <span class="h5">
+    {{ item.line_price | money }}
+              </span>
+                
+             <a href="javascript:" data="{{ item.product.id }}" datas="{{ item.id }}"  class="cart__remove2 c{{ item.product.id }}" style="visibility: hidden;">
+           
+            
+           
+             </a>
+               
+            </td>
+            
+            {% comment %}
+            <td data-label="{{ 'cart.label.total' | t }}" class="text-right">
+              <span class="h3">
+                {{ item.line_price | money }}
+              </span>
+              
+            </td>
+            {% endcomment %}
+          </tr>
+
+        {% endfor %}
+      </tbody>
+    </table>
+  
+      <footer class="cart__footer">
+        <div class="grid">
+          
+            <div class="grid__item medium-up--one-half cart-note">
+           
+            {% if  section.settings.cart_notes_enable %}
+              <label for="CartSpecialInstructions" class="cart-note__label small--text-center">{{ 'cart.general.note' | t }}</label>
+              <textarea name="note" id="CartSpecialInstructions" class="cart-note__input">{{ cart.note }}</textarea>
+               
+               {% endif %}
+              
+              {% if section.settings.continuous_shopping_enable %}
+                  <a href="/" class="continuous_shopping checkout_btn btn">Continue Shopping</a>
+              {% endif %}
+              
+                <input type="submit" name="update" class="btn--secondary update-cart" value="{{ 'cart.general.update' | t }}">
+    
+              
+            </div>
+         
+          <div class="grid__item text-right small--text-center{% if section.settings.cart_notes_enable %} medium-up--one-half{% endif %}">
+            <div>
+              
+              {%comment %}
+               for saved ammount
+              {% endcomment %}
+              {% if section.settings.was_price  %}
+              {% if total_saving_was %}
+              <div class="td_price">
+              <span class="cart__subtotal-title" >
+                {{ 'cart.general.was' | t }}
+              </span>
+              <span class="cart__subtotal">{{ total_saving_was | money }}</span>        
+              </div>
+              {% endif %}
+              {% endif %}
+              
+              {% if section.settings.saved_price  %}
+              {% if total_saving %}
+              <div class="td_price">
+              <span class="cart__subtotal-title" >
+                {{ 'cart.general.yousave' | t }}
+              </span>
+              <span class="cart__subtotal">{{ total_saving | money }}</span>
+              </div>
+              {% endif %}
+              {% endif %}
+              <div class="td_price">
+              <span class="cart__subtotal-title">{{ 'cart.general.subtotal' | t }}</span>
+              <span class="cart__subtotal">{{ cart.total_price | money }}</span>
+              </div>
+            </div>
+            {% if cart.total_discounts > 0 %}
+              <div class="cart__savings">
+                {{ 'cart.general.savings' | t }}
+                <span class="cart__savings-amount">{{ cart.total_discounts | money }}</span>
+              </div>
+            {% endif %}
+            <div class="cart__shipping">{{ 'cart.general.shipping_at_checkout' | t }}
+            
+              
+              
+              
+        
+        {% if section.settings.cart_enable %}
+        
+        
+         
+
+          <script>
+            
+            
+            var time_minute={{ section.settings.cart_timer_minute }}/60 ;
+         //   alert(time_minute);
+            var hours = Math.floor( time_minute / 60);          
+            var minutes = Math.floor(time_minute % 60);     
+
+            
+            $(function(){
+              $('#hm_timer1201').countdowntimer({
+                hours : hours,
+                minutes :minutes,
+                seconds :00
+              });
+            });
+          </script>
+
+
+        <p class="timer_box"><span class="cart_text">{{ section.settings.cart_title }} </span>
+          <span id="hm_timer1201" class="cart_time">dsfsd</span></p>
+        
+        {% endif %}
+              
+              
+              
+            </div>
+           
+               
+         
+        <input type="submit" name="checkout" class="checkout_btn btn" value="{{ 'cart.general.checkout' | t }}">
+        
+            
+            
+            
+            {% if additional_checkout_buttons %}
+              <div class="additional-checkout-buttons">{{ content_for_additional_checkout_buttons }}</div>
+            {% endif %}
+          </div>
+        </div>
+      </footer>
+    </form>
+  
+  
+  
+           {% comment %}  for mobile {% endcomment %}
+        
+    <form action="/cart" method="post" id="update_cart" class="medium-up--hide mobilecartnew" novalidate class="cart">
+    <table class="cart-table full table--responsive" id="table_mobile">
+   
+      <thead class="cart__row cart__header-labels">
+        <th colspan="2" class="text-left">{{ 'cart.label.product' | t }}</th>
+        <th class="text-left quantity_cart">{{ 'cart.label.quantity' | t }}</th>
+        <th class="text-left price_cart">{{ 'cart.label.price' | t }}</th>
+        <th class="text-left total_cart">{{ 'cart.label.total' | t }}</th>       
+      </thead>
+  
+      <tbody>
+        {% for item in cart.items %}
+        
+       
+          <tr class="cart__row table__section">
+            <td class="order_product_cart" data-label="{{ 'customer.order.product' | t }}">
+              <a href="{{ item.url | within: collections.all }}" class="cart__image">
+                {% comment %}
+                  More image size options at:
+                    - http://docs.shopify.com/themes/filters/product-img-url
+                {% endcomment %}
+                <img class="nav-bar desktop_nav" src="{{ item | img_url: 'small' }}" alt="{{ item.title | escape }}">
+                <img class="nav-bar mobile_nav" src="{{ item | img_url: 'large' }}" alt="{{ item.title | escape }}">
+
+              </a>
+            </td>
+            <td class="product_title_cart">
+              <a href="{{ item.url }}" class="h5">
+                {{ item.product.title }}
+              </a>
+              {% comment %}
+              {% unless item.variant.title contains 'Default' %}
+                <br>
+                <small>{{ item.variant.title }}</small>
+              {% endunless %}
+              
+              {% endcomment %}
+              
+              
+                              {% unless item.variant.title contains 'Default' %}
+                  <div class="cart__meta-text">
+                    {% for option in item.product.options %}
+                      {{ option }}: {{ item.variant.options[forloop.index0] }}<br/>
+                    {% endfor %}
+                  </div>
+                {% endunless %}
+
+              {% if section.settings.cart_vendor_enable %}
+                <p>{{ item.vendor }}</p>
+              {% endif %}
+
+              {% comment %}
+                Optional, loop through custom product line items if available
+
+                For more info on line item properties, visit:
+                  - http://docs.shopify.com/support/your-store/products/how-do-I-collect-additional-information-on-the-product-page-Like-for-a-monogram-engraving-or-customization
+              
+             
+              {% assign property_size = item.properties | size %}
+              {% if property_size > 0 %}
+                {% for p in item.properties %}
+                  {% unless p.last == blank %}
+                    {{ p.first }}:
+
+                    {% comment %}
+                      Check if there was an uploaded file associated
+                    {% endcomment %}
+                    {% if p.last contains '/uploads/' %}
+                      <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+                    {% else %}
+                      {{ p.last }}
+                    {% endif %}
+
+                    <br>
+                  {% endunless %}
+                {% endfor %}
+              {% endif %}
+
+              {% endcomment %}
+
+              
+              {% for free in item.properties %}
+              {% assign freeitemParent = free.last  %}
+              {% endfor %}
+              
+              
+           
+              
+            </td>
+           
+              {% assign  freeItem=all_products[settings.free_product].selected_or_first_available_variant.id %}
+
+          
+            {% if item.properties.free_product == 'true' %}
+            
+            
+            <td class="price_cart" data-label="{{ 'cart.label.price' | t }}">
+           {{ item.price | money }}
+              
+              <input type="button" name="update" class="btn--secondary mobileedit " value="{{ 'cart.general.edit' | t }}">
+            </td>
+            
+            
+            <td class="quantity_cart" data-label="{{ 'cart.label.quantity' | t }}">
+            <!--  <input type="number" readonly name="updates[]" class="text_cart_box free_{{ freeitemParent | first }}" id="updates_{{ item.id }}" value="{{ item.quantity }}" min='0'>
+           -->
+             <a data="{{ item.product.id }}" href="javascript:;"  class="cart__remove cardesktop">
+                <small>{{ 'cart.general.remove' | t }}</small>
+              </a> 
+              
+             <div class="cart_quantity not_click_btn">
+                   <!-- <a class="plus-minus"><i class='iconsh cart_minus'></i></a> -->
+                    <input name="updates[]" readonly class="text_cart_box free_{{ item.properties.free_product_parent_id }}" id="updates_{{ item.id }}" type="text" value="{{ item.quantity }}" min="0" size="3" />
+                   <!-- <a class="plus-minus" ><i class='iconsh cart_plus'></i></a> -->
+
+              </div>
+     
+       
+            </td> 
+            {% else %}
+             <td class="price_cart" data-label="{{ 'cart.label.price' | t }}">
+           {{ item.price | money }}
+              
+              <input type="button" name="update" class="btn--secondary mobileedit " value="{{ 'cart.general.edit' | t }}">
+            </td>
+            <td class="quantity_cart" data-label="{{ 'cart.label.quantity' | t }}">
+             
+                 
+              <a data="{{ item.product.id }}" href="javascript:;"  class="cart__remove cardesktop">
+                <small>{{ 'cart.general.remove' | t }}</small>
+              </a>
+              
+            <div class="cart_quantity">
+                <!-- <a class="plus-minus" onclick="TextBox_AddToIntValue_{{ item.id }}('updates_{{ item.id }}',-1)"><i class='iconsh cart_minus'></i></a> -->
+                    <input name="updates[]" class="text_cart_box offerUpdate" data="{{item.product.id }}" id="updates_{{ item.id }}" type="number" value="{{ item.quantity }}" min="0" size="3" itemref="{{item.properties.upsellcheckquantity}}"/>
+                   <!-- <a class="plus-minus" onclick="TextBox_AddToIntValue_{{ item.id }}('updates_{{ item.id }}',+1)"><i class='iconsh cart_plus'></i></a> -->
+<!-- <input type="number" name="updates[]" class="text_cart_box offerUpdate" id="updates_{{ item.id }}" value="{{ item.quantity }}" min="0"> -->
+              </div>
+              
+              <input type="submit" name="update" class="btn btn--small cart__update medium-up--hide" value="Update">
+              
+               
+           
+              
+              
+          <script>
+
+                  function TextBox_AddToIntValue_{{ item.id }}(targetId,addToValue)
+                  {
+                      
+                      //var input = document.getElementById('table_mobile').getElementById(targetId);
+                    
+                      var input =  $("#table_mobile").find("#"+targetId).val();
+                    
+                      var textInt = parseInt(input);
+                     
+                      if(isNaN(textInt))
+                      {
+                          textInt = 0;
+                      }
+                      
+                    
+                     var total_quantity= textInt + addToValue;
+                   //input.value=total_quantity;
+                    
+                   if(total_quantity<=0){
+                        $("#table_mobile").find("#"+targetId).val(0);
+                    } else{
+                        
+                      $("#table_mobile").find("#"+targetId).val(total_quantity);
+                    }
+                    
+                   
+                    
+                  }
+
+          </script> 
+            
+            </td>
+            
+            {% endif %}
+            
+         
+            
+           
+            
+            <td  class="total_cart" data-label="{{ 'cart.label.total' | t }}" class="text-right">
+              <span class="h5">
+    {{ item.line_price | money }}
+              </span>
+                
+             <a href="javascript:" data="{{ item.product.id }}" datas="{{ item.id }}"  class="cart__remove2 c{{ item.product.id }}" style="visibility: hidden;">
+           
+            
+           
+             </a>
+               
+            </td>
+            
+            {% comment %}
+            <td data-label="{{ 'cart.label.total' | t }}" class="text-right">
+              <span class="h3">
+                {{ item.line_price | money }}
+              </span>
+              
+            </td>
+            {% endcomment %}
+          </tr>
+
+        {% endfor %}
+      </tbody>
+    </table>
+  
+      <footer class="cart__footer">
+        <div class="grid">
+          
+            <div class="grid__item medium-up--one-half cart-note">
+            {% if section.settings.cart_notes_enable %}
+              <label for="CartSpecialInstructions" class="cart-note__label small--text-center">{{ 'cart.general.note' | t }}</label>
+              <textarea name="note" id="CartSpecialInstructions" class="cart-note__input">{{ cart.note }}</textarea>
+               
+               {% endif %}
+              
+              {% if section.settings.continuous_shopping_enable %}
+        <a href="/" class="continuous_shopping checkout_btn btn">Continue Shopping</a>
+        {% endif %}
+              
+         {%comment%}
+                <input type="submit" name="update" class="btn--secondary update-cart" value="{{ 'cart.general.update' | t }}">
+            {%endcomment%}  
+        
+              
+              
+            </div>
+         
+          <div class="grid__item text-right small--text-center1{% if section.settings.cart_notes_enable %} medium-up--one-half{% endif %}">
+            <div>
+               
+                            <div class="td_price">
+               <span class="cart__subtotal-title" >
+                {{ 'cart.general.was' | t }}
+              </span>
+              <span class="cart__subtotal">{{ total_saving_was | money }}</span>        
+              </div>
+              <div class="td_price">
+              <span class="cart__subtotal-title" >
+                {{ 'cart.general.yousave' | t }}
+              </span>
+              <span class="cart__subtotal">{{ total_saving | money }}</span>
+              </div>
+              <div class="td_price">
+              <span class="cart__subtotal-title">{{ 'cart.general.subtotal' | t }}</span>
+              <span class="cart__subtotal">{{ cart.total_price | money }}</span>
+              </div>
+              
+            </div>
+            {% if cart.total_discounts > 0 %}
+              <div class="cart__savings">
+                {{ 'cart.general.savings' | t }}
+                <span class="cart__savings-amount">{{ cart.total_discounts | money }}</span>
+              </div>
+            {% endif %}
+            <div class="cart__shipping">{{ 'cart.general.shipping_at_checkout' | t }}
+            
+              
+              
+              
+        
+        {% if section.settings.cart_enable %}
+        
+        
+          
+
+          <script>
+            
+            
+            var time_minute={{ section.settings.cart_timer_minute }}/60 ;
+         //   alert(time_minute);
+            var hours = Math.floor( time_minute / 60);          
+            var minutes = Math.floor(time_minute % 60);     
+
+            
+            $(function(){
+              $('#hm_timer120').countdowntimer({
+                hours : hours,
+                minutes :minutes,
+                seconds :00
+              });
+            });
+          </script>
+
+
+        <p class="timer_box"><span class="cart_text">{{ section.settings.cart_title }} </span>
+          <span id="hm_timer120" class="cart_time"></span></p>
+        
+        {% endif %}
+              
+              
+              
+            </div>
+           
+               
+     
+        <input type="submit" name="checkout" class="checkout_btn btn" value="{{ 'cart.general.checkout' | t }}">
+        
+            
+            
+            
+            {% if additional_checkout_buttons %}
+              <div class="additional-checkout-buttons">{{ content_for_additional_checkout_buttons }}</div>
+            {% endif %}
+          </div>
+        </div>
+      </footer>
+    </form>
+        
+         {% comment %}
+           end for mobile
+         {% endcomment %}
+  {% else %}
+    <div class="empty-page-content text-center">
+      <h1>{{ 'cart.general.title' | t }}</h1>
+      <p class="cart--empty-message">{{ 'cart.general.empty' | t }}</p>
+      <div class="cookie-message">
+        <p>{{ 'cart.general.cookies_required' | t }}</p>
+      </div>
+      <a href="/" class="btn btn--has-icon-after cart__continue-btn">{{ 'general.404.link' | t }}{% include 'icon-arrow-right' %}</a>
+    </div>
+  {% endif %}
+  
+  <p class="currency_info">
+        {{ shop.name }} process all orders in {{ shop.currency }}.
+        While the content of your cart is currently displayed in
+        <span class="selected-currency"></span>,
+        you will check out using {{ shop.currency }} at the most current exchange rate.
+      </p>
+  
+  
+  
+     
+    <div class="grid cart__row cart_boxS">
+    
+    
+    <div class="grid__item medium-up--one-half checkout-logos">
+    <div class="we-accept">
+       <p> {{ section.settings.cart_left_title }} </p>
+      
+      {% if section.settings.cart_left_image == blank %}
+      <img src="{{ 'pay_right.png' | asset_img_url: '500x100' }}">
+      {% else %}
+     <img src="{{ section.settings.cart_left_image | img_url: '500x100' }}">
+	  {% endif %}      
+        
+    </div>
+      </div> 
+      
+    <div class="grid__item medium-up--one-half text-right secure-shopping">
+      <p> {{ section.settings.cart_right_title }}  </p>
+      {% if section.settings.cart_right_image == blank %}
+      <img src="{{ 'pay_icn.jpg' | asset_img_url: '500x100' }}">
+       {% else %}
+      <img src="{{ section.settings.cart_right_image | img_url: '500x100' }}">
+      {% endif %}     
+      
+    </div>
+      
+    </div>
+
+   
+  
+</div>
+
+
+<script>
+	$(document).ready(function(e) {
+        $('input.btn--secondary.mobileedit').click(function(e) {
+           $(this).toggleClass('open');
+          if($(this).hasClass('open')){
+          $(this).val('cancel');
+          
+          }else{
+          $(this).val('edit');
+          }
+          
+           
+     
+            $(this).closest('.cart__row.table__section').toggleClass('show-rmov-bar');
+        });
+    });
+</script>
+
+
+
+<script>
+  $(document).ready(function(){
+    
+
+    
+    
+    $('.cart__remove').on('click', function(){
+         var parentid =$(this).attr("data");
+         $(".c"+parentid).trigger("click");
+    
+    });
+    
+    
+    $('.cart__remove2').on('click', function(){
+   var parentid =$(this).attr("data");
+ 
+   var parentid_vrt=$(this).attr("datas");
+      
+   var freeid=$(".free_"+parentid).attr("id"); 
+    
+    
+ // exit;
+       if (freeid)
+       {
+       
+        var spldprd=freeid.split("_");
+        var $parentid=Number(parentid_vrt);
+        var $childprd=Number(spldprd[1]);  
+         
+         
+        $("#updates_"+$parentid).val(0);  
+        $("#updates_"+$childprd).val(0); 
+        $(".free_"+parentid).val(0);   
+             
+       
+       } else{
+     
+       
+     var $parentid=Number(parentid_vrt); 
+    $("#updates_"+$parentid).val(0); 
+         
+       }
+      
+       $("#update_cart").submit();
+      
+  //jQuery.post('/cart/update.js', "updates["+$parentid+"]=0&updates["+$childprd+"]=0");       
+  
+    });
+
+
+    $(".offerUpdate, .plus-minus").on('keyup, mouseup, click', function(){
+      
+     
+ var currentData= $(this).val();
+      if(currentData == ""){
+          var parentid=$(this).parents('.cart_quantity').find(".text_cart_box").attr("data");
+        var quantity_upsell=$(this).parents('.cart_quantity').find(".text_cart_box").attr("itemref");
+         var currentData=$(this).parents('.cart_quantity').find(".text_cart_box").val();
+      }else{
+          var parentid=$(this).attr("data");
+         var quantity_upsell=$(this).attr("itemref");
+      }
+         
+                     
+     // var parentu_id=parentid.split("_");
+       var parentu_id=parentid;
+   
+      
+     
+      if(Number(currentData) < quantity_upsell) {
+
+      var freeid=$(".free_"+parentu_id).attr("id"); 
+        
+        if(freeid){       
+         //$("#"+freeid).val(0); 
+          $(".free_"+parentu_id).val(0);
+        }
+        
+      } else{
+       var freeid=$(".free_"+parentu_id).attr("id"); 
+        
+        if(freeid){       
+         $(".free_"+parentu_id).val(1);
+        }
+     
+      }
+      
+    });
+});
+</script>
+
+
+
+
+
+{% schema %}
+  {
+    "name": "Cart page",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "cart_notes_enable",
+        "label": "Enable cart notes",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "continuous_shopping_enable",
+        "label": "Enable continue"
+      },
+      {
+        "type": "checkbox",
+        "id": "up_checkout_button_enable",
+        "label": "Enable up checkout button"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_vendor_enable",
+        "label": "Show product vendor"
+      },
+      {
+        "type": "color",
+        "id": "checkout_bg_color",
+        "label": "Checkout",
+        "info": "checkout Button Color"
+      },
+      {
+        "type": "color",
+        "id": "checkout_bg_hover_color",
+        "label": "Checkout Button Hover Color"
+      },
+ 
+        {
+        "type": "select",
+        "id": "checkout_button_font_family",
+        "label": "Checkout button font family",
+        "options": [
+          {
+            "value": "Arial",
+            "label": "default theme font family"
+          },
+          {
+            "value": "Anton",
+            "label": "Anton"
+          },
+          {
+            "value": "Arimo",
+            "label": "Arimo"
+          },
+          {
+            "value": "Arvo",
+            "label": "Arvo"
+          },
+          {
+            "value": "Baloo Bhai",
+            "label": "Baloo Bhai"
+          },
+          {
+            "value": "Baloo Bhaina",
+            "label": "Baloo Bhaina"
+          },
+          {
+            "value": "Bitter",
+            "label": "Bitter"
+          },
+          {
+            "value": "Bree Serif",
+            "label": "Bree Serif"
+          },
+          {
+            "value": "Cabin",
+            "label": "Cabin"
+          },
+          {
+            "value": "Catamaran",
+            "label": "Catamaran"
+          },
+          {
+            "value": "David Libre",
+            "label": "David Libre"
+          },
+          {
+            "value": "Dosis",
+            "label": "Dosis"
+          },
+          {
+            "value": "Droid Sans",
+            "label": "Droid Sans"
+          },
+          {
+            "value": "Droid Serif",
+            "label": "Droid Serif"
+          },
+          {
+            "value": "Ek Mukta",
+            "label": "Ek Mukta"
+          },
+          {
+            "value": "Fjalla One",
+            "label": "Fjalla One"
+          },
+          {
+            "value": "Hind",
+            "label": "Hind"
+          },
+          {
+            "value": "Inconsolata",
+            "label": "Inconsolata"
+          },
+          {
+            "value": "Indie Flower",
+            "label": "Indie Flower"
+          },
+          {
+            "value": "Lato",
+            "label": "Lato"
+          },
+          {
+            "value": "Libre Baskerville",
+            "label": "Libre Baskerville"
+          },
+          {
+            "value": "Lobster",
+            "label": "Lobster"
+          },
+          {
+            "value": "Lora",
+            "label": "Lora"
+          },
+          {
+            "value": "Merriweather",
+            "label": "Merriweather"
+          },
+          {
+            "value": "Modak",
+            "label": "Modak"
+          },
+          {
+            "value": "Montserrat",
+            "label": "Montserrat"
+          },
+          {
+            "value": "Muli",
+            "label": "Muli"
+          },
+          {
+            "value": "Noto Sans",
+            "label": "Noto Sans"
+          },
+          {
+            "value": "Noto Serif",
+            "label": "Noto Serif"
+          },
+          {
+            "value": "Nunito",
+            "label": "Nunito"
+          },
+          {
+            "value": "Open Sans Condensed",
+            "label": "Open Sans Condensed"
+          },
+          {
+            "value": "Oswald",
+            "label": "Oswald"
+          },
+          {
+            "value": "Oxygen",
+            "label": "Oxygen"
+          },
+          {
+            "value": "PT Sans",
+            "label": "PT Sans"
+          },
+          {
+            "value": "PT Sans Narrow",
+            "label": "PT Sans Narrow"
+          },
+          {
+            "value": "PT Serif",
+            "label": "PT Serif"
+          },
+          {
+            "value": "Pavanam",
+            "label": "Pavanam"
+          },
+          {
+            "value": "Playfair Display",
+            "label": "Playfair Display"
+          },
+          {
+            "value": "Poppins",
+            "label": "Poppins"
+          },
+          {
+            "value": "Raleway",
+            "label": "Raleway"
+          },
+          {
+            "value": "Roboto",
+            "label": "Roboto"
+          },
+          {
+            "value": "Roboto Condensed",
+            "label": "Roboto Condensed"
+          },
+          {
+            "value": "Roboto Slab",
+            "label": "Roboto Slab"
+          },
+          {
+            "value": "Slabo",
+            "label": "Slabo"
+          },
+          {
+            "value": "Source Sans Pro",
+            "label": "Source Sans Pro"
+          },
+          {
+            "value": "Teko",
+            "label": "Teko"
+          },
+          {
+            "value": "Titillium Web",
+            "label": "Titillium Web"
+          },
+          {
+            "value": "Ubuntu",
+            "label": "Ubuntu"
+          },
+          {
+            "value": "Yanone Kaffeesatz",
+            "label": "Yanone Kaffeesatz"
+          },
+          {
+            "value": "Yatra One",
+            "label": "Yatra One"
+          }
+         ]
+        },
+         {
+        "type": "select",
+        "id": "checkout_button_font_size",
+        "label": "Checkout button font size",
+        "default": "26",
+        "options": [
+          {
+            "value": "12",
+            "label": "12"
+          },
+          {
+            "value": "13",
+            "label": "13"
+          },
+          {
+            "value": "14",
+            "label": "14"
+          },
+          {
+            "value": "15",
+            "label": "15"
+          },
+          {
+            "value": "16",
+            "label": "16"
+          },
+          {
+            "value": "17",
+            "label": "17"
+          },
+          {
+            "value": "18",
+            "label": "18"
+          },
+          {
+            "value": "19",
+            "label": "19"
+          },
+          {
+            "value": "20",
+            "label": "20"
+          },
+          {
+            "value": "21",
+            "label": "21"
+          },
+          {
+            "value": "22",
+            "label": "22"
+          },
+          {
+            "value": "23",
+            "label": "23"
+          },
+          {
+            "value": "24",
+            "label": "24"
+          },
+          {
+            "value": "25",
+            "label": "25"
+          },
+          {
+            "value": "26",
+            "label": "26"
+          },
+          {
+            "value": "28",
+            "label": "28"
+          },
+          {
+            "value": "29",
+            "label": "29"
+          },
+          {
+            "value": "30",
+            "label": "30"
+          },
+          {
+            "value": "31",
+            "label": "31"
+          },
+          {
+            "value": "32",
+            "label": "32"
+          },
+          {
+            "value": "33",
+            "label": "33"
+          },
+          {
+            "value": "34",
+            "label": "34"
+          },
+          {
+            "value": "35",
+            "label": "35"
+          },
+          {
+            "value": "36",
+            "label": "36"
+          },
+          {
+            "value": "37",
+            "label": "37"
+          },
+          {
+            "value": "38",
+            "label": "38"
+          },
+          {
+            "value": "39",
+            "label": "39"
+          },
+          {
+            "value": "40",
+            "label": "40"
+          },
+          {
+            "value": "41",
+            "label": "42"
+          },
+          {
+            "value": "42",
+            "label": "42"
+          },
+          {
+            "value": "43",
+            "label": "43"
+          },
+          {
+            "value": "44",
+            "label": "44"
+          },
+          {
+            "value": "45",
+            "label": "45"
+          },
+          {
+            "value": "46",
+            "label": "46"
+          },
+          {
+            "value": "47",
+            "label": "47"
+          },
+          {
+            "value": "48",
+            "label": "48"
+          },
+          {
+            "value": "49",
+            "label": "49"
+          },
+          {
+            "value": "50",
+            "label": "50"
+          },
+          {
+            "value": "51",
+            "label": "51"
+          },
+          {
+            "value": "52",
+            "label": "52"
+          },
+          {
+            "value": "53",
+            "label": "53"
+          },
+          {
+            "value": "54",
+            "label": "54"
+          },
+          {
+            "value": "55",
+            "label": "55"
+          },
+          {
+            "value": "56",
+            "label": "56"
+          },
+          {
+            "value": "57",
+            "label": "57"
+          },
+          {
+            "value": "58",
+            "label": "58"
+          },
+          {
+            "value": "59",
+            "label": "59"
+          },
+          {
+            "value": "60",
+            "label": "60"
+          }
+
+
+
+
+        ]
+      },
+
+      {
+        "type": "header",
+        "content": "Prices"
+      },
+ 
+        {
+        "type": "select",
+        "id": "price_fontfamily",
+        "label": " Price font family",
+        "options": [
+          {
+            "value": "Arial",
+            "label": "default theme font family"
+          },
+          {
+            "value": "Anton",
+            "label": "Anton"
+          },
+          {
+            "value": "Arimo",
+            "label": "Arimo"
+          },
+          {
+            "value": "Arvo",
+            "label": "Arvo"
+          },
+          {
+            "value": "Baloo Bhai",
+            "label": "Baloo Bhai"
+          },
+          {
+            "value": "Baloo Bhaina",
+            "label": "Baloo Bhaina"
+          },
+          {
+            "value": "Bitter",
+            "label": "Bitter"
+          },
+          {
+            "value": "Bree Serif",
+            "label": "Bree Serif"
+          },
+          {
+            "value": "Cabin",
+            "label": "Cabin"
+          },
+          {
+            "value": "Catamaran",
+            "label": "Catamaran"
+          },
+          {
+            "value": "David Libre",
+            "label": "David Libre"
+          },
+          {
+            "value": "Dosis",
+            "label": "Dosis"
+          },
+          {
+            "value": "Droid Sans",
+            "label": "Droid Sans"
+          },
+          {
+            "value": "Droid Serif",
+            "label": "Droid Serif"
+          },
+          {
+            "value": "Ek Mukta",
+            "label": "Ek Mukta"
+          },
+          {
+            "value": "Fjalla One",
+            "label": "Fjalla One"
+          },
+          {
+            "value": "Hind",
+            "label": "Hind"
+          },
+          {
+            "value": "Inconsolata",
+            "label": "Inconsolata"
+          },
+          {
+            "value": "Indie Flower",
+            "label": "Indie Flower"
+          },
+          {
+            "value": "Lato",
+            "label": "Lato"
+          },
+          {
+            "value": "Libre Baskerville",
+            "label": "Libre Baskerville"
+          },
+          {
+            "value": "Lobster",
+            "label": "Lobster"
+          },
+          {
+            "value": "Lora",
+            "label": "Lora"
+          },
+          {
+            "value": "Merriweather",
+            "label": "Merriweather"
+          },
+          {
+            "value": "Modak",
+            "label": "Modak"
+          },
+          {
+            "value": "Montserrat",
+            "label": "Montserrat"
+          },
+          {
+            "value": "Muli",
+            "label": "Muli"
+          },
+          {
+            "value": "Noto Sans",
+            "label": "Noto Sans"
+          },
+          {
+            "value": "Noto Serif",
+            "label": "Noto Serif"
+          },
+          {
+            "value": "Nunito",
+            "label": "Nunito"
+          },
+          {
+            "value": "Open Sans Condensed",
+            "label": "Open Sans Condensed"
+          },
+          {
+            "value": "Oswald",
+            "label": "Oswald"
+          },
+          {
+            "value": "Oxygen",
+            "label": "Oxygen"
+          },
+          {
+            "value": "PT Sans",
+            "label": "PT Sans"
+          },
+          {
+            "value": "PT Sans Narrow",
+            "label": "PT Sans Narrow"
+          },
+          {
+            "value": "PT Serif",
+            "label": "PT Serif"
+          },
+          {
+            "value": "Pavanam",
+            "label": "Pavanam"
+          },
+          {
+            "value": "Playfair Display",
+            "label": "Playfair Display"
+          },
+          {
+            "value": "Poppins",
+            "label": "Poppins"
+          },
+          {
+            "value": "Raleway",
+            "label": "Raleway"
+          },
+          {
+            "value": "Roboto",
+            "label": "Roboto"
+          },
+          {
+            "value": "Roboto Condensed",
+            "label": "Roboto Condensed"
+          },
+          {
+            "value": "Roboto Slab",
+            "label": "Roboto Slab"
+          },
+          {
+            "value": "Slabo",
+            "label": "Slabo"
+          },
+          {
+            "value": "Source Sans Pro",
+            "label": "Source Sans Pro"
+          },
+          {
+            "value": "Teko",
+            "label": "Teko"
+          },
+          {
+            "value": "Titillium Web",
+            "label": "Titillium Web"
+          },
+          {
+            "value": "Ubuntu",
+            "label": "Ubuntu"
+          },
+          {
+            "value": "Yanone Kaffeesatz",
+            "label": "Yanone Kaffeesatz"
+          },
+          {
+            "value": "Yatra One",
+            "label": "Yatra One"
+          }
+         ]
+        },
+         {
+        "type": "select",
+        "id": "price_font",
+        "label": "Price font size",
+        "default": "26",
+        "options": [
+          {
+            "value": "12",
+            "label": "12"
+          },
+          {
+            "value": "13",
+            "label": "13"
+          },
+          {
+            "value": "14",
+            "label": "14"
+          },
+          {
+            "value": "15",
+            "label": "15"
+          },
+          {
+            "value": "16",
+            "label": "16"
+          },
+          {
+            "value": "17",
+            "label": "17"
+          },
+          {
+            "value": "18",
+            "label": "18"
+          },
+          {
+            "value": "19",
+            "label": "19"
+          },
+          {
+            "value": "20",
+            "label": "20"
+          },
+          {
+            "value": "21",
+            "label": "21"
+          },
+          {
+            "value": "22",
+            "label": "22"
+          },
+          {
+            "value": "23",
+            "label": "23"
+          },
+          {
+            "value": "24",
+            "label": "24"
+          },
+          {
+            "value": "25",
+            "label": "25"
+          },
+          {
+            "value": "26",
+            "label": "26"
+          },
+          {
+            "value": "28",
+            "label": "28"
+          },
+          {
+            "value": "29",
+            "label": "29"
+          },
+          {
+            "value": "30",
+            "label": "30"
+          },
+          {
+            "value": "31",
+            "label": "31"
+          },
+          {
+            "value": "32",
+            "label": "32"
+          },
+          {
+            "value": "33",
+            "label": "33"
+          },
+          {
+            "value": "34",
+            "label": "34"
+          },
+          {
+            "value": "35",
+            "label": "35"
+          },
+          {
+            "value": "36",
+            "label": "36"
+          },
+          {
+            "value": "37",
+            "label": "37"
+          },
+          {
+            "value": "38",
+            "label": "38"
+          },
+          {
+            "value": "39",
+            "label": "39"
+          },
+          {
+            "value": "40",
+            "label": "40"
+          },
+          {
+            "value": "41",
+            "label": "42"
+          },
+          {
+            "value": "42",
+            "label": "42"
+          },
+          {
+            "value": "43",
+            "label": "43"
+          },
+          {
+            "value": "44",
+            "label": "44"
+          },
+          {
+            "value": "45",
+            "label": "45"
+          },
+          {
+            "value": "46",
+            "label": "46"
+          },
+          {
+            "value": "47",
+            "label": "47"
+          },
+          {
+            "value": "48",
+            "label": "48"
+          },
+          {
+            "value": "49",
+            "label": "49"
+          },
+          {
+            "value": "50",
+            "label": "50"
+          },
+          {
+            "value": "51",
+            "label": "51"
+          },
+          {
+            "value": "52",
+            "label": "52"
+          },
+          {
+            "value": "53",
+            "label": "53"
+          },
+          {
+            "value": "54",
+            "label": "54"
+          },
+          {
+            "value": "55",
+            "label": "55"
+          },
+          {
+            "value": "56",
+            "label": "56"
+          },
+          {
+            "value": "57",
+            "label": "57"
+          },
+          {
+            "value": "58",
+            "label": "58"
+          },
+          {
+            "value": "59",
+            "label": "59"
+          },
+          {
+            "value": "60",
+            "label": "60"
+          }
+        ]
+      },
+      {
+        "type": "color",
+        "id": "price_color",
+        "label": "Price color"
+      },
+	  {
+        "type": "checkbox",
+        "id": "was_price",
+        "label": "Enable Was Price",
+        "default": true
+      },
+ 	  {
+        "type": "checkbox",
+        "id": "saved_price",
+        "label": "Enable Saved Price",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Cart Page Timer"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_enable",
+        "label": "Cart Enable"
+      },
+      {
+        "type": "text",
+        "id": "cart_title",
+        "label": "Cart Title"
+      },
+      {
+        "type": "number",
+        "id": "cart_timer_minute",
+        "label": "Cart Timer Minute",
+        "info": "Example: 1500 second left = 25 minutes left"
+      },
+      {
+        "type": "color",
+        "id": "cart_timer_color",
+        "label": "Cart Timer Color"
+      },
+      {
+        "type": "header",
+        "content": "cart page images setting"
+      },
+      {
+        "type": "text",
+        "id": "cart_left_title",
+        "label": "Cart Left Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "cart_left_image",
+        "label": "Left image",
+        "info": "Maximum logo dimensions are 500px wide by 100px high. The uploaded file will be resized to fit within those constraints."
+      },
+      {
+        "type": "text",
+        "id": "cart_right_title",
+        "label": "Cart Right Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "cart_right_image",
+        "label": "Right image",
+        "info": "Maximum logo dimensions are 500px wide by 100px high. The uploaded file will be resized to fit within those constraints."
+      }
+
+    ]
+  }
+{% endschema %}

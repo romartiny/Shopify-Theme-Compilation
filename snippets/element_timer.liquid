@@ -1,0 +1,168 @@
+
+{% assign tg = 'show' %}
+
+{% if settings.disable_timer_use_tag %}
+
+{% for tag in product.tags %}
+  
+    {% if "no-timer" == tag %}
+     {% assign tg = 'hide' %}
+     {% endif %}
+
+{% endfor %}
+
+{% endif %}
+
+
+<div class="counter_box {{ tg }}">
+
+  {% if settings.enable_timer_stg_on == 'enable_timer_stg_on' %}
+        
+      {% if settings.enable_timer_stg == 'enable_timer_custom' %}          
+
+                 {% include 'product_count_24m' %}
+  
+                 <input type="hidden" class="timer_time" value="{{ settings.enable_timer_stg_custom }}" />
+                 <input type="hidden" id="stock_left_num" class="stock_left_num" value="{{ settings.timer_top_message_value_num }}" />
+                 <input type="hidden"  id="stock_final_num" value="{{ settings.timer_top_message_value_num }}" />
+
+  
+     {% elsif settings.enable_timer_stg == 'enable_timer_stg_2' %}
+  
+                 {% include 'product_count_2' %}
+   
+                <input type="hidden" class="timer_time" value="" />                 
+
+                <input type="hidden" id="stock_left_num" class="stock_left_num" value="{{ settings.timer_top_message_value_num }}" />
+                 <input type="hidden"  class="stock_final_num" value="{{ settings.timer_top_message_value_num }}" />
+
+     {% elsif settings.enable_timer_stg == 'enable_timer_custom_cookies' %}
+  
+         
+
+              {% if settings.enable_inventory_stock_number == "enable_stock_number_custom" %}
+
+                       {% assign leftNumber=settings.timer_top_message_value_num %}
+                       <input type="hidden" id="stock_left_num" class="cookies_Left_number stock_left_num" value="{{ leftNumber }}" />
+
+                {% elsif settings.enable_inventory_stock_number == "enable_stock_number_random" %}
+
+                       {% assign leftNumber='' %}
+                       <input type="hidden" id="stock_left_num" class="cookies_Left_number stock_left_num" value="" />
+
+                {% else %}
+                        <input type="hidden" id="stock_left_num" class="cookies_Left_number stock_left_num" value="{{ leftNumber }}" />
+
+                               {% if product.variants.first.inventory_quantity == 0 %}
+                              {% assign leftNumber = '1' %}
+                                {% else %}
+                              {% assign leftNumber = product.variants.first.inventory_quantity %}
+                                {% endif %}
+  
+                        
+
+                {% endif %}
+
+ 
+               <input type="hidden" class="timer_time_cookies timer_time" value="120" />                 
+               <input type="hidden"  class="total_stock_left_num" value="{{ leftNumber }}" />
+            <input type="hidden"  id="stock_final_num" value="{{ leftNumber }}" />
+
+
+              	 {% include 'set_cookies' %} 					
+                {% include 'product_count_down_custom_with_cookies' %}
+  
+                
+   
+    {% elsif settings.enable_timer_stg == 'enable_timer_custom_time_revise' %}
+  
+  
+               <input type="hidden" class="timer_time_reset_day timer_time" value="120" />                 
+               <input type="hidden"  class="total_stock_left_num" value="{{ settings.timer_top_message_value_num }}" />
+
+               <input type="hidden" id="stock_left_num" class="reset_day_Left_number stock_left_num" value="" />
+              <input type="hidden"  id="stock_final_num" value="{{ settings.timer_top_message_value_num }}" />
+
+
+                {% include 'reset_every_day' %} 						
+               {% include 'product_count_down_reset_every_day' %}
+
+    {% else %} 
+  
+                   <input type="hidden" id="myMinute" class="timer_time" value="" />
+                   <input type="hidden" id="myLeftnum" class="stock_left_num" value="" />
+                    <input type="hidden"  id="stock_final_num" value="" />
+
+
+              <script>
+
+                // for minute
+            var myMinute = ['10','15', '20', '25', '30', '45','60','90','120','180','300','420','600','720'];    
+
+            var randMinute = Math.floor(Math.random() * myMinute.length);
+
+            var currentMinute = myMinute[randMinute];
+            document.getElementById("myMinute").value =currentMinute*60;
+
+                       // for stock left number
+            var myLeftnum = ['3','4', '5', '6', '7', '8','9','10','11','12'];    
+
+            var randLeftnum = Math.floor(Math.random() * myLeftnum.length);
+
+            var currentLeftnum = myLeftnum[randLeftnum];
+                document.getElementById("myLeftnum").value=currentLeftnum;
+                document.getElementById("stock_final_num").value=currentLeftnum;
+
+                document.getElementById("counter_left").innerHTML= currentLeftnum;
+
+            </script>
+
+
+
+               {% include 'product_count_random' %}
+
+        {% endif %}
+      
+                
+ {% endif %}
+
+</div>
+
+
+ {% if section.settings.enable_progressbar_text %}
+  
+    <div id="progress_bar_text" class="progress-container items-count {{ tg }}">
+
+    <p class="progressbar_text">{{ section.settings.enable_progressbar_text_value }}</p>
+
+    </div>
+  
+  {% endif %} 
+
+     <!-- allow setting after timer-->
+       {% if section.settings.move_product_desc == 'move_product_desc_timer' %}
+       
+        {% if section.settings.product_description %}
+
+         <div class="product-description rte" itemprop="description">
+        {% if product.description contains '<!-- split -->' %}
+        {% assign mycontent = product.content | split:'<!-- split -->' %}
+        {{ mycontent[0] }}
+        {% else %}
+        {{ product.description }}
+        {% endif %}
+         </div>
+        
+        {% endif %}
+        
+      {% endif %}
+
+
+<style>
+
+  .product-description.rte, .rte{
+  float:left !important;
+  text-align: left;  
+  }
+</style>
+

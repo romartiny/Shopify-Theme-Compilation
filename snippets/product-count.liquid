@@ -1,0 +1,166 @@
+<!--prouct-count-->
+  
+{{ 'jquery.downCount.js' | asset_url | script_tag }}
+
+
+{% include section.settings.order_element1 %}
+{% include section.settings.order_element2 %}
+{% include section.settings.order_element3 %}
+
+<!-- enable random number-->
+
+{% if settings.enable_timer_stg == 'enable_timer_randomly' %}
+
+<script>
+
+
+        // for stock left number
+var myLeftnum = ['3','4', '5', '6', '7', '8','9','10','11','12'];    
+
+var randLeftnum = Math.floor(Math.random() * myLeftnum.length);
+
+var currentLeftnum = myLeftnum[randLeftnum];
+ 
+     document.getElementById("stock_left_num").value= currentLeftnum;
+     document.getElementById("stock_final_num").value= currentLeftnum;
+    document.getElementById("counter_left").innerHTML= currentLeftnum;
+ //alert(currentLeftnum);
+ 
+</script>
+
+{% endif %}
+
+
+<style>
+
+</style>          
+
+
+<!--
+for script only  cookies based invetory left number
+-->
+{% if settings.enable_inventory_stock_number == "enable_inventory_stock_number_with_not_desc"  %}
+ 
+
+<script type="text/javascript">
+
+ setTimeout(function() {
+   
+  
+  var second_db=$(".timer_time").val()-4;
+   var left_number=$(".stock_left_num").val();
+  
+   var counter_number=second_db/left_number;
+  
+  var counter_number_sec=counter_number*1000;
+
+  
+  var stop = 1;
+
+function decrease(){
+    var percent = Number($('#counter_left').text());
+    if(percent > stop){
+      $('#counter_left').text(percent);
+        var t = setTimeout(decrease,counter_number_sec);
+    }  else{
+   $('#counter_left').text(1);
+    }
+}
+setTimeout(decrease,counter_number_sec); // mini seconds
+
+
+  
+  function progress(timeleft, timetotal, $element) {
+    var progressBarWidth = timeleft * $element.width() / timetotal;
+   // for inventory out of 50
+    var totalleftnumber=left_number*2.7;
+    
+    
+    $element.find('div').animate({ width:totalleftnumber  }, 0).html(timeleft);
+    if(timeleft > counter_number) {
+        setTimeout(function() {
+            progress(timeleft - counter_number, timetotal, $element);
+        }, timetotal);
+    }
+};
+
+  
+progress(second_db, second_db, $('#progressBar'));
+  $("#progressBar").removeClass("progress-bar-success");
+   
+    }, 2000);
+  
+</script>
+{% else %}
+
+
+<script type="text/javascript">
+
+ setTimeout(function() {
+   
+  
+  var second_db=$(".timer_time").val()-4;
+   var left_number=$(".stock_left_num").val();
+   var final_number= $("#stock_final_num").val();
+ 
+   // for progress bar incrase size after refresh
+
+   /*
+   if(final_number !== ''){
+      var get_size_progress= (left_number * 30)/ final_number;
+    var get_size_progress = 100 - Number(get_size_progress);
+     var get_size_progress = get_size_progress+'%';
+ //   alert(get_size_progress);
+  $("#progressBar"). css("padding-right",get_size_progress);
+   } */
+   
+   var counter_number=second_db/left_number;
+  
+  var counter_number_sec=counter_number*1000;
+
+  var stop = 1;
+ 
+  function decrease(){
+      var percent = Number($('#counter_left').text());
+   
+    if(percent > stop){
+
+          $('#counter_left').text(--percent);
+          var t = setTimeout(decrease,counter_number_sec);
+    } else{
+   $('#counter_left').text(1);
+    }
+  }
+  setTimeout(decrease,counter_number_sec); // mini seconds
+
+
+  
+  function progress(timeleft, timetotal, $element) {
+    var progressBarWidth = timeleft * $element.width() / timetotal;
+    $element.find('div').animate({ width: progressBarWidth }, 100).html(timeleft);
+    if(timeleft > counter_number) {
+        setTimeout(function() {
+            progress(timeleft - counter_number, timetotal, $element);
+        }, counter_number_sec);
+    }
+};
+
+  
+progress(second_db, second_db, $('#progressBar'));
+  $("#progressBar").removeClass("progress-bar-success");
+   
+   
+   
+    }, 2000);
+  
+</script>
+
+
+{% endif %}
+
+<script type="text/javascript">
+  $(window).load(function(){    }); 
+    $(".progressBar_back").animate({
+      width: 137.5
+    }, 1000);
+</script>

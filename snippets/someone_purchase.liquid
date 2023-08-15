@@ -1,0 +1,119 @@
+{{ 'jquery-1.8.3.min.js' | asset_url | script_tag }}
+<script>
+		$(function() {
+ 
+$('#someone-purchased').show();
+       
+        /*  var poptime= "{{ settings.product_every_interval_time }}";
+    
+           var poptime= poptime*1000;
+          
+           var producttime= "{{ settings.new_product_every_interval_time }}";
+    
+           var producttime= producttime*1000;
+          
+          var sumtime=poptime+producttime-1000;
+          var sumtimenotminus=poptime+producttime;
+          var halftime=sumtime/2;
+           */  
+           var mytimeAgo = ['0', '1', '5', '10', '12', '14', '16', '18', '20', '25', '30', '35', '40','42','45', '50', '60'];  
+                
+             var randomlytimeAgo = Math.floor(Math.random() * mytimeAgo.length);
+
+                var currentmytimeAgo = mytimeAgo[randomlytimeAgo];
+
+
+                $(".timeAgo").text(currentmytimeAgo+" {{ 'cart.general.minutes_ago' | t}}"); 
+            
+          
+          $("#someone-purchased > div:gt(0)").hide();
+
+          
+			setInterval(function() {
+			  $('#someone-purchased > div:first')
+              .fadeOut(0)
+			    .next()
+			    .fadeIn(0)
+			    .end()
+			    .appendTo('#someone-purchased');
+              
+              
+              var mytimeAgo = ['0', '1', '5', '10', '12', '14', '16', '18', '20', '25', '30', '35', '40','42','45', '50', '60'];  
+             
+              var randomlytimeAgo = Math.floor(Math.random() * mytimeAgo.length);
+
+                var currentmytimeAgo = mytimeAgo[randomlytimeAgo];
+
+
+              
+                $(".timeAgo").text(currentmytimeAgo+" {{ 'cart.general.minutes_ago' | t}}"); 
+
+     
+			},  20000);
+          
+          
+          
+          	setInterval(function() {
+			             
+              
+          $('#someone-purchased').fadeIn(function() {    $(this).removeClass("fade-out"); }).delay(5000).fadeIn( function() {  $(this).addClass("fade-out"); }).delay({{settings.notification_popup_time }}); 
+
+              
+          // $('#someone-purchased').fadeIn(function() {    $(this).removeClass("fade-out"); }).delay(5000).fadeIn("slow", function() {  $(this).addClass("fade-out"); }).delay(5000); 
+                   
+          // $('#someone-purchased').addClass('fade-in',5000).removeClass('fade-out').addClass('fade-out',5000).removeClass('fade-in');
+        
+            }, 5000);
+          
+
+		});
+	</script>
+   
+
+{% comment %}
+{{ 'buttom_popup.scss.css' | asset_url | stylesheet_tag }}
+{% endcomment %}
+
+{% assign randomly_collection = collections[settings.popup_randomly_collection] %}
+
+
+
+{% if settings.popup_enable %}
+
+<div id="someone-purchased" class="customized fade-in" style="display:none;">
+ 
+  
+ {% capture index %}{{ 'now' | date: '%S' | times: randomly_collection.products.size | divided_by: 60 }}{% endcapture %}
+{% for product in randomly_collection.products offset:index limit:1000 %}
+ <div>
+  
+   {% if settings.enable_product_variant_image %}
+      
+        <img src="{% if product.first_available_variant.image %} {{ product.first_available_variant.image | img_url: '120x85' }} {% else %} {{ product | img_url: '120x85' }} {%endif%}" alt="{{ product.featured_image.alt | escape }}" >
+
+      {% else %}
+          <img src="{{ product | img_url: '120x85' }}" alt="{{ product.featured_image.alt | escape }}">
+    
+  {% endif %}
+   
+   
+         <p>
+
+        {{ settings.buttom_message }}
+        <a href="{{ product.url }}">
+         {{ product.title }}</a>
+           
+           {% if settings.popup_ago_custom_time %}
+          <small class="timeAgo"></small>
+           
+             {% endif %}
+        </p>
+  </div>
+
+    {% endfor %}
+    
+  </div>
+
+{% endif %}
+
+

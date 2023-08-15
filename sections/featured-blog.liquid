@@ -1,0 +1,448 @@
+<style>
+ #section-{{ section.id }} .article__title{
+    color:{{ section.settings.title_color }} !important;
+     font-size: {{ section.settings.heading_font_size }}px !important;
+ 
+  }
+  
+  #section-{{ section.id }} a.btn.btn--secondary{ background-color:{{ section.settings.btn_color }} !important;
+  
+  }
+  #section-{{ section.id }} .rte ,  #section-{{ section.id }} .article__author { 
+    color: {{ section.settings.text_color  }} !important; 
+  }
+  
+ #section-{{ section.id }} header.section-header.text-center h2 {
+    color: {{ section.settings.heading_color }} !important;     
+   font-size: {{ section.settings.heading_font_size }}px !important;
+}
+  
+  #section-{{ section.id }} .blog_link a {background-color:{{ section.settings.view_all_color }} !important; }
+  
+</style>
+
+<div id="section-{{ section.id }}" class="container wrapper featured-blog-page">
+  {% if section.settings.title != blank %}
+    <header class="section-header text-center">
+      <h2>{{ section.settings.title | escape }}</h2>
+    </header>
+  {% endif %}
+
+  {%- assign blog = blogs[section.settings.blog] -%}
+
+  {% unless blog.articles_count == 0 %}
+    <div class="grid grid--uniform grid--blog">
+      {% for article in blog.articles limit: section.settings.post_limit %}
+        <div class="grid__item medium-up--one-third">
+          {% if article.image %}
+            <a href="{{ article.url }}" class="article__grid-image tr">
+           {% comment %} 
+              {{ article | img_url: '345x', scale: 1 | img_tag: article.title }}
+             {% endcomment %}
+              <img class="lazy" width="340" height="200" data-original="{{ article | img_url: '345x', scale: 1}}" title="{{ article.title }}">
+            </a>
+          {% endif %}
+
+          <div class="article__grid-meta{% if article.image %} article__grid-meta--has-image{% endif %}">
+            <h2 class="h3 article__title">
+              <a href="{{ article.url }}">{{ article.title }}</a>
+            </h2>
+
+            {% if section.settings.blog_show_author %}
+              <span class="article__author">{{ 'blogs.article.by_author' | t: author: article.author }}</span>
+            {% endif %}
+
+            {% if section.settings.blog_show_date %}
+              <span class="article__date">
+                {{ article.published_at | time_tag: format: 'month_day_year' }}
+              </span>
+            {% endif %}
+
+            <div class="rte article__grid-excerpt">
+              {% if article.excerpt.size > 0 %}
+                {{ article.excerpt }}
+              {% else %}
+                {{ article.content | strip_html | truncate: 150 }}
+              {% endif %}
+            </div>
+
+            {% if article.tags.size > 0 %}
+              <div class="article__tags rte">
+                {% for tag in article.tags %}
+                  <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="article__grid-tag">{{ tag }}</a>
+                {% endfor %}
+              </div>
+             
+              {% else %}
+              <div class="article__tags rte">
+                <a class='none_bottom_border'>&nbsp;</a>
+              </div>
+            
+            {% endif %}
+
+            <ul class="list--inline article__meta-buttons">
+              <li>
+                <a href="{{ article.url }}" class="btn btn--secondary btn--small">
+                  {{ 'blogs.article.read_more' | t }}
+                </a>
+              </li>
+
+              {% if blog.comments_enabled? and article.comments_count > 0 %}
+                <li>
+                  <a href="{{ article.url }}#comments" class="btn btn--small btn--link">
+                    {{ 'blogs.comments.comments_with_count' | t: count: article.comments_count }}
+                  </a>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="grid grid--uniform grid--blog">
+      {% for i in (1..section.settings.post_limit) %}
+        <div class="grid__item medium-up--one-third">
+          <div class="article__grid-meta">
+            <h2 class="h3 article__title">
+              <a href="#">{{ 'homepage.onboarding.blog_title' | t }}</a>
+            </h2>
+
+            {% if section.settings.blog_show_author %}
+              <span class="article__author">{{ 'homepage.onboarding.blog_author' | t }}</span>
+            {% endif %}
+
+            <div class="rte article__grid-excerpt">
+              {{ 'homepage.onboarding.blog_excerpt' | t }}
+            </div>
+
+            <ul class="list--inline article__meta-buttons">
+              <li>
+                <a href="{{ article.url }}" class="btn btn--secondary btn--small">
+                  {{ 'blogs.article.read_more' | t }}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endunless %}
+
+  {% if section.settings.show_view_all %}
+    <hr class="hr--invisible"></hr>
+    <div class="text-center blog_link">
+      <a href="{{ blog.url }}" class="btn">
+        {{ 'blogs.article.view_all' | t }}
+      </a>
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+  {
+    "name": "Blog posts",
+    "class": "index-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Blog posts"
+      }, 
+        {
+         "type": "color",
+         "id": "heading_color",
+          "label": "Heading color",
+           "default": "#000"
+       },
+        {
+        "type": "select",
+        "id": "heading_font_size",
+        "label": "Heading font size",
+        "default": "44",
+        "options": [
+          {
+            "value": "12",
+            "label": "12"
+          },
+          {
+            "value": "13",
+            "label": "13"
+          },
+          {
+            "value": "14",
+            "label": "14"
+          },
+          {
+            "value": "15",
+            "label": "15"
+          },
+          {
+            "value": "16",
+            "label": "16"
+          },
+          {
+            "value": "17",
+            "label": "17"
+          },
+          {
+            "value": "18",
+            "label": "18"
+          },
+          {
+            "value": "19",
+            "label": "19"
+          },
+          {
+            "value": "20",
+            "label": "20"
+          },
+          {
+            "value": "21",
+            "label": "21"
+          },
+          {
+            "value": "22",
+            "label": "22"
+          },
+          {
+            "value": "23",
+            "label": "23"
+          },
+          {
+            "value": "24",
+            "label": "24"
+          },
+          {
+            "value": "25",
+            "label": "25"
+          },
+          {
+            "value": "26",
+            "label": "26"
+          },
+          {
+            "value": "28",
+            "label": "28"
+          },
+          {
+            "value": "29",
+            "label": "29"
+          },
+          {
+            "value": "30",
+            "label": "30"
+          } ,     
+          {
+           "value": "31",
+           "label": "31"
+         },
+         {
+           "value": "32",
+           "label": "32"
+         },
+         {
+           "value": "33",
+           "label": "33"
+         },
+         {
+           "value": "34",
+           "label": "34"
+         },
+         {
+           "value": "35",
+           "label": "35"
+         },
+         {
+           "value": "36",
+           "label": "36"
+         },
+         {
+           "value": "37",
+           "label": "37"
+         },
+         {
+           "value": "38",
+           "label": "38"
+         },
+         {
+           "value": "39",
+           "label": "39"
+         },
+         {
+           "value": "40",
+           "label": "40"
+         },
+         {
+           "value": "41",
+           "label": "42"
+         },
+         {
+           "value": "42",
+           "label": "42"
+         },
+         {
+           "value": "43",
+           "label": "43"
+         },
+         {
+           "value": "44",
+           "label": "44"
+         },
+         {
+           "value": "45",
+           "label": "45"
+         },
+         {
+           "value": "46",
+           "label": "46"
+         },
+         {
+           "value": "47",
+           "label": "47"
+         },
+         {
+           "value": "48",
+           "label": "48"
+         },
+         {
+           "value": "49",
+           "label": "49"
+         },
+         {
+           "value": "50",
+           "label": "50"
+         },
+         {
+           "value": "51",
+           "label": "51"
+         },
+         {
+           "value": "52",
+           "label": "52"
+         },
+         {
+           "value": "53",
+           "label": "53"
+         },
+         {
+           "value": "54",
+           "label": "54"
+         },
+         {
+           "value": "55",
+           "label": "55"
+         },
+         {
+           "value": "56",
+           "label": "56"
+         },
+         {
+           "value": "57",
+           "label": "57"
+         },
+         {
+           "value": "58",
+           "label": "58"
+         },
+         {
+           "value": "59",
+           "label": "59"
+         },
+         {
+           "value": "60",
+           "label": "60"
+         }
+
+        ]
+      },
+      {
+        "id": "blog",
+        "type": "blog",
+        "label": "Blog"
+      },
+ 
+      {
+        "type": "select",
+        "id": "post_limit",
+        "label": "Posts",
+        "default": "3",
+        "options": [
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "6",
+            "label": "6"
+          },
+          {
+            "value": "9",
+            "label": "9"
+          },
+          {
+            "value": "12",
+            "label": "12"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "blog_show_author",
+        "label": "Show author",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "blog_show_date",
+        "label": "Show date",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_view_all",
+        "label": "Show 'View all' button",
+        "default": false
+      },
+       {
+        "type": "header",
+         "content": "Color setting"
+       },
+       {
+         "type": "color",
+         "id": "title_color",
+          "label": "Title color",
+           "default": "#000"
+       },
+       {
+         "type": "color",
+          "id": "text_color",
+          "label": "text color",
+          "default" :"#000"
+       },
+       {
+       "type": "color",
+       "id": "btn_color",
+       "label": "Read more button color",
+       "default": "#2ACB13"
+     },
+       {
+       "type": "color",
+       "id": "view_all_color",
+       "label": "View all button color",
+       "default": "#2ACB13"
+     }
+    ],
+    "presets": [
+      {
+        "name": "Blog posts",
+        "category": "Blog",
+        "settings": {
+          "blog": "News",
+          "post_limit": "3"
+        }
+      }
+    ]
+  }
+{% endschema %}

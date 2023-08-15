@@ -1,0 +1,526 @@
+<style>
+   nav.mobile-nav-wrapper{   
+    position: fixed !important;
+    z-index: 9999 !important;
+    top: -122px;
+    height: 100%;
+    background: {{ settings.mob_menue_bg }} !important;
+  }
+
+  .mobile-nav__dropdown {
+     position: inherit;
+    z-index: 999999;
+    width: 100%;
+    display: none;
+}
+
+  
+form.mobilesearch {
+    position: relative;
+}
+
+  button.search-header__submit.search__submit.btn--link {
+    right: 10px !important;
+    float: right !important;
+    left: inherit;
+    background: none !important;
+}
+  .search-header__submit svg.icon.icon-search {
+    width: 30px !important;
+    height: 30px;
+    
+    top: 10px;
+    left: -15px;
+}
+  
+.mobile-nav>.mobile-nav__item a {
+    text-align: center;
+}  
+  
+ .mobile-nav__link{    
+    text-align: center;
+} 
+
+  
+.mob_boxSerch {
+    background-color: #0c0c0c !important;
+    padding: 15px 15px 15px;
+}  
+  
+ form.mobilesearch {
+    position: relative;
+    border: 1px solid {{  settings.mob_menue_font }} !important;
+} 
+
+  .mobile-nav__dropdown h3 {
+    text-align: center;
+    padding-left: 0px;
+        padding-top: 10px;
+    padding-bottom: 10px;
+}
+    
+
+  
+html body input.search-header__input.search__input{
+color:{{  settings.mob_menue_font }} !important;
+} 
+  
+ul.super.mobile li a {
+    background: none !important;
+} 
+  .mobile-nav__dropdown h3 {
+    opacity: 0.96;
+}
+  
+  .mobile-nav>.mobile-nav__item {  
+    border-bottom: 1px solid {{  settings.mob_menue_inner_font_bg }}!important;
+}
+  
+  .mobile-nav li {
+  
+    border-bottom: 1px solid {{ settings.mob_menue_bg }}!important;
+}
+
+  
+  
+html body input.search-header__input.search__input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color:{{ settings.mob_menue_font }} !important;
+} 
+html body input.search-header__input.search__input::-moz-placeholder { /* Firefox 19+ */
+  color:{{ settings.mob_menue_font }} !important;
+}
+html body input.search-header__input.search__input:-ms-input-placeholder { /* IE 10+ */
+  color:{{ settings.mob_menue_font }} !important;
+}
+html body input.search-header__input.search__input:-moz-placeholder { /* Firefox 18- */
+  color:{{ settings.mob_menue_font }} !important;
+}   
+  
+ ul.mobile-nav__dropdown.mobile_mega {
+    max-height: 300px !important;
+    overflow: auto;
+} 
+  
+ul.super.mobile a {
+    padding-left: 15px;
+}  
+  
+.mobile-nav__sublist-link:not(.mobile-nav__sublist-header) {
+    padding-left: 15px;
+}  
+  
+.mobile-nav__link {
+    text-align: center;
+    text-transform: capitalize;
+}  
+  
+ .btn--link:hover, .btn--link:focus {
+    opacity: 0.96;
+} 
+  
+
+  
+  
+  
+ .mobile-nav-wrapper ul li a {
+    color:{{  settings.mob_menue_font }} !important;
+   background-color: {{ settings.mob_menue_bg }} !important;
+}
+  .mob_boxSerch,  .mobile-nav-wrapper ul li button {
+    color:{{  settings.mob_menue_font }} !important;
+      background-color: {{ settings.mob_menue_bg }}!important; 
+}
+ ul.super.mobile li a, .mobile-nav__dropdown h3, ul.mobile-nav__dropdown li.mobile-nav__item, .mobile-nav-wrapper ul li a.menu_img_mobile, .mobile-nav-wrapper ul li a.mobile-nav__sublist-link {
+    color:{{  settings.mob_menue_inner_font }} !important;
+    background-color: {{  settings.mob_menue_inner_font_bg }} !important;
+
+}
+  
+  header.mobile_head nav a, .mobile-nav__link, .mobile-nav__sublist-link, ul.super.mobile li a, .mobile_mega h3 {
+      font-size:14px !important;
+   font-family:{{ section.settings.mobile_nav_font_family }} !important;
+}
+  
+  .mng-srch a i.fa{
+        font-size:14px !important;
+
+  }
+  
+.mobile_currency .currency-picker, .mobilelogin  span , .mobilelogin .fa-user{
+
+  color:{{section.settings.hamburger_color_set}}!important;
+}
+   i.fa.fa-chevron-down.menu_arrow_mobile{
+     color:{{ section.settings.hamburger_color_set }} !important;
+  } 
+  svg.icon.icon-close, .icon.icon-hamburger{
+    color: {{section.settings.hamburger_color_set }}!important;
+  } 
+  
+  .fa.fa-shopping-cart, .mng-srch.mobile_cart_s a.mobilecart{
+     color:{{section.settings.cartcount_mobile_color}}!important;
+     background:{{section.settings.cartcount_bg_mobile_color}}!important;
+  }
+.mobilelogog img{
+  width:{{section.settings.mobile_logo_size}}!important;
+}
+  .mng-srch{
+       background-color:{{section.settings.Top_header_background_mobile}}!important; 
+  }
+  .mob_clr
+  {
+       background-color:{{section.settings.header_background_mobile}}!important; 
+  }
+  
+  
+.mobile_head .icon__fallback-text, .mobile_head .site-header a, .mobile_head .currency-picker, .mobile_cart {
+  Font-family:{{ section.settings.mobile_heading_font_family }} !important;
+  font-size: 14px !important;
+}
+
+ .mobile_cart#CartCount, .mng-srch.mobile_currency.mobile_currency_new a i.fa{
+      font-size: 14px !important;
+  }
+  
+ 
+  
+
+</style>
+
+
+<header class="mobile_head medium-up--hide site-header{% if section.settings.align_logo == 'left' %} border-bottom logo--left{% else %} logo--center{% endif %}" role="banner">
+  
+  
+  
+  
+<nav class="mobile-nav-wrapper medium-up--hide" role="navigation">
+  <ul id="MobileNav" class="mobile-nav">
+    
+    <li class="mobile-nav__item{% unless forloop.last %} border-bottom{% endunless %}">
+      <div class="mob_boxSerch">
+          <form action="/search" method="get" class="mobilesearch" role="search">
+            <input class="search-header__input search__input"
+            type="search"
+            name="q"
+            placeholder="{{ 'general.search.placeholder' | t }}"
+            aria-label="{{ 'general.search.placeholder' | t }}">
+            <button class="search-header__submit search__submit btn--link" type="submit">
+            {% include 'icon-search' %}
+            <span class="icon__fallback-text">{{ 'general.search.submit' | t }}</span>
+            </button>
+           </form>
+       </div>
+    
+    </li>
+    
+    
+    
+         {% for link in linklists[settings.menu_primary].links %}
+        {%- assign child_list_handle = link.title | handleize -%}
+         {% assign item = link.title | downcase %}
+        <li class="mobile-nav__item{% unless forloop.last %} border-bottom{% endunless %}">
+          {% if linklists[child_list_handle].links != blank %}
+            <button type="button" class="btn--link js-toggle-submenu mobile-nav__link" data-target="{{ child_list_handle }}" data-level="1">
+              {{ link.title }}
+              <div class="mobile-nav__icon">
+                {% include 'icon-chevron-right' %}
+                <span class="icon__fallback-text">{{ 'layout.navigation.expand' | t }}</span>
+              </div>
+            </button>
+            <ul class="mobile-nav__dropdown" data-parent="{{ child_list_handle }}" data-level="2">
+            {% comment %}
+              <li class="mobile-nav__item border-bottom">
+                <div class="mobile-nav__table">
+                  <div class="mobile-nav__table-cell mobile-nav__return">
+                    <button class="btn--link js-toggle-submenu mobile-nav__return-btn" type="button">
+                      {% include 'icon-chevron-left' %}
+                      <span class="icon__fallback-text">{{ 'layout.navigation.collapse' | t }}</span>
+                    </button>
+                  </div>
+                  <a href="{{ link.url }}" class="mobile-nav__sublist-link mobile-nav__sublist-header">
+              {{ link.title }}
+                  </a>
+                </div>
+              </li> {% endcomment %}
+
+              {% for childlink in linklists[child_list_handle].links %}
+              
+                 <li class="mobile-nav__item{% unless forloop.last %} border-bottom{% endunless %}">
+                  <a href="{{ childlink.url }}" class="mobile-nav__sublist-link">
+                    {{ childlink.title | escape }}
+                  </a>
+                </li>
+              {% endfor %}
+
+            </ul>
+          {% else %}
+          
+          
+          
+          
+          
+          
+         
+          {% capture megamenu_1 %}megamenu_1_parent{% endcapture %}
+          {% capture megamenu_2 %}megamenu_2_parent{% endcapture %}
+          {% capture megamenu_3 %}megamenu_3_parent{% endcapture %}
+
+                {% if settings[megamenu_1] == item or settings[megamenu_2] == item  or settings[megamenu_3] == item %}
+                    {% for i in (1..3) %}
+                        {%capture megamenu%}megamenu_{{i}}_parent{%endcapture%}
+                       
+                         
+                              {% if settings[megamenu] == item %}
+                              
+                                <button type="button" class="btn--link js-toggle-submenu mobile-nav__link" data-target="{{ child_list_handle }}" data-level="1">
+                              {{ link.title }}
+                              <div class="mobile-nav__icon">
+                                {% include 'icon-chevron-right' %}
+                                <span class="icon__fallback-text">{{ 'layout.navigation.expand' | t }}</span>
+                              </div>
+                            </button>
+                              
+                              
+                            <ul class="mobile-nav__dropdown mobile_mega" data-parent="{{ child_list_handle }}" data-level="2">
+                             
+
+                            <div class="grid1 ">
+                                        {% for j in (1..4) %}
+                                        {% capture mega_title %}megamenu_{{ i }}_column_{{ j }}_title{% endcapture %}
+                                        {% capture mega_col %}megamenu_{{ i }}_column_{{ j }}_menu{% endcapture %}
+
+                                            <div class="grid__item1 large--one-quarter">
+                                             
+                                              
+                                              <h3>{{ settings[mega_title] }}</h3>
+                                              <ul class="super mobile">
+                                                    {% for link1 in linklists[settings[mega_col]].links %}
+                                                    <li><a href="{{ link1.url }}">{{ link1.title }}</a></li>
+                                                    {% endfor %}
+                                                  </ul>
+                                            </div>
+                                          {% endfor %}
+                               {% capture photo_enable %}megamenu_{{ i }}_column_5_photo_enable{% endcapture %}
+                              {% if photo_enable %} 
+                                            <div class="grid__item1 large--one-half">
+                                              {% capture mega_title %}megamenu_{{ i }}_column_5_title{% endcapture %}
+                                              {% capture _image1 %}megamenu_{{ i }}_image_1.jpg{% endcapture %}
+                                              {% capture _url %}megamenu_{{ i }}_image_1_url{% endcapture %}
+                                              {% if settings[mega_title] !="" %}
+                                              <h3>{{ settings[mega_title] }}</h3>
+                                              {% endif %}
+                                              {% if settings[_url] != blank %}
+                                                <a class="menu_img_mobile" href="{{ settings[_url] }}">
+                                              {% endif %}
+                                                <img src="{{ _image1 | asset_url }}" alt="menu">
+                                              {% if settings[_url] != blank %}
+                                                </a>
+                                              {% endif %}
+                                            </div>
+                                   {% endif %}
+                              
+                                      </div>
+
+                            </ul>
+                              
+                              
+                              
+                           
+                        {% endif %}
+                              
+                    {% endfor %}
+                {% else %}
+          
+          
+          
+          
+           <a href="{{ link.url }}" class="mobile-nav__link">{{ link.title }}</a>
+    
+         {% endif %}   
+          
+          
+          
+          
+          
+          
+          
+      
+ 
+    {% endif %}
+    </li>
+         
+      {% endfor %}
+    </ul> 
+ 
+    
+
+    
+</nav>
+ 
+
+  
+  
+  
+  
+  <div class="grid grid--no-gutters grid--table mobile_div_hidden_extra">
+      {% if section.settings.align_logo == 'center' %}
+        <div class="grid__item small--hide medium-up--one-quarter">
+          <div class="site-header__search">
+            {% include 'search-form' %}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if section.settings.align_logo == 'center' %}
+        {%- assign logo_classes = 'medium--one-third large-up--one-quarter logo-align--center' -%}
+      {% else %}
+        {%- assign logo_classes = 'medium-up--one-quarter logo-align--left' -%}
+      {% endif %}
+
+
+
+     
+        <div class="grid grid--no-gutters grid--table mobile_head">
+          <div class="grid">
+            <div class="grid__item grid--full">
+              <div class="site-nav--mobile mng-srch">
+              {% unless linklists[section.settings.main_linklist] == blank %}
+            <button type="button" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open">
+              {% include 'icon-hamburger' %}
+              {% include 'icon-close' %}
+              <span class="icon__fallback-text">{{ 'layout.navigation.toggle' | t }}</span>
+            </button>
+          {% endunless %}
+              </div>
+              <div class="mng-srch mobile_currency remove-mob">
+                {% if settings.show_multiple_currencies %}
+                
+                     <select class="currency-picker" name="currencies" style="display: inline; width: auto; vertical-align: inherit;">
+            {% assign codes = 'USD,EUR,GBP,CAD,ARS,AUD,BBD,BDT,BSD,BHD,BRL,BOB,BND,BGN,ILS,MMK,KYD,CLP,CNY,COP,CRC,HRK,CZK,DKK,DOP,XCD,EGP,XPF,FJD,GHS,GTQ,GYD,GEL,HKD,HUF,ISK,INR,IDR,NIS,JMD,JPY,JOD,KZT,KES,KWD,LVL,LTL,MXN,MYR,MUR,MDL,MAD,MNT,MZN,ANG,NZD,NGN,NOK,OMR,PKR,PYG,PEN,PHP,PLN,QAR,RON,RUB,SAR,RSD,SCR,SGD,SYP,ZAR,KRW,LKR,SEK,CHF,TWD,THB,TZS,TTD,TRY,UAH,AED,UYU,VEB,VND,ZMK' | split: ',' %}
+            {% assign supported_codes = settings.supported_currencies | split: ' ' %}
+            <option value="{{ shop.currency }}" selected="selected">{{ shop.currency }}</option>
+            {% for code in supported_codes %}
+              {% if code != shop.currency and codes contains code %}
+              <option value="{{ code }}">{{ code }}</option>
+              {% endif %}
+            {% endfor %}
+            </select>
+                 <i class="fa fa-chevron-down menu_arrow_mobile" aria-hidden="true"></i>
+                {% else %}
+                
+              <a href="/account/login">
+                <i class="fa fa-user re-mov"></i>
+               
+               </a>
+                {% endif %}
+            </div>
+              
+              <div class="mng-srch mobile_currency mobile_currency_new">
+               
+          {% if shop.customer_accounts_enabled %}
+            {% if customer %}
+              <a href="/account" class="site-header__account mobilelogin">
+                <i class="fa fa-user"></i>
+                <span class="icon__fallback-text">{{ 'layout.customer.account' | t }}</span>
+              </a>
+            {% else %}
+              <a href="/account/login" class="site-header__account mobilelogin">
+                <i class="fa fa-user"></i>
+                <span class="icon__fallback-text">{{ 'layout.customer.log_in' | t }}</span>
+              </a> 
+            {% endif %}
+          {% endif %}              
+                       
+                
+                
+    
+                
+              </div>              
+           
+  
+              
+            <div class="mng-srch mobile_cart_s">
+ 
+              <div class="site-header_cart carcustommobile "> 
+              
+              <a href="/cart" class="cart-page-link site-header__cart-toggle js-drawer-open-right mobilecart" aria-controls="CartDrawer" aria-expanded="false">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <span id="CartCount" class="mobile_cart  header-bar__cart-count{% if cart.item_count == 0 %} hidden-count{% endif %}  commom_colord">{{ cart.item_count }}  </span> 
+                <span class="items_manage mobile_cart cart-count header-bar__cart-count{% if cart.item_count == 0 %} hidden-count{% endif %}  commom_colord">{% if cart.item_count <= 1 %} {{ 'layout.cart.items_count.one' | t: count: cart.item_count }} {% else %}   {{ 'layout.cart.items_count.other' | t: count: cart.item_count }} {% endif %}</span>
+              
+              </a>
+                
+                 
+                
+              </div>  
+              
+              
+              
+              
+            </div>  
+          
+             {%comment%}
+            <div class="mng-srch">
+               <button type="button" class="btn--link site-header__search-toggle js-drawer-open-top medium-up--hide">
+            {% include 'icon-search' %}
+            <span class="icon__fallback-text">{{ 'layout.navigation.search' | t }}</span>
+          </button>
+            </div>
+               {%endcomment%}
+            </div>
+            
+            
+            <div class="grid__item one-half text-right for-nav-menu">
+              <div class="site-nav--mobile">
+                <a href="/cart" class="js-drawer-open-right" aria-controls="CartDrawer" aria-expanded="false">
+                  <span class="icon-fallback-text">
+                    <span class="icon icon-cart" aria-hidden="true"></span>
+                    <span class="fallback-text">{{ 'layout.cart.title' | t }}</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+     
+      
+      
+
+      
+      
+     
+  </div>
+  
+  
+  
+  </header>
+
+<div class="medium-up--hide mob_clr">
+          <div class="grid grid--no-gutters grid--table">
+        {% comment %}
+          Use the uploaded logo from theme settings if enabled.
+          Site name gets precedence with H1 tag on homepage, div on other pages.
+        {% endcomment %}
+        {% if template.name == 'index' %}
+          <h1 class="h2 site-header__logo" itemscope itemtype="http://schema.org/Organization">
+        {% else %}
+          <div class="h2 site-header__logo" itemscope itemtype="http://schema.org/Organization">
+        {% endif %}
+          {% if section.settings.logo %}
+            <a href="/" itemprop="url" class="mobilelogog site-header__logo-image{% if section.settings.align_logo == 'center' %} site-header__logo-image--centered{% endif %}">
+              {% capture image_size %}{{ section.settings.logo_max_width | escape }}x{% endcapture %}
+              <img src="{{ section.settings.logo_mobile | img_url: image_size }}"
+                   srcset="{{ section.settings.logo_mobile | img_url: image_size }} 1x, {{ section.settings.logo_mobile | img_url: image_size, scale: 2 }} 2x"
+                   alt="{{ section.settings.logo_mobile.alt | default: shop.name }}"
+                   itemprop="logo">
+            </a>
+          {% else %}
+            <a class="site-header__logo-link" href="/" itemprop="url">{{ shop.name }}</a>
+          {% endif %}
+        {% if template.name == 'index' %}
+          </h1>
+        {% else %}
+          </div>
+        {% endif %}
+      </div> 
+</div> 

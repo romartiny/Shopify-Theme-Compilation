@@ -1,0 +1,1922 @@
+<div data-section-id="{{ section.id }}"  data-section-type="slideshow-section">
+
+  {% if section.blocks.size > 0 %}
+    <div class="slideshow-wrapper">
+      <button type="button" class="visually-hidden slideshow__pause" data-id="{{ section.id }}" aria-live="polite">
+        <span class="slideshow__pause-stop">
+          {% include 'icon-pause' %}
+          <span class="icon__fallback-text">{{ 'sections.slideshow.pause_slideshow' | t }}</span>
+        </span>
+        <span class="slideshow__pause-play">
+          {% include 'icon-play' %}
+          <span class="icon__fallback-text">{{ 'sections.slideshow.play_slideshow' | t }}</span>
+        </span>
+      </button>
+
+      <div class=" {% if section.settings.slideshow_height != "full" %}slideshow slideshow--{{ section.settings.slideshow_height }}{% endif %}" id="Slideshow-{{ section.id }}" data-autoplay="{{ section.settings.autoplay }}" data-speed="{{ section.settings.autoplay_speed }}">
+        {% for block in section.blocks %}
+          {%- assign is_background_video = false -%}
+          {% if block.type == 'video' %}
+            {% if block.settings.video_type == 'background' or block.settings.video_type =='background-chrome' %}
+              {%- assign is_background_video = true -%}
+            {% endif %}
+          {% endif %}
+
+          <div class="slideshow__slide slideshow__slide--{{ block.id }}{% if is_background_video %} slideshow__slide--background-video{% endif %}" {{ block.shopify_attributes }}>
+            {% if block.settings.link != blank %}
+              <a href="{{ block.settings.link }}" class="slideshow__link">
+            {% endif %}
+
+            {% if block.type == 'video' %}
+              {% if block.settings.video_id != blank %}
+                <div class="video-loader"></div>
+              {% endif %}
+              {% unless block.settings.video_type == 'background' %}
+                <button type="button" class="text-link slideshow__video-control slideshow__video-control--close" data-controls="SlideshowVideo-{{ block.id }}">
+                  {% include 'icon-close' %}
+                  <span class="icon__fallback-text">{{ 'sections.slideshow.close_video' | t }}</span>
+                </button>
+              {% endunless %}
+              {% if block.settings.video_id != blank %}
+                <div id="SlideshowVideo-{{ block.id }}" class="slideshow__video {% if is_background_video %}slideshow__video--background{% endif %} slideshow__video--{{ block.settings.video_type }}"
+                  data-id="{{ block.settings.video_id }}"
+                  data-type="{{ block.settings.video_type }}"
+                  data-slideshow="Slideshow-{{ section.id }}"></div>
+              {% endif %}
+            {% endif %}
+
+               {% if section.settings.slideshow_height == "full" %}
+             <div class="slideshow__image"{% if block.settings.image %} style="background-image: url(''); "{% endif %}>
+             <img src="{{ block.settings.image | img_url: '1920x' }}">
+              {% else %}
+              
+              <div class="slideshow__image"{% if block.settings.image %} style="background-image: url('{{ block.settings.image | img_url: '1920x' }}'); "{% endif %}>
+              {% endif %}
+               
+              
+              {% if block.settings.image == blank %}
+                <div class="placeholder-background">
+                  {% capture current %}{% cycle 1, 2 %}{% endcapture %}
+                  {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+              {% endif %}
+            </div>
+            <div class="slideshow__text-wrap{% if block.settings.title != blank or block.settings.subheading != blank %} slideshow__overlay{% endif %}">
+              <div class="slideshow__text-content">
+                <div class="page-width">
+                  {% unless block.settings.title == blank %}
+                    <h2 class="h1 mega-title slideshow__title{% if settings.link != blank %} slideshow__title--has-link{% endif %}{% if section.settings.text_size == 'large' %} mega-title--large{% endif %}" style="color:{{block.settings.heading_color}};font-size:{{block.settings.heading_font_size}}px;font-family:{{block.settings.heading_font_family}} !important;">
+                      {{ block.settings.title | escape }}
+                    </h2>
+                  {% endunless %}
+                  {% unless block.settings.subheading == blank %}
+                    <span class="mega-subtitle slideshow__subtitle{% if section.settings.text_size == 'large' %} mega-subtitle--large{% endif %}" style="color:{{block.settings.sub_heading_color}};font-size:{{block.settings.sub_heading_font_size}}px;font-family:{{block.settings.sub_heading_font_family}};" >
+                      {{ block.settings.subheading | escape }}
+                    </span>
+                  {% endunless %}
+                  {% if block.type == 'video' %}
+                    {% unless block.settings.video_type == 'background' %}
+                      <div class="slideshow__video-control--play-wrapper{% if block.settings.title != blank or block.settings.subheading != blank %} slideshow__video-control--play-wrapper--push{% endif %}">
+                        <button type="button" class="text-link slideshow__video-control slideshow__video-control--play" data-controls="SlideshowVideo-{{ block.id }}">
+                          {% include 'icon-play-video' %}
+                          <span class="icon__fallback-text">{{ 'sections.slideshow.play_video' | t }}</span>
+                        </button>
+                      </div>
+                    {% endunless %}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+
+            {% if block.settings.link != blank %}
+              </a>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if section.blocks.size == 0 %}
+    <div class="placeholder-noblocks">
+      {{ 'homepage.onboarding.no_content' | t }}
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+  {
+    "name": "Slideshow",
+    "class": "index-section index-section--flush",
+    "max_blocks": 4,
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "Auto-rotate slides",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "autoplay_speed",
+        "label": "Change slides every",
+        "options": [
+          { "value": "5000", "label": "5 seconds" },
+          { "value": "6000", "label": "6 seconds" },
+          { "value": "7000", "label": "7 seconds" },
+          { "value": "8000", "label": "8 seconds" },
+          { "value": "9000", "label": "9 seconds" },
+          { "value": "10000", "label": "10 seconds" }
+        ],
+        "default": "7000"
+      },
+	  {
+        "type": "select",
+        "id": "slideshow_height",
+        "label": "Section height",
+        "default": "medium",
+        "options": [
+          {
+            "label": "Small",
+            "value": "small"
+          },
+          {
+            "label": "Medium",
+            "value": "medium"
+          },
+          {
+            "label": "Large",
+            "value": "large"
+          },
+		  {
+            "label": "Full",
+            "value": "full"
+          }
+        ]
+      }
+ 
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image slide",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+  			"info": "Upload Minimum 1920 x 600px Size Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Image slide"
+          },
+          {
+            "type": "text",
+            "id": "subheading",
+            "label": "Subheading",
+            "default": "Tell your brand's story through video and images"
+          },
+          {
+            "type": "color",
+            "id": "heading_color",
+            "label": "Heading color",
+            "default": "#dcdcdc"
+          },
+          {
+            "type": "color",
+            "id": "sub_heading_color",
+            "label": "Sub heading color",
+            "default": "#dcdcdc"
+          },
+		{
+        "type": "select",
+        "id": "heading_font_family",
+        "label": "Heading Font",
+        "options": [
+          {
+            "value": "Arial",
+            "label": "default theme font family"
+          },
+          {
+            "value": "Anton",
+            "label": "Anton"
+          },
+          {
+            "value": "Arimo",
+            "label": "Arimo"
+          },
+          {
+            "value": "Arvo",
+            "label": "Arvo"
+          },
+          {
+            "value": "Baloo Bhai",
+            "label": "Baloo Bhai"
+          },
+          {
+            "value": "Baloo Bhaina",
+            "label": "Baloo Bhaina"
+          },
+          {
+            "value": "Bitter",
+            "label": "Bitter"
+          },
+          {
+            "value": "Bree Serif",
+            "label": "Bree Serif"
+          },
+          {
+            "value": "Cabin",
+            "label": "Cabin"
+          },
+          {
+            "value": "Catamaran",
+            "label": "Catamaran"
+          },
+          {
+            "value": "David Libre",
+            "label": "David Libre"
+          },
+          {
+            "value": "Dosis",
+            "label": "Dosis"
+          },
+          {
+            "value": "Droid Sans",
+            "label": "Droid Sans"
+          },
+          {
+            "value": "Droid Serif",
+            "label": "Droid Serif"
+          },
+          {
+            "value": "Ek Mukta",
+            "label": "Ek Mukta"
+          },
+          {
+            "value": "Fjalla One",
+            "label": "Fjalla One"
+          },
+          {
+            "value": "Hind",
+            "label": "Hind"
+          },
+          {
+            "value": "Inconsolata",
+            "label": "Inconsolata"
+          },
+          {
+            "value": "Indie Flower",
+            "label": "Indie Flower"
+          },
+          {
+            "value": "Lato",
+            "label": "Lato"
+          },
+          {
+            "value": "Libre Baskerville",
+            "label": "Libre Baskerville"
+          },
+          {
+            "value": "Lobster",
+            "label": "Lobster"
+          },
+          {
+            "value": "Lora",
+            "label": "Lora"
+          },
+          {
+            "value": "Merriweather",
+            "label": "Merriweather"
+          },
+          {
+            "value": "Modak",
+            "label": "Modak"
+          },
+          {
+            "value": "Montserrat",
+            "label": "Montserrat"
+          },
+          {
+            "value": "Muli",
+            "label": "Muli"
+          },
+          {
+            "value": "Noto Sans",
+            "label": "Noto Sans"
+          },
+          {
+            "value": "Noto Serif",
+            "label": "Noto Serif"
+          },
+          {
+            "value": "Nunito",
+            "label": "Nunito"
+          },
+          {
+            "value": "Open Sans Condensed",
+            "label": "Open Sans Condensed"
+          },
+          {
+            "value": "Oswald",
+            "label": "Oswald"
+          },
+          {
+            "value": "Oxygen",
+            "label": "Oxygen"
+          },
+          {
+            "value": "PT Sans",
+            "label": "PT Sans"
+          },
+          {
+            "value": "PT Sans Narrow",
+            "label": "PT Sans Narrow"
+          },
+          {
+            "value": "PT Serif",
+            "label": "PT Serif"
+          },
+          {
+            "value": "Pavanam",
+            "label": "Pavanam"
+          },
+          {
+            "value": "Playfair Display",
+            "label": "Playfair Display"
+          },
+          {
+            "value": "Poppins",
+            "label": "Poppins"
+          },
+          {
+            "value": "Raleway",
+            "label": "Raleway"
+          },
+          {
+            "value": "Roboto",
+            "label": "Roboto"
+          },
+          {
+            "value": "Roboto Condensed",
+            "label": "Roboto Condensed"
+          },
+          {
+            "value": "Roboto Slab",
+            "label": "Roboto Slab"
+          },
+          {
+            "value": "Slabo",
+            "label": "Slabo"
+          },
+          {
+            "value": "Source Sans Pro",
+            "label": "Source Sans Pro"
+          },
+          {
+            "value": "Teko",
+            "label": "Teko"
+          },
+          {
+            "value": "Titillium Web",
+            "label": "Titillium Web"
+          },
+          {
+            "value": "Ubuntu",
+            "label": "Ubuntu"
+          },
+          {
+            "value": "Yanone Kaffeesatz",
+            "label": "Yanone Kaffeesatz"
+          },
+          {
+            "value": "Yatra One",
+            "label": "Yatra One"
+          }
+        ]
+        },
+        {
+        "type": "select",
+        "id": "sub_heading_font_family",
+        "label": "Sub heading font",
+        "options": [
+          {
+            "value": "Arial",
+            "label": "default theme font family"
+          },
+          {
+            "value": "Anton",
+            "label": "Anton"
+          },
+          {
+            "value": "Arimo",
+            "label": "Arimo"
+          },
+          {
+            "value": "Arvo",
+            "label": "Arvo"
+          },
+          {
+            "value": "Baloo Bhai",
+            "label": "Baloo Bhai"
+          },
+          {
+            "value": "Baloo Bhaina",
+            "label": "Baloo Bhaina"
+          },
+          {
+            "value": "Bitter",
+            "label": "Bitter"
+          },
+          {
+            "value": "Bree Serif",
+            "label": "Bree Serif"
+          },
+          {
+            "value": "Cabin",
+            "label": "Cabin"
+          },
+          {
+            "value": "Catamaran",
+            "label": "Catamaran"
+          },
+          {
+            "value": "David Libre",
+            "label": "David Libre"
+          },
+          {
+            "value": "Dosis",
+            "label": "Dosis"
+          },
+          {
+            "value": "Droid Sans",
+            "label": "Droid Sans"
+          },
+          {
+            "value": "Droid Serif",
+            "label": "Droid Serif"
+          },
+          {
+            "value": "Ek Mukta",
+            "label": "Ek Mukta"
+          },
+          {
+            "value": "Fjalla One",
+            "label": "Fjalla One"
+          },
+          {
+            "value": "Hind",
+            "label": "Hind"
+          },
+          {
+            "value": "Inconsolata",
+            "label": "Inconsolata"
+          },
+          {
+            "value": "Indie Flower",
+            "label": "Indie Flower"
+          },
+          {
+            "value": "Lato",
+            "label": "Lato"
+          },
+          {
+            "value": "Libre Baskerville",
+            "label": "Libre Baskerville"
+          },
+          {
+            "value": "Lobster",
+            "label": "Lobster"
+          },
+          {
+            "value": "Lora",
+            "label": "Lora"
+          },
+          {
+            "value": "Merriweather",
+            "label": "Merriweather"
+          },
+          {
+            "value": "Modak",
+            "label": "Modak"
+          },
+          {
+            "value": "Montserrat",
+            "label": "Montserrat"
+          },
+          {
+            "value": "Muli",
+            "label": "Muli"
+          },
+          {
+            "value": "Noto Sans",
+            "label": "Noto Sans"
+          },
+          {
+            "value": "Noto Serif",
+            "label": "Noto Serif"
+          },
+          {
+            "value": "Nunito",
+            "label": "Nunito"
+          },
+          {
+            "value": "Open Sans Condensed",
+            "label": "Open Sans Condensed"
+          },
+          {
+            "value": "Oswald",
+            "label": "Oswald"
+          },
+          {
+            "value": "Oxygen",
+            "label": "Oxygen"
+          },
+          {
+            "value": "PT Sans",
+            "label": "PT Sans"
+          },
+          {
+            "value": "PT Sans Narrow",
+            "label": "PT Sans Narrow"
+          },
+          {
+            "value": "PT Serif",
+            "label": "PT Serif"
+          },
+          {
+            "value": "Pavanam",
+            "label": "Pavanam"
+          },
+          {
+            "value": "Playfair Display",
+            "label": "Playfair Display"
+          },
+          {
+            "value": "Poppins",
+            "label": "Poppins"
+          },
+          {
+            "value": "Raleway",
+            "label": "Raleway"
+          },
+          {
+            "value": "Roboto",
+            "label": "Roboto"
+          },
+          {
+            "value": "Roboto Condensed",
+            "label": "Roboto Condensed"
+          },
+          {
+            "value": "Roboto Slab",
+            "label": "Roboto Slab"
+          },
+          {
+            "value": "Slabo",
+            "label": "Slabo"
+          },
+          {
+            "value": "Source Sans Pro",
+            "label": "Source Sans Pro"
+          },
+          {
+            "value": "Teko",
+            "label": "Teko"
+          },
+          {
+            "value": "Titillium Web",
+            "label": "Titillium Web"
+          },
+          {
+            "value": "Ubuntu",
+            "label": "Ubuntu"
+          },
+          {
+            "value": "Yanone Kaffeesatz",
+            "label": "Yanone Kaffeesatz"
+          },
+          {
+            "value": "Yatra One",
+            "label": "Yatra One"
+          }
+         ]
+        },
+         {
+        "type": "select",
+        "id": "heading_font_size",
+        "label": "Heading font size",
+        "default": "14",
+        "options": [
+          {
+            "value": "12",
+            "label": "12"
+          },
+          {
+            "value": "13",
+            "label": "13"
+          },
+          {
+            "value": "14",
+            "label": "14"
+          },
+          {
+            "value": "15",
+            "label": "15"
+          },
+          {
+            "value": "16",
+            "label": "16"
+          },
+          {
+            "value": "17",
+            "label": "17"
+          },
+          {
+            "value": "18",
+            "label": "18"
+          },
+          {
+            "value": "19",
+            "label": "19"
+          },
+          {
+            "value": "20",
+            "label": "20"
+          },
+          {
+            "value": "21",
+            "label": "21"
+          },
+          {
+            "value": "22",
+            "label": "22"
+          },
+          {
+            "value": "23",
+            "label": "23"
+          },
+          {
+            "value": "24",
+            "label": "24"
+          },
+          {
+            "value": "25",
+            "label": "25"
+          },
+          {
+            "value": "26",
+            "label": "26"
+          },
+          {
+            "value": "28",
+            "label": "28"
+          },
+          {
+            "value": "29",
+            "label": "29"
+          },
+          {
+            "value": "30",
+            "label": "30"
+          },
+          {
+            "value": "31",
+            "label": "31"
+          },
+          {
+            "value": "32",
+            "label": "32"
+          },
+          {
+            "value": "33",
+            "label": "33"
+          },
+          {
+            "value": "34",
+            "label": "34"
+          },
+          {
+            "value": "35",
+            "label": "35"
+          },
+          {
+            "value": "36",
+            "label": "36"
+          },
+          {
+            "value": "37",
+            "label": "37"
+          },
+          {
+            "value": "38",
+            "label": "38"
+          },
+          {
+            "value": "39",
+            "label": "39"
+          },
+          {
+            "value": "40",
+            "label": "40"
+          },
+          {
+            "value": "41",
+            "label": "42"
+          },
+          {
+            "value": "42",
+            "label": "42"
+          },
+          {
+            "value": "43",
+            "label": "43"
+          },
+          {
+            "value": "44",
+            "label": "44"
+          },
+          {
+            "value": "45",
+            "label": "45"
+          },
+          {
+            "value": "46",
+            "label": "46"
+          },
+          {
+            "value": "47",
+            "label": "47"
+          },
+          {
+            "value": "48",
+            "label": "48"
+          },
+          {
+            "value": "49",
+            "label": "49"
+          },
+          {
+            "value": "50",
+            "label": "50"
+          },
+          {
+            "value": "51",
+            "label": "51"
+          },
+          {
+            "value": "52",
+            "label": "52"
+          },
+          {
+            "value": "53",
+            "label": "53"
+          },
+          {
+            "value": "54",
+            "label": "54"
+          },
+          {
+            "value": "55",
+            "label": "55"
+          },
+          {
+            "value": "56",
+            "label": "56"
+          },
+          {
+            "value": "57",
+            "label": "57"
+          },
+          {
+            "value": "58",
+            "label": "58"
+          },
+          {
+            "value": "59",
+            "label": "59"
+          },
+          {
+            "value": "60",
+            "label": "60"
+          }
+
+
+
+
+
+        ]
+      },
+      {
+        "type": "select",
+        "id": "sub_heading_font_size",
+        "label": "Sub heading font size",
+        "default": "14",
+        "options": [
+          {
+            "value": "12",
+            "label": "12"
+          },
+          {
+            "value": "13",
+            "label": "13"
+          },
+          {
+            "value": "14",
+            "label": "14"
+          },
+          {
+            "value": "15",
+            "label": "15"
+          },
+          {
+            "value": "16",
+            "label": "16"
+          },
+          {
+            "value": "17",
+            "label": "17"
+          },
+          {
+            "value": "18",
+            "label": "18"
+          },
+          {
+            "value": "19",
+            "label": "19"
+          },
+          {
+            "value": "20",
+            "label": "20"
+          },
+          {
+            "value": "21",
+            "label": "21"
+          },
+          {
+            "value": "22",
+            "label": "22"
+          },
+          {
+            "value": "23",
+            "label": "23"
+          },
+          {
+            "value": "24",
+            "label": "24"
+          },
+          {
+            "value": "25",
+            "label": "25"
+          },
+          {
+            "value": "26",
+            "label": "26"
+          },
+          {
+            "value": "28",
+            "label": "28"
+          },
+          {
+            "value": "29",
+            "label": "29"
+          },
+          {
+            "value": "30",
+            "label": "30"
+          },
+          {
+            "value": "31",
+            "label": "31"
+          },
+          {
+            "value": "32",
+            "label": "32"
+          },
+          {
+            "value": "33",
+            "label": "33"
+          },
+          {
+            "value": "34",
+            "label": "34"
+          },
+          {
+            "value": "35",
+            "label": "35"
+          },
+          {
+            "value": "36",
+            "label": "36"
+          },
+          {
+            "value": "37",
+            "label": "37"
+          },
+          {
+            "value": "38",
+            "label": "38"
+          },
+          {
+            "value": "39",
+            "label": "39"
+          },
+          {
+            "value": "40",
+            "label": "40"
+          },
+          {
+            "value": "41",
+            "label": "42"
+          },
+          {
+            "value": "42",
+            "label": "42"
+          },
+          {
+            "value": "43",
+            "label": "43"
+          },
+          {
+            "value": "44",
+            "label": "44"
+          },
+          {
+            "value": "45",
+            "label": "45"
+          },
+          {
+            "value": "46",
+            "label": "46"
+          },
+          {
+            "value": "47",
+            "label": "47"
+          },
+          {
+            "value": "48",
+            "label": "48"
+          },
+          {
+            "value": "49",
+            "label": "49"
+          },
+          {
+            "value": "50",
+            "label": "50"
+          },
+          {
+            "value": "51",
+            "label": "51"
+          },
+          {
+            "value": "52",
+            "label": "52"
+          },
+          {
+            "value": "53",
+            "label": "53"
+          },
+          {
+            "value": "54",
+            "label": "54"
+          },
+          {
+            "value": "55",
+            "label": "55"
+          },
+          {
+            "value": "56",
+            "label": "56"
+          },
+          {
+            "value": "57",
+            "label": "57"
+          },
+          {
+            "value": "58",
+            "label": "58"
+          },
+          {
+            "value": "59",
+            "label": "59"
+          },
+          {
+            "value": "60",
+            "label": "60"
+          }
+
+
+
+
+        ]
+      }
+        ]
+      },
+      {
+        "type": "video",
+        "name": "Video slide",
+        "settings": [
+          {
+            "type": "text",
+            "id": "video_id",
+            "label": "YouTube video ID",
+            "default": "_9VUPq3SxOc",
+            "info": "[Find your YouTube video ID](https://docs.joeworkman.net/rapidweaver/stacks/youtube/video-id)."
+          },
+          {
+            "type": "select",
+            "id": "video_type",
+            "label": "Style",
+            "options": [
+              {
+                "value": "chrome",
+                "label": "Image with play button"
+              },
+              {
+                "value": "background-chrome",
+                "label": "Background video with play button"
+              },
+              {
+                "value": "background",
+                "label": "Background video"
+              }
+            ]
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "Fallback when autoplaying video is not supported on mobile devices"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Video slide"
+          },
+          {
+            "type": "text",
+            "id": "subheading",
+            "label": "Subheading",
+            "default": "Tell your brand's story through video and images"
+          },
+          {
+            "type": "color",
+            "id": "heading_color",
+            "label": "Heading color",
+            "default": "#dcdcdc"
+          },
+          {
+            "type": "color",
+            "id": "sub_heading_color",
+            "label": "Sub heading color",
+            "default": "#dcdcdc"
+          },
+		{
+        "type": "select",
+        "id": "heading_font_family",
+        "label": "Heading Font",
+        "options": [
+          {
+            "value": "Arial",
+            "label": "default theme font family"
+          },
+          {
+            "value": "Anton",
+            "label": "Anton"
+          },
+          {
+            "value": "Arimo",
+            "label": "Arimo"
+          },
+          {
+            "value": "Arvo",
+            "label": "Arvo"
+          },
+          {
+            "value": "Baloo Bhai",
+            "label": "Baloo Bhai"
+          },
+          {
+            "value": "Baloo Bhaina",
+            "label": "Baloo Bhaina"
+          },
+          {
+            "value": "Bitter",
+            "label": "Bitter"
+          },
+          {
+            "value": "Bree Serif",
+            "label": "Bree Serif"
+          },
+          {
+            "value": "Cabin",
+            "label": "Cabin"
+          },
+          {
+            "value": "Catamaran",
+            "label": "Catamaran"
+          },
+          {
+            "value": "David Libre",
+            "label": "David Libre"
+          },
+          {
+            "value": "Dosis",
+            "label": "Dosis"
+          },
+          {
+            "value": "Droid Sans",
+            "label": "Droid Sans"
+          },
+          {
+            "value": "Droid Serif",
+            "label": "Droid Serif"
+          },
+          {
+            "value": "Ek Mukta",
+            "label": "Ek Mukta"
+          },
+          {
+            "value": "Fjalla One",
+            "label": "Fjalla One"
+          },
+          {
+            "value": "Hind",
+            "label": "Hind"
+          },
+          {
+            "value": "Inconsolata",
+            "label": "Inconsolata"
+          },
+          {
+            "value": "Indie Flower",
+            "label": "Indie Flower"
+          },
+          {
+            "value": "Lato",
+            "label": "Lato"
+          },
+          {
+            "value": "Libre Baskerville",
+            "label": "Libre Baskerville"
+          },
+          {
+            "value": "Lobster",
+            "label": "Lobster"
+          },
+          {
+            "value": "Lora",
+            "label": "Lora"
+          },
+          {
+            "value": "Merriweather",
+            "label": "Merriweather"
+          },
+          {
+            "value": "Modak",
+            "label": "Modak"
+          },
+          {
+            "value": "Montserrat",
+            "label": "Montserrat"
+          },
+          {
+            "value": "Muli",
+            "label": "Muli"
+          },
+          {
+            "value": "Noto Sans",
+            "label": "Noto Sans"
+          },
+          {
+            "value": "Noto Serif",
+            "label": "Noto Serif"
+          },
+          {
+            "value": "Nunito",
+            "label": "Nunito"
+          },
+          {
+            "value": "Open Sans Condensed",
+            "label": "Open Sans Condensed"
+          },
+          {
+            "value": "Oswald",
+            "label": "Oswald"
+          },
+          {
+            "value": "Oxygen",
+            "label": "Oxygen"
+          },
+          {
+            "value": "PT Sans",
+            "label": "PT Sans"
+          },
+          {
+            "value": "PT Sans Narrow",
+            "label": "PT Sans Narrow"
+          },
+          {
+            "value": "PT Serif",
+            "label": "PT Serif"
+          },
+          {
+            "value": "Pavanam",
+            "label": "Pavanam"
+          },
+          {
+            "value": "Playfair Display",
+            "label": "Playfair Display"
+          },
+          {
+            "value": "Poppins",
+            "label": "Poppins"
+          },
+          {
+            "value": "Raleway",
+            "label": "Raleway"
+          },
+          {
+            "value": "Roboto",
+            "label": "Roboto"
+          },
+          {
+            "value": "Roboto Condensed",
+            "label": "Roboto Condensed"
+          },
+          {
+            "value": "Roboto Slab",
+            "label": "Roboto Slab"
+          },
+          {
+            "value": "Slabo",
+            "label": "Slabo"
+          },
+          {
+            "value": "Source Sans Pro",
+            "label": "Source Sans Pro"
+          },
+          {
+            "value": "Teko",
+            "label": "Teko"
+          },
+          {
+            "value": "Titillium Web",
+            "label": "Titillium Web"
+          },
+          {
+            "value": "Ubuntu",
+            "label": "Ubuntu"
+          },
+          {
+            "value": "Yanone Kaffeesatz",
+            "label": "Yanone Kaffeesatz"
+          },
+          {
+            "value": "Yatra One",
+            "label": "Yatra One"
+          }
+        ]
+        },
+        {
+        "type": "select",
+        "id": "sub_heading_font_family",
+        "label": "Sub heading font",
+        "options": [
+          {
+            "value": "Arial",
+            "label": "default theme font family"
+          },
+          {
+            "value": "Anton",
+            "label": "Anton"
+          },
+          {
+            "value": "Arimo",
+            "label": "Arimo"
+          },
+          {
+            "value": "Arvo",
+            "label": "Arvo"
+          },
+          {
+            "value": "Baloo Bhai",
+            "label": "Baloo Bhai"
+          },
+          {
+            "value": "Baloo Bhaina",
+            "label": "Baloo Bhaina"
+          },
+          {
+            "value": "Bitter",
+            "label": "Bitter"
+          },
+          {
+            "value": "Bree Serif",
+            "label": "Bree Serif"
+          },
+          {
+            "value": "Cabin",
+            "label": "Cabin"
+          },
+          {
+            "value": "Catamaran",
+            "label": "Catamaran"
+          },
+          {
+            "value": "David Libre",
+            "label": "David Libre"
+          },
+          {
+            "value": "Dosis",
+            "label": "Dosis"
+          },
+          {
+            "value": "Droid Sans",
+            "label": "Droid Sans"
+          },
+          {
+            "value": "Droid Serif",
+            "label": "Droid Serif"
+          },
+          {
+            "value": "Ek Mukta",
+            "label": "Ek Mukta"
+          },
+          {
+            "value": "Fjalla One",
+            "label": "Fjalla One"
+          },
+          {
+            "value": "Hind",
+            "label": "Hind"
+          },
+          {
+            "value": "Inconsolata",
+            "label": "Inconsolata"
+          },
+          {
+            "value": "Indie Flower",
+            "label": "Indie Flower"
+          },
+          {
+            "value": "Lato",
+            "label": "Lato"
+          },
+          {
+            "value": "Libre Baskerville",
+            "label": "Libre Baskerville"
+          },
+          {
+            "value": "Lobster",
+            "label": "Lobster"
+          },
+          {
+            "value": "Lora",
+            "label": "Lora"
+          },
+          {
+            "value": "Merriweather",
+            "label": "Merriweather"
+          },
+          {
+            "value": "Modak",
+            "label": "Modak"
+          },
+          {
+            "value": "Montserrat",
+            "label": "Montserrat"
+          },
+          {
+            "value": "Muli",
+            "label": "Muli"
+          },
+          {
+            "value": "Noto Sans",
+            "label": "Noto Sans"
+          },
+          {
+            "value": "Noto Serif",
+            "label": "Noto Serif"
+          },
+          {
+            "value": "Nunito",
+            "label": "Nunito"
+          },
+          {
+            "value": "Open Sans Condensed",
+            "label": "Open Sans Condensed"
+          },
+          {
+            "value": "Oswald",
+            "label": "Oswald"
+          },
+          {
+            "value": "Oxygen",
+            "label": "Oxygen"
+          },
+          {
+            "value": "PT Sans",
+            "label": "PT Sans"
+          },
+          {
+            "value": "PT Sans Narrow",
+            "label": "PT Sans Narrow"
+          },
+          {
+            "value": "PT Serif",
+            "label": "PT Serif"
+          },
+          {
+            "value": "Pavanam",
+            "label": "Pavanam"
+          },
+          {
+            "value": "Playfair Display",
+            "label": "Playfair Display"
+          },
+          {
+            "value": "Poppins",
+            "label": "Poppins"
+          },
+          {
+            "value": "Raleway",
+            "label": "Raleway"
+          },
+          {
+            "value": "Roboto",
+            "label": "Roboto"
+          },
+          {
+            "value": "Roboto Condensed",
+            "label": "Roboto Condensed"
+          },
+          {
+            "value": "Roboto Slab",
+            "label": "Roboto Slab"
+          },
+          {
+            "value": "Slabo",
+            "label": "Slabo"
+          },
+          {
+            "value": "Source Sans Pro",
+            "label": "Source Sans Pro"
+          },
+          {
+            "value": "Teko",
+            "label": "Teko"
+          },
+          {
+            "value": "Titillium Web",
+            "label": "Titillium Web"
+          },
+          {
+            "value": "Ubuntu",
+            "label": "Ubuntu"
+          },
+          {
+            "value": "Yanone Kaffeesatz",
+            "label": "Yanone Kaffeesatz"
+          },
+          {
+            "value": "Yatra One",
+            "label": "Yatra One"
+          }
+         ]
+        },
+         {
+        "type": "select",
+        "id": "heading_font_size",
+        "label": "Heading font size",
+        "default": "14",
+        "options": [
+          {
+            "value": "12",
+            "label": "12"
+          },
+          {
+            "value": "13",
+            "label": "13"
+          },
+          {
+            "value": "14",
+            "label": "14"
+          },
+          {
+            "value": "15",
+            "label": "15"
+          },
+          {
+            "value": "16",
+            "label": "16"
+          },
+          {
+            "value": "17",
+            "label": "17"
+          },
+          {
+            "value": "18",
+            "label": "18"
+          },
+          {
+            "value": "19",
+            "label": "19"
+          },
+          {
+            "value": "20",
+            "label": "20"
+          },
+          {
+            "value": "21",
+            "label": "21"
+          },
+          {
+            "value": "22",
+            "label": "22"
+          },
+          {
+            "value": "23",
+            "label": "23"
+          },
+          {
+            "value": "24",
+            "label": "24"
+          },
+          {
+            "value": "25",
+            "label": "25"
+          },
+          {
+            "value": "26",
+            "label": "26"
+          },
+          {
+            "value": "28",
+            "label": "28"
+          },
+          {
+            "value": "29",
+            "label": "29"
+          },
+          {
+            "value": "30",
+            "label": "30"
+          },
+          {
+            "value": "31",
+            "label": "31"
+          },
+          {
+            "value": "32",
+            "label": "32"
+          },
+          {
+            "value": "33",
+            "label": "33"
+          },
+          {
+            "value": "34",
+            "label": "34"
+          },
+          {
+            "value": "35",
+            "label": "35"
+          },
+          {
+            "value": "36",
+            "label": "36"
+          },
+          {
+            "value": "37",
+            "label": "37"
+          },
+          {
+            "value": "38",
+            "label": "38"
+          },
+          {
+            "value": "39",
+            "label": "39"
+          },
+          {
+            "value": "40",
+            "label": "40"
+          },
+          {
+            "value": "41",
+            "label": "42"
+          },
+          {
+            "value": "42",
+            "label": "42"
+          },
+          {
+            "value": "43",
+            "label": "43"
+          },
+          {
+            "value": "44",
+            "label": "44"
+          },
+          {
+            "value": "45",
+            "label": "45"
+          },
+          {
+            "value": "46",
+            "label": "46"
+          },
+          {
+            "value": "47",
+            "label": "47"
+          },
+          {
+            "value": "48",
+            "label": "48"
+          },
+          {
+            "value": "49",
+            "label": "49"
+          },
+          {
+            "value": "50",
+            "label": "50"
+          },
+          {
+            "value": "51",
+            "label": "51"
+          },
+          {
+            "value": "52",
+            "label": "52"
+          },
+          {
+            "value": "53",
+            "label": "53"
+          },
+          {
+            "value": "54",
+            "label": "54"
+          },
+          {
+            "value": "55",
+            "label": "55"
+          },
+          {
+            "value": "56",
+            "label": "56"
+          },
+          {
+            "value": "57",
+            "label": "57"
+          },
+          {
+            "value": "58",
+            "label": "58"
+          },
+          {
+            "value": "59",
+            "label": "59"
+          },
+          {
+            "value": "60",
+            "label": "60"
+          }
+
+
+
+
+        ]
+      },
+      {
+        "type": "select",
+        "id": "sub_heading_font_size",
+        "label": "Sub heading font size",
+        "default": "14",
+        "options": [
+          {
+            "value": "12",
+            "label": "12"
+          },
+          {
+            "value": "13",
+            "label": "13"
+          },
+          {
+            "value": "14",
+            "label": "14"
+          },
+          {
+            "value": "15",
+            "label": "15"
+          },
+          {
+            "value": "16",
+            "label": "16"
+          },
+          {
+            "value": "17",
+            "label": "17"
+          },
+          {
+            "value": "18",
+            "label": "18"
+          },
+          {
+            "value": "19",
+            "label": "19"
+          },
+          {
+            "value": "20",
+            "label": "20"
+          },
+          {
+            "value": "21",
+            "label": "21"
+          },
+          {
+            "value": "22",
+            "label": "22"
+          },
+          {
+            "value": "23",
+            "label": "23"
+          },
+          {
+            "value": "24",
+            "label": "24"
+          },
+          {
+            "value": "25",
+            "label": "25"
+          },
+          {
+            "value": "26",
+            "label": "26"
+          },
+          {
+            "value": "28",
+            "label": "28"
+          },
+          {
+            "value": "29",
+            "label": "29"
+          },
+          {
+            "value": "30",
+            "label": "30"
+          },
+          {
+            "value": "31",
+            "label": "31"
+          },
+          {
+            "value": "32",
+            "label": "32"
+          },
+          {
+            "value": "33",
+            "label": "33"
+          },
+          {
+            "value": "34",
+            "label": "34"
+          },
+          {
+            "value": "35",
+            "label": "35"
+          },
+          {
+            "value": "36",
+            "label": "36"
+          },
+          {
+            "value": "37",
+            "label": "37"
+          },
+          {
+            "value": "38",
+            "label": "38"
+          },
+          {
+            "value": "39",
+            "label": "39"
+          },
+          {
+            "value": "40",
+            "label": "40"
+          },
+          {
+            "value": "41",
+            "label": "42"
+          },
+          {
+            "value": "42",
+            "label": "42"
+          },
+          {
+            "value": "43",
+            "label": "43"
+          },
+          {
+            "value": "44",
+            "label": "44"
+          },
+          {
+            "value": "45",
+            "label": "45"
+          },
+          {
+            "value": "46",
+            "label": "46"
+          },
+          {
+            "value": "47",
+            "label": "47"
+          },
+          {
+            "value": "48",
+            "label": "48"
+          },
+          {
+            "value": "49",
+            "label": "49"
+          },
+          {
+            "value": "50",
+            "label": "50"
+          },
+          {
+            "value": "51",
+            "label": "51"
+          },
+          {
+            "value": "52",
+            "label": "52"
+          },
+          {
+            "value": "53",
+            "label": "53"
+          },
+          {
+            "value": "54",
+            "label": "54"
+          },
+          {
+            "value": "55",
+            "label": "55"
+          },
+          {
+            "value": "56",
+            "label": "56"
+          },
+          {
+            "value": "57",
+            "label": "57"
+          },
+          {
+            "value": "58",
+            "label": "58"
+          },
+          {
+            "value": "59",
+            "label": "59"
+          },
+          {
+            "value": "60",
+            "label": "60"
+          }
+
+
+
+        ]
+      }
+
+
+        ]
+      }
+    ],
+    "presets": [{
+      "name": "Slideshow",
+      "category": "Image",
+      "settings": {
+        "autoplay": true,
+        "autoplay_speed": "5000"
+      },
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }]
+  }
+{% endschema %}
