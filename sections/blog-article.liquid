@@ -1,0 +1,38 @@
+{%- comment -%}
+(c) Tonytemplates Ltd,
+https://www.tonytemplates.com/
+support@tonytemplates.com
+{%- endcomment -%}
+{%- if section.settings.layout == 'text' -%}
+	{% include 'blogarticle-text' %}
+{%- endif -%}
+
+{%- if section.settings.layout == 'standart' -%}
+	{% include 'blogarticle-standart' %}
+{%- endif -%}
+
+
+{% schema %}
+{
+"name": "Blog Article",
+"settings": [
+{
+"type": "select",
+"id": "layout",
+"label": "Select caption style",
+"default": "text",
+"options": [
+{ "value": "text", "label": "Text" },
+{ "value": "standart", "label": "Featured image on background" }
+]
+},
+{
+"type": "checkbox",
+"id": "show_featured_image",
+"label": "Show featured image after caption?",
+"default": true,
+"info": "Applied only for text type caption."
+}
+]
+}
+{% endschema %}

@@ -1,0 +1,17 @@
+{%- comment -%}
+(c) Tonytemplates Ltd,
+https://www.tonytemplates.com/
+support@tonytemplates.com
+{%- endcomment -%}
+{%- comment -%} ### show/hide popup ###{%- endcomment -%}
+{%- if settings.prd-show_btn_addtocart-popup -%}
+	{%- assign loc-show-popup = 'true' -%}
+{%- else -%}
+	{%- assign loc-show-popup = 'false' -%}
+{%- endif -%}
+
+<div class="tt-add-to-cart" data-active="{{ loc-show-popup }}">
+	<i class="icon-check"></i>
+	<p>{{ 'cart.general.popup_msg' | t }}</p>
+	<a href="/cart" class="btn"><i class="icon-shop24"></i>{{ 'cart.general.popup_view' | t }}</a>
+</div>

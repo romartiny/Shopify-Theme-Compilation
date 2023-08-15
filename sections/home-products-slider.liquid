@@ -1,0 +1,75 @@
+{%- comment -%}
+(c) Tonytemplates Ltd,
+https://www.tonytemplates.com/
+support@tonytemplates.com
+{%- endcomment -%}
+{%- assign set-image_size = '480x480' -%}
+
+{% comment %} ### CONTENT ### {% endcomment %}
+{%- assign collection = collections[section.settings.collection] -%}
+{%- assign collection_title = collection.title -%}
+{% if section.settings.limit != blank %}
+	{% assign loc-limit = section.settings.limit %}
+{% else %}
+	{% assign loc-limit = 999 %}
+{% endif %}
+
+<div data-section-id="{{ section.id }}" data-section-type="home-products-col" class="container tt-page__section ttg-mb--40" >
+	<div class="tt-page__section-head tt-page__section-head--center tt-page__section-head--arrows tt-layout__section--pdg">
+		<div class="tt-page__title">{{ collection.title }}</div>
+		{% if section.settings.arrows %}
+			<div class="tt-page__arrows tt-page__arrows--in-head">
+				<span class="tt-page__arrows-prev"><i class="icon-left-open-2"></i></span>
+				<span class="tt-page__arrows-next"><i class="icon-right-open-2"></i></span>
+			</div>
+		{% endif %}
+	</div>
+	<div class="tt-carousel-box">
+		<div class="tt-product-view">
+			<div class="tt-carousel-box__slider">
+				{% for product in collection.products limit: loc-limit %}
+					<div class="col-sm-6 col-md-{{ loc-colwidth }} col-xl-{{ loc-colwidth }} col-xxl-{{ loc-colwidth }}">
+						{% assign set-view = 'sheet' %}
+						{% include 'product-list' %}
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% schema %}
+{
+"name": "Products slider",
+"settings": [
+{
+"label": "Product's collection",
+"id": "collection",
+"type": "collection",
+"info": "Show ALL products, unless you select needed collection."
+},
+{
+"type": "text",
+"id": "limit",
+"label": "Product limit",
+"default": "8",
+"info": "Put number to limit out put for first NUMBER items. Empty - disable limit"
+},
+{
+"label": "Show arrows",
+"id": "arrows",
+"type": "checkbox",
+"default": true
+}
+],
+"presets": [
+{
+"name": "Products slider",
+"category": "3) Products",
+"settings": {
+}
+}
+]
+}
+{% endschema %}

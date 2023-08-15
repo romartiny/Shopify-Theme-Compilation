@@ -1,0 +1,11 @@
+/*
+Add you custom CSS styles at this file.
+
+1. Rename file from "custom-example.css" to "custom.css"
+2. Enable custom CSS at general settings -> developer section
+3. Write your awesome CSS styles here.
+ */
+
+body {
+	background-color: black;
+}

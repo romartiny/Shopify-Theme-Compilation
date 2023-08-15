@@ -1,0 +1,46 @@
+{%- comment -%}
+(c) Tonytemplates Ltd,
+https://www.tonytemplates.com/
+support@tonytemplates.com
+{%- endcomment -%}
+<!-- BEGIN:FONTS -->
+{%- if settings.enable_fonts_url -%}
+	{%- assign res-font = settings.fonts_url -%}
+{%- else -%}
+	{%- assign loc-google_fonts_url = 'https://fonts.googleapis.com/css?family=' -%}
+	{%- if settings.font_url != blank -%}
+		{%- assign res-font = res-font | append: settings.font_url -%}
+	{%- endif -%}
+	{%- if settings.font2_url != blank -%}
+		{%- if res-font != blank -%}
+			{%- assign res-font = res-font | append: '|' -%}
+		{%- endif -%}
+		{%- assign res-font = res-font | append: settings.font2_url -%}
+	{%- endif -%}
+	{%- if settings.font3_url != blank -%}
+		{%- if res-font != blank -%}
+			{%- assign res-font = res-font | append: '|' -%}
+		{%- endif -%}
+		{%- assign res-font = res-font | append: settings.font3_url -%}
+	{%- endif -%}
+	{%- assign res-font = res-font | url_encode | prepend: loc-google_fonts_url -%}
+{%- endif -%}
+{%- if  res-font == loc-google_fonts_url -%}
+{%- else -%}
+	{{ res-font | stylesheet_tag }}
+{%- endif -%}
+<!-- END:FONTS -->
+<!-- BEGIN:STYLES -->
+{{ 'style.css' | asset_url | stylesheet_tag }}
+{{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+{%- if settings.dev_enable_custom_css == true -%}
+	{{ 'custom.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+{%- if shop.metafields.ato-swatch-css.size > 0 -%}
+	<style>
+		{%-  for optioncss in shop.metafields.ato-swatch-css -%}
+		{{ optioncss[1] }}
+		{%-  endfor -%}
+	</style>
+{%- endif -%}
+<!-- END:STYLES -->

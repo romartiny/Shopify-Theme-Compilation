@@ -1,0 +1,10 @@
+{%- comment -%}
+(c) Tonytemplates Ltd,
+https://www.tonytemplates.com/
+support@tonytemplates.com
+{%- endcomment -%}
+{%- if tt_menu_custom_values[5] == 'int' -%}
+	{{- tt_menu_custom_values[4] -}}
+{%- else -%}
+	{{- tt_menu_custom_values[5] -}}
+{%- endif -%}
