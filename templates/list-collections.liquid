@@ -1,0 +1,170 @@
+<style type="text/css">
+body.template-list-collections  .page-title-default {
+    background-color: #212121;
+}
+   body.template-list-collections .grid__item {
+  float: left;
+  padding-left: 30px;
+  width: 100%;
+}
+body.template-list-collections .collection-grid-item {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  margin-bottom: 22px;
+}
+.tea_banner_lookbook .collection-grid-item {
+  position: relative;
+  width: 100%;
+  padding-bottom: 40%;
+}
+.tea_banner_lookbook .collection-grid-item__link,
+body.template-list-collections .collection-grid-item__link {
+  border: 2px solid transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.tea_banner_lookbook .collection-grid-item__link {
+   border: 0;
+}
+.tea_banner_lookbook .collection-grid-item__overlay,
+body.template-list-collections .collection-grid-item__overlay {
+  position: relative;
+  display: block;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+body.template-list-collections .collection-grid-item__title-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #3d4246;
+  opacity: 0.25;
+}
+.tea_banner_lookbook .collection-grid-item__title-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.5;
+}
+.tea_banner_lookbook .collection-grid-item__title,
+body.template-list-collections .collection-grid-item__title {
+  color: #fff;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  top: 50%;
+  padding: 0 5px;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  transition: 0.1s cubic-bezier(0.44, 0.13, 0.48, 0.87);
+  text-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+body.template-list-collections .collection-grid-item__link:hover,  .collection-grid-item__link:focus {
+  opacity: 0.6;
+}
+body.template-list-collections .collection-grid-item__link:focus {
+  border-color: #3d4246;
+}
+@media only screen and (min-width: 750px) {
+  body.template-list-collections .grid--uniform .medium-up--one-half:nth-child(2n+1), 
+  body.template-list-collections .grid--uniform .medium-up--one-third:nth-child(3n+1), 
+  body.template-list-collections .grid--uniform .medium-up--one-quarter:nth-child(4n+1), 
+  body.template-list-collections .grid--uniform .medium-up--one-fifth:nth-child(5n+1), 
+  body.template-list-collections .grid--uniform .medium-up--one-sixth:nth-child(6n+1), 
+  body.template-list-collections .grid--uniform .medium-up--two-sixths:nth-child(3n+1), 
+  body.template-list-collections .grid--uniform .medium-up--three-sixths:nth-child(2n+1), 
+  body.template-list-collections .grid--uniform .medium-up--one-eighth:nth-child(8n+1), 
+  body.template-list-collections .grid--uniform .medium-up--two-eighths:nth-child(4n+1), 
+  body.template-list-collections .grid--uniform .medium-up--four-eighths:nth-child(2n+1), 
+  body.template-list-collections .grid--uniform .medium-up--five-tenths:nth-child(2n+1), 
+  body.template-list-collections .grid--uniform .medium-up--one-twelfth:nth-child(12n+1), 
+  body.template-list-collections .grid--uniform .medium-up--two-twelfths:nth-child(6n+1), 
+  body.template-list-collections .grid--uniform .medium-up--three-twelfths:nth-child(4n+1), 
+  body.template-list-collections .grid--uniform .medium-up--four-twelfths:nth-child(3n+1), 
+  body.template-list-collections .grid--uniform .medium-up--six-twelfths:nth-child(2n+1) {
+    clear: both;
+  }
+  body.template-list-collections .medium-up--one-third {
+    width: 33.33333%;
+  }
+ body.template-list-collections .medium-up--one-half {
+    width: 50%;
+}
+ body.template-list-collections .medium-up--one-quarter {
+    width: 25%;
+}
+ body.template-list-collections .medium-up--one-fifth {
+    width: 20%;
+}
+  body.template-list-collections .collection-grid-item {
+    margin-bottom: 30px;
+  }
+  body.template-list-collections .collection-grid-item__title {
+    padding: 0 15px;
+  }
+}
+@media only screen and (max-width: 749px) {
+  body.template-list-collections .grid {
+    margin-left: -22px;
+  }
+  body.template-list-collections .grid--uniform .small--one-half:nth-child(2n+1), 
+  body.template-list-collections .grid--uniform .small--one-third:nth-child(3n+1), 
+  body.template-list-collections .grid--uniform .small--one-quarter:nth-child(4n+1), 
+  body.template-list-collections .grid--uniform .small--one-fifth:nth-child(5n+1), 
+  body.template-list-collections .grid--uniform .small--one-sixth:nth-child(6n+1), 
+  body.template-list-collections .grid--uniform .small--two-sixths:nth-child(3n+1), 
+  body.template-list-collections .grid--uniform .small--three-sixths:nth-child(2n+1), 
+  body.template-list-collections .grid--uniform .small--one-eighth:nth-child(8n+1), 
+  body.template-list-collections .grid--uniform .small--two-eighths:nth-child(4n+1), 
+  body.template-list-collections .grid--uniform .small--four-eighths:nth-child(2n+1), 
+  body.template-list-collections .grid--uniform .small--five-tenths:nth-child(2n+1), 
+  body.template-list-collections .grid--uniform .small--one-twelfth:nth-child(12n+1), 
+  body.template-list-collections .grid--uniform .small--two-twelfths:nth-child(6n+1), 
+  body.template-list-collections .grid--uniform .small--three-twelfths:nth-child(4n+1), 
+  body.template-list-collections .grid--uniform .small--four-twelfths:nth-child(3n+1), 
+  body.template-list-collections .grid--uniform .small--six-twelfths:nth-child(2n+1) {
+    clear: both;
+  }
+  body.template-list-collections .small--one-half {
+    width: 50%;
+  }
+  body.template-list-collections .grid__item {
+    padding-left: 22px;
+  }
+  body.template-list-collections h3, body.template-list-collections .h3 {
+    font-size: 1.25em;
+  }
+}
+</style>
+<div class="main-page-wrapper">
+  <div class="page-title page-title-default title-size-small color-scheme-light title-design-centered title-blog" style="">
+    <div class="container">
+      <header class="entry-header">
+        <h1 class="entry-title">{{ page_title }}</h1> 
+      </header>        
+    </div>
+  </div><!-- MAIN CONTENT AREA -->
+  <div class="container">
+      <div class="row">
+         <div class="site-content col-sm-12" role="main">
+            {%- section 'list-collections-template' -%}
+         </div>
+      </div>
+   </div>
+</div>
+

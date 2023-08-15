@@ -1,0 +1,47 @@
+{%- assign on_sale = false -%}
+{%- if current_variant.compare_at_price > current_variant.price -%}
+   {%- unless product.tags contains 'notsale'-%}
+   {%- assign on_sale = true -%}
+   {%-endunless-%}
+{%- endif -%}
+{%- assign sold_out = true -%}
+{%- if product.available  -%}
+{%- assign sold_out = false -%}
+{%- endif -%}
+{%- assign hot = false -%}
+{%- for tag in product.tags -%}
+{%- assign tag_handle = tag | handle -%}
+   {%- if tag_handle == 'hot' -%}
+   {%- assign hot = true -%}
+   {%- endif- %}
+{%- endfor -%}
+{%- assign not_group = false -%}
+{%- for tag in product.tags -%}
+{%- assign tag_handle = tag | handle -%}
+   {%- if tag_handle == 'not_group' -%}
+   {%- assign not_group = true -%}
+   {%- endif- %}
+{%- endfor -%}
+{%-unless product.tags contains 'notnew'%}
+{%-assign now_date_int = "now" | date: "%j" | plus: 0-%}
+{%-assign now_year_int = "now" | date: '%Y' | plus: 0-%}
+{%-assign pub_date_int = product.created_at | date: "%j" | plus: 0-%}
+{%-assign pub_year_int = product.created_at | date: '%Y' | plus: 0-%}
+{%-if now_year_int == pub_year_int-%}
+  {%-assign new_day_int = settings.new_day | default: 30 | plus: 0 -%}
+  {%-assign check_new = now_date_int | minus: pub_date_int-%}
+  {%-if check_new >= 0 and check_new <= new_day_int-%}
+    {%-capture new_label-%}{{'products.product.new' | t }}{%-endcapture-%}
+  {%-else-%}
+    {%-assign new_label =""%}
+  {%-endif-%}
+{%-else-%}
+  {%-assign new_day_int = settings.new_day | default: 30 | plus: 366-%}
+  {%-assign check_new = now_date_int | plus: 366-%}
+  {%-if check_new <= new_day_int-%}
+    {%-capture new_label-%}{{'products.product.new' | t }}{%-endcapture-%}
+  {%-else-%}
+    {%-assign new_label =""-%}
+  {%-endif-%}
+{%-endif-%}
+{%-endunless-%}

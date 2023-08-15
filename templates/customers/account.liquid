@@ -1,0 +1,128 @@
+{%- assign title = 'customer.account.title' | t -%}
+<div class="main-page-wrapper">
+   {%- include 'page_heading', page_title:title -%}
+   <!-- MAIN CONTENT AREA -->
+   <div class="container">
+      <div class="row">
+         <div class="site-content col-sm-12" role="main">
+            <article id="post-9" class="post-9 page type-page status-publish hentry">
+               <div class="entry-content">
+                  <div class="shopify">
+                     <div class="basel-my-account-sidebar">
+                        <h3 class="shopify-MyAccount-title entry-title">{{title}}</h3>
+                        <nav class="shopify-MyAccount-navigation">
+                           <ul>
+                              <li class="shopify-MyAccount-navigation-link shopify-MyAccount-navigation-link--dashboard is-active">
+                                 <a href="/account">{{ 'customer.account.dashboard' | t }}</a>
+                              </li>
+                              <li class="shopify-MyAccount-navigation-link shopify-MyAccount-navigation-link--edit-address">
+                                 <a href="/account/addresses">{{ 'customer.addresses.title' | t }} ({{ customer.addresses_count }})</a>
+                              </li>
+                              {%- if settings.use_wishlist and pages['wishlist'].empty? != true -%}
+                              {%- include 'nitro-wishlist' -%}
+                              <li class="shopify-MyAccount-navigation-link shopify-MyAccount-navigation-link--wishlist">
+                                 <a href="/pages/wishlist">{{ 'customer.account.wishlist' | t }} ({{ NITRO_WISHLIST_COUNT }})</a>
+                              </li>
+                              {%- endif -%}
+                              <li class="shopify-MyAccount-navigation-link shopify-MyAccount-navigation-link--customer-logout">
+                                 {{ 'layout.customer.log_out' | t | customer_logout_link }}
+                              </li>
+                           </ul>
+                        </nav>
+                     </div>
+                     <!-- .basel-my-account-sidebar -->
+                     <div class="shopify-MyAccount-content">
+                        <p>{{ 'customer.account.hello' | t }} <strong>{%- if customer.name != blank -%}{{customer.name}}{%-else-%}{{customer.email}}{%-endif-%}</strong> (not <strong>{%- if customer.name != blank -%}{{customer.name}}{%-else-%}{{customer.email}}{%-endif-%}</strong>? <a href="/account/logout">{{ 'customer.account.sign_out' | t }}</a>)</p>
+                        <p><strong>{{ 'customer.orders.title' | t }}</strong></p>
+                        {%- if customer.orders.size != 0 -%}
+                           {%- paginate customer.orders by 20 -%}
+                           <div class="responsive-table">
+                              <table class="gl_table_account shopify-orders-table shopify-MyAccount-orders shop_table shop_table_responsive my_account_orders account-orders-table">
+                                 <thead>
+                                   <tr>
+                                     <th>{{ 'customer.orders.order_number' | t }}</th>
+                                     <th>{{ 'customer.orders.date' | t }}</th>
+                                     <th>{{ 'customer.orders.payment_status' | t }}</th>
+                                     <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
+                                     <th>{{ 'customer.orders.total' | t }}</th>
+                                      <th>{{ 'customer.orders.actions' | t }}</th>
+                                   </tr>
+                                 </thead>
+                                 <tbody>
+                                   {%- for order in customer.orders -%}
+                                     <tr>
+                                       <td data-label="{{ 'customer.orders.order_number' | t }}">
+                                         <a href="{{ order.customer_url }}">{{ order.name }}</a>
+                                       </td>
+                                       <td data-label="{{ 'customer.orders.date' | t }}">{{ order.created_at | date: format: 'month_day_year' }}</td>
+                                       <td data-label="{{ 'customer.orders.payment_status' | t }}">{{ order.financial_status_label }}</td>
+                                       <td data-label="{{ 'customer.orders.fulfillment_status' | t }}">{{ order.fulfillment_status_label }}</td>
+                                       <td data-label="{{ 'customer.orders.total' | t }}">{{ order.total_price | money }}</td>
+                                       <td data-label="{{ 'customer.orders.actions' | t }}"><a href="{{ order.customer_url }}" class="shopify-button button view">{{ 'customer.orders.view' | t }}</a></td>
+                                     </tr>
+                                   {%- endfor -%}
+                                 </tbody>
+                               </table>
+                           </div>
+                           {%- if paginate.pages > 1 -%}
+                              <div class="clear"></div>
+                              <div class="basel-pagination">{%- include 'pagination',blog_ajax:true -%}</div>
+                           {%- endif -%}
+                           {%- endpaginate -%}
+                        {%- else -%}
+                           <div class="shopify-message shopify-message--info shopify-Message shopify-Message--info shopify-info">
+                              {{ 'customer.orders.none' | t }}   
+                           </div>
+                        {%- endif -%}
+                        <p><strong>{{ 'customer.account.details' | t }}</strong></p>
+                        <table class="gl_table_account responsive-table gl_infor_account">
+                          <tbody>
+                            <tr>
+                              <td class="text-left"><strong>{{ 'customer.account.name' | t }}</strong></td>
+                              <td>{{ customer.name }}</td>
+                            </tr>
+                            <tr>
+                              <td class="text-left"><strong>{{ 'customer.account.email' | t }}</strong></td>
+                              <td>{{ customer.email }}</td>
+                            </tr>
+                            
+                            {%- if customer.default_address != nil -%}
+                            <tr>
+                              <td class="text-left"><strong>{{ 'customer.account.address' | t }}</strong></td>
+                              <td>{{ customer.default_address.address1 }}</td>
+                            </tr>
+                            {%- if customer.default_address.address2 != "" -%}
+                            <tr>
+                              <td class="text-left"><strong>{{ 'customer.account.address_2' | t }}</strong></td>
+                              <td>{{ customer.default_address.address2 }}</td>
+                            </tr>
+                            {%- endif -%}
+                            {%- if customer.default_address.city != blank -%}
+                            <tr>
+                              <td class="text-left"><strong>{{ 'customer.account.country' | t }}</strong></td>
+                              <td>{{ customer.default_address.city}}, {% if address.province_code %}{{customer.default_address.province_code}}, {% endif %}{{customer.default_address.country}}</td>
+                            </tr>
+                            {%- endif -%}
+                            {%- if customer.default_address.zip != blank -%}
+                            <tr>
+                              <td class="text-left"><strong>{{ 'customer.account.zip' | t }}</strong></td>
+                              <td>{{ customer.default_address.zip }}</td>
+                            </tr>
+                            {%- endif -%}
+                            {%- if customer.default_address.phone != blank -%}
+                            <tr>
+                              <td class="text-left"><strong>{{ 'customer.account.phone' | t }}</strong></td>
+                              <td>{{ customer.default_address.phone }}</td>
+                            </tr>
+                            {%- endif -%}
+                            {%- endif -%}
+                          </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </article>
+         </div>
+      </div>
+   </div><!-- end container -->
+</div><!-- .main-page-wrapper -->

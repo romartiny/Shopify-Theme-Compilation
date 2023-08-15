@@ -1,0 +1,5 @@
+<div class="product_img_trust_seal {{padding_class}}">
+  {%- assign image = settings.img_trust_seal -%}
+  {%- assign product_image_size = image.width | append: 'x' -%}
+  <img alt="{{image.alt}}" src="{%-include 'gl_image_format',cache:true,src: image.src, size: product_image_size -%}">
+</div>

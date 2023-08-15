@@ -1,0 +1,29 @@
+{%- capture basel_style -%}
+/*-----------------------------------------------------------------------------/
+/ Custom Theme CSS
+/-----------------------------------------------------------------------------*/
+/*---------------- Global Custom CSS -------------------*/
+{{settings.global_custom_css }}
+
+/*---------------- Custom CSS for desktop -------------------*/
+@media (min-width: 992px) {
+{{settings.desktop_custom_css }}
+}
+
+/*---------------- Custom CSS for tablet -------------------*/
+@media (min-width: 768px) and (max-width: 991px) {
+{{settings.tablet_custom_css }}
+}
+
+/*---------------- Custom CSS for mobile landscape -------------------*/
+@media (min-width: 481px) and (max-width: 767px) {
+{{settings.landscape_custom_css }}
+}
+
+/*---------------- Custom CSS for mobile -------------------*/
+@media (max-width: 480px){
+{{settings.mobile_custom_css }}
+}
+{%- endcapture -%}
+{{ basel_style | strip_newlines | remove: "  "}}
+

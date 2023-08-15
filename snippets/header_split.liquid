@@ -1,0 +1,33 @@
+<div class="container">
+   <div class="wrapp-header">
+      <div class="right-column left-side">
+         <div class="mobile-nav-icon">
+            <span class="basel-burger"></span>
+         </div>
+         <!--END MOBILE-NAV-ICON-->
+         {%- include 'header_search' -%}
+         {%- include 'header_wishlist' -%}
+      </div>
+      {%- include 'gl_logo' -%}
+      <div class="main-nav site-navigation basel-navigation menu-{{settings.basel_menu_align}}" role="navigation">{%- section 'gl_mega_menu' -%}</div>
+      <!--END MAIN-NAV-->
+      <div class="right-column">
+         {%- include 'header_account' -%}
+         {%- unless settings.cart_design == 'disable' or settings.catalog_mode or template contains 'cart' -%}
+         <div class="shopping-cart basel-cart-design-{{settings.cart_design}} basel-cart-icon{%- if settings.cart_position == 'side' %} cart-widget-opener{%- endif %}{%- if settings.shopping_icon_alt %} basel-cart-alt{%- endif -%}">
+            <a href="/cart">
+               <span>Cart (<span class="cartCount">{{ cart.item_count }}</span>)</span>
+               <span class="basel-cart-totals">
+                  <span class="basel-cart-number cartCount">{{ cart.item_count }}</span>
+                  <span class="subtotal-divider">/</span> 
+                  <span class="basel-cart-subtotal"><span class="shopify-Price-amount amount">{{ cart.total_price | money }}</span></span>
+               </span>
+            </a>
+            {%- if settings.cart_position == 'dropdown' -%}
+            <div class="dropdown-wrap-cat">{%- include 'cart_widget_side' -%}</div>
+            {%- endif -%}
+         </div>
+         {%- endunless -%}
+      </div>
+   </div>
+</div>

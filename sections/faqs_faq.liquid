@@ -1,0 +1,144 @@
+{%- if section.settings.hidden_section -%}{%- capture check_admin -%}{{ content_for_header  }}{%- endcapture -%}<style> #shopify-section-{{ section.id }} { {%- if check_admin contains 'design_mode' -%}opacity: .5;filter: alpha(opacity=50){%- else -%}display: none !important{%- endif -%}}</style>{%- endif -%}
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{{style_block_section}}
+<div data-gl-full-width="true" data-gl-full-width-init="true" class="gl_custom_{{section.id}} gl_row spb_row gl_row-fluid gl_row-has-fill">
+   <div class="spb_column gl_column_container gl_col-sm-12">
+      <div class="gl_column-inner ">
+         <div class="spb_wrapper">
+            {%- if section.settings.title != blank -%}<h1 style="font-size: 78px;color: #ffffff;line-height: 1.4;text-align: center" class="gl_custom_heading" style="margin-bottom: 35px">{{section.settings.title}}</h1>{%- endif -%}
+            <div class="gl_row spb_row gl_inner gl_row-fluid" style="margin-bottom: 15px !important; padding-right: 50px !important;padding-left: 50px !important">
+               {%- for block in section.blocks -%}
+               <div class="spb_column gl_column_container gl_col-sm-3">
+                  <div class="gl_column-inner ">
+                     <div class="spb_wrapper">
+                        <div class="spb_text_column spb_content_element color-white">
+                           <div class="spb_wrapper">
+                              <p>
+                              	{%- if block.settings.title != blank -%}<span class="gl_icon_element-icon icon-{{block.settings.title}} icons" style="color: #ffffff!important; float: left; font-size: 38px; margin: 0 10px 0;">&nbsp;</span>{%- endif -%}
+                              	{%- if block.settings.text != blank -%}
+                              	<span style="color: white">{{block.settings.text}}</span>
+                                {%- endif -%}
+                              </p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               {%- endfor -%}
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="gl_row-full-width gl_clearfix"></div>
+{%- schema -%}
+  {
+    "name": "FaQs Information",
+    "class": "index-section gl_info",
+    "settings": [
+      {
+      "type": "header",
+      "content": "== General"
+      },
+      {
+	      "type": "text",
+	      "id": "title",
+	      "label": "Title",
+	      "default": "FAQS"
+	    },
+	    {
+        "type": "image_picker",
+        "id": "section_bg_image",
+        "label": "Background Image",
+        "info": "1900x700 (Width x Height)."
+      },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "color",
+        "id": "section_bg_color",
+        "label": "Background color",
+         "default":"#f9f9f9"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      },
+      {
+        "type": "header",
+        "content": "== Basel Extras"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden_section",
+        "label": "Hidden Section?",
+        "info": "if checked section will be set to hidden.",
+        "default": false
+      }
+    ],
+    "blocks": [
+      {
+        "type": "block",
+        "name": "Text block",
+        "settings": [
+        	{
+              "id": "title",
+              "type": "text",
+              "label": "Icon",
+              "default": "envelope",
+              "info":"ex:envelope [Simple line icons](http://simplelineicons.com)"
+            },
+            {
+              "id": "text",
+              "type": "html",
+              "label": "Text ",
+              "default": "Tel: 877-45-44-33<br>E-Mail: shop@store.uk"
+            }
+        ]
+      }
+    ]
+  }
+{% endschema %}

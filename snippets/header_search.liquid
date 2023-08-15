@@ -1,0 +1,23 @@
+{%- if settings.basel_search_widget != 'disable' -%}
+<div class="search-button basel-search-{{settings.basel_search_widget}}">
+   <a href="#"><i class="fa fa-search"></i></a>
+   <div class="basel-search-wrapper">
+      <div class="basel-search-inner">
+         <span class="basel-close-search">{{ 'general.search.close_search' | t }}</span>
+         <form role="search" method="get" id="searchform" class="searchform{%- if settings.ajax_search %} basel-ajax-search{%- endif -%}" action="/search">
+            <div>
+               <label class="screen-reader-text" for="q"></label>
+               <input type="text" placeholder="{{ 'general.search.placeholder' | t }}" value="{{ search.terms | escape }}" name="q" id="q" autocomplete="off">
+               {%- if settings.only_search_products -%}<input type="hidden" name="type" value="product" />{%- endif -%}
+               <button type="submit" id="searchsubmit">{{ 'general.search.submit' | t }}</button>
+            </div>
+         </form>
+         <div class="search-results-wrapper">
+            <div class="basel-search-results">
+               <div class="autocomplete-suggestions" style="position: absolute; display: none; max-height: 300px; z-index: 9999;"></div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{%- endif -%}

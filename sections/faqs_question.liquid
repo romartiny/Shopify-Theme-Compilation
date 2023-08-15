@@ -1,0 +1,169 @@
+{%- if section.settings.hidden_section -%}{%- capture check_admin -%}{{ content_for_header  }}{%- endcapture -%}<style> #shopify-section-{{ section.id }} { {%- if check_admin contains 'design_mode' -%}opacity: .5;filter: alpha(opacity=50){%- else -%}display: none !important{%- endif -%}}</style>{%- endif -%}
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{{style_block_section}}
+<div data-gl-full-width="true" data-gl-full-width-init="true" class="gl_custom_{{section.id}} gl_row spb_row gl_row-fluid gl_row-has-fill">
+   <div class="spb_column gl_column_container gl_col-sm-12">
+      <div class="gl_column-inner ">
+         <div class="spb_wrapper">
+            {%- if section.settings.title != blank -%}<h1 style="font-size: 38px;line-height: 1;text-align: left;margin-bottom: 35px" class="gl_custom_heading"><strong>{{section.settings.title}}</strong></h1>{%- endif -%}
+            <div class="gl_row spb_row gl_inner gl_row-fluid">
+               {%- for block in section.blocks -%}
+                <div class="spb_column gl_column_container gl_col-sm-6">
+                  <div class="gl_column-inner ">
+                     <div class="spb_wrapper">
+                      {%- if block.settings.title_one != blank and block.settings.answering_one != blank -%}
+                        <div class="spb_text_column spb_content_element ">
+                            <div class="spb_wrapper">
+                              <h5><strong>{{block.settings.title_one}}</strong></h5>
+                              <p>{{block.settings.answering_one}}</p>
+                            </div>
+                        </div>
+                        {%- endif -%}
+                        {%- if block.settings.title_two != blank and block.settings.answering_two != blank -%}
+                        <div class="spb_text_column spb_content_element ">
+                           <div class="spb_wrapper">
+                              <h5><strong>{{block.settings.title_two}}</strong></h5>
+                              <p>{{block.settings.answering_two}}</p>
+                            </div>
+                        </div>
+                        {%- endif -%}
+                     </div>
+                  </div>
+               </div>
+               {%- endfor -%}
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="gl_row-full-width gl_clearfix"></div>
+{%- schema -%}
+  {
+    "name": "FaQs Question",
+    "class": "index-section gl_question",
+    "settings": [
+      {
+      "type": "header",
+      "content": "== General"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "FaQs. General Information"
+      },
+      {
+            "type": "image_picker",
+            "id": "section_bg_image",
+            "label": "Background Image",
+            "info": "1900x700 (Width x Height)."
+        },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "color",
+        "id": "section_bg_color",
+        "label": "Background color",
+        "default":"#f9f9f9"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      },
+      {
+        "type": "header",
+        "content": "== Basel Extras"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden_section",
+        "label": "Hidden Section?",
+        "info": "if checked section will be set to hidden.",
+        "default": false
+      }
+    ],
+    "blocks": [
+      {
+        "type": "block",
+        "name": "Text block",
+        "settings": [
+          {
+            "type": "header",
+            "content": "== Question/Answering 1"
+        },
+            {
+              "id": "title_one",
+              "type": "text",
+              "label": "Question",
+              "default": "Eu dictumst cum at sed euismod condimentum?"
+            },
+            {
+              "id": "answering_one",
+              "type": "textarea",
+              "label": "Answering",
+              "default": "Justo est cum sit fames ac convallis est non leo rhoncus feugiat scelerisque tempus nec sapien vestibulum dis parturient felis a taciti."
+            },
+            {
+            "type": "header",
+            "content": "== Question/Answering 2"
+        },
+            {
+              "id": "title_two",
+              "type": "text",
+              "label": "Question",
+              "default": "Odio molestie hac eros consectetur scelerisque?"
+            },
+            {
+              "id": "answering_two",
+              "type": "textarea",
+              "label": "Answering",
+              "default": "Eu tincidunt magnis erat malesuada vulputate parturient nisl a nisl in a facilisis porttitor ullamcorper nec a a lectus eget non leo ad ad parturient pretium magna.A ligula dis vestibulum dapibus."
+            }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,547 @@
+{%- if section.settings.hidden_section -%}{%- capture check_admin -%}{{ content_for_header  }}{%- endcapture -%}<style> #shopify-section-{{ section.id }} { {%- if check_admin contains 'design_mode' -%}opacity: .5;filter: alpha(opacity=50){%- else -%}display: none !important{%- endif -%}}</style>{%- endif -%}
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{%- capture data_section -%}
+  {%- if section.settings.row_stretch == 'stretch_row' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true'
+  {%- elsif section.settings.row_stretch == 'stretch_row_content' or section.settings.row_stretch == 'stretch_row_content_no_spaces' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true' data-gl-stretch-content='true'
+  {%- else -%}
+  {%- assign class_has_fill = '' -%}
+  {%- endif -%}
+{%- endcapture -%}
+{{ style_block_section }}
+{%- if section.settings.title != blank -%}
+<section {{ data_section }} class="gl_custom_{{section.id}} gl_section {{class_has_fill}}">
+  <div class="gl_row spb_row gl_row-fluid">
+     <div class="spb_column gl_column_container gl_col-sm-3">
+        <div class="gl_column-inner">
+           <div class="spb_wrapper"></div>
+        </div>
+     </div>
+     <div class="spb_column gl_column_container gl_col-sm-6">
+        <div class="gl_column-inner ">
+           <div class="spb_wrapper">
+              <div class="spb_text_column spb_content_element gl_mb_0">
+                {%- if section.settings.title contains '[' -%}
+                    {%- assign title = section.settings.title | split: ']' -%}
+                    {%- assign title_two = title[1] -%}
+                    {%- assign title_one = title[0]| split: '[' | last -%}
+                {%- endif -%}
+                 <div class="spb_wrapper"><h4 style="font-size: 42px; text-align: center;">{%- if section.settings.title contains '[' -%}{{title_one}} <span class="color-primary"> {{title_two}}{%- else -%}{{ section.settings.title }}{%- endif -%}</span></h4></div>
+              </div>
+              <div class="gl_separator spb_content_element gl_separator_align_center gl_sep_width_10 gl_sep_border_width_2 gl_sep_pos_align_center gl_separator_no_text gl_sep_color_grey gl_mb_20"><span class="gl_sep_holder gl_sep_holder_l"><span class="gl_sep_line"></span></span><span class="gl_sep_holder gl_sep_holder_r"><span class="gl_sep_line"></span></span></div>
+           </div>
+        </div>
+     </div>
+     <div class="spb_column gl_column_container gl_col-sm-3">
+        <div class="gl_column-inner ">
+           <div class="spb_wrapper"></div>
+        </div>
+     </div>
+  </div>
+{%- endif -%}
+  <div {{ data_section }} class="gl_row spb_row gl_row-fluid {{class_has_fill}}{%- if section.settings.title == blank %} gl_custom_{{section.id}}{%- endif -%}">
+    {%- for block in section.blocks -%}
+      {%- if block.settings.block_margin_top != blank or block.settings.block_margin_bottom != blank or block.settings.block_border != blank -%}
+      {%- assign s_margin_top = block.settings.block_margin_top | remove: ' ' | join: ' ' -%}
+      {%- assign s_margin_bottom = block.settings.block_margin_bottom | remove: ' ' | join: ' ' -%}
+      {%- assign s_border = block.settings.block_border | remove: ' ' | split: '-' | join: ' ' -%}
+      {%- endif -%}
+      {%- capture style_block -%}
+      {%- if block.settings.block_margin_top != blank or block.settings.block_margin_bottom != blank or block.settings.block_padding_top != blank or block.settings.block_padding_right != blank or block.settings.block_padding_left != blank or block.settings.block_padding_bottom != blank or block.settings.block_border != blank -%}
+      <style type="text/css">.gl_block_{{block.id}}{ {%- if block.settings.block_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if block.settings.block_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if block.settings.block_padding_top != blank -%}padding-top: {{block.settings.block_padding_top}} !important;{%- endif-%}{%- if block.settings.block_padding_right != blank -%}padding-right: {{block.settings.block_padding_right}} !important;{%- endif-%}{%- if block.settings.block_padding_bottom != blank -%}padding-bottom: {{block.settings.block_padding_bottom}} !important;{%- endif-%}{%- if block.settings.block_padding_left != blank -%}padding-left: {{block.settings.block_padding_left}} !important; {%- endif -%}{%- if block.settings.block_border != blank and block.settings.block_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{block.settings.block_border_color}} !important; border-style: {{block.settings.block_border_style}} !important{%- endif -%} }</style>
+      {%- endif -%}
+      {%- endcapture -%}
+    {{style_block}}
+    <div class="spb_column gl_column_container gl_col-sm-{{ block.settings.banner_width | plus:0 }}">
+        <div class="gl_column-inner gl_block_{{block.id}}">
+           <div class="spb_wrapper">
+              <div class="{%- if block.settings.banner_link != blank and block.settings.banner_btn_title != blank -%}cursor-pointer{%- endif %} basel-info-box text-{{ block.settings.banner_alignment }} icon-alignment-{{ block.settings.banner_vertical_alignment }} box-style-{{ block.settings.box_style }} color-scheme-{{ block.settings.banner_color }} btn-position-{{ block.settings.button_style }} with-animation" {%- if block.settings.banner_link != blank and block.settings.banner_btn_title != blank -%}onclick="window.location.href='{{ block.settings.banner_link }}'"{%- endif %}>
+                 <div class="box-icon-wrapper">
+                    <div class="info-box-icon">
+                        {%- if block.settings.svg_link != blank -%}
+                        <div class="info-svg-wrapper" style="width: 60px;height: 60px;">{{ block.settings.svg_link }}</div>
+                        {%- elsif block.settings.image != blank -%}
+                           {%- assign image = block.settings.image -%}
+                           {%- assign image_size = image.width | append:'x' -%}
+                           {%- assign image_width = image.width -%}
+                           <img width="{{ image_width }}" height="{{ image.height }}" class="info-icon image-1 attachment-full" alt="{{ image.alt }}"
+                           src="{%-include 'gl_image_format',src: image , size: image_size -%}" 
+                           srcset="{%-include 'gl_image_format',src: image , size: image_size %} {{ image_width }}w 
+                           {%- if image_width > 300 -%},{%-include 'gl_image_format',src: image , size: '300x' %} 300w{%- endif -%}  
+                           {%- if image_width > 270 -%},{%-include 'gl_image_format',src: image , size: '270x' %} 270w{%- endif -%}  
+                           {%- if image_width > 280 -%},{%-include 'gl_image_format',src: image , size: '280x' %} 280w{%- endif -%}  
+                           {%- if image_width > 273 -%},{%-include 'gl_image_format',src: image , size: '273x' %} 273w{%- endif -%}  
+                           {%- if image_width > 546 -%},{%-include 'gl_image_format',src: image , size: '546x' %} 546w{%- endif -%} " sizes="(max-width: {{ image_width }}px) 100vw, {{ image_width }}px">
+                        {%- else -%}
+                           <img width="600" height="442" src="https://cdn.shopify.com/s/files/1/1933/6253/files/portfolio-placeholder_360x360_crop_center.jpg?12790048884060573015">                            
+                        {%- endif -%}
+                    </div>
+                 </div>
+                 <div class="info-box-content">
+                    <div class="info-box-inner">
+                        {%- if block.settings.banner_content != blank -%}
+                         {{ block.settings.banner_content }}
+                        {%- else -%}
+                          <p></p>
+                          <h1 style="text-align: center;"><strong class="font-alt color-primary">Dog care</strong>&nbsp;ADVICE</h1>
+                          <p>Dapibus parturient sit morbi lobortis urna a diam lacus scelerisque a potenti suspendisse a a ullamcorper facilisi dapibus ultricies sed.</p>
+                        {%- endif -%}
+                        {%- if block.settings.banner_link != blank  and block.settings.banner_btn_title != blank  -%}
+                        <div class="info-btn-wrapper">
+                        <a href="{{ block.settings.banner_link }}" class="btn btn-style-link btn-color-primary info-box-btn">{{ block.settings.banner_btn_title }}</a>
+                        </div>
+                        {%- endif -%}
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+     {%- endfor -%}
+     {%- if section.settings.button_text != blank and section.settings.link != blank -%}
+     <div class="spb_column gl_column_container gl_col-sm-12">
+         <div class="gl_column-inner">
+            <div class="spb_wrapper">
+               <div class="basel-button-wrapper text-center"><a href="{{ section.settings.link }}" class="btn btn-color-primary btn-style-default btn-size-default"><strong>{{section.settings.button_text}}</strong></a></div>
+            </div>
+         </div>
+      </div>
+      {%- endif -%}
+  </div>
+  {%- unless section.settings.row_stretch == 'default' -%}
+  <div class="gl_row-full-width gl_clearfix"></div>
+  {%- endunless -%}
+{%- if section.settings.title != blank -%}</section>{%- endif -%}
+{%- unless section.settings.row_stretch == 'default' -%}
+<div class="gl_row-full-width gl_clearfix"></div>
+{%- endunless -%}
+
+{%- schema -%}
+  {
+    "name": "Information box",
+    "class": "index-section has_section_gl_js gl_info_box",
+    "presets": [{
+      "name": "Information box",
+      "category": "Text",
+      "blocks": [
+       {
+         "type": "information"
+       },
+       {
+         "type": "information"
+       },
+       {
+         "type": "information"
+       }
+     ]
+    }],
+    "settings": [
+      {
+        "type": "header",
+        "content": "== General"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "___ Heading",
+        "info": "[our]Services"
+      },
+      {
+        "type": "select",
+        "id": "row_stretch",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "stretch_row",
+            "label": "Stretch row"
+          },
+          {
+            "value": "stretch_row_content",
+            "label": "Stretch row and content"
+          },
+          {
+            "value": "stretch_row_content_no_spaces",
+            "label": "Stretch row and content (no paddings)"
+          }
+        ],
+        "label": "___ Row stretch",
+        "info": "Select stretching options for row and content (Note: stretched may not work properly if parent container has 'overflow: hidden' CSS property).",
+        "default": "default"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text"
+      },
+      {
+         "type": "url",
+         "id": "link",
+         "label": "Link",
+         "info": "Enter URL if you want this box to have a link."
+       },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "color",
+        "id": "section_bg_color",
+        "label": "Background"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      },
+      {
+        "type": "header",
+        "content": "== Basel Extras"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden_section",
+        "label": "Disable Section?",
+        "info": "If checked the section won't be visible on the public side of your website. You can switch it back any time.",
+        "default": false
+      }
+    ],
+    "blocks": [
+      {
+        "type": "information",
+        "name": "Information",
+        "settings": [
+            {
+             "type": "select",
+             "id": "banner_width",
+             "options": [
+              {
+                 "value": "1",
+                 "label": "1 column - 1/12"
+               },
+               {
+                 "value": "2",
+                 "label": "2 columns - 1/6"
+               },
+               {
+                 "value": "3",
+                 "label": "3 columns - 1/4"
+               },
+               {
+                 "value": "4",
+                 "label": "4 columns - 1/3"
+               },
+               {
+                 "value": "5",
+                 "label": "5 columns - 5/12"
+               },
+               {
+                 "value": "6",
+                 "label": "6 columns - 1/2"
+               },
+               {
+                 "value": "7",
+                 "label": "7 columns - 7/12"
+               },
+               {
+                 "value": "8",
+                 "label": "8 columns - 2/3"
+               },
+               {
+                 "value": "9",
+                 "label": "9 columns - 3/4"
+               },
+               {
+                 "value": "10",
+                 "label": "10 columns - 5/6"
+               },
+               {
+                 "value": "11",
+                 "label": "11 columns - 11/12"
+               },
+               {
+                 "value": "12",
+                 "label": "12 columns - 1/1"
+               }
+             ],
+             "label": "== Select column width",
+             "default": "4"
+           },
+           {
+               "type": "image_picker",
+               "id": "image",
+               "label": "== Image"
+             },
+            {
+               "type": "html",
+              "id": "svg_link",
+              "label": "== svg image"
+            },
+           {
+             "type": "html",
+             "id": "banner_content",
+             "label": "== Banner content",
+             "info": "Add here few words to your banner image."
+           },
+           {
+             "type": "paragraph",
+             "content": "[Copy information content style 1 ( home-cars ) ](http:\/\/codepen.io\/sarus\/pen\/XRwGVB?editors=1000)"
+           },
+           {
+             "type": "paragraph",
+             "content": "[Copy information content style 2 ( home-cosmetics ) ](http:\/\/codepen.io\/sarus\/pen\/pPmYLd?editors=1000)."
+           },
+           {
+             "type": "paragraph",
+             "content": "[Copy information content style 3 ( home-pets ) ](http:\/\/codepen.io\/sarus\/pen\/QvRomg?editors=1000)."
+           },
+           {
+             "type": "paragraph",
+             "content": "[Copy information content style 4 ( home-jewellery ) ](http:\/\/codepen.io\/sarus\/pen\/NjVJYp?editors=1000)."
+           },
+           {
+             "type": "text",
+             "id": "banner_btn_title",
+             "label": "== Button title",
+             "info": "Add here few words to your title button."
+           },
+           {
+             "type": "url",
+             "id": "banner_link",
+             "label": "== Banner link",
+             "info": "Enter URL if you want this banner to have a link."
+           },
+           {
+            "type": "select",
+            "id": "button_style",
+            "options": [
+             {
+                "value": "hover",
+                "label": "Show on hover"
+              },
+              {
+                "value": "static",
+                "label": "Static"
+              }
+            ],
+            "label": "== Button style",
+            "default": "hover"
+          },
+           {
+            "type": "select",
+            "id": "banner_alignment",
+            "options": [
+             {
+                "value": "left",
+                "label": "Align left"
+              },
+              {
+                "value": "right",
+                "label": "Align right"
+              },
+              {
+                "value": "center",
+                "label": "Align center"
+              }
+            ],
+            "label": "== Text alignment",
+            "info": "Select Text alignment.",
+            "default": "center"
+          },
+          {
+            "type": "select",
+            "id": "banner_vertical_alignment",
+            "options": [
+             {
+                "value": "top",
+                "label": "Top"
+              },
+              {
+                "value": "left",
+                "label": "Left"
+              },
+              {
+                "value": "right",
+                "label": "Right"
+              }
+            ],
+            "label": "== Image alignment",
+            "default": "top"
+          },
+          {
+            "type": "select",
+            "id": "box_style",
+            "options": [
+             {
+                "value": "base",
+                "label": "Base"
+              },
+              {
+                "value": "border",
+                "label": "Bordered"
+              },
+              {
+                "value": "shadow",
+                "label": "Shadow"
+              }
+            ],
+            "label": "== Box style",
+            "default": "base"
+          },
+          {
+            "type": "select",
+            "id": "banner_color",
+            "options": [
+             {
+                "value": "light",
+                "label": "Light"
+              },
+              {
+                "value": "dark",
+                "label": "Dark"
+              }
+            ],
+            "label": "== Color Scheme",
+            "default": "dark"
+          },
+          {
+            "type": "header",
+            "content": "== Design Options"
+          },
+          {
+          "type": "color",
+          "id": "block_border_color",
+          "label": "Border color"
+          },
+          {
+          "type": "select",
+          "id": "block_border_style",
+          "options": [
+          {
+             "value": "solid",
+             "label": "Solid"
+           },
+          {
+             "value": "dotted",
+             "label": "Dotted"
+           },
+           {
+             "value": "dashed",
+             "label": "Dashed"
+           },
+           {
+             "value": "double",
+             "label": "Double"
+           },
+           {
+             "value": "groove",
+             "label": "Groove"
+           },
+           {
+             "value": "Ridge",
+             "label": "Ridge"
+           },
+           {
+             "value": "inset",
+             "label": "Inset"
+           },
+           {
+             "value": "outset",
+             "label": "Outset"
+           }
+          ],
+          "label": "Border style",
+          "default": "solid"
+          },
+          {
+          "type": "text",
+          "id": "block_border",
+          "label": "Borders Integer px ( top-right-bottom-left )",
+          "info": "0-0-1px-0"
+          },
+          {
+            "type": "text",
+            "id": "block_margin_top",
+            "label": "Margin top",
+            "info": "60px"
+          },
+          {
+            "type": "text",
+            "id": "block_margin_bottom",
+            "label": "Margin bottom",
+            "info": "60px"
+          },
+          {
+            "type": "text",
+            "id": "block_padding_top",
+            "label": "Padding top",
+            "info": "60px"
+          },
+          {
+            "type": "text",
+            "id": "block_padding_right",
+            "label": "Padding right",
+            "info": "60px"
+          },
+          {
+            "type": "text",
+            "id": "block_padding_bottom",
+            "label": "Padding bottom",
+            "info": "60px"
+          },
+          {
+            "type": "text",
+            "id": "block_padding_left",
+            "label": "Padding left",
+            "info": "60px"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

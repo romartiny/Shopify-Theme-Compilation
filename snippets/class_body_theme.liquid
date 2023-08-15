@@ -1,0 +1,89 @@
+{%- comment -%}class general layout{%- endcomment -%}
+{%- case settings.general_layout -%}
+{%- when 'full_width' -%}
+	{%- assign general_layout = "wrapper-full-width" -%}
+{%- when 'boxed' -%}
+	{%- assign  general_layout = "wrapper-boxed" -%}
+{%- when 'contetn_full' -%}
+	{%- assign general_layout = "wrapper-full-width-content" -%}
+{%- when 'wide' -%}
+	{%- assign general_layout = "wrapper-wide" -%}
+{%- endcase -%}
+{%- comment -%}class product page layout{%- endcomment -%}
+{%- if product.template_suffix == 'design_images_scroll' -%}
+	{%- assign design_products = "basel-product-design-sticky" -%}
+{%- elsif product.template_suffix == 'design_compact' -%}
+	{%- assign design_products = "basel-product-design-compact" -%}
+{%- elsif product.template_suffix == 'design_alternative' -%}
+	{%- assign design_products = "basel-product-design-alt" -%}
+{%- elsif product.template_suffix == 'design_default' -%}
+	{%- assign design_products = "basel-product-design-default" -%}
+{%- elsif template contains 'product' -%}
+	{%- case settings.design_products -%}
+	{%- when '1' -%}
+		{%- assign design_products = "basel-product-design-default" -%}
+	{%- when '2' -%}
+		{%- assign design_products = "basel-product-design-alt" -%}
+	{%- when '3' -%}
+		{%- assign design_products = "basel-product-design-sticky" -%}
+	{%- when '4' -%}
+		{%- assign design_products = "basel-product-design-compact" -%}
+	{%- endcase -%}
+{%- endif -%}
+{%- comment -%}class header layout{%- endcomment -%}
+{%- capture header_class -%}
+	{%- if settings.use_rtl %} rtl{%- endif -%}
+	{%- if settings.use_dark_version %} basel-dark{%- endif -%}
+	{%- if settings.top_bar_enable %} basel-top-bar-on{%- endif -%}
+	{%- if settings.full_header_enable %} header-full-width{%- endif -%}
+	{%- if settings.header_design == 'menu-top' %} sticky-navigation-only{%- endif -%}
+	{%- if settings.sticky_header_enable %}
+		{%- case settings.header_design -%}
+			{%- when 'shop' -%}
+				{%- assign sticky_header = "real" -%}
+			{%- when 'split' -%}
+				{%- assign sticky_header = "real" -%}
+			{%- when 'menu-top' -%}
+				{%- assign sticky_header = "real" -%}
+			{%- when 'simple' -%}
+				{%- if settings.overlap_header_enable -%}
+					{%- assign sticky_header = "real" -%}
+				{%- else -%}
+					{%- assign sticky_header = "clone" -%}
+				{%- endif -%}
+			{%- else -%}
+				{%- assign sticky_header = "clone" -%}
+			{%- endcase -%}
+	{%- endif -%}
+	{%- if settings.sticky_header_enable %} enable-sticky-header sticky-header-{{sticky_header}}{%- endif -%}
+	{%- if template contains 'index' or template contains 'collection' or template contains 'blog' or template contains 'article' -%}{%- assign overlap_header = true -%}{%- else -%}{%- assign overlap_header = false -%}{%- endif -%}
+	{%- if settings.overlap_header_enable and overlap_header %} basel-header-overlap{%- endif -%}
+	{%- if settings.overlap_header_enable and overlap_header == false %} nathan-header-overlap{%- endif -%}
+{%- endcapture -%}
+{%- comment -%}class footer layout{%- endcomment -%}
+{%- capture footer_layout -%}
+	{%- if settings.sticky_footer_enable %} sticky-footer-on{%- else %} no-sticky-footer{%- endif -%}
+{%- endcapture -%}
+
+{%- comment -%}class search layout{%- endcomment -%}
+{%- capture search_layout -%}
+	{%- if settings.header_design contains 'categories' -%} global-search-disable {%- else %} global-search-{{settings.basel_search_widget}}{%- endif -%}
+	{%- if settings.ajax_search %} basel-ajax-search-on{%- endif -%}
+{%- endcapture -%}
+
+{%- comment -%}class tab style one js {%- endcomment -%}
+{%- assign tab_class = "" -%}
+{%- capture ar_check_tab -%}{{ content_for_layout  }}{%- endcapture -%}
+{%- if ar_check_tab contains 'section_tab_style_one' -%}
+{%- assign check_tab = true -%}
+{%- endif -%}
+{%- if ar_check_tab contains 'gl_has_youtube' -%}
+{%- assign check_youtube = true -%}
+{%- endif -%}
+{%- if ar_check_tab contains 'gl_has_photowipe' -%}
+{%- assign check_photowipe = true -%}
+{%- endif -%}
+{%- if ar_check_tab or section_tab_single -%}
+{%- assign tab_class = "gl-tab-js" -%}
+{%- endif -%}
+{%- include 'last_catelog_mod' -%}

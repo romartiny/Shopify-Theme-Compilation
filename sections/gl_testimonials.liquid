@@ -1,0 +1,647 @@
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{%- capture data_section -%}
+  {%- if section.settings.row_stretch == 'stretch_row' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true'
+  {%- elsif section.settings.row_stretch == 'stretch_row_content' or section.settings.row_stretch == 'stretch_row_content_no_spaces' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true' data-gl-stretch-content='true'
+  {%- else -%}
+  {%- assign class_has_fill = '' -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- capture data_grid -%}
+  {%- if section.settings.photo_design == 'grid' -%}
+  instagram-grid
+  {%- elsif section.settings.photo_design == 'slider' -%}
+  instagram-slider
+  {%- else -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- capture style_title -%}
+  {%- if section.settings.bg_title != blank -%}
+  style="background-color: {{section.settings.bg_title}} !important"
+  {%- endif -%}
+{%- endcapture -%}
+{%- unless image_size != blank -%}
+  {%- assign image_size = '100x100' -%}
+{%- endunless -%}
+{%- case section.settings.width -%}
+   {%- when '4' -%}
+      {%- assign class_phu = '4' -%}
+   {%- when '6' -%}
+      {%- assign class_phu = '3' -%}
+   {%- when '8' -%}
+      {%- assign class_phu = '2' -%}
+   {%- when '10' -%}
+      {%- assign class_phu = '1' -%}
+   {%- when '12' -%}
+      {%- assign class_phu = '12' -%}
+{%- endcase -%}
+{%- assign number = section.settings.silder_per_view | plus: 0 -%}
+ {{ style_block_section }}
+<div data-section-id="{{ section.id }}" data-section-type="gl_testimonial" {{ data_section }}{%- if section.settings.use_video and section.settings.video_url != blank %} data-gl-video-bg="{{ section.settings.video_url }}"{%- endif %} class="gl_custom_{{section.id}} {% if section.settings.row_stretch == 'stretch_row_content_no_spaces' %}gl_row-no-padding{%- endif %}{%- if section.settings.use_parallax %} basel-parallax{%- endif %} gl_row spb_row gl_row-fluid {{class_has_fill}} {%- if section.settings.use_video and section.settings.video_url != blank %} opacity-video-bg gl_video-bg-container gl_has_youtube{%- endif %}{%- if section.settings.full_height %} gl_row-o-full-height gl_row-o-columns-{{section.settings.columns_position}}{%- endif %}{%- if section.settings.equal_height %} gl_row-o-equal-height{%- endif %}{%- unless section.settings.content_position == 'default' %} gl_row-o-content-{{section.settings.content_position}}{%- endunless %}{%- if section.settings.equal_height or section.settings.full_height or section.settings.content_position != 'default' %} gl_row-flex{%- endif -%}">
+   {%- if class_phu != '12' -%}
+   <div class="spb_column gl_column_container gl_col-sm-{{class_phu}}"><div class="gl_column-inner"><div class="spb_wrapper"></div></div></div>
+   {%- endif -%}
+   <div class="spb_column gl_column_container gl_col-sm-{{section.settings.width}} gl_col-has-fill color-scheme-{{ section.settings.text_color }}">
+      <div class="gl_column-inner gl_custom_testimonials">
+         <div class="spb_wrapper">
+            {%- if section.settings.title != blank -%}
+            <div class="title-wrapper basel-title-color-black basel-title-style-{{ section.settings.title_style }} basel-title-size-{{ section.settings.title_size }} text-center ">
+               <div class="liner-continer"> <span class="left-line"></span> <span class="title">{{ section.settings.title }}<span class="title-separator"><span></span></span></span> <span class="right-line"></span> </div>
+            </div>
+            {%- endif -%}
+            <div class="testimonials-wrapper">
+               {%- if section.blocks.size > 0 -%}
+                  {% comment %}{%- if section.settings.title != blank and section.settings.title_style == 'silder_title' -%}<h2 class="title slider-title">{{section.settings.title}}</h2>{%- endif -%}{% endcomment %}
+                  <div class="testimonials testimonials-{{section.settings.layout}} testimon-style-{{section.settings.style}} testimon-columns-{{section.settings.columns}} testimon-align-{{section.settings.align}} {%- if section.settings.layout =='slider' %}ins-owl-carousel owl-carousel{%- endif -%}" data-autoheight='true' data-time='{{ section.settings.silder_speed | plus: 0 }}' data-nav='{%- if section.settings.hide_button -%}false{%- else -%}true{%- endif -%}' data-items='{{ number }}' data-dots='{%- if section.settings.hide_pagination -%}false{%- else -%}true{%- endif -%}' data-autoplay='{%- if section.settings.autoplay -%}true{%- else -%}false{%- endif -%}' data-loop='{%- if section.settings.slider_loop -%}true{%- else -%}false{%- endif -%}' data-medium='1' data-small='1' data-exsmall='1'>
+                     {%- for block in section.blocks -%}
+                     <div class="testimonial" {{ block.shopify_attributes }}>
+                        <div class="testimonial-inner">
+                           <div class="testimonial-avatar">
+                              {%- if block.settings.avatar != blank -%}
+                              {%- assign image = block.settings.avatar -%}
+                                 <img class="testimonial-avatar-image" src="{%-include 'gl_image_format',src: image , size: image_size -%}" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt }}" title="{{ image.alt }}">                 
+                              {%- else -%}
+                                 <img class="testimonial-avatar-image" src="//cdn.shopify.com/s/files/1/1933/6253/files/testimonials-placeholder.jpg?14557201033594249559" width="100" height="100" alt="client1" title="client1">
+                              {%- endif -%}
+                           </div>
+                           <div class="testimonial-content">
+                              {%- if block.settings.quote != blank -%}{{ block.settings.quote | strip_html }}{%- endif -%}         
+                              {%- if block.settings.author != blank -%}
+                              <footer>
+                                 {{ block.settings.author }}{%- if block.settings.user_title != blank -%}<span>{{block.settings.user_title}}</span>{%- endif -%}
+                              </footer>
+                              {%- endif -%}
+                           </div>
+                        </div>
+                     </div>
+                     {%- endfor -%}
+                  </div>
+               {%- endif -%}
+               {%- if section.blocks.size == 0 -%}
+                {%- include 'no-blocks' -%}
+               {%- endif -%}
+            </div>
+         </div>
+      </div>
+   </div>
+  {%- if class_phu != '12' -%}
+   <div class="spb_column gl_column_container gl_col-sm-{{class_phu}}"><div class="gl_column-inner"><div class="spb_wrapper"></div></div></div>
+   {%- endif -%}
+</div>
+{%- unless section.settings.row_stretch == 'default' -%}
+  <div class="gl_row-full-width gl_clearfix"></div>
+{%- endunless -%}
+{%- schema -%}
+  {
+    "name": "Testimonials",
+    "class": "index-section index-section_testimonials",
+    "max_blocks": 9,
+    "settings": [
+      {
+      "type": "header",
+      "content": "== General Settings"
+      },
+      {
+        "type": "select",
+        "id": "row_stretch",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "stretch_row",
+            "label": "Stretch row"
+          },
+          {
+            "value": "stretch_row_content",
+            "label": "Stretch row and content"
+          },
+          {
+            "value": "stretch_row_content_no_spaces",
+            "label": "Stretch row and content (no paddings)"
+          }
+        ],
+        "label": "___ Row stretch",
+        "info": "Select stretching options for row and content (Note: stretched may not work properly if parent container has 'overflow: hidden' CSS property).",
+        "default": "default"
+      },
+      {
+        "type": "checkbox",
+        "id": "full_height",
+        "label": "Full height row?",
+        "info": "if checked row will be set to full height.",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "columns_position",
+        "options": [
+         {
+            "value": "middle",
+            "label": "Middle"
+          },
+         {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "stretch",
+            "label": "Stretch"
+          }
+        ],
+        "label": "___ Columns position (only for full height)",
+        "info": "Select columns position within row.",
+        "default": "middle"
+      },
+      {
+        "type": "checkbox",
+        "id": "equal_height",
+        "label": "Equal height?",
+        "info": "If checked columns will be set to equal height.",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "content_position",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "middle",
+            "label": "Middle"
+          },
+         {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "label": "___ Content position",
+        "info": "Select content position within columns.",
+        "default": "default"
+      },
+      {
+        "type": "header",
+        "content": "== Testimonials Options"
+      },
+      {
+       "type": "select",
+       "id": "width",
+       "options": [
+         {
+           "value": "4",
+           "label": "4 columns - 33%"
+         },
+         {
+           "value": "6",
+           "label": "6 columns - 50%"
+         },
+         {
+           "value": "8",
+           "label": "8 columns - 66%"
+         },
+         {
+           "value": "10",
+           "label": "10 columns - 83%"
+         },
+         {
+           "value": "12",
+           "label": "12 columns - 100%"
+         }
+       ],
+       "label": "== Select column width",
+       "default": "8"
+      },
+      {
+       "type": "select",
+       "id": "text_color",
+       "options": [
+        {
+           "value": "light",
+           "label": "Light"
+         },
+         {
+           "value": "dark",
+           "label": "Dark"
+         }
+       ],
+       "label": "== Color Scheme",
+       "info": "only for style Testimonials Boxed",
+       "default": "dark"
+     },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "select",
+        "id": "title_style",
+        "label": "Title style",
+        "options": [
+        {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "simple",
+            "label": "Simple"
+          },
+          {
+            "value": "cross",
+            "label": "X sign"
+          },
+          {
+            "value": "bordered",
+            "label": "Bordered"
+          },
+          {
+            "value": "shadow",
+            "label": "Shadow"
+          }
+        ],
+        "default": "default"
+      },
+      {
+        "type": "select",
+        "id": "title_size",
+        "label": "Title size",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "small",
+            "label": "Small"
+          },
+          {
+            "value": "large",
+            "label": "Large"
+          },
+          {
+            "value": "extra-large",
+            "label": "Extra Large"
+          }
+        ],
+        "default": "default"
+      },
+      {
+        "type": "select",
+        "id": "layout",
+        "label": "Layout",
+        "default": "slider",
+        "options": [
+          {
+            "label": "Slider",
+            "value": "slider"
+          },
+          {
+            "label": "Grid",
+            "value": "grid"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "style",
+        "label": "Style",
+        "default": "standard",
+        "options": [
+          {
+            "label": "Standard",
+            "value": "standard"
+          },
+          {
+            "label": "Boxed",
+            "value": "boxed"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "align",
+        "label": "Align",
+        "default": "center",
+        "options": [
+          {
+            "label": "Center",
+            "value": "center"
+          },
+          {
+            "label": "Left",
+            "value": "left"
+          },
+          {
+            "label": "Right",
+            "value": "right"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "columns",
+        "label": "Columns",
+        "info": "only for layout grid",
+        "default": "1",
+        "options": [
+          {
+            "label": "1",
+            "value": "1"
+          },
+          {
+            "label": "2",
+            "value": "2"
+          },
+          {
+            "label": "3",
+            "value": "3"
+          },
+          {
+            "label": "4",
+            "value": "4"
+          },
+          {
+            "label": "5",
+            "value": "5"
+          },
+          {
+            "label": "6",
+            "value": "6"
+          },
+          {
+            "label": "7",
+            "value": "7"
+          },
+          {
+            "label": "8",
+            "value": "8"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "== Carousel Settings"
+      },
+      {
+        "type": "text",
+        "id": "silder_speed",
+        "label": "Slider speed ( integer )",
+        "info": "Duration of animation between slides (in ms).",
+        "default": "5000"
+      },
+      {
+        "type": "select",
+        "id": "silder_per_view",
+        "options": [
+          {
+            "value": "1",
+            "label": "1"
+          },
+          {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          },
+          {
+            "value": "5",
+            "label": "5"
+          },
+          {
+            "value": "6",
+            "label": "6"
+          },
+          {
+            "value": "7",
+            "label": "7"
+          },
+          {
+            "value": "8",
+            "label": "8"
+          }
+        ],
+        "label": "Slides per view",
+        "default": "3",
+        "info": "Set numbers of slides you want to display at the same time on slider's container for carousel mode."
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_pagination",
+        "default": false,
+        "label": "Hide pagination control?",
+        "info": "pagination control will be removed"
+      },
+       {
+        "type": "checkbox",
+        "id": "hide_button",
+        "default": false,
+        "label": "Hide prev/next buttons?",
+        "info": "prev/next control will be removed"
+      },
+       {
+        "type": "checkbox",
+        "id": "slider_loop",
+        "default": false,
+        "label": "Slider loop?",
+        "info": "Enables loop mode."
+      },
+      {
+       "type": "checkbox",
+       "id": "autoplay",
+       "label": "Slider autoplay",
+       "info": "Enables autoplay mode.",
+       "default": false
+     },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "image_picker",
+        "id": "section_bg_image",
+        "label": "Background Image"
+      },
+      {
+        "type": "color",
+        "id": "section_bg_color",
+        "label": "Background color"
+      },
+      {
+        "type": "color",
+        "id": "section_border_color",
+        "label": "Border color"
+      },
+      {
+        "type": "select",
+        "id": "section_border_style",
+        "options": [
+         {
+            "value": "solid",
+            "label": "Solid"
+          },
+         {
+            "value": "dotted",
+            "label": "Dotted"
+          },
+          {
+            "value": "dashed",
+            "label": "Dashed"
+          },
+          {
+            "value": "double",
+            "label": "Double"
+          },
+          {
+            "value": "groove",
+            "label": "Groove"
+          },
+          {
+            "value": "Ridge",
+            "label": "Ridge"
+          },
+          {
+            "value": "inset",
+            "label": "Inset"
+          },
+          {
+            "value": "outset",
+            "label": "Outset"
+          }
+        ],
+        "label": "Border style",
+        "default": "solid"
+      },
+      {
+        "type": "text",
+        "id": "section_border",
+        "label": "Borders Integer px ( top-right-bottom-left )",
+        "info": "0-0-1px-0"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      },
+      {
+        "type": "header",
+        "content": "== Basel Extras"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_parallax",
+        "label": "Use Basel parallax?",
+        "default": false
+      }
+    ],
+    "blocks": [
+      {
+        "type": "quote",
+        "name": "Testimonial",
+        "settings": [
+            {
+               "type": "text",
+               "id": "author",
+               "label": "Author",
+               "info": "User name",
+               "default": "Author's name"
+            },
+            {
+               "type": "text",
+               "id": "user_title",
+               "label": "Title",
+               "info": "User title",
+               "default": "User title"
+            },
+            {
+              "type": "image_picker",
+              "id": "avatar",
+              "label": "User Avatar (100x100)"
+            },
+            {
+               "type": "textarea",
+               "id": "quote",
+               "label": "Text",
+               "default": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.</p>"
+            }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Testimonials",
+        "category": "Text",
+        "blocks": [
+          {
+            "type": "quote"
+          },
+          {
+            "type": "quote"
+          },
+          {
+            "type": "quote"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

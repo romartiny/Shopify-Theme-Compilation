@@ -1,0 +1,86 @@
+{%- layout none -%}
+{%- comment -%} check search page next search.results_count {%- endcomment -%}
+{%- assign check_paginate = false -%}
+{%- if search.terms != blank and search.performed == true -%}
+        {%- assign search_list_handle = '' -%}
+        {%- assign collection_gl = canonical_url | split:'/collections/' | last | split:'?q=' | first -%}
+          {%- paginate search.results by search.results_count -%}
+               {%- for item in search.results -%}
+                    {%- assign product = item -%}
+                    {%- for collection in product.collections -%}
+                        {%- if collection.handle == collection_gl -%}
+                          {%- assign search_list_handle = search_list_handle | append:product.handle | append:',' -%}
+                          {%- break -%}
+                        {%- endif -%}
+                    {%- endfor -%}
+               {%- endfor -%}
+               {%- if paginate.pages > 1 and paginate.next.is_link -%}{%- assign check_paginate = true -%}{%- assign next_url = paginate.next.url -%}{%- endif -%}
+          {%- endpaginate -%}
+          {%- assign arr_search_list_handle = search_list_handle | split:',' -%} 
+        {%- if arr_search_list_handle.size == 0 and check_paginate == false -%}
+           <div id="no_pr_nathan" class="autocomplete-suggestion" data-index="0"><div class="suggestion-title">{{ 'general.search.no_products' | t }}</div></div>
+        {%- else -%}
+             {%- for handle_product in arr_search_list_handle limit:4-%}
+                 {%- assign product = all_products[handle_product] -%}
+                 {%- assign current_variant = product.selected_or_first_available_variant -%}
+                 {%- assign image = current_variant.featured_image | default: product.featured_image -%} 
+                 <div class="autocomplete-suggestion" data-index="{{forloop.index0}}">
+                      {%- if image != blank -%}
+                         <div class="suggestion-thumb">
+                            {%- assign image_width = image.width | append:"x" -%}
+                            <img width="219" height="280" src="{%-include 'gl_image_format',src: image.src , size: image_size -%}" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="{{ image.alt | escape }}" 
+                            srcset="{%-include 'gl_image_format',src: image.src , size: image_size %} 219w, 
+                                   {%-include 'gl_image_format',src: image.src , size: '235x300' %} 235w, 
+                                   {%-include 'gl_image_format',src: image.src , size: '768x980' %} 768w, 
+                                   {%-include 'gl_image_format',src: image.src , size: '803x1024' %} 803w, 
+                                   {%-include 'gl_image_format',src: image.src , size: '266x340' %} 266w, 
+                                   {%-include 'gl_image_format',src: image.src , size: '219x280' %} 219w, 
+                                   {%-include 'gl_image_format',src: image.src , size: '526x671' %} 526w, 
+                                   {%-include 'gl_image_format',src: image.src , size: image_width %} {{ image.width}}w" sizes="(max-width: 219px) 100vw, 219px">
+                         </div>
+                       {%- endif -%}
+                      <div class="suggestion-title"><a href="{{ product.url | within: product.collections.first }}">{{ product.title | highlight: search.terms }}</a></div>
+                      <div class="suggestion-price price">
+                         {%- if product.price_varies -%}
+                         <span class="shopify-Price-amount amount">{{ product.price_min | money }}</span> <span class="shopify-Price-amount amount">–</span> <span class="shopify-Price-amount amount">{{ product.price_max | money }}</span>
+                         {%- elsif on_sale -%}<del><span class="shopify-Price-amount amount">{{ current_variant.compare_at_price  | money }}</span></del> <ins><span class="shopify-Price-amount amount">{{ current_variant.price | money }}</span></ins>
+                         {%- else -%}
+                         <span class="shopify-Price-amount amount">{{ current_variant.price | money }}</span>
+                         {%- endif -%}
+                      </div>
+                   </div>
+              {%- endfor -%}
+              {%- if arr_search_list_handle.size > 4 -%}
+               <div class="view-all-products"><a href="{{canonical_url}}"><span>{{ 'general.search.search_ajax__no_count_results' |t}}</span></a></div>
+               {%- elsif check_paginate and arr_search_list_handle.size == 0 -%}
+              <script type="text/javascript">
+                jQuery( document ).ready(function( $ ) {
+                  var categories_form = $('form.has-categories-dropdown');
+                  categories_form.addClass('search-loading');
+                  $('.autocomplete-suggestions').html('').addClass('hide hidden');
+                  $.ajax({
+                    dataType: "html",
+                    type: 'GET',
+                    url: '{{next_url}}&view=category',
+                    success: function(data) {
+                    $('.autocomplete-suggestions').html(data);
+                   },
+                    error: function(data) {
+                    console.log('ajax error');
+                  },
+                    complete: function() {
+                      $('.autocomplete-suggestions').html('').removeClass('hide hidden');
+                      categories_form.removeClass('search-loading');
+                      baselThemeModule.gl_currency();
+                      process = false;
+                    },
+                });
+                });
+              </script>
+               {%- elsif check_paginate and arr_search_list_handle.size < 3 and check_paginate -%}
+                   <div class="view-all-products"><a href="{{canonical_url}}"><span>{{ 'general.search.search_ajax__no_count_results' |t}}</span></a></div>
+               {%- elsif check_paginate == false and arr_search_list_handle.size == 0 -%}
+                   <div class="view-all-products"><a href="{{canonical_url}}"><span>{{ 'general.search.search_ajax__no_count_results' |t}}</span></a></div>
+               {%- endif -%}
+        {%- endif -%}
+  {%- endif -%}

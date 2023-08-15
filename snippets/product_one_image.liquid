@@ -1,0 +1,45 @@
+{%- unless template contains 'collection' and current_tags != blank -%}
+   {%- assign featured_image = product.images[0] -%}
+{%- endunless -%}
+{%- if product.featured_image.src == blank -%}
+<a href="{{ url_nt | within: collection }}">
+ {%- capture current -%}{%- cycle 1, 2 -%}{%- endcapture -%}
+ {{ 'product-' | append: current | placeholder_svg_tag: 'product-item__image icon icon--placeholder' }}
+</a>
+{%- else -%}
+ {%- if crop_nt != blank -%}
+  <a href="{{ url_nt | within: collection }}">
+    {%- assign image_width_append = crop_nt -%}
+     {%- assign image_width_append_arr = image_width_append | replace: ' x', 'x' | replace: 'x ', 'x' | replace: ' x ', 'x' | split: 'x' -%}
+   {%- assign image_width = image_width_append_arr[0] -%}
+    {%- assign image_size_first = image_width | plus:0 -%}
+   {%- assign image_height = image_size_first | divided_by: featured_image.aspect_ratio | round -%}
+   <img width="{{ image_size_first }}" height="{{ image_height }}" src="{%-include 'gl_image_format_crop',src: featured_image.src , size: crop_nt,position:'top' -%}" class="attachment-shop_catalog size-shop_catalog" alt="{{ featured_image.alt | escape }}" 
+      srcset="{%-include 'gl_image_format_crop',src: featured_image.src , size: crop_nt,position:'top' %} {{image_size_first}}w 
+      {%- if image_size_first > 235 -%}{%- assign image_height = 235 | divided_by: featured_image.aspect_ratio | round -%}{%- assign image_size_el = 235 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: featured_image.src , size:image_size_el,position:'top' %} 235w{%- endif -%} 
+      {%- if image_size_first > 768 -%}{%- assign image_height = 768 | divided_by: featured_image.aspect_ratio | round -%},{%- assign image_size_el = 768 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: featured_image.src , size:image_size_el,position:'top' %} 768w{%- endif -%}
+      {%- if image_size_first > 803 -%}{%- assign image_height = 803 | divided_by: featured_image.aspect_ratio | round -%},{%- assign image_size_el = 803 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: featured_image.src , size:image_size_el,position:'top' %} 803w{%- endif -%} 
+      {%- if image_size_first > 266 -%}{%- assign image_height = 266 | divided_by: featured_image.aspect_ratio | round -%}{%- assign image_size_el = 266 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: featured_image.src , size:image_size_el,position:'top' %} 266w{%- endif -%} 
+      {%- if image_size_first > 219 -%}{%- assign image_height = 219 | divided_by: featured_image.aspect_ratio | round -%},{%- assign image_size_el = 219 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: featured_image.src , size:image_size_el,position:'top' %} 219w{%- endif -%} 
+      {%- if image_size_first > 526 -%}{%- assign image_height = 526 | divided_by: featured_image.aspect_ratio | round -%},{%- assign image_size_el = 526 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: featured_image.src , size:image_size_el,position:'top' %} 526w{%- endif -%}" sizes="(max-width: {{ image_size_first }}px) 100vw, {{ image_size_first }}px"> 
+       {%- include 'product_labels' -%}
+</a>
+  {%- else -%}
+  <a href="{{ url_nt | within: collection }}">
+   {%- assign image_size_first = image_size | split: 'x' | first | plus:0 -%}
+   {%- assign image_width = featured_image.width -%}
+   {%- assign image_height = image_size_first | divided_by: featured_image.aspect_ratio | round -%}
+   {%- assign image_width_append = image_width | append:'x' -%}
+   <img width="{{ image_size_first }}" height="{{ image_height }}" src="{%-include 'gl_image_format',src: featured_image.src , size: image_size,cache:true -%}" class="attachment-shop_catalog size-shop_catalog" alt="{{ featured_image.alt | escape }}" 
+      srcset="{%-include 'gl_image_format',src: featured_image.src , size: image_size,cache:true %} {{image_size_first}}w 
+      {%- if image_width > 235 -%},{%-include 'gl_image_format',src: featured_image.src , size: '235x',cache:true %} 235w{%- endif -%} 
+      {%- if image_width > 768 -%},{%-include 'gl_image_format',src: featured_image.src , size: '768x',cache:true %} 768w{%- endif -%}
+      {%- if image_width > 803 -%},{%-include 'gl_image_format',src: featured_image.src , size: '803x',cache:true %} 803w{%- endif -%} 
+      {%- if image_width > 266 -%},{%-include 'gl_image_format',src: featured_image.src , size: '266x',cache:true %} 266w{%- endif -%} 
+      {%- if image_width > 219 -%},{%-include 'gl_image_format',src: featured_image.src , size: '219x',cache:true %} 219w{%- endif -%} 
+      {%- if image_width > 526 -%},{%-include 'gl_image_format',src: featured_image.src , size: '526x',cache:true %} 526w{%- endif -%}
+      ,{%-include 'gl_image_format',src: featured_image.src , size: image_width_append,cache:true %} {{image_width}}w" sizes="(max-width: {{ image_size_first }}px) 100vw, {{ image_height }}px"> 
+      {%- include 'product_labels' -%}
+  </a>
+  {%- endif -%}
+{%- endif -%}

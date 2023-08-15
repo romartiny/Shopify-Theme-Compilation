@@ -1,0 +1,8 @@
+{%- assign view_not_default = false -%}
+{%- assign limit = settings.products_per_page | plus:0 -%}
+{%- if settings.view_default == 'grid' -%}
+ {%- include 'collection_grid' -%}
+{%- else -%}
+ {%- include 'collection_list' -%}
+{%- endif -%}
+

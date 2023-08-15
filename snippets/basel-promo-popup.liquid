@@ -1,0 +1,88 @@
+{%- assign template_id = template | split: '.' | first -%}
+{%- assign st = 'display_newsletter_' | append: template_id -%}
+{%- if settings[st] -%}
+<div class="basel-promo-popup nathan-promo-popup">
+   <div class="basel-popup-inner">
+      <div class="gl_row spb_row gl_row-fluid gl_row-o-content-middle gl_row-flex">
+         <div class="spb_column gl_column_container gl_col-sm-6">
+            <div class="gl_column-inner ">
+               <div class="spb_wrapper">
+                  <div class="spb_single_image spb_content_element gl_align_left gl_custom_1459944906701">
+                     <figure class="spb_wrapper gl_figure">
+                        <div class="gl_single_image-wrapper gl_box_border_grey">
+                           {%- if settings.newsletter_bg == blank -%}
+                              <img src="http://placehold.it/760x800" alt ="placehold">
+                           {%- else -%}
+                              {%- assign image_size = '760x' -%}
+                              {%- assign image = settings.newsletter_bg -%}
+                              {%- assign image_size_first = image_size | split: 'x' | first -%}
+                              {%- assign image_width = image.width -%}
+                              {%- assign image_height = image_size_first | divided_by: image.aspect_ratio | round -%}
+                              {%- assign image_width_append = image_width | append:'x' -%}
+                              <img width="{{image_size_first}}" height="800" src="{%-include 'gl_image_format',src: image.src , size: image_size -%}" class="gl_single_image-img attachment-full" alt="{{image.alt}}" 
+                                 srcset="{%-include 'gl_image_format',src: image.src , size: image_width_append %} {{image_width}}w 
+                                 {%- if image_width > 285 -%},{%-include 'gl_image_format',src: image.src , size: '285x' %} 285w{%- endif -%} 
+                                 {%- if image_width > 270 -%},{%-include 'gl_image_format',src: image.src , size: '270x' %} 270w{%- endif -%}
+                                 {%- if image_width > 266 -%},{%-include 'gl_image_format',src: image.src , size: '266x' %} 266w{%- endif -%}
+                                 {%- if image_width > 263 -%},{%-include 'gl_image_format',src: image.src , size: '263x' %} 263w{%- endif -%}
+                                 {%- if image_width > 526 -%},{%-include 'gl_image_format',src: image.src , size: '526x' %} 526w{%- endif -%}" sizes="(max-width: {{image_size_first}}px) 100vw, {{image_size_first}}px">
+                           {%- endif -%}
+                        </div>
+                     </figure>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="spb_column gl_column_container gl_col-sm-6">
+            <div class="gl_column-inner ">
+               <div class="spb_wrapper">
+                  <div class="spb_text_column spb_content_element gl_custom_1459945099927">
+                     <div class="spb_wrapper">
+                        {{settings.popup_newsletter_description}}
+                        {%- if settings.use_newsletter_mailchimp -%}
+                           {%- if settings.newsletter_form_action != "" -%}
+                           <form id="mc4wp-form-19041994" class="mc4wp-form mc4wp-form-19041994 mc4wp-form-basic" method="post" action="{{ settings.newsletter_form_action }}" target="_blank" data-id="19041994">
+                            <div class="mc4wp-form-fields">
+                              <p class="mailchimp-input-icon">
+                                <label>Email address: </label>
+                                <input type="email" name="EMAIL" placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}" value="{%- if customer -%}{{ customer.email }}{%- endif -%}" required="">
+                              </p>
+                              <p>
+                                <input type="submit" value="{{ 'general.newsletter_form.submit' | t }}">
+                              </p>
+                              {%- if bottom -%}<div class="hidden hide"></div>{%- endif -%}
+                            </div>
+                           </form>
+                           {%- else -%}
+                           <div style="text-align: center;"><strong><em>Find the form action URL, which is a unique URL that you need to link your store to MailChimp.</em></strong></div>
+                           {%- endif -%}
+                           {%- else -%}
+                           {%- form 'customer', class:'mc4wp-form' -%}
+                           <div class="mc4wp-form-fields">
+                            <p class="mailchimp-input-icon">
+                              <input type="hidden" name="contact[tags]" value="newsletter">
+                              <label>Email address: </label>
+                              <input type="email" name="contact[email]" placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}" value="{%- if customer -%}{{ customer.email }}{%- endif -%}" required="">
+                            </p>
+                            <p>
+                              <input type="submit" value="{{ 'general.newsletter_form.submit' | t }}">
+                            </p>
+                            {%- if bottom -%}<div class="hidden hide"></div>{%- endif -%}
+                           </div>
+                           {%- if form.posted_successfully? -%}
+                           <div class="mc4wp-response"><div class="mc4wp-alert mc4wp-success">{{ 'contact.form.post_success' | t }}</div></div>
+                           {%- elsif form.errors -%}
+                           <div class="mc4wp-response"><div class="mc4wp-alert mc4wp-error">{{ form.errors | default_errors }}</div></div>
+                           {%- endif -%}
+                           {%- endform -%}
+                        {%- endif -%}
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <style type="text/css">.gl_custom_1459944906701{margin-top: -20px !important;margin-right: -20px !important;margin-bottom: -20px !important;margin-left: -20px !important;}.gl_custom_1459945099927{margin-bottom: 0px !important;padding-top: 40px !important;padding-right: 20px !important;padding-bottom: 40px !important;padding-left: 20px !important;}</style>
+   </div>
+</div>
+{%- endif -%}

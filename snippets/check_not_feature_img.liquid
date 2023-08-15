@@ -1,0 +1,49 @@
+{%- for option in product.options_with_values -%}
+  {%- assign downcased_option = option.name | downcase -%} 
+ {%- if downcased_option == 'color' or downcased_option == 'colour' -%}
+ {%- assign position_option = option.position -%} 
+ {%- endif -%}
+{%- endfor -%} 
+
+{%-assign variant_title_index = '' -%}
+{%-assign _featured_image_id = '' -%}
+{%-assign _featured_image_id_page = '' -%}
+  {%- for variant in product.variants-%}  
+     {%- case position_option -%}
+     {%- when 1 -%}
+     {%-assign title = variant.title | split: ' / ' | first | append: '|||' -%}
+     {%- assign gl_variant_option1 = variant.option1 -%} 
+     {%- assign gl_variant_option2 = variant.option2 -%} 
+     {%- assign gl_variant_option3 = variant.option3 -%}
+     {%- assign current_variant_title = current_variant.option1 -%} 
+     {%- when 2 -%}
+     {%-assign title_ = variant.title | split: ' / '  -%}
+     {%-assign title = title_[1] | append: '|||' -%}
+     {%- assign gl_variant_option1 = variant.option2 -%}
+     {%- assign gl_variant_option2 = variant.option1 -%} 
+     {%- assign current_variant_title = current_variant.option2 -%} 
+     {%- when 3 -%}
+     {%-assign title = variant.title | split: ' / ' | last | append: '|||' -%}
+     {%- assign gl_variant_option1 = variant.option3 -%} 
+     {%- assign gl_variant_option2 = variant.option1 -%} 
+     {%- assign gl_variant_option3 = variant.option2 -%} 
+     {%- assign current_variant_title = current_variant.option3 -%} 
+     {%- endcase -%}
+     {%-if variant.featured_image-%}
+         {%- unless variant_title_index contains title -%}
+         {%-assign _featured_image_id = _featured_image_id | append :variant.featured_image.id | append: '|' -%}
+         {%-assign _featured_image_id_page = _featured_image_id_page | append :variant.featured_image.id | append: ',' | append : gl_variant_option1 | append: '|' -%}
+         {%- endunless -%}
+         {%-assign variant_title_index = variant_title_index | append: title -%}
+     {%-endif-%}
+  {%- endfor -%}
+  
+{%-assign featured_image_id = _featured_image_id | split: '|' -%}
+{%-assign featured_image_id_page = _featured_image_id_page | split: '|' -%}
+{%- assign variant_recoment = false -%} 
+ {%- for id_page in featured_image_id_page -%}
+    {%- if id_page contains current_variant_title -%}
+        {%- assign id_page = id_page | split: ',' | first -%}
+        {%- assign variant_recoment = true -%} 
+    {%- endif-%}
+ {%- endfor -%}

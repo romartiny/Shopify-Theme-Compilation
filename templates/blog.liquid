@@ -1,0 +1,257 @@
+{%- assign gl_portfolio = settings.blog_portfolio -%}
+{%- if blog.handle != gl_portfolio -%}
+{%- if settings.enable_title == 'show' -%}
+   {%- assign enable_title = true -%}
+{%- else -%}
+   {%- assign enable_title = false -%}
+{%- endif -%}
+{%- if settings.enable_meta == 'show' -%}
+   {%- assign enable_meta = true -%}
+{%- else -%}
+   {%- assign enable_meta = false -%}
+{%- endif -%}
+{%- if settings.enable_text == 'show' -%}
+   {%- assign enable_text = true -%}
+{%- else -%}
+   {%- assign enable_text = false -%}
+{%- endif -%}
+{%- if settings.enable_button == 'show' -%}
+   {%- assign enable_button = true -%}
+{%- else -%}
+   {%- assign enable_button = false -%}
+{%- endif -%}
+{%- if settings.enable_post_date == 'show' -%}
+   {%- assign enable_post_date = true -%}
+{%- else -%}
+   {%- assign enable_post_date = false -%}
+{%- endif -%}
+{%- if settings.enable_post_categories == 'show' -%}
+   {%- assign enable_post_categories = true -%}
+{%- else -%}
+   {%- assign enable_post_categories = false -%}
+{%- endif -%}
+    {%- if settings.enable_post_categories == 'show' -%}
+	   {%- assign enable_post_categories = true -%}
+	{%- else -%}
+	   {%- assign enable_post_categories = false -%}
+	{%- endif -%}
+	{%- assign gl_blog_title = 'blogs.blog.blog_title_html' | t:blog_title:blog.title -%}
+	{%- assign number_articles_per_grid_page = settings.articles_per_grid_page | plus:0 -%}
+	{%- case settings.blog_columns -%}
+	    {%- when '1' -%}
+	      {%- assign gl_colum_width = 'col-xs-12 col-sm-4 col-md-12' -%} 
+	      {%- assign image_size = '1140x' -%}
+	    {%- when '2' -%}
+	      {%- assign gl_colum_width = 'col-xs-12 col-sm-4 col-md-6' -%}
+	      {%- assign image_size = '557x' -%}
+	    {%- when '3' -%}
+	      {%- assign gl_colum_width = 'col-xs-12 col-sm-4 col-md-4' -%}
+	      {%- assign image_size = '362x' -%}
+	    {%- when '4' -%}
+	      {%- assign gl_colum_width = 'col-xs-12 col-sm-4 col-md-3' -%}
+	      {%- assign image_size = '265x' -%}
+	   {%- when '6' -%}
+	      {%- assign gl_colum_width = 'col-xs-12 col-sm-4 col-md-2' -%}
+	      {%- assign image_size = '167x' -%}
+	{%- endcase -%}
+	{%- assign enable_title = true -%}
+	{%- assign enable_meta = true -%}
+	{%- assign enable_text = true -%}
+	
+	{%- assign _posts_excerpt_length = settings.posts_excerpt_length | plus:0 -%}
+   {%- assign posts_excerpt_length = _posts_excerpt_length | default: 19 -%}
+	{%- if settings.blog_layout == 'left' -%}
+	   {%- case settings.blog_size_sidebar -%}
+	     {% when '1' %}
+	       {%- assign class_gl = 'col-sm-10 col-sm-push-2' -%}
+	       {%- assign class_sidebar = 'col-sm-2 col-sm-pull-10' -%}
+	     {% when '2' %}
+	       {%- assign class_gl = 'col-sm-9 col-sm-push-3' -%}
+	       {%- assign class_sidebar = 'col-sm-3 col-sm-pull-9' -%}
+	     {% when '3' %}
+	       {%- assign class_gl = 'col-sm-8 col-sm-push-4' -%}
+	       {%- assign class_sidebar = 'col-sm-4 col-sm-pull-8' -%}
+	   {%- endcase -%}
+	{%- elsif settings.blog_layout == 'right' -%}
+	   {%- case settings.blog_size_sidebar -%}
+	     {% when '1' %}
+	       {%- assign class_gl = 'col-sm-10' -%}
+	       {%- assign class_sidebar = 'col-sm-2' -%}
+	     {% when '2' %}
+	       {%- assign class_gl = 'col-sm-9' -%}
+	       {%- assign class_sidebar = 'col-sm-3' -%}
+	     {% when '3' %}
+	       {%- assign class_gl = 'col-sm-8' -%}
+	       {%- assign class_sidebar = 'col-sm-4' -%}
+	   {%- endcase -%}
+	{%- else -%}
+	   {%- assign class_gl = 'col-sm-12' -%}
+	{%- endif -%}
+	{%- case settings.blog_design -%}
+	    {%- when '1' -%}
+	      {%- assign gl_include = 'section_loop_blog_default' -%} 
+	    {%- when '2' -%}
+	      {%- assign gl_include = 'section_loop_blog_default_alt' -%}
+	    {%- when '3' -%}
+	      {%- assign gl_include = 'section_loop_blog_small_images' -%}
+	   {%- when '4' -%}
+	      {%- assign gl_include = 'section_loop_blog_masonry' -%}
+	   {%- when '5' -%}
+	      {%- assign gl_include = 'section_loop_blog_mask' -%}
+	{%- endcase -%}
+	<div class="main-page-wrapper">
+		{%- include 'page_heading', page_title:gl_blog_title -%}
+		<!-- MAIN CONTENT AREA -->
+		{%- paginate blog.articles by number_articles_per_grid_page -%}
+		<div class="container">
+			<div class="row">
+				<div class="row site-content {{class_gl}}" role="main">
+					{%- if settings.blog_design == '4' or settings.blog_design == '5' -%}<div class="masonry-container">{%- endif -%}
+						{%- for article in blog.articles -%}
+							{%- include  gl_include -%}
+							{%- if settings.blog_design != '4' or settings.blog_design != '5' -%}
+								{%- cycle '','','<div class="clearfix clearfix visible-sm-block"></div>' -%}
+		                  {%- case settings.blog_columns -%}
+		                      {%- when '2' -%}
+		                        {%- cycle '','<div class="clearfix visible-md-block visible-lg-block"></div>' -%}
+		                      {%- when '3' -%}
+		                        {%- cycle '','','<div class="clearfix visible-md-block visible-lg-block"></div>' -%}
+		                      {%- when '4' -%}
+		                        {%- cycle '','','','<div class="clearfix visible-md-block visible-lg-block"></div>' -%}
+		                     {%- when '6' -%}
+		                        {%- cycle '','','','','','<div class="clearfix visible-md-block visible-lg-block"></div>' -%}
+		                  {%- endcase -%}
+	                 {%- endif -%}
+						{%- endfor -%}
+					{%- if settings.blog_design == '4' or settings.blog_design == '5' -%}</div>{%- endif -%}
+					{%- if paginate.pages > 1 -%}
+						{%- if settings.blog_design != '4' or settings.blog_design != '5' -%}<div class="clear"></div>{%- endif -%}
+						<div class="basel-pagination blog_gl_pagination ">
+                      {%- include 'pagination',blog_ajax:true -%}
+                  </div>
+					{%- endif -%}
+				</div><!-- .site-content -->
+				{%- if settings.blog_layout != '1' -%}
+				<aside class="sidebar-container {{class_sidebar}} sidebar-{{settings.blog_layout}}" role="complementary">
+	            <div class="sidebar-inner">
+	               {%- section 'gl_section_sidebar_blog' -%}<!-- .widget-area -->
+	            </div><!-- .sidebar-inner -->
+	         </aside><!-- .sidebar-container -->
+				{%- endif -%}
+			</div>
+		</div>
+		{%- endpaginate -%}
+	</div>
+{%- else -%}
+	<div class="main-page-wrapper">
+		{%- assign number_projects_per_grid_page = settings.projects_per_page | plus:0 -%}
+		{%- case settings.projects_columns -%}
+		    {%- when '2' -%}
+		      {%- assign gl_colum_width = 'col-xs-12 col-sm-4 col-md-6' -%}
+		    {%- when '3' -%}
+		      {%- assign gl_colum_width = 'col-xs-12 col-sm-4 col-md-4' -%}
+		    {%- when '4' -%}
+		      {%- assign gl_colum_width = 'col-xs-12 col-sm-4 col-md-3' -%}
+		   {%- when '6' -%}
+		      {%- assign gl_colum_width = 'col-xs-12 col-sm-4 col-md-2' -%}
+		{%- endcase -%}
+		{%- assign _array_tag = '' -%}
+		{%- include 'page_heading', blog_portfolio:true -%}
+		<!-- MAIN CONTENT AREA -->
+      
+		{%- paginate blog.articles by number_projects_per_grid_page -%}
+		<div class="container">
+			<div class="row">
+				<div class="site-content page-portfolio portfolio-layout-{%- if settings.portfolio_full_width -%}full-width{%- else -%}boxed{%- endif %} portfolio-{{settings.portfolio_styles}} col-sm-12" role="main">
+					<div class="row row-spacing-{{settings.projects_spacing}}{%- if settings.portfolio_full_width %} gl_row gl_row-fluid gl_row-no-padding{%-endif-%}" data-gl-full-width="true" data-gl-full-width-init="true" data-gl-stretch-content="true">
+						{%- if blog.all_tags.size > 0 and settings.portfolio_filters-%}
+						<div class="col-sm-12 portfolio-filter color-scheme-dark">
+							<ul class="masonry-filter list-inline text-center">
+							  <li><a href="javascript:void(0);" data-filter="*" class="filter-active">{{ 'blogs.portfolio.filter_all' | t }}</a></li>
+							  {%- for article in blog.articles -%}
+									{% for tag in article.tags %}
+										{%- assign tag = tag | strip -%}
+			                		{%- assign tag_value = tag | handleize -%} 
+										{%- assign _array_tag = _array_tag | append:tag_value | append:',' -%}
+									{%- endfor -%}
+									{%- assign __array_tag = _array_tag -%}
+								{%- endfor -%}
+							{%- if settings.portfolio_tags_filter != blank -%}
+							  		{%- assign array_tag = __array_tag | split: ',' | remove:" " -%}
+							  		{%- assign tags = settings.portfolio_tags_filter | replace: ' ,', ',' | replace: ', ', ',' | split: ',' | uniq -%}
+			                	{%- for tag in tags -%}
+			                		{%- assign tag = tag | strip -%}
+				                	{%- assign tag_value = tag | handleize -%} 
+				                	{% if array_tag contains tag_value %}
+					                	<li><a data-filter=".proj-cat-{{ tag_value }}" class="" href="javascript:void(0);">{{ tag_value | capitalize }}</a></li>
+				                	{%- endif -%}
+				               {%- endfor -%}
+			              {%- else -%}
+				              	{%- assign array_tag = __array_tag | replace: ' ,', ',' | replace: ', ', ',' | split: ',' | uniq -%}
+				                {%- for tag in array_tag -%}
+				                {%- assign tag = tag | strip -%}
+				                {%- assign tag_value = tag | handleize -%}  
+				                <li><a data-filter=".proj-cat-{{ tag_value }}" class="" href="javascript:void(0);">{{ tag_value | capitalize }}</a></li>
+				                {%- endfor -%}
+			              {%- endif -%}
+							</ul>
+						</div>
+						<div class="clear"></div>
+						{%- endif -%}
+						<div class="masonry-container basel-portfolio-holder">
+						{%- for article in blog.articles -%}
+							<article id="post-{{ article.id }}" class="portfolio-entry {{gl_colum_width}} portfolio-single masonry-item post-{{ article.id }} portfolio type-portfolio status-publish{%- if article.image %} has-post-thumbnail{%- endif %} hentry {% if article.tags.size > 0 -%}{%- for tag in article.tags -%}proj-cat-{{ tag | handle }} project-cat-{{ tag | handle }} {% endfor -%}{%- endif -%}">
+							   <header class="entry-header">
+							   	{%- if article.image -%}
+		                     {%- assign image = article.image -%}
+		                     {%- assign blog_image_size = image.width | append: 'x' -%}
+							      <figure class="entry-thumbnail">
+							         <a href="{{ article.url }}" class="portfolio-thumbnail">
+							         	<img width="{{image.width}}" height="{{image.height}}" src="{%-include 'gl_image_format',cache:true,src: image.src, size: blog_image_size -%}" class="attachment-large size-large sp-post-image" alt="{{image.alt}}" 
+								         	srcset="{%-include 'gl_image_format',cache:true,src: image.src, size: blog_image_size %} {{image.width}}w 
+								         	{%- if image.width > 150 -%},{%-include 'gl_image_format',cache:true,src: image.src, size: '150x150' %} 150w{%-endif-%} 
+								         	{%- if image.width > 300 -%},{%-include 'gl_image_format',cache:true,src: image.src, size: '300x300' -%} 300w{%-endif-%} 
+								         	{%- if image.width > 768 -%},{%-include 'gl_image_format',cache:true,src: image.src, size: '768x768' -%} 768w{%-endif-%}  
+								         	{%- if image.width > 270 -%},{%-include 'gl_image_format',cache:true,src: image.src, size: '270x270' -%} 270w{%-endif-%}  
+								         	{%- if image.width > 280 -%},{%-include 'gl_image_format',cache:true,src: image.src, size: '280x280' -%} 280w{%-endif-%}  
+								         	{%- if image.width > 273 -%},{%-include 'gl_image_format',cache:true,src: image.src, size: '273x273' -%} 273w{%-endif-%}  
+								         	{%- if image.width > 546 -%},{%-include 'gl_image_format',cache:true,src: image.src, size: '546x546' -%} 546w{%-endif-%}  
+								         	{%- if image.width > 45 -%},{%-include 'gl_image_format',cache:true,src: image.src, size: '45x45' -%} 45w{%-endif-%}" sizes="(max-width: {{image.width}}px) 100vw, {{image.width}}px">							
+							         </a>
+							         <a href="{%-include 'gl_image_format',cache:true,src: image.src, size: blog_image_size -%}" class="portfolio-enlarge" data-rel="mfp[projects-gallery]">View Large</a>
+							      </figure>
+							      {%- endif -%}
+							      <div class="portfolio-info">
+							         <h1 class="entry-title">
+							            <a href="{{ article.url }}" rel="bookmark">{{ article.title }}</a>
+							         </h1>
+							         {%- if article.tags.size > 0 -%}
+							         <ul class="proj-cats-list font-alt">
+							         	{%- for tag in article.tags limit:4 -%}
+							            <li>{{ tag | capitalize }}</li>
+							            {%- endfor -%}
+							         </ul>
+							         {%- endif -%}
+							      </div>
+							   </header>
+							   <div class="entry-summary">
+							      Sample video project Et commodo velit hendrerit urna aliquam sit suscipit amet nisi netus vestibulum condimentum orci fa am nec.		
+							   </div>
+							   <!-- .entry-summary -->
+							</article>
+						{%- endfor -%}
+						</div>
+					</div>
+					{%- if paginate.pages < 2 and settings.portfolio_full_width -%}
+						<div class="gl_row-full-width"></div>
+					{%- endif -%}
+					{%- if paginate.pages > 1 -%}
+						<div class="gl_row-full-width"></div>
+						<div class="portfolio-footer"><div class="basel-pagination">{%- include 'pagination',blog_ajax:true -%}</div></div>
+                  {%- endif -%}
+				</div>
+			</div>
+		</div>
+		{%- endpaginate -%}
+	</div>
+{%- endif -%}

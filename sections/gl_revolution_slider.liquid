@@ -1,0 +1,102 @@
+{%- if section.settings.hidden_section -%}{%- capture check_admin -%}{{ content_for_header  }}{%- endcapture -%}<style> #shopify-section-{{ section.id }} { {%- if check_admin contains 'design_mode' -%}opacity: .5;filter: alpha(opacity=50){%- else -%}display: none !important{%- endif -%}}</style>{%- endif -%}
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{{style_block_section}}
+<div {%- if section.settings.use_video and section.settings.video_url != blank %} data-gl-video-bg="{{ section.settings.video_url }}"{%- endif %} class="gl_custom_{{section.id}} gl_rev_slider{%- if section.settings.row_stretch == 'stretch_row_content_no_spaces' %}gl_row-no-padding{%- endif %}{%- if section.settings.use_parallax %} basel-parallax{%- endif %} gl_row spb_row gl_row-fluid {%- if section.settings.use_video and section.settings.video_url != blank %} opacity-video-bg gl_video-bg-container gl_has_youtube{%- endif %}">
+   <div class="spb_column gl_column_container gl_col-sm-12">
+      <div class="gl_column-inner">
+         <div class="spb_wrapper">
+         {%- if  section.settings.tea_revolution_sc != blank -%}
+            {%- include 'shortcode' load: section.settings.tea_revolution_sc -%}
+         {%- else -%}
+            <img src="//cdn.shopify.com/s/files/1/1933/6253/files/rev_slider.jpg?3427858803367506429" class="w__100" alt="slider Featured">
+         {%- endif -%}
+         </div>
+      </div>
+   </div>
+</div>
+{%- schema -%}
+ {
+  "name": "Revolution Slider",
+  "class": "gl-revolution-slider",
+  "settings":[
+    {
+      "type":"textarea",
+      "id":"tea_revolution_sc",
+      "label":"Tea Revolution Shortcode",
+	   "info":"Example: [shopify-slider-259]"
+    },
+    {
+        "type": "paragraph",
+        "content": "You can easily add the slider to this theme by installing our free [Nitro Powerfull Slider Partner](https://partner.teathemes.net/signup) app."
+      },
+    {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      },
+      {
+        "type": "header",
+        "content": "== Basel Extras"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden_section",
+        "label": "Disable Section?",
+        "info": "If checked the section won't be visible on the public side of your website. You can switch it back any time.",
+        "default": false
+      }
+  ],
+   
+  "presets": [
+    {
+      "name": "Revolution Slider",
+      "category": "Slider"
+    }
+  ]
+}
+{% endschema %}
+ 

@@ -1,0 +1,268 @@
+{%- if settings.show_share_btn_contact_us_2 and settings.share_type_contact_us_2 == '1' -%}
+   {%- assign gl_follow_social = false -%}
+{%- elsif settings.show_share_btn_contact_us_2 and settings.share_type_contact_us_2 == '2' -%}
+   {%- assign gl_follow_social = true -%}
+{%- endif -%}
+<div class="main-page-wrapper">
+	<!-- MAIN CONTENT AREA -->
+	<div class="container">
+		<div class="row">
+			<div class="site-content col-sm-12" role="main">
+				<article id="post-{{page.id}}" class="post-{{page.id}} page type-page status-publish hentry">
+					<div class="entry-content">
+						<div data-gl-full-width="true" data-gl-full-width-init="true" data-gl-stretch-content="{%- if settings.general_layout == 'boxed' %}false{%- else -%}true{%- endif -%}" class="gl_row spb_row gl_row-fluid gl_row-no-padding" style="margin-bottom: -40px;padding-top: 0px;background-color: #021019;background-position: center;background-repeat: no-repeat;background-size: contain">
+						   {%- if settings.lat_contact_us_2 != blank and settings.lon_contact_us_2 != blank and settings.show_map_contact_us_2-%}
+						   <div class="spb_column gl_column_container gl_col-sm-12{%- if settings.show_info_contact_us_2 %} gl_col-lg-6 gl_col-md-6{%- else %} gl_col-lg-12 gl_col-md-12{%- endif -%}">
+							   <div class="gl_column-inner">
+							      <div class="spb_wrapper">
+							         <div class="google-map-container  ">
+							            <div class="basel-google-map-wrapper">
+							               <div class="basel-google-map without-content google-map-{{page.id}}" style="height: {{settings.height_contact_us_2}}px; position: relative; overflow: hidden;">
+							                  
+							               </div>
+							            </div>
+							         </div>
+							         <script type="text/javascript">
+						               jQuery(document).ready(function() {
+					               	new Maplace({
+					               		locations: [
+					               		    {
+					               				lat: {{settings.lat_contact_us_2 }},
+					               				lon: {{settings.lon_contact_us_2 }},
+					               				title: '',
+					               		      animation: google.maps.Animation.DROP
+					               		    }
+					               		],
+					               		controls_on_map: false,
+					               		title: '',
+					               	    map_div: '.google-map-{{page.id}}',
+					               	    start: 1,
+					               	    map_options: {
+					               	        zoom: 15,
+					               	        scrollwheel: false					    
+					               	     }
+					               	     {%- if settings.style_json_contact_us_2 != blank -%},
+				                          styles: {
+				                                'Custom style': {{ settings.style_json_contact_us_2 }}}
+				                           {%- endif %}
+					               	    }).Load();
+						               });
+						            </script>
+							      </div>
+							   </div>
+							</div>
+							{%- endif -%}
+							<div class="spb_column gl_column_container gl_col-sm-12 gl_col-has-fill color-scheme-light{%- if settings.show_map_contact_us_2 %} gl_col-lg-6 gl_col-md-6{%- else %} gl_col-lg-12 gl_col-md-12{%- endif -%}">
+							   <div class="gl_column-inner" style="padding-top: 20px;padding-right: 60px;padding-bottom: 20px;padding-left: 60px;{%- if settings.bg_image_contact_us_2 != blank -%}background-image: url({%-include 'gl_image_format',src: settings.bg_image_contact_us_2, size: '2048x' -%});background-position: center;background-repeat: no-repeat;background-size: contain{%- elsif settings.bg_color_contact_us_2 != blank -%} background-color:{{settings.bg_color_contact_us_2}} {%- endif -%}">
+							      <div class="spb_wrapper">
+							        {%- if settings.heading_info_contact_us_2 != blank -%}
+							         <div class="spb_text_column spb_content_element" style="margin-bottom: 50px;padding-top: 10px">
+							            <div class="spb_wrapper">
+							               <h1 style="font-size: 44px; font-weight: bold; display: inline-block; border-bottom: 3px solid white;">{{settings.heading_info_contact_us_2}}</h1>
+							            </div>
+							         </div>
+							         {%- endif -%}
+							         <div class="gl_row spb_row gl_inner gl_row-fluid" style="margin-bottom: 15px">
+							            <div class="spb_column gl_column_container gl_col-sm-6">
+							               <div class="gl_column-inner ">
+							                  <div class="spb_wrapper">
+							                  	{%- if settings.html_one_contact_us_2 != blank -%}
+							                     <div class="basel-info-box2 text-left icon-alignment-left box-style-base color-scheme-light  with-animation">
+							                        {%- if settings.svg_one_contact_us_2 != blank or settings.html_one_contact_us_2 contains '[' -%}
+							                        <div class="box-icon-wrapper">
+							                           <div class="info-box-icon">
+																	{%- if settings.svg_one_contact_us_2 != blank -%}
+								                              <script type="text/javascript">
+								                                 jQuery(document).ready(function($) {
+								                                 	new Vivus('svg-5300', {
+								                                 	    type: 'delayed',
+								                                 	    duration: 200,
+								                                 	    start: 'inViewport',
+								                                 	    // file: 'https://xtemos2.r.worldssl.net/basel/wp-content/uploads/2015/11/basic_mail.svg',
+								                                 	    animTimingFunction: Vivus.EASE_OUT
+								                                 	});
+								                                 });
+								                              </script>
+								                              <div class="info-svg-wrapper" style="width: 40px;height: 40px;">
+								                                 {{settings.svg_one_contact_us_2}}
+								                              </div>
+							                              {%- elsif settings.html_one_contact_us_2 contains '[' -%}
+							                              	{%- assign title_one = settings.html_one_contact_us_2 | split: ']' -%}
+							                              	<span class="gl_icon_element-icon icon-{{title_one[0] | split: '[' | last}} icons" style="font-size: 38px">&nbsp;</span>
+							                           	{%- endif -%}
+							                           </div>
+							                        </div>
+							                        {%- endif -%}
+							                        {%- assign _title_one = settings.html_one_contact_us_2 | split: ']' -%}
+							                        <div class="info-box-content">
+							                           <div class="info-box-inner">{%- if settings.html_one_contact_us_2 contains '[' -%}{{ _title_one[1] }}{%- else -%}{{settings.html_one_contact_us_2}}{%- endif -%}</div>
+							                        </div>
+							                     </div>
+							                     {%- endif -%}
+							                     {%- if settings.html_three_contact_us_2 != blank -%}
+							                     <div class="basel-info-box2 text-left icon-alignment-left box-style-base color-scheme-light  with-animation">
+							                        {%- if settings.svg_three_contact_us_2 != blank or settings.html_three_contact_us_2 contains '[' -%}
+							                        <div class="box-icon-wrapper">
+							                           <div class="info-box-icon">
+							                           	{%- if settings.svg_three_contact_us_2 != blank -%}
+								                              <script type="text/javascript">
+								                                 jQuery(document).ready(function($) {
+								                                 	new Vivus('svg-2872', {
+								                                 	    type: 'delayed',
+								                                 	    duration: 200,
+								                                 	    start: 'inViewport',
+								                                 	    // file: 'https://xtemos1.r.worldssl.net/basel/wp-content/uploads/2015/11/basic_paperplane.svg',
+								                                 	    animTimingFunction: Vivus.EASE_OUT
+								                                 	});
+								                                 });
+								                              </script>
+								                              <div class="info-svg-wrapper" style="width: 40px;height: 40px;">{{settings.svg_three_contact_us_2}}</div>
+							                           	{%- elsif settings.html_three_contact_us_2 contains '[' -%}
+							                              	{%- assign title_three = settings.html_three_contact_us_2 | split: ']' -%}
+							                              	<span class="gl_icon_element-icon icon-{{title_three[0] | split: '[' | last}} icons" style="font-size: 38px">&nbsp;</span>
+							                           	{%- endif -%}
+							                           </div>
+							                        </div>
+							                        {%- endif -%}
+							                        <div class="info-box-content">
+							                        	{%- assign _title_three = settings.html_three_contact_us_2 | split: ']' -%}
+							                           <div class="info-box-inner">{%- if settings.html_three_contact_us_2 contains '[' -%}{{ _title_three[1] }}{%- else -%}{{settings.html_three_contact_us_2}}{%- endif -%}</div>
+							                        </div>
+							                     </div>
+							                     {%- endif -%}
+							                  </div>
+							               </div>
+							            </div>
+							            <div class="spb_column gl_column_container gl_col-sm-6">
+							               <div class="gl_column-inner ">
+							                  <div class="spb_wrapper">
+							                  	{%- if settings.html_two_contact_us_2 != blank -%}
+							                     <div class="basel-info-box2 text-left icon-alignment-left box-style-base color-scheme-light with-animation">
+							                        {%- if settings.svg_two_contact_us_2 != blank or settings.html_two_contact_us_2 contains '[' -%}
+							                        <div class="box-icon-wrapper">
+							                           <div class="info-box-icon">
+							                              {%- if settings.svg_two_contact_us_2 != blank -%}
+								                              <script type="text/javascript">
+								                                 jQuery(document).ready(function($) {
+								                                 	new Vivus('svg-8277', {
+								                                 	    type: 'delayed',
+								                                 	    duration: 200,
+								                                 	    start: 'inViewport',
+								                                 	    // file: 'https://xtemos1.r.worldssl.net/basel/wp-content/uploads/2015/11/basic_clock.svg',
+								                                 	    animTimingFunction: Vivus.EASE_OUT
+								                                 	});
+								                                 });
+								                              </script>
+								                              <div class="info-svg-wrapper" style="width: 40px;height: 40px;">{{settings.svg_two_contact_us_2}}</div>
+							                              {%- elsif settings.html_two_contact_us_2 contains '[' -%}
+							                              	{%- assign title_two = settings.html_two_contact_us_2 | split: ']' -%}
+							                              	<span class="gl_icon_element-icon icon-{{title_two[0] | split: '[' | last}} icons" style="font-size: 38px">&nbsp;</span>
+							                           	{%- endif -%}
+							                           </div>
+							                        </div>
+							                        {%- endif -%}
+							                        {%- assign _title_two = settings.html_two_contact_us_2 | split: ']' -%}
+							                        <div class="info-box-content">
+							                           <div class="info-box-inner">{%- if settings.html_two_contact_us_2 contains '[' -%}{{ _title_two[1] }}{%- else -%}{{settings.html_two_contact_us_2}}{%- endif -%}</div>
+							                        </div>
+							                     </div>
+							                     {%- endif -%}
+							                     {%- if settings.html_four_contact_us_2 != blank -%}
+							                     <div class="basel-info-box2 text-left icon-alignment-left box-style-base color-scheme-light with-animation">
+							                        {%- if settings.svg_four_contact_us_2 != blank or settings.html_four_contact_us_2 contains '[' -%}
+							                        <div class="box-icon-wrapper">
+							                           <div class="info-box-icon">
+							                           	{%- if settings.svg_four_contact_us_2 != blank -%}
+								                              <script type="text/javascript">
+								                                 jQuery(document).ready(function($) {
+								                                 	new Vivus('svg-9269', {
+								                                 	    type: 'delayed',
+								                                 	    duration: 200,
+								                                 	    start: 'inViewport',
+								                                 	    // file: 'https://xtemos2.r.worldssl.net/basel/wp-content/uploads/2015/11/ecommerce_cart_upload3.svg',
+								                                 	    animTimingFunction: Vivus.EASE_OUT
+								                                 	});
+								                                 });
+								                              </script>
+								                              <div class="info-svg-wrapper" style="width: 40px;height: 40px;">{{settings.svg_four_contact_us_2}}</div>
+							                           	{%- elsif settings.html_four_contact_us_2 contains '[' -%}
+																		{%- assign title_four = settings.html_four_contact_us_2 | split: ']' -%}
+							                              	<span class="gl_icon_element-icon icon-{{title_four[0] | split: '[' | last}} icons" style="font-size: 38px">&nbsp;</span>
+							                           	{%- endif -%}
+							                           </div>
+							                        </div>
+							                        {%- endif -%}
+							                        <div class="info-box-content">
+							                        	{%- assign _title_four = settings.html_four_contact_us_2 | split: ']' -%}
+							                           <div class="info-box-content">
+								                           <div class="info-box-inner">{%- if settings.html_four_contact_us_2 contains '[' -%}{{ _title_four[1] }}{%- else -%}{{settings.html_four_contact_us_2}}{%- endif -%}</div>
+								                        </div>
+							                        </div>
+							                     </div>
+							                     {%- endif -%}
+							                  </div>
+							               </div>
+							            </div>
+							         </div>
+							         <div role="form" class="wpcf7" lang="{{ shop.locale }}" dir="ltr">
+					                  <div class="screen-reader-response"></div>
+					                   {%- form 'contact' -%}
+					                     {%- if form.posted_successfully? -%}
+					                        <div class="wpcf7-response-output wpcf7-mail-sent-ok" role="alert">{{ 'contact.form.post_success' | t }}</div>
+					                     {%- elsif form.errors -%}
+					                        <div class="wpcf7-response-output wpcf7-validation-errors" role="alert">{{ form.errors | default_errors }}</div>
+					                     {%- endif -%}
+					                     <div class="row">
+					                        <div class="col-md-6">
+					                           <p style="margin-bottom: 27px">
+					                              <label>{{ 'contact.form.name' | t }}</label> 
+					                              <span class="wpcf7-form-control-wrap your-name">
+					                              <input type="text" name="contact[name]" value="{%- if form[name] -%}{{ form[name] }}{%- elsif customer -%}{{ customer.name }}{%- endif -%}" size="40" class="{%- if form.errors contains 'name' -%}input__error{%- else -%}input__ok{%- endif -%}" aria-required="true" aria-invalid="false">
+					                              </span> 
+					                           </p>
+					                           <p style="margin-bottom: 27px">
+					                              <label>{{ 'contact.form.email' | t }}</label> 
+					                              <span class="wpcf7-form-control-wrap your-email">
+					                                 <input type="email" name="contact[email]" value="{%- if form.email -%}{{ form.email }}{%- elsif customer -%}{{ customer.email }}{%- endif -%}" size="40" class="{%- if form.errors contains 'email' -%}input__error{%- else -%}input__ok{%- endif -%}" aria-required="true" aria-invalid="false">
+					                              </span> 
+					                           </p>
+					                           <p style="margin-bottom: 27px">
+					                              <label>{{ 'contact.form.phone' | t }}</label>
+							                        <span class="wpcf7-form-control-wrap your-subject">
+							                           <input type="tel" class="{%- if form.errors contains 'phone' -%}input__error{%- else -%}input__ok{%- endif -%}" name="contact[phone]" pattern="[0-9\-]*" value="{%- if form[phone] -%}{{ form[phone] }}{%- elsif customer -%}{{ customer.phone }}{%- endif -%}" aria-required="true" aria-invalid="false">
+							                        </span> 
+					                           </p>
+					                        </div>
+					                        <div class="col-md-6">
+					                           <p>
+							                        <label>{{ 'contact.form.message' | t }}</label> 
+							                        <span class="wpcf7-form-control-wrap your-message">
+							                           <textarea name="contact[body]" cols="40" rows="10" class="{%- if form.errors contains 'body' -%}input__error{%- else -%}input__ok{%- endif -%}" aria-required="true" aria-invalid="false">{%- if form.body -%}{{ form.body }}{%- endif -%}</textarea>
+							                        </span> 
+							                     </p>
+					                        </div>
+					                     </div>
+					                     <p><input type="submit" value="{{ 'contact.form.submit' | t }}" class="wpcf7-form-control wpcf7-submit btn btn-color-white btn-style-bordered"></p>
+					                  {%- endform -%}
+					               </div>
+							         <div class="spb_text_column spb_content_element gl_mb_30">
+							            <div class="spb_wrapper">
+							            </div>
+							         </div>
+							         {%- if settings.show_share_btn_contact_us_2 -%}{%- include 'social-sharing', gl_design:'icons-design-colored', gl_size:'icons-size-small',gl_text_align:'left', follow_social:gl_follow_social -%}{%- endif -%}
+							      </div>
+							   </div>
+							</div>
+						</div>
+						<div class="gl_row-full-width gl_clearfix"></div>
+					</div>
+				</article>
+			</div><!-- .site-content -->
+		</div><!-- end row -->
+	</div><!-- end container -->
+</div><!-- .main-page-wrapper -->
+<!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'js_cp_gl.min.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+<!--[if lte IE 9]><script src="{{ 'js_cp_gl.min.js' | asset_url }}"></script><![endif]-->
+{%- if settings.api_key != blank -%}
+<script src="https://maps.google.com/maps/api/js?key={{settings.api_key}}&ver=4.7.5"></script>
+{%- endif -%}

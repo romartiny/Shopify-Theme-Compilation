@@ -1,0 +1,150 @@
+{%- assign title = 'customer.account.title' | t -%}
+<div class="main-page-wrapper">
+   {%- include 'page_heading', page_title:title -%}
+   <!-- MAIN CONTENT AREA -->
+   <div class="container">
+      <div class="row">
+         <div class="site-content col-sm-12" role="main">
+            <article id="post-9" class="post-9 page type-page status-publish hentry">
+               <div class="entry-content">
+                  <div class="shopify">
+                     <div class="basel-my-account-sidebar">
+                        <h3 class="shopify-MyAccount-title entry-title">{{title}}</h3>
+                        <nav class="shopify-MyAccount-navigation">
+                           <ul>
+                              <li class="shopify-MyAccount-navigation-link shopify-MyAccount-navigation-link--dashboard">
+                                 <a href="/account">{{ 'customer.account.dashboard' | t }}</a>
+                              </li>
+                              <li class="shopify-MyAccount-navigation-link shopify-MyAccount-navigation-link--orders is-active" style="pointer-events: none">
+                                 <a href="/my-account/orders/">{{ 'customer.orders.title_orders' | t }}</a>
+                              </li>
+                              <li class="shopify-MyAccount-navigation-link shopify-MyAccount-navigation-link--edit-address">
+                                 <a href="/account/addresses">{{ 'customer.addresses.title' | t }} ({{ customer.addresses_count }})</a>
+                              </li>
+                              {%- if settings.use_wishlist and pages['wishlist'].empty? != true -%}
+                              {%- include 'nitro-wishlist' -%}
+                              <li class="shopify-MyAccount-navigation-link shopify-MyAccount-navigation-link--wishlist">
+                                 <a href="/pages/wishlist">{{ 'customer.account.wishlist' | t }} ({{ NITRO_WISHLIST_COUNT }})</a>
+                              </li>
+                              {%- endif -%}
+                              <li class="shopify-MyAccount-navigation-link shopify-MyAccount-navigation-link--customer-logout">
+                                 {{ 'layout.customer.log_out' | t | customer_logout_link }}
+                              </li>
+                           </ul>
+                        </nav>
+                     </div>
+                     <!-- .basel-my-account-sidebar -->
+                     <div class="shopify-MyAccount-content">
+                        {%- assign order_date = order.created_at | date: "%B %d, %Y %I:%M%p" -%}
+                           <p>{{ 'customer.order.title' | t }} <mark class="order-number">{{order.name}}</mark> {{ 'customer.order.date' | t }} <mark class="order-date">{{order_date}}</mark> {{ 'customer.order.and_currently' | t }} <mark class="order-status">{{ order.fulfillment_status_label }}</mark>.</p>
+                        {%- if order.cancelled -%}
+                           {%- assign cancelled_at = order.cancelled_at | date: "%B %d, %Y %I:%M%p" -%}
+                           <p>{{ 'customer.order.cancelled' | t }} <mark class="order-cancelled">{{cancelled_at}}</mark></p>
+                           <p>{{ 'customer.order.cancelled_reason' | t }} <mark class="order-cancelled_reason">{{order.cancel_reason}}</mark></p>
+                        {%- endif -%}
+                        <section class="shopify-order-details">
+                           <h2 class="shopify-order-details__title">{{ 'customer.order.order_details' | t }}</h2>
+                           <div class="responsive-table">
+                              <table class="shopify-table shopify-table--order-details shop_table order_details">
+                                 <thead>
+                                    <tr>
+                                       <th class="shopify-table__product-name product-name">{{ 'customer.order.product' | t }}</th>
+                                       <th class="shopify-table__product-table product-total">{{ 'customer.order.total' | t }}</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                    {%- for line_item in order.line_items -%}
+                                       <tr id="{{ line_item.key }}" class="shopify-table__line-item order_item">
+                                          <td class="shopify-table__product-name product-name">
+                                             <a href="{{ line_item.url | within: collections.all }}">{{line_item.product.title}}{%- if line_item.product.has_only_default_variant == false %} – {% for option in line_item.product.options -%}{{ option | capitalize }}: {{ line_item.variant.options[forloop.index0] }}{%- if forloop.last == false-%}, {% endif -%}{%- endfor -%}{%- endif -%}</a> <strong class="product-quantity">× {{ line_item.quantity }}</strong>
+                                             {% if line_item.fulfillment %}
+                                              <div class="note">
+                                                {%- assign created_at = line_item.fulfillment.created_at | date: format: 'month_day_year' -%}
+                                                {{ 'customer.order.fulfilled_at' | t: date: created_at }}
+                                                {%- if line_item.fulfillment.tracking_number -%}
+                                                  <a href="{{ line_item.fulfillment.tracking_url }}">{{ line_item.fulfillment.tracking_company }} #{{ line_item.fulfillment.tracking_number}}</a>
+                                                {%- endif -%}
+                                              </div>
+                                            {%- endif -%}  
+                                          </td>
+                                          <td class="shopify-table__product-total product-total">
+                                             <span class="shopify-Price-amount amount">{{ line_item.quantity | times: line_item.price | money }}</span> 
+                                          </td>
+                                       </tr>
+                                    {%- endfor -%}
+                                 </tbody>
+                                 <tfoot>
+                                    <tr>
+                                       <th scope="row">{{ 'customer.order.subtotal' | t }}:</th>
+                                       <td data-label="{{ 'customer.order.subtotal' | t }}"><span class="shopify-Price-amount amount">{{ order.subtotal_price | money }}</span></td>
+                                    </tr>
+                                    {%- for discount in order.discounts -%}
+                                    <tr class="order_summary discount">
+                                       <th scope="row">{{ discount.code }} {{ 'customer.order.discount' | t }}</th>
+                                       <td data-label="{{ 'customer.order.discount' | t }}">{{ discount.savings | money }}</td>
+                                    </tr>
+                                    {%- endfor -%}
+                                    {%- for shipping_method in order.shipping_methods -%}
+                                    <tr>
+                                       <th scope="row">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }}):</th>
+                                       <td data-label="{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})"><span class="shopify-Price-amount amount">{{ shipping_method.price | money }}</span></td>
+                                    </tr>
+                                    {%- endfor -%}
+                                    {%- for tax_line in order.tax_lines -%}
+                                       <tr>
+                                          <th scope="row">{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)</th>
+                                          <td data-label="{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)">{{ tax_line.price | money }}</td>
+                                        </tr>
+                                    {%- endfor -%}
+                                    <tr>
+                                       <th scope="row">{{ 'customer.order.total' | t }}:</th>
+                                       <td data-label="{{ 'customer.order.total' | t }}"><span class="shopify-Price-amount amount">{{ order.total_price | money }} {{ order.currency }}</span></td>
+                                    </tr>
+                                 </tfoot>
+                              </table>
+                           </div>
+                           <section class="shopify-customer-details">
+                              <h2>{{ 'customer.order.customer_details' | t }}</h2>
+                              <div class="responsive-table">
+                                 <table class="shopify-table shopify-table--customer-details shop_table customer_details">
+                                    <tbody>
+                                       <tr>
+                                          <th>{{ 'customer.order.email' | t }}:</th>
+                                          <td>{{order.email}}</td>
+                                       </tr>
+                                       {%- if order.note != blank -%}
+                                       <tr>
+                                          <th>{{ 'customer.order.note' | t }}:</th>
+                                          <td>{{ order.note }}</td>
+                                       </tr>
+                                       {%- endif -%}
+                                    </tbody>
+                                 </table>
+                              </div>
+                              <section class="shopify-columns shopify-columns--2 shopify-columns--addresses col2-set addresses">
+                                 <div class="shopify-column shopify-column--1 shopify-column--billing-address col-1">
+                                    <h3 class="shopify-column__title">{{ 'customer.order.billing_address' | t }}</h3>
+                                    <p><strong>{{ 'customer.order.payment_status' | t }}:</strong> {{ order.financial_status_label }}</p>
+                                    {%- assign order_billing =  order.billing_address | format_address -%}
+                                    {{order_billing | replace: '<p>', '<address>' | replace: '</p>', '</address>' }}
+                                 </div>
+                                 <!-- /.col-1 -->
+                                 <div class="shopify-column shopify-column--2 shopify-column--shipping-address col-2">
+                                    <h3 class="shopify-column__title">{{ 'customer.order.shipping_address' | t }}</h3>
+                                    <p><strong>{{ 'customer.order.fulfillment_status' | t }}:</strong> {{ order.fulfillment_status_label }}</p>
+                                    {%- assign order_shipping =  order.shipping_address | format_address -%}
+                                    {{order_shipping | replace: '<p>', '<address>' | replace: '</p>', '</address>' }}
+                                 </div>
+                                 <!-- /.col-2 -->
+                              </section>
+                              <!-- /.col2-set -->
+                           </section>
+                        </section>
+                     </div>
+                  </div>
+               </div>
+            </article>
+         </div>
+      </div>
+   </div><!-- end container -->
+</div><!-- .main-page-wrapper -->

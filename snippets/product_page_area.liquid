@@ -1,0 +1,856 @@
+{%- if product.selected_variant != blank -%}
+ {%- assign current_variant = product.selected_variant -%}
+{%- else -%}
+ {%- assign current_variant = product.variants.first -%}
+{%- endif -%}
+{%- assign loop_countdown = settings.loop_show_countdown -%}
+{%- if settings.pr_image_size != blank -%}{%- assign crop_nt = settings.pr_image_size | replace: ' x', 'x' | replace: 'x ', 'x' -%}{%- endif -%}
+{%- if settings.pr_thumb_image_size != blank -%}{%- assign crop_thumb_nt = settings.pr_thumb_image_size | replace: ' x', 'x' | replace: 'x ', 'x' -%}{%- endif -%}
+{%- include 'check_label_gl' -%}
+{%- if settings.color_name_check != blank -%}{%- assign _gl_color_name = settings.color_name_check | replace: ' ,', ',' | replace: ', ', ',' | split: ',' -%}{%- assign gl_color_name = _gl_color_name | downcase -%}{%-else-%}{%- assign gl_color_name = '\nathan_dt\' -%}{%-endif-%}
+{%- for option in product.options_with_values -%}
+   {%- assign downcased_option = option.name | downcase -%}
+   {%- assign downcased_option_check = option.name | downcase | prepend: '"' | append: '"' | strip -%} 
+   {%- if downcased_option == 'color' or downcased_option == 'colour' or gl_color_name contains downcased_option_check -%}
+     {%- assign colour_count = option.values.size | plus:0 -%}
+   {%- endif -%}
+{%- endfor -%}
+{%- if settings.product_sidebar == 'left' -%}
+   {%- case settings.size_sidebar -%}
+     {% when '1' %}
+       {%- assign class_gl = 'col-sm-10 col-sm-push-2' -%}
+       {%- assign class_sidebar = 'col-sm-2 col-sm-pull-10' -%}
+     {% when '2' %}
+       {%- assign class_gl = 'col-sm-9 col-sm-push-3' -%}
+       {%- assign class_sidebar = 'col-sm-3 col-sm-pull-9' -%}
+     {% when '3' %}
+       {%- assign class_gl = 'col-sm-8 col-sm-push-4' -%}
+       {%- assign class_sidebar = 'col-sm-4 col-sm-pull-8' -%}
+   {%- endcase -%}
+{%- elsif settings.product_sidebar == 'right' -%}
+   {%- case settings.size_sidebar -%}
+     {% when '1' %}
+       {%- assign class_gl = 'col-sm-10' -%}
+       {%- assign class_sidebar = 'col-sm-2' -%}
+     {% when '2' %}
+       {%- assign class_gl = 'col-sm-9' -%}
+       {%- assign class_sidebar = 'col-sm-3' -%}
+     {% when '3' %}
+       {%- assign class_gl = 'col-sm-8' -%}
+       {%- assign class_sidebar = 'col-sm-4' -%}
+   {%- endcase -%}
+{%- else -%}
+   {%- assign class_gl = 'col-sm-12' -%}
+{%- endif -%}
+{%- case settings.size_img_products -%}
+     {% when '1' %}
+       {%- assign class_images = 'col-sm-4' -%}
+       {%- assign class_summary = 'col-sm-8' -%}
+     {% when '2' %}
+       {%- assign class_images = 'col-sm-6' -%}
+       {%- assign class_summary = 'col-sm-6' -%}
+     {% when '3' %}
+       {%- assign class_images = 'col-sm-8' -%}
+       {%- assign class_summary = 'col-sm-4' -%}
+{%- endcase -%}
+{%- case settings.countdown_style -%}
+    {%- when 'light' -%}
+      {%- assign countdown_style = 'color-scheme-dark timer-size-small timer-style-standard' -%} 
+    {%- when 'dark' -%}
+      {%- assign countdown_style = 'color-scheme-light timer-size-small timer-style-standard' -%}
+    {%- when 'transparent_1' -%}
+      {%- assign countdown_style = 'color-scheme-light timer-size-small timer-style-transparent' -%}
+   {%- when 'transparent_2' -%}
+      {%- assign countdown_style = 'color-scheme-dark timer-size-small timer-style-transparent' -%}
+{%- endcase -%}
+{%- if settings.show_share_btn and settings.share_type == '1' -%}
+   {%- assign gl_follow_social = false -%}
+{%- elsif settings.show_share_btn and settings.share_type == '2' -%}
+   {%- assign gl_follow_social = true -%}
+{%- endif -%}
+{%- include 'check_not_feature_img' -%}
+{%- if settings.show_grouped_variant_image and product.has_only_default_variant == false and product.images.size > 1 and not_group == false -%}{%- include 'check_position_feature_img' -%}{%-endif-%}
+<div class="single-breadcrumbs-wrapper">
+   <div class="container">
+      <a href="javascript:baselThemeModule.backHistory()" class="basel-back-btn basel-tooltip"><span class="basel-tooltip-label">Back</span><span>Back</span></a>
+      <nav class="shopify-breadcrumb"><a href="/">{{ 'general.breadcrumbs.home' | t }}</a>{%- if template contains 'product' and collection.url -%}<a href="{{ collection.url }}">{{ collection.title  }}</a>{%- endif -%}<span class="breadcrumb-last">{{ product.title  }}</span></nav>
+      {%- if collection == blank and product.collections.first != blank -%}{%- assign collection = product.collections.first -%}{%- endif -%}
+      {%- if collection.next_product or collection.previous_product -%}
+      {%- assign product_image_size = '219x' -%}
+      <div class="basel-products-nav">
+         {%- if collection.previous_product -%}
+         <div class="product-btn product-prev">
+            <a href="{{ collection.previous_product.url }}">Previous product<span></span></a>
+            <div class="wrapper-short">
+               <div class="product-short">
+                  {%- if collection.previous_product.featured_image -%}
+                  <a href="{{collection.previous_product.url}}" class="product-thumb">
+                     <img width="219" height="280" src="{%-include 'gl_image_format',src: collection.previous_product.featured_image.src , size: product_image_size -%}" class="attachment-shop_thumbnail size-shop_thumbnail sp-post-image" alt="{{ collection.previous_product.title | escape  }}" 
+                   srcset="{%-include 'gl_image_format',src: collection.previous_product.featured_image.src , size: product_image_size %} 219w, 
+                           {%-include 'gl_image_format',src: collection.previous_product.featured_image.src , size: '768x' %} 768w, 
+                           {%-include 'gl_image_format',src: collection.previous_product.featured_image.src , size: '803x' %} 803w,
+                           {%-include 'gl_image_format',src: collection.previous_product.featured_image.src , size: '266x' %} 266w,
+                           {%-include 'gl_image_format',src: collection.previous_product.featured_image.src , size: '219x' %} 219w,
+                           {%-include 'gl_image_format',src: collection.previous_product.featured_image.src , size: '263x' %} 263w,
+                           {%-include 'gl_image_format',src: collection.previous_product.featured_image.src , size: '526x' %} 526w,
+                           {%-include 'gl_image_format',src: collection.previous_product.featured_image.src , size: 'master' %} 870w" sizes="(max-width: 219px) 100vw, 219px">
+                  </a>
+                  {%- endif -%}
+                  <a href="{{ collection.previous_product.url }}" class="product-title">{{collection.previous_product.title}}</a>
+                  <span class="price">
+                      {%- if collection.previous_product.price_varies -%}
+                      {{ collection.previous_product.price_min | money }} – {{ collection.previous_product.price_max | money }}
+                      {%- elsif collection.previous_product.compare_at_price > collection.previous_product.price -%}<del>{{ collection.previous_product.compare_at_price  | money }}</del> <ins>{{ collection.previous_product.price | money }}</ins>
+                      {%- else -%}
+                      {{ collection.previous_product.price | money }}
+                      {%- endif -%}
+                  </span>
+               </div>
+            </div>
+         </div>
+         {%- endif -%}
+         {%- if collection.next_product -%}
+         <div class="product-btn product-next">
+            <a href="{{collection.next_product.url}}">Next product<span></span></a>
+            <div class="wrapper-short">
+               <div class="product-short">
+                  {%- if collection.next_product.featured_image -%}
+                  <a href="{{collection.next_product.url}}" class="product-thumb">
+                     <img width="219" height="280" src="{%-include 'gl_image_format',src: collection.next_product.featured_image.src , size: product_image_size -%}" class="attachment-shop_thumbnail size-shop_thumbnail sp-post-image" alt="{{ collection.next_product.title | escape  }}" 
+                   srcset="{%-include 'gl_image_format',src: collection.next_product.featured_image.src , size: product_image_size %} 219w, 
+                           {%-include 'gl_image_format',src: collection.next_product.featured_image.src , size: '768x' %} 768w, 
+                           {%-include 'gl_image_format',src: collection.next_product.featured_image.src , size: '803x' %} 803w,
+                           {%-include 'gl_image_format',src: collection.next_product.featured_image.src , size: '266x' %} 266w,
+                           {%-include 'gl_image_format',src: collection.next_product.featured_image.src , size: '219x' %} 219w,
+                           {%-include 'gl_image_format',src: collection.next_product.featured_image.src , size: '263x' %} 263w,
+                           {%-include 'gl_image_format',src: collection.next_product.featured_image.src , size: '526x' %} 526w,
+                           {%-include 'gl_image_format',src: collection.next_product.featured_image.src , size: 'master' %} 870w" sizes="(max-width: 219px) 100vw, 219px">
+                  </a>
+                  {%- endif -%}
+                  <a href="{{collection.next_product.url}}" class="product-title">{{collection.next_product.title}}</a>
+                  <span class="price">
+                     {%- if collection.next_product.price_varies -%}
+                     {{ collection.next_product.price_min | money }} – {{ collection.next_product.price_max | money }}
+                     {%- elsif collection.next_product.compare_at_price > collection.next_product.price -%}<del>{{ collection.next_product.compare_at_price  | money }}</del> <ins>{{ collection.next_product.price | money }}</ins>
+                     {%- else -%}
+                     {{ collection.next_product.price | money }}
+                     {%- endif -%}
+                  </span>
+               </div>
+            </div>
+         </div>
+         {%- endif -%}
+      </div>
+      {%- endif -%}
+   </div>
+</div>
+<div class="container"></div>
+<div id="product-{{product.id}}" itemscope itemtype="http://schema.org/Product" class="product-nathan-{{product.id}} nathan_style_{{settings.button_art_to_cart_style}} single-product-page single-product-content {{design_products_page}}{%- if product.metafields.meta.video contains 'youtube' or product.metafields.meta.video contains 'vimeo' %} product-with-attachments{%- endif %}{%- if linklists[product.handle].links.size > 0 %} product-type-grouped{%- endif %}{%- if settings.show_grouped_variant_image and product.images.size > 1 and product.has_only_default_variant == false and not_group == false %} gl_group_variant_images{%- endif -%}">
+   <meta itemprop="name" content="{{ product.title }}">
+   <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+   <meta itemprop="image" content="{{ product.featured_image.src | img_url: '800x' }}">
+   <div class="{%- if design_products_page != 'product-design-sticky' -%}container{%- else -%}container-fluid{%-endif-%}">
+      <div class="row">
+         <div class="product-image-summary {{class_gl}}">
+            <div class="row">
+               {%- if product.images.size > 0 -%}
+               <div class="{{class_images}} product-images">
+                  {%- include 'product_labels' -%}
+                  <div class="shopify-product-gallery shopify-product-gallery--with-images shopify-product-gallery--columns-4 images row thumbs-position-{{settings.thumbnails_position}} image-action-{{settings.main_click}}">
+                     <div class="{%- if product.images.size > 1 and settings.thumbnails_position == 'left' and design_products_page != 'product-design-sticky' -%}col-md-9 col-md-push-3{%- else -%}col-sm-12{%- endif -%}">
+                        <figure id="gl_thum" class="shopify-product-gallery__wrapper{%- if design_products_page != 'product-design-sticky' %} owl-carousel{%- endif %}{%- if settings.main_click == 'popup' %} shopify-main-image{%- endif -%}">
+                        {%- if settings.show_grouped_variant_image and product.has_only_default_variant == false and product.images.size > 1 and not_group == false -%}
+                           {%- if current_variant.featured_image != blank -%}
+                              {%- assign image = current_variant.featured_image -%}
+                              {%- assign product_image_photowipe = image.width | append: 'x' -%}
+                              {%- if crop_nt != blank -%}
+                                 {%- assign image_width_append = crop_nt -%}
+                                 {%- assign image_width_append_arr = image_width_append | replace: ' x', 'x' | replace: 'x ', 'x' | replace: ' x ', 'x' | split: 'x' -%}
+                                 {%- assign image_width = image_width_append_arr[0] -%}
+                                 {%- assign image_size_first = image_width | plus:0 -%}
+                                 {%- assign image_height = image_size_first | divided_by: image.aspect_ratio | round -%}
+                              {%- else -%} 
+                                 {%- assign product_image_size = image.width | append: 'x' -%}
+                                 {%- assign image_width = image.width -%}
+                              {%- endif -%}
+                              {%- if image.attached_to_variant? and settings.use_clicking_variant_image -%}
+                                 <figure data-variant_id= "{{current_variant.id}}" data-lenght= "{{product.options.size}}" data-one='{{ current_variant.option1 | handleize }}' data-two= '{{ current_variant.option2 | handleize }}' data-three= '{{ current_variant.option3 | handleize }}' data-thumb="{%- if crop_thumb_nt != blank -%}{%-include 'gl_image_format_crop',src: image.src , size: crop_thumb_nt,position:'top' -%}{%- else -%}{%-include 'gl_image_format',cache:true,src: image.src , size: '219x' -%}{%- endif -%}" data-alt="{{image.alt}}" data-id="{{image.id}}" class="shopify-product-gallery__image">
+                                    <a href="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}">
+                                    {%- if crop_nt != blank -%}
+                                       <img width="{{ image_size_first }}" height="{{ image_height }}" src="{%-include 'gl_image_format_crop',src: image.src , size: crop_nt,position:'top' -%}" class="attachment-shop_catalog size-shop_catalog" alt="{{ image.alt | escape }}" 
+                                         data-src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}" 
+                                       data-large_image="{%-include 'gl_image_format',cache:true, src: image.src, size: product_image_photowipe -%}" data-large_image_width="{{ image.width }}" data-large_image_height="{{ image.height }}" 
+                                         srcset="{%-include 'gl_image_format_crop',src: image.src , size: crop_nt,position:'top' %} {{image_size_first}}w 
+                                         {%- if image_size_first > 235 -%}{%- assign image_height = 235 | divided_by: image.aspect_ratio | round -%}{%- assign image_size_el = 235 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 235w{%- endif -%} 
+                                         {%- if image_size_first > 768 -%}{%- assign image_height = 768 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 768 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 768w{%- endif -%}
+                                         {%- if image_size_first > 803 -%}{%- assign image_height = 803 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 803 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 803w{%- endif -%} 
+                                         {%- if image_size_first > 266 -%}{%- assign image_height = 266 | divided_by: image.aspect_ratio | round -%}{%- assign image_size_el = 266 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 266w{%- endif -%} 
+                                         {%- if image_size_first > 219 -%}{%- assign image_height = 219 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 219 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 219w{%- endif -%} 
+                                         {%- if image_size_first > 526 -%}{%- assign image_height = 526 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 526 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 526w{%- endif -%}" sizes="(max-width: {{ image_size_first }}px) 100vw, {{ image_size_first }}px"> 
+                                    {%- else -%} 
+                                       <img width="{{ image.width }}" height="{{ image.height }}" src="{%-include 'gl_image_format',cache:true,src: image.src, size: product_image_size -%}" class="attachment-shop_single size-shop_single sp-post-image" alt="{{image.alt}}" title="{{product.title}}" 
+                                       data-src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}" 
+                                       data-large_image="{%-include 'gl_image_format',cache:true, src: image.src, size: product_image_photowipe -%}" data-large_image_width="{{ image.width }}" data-large_image_height="{{ image.height }}" 
+                                       srcset="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_size %} {{ image.width }}w
+                                               {%- if image_width > 235 -%},{%-include 'gl_image_format',src: image.src , size: '235x',cache:true %} 235w{%- endif -%} 
+                                               {%- if image_width > 768 -%},{%-include 'gl_image_format',src: image.src , size: '768x',cache:true %} 768w{%- endif -%}
+                                               {%- if image_width > 803 -%},{%-include 'gl_image_format',src: image.src , size: '803x',cache:true %} 803w{%- endif -%} 
+                                               {%- if image_width > 266 -%},{%-include 'gl_image_format',src: image.src , size: '266x',cache:true %} 266w{%- endif -%} 
+                                               {%- if image_width > 219 -%},{%-include 'gl_image_format',src: image.src , size: '219x',cache:true %} 219w{%- endif -%}
+                                               {%- if image_width > 263 -%},{%-include 'gl_image_format',src: image.src , size: '219x',cache:true %} 263w{%- endif -%}
+                                               {%- if image_width > 526 -%},{%-include 'gl_image_format',src: image.src , size: '526x',cache:true %} 526w{%- endif -%}" sizes="(max-width: {{ image.width }}px) 100vw, {{ image.width }}px">
+                                    {%- endif -%}
+                                    </a>
+                                 </figure>
+                              {%- else -%}
+                              <figure data-thumb="{%- if crop_thumb_nt != blank -%}{%-include 'gl_image_format_crop',src: image.src , size: crop_thumb_nt,position:'top' -%}{%- else -%}{%-include 'gl_image_format',cache:true,src: image.src , size: '219x' -%}{%- endif -%}" data-alt="{{image.alt}}" data-id="{{image.id}}" class="shopify-product-gallery__image">
+                                 <a href="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}">
+                                 {%- if crop_nt != blank -%}
+                                       <img width="{{ image_size_first }}" height="{{ image_height }}" src="{%-include 'gl_image_format_crop',src: image.src , size: crop_nt,position:'top' -%}" class="attachment-shop_catalog size-shop_catalog" alt="{{ image.alt | escape }}" 
+                                        data-src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}" 
+                                       data-large_image="{%-include 'gl_image_format',cache:true, src: image.src, size: product_image_photowipe -%}" data-large_image_width="{{ image.width }}" data-large_image_height="{{ image.height }}" 
+                                         srcset="{%-include 'gl_image_format_crop',src: image.src , size: crop_nt,position:'top' %} {{image_size_first}}w 
+                                         {%- if image_size_first > 235 -%}{%- assign image_height = 235 | divided_by: image.aspect_ratio | round -%}{%- assign image_size_el = 235 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 235w{%- endif -%} 
+                                         {%- if image_size_first > 768 -%}{%- assign image_height = 768 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 768 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 768w{%- endif -%}
+                                         {%- if image_size_first > 803 -%}{%- assign image_height = 803 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 803 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 803w{%- endif -%} 
+                                         {%- if image_size_first > 266 -%}{%- assign image_height = 266 | divided_by: image.aspect_ratio | round -%}{%- assign image_size_el = 266 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 266w{%- endif -%} 
+                                         {%- if image_size_first > 219 -%}{%- assign image_height = 219 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 219 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 219w{%- endif -%} 
+                                         {%- if image_size_first > 526 -%}{%- assign image_height = 526 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 526 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 526w{%- endif -%}" sizes="(max-width: {{ image_size_first }}px) 100vw, {{ image_size_first }}px"> 
+                                 {%- else -%}   
+                                    <img width="{{ image.width }}" height="{{ image.height }}" src="{%-include 'gl_image_format',cache:true,src: image.src, size: product_image_size -%}" class="attachment-shop_single size-shop_single sp-post-image" alt="{{image.alt}}" title="{{product.title}}" 
+                                    data-src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}" 
+                                    data-large_image="{%-include 'gl_image_format',cache:true, src: image.src, size: product_image_photowipe -%}" data-large_image_width="{{ image.width }}" data-large_image_height="{{ image.height }}" 
+                                    srcset="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_size %} {{ image.width }}w 
+                                            {%- if image_width > 235 -%},{%-include 'gl_image_format',src: image.src , size: '235x',cache:true %} 235w{%- endif -%} 
+                                            {%- if image_width > 768 -%},{%-include 'gl_image_format',src: image.src , size: '768x',cache:true %} 768w{%- endif -%}
+                                            {%- if image_width > 803 -%},{%-include 'gl_image_format',src: image.src , size: '803x',cache:true %} 803w{%- endif -%} 
+                                            {%- if image_width > 266 -%},{%-include 'gl_image_format',src: image.src , size: '266x',cache:true %} 266w{%- endif -%} 
+                                            {%- if image_width > 219 -%},{%-include 'gl_image_format',src: image.src , size: '219x',cache:true %} 219w{%- endif -%}
+                                            {%- if image_width > 263 -%},{%-include 'gl_image_format',src: image.src , size: '219x',cache:true %} 263w{%- endif -%}
+                                            {%- if image_width > 526 -%},{%-include 'gl_image_format',src: image.src , size: '526x',cache:true %} 526w{%- endif -%}" sizes="(max-width: {{ image.width }}px) 100vw, {{ image.width }}px">
+                                 {%- endif -%}
+                                 </a>
+                              </figure>
+                              {%- endif -%}
+                           {%- endif -%}
+                           {%- assign option_index = 0 -%}{%-assign image_index = 0-%}
+                            {%- for option in product.options -%}
+                              {%- assign downcased_option = option | downcase -%}
+                              {%- assign downcased_option_check = option | downcase | prepend: '"' | append: '"' | strip -%} 
+                              {%- if downcased_option == 'color' or downcased_option == 'colour' or gl_color_name contains downcased_option_check -%}
+                                  {%- assign option_index = forloop.index0 -%}
+                                  {%- assign displayed_option_values = '' -%}
+                                  {%- for variant in product.variants -%}
+                                    {%- assign option_value = variant.options[option_index] -%}
+                                    {%- unless displayed_option_values contains option_value -%}
+                                    {%- if current_variant.option1 == option_value or current_variant.option2 == option_value or current_variant.option3 == option_value -%}
+                                           {%- assign imgs_arr_child = imgs_arr[image_index] | split:','  -%}
+                                            {%- for src in imgs_arr_child -%}
+                                                {%- for image in product.images -%}
+                                                   {%- if src == image and src != current_variant.featured_image -%}
+                                                   {%- assign product_image_photowipe = image.width | append: 'x' -%}
+                                                   {%- if crop_nt != blank -%}
+                                                      {%- assign image_width_append = crop_nt -%}
+                                                      {%- assign image_width_append_arr = image_width_append | replace: ' x', 'x' | replace: 'x ', 'x' | replace: ' x ', 'x' | split: 'x' -%}
+                                                      {%- assign image_width = image_width_append_arr[0] -%}
+                                                      {%- assign image_size_first = image_width | plus:0 -%}
+                                                   {%- else -%}
+                                                      {%- assign product_image_size = image.width | append: 'x' -%}
+                                                      {%- assign image_width = image.width -%}
+                                                   {%- endif -%}
+                                                      {%- if image.attached_to_variant? and settings.use_clicking_variant_image -%}
+                                                         {%- for variant in image.variants -%}
+                                                            <figure data-variant_id= "{{variant.id}}" data-lenght= "{{product.options.size}}" data-one='{{ variant.option1 | handleize }}' data-two= '{{ variant.option2 | handleize }}' data-three= '{{ variant.option3 | handleize }}' data-thumb="{%- if crop_thumb_nt != blank -%}{%-include 'gl_image_format_crop',src: image.src , size: crop_thumb_nt,position:'top' -%}{%- else -%}{%-include 'gl_image_format',cache:true,src: image.src , size: '219x' -%}{%- endif -%}" data-alt="{{image.alt}}" data-id="{{image.id}}" class="shopify-product-gallery__image">
+                                                               <a href="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}">
+                                                                  {%- if crop_nt != blank -%}
+                                                                    <img width="{{ image_size_first }}" height="{{ image_height }}" src="{%-include 'gl_image_format_crop',src: image.src , size: crop_nt,position:'top' -%}" class="attachment-shop_catalog size-shop_catalog" alt="{{ image.alt | escape }}" 
+                                                                       data-src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}" 
+                                                                         data-large_image="{%-include 'gl_image_format',cache:true, src: image.src, size: product_image_photowipe -%}" data-large_image_width="{{ image.width }}" data-large_image_height="{{ image.height }}" 
+                                                                       srcset="{%-include 'gl_image_format_crop',src: image.src , size: crop_nt,position:'top' %} {{image_size_first}}w 
+                                                                       {%- if image_size_first > 235 -%}{%- assign image_height = 235 | divided_by: image.aspect_ratio | round -%}{%- assign image_size_el = 235 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 235w{%- endif -%} 
+                                                                       {%- if image_size_first > 768 -%}{%- assign image_height = 768 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 768 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 768w{%- endif -%}
+                                                                       {%- if image_size_first > 803 -%}{%- assign image_height = 803 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 803 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 803w{%- endif -%} 
+                                                                       {%- if image_size_first > 266 -%}{%- assign image_height = 266 | divided_by: image.aspect_ratio | round -%}{%- assign image_size_el = 266 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 266w{%- endif -%} 
+                                                                       {%- if image_size_first > 219 -%}{%- assign image_height = 219 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 219 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 219w{%- endif -%} 
+                                                                       {%- if image_size_first > 526 -%}{%- assign image_height = 526 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 526 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 526w{%- endif -%}" sizes="(max-width: {{ image_size_first }}px) 100vw, {{ image_size_first }}px"> 
+                                                                  {%- else -%} 
+                                                                   <img width="{{ image.width }}" height="{{ image.height }}" src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_size -%}" class="attachment-shop_single size-shop_single sp-post-image" alt="{{image.alt}}" title="{{product.title}}" 
+                                                                   data-src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}" 
+                                                                   data-large_image="{%-include 'gl_image_format',cache:true, src: image.src, size: product_image_photowipe -%}" data-large_image_width="{{ image.width }}" data-large_image_height="{{ image.height }}" 
+                                                                   srcset="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_size %} {{ image.width }}w 
+                                                                           {%- if image_width > 235 -%},{%-include 'gl_image_format',src: image.src , size: '235x',cache:true %} 235w{%- endif -%} 
+                                                                           {%- if image_width > 768 -%},{%-include 'gl_image_format',src: image.src , size: '768x',cache:true %} 768w{%- endif -%}
+                                                                           {%- if image_width > 803 -%},{%-include 'gl_image_format',src: image.src , size: '803x',cache:true %} 803w{%- endif -%} 
+                                                                           {%- if image_width > 266 -%},{%-include 'gl_image_format',src: image.src , size: '266x',cache:true %} 266w{%- endif -%} 
+                                                                           {%- if image_width > 219 -%},{%-include 'gl_image_format',src: image.src , size: '219x',cache:true %} 219w{%- endif -%}
+                                                                           {%- if image_width > 263 -%},{%-include 'gl_image_format',src: image.src , size: '219x',cache:true %} 263w{%- endif -%}
+                                                                           {%- if image_width > 526 -%},{%-include 'gl_image_format',src: image.src , size: '526x',cache:true %} 526w{%- endif -%}" sizes="(max-width: {{ image.width }}px) 100vw, {{ image.width }}px">
+                                                                 {%- endif -%}
+                                                               </a>
+                                                            </figure>
+                                                         {%- endfor -%}
+                                                      {%- else -%}
+                                                         <figure data-thumb="{%- if crop_thumb_nt != blank -%}{%-include 'gl_image_format_crop',src: image.src , size: crop_thumb_nt,position:'top' -%}{%- else -%}{%-include 'gl_image_format',cache:true,src: image.src , size: '219x' -%}{%- endif -%}" data-alt="{{image.alt}}" data-id="{{image.id}}" class="shopify-product-gallery__image">
+                                                            <a href="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}">
+                                                               {%- if crop_nt != blank -%}
+                                                                 <img width="{{ image_size_first }}" height="{{ image_height }}" src="{%-include 'gl_image_format_crop',src: image.src , size: crop_nt,position:'top' -%}" class="attachment-shop_catalog size-shop_catalog" alt="{{ image.alt | escape }}" 
+                                                                    data-src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}" 
+                                       data-large_image="{%-include 'gl_image_format',cache:true, src: image.src, size: product_image_photowipe -%}" data-large_image_width="{{ image.width }}" data-large_image_height="{{ image.height }}" 
+                                                                    srcset="{%-include 'gl_image_format_crop',src: image.src , size: crop_nt,position:'top' %} {{image_size_first}}w 
+                                                                    {%- if image_size_first > 235 -%}{%- assign image_height = 235 | divided_by: image.aspect_ratio | round -%}{%- assign image_size_el = 235 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 235w{%- endif -%} 
+                                                                    {%- if image_size_first > 768 -%}{%- assign image_height = 768 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 768 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 768w{%- endif -%}
+                                                                    {%- if image_size_first > 803 -%}{%- assign image_height = 803 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 803 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 803w{%- endif -%} 
+                                                                    {%- if image_size_first > 266 -%}{%- assign image_height = 266 | divided_by: image.aspect_ratio | round -%}{%- assign image_size_el = 266 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 266w{%- endif -%} 
+                                                                    {%- if image_size_first > 219 -%}{%- assign image_height = 219 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 219 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 219w{%- endif -%} 
+                                                                    {%- if image_size_first > 526 -%}{%- assign image_height = 526 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 526 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 526w{%- endif -%}" sizes="(max-width: {{ image_size_first }}px) 100vw, {{ image_size_first }}px"> 
+                                                               {%- else -%} 
+                                                                <img width="{{ image.width }}" height="{{ image.height }}" src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_size -%}" class="attachment-shop_single size-shop_single sp-post-image" alt="{{image.alt}}" title="{{product.title}}" 
+                                                                data-src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}" 
+                                                                data-large_image="{%-include 'gl_image_format',cache:true, src: image.src, size: product_image_photowipe -%}" data-large_image_width="{{ image.width }}" data-large_image_height="{{ image.height }}" 
+                                                                srcset="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_size %} {{ image.width }}w 
+                                                                        {%- if image_width > 235 -%},{%-include 'gl_image_format',src: image.src , size: '235x',cache:true %} 235w{%- endif -%} 
+                                                                        {%- if image_width > 768 -%},{%-include 'gl_image_format',src: image.src , size: '768x',cache:true %} 768w{%- endif -%}
+                                                                        {%- if image_width > 803 -%},{%-include 'gl_image_format',src: image.src , size: '803x',cache:true %} 803w{%- endif -%} 
+                                                                        {%- if image_width > 266 -%},{%-include 'gl_image_format',src: image.src , size: '266x',cache:true %} 266w{%- endif -%} 
+                                                                        {%- if image_width > 219 -%},{%-include 'gl_image_format',src: image.src , size: '219x',cache:true %} 219w{%- endif -%}
+                                                                        {%- if image_width > 263 -%},{%-include 'gl_image_format',src: image.src , size: '219x',cache:true %} 263w{%- endif -%}
+                                                                        {%- if image_width > 526 -%},{%-include 'gl_image_format',src: image.src , size: '526x',cache:true %} 526w{%- endif -%}" sizes="(max-width: {{ image.width }}px) 100vw, {{ image.width }}px">
+                                                              {%- endif -%}
+                                                            </a>
+                                                         </figure>
+                                                      {%- endif -%}
+                                                   {%- endif -%}
+                                                {%- endfor -%}
+                                              {%- endfor -%}
+                                    {%- endif -%}
+                                      {%- assign displayed_option_values = displayed_option_values | join: ',' -%}
+                                      {%- assign displayed_option_values = displayed_option_values | append: ',' | append: option_value -%}
+                                      {%- assign displayed_option_values = displayed_option_values | split: ',' -%}
+                                      {%- assign image_index = image_index | plus: 1 -%}
+                                      {%- endunless -%}
+                                    {%- endfor -%}
+                              {%- endif -%}
+                              {%- endfor -%}
+                        {%-else-%}
+                           {%- if current_variant.featured_image != blank -%}
+                              {%- assign image = current_variant.featured_image -%}
+                              {%- assign product_image_photowipe = image.width | append: 'x' -%}
+                              {%- if crop_nt != blank -%}
+                                 {%- assign image_width_append = crop_nt -%}
+                                 {%- assign image_width_append_arr = image_width_append | replace: ' x', 'x' | replace: 'x ', 'x' | replace: ' x ', 'x' | split: 'x' -%}
+                                 {%- assign image_width = image_width_append_arr[0] -%}
+                                 {%- assign image_size_first = image_width | plus:0 -%}
+                              {%- else -%} 
+                                 {%- assign product_image_size = image.width | append: 'x' -%}
+                                 {%- assign image_width = image.width -%}
+                              {%- endif -%}
+                                 {%- if image.attached_to_variant? and settings.use_clicking_variant_image -%}
+                                       <figure data='{{ forloop.index}}' data-variant_id= "{{current_variant.id}}" data-lenght= "{{product.options.size}}" data-one='{{ current_variant.option1 | handleize | handleize }}' data-two= '{{ current_variant.option2 | handleize | handleize }}' data-three= '{{ current_variant.option3 | handleize | handleize }}' data-thumb="{%- if crop_thumb_nt != blank -%}{%-include 'gl_image_format_crop',src: image.src , size: crop_thumb_nt,position:'top' -%}{%- else -%}{%-include 'gl_image_format',cache:true,src: image.src , size: '219x' -%}{%- endif -%}" data-alt="{{image.alt}}" data-id="{{image.id}}" class="shopify-product-gallery__image">
+                                          <a href="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}">
+                                             {%- if crop_nt != blank -%}
+                                               <img width="{{ image_size_first }}" height="{{ image_height }}" src="{%-include 'gl_image_format_crop',src: image.src , size: crop_nt,position:'top' -%}" class="attachment-shop_catalog size-shop_catalog" alt="{{ image.alt | escape }}" 
+                                                  data-src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}" 
+                                       data-large_image="{%-include 'gl_image_format',cache:true, src: image.src, size: product_image_photowipe -%}" data-large_image_width="{{ image.width }}" data-large_image_height="{{ image.height }}" 
+                                                  srcset="{%-include 'gl_image_format_crop',src: image.src , size: crop_nt,position:'top' %} {{image_size_first}}w 
+                                                  {%- if image_size_first > 235 -%}{%- assign image_height = 235 | divided_by: image.aspect_ratio | round -%}{%- assign image_size_el = 235 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 235w{%- endif -%} 
+                                                  {%- if image_size_first > 768 -%}{%- assign image_height = 768 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 768 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 768w{%- endif -%}
+                                                  {%- if image_size_first > 803 -%}{%- assign image_height = 803 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 803 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 803w{%- endif -%} 
+                                                  {%- if image_size_first > 266 -%}{%- assign image_height = 266 | divided_by: image.aspect_ratio | round -%}{%- assign image_size_el = 266 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 266w{%- endif -%} 
+                                                  {%- if image_size_first > 219 -%}{%- assign image_height = 219 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 219 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 219w{%- endif -%} 
+                                                  {%- if image_size_first > 526 -%}{%- assign image_height = 526 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 526 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 526w{%- endif -%}" sizes="(max-width: {{ image_size_first }}px) 100vw, {{ image_size_first }}px"> 
+                                             {%- else -%} 
+                                              <img width="{{ image.width }}" height="{{ image.height }}" src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_size -%}" class="attachment-shop_single size-shop_single sp-post-image" alt="{{image.alt}}" title="{{product.title}}" 
+                                              data-src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}" 
+                                              data-large_image="{%-include 'gl_image_format',cache:true, src: image.src, size: product_image_photowipe -%}" data-large_image_width="{{ image.width }}" data-large_image_height="{{ image.height }}" 
+                                              srcset="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_size %} {{ image.width }}w 
+                                                      {%- if image_width > 235 -%},{%-include 'gl_image_format',src: image.src , size: '235x',cache:true %} 235w{%- endif -%} 
+                                                      {%- if image_width > 768 -%},{%-include 'gl_image_format',src: image.src , size: '768x',cache:true %} 768w{%- endif -%}
+                                                      {%- if image_width > 803 -%},{%-include 'gl_image_format',src: image.src , size: '803x',cache:true %} 803w{%- endif -%} 
+                                                      {%- if image_width > 266 -%},{%-include 'gl_image_format',src: image.src , size: '266x',cache:true %} 266w{%- endif -%} 
+                                                      {%- if image_width > 219 -%},{%-include 'gl_image_format',src: image.src , size: '219x',cache:true %} 219w{%- endif -%}
+                                                      {%- if image_width > 263 -%},{%-include 'gl_image_format',src: image.src , size: '219x',cache:true %} 263w{%- endif -%}
+                                                      {%- if image_width > 526 -%},{%-include 'gl_image_format',src: image.src , size: '526x',cache:true %} 526w{%- endif -%}" sizes="(max-width: {{ image.width }}px) 100vw, {{ image.width }}px">
+                                            {%- endif -%}
+                                          </a>
+                                       </figure>
+                                 {%- else -%}
+                                    <figure data-thumb="{%- if crop_thumb_nt != blank -%}{%-include 'gl_image_format_crop',src: image.src , size: crop_thumb_nt,position:'top' -%}{%- else -%}{%-include 'gl_image_format',cache:true,src: image.src , size: '219x' -%}{%- endif -%}" data-alt="{{image.alt}}" data-id="{{image.id}}" class="shopify-product-gallery__image">
+                                       <a href="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}">
+                                          {%- if crop_nt != blank -%}
+                                            <img width="{{ image_size_first }}" height="{{ image_height }}" src="{%-include 'gl_image_format_crop',src: image.src , size: crop_nt,position:'top' -%}" class="attachment-shop_catalog size-shop_catalog" alt="{{ image.alt | escape }}" 
+                                               data-src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}" 
+                                       data-large_image="{%-include 'gl_image_format',cache:true, src: image.src, size: product_image_photowipe -%}" data-large_image_width="{{ image.width }}" data-large_image_height="{{ image.height }}" 
+                                               srcset="{%-include 'gl_image_format_crop',src: image.src , size: crop_nt,position:'top' %} {{image_size_first}}w 
+                                               {%- if image_size_first > 235 -%}{%- assign image_height = 235 | divided_by: image.aspect_ratio | round -%}{%- assign image_size_el = 235 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 235w{%- endif -%} 
+                                               {%- if image_size_first > 768 -%}{%- assign image_height = 768 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 768 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 768w{%- endif -%}
+                                               {%- if image_size_first > 803 -%}{%- assign image_height = 803 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 803 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 803w{%- endif -%} 
+                                               {%- if image_size_first > 266 -%}{%- assign image_height = 266 | divided_by: image.aspect_ratio | round -%}{%- assign image_size_el = 266 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 266w{%- endif -%} 
+                                               {%- if image_size_first > 219 -%}{%- assign image_height = 219 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 219 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 219w{%- endif -%} 
+                                               {%- if image_size_first > 526 -%}{%- assign image_height = 526 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 526 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 526w{%- endif -%}" sizes="(max-width: {{ image_size_first }}px) 100vw, {{ image_size_first }}px"> 
+                                          {%- else -%} 
+                                           <img width="{{ image.width }}" height="{{ image.height }}" src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_size -%}" class="attachment-shop_single size-shop_single sp-post-image" alt="{{image.alt}}" title="{{product.title}}" 
+                                           data-src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}" 
+                                           data-large_image="{%-include 'gl_image_format',cache:true, src: image.src, size: product_image_photowipe -%}" data-large_image_width="{{ image.width }}" data-large_image_height="{{ image.height }}" 
+                                           srcset="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_size %} {{ image.width }}w 
+                                                   {%- if image_width > 235 -%},{%-include 'gl_image_format',src: image.src , size: '235x',cache:true %} 235w{%- endif -%} 
+                                                   {%- if image_width > 768 -%},{%-include 'gl_image_format',src: image.src , size: '768x',cache:true %} 768w{%- endif -%}
+                                                   {%- if image_width > 803 -%},{%-include 'gl_image_format',src: image.src , size: '803x',cache:true %} 803w{%- endif -%} 
+                                                   {%- if image_width > 266 -%},{%-include 'gl_image_format',src: image.src , size: '266x',cache:true %} 266w{%- endif -%} 
+                                                   {%- if image_width > 219 -%},{%-include 'gl_image_format',src: image.src , size: '219x',cache:true %} 219w{%- endif -%}
+                                                   {%- if image_width > 263 -%},{%-include 'gl_image_format',src: image.src , size: '219x',cache:true %} 263w{%- endif -%}
+                                                   {%- if image_width > 526 -%},{%-include 'gl_image_format',src: image.src , size: '526x',cache:true %} 526w{%- endif -%}" sizes="(max-width: {{ image.width }}px) 100vw, {{ image.width }}px">
+                                         {%- endif -%}
+                                       </a>
+                                    </figure>
+                                 {%- endif -%}
+                           {%- elsif variant_recoment == true -%}
+                              {%- assign id_page = id_page | json -%}
+                              {%- for image in product.images -%}
+                                 {%- for variant in image.variants -%}
+                                    {%- assign image_re_id = image.id | prepend :'"'| append: '"'-%}
+                                      {%- if image_re_id == id_page -%}
+                                       {%- if crop_nt != blank -%}
+                                         {%- assign image_width_append = crop_nt -%}
+                                          {%- assign image_width_append_arr = image_width_append | replace: ' x', 'x' | replace: 'x ', 'x' | replace: ' x ', 'x' | split: 'x' -%}
+                                          {%- assign image_width = image_width_append_arr[0] -%}
+                                          {%- assign image_size_first = image_width | plus:0 -%}
+                                       {%- else -%}
+                                         {%- assign product_image_size = image.width | append: 'x' -%}
+                                         {%- assign image_width = image.width -%}
+                                       {%- endif -%}
+                                       {%- assign product_image_photowipe = image.width | append: 'x' -%}
+                                       {%- if image.attached_to_variant? and settings.use_clicking_variant_image -%}
+                                          {%- for variant in image.variants -%}
+                                             <figure data-variant_id= "{{variant.id}}" data-lenght= "{{product.options.size}}" data-one='{{ variant.option1 | handleize }}' data-two= '{{ variant.option2 | handleize }}' data-three= '{{ variant.option3 | handleize }}' data-thumb="{%- if crop_thumb_nt != blank -%}{%-include 'gl_image_format_crop',src: image.src , size: crop_thumb_nt,position:'top' -%}{%- else -%}{%-include 'gl_image_format',cache:true,src: image.src , size: '219x' -%}{%- endif -%}" data-alt="{{image.alt}}" data-id="{{image.id}}" class="shopify-product-gallery__image">
+                                                <a href="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}">
+                                                   {%- if crop_nt != blank -%}
+                                                     <img width="{{ image_size_first }}" height="{{ image_height }}" src="{%-include 'gl_image_format_crop',src: image.src , size: crop_nt,position:'top' -%}" class="attachment-shop_catalog size-shop_catalog" alt="{{ image.alt | escape }}" 
+                                                        data-src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}" 
+                                       data-large_image="{%-include 'gl_image_format',cache:true, src: image.src, size: product_image_photowipe -%}" data-large_image_width="{{ image.width }}" data-large_image_height="{{ image.height }}" 
+                                                        srcset="{%-include 'gl_image_format_crop',src: image.src , size: crop_nt,position:'top' %} {{image_size_first}}w 
+                                                        {%- if image_size_first > 235 -%}{%- assign image_height = 235 | divided_by: image.aspect_ratio | round -%}{%- assign image_size_el = 235 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 235w{%- endif -%} 
+                                                        {%- if image_size_first > 768 -%}{%- assign image_height = 768 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 768 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 768w{%- endif -%}
+                                                        {%- if image_size_first > 803 -%}{%- assign image_height = 803 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 803 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 803w{%- endif -%} 
+                                                        {%- if image_size_first > 266 -%}{%- assign image_height = 266 | divided_by: image.aspect_ratio | round -%}{%- assign image_size_el = 266 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 266w{%- endif -%} 
+                                                        {%- if image_size_first > 219 -%}{%- assign image_height = 219 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 219 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 219w{%- endif -%} 
+                                                        {%- if image_size_first > 526 -%}{%- assign image_height = 526 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 526 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 526w{%- endif -%}" sizes="(max-width: {{ image_size_first }}px) 100vw, {{ image_size_first }}px"> 
+                                                   {%- else -%} 
+                                                    <img width="{{ image.width }}" height="{{ image.height }}" src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_size -%}" class="attachment-shop_single size-shop_single sp-post-image" alt="{{image.alt}}" title="{{product.title}}" 
+                                                    data-src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}" 
+                                                    data-large_image="{%-include 'gl_image_format',cache:true, src: image.src, size: product_image_photowipe -%}" data-large_image_width="{{ image.width }}" data-large_image_height="{{ image.height }}" 
+                                                    srcset="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_size %} {{ image.width }}w 
+                                                            {%- if image_width > 235 -%},{%-include 'gl_image_format',src: image.src , size: '235x',cache:true %} 235w{%- endif -%} 
+                                                            {%- if image_width > 768 -%},{%-include 'gl_image_format',src: image.src , size: '768x',cache:true %} 768w{%- endif -%}
+                                                            {%- if image_width > 803 -%},{%-include 'gl_image_format',src: image.src , size: '803x',cache:true %} 803w{%- endif -%} 
+                                                            {%- if image_width > 266 -%},{%-include 'gl_image_format',src: image.src , size: '266x',cache:true %} 266w{%- endif -%} 
+                                                            {%- if image_width > 219 -%},{%-include 'gl_image_format',src: image.src , size: '219x',cache:true %} 219w{%- endif -%}
+                                                            {%- if image_width > 263 -%},{%-include 'gl_image_format',src: image.src , size: '219x',cache:true %} 263w{%- endif -%}
+                                                            {%- if image_width > 526 -%},{%-include 'gl_image_format',src: image.src , size: '526x',cache:true %} 526w{%- endif -%}" sizes="(max-width: {{ image.width }}px) 100vw, {{ image.width }}px">
+                                                  {%- endif -%}
+                                                </a>
+                                             </figure>
+                                          {%- endfor -%}
+                                       {%- else -%}
+                                          <figure data-thumb="{%- if crop_thumb_nt != blank -%}{%-include 'gl_image_format_crop',src: image.src , size: crop_thumb_nt,position:'top' -%}{%- else -%}{%-include 'gl_image_format',cache:true,src: image.src , size: '219x' -%}{%- endif -%}" data-alt="{{image.alt}}" data-id="{{image.id}}" class="shopify-product-gallery__image">
+                                             <a href="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}">
+                                                {%- if crop_nt != blank -%}
+                                                  <img width="{{ image_size_first }}" height="{{ image_height }}" src="{%-include 'gl_image_format_crop',src: image.src , size: crop_nt,position:'top' -%}" class="attachment-shop_catalog size-shop_catalog" alt="{{ image.alt | escape }}" 
+                                                     data-src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}" 
+                                       data-large_image="{%-include 'gl_image_format',cache:true, src: image.src, size: product_image_photowipe -%}" data-large_image_width="{{ image.width }}" data-large_image_height="{{ image.height }}" 
+                                                     srcset="{%-include 'gl_image_format_crop',src: image.src , size: crop_nt,position:'top' %} {{image_size_first}}w 
+                                                     {%- if image_size_first > 235 -%}{%- assign image_height = 235 | divided_by: image.aspect_ratio | round -%}{%- assign image_size_el = 235 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 235w{%- endif -%} 
+                                                     {%- if image_size_first > 768 -%}{%- assign image_height = 768 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 768 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 768w{%- endif -%}
+                                                     {%- if image_size_first > 803 -%}{%- assign image_height = 803 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 803 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 803w{%- endif -%} 
+                                                     {%- if image_size_first > 266 -%}{%- assign image_height = 266 | divided_by: image.aspect_ratio | round -%}{%- assign image_size_el = 266 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 266w{%- endif -%} 
+                                                     {%- if image_size_first > 219 -%}{%- assign image_height = 219 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 219 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 219w{%- endif -%} 
+                                                     {%- if image_size_first > 526 -%}{%- assign image_height = 526 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 526 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 526w{%- endif -%}" sizes="(max-width: {{ image_size_first }}px) 100vw, {{ image_size_first }}px"> 
+                                                {%- else -%} 
+                                                 <img width="{{ image.width }}" height="{{ image.height }}" src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_size -%}" class="attachment-shop_single size-shop_single sp-post-image" alt="{{image.alt}}" title="{{product.title}}" 
+                                                 data-src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}" 
+                                                 data-large_image="{%-include 'gl_image_format',cache:true, src: image.src, size: product_image_photowipe -%}" data-large_image_width="{{ image.width }}" data-large_image_height="{{ image.height }}" 
+                                                 srcset="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_size %} {{ image.width }}w 
+                                                         {%- if image_width > 235 -%},{%-include 'gl_image_format',src: image.src , size: '235x',cache:true %} 235w{%- endif -%} 
+                                                         {%- if image_width > 768 -%},{%-include 'gl_image_format',src: image.src , size: '768x',cache:true %} 768w{%- endif -%}
+                                                         {%- if image_width > 803 -%},{%-include 'gl_image_format',src: image.src , size: '803x',cache:true %} 803w{%- endif -%} 
+                                                         {%- if image_width > 266 -%},{%-include 'gl_image_format',src: image.src , size: '266x',cache:true %} 266w{%- endif -%} 
+                                                         {%- if image_width > 219 -%},{%-include 'gl_image_format',src: image.src , size: '219x',cache:true %} 219w{%- endif -%}
+                                                         {%- if image_width > 263 -%},{%-include 'gl_image_format',src: image.src , size: '219x',cache:true %} 263w{%- endif -%}
+                                                         {%- if image_width > 526 -%},{%-include 'gl_image_format',src: image.src , size: '526x',cache:true %} 526w{%- endif -%}" sizes="(max-width: {{ image.width }}px) 100vw, {{ image.width }}px">
+                                               {%- endif -%}
+                                             </a>
+                                          </figure>
+                                       {%- endif -%}
+                                       {%- assign current_variant_re_nt = image -%}
+                                      {%- endif -%}
+                                 {%- endfor- %}
+                              {%- endfor -%}
+                           {%- endif -%}
+                           {%- for image in product.images -%}
+                           {%- unless current_variant.featured_image == image or current_variant_re_nt == image -%}
+                              {%- if crop_nt != blank -%}
+                                 {%- assign image_width_append = crop_nt -%}
+                                 {%- assign image_width_append_arr = image_width_append | replace: ' x', 'x' | replace: 'x ', 'x' | replace: ' x ', 'x' | split: 'x' -%}
+                                 {%- assign image_width = image_width_append_arr[0] -%}
+                                 {%- assign image_size_first = image_width | plus:0 -%}
+                               {%- else -%}
+                                 {%- assign product_image_size = image.width | append: 'x' -%}
+                                 {%- assign image_width = image.width -%}
+                               {%- endif -%}
+                               {%- assign product_image_photowipe = image.width | append: 'x' -%}
+                              {%- if image.attached_to_variant? and settings.use_clicking_variant_image -%}
+                                 {%- for variant in image.variants -%}
+                                    <figure data-variant_id= "{{variant.id}}" data-lenght= "{{product.options.size}}" data-one='{{ variant.option1 | handleize }}' data-two= '{{ variant.option2 | handleize }}' data-three= '{{ variant.option3 | handleize }}' data-thumb="{%- if crop_thumb_nt != blank -%}{%-include 'gl_image_format_crop',src: image.src , size: crop_thumb_nt,position:'top' -%}{%- else -%}{%-include 'gl_image_format',cache:true,src: image.src , size: '219x' -%}{%- endif -%}" data-alt="{{image.alt}}" data-id="{{image.id}}" class="shopify-product-gallery__image">
+                                       <a href="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}">
+                                          {%- if crop_nt != blank -%}
+                                            <img width="{{ image_size_first }}" height="{{ image_height }}" src="{%-include 'gl_image_format_crop',src: image.src , size: crop_nt,position:'top' -%}" class="attachment-shop_catalog size-shop_catalog" alt="{{ image.alt | escape }}" 
+                                               data-src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}" 
+                                       data-large_image="{%-include 'gl_image_format',cache:true, src: image.src, size: product_image_photowipe -%}" data-large_image_width="{{ image.width }}" data-large_image_height="{{ image.height }}" 
+                                               srcset="{%-include 'gl_image_format_crop',src: image.src , size: crop_nt,position:'top' %} {{image_size_first}}w 
+                                               {%- if image_size_first > 235 -%}{%- assign image_height = 235 | divided_by: image.aspect_ratio | round -%}{%- assign image_size_el = 235 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 235w{%- endif -%} 
+                                               {%- if image_size_first > 768 -%}{%- assign image_height = 768 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 768 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 768w{%- endif -%}
+                                               {%- if image_size_first > 803 -%}{%- assign image_height = 803 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 803 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 803w{%- endif -%} 
+                                               {%- if image_size_first > 266 -%}{%- assign image_height = 266 | divided_by: image.aspect_ratio | round -%}{%- assign image_size_el = 266 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 266w{%- endif -%} 
+                                               {%- if image_size_first > 219 -%}{%- assign image_height = 219 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 219 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 219w{%- endif -%} 
+                                               {%- if image_size_first > 526 -%}{%- assign image_height = 526 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 526 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 526w{%- endif -%}" sizes="(max-width: {{ image_size_first }}px) 100vw, {{ image_size_first }}px"> 
+                                          {%- else -%} 
+                                           <img width="{{ image.width }}" height="{{ image.height }}" src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_size -%}" class="attachment-shop_single size-shop_single sp-post-image" alt="{{image.alt}}" title="{{product.title}}" 
+                                           data-src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}" 
+                                           data-large_image="{%-include 'gl_image_format',cache:true, src: image.src, size: product_image_photowipe -%}" data-large_image_width="{{ image.width }}" data-large_image_height="{{ image.height }}" 
+                                           srcset="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_size %} {{ image.width }}w 
+                                                   {%- if image_width > 235 -%},{%-include 'gl_image_format',src: image.src , size: '235x',cache:true %} 235w{%- endif -%} 
+                                                   {%- if image_width > 768 -%},{%-include 'gl_image_format',src: image.src , size: '768x',cache:true %} 768w{%- endif -%}
+                                                   {%- if image_width > 803 -%},{%-include 'gl_image_format',src: image.src , size: '803x',cache:true %} 803w{%- endif -%} 
+                                                   {%- if image_width > 266 -%},{%-include 'gl_image_format',src: image.src , size: '266x',cache:true %} 266w{%- endif -%} 
+                                                   {%- if image_width > 219 -%},{%-include 'gl_image_format',src: image.src , size: '219x',cache:true %} 219w{%- endif -%}
+                                                   {%- if image_width > 263 -%},{%-include 'gl_image_format',src: image.src , size: '219x',cache:true %} 263w{%- endif -%}
+                                                   {%- if image_width > 526 -%},{%-include 'gl_image_format',src: image.src , size: '526x',cache:true %} 526w{%- endif -%}" sizes="(max-width: {{ image.width }}px) 100vw, {{ image.width }}px">
+                                         {%- endif -%}
+                                       </a>
+                                    </figure>
+                                 {%- endfor -%}
+                              {%- else -%}
+                                 <figure data-thumb="{%- if crop_thumb_nt != blank -%}{%-include 'gl_image_format_crop',src: image.src , size: crop_thumb_nt,position:'top' -%}{%- else -%}{%-include 'gl_image_format',cache:true,src: image.src , size: '219x' -%}{%- endif -%}" data-alt="{{image.alt}}" data-id="{{image.id}}" class="shopify-product-gallery__image">
+                                    <a href="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}">
+                                       {%- if crop_nt != blank -%}
+                                         <img width="{{ image_size_first }}" height="{{ image_height }}" src="{%-include 'gl_image_format_crop',src: image.src , size: crop_nt,position:'top' -%}" class="attachment-shop_catalog size-shop_catalog" alt="{{ image.alt | escape }}" 
+                                            data-src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe -%}" 
+                                       data-large_image="{%-include 'gl_image_format',cache:true, src: image.src, size: product_image_photowipe -%}" data-large_image_width="{{ image.width }}" data-large_image_height="{{ image.height }}" 
+                                            srcset="{%-include 'gl_image_format_crop',src: image.src , size: crop_nt,position:'top' %} {{image_size_first}}w 
+                                            {%- if image_size_first > 235 -%}{%- assign image_height = 235 | divided_by: image.aspect_ratio | round -%}{%- assign image_size_el = 235 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 235w{%- endif -%} 
+                                            {%- if image_size_first > 768 -%}{%- assign image_height = 768 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 768 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 768w{%- endif -%}
+                                            {%- if image_size_first > 803 -%}{%- assign image_height = 803 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 803 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 803w{%- endif -%} 
+                                            {%- if image_size_first > 266 -%}{%- assign image_height = 266 | divided_by: image.aspect_ratio | round -%}{%- assign image_size_el = 266 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 266w{%- endif -%} 
+                                            {%- if image_size_first > 219 -%}{%- assign image_height = 219 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 219 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 219w{%- endif -%} 
+                                            {%- if image_size_first > 526 -%}{%- assign image_height = 526 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 526 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 526w{%- endif -%}" sizes="(max-width: {{ image_size_first }}px) 100vw, {{ image_size_first }}px"> 
+                                       {%- else -%} 
+                                        <img width="{{ image.width }}" height="{{ image.height }}" src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_size -%}" class="attachment-shop_single size-shop_single sp-post-image" alt="{{image.alt}}" title="{{product.title}}" 
+                                        data-src="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_size -%}" 
+                                        data-large_image="{%-include 'gl_image_format',cache:true, src: image.src, size: product_image_photowipe -%}" data-large_image_width="{{ image.width }}" data-large_image_height="{{ image.height }}" 
+                                        srcset="{%-include 'gl_image_format',cache:true,src: image.src , size: product_image_photowipe %} {{ image.width }}w 
+                                                {%- if image_width > 235 -%},{%-include 'gl_image_format',src: image.src , size: '235x',cache:true %} 235w{%- endif -%} 
+                                                {%- if image_width > 768 -%},{%-include 'gl_image_format',src: image.src , size: '768x',cache:true %} 768w{%- endif -%}
+                                                {%- if image_width > 803 -%},{%-include 'gl_image_format',src: image.src , size: '803x',cache:true %} 803w{%- endif -%} 
+                                                {%- if image_width > 266 -%},{%-include 'gl_image_format',src: image.src , size: '266x',cache:true %} 266w{%- endif -%} 
+                                                {%- if image_width > 219 -%},{%-include 'gl_image_format',src: image.src , size: '219x',cache:true %} 219w{%- endif -%}
+                                                {%- if image_width > 263 -%},{%-include 'gl_image_format',src: image.src , size: '219x',cache:true %} 263w{%- endif -%}
+                                                {%- if image_width > 526 -%},{%-include 'gl_image_format',src: image.src , size: '526x',cache:true %} 526w{%- endif -%}" sizes="(max-width: {{ image.width }}px) 100vw, {{ image.width }}px">
+                                      {%- endif -%}
+                                    </a>
+                                 </figure>
+                              {%- endif -%}
+                           {%- endunless -%}
+                           {%- endfor -%}
+                        {%-endif-%}
+                        </figure>
+                        {%- if settings.main_click == 'zoom' and settings.show_zoom_img -%}<div class="basel-show-product-gallery-wrap"><a href="#" class="basel-show-product-gallery basel-tooltip"><span class="basel-tooltip-label">{{ 'products.product.click_zoom' | t }}</span>{{ 'products.product.click_zoom' | t }}</a></div>{%- endif -%}
+                     </div>
+                     {%- if product.images.size > 1 and design_products_page != 'product-design-sticky' -%}<div class="{%- if settings.thumbnails_position == 'left' -%}col-md-3 col-md-pull-9{%- else -%}col-sm-12{%- endif -%}"><div id="gl_thumbnails" class="thumbnails"></div></div>{%- endif -%}
+                  </div>
+                  {%- if settings.use_view_360 -%}
+                     {%- section 'product_360_section' -%}
+                  {%- elsif product.metafields.meta.video contains 'youtube' or product.metafields.meta.video contains 'vimeo' -%}
+                     <div class="product-additional-galleries">
+                        <div class="product-video-button">
+                        <a href="{{product.metafields.meta.video}}"><span>{{ 'products.product.video' | t }}</span></a>
+                        </div>
+                     </div>
+                  {%- endif -%}
+               </div>
+               {%- endif -%}
+               <div class="{{class_summary}} summary entry-summary">
+                  <div class="summary-inner{%- if design_products_page == 'product-design-compact' %} basel-scroll{%- endif -%}">
+                     <div class="basel-scroll-content">
+                        <h1 itemprop="name" class="product_title entry-title">{{ product.title }}</h1>
+                        {%- if settings.show_product_page_rating -%}
+                        <a href="#shopify-section-gl-product-page-description" class="shopify-product-rating">
+                          <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+                        </a>
+                        {%- endif -%}
+                        <div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+                           <p class="price"{%- unless product.price_varies %} id="productPrice"{%- endunless -%}>
+                             {%- if linklists[product.handle].links.size == 0 -%}
+                               {%- if product.price_varies -%}
+                               {{ product.price_min | money }} – {{ product.price_max | money }}
+                               {%- elsif on_sale -%}<del id="old-product-price">{{current_variant.compare_at_price | money }}</del> <ins id="product-price">{{ current_variant.price | money }}</ins>
+                               {%- else -%}
+                               <span id="product-price">{{ current_variant.price | money }}</span> 
+                               {%- endif -%}
+                             {%- else -%}
+                               {%- if on_sale -%}
+                               {{ current_variant.price | money }} – {{ current_variant.compare_at_price | money }}
+                               {%- else -%}
+                               {{ current_variant.price | money }}
+                               {%- endif -%}
+                             {%- endif -%}
+                             </p>
+                          <meta itemprop="price" content="{{ product.price | divided_by: 100.00 }}">
+                          <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+                          <link itemprop="availability" href="http://schema.org/{%- if product.available -%}InStock{%- else -%}OutOfStock{%- endif -%}"> 
+                        </div>
+                        {%- if settings.use_description_excerpt -%}
+                        {%- assign _prodcut_excerpt_length = settings.prodcut_excerpt_length | plus:0 -%}
+                        {%- assign prodcut_excerpt_length = _prodcut_excerpt_length | default: 31 -%}
+                        <div class="shopify-product-details__short-description{%- if product.template_suffix == 'design_compact'%} hide hidden{%- endif %}{%- if settings.use_description_full %} gl_mb_20{%- endif -%}" itemprop="description">
+                           {%- if settings.use_description_full -%}
+                              {%- include 'shortcode' load: product.description -%}
+                           {%-else-%}
+                              <p class="p_des_ex">
+                                 {%- if product.metafields.meta.description_excerpt -%}
+                                  {{  product.metafields.meta.description_excerpt | strip }}
+                                {% elsif product.description contains  '[' %}
+                                  {% assign pr_des = product.description | split: '[' %}
+                                  {% assign pr_des = pr_des[1] | split: ']' | first | append:']' | prepend:'[' %}
+                                  {{ product.description | remove: pr_des | strip_html | truncatewords: prodcut_excerpt_length }}
+                                {%-else-%}
+                                  {{ product.description | strip_html | truncatewords: prodcut_excerpt_length }}
+                                {%-endif-%}
+                              </p>
+                           {%-endif-%}
+                        </div>
+                        {%-endif-%}
+                       
+                       
+                        {%- assign section_settings_countdown = settings.show_countdown -%}
+                        {%- include 'basel_count_down' -%}
+                            {%- unless product.options.size == 1 and product.has_only_default_variant -%}
+                              {%-capture variantSoldout-%}
+                              {%-for option in product.options_with_values-%}
+                                  {%-for value in option.values-%}
+                                    {% if option.selected_value == value and forloop.last == false %} bg_{{value | handleize}}{% endif-%}
+                                  {%-endfor-%}
+                              {%-endfor-%}
+                              {%-endcapture-%}
+                           {%-endunless-%}
+                           {%- if product.metafields.external -%}
+                              {%- assign check = product.metafields.external | first | last -%}
+                              {%- if check contains 'https:' or check  contains 'http:' -%}{%- assign check_external = true -%}{%-else-%}{%- assign check_external = false -%}{%-endif-%}
+                           {%-endif-%}
+                           {%- if product.has_only_default_variant == false or linklists[product.handle].links.size == 0 -%}<div id="callBackVariant" class="{{variantSoldout}}">{%- endif-%}
+                           {%- if settings.catalog_mode == false -%}
+                              {%- comment -%}
+                                {%- if settings.product_quantity_message and product.variants.size == 1 and sold_out == false -%}
+                           <div id="variantQuantity" class="variant-quantity{%- if current_variant.inventory_management %} show{%- endif -%}">
+                              {%- if current_variant.inventory_management -%}
+                                 {%- if current_variant.inventory_quantity < 10 and current_variant.inventory_quantity > 0 -%}
+                                    {{ 'products.product.only_left' | t: count: current_variant.inventory_quantity }}
+                                 {%- elsif current_variant.inventory_quantity <= 0 and current_variant.incoming -%}
+                                    {%- assign next_incoming_date = current_variant.next_incoming_date | date: format: 'month_day_year' -%}
+                                    {{ 'products.product.will_not_ship_until' | t: date:next_incoming_date }}
+                                 {%- endif -%}
+                              {%- endif -%}
+                           </div>
+                           {%- endif -%}
+                        {%- endcomment -%}
+                              
+                              {%- if product.variants.size == 1 and sold_out -%}
+                                 <p class="stock out-of-stock" id="out-of-stock-gl">{{ 'products.product.outofstock' | t }}</p>
+                                 {%- if settings.product_quantity_message -%}
+                                 <div id="variantQuantity" class="variant-quantity{%- if current_variant.inventory_management %} show{%- endif -%}">
+                                    {%- if current_variant.inventory_management -%}
+                                       {%- if current_variant.inventory_quantity < 10 and current_variant.inventory_quantity > 0 -%}
+                                          {{ 'products.product.only_left' | t: count: current_variant.inventory_quantity }}
+                                       {%- elsif current_variant.inventory_quantity <= 0 and current_variant.incoming -%}
+                                          {%- assign next_incoming_date = current_variant.next_incoming_date | date: format: 'month_day_year' -%}
+                                          {{ 'products.product.will_not_ship_until' | t: date:next_incoming_date }}
+                                       {%- endif -%}
+                                    {%- endif -%}
+                                 </div>
+                                 {%- endif -%}
+                              {%- elsif linklists[product.handle].links.size == 0 -%}
+                                 {%- if check_external and product.variants.size == 1 -%}
+                                    <p class="cart"><a href="{{ check }}" rel="nofollow" class="single_add_to_cart_button button alt">{{ product.metafields.external | first | first }}</a></p>
+                                 {%- else -%}
+                                    <form class="add-to-cart-form cart{%- if product.variants.size > 1 %} variations_form{%-endif %}{%- if settings.show_watch_products %} swatch-color-single{%- endif -%}" method="post" action="/cart/add" enctype="multipart/form-data" id="cart-form" data-product_id="{{product.id}}">
+                                      <select name="id" id="product-select" class="product-form__variants hide hidden">
+                                        {%- for variant in product.variants -%}
+                                        <option  data-sku="{{ variant.sku }}" data-index="{{ forloop.index0 }}" value="{{ variant.id }}"{%- if variant.id == current_variant.id %} selected="selected"{%- endif -%}>{{ variant.title }}</option>
+                                        {%- endfor -%}
+                                      </select>
+                                      {%- if product.has_only_default_variant == false and settings.swatch_design != '3' -%}{%- include 'swatch' -%}{%- elsif product.has_only_default_variant == false and settings.swatch_design == '3' -%}{%- include 'swatch_simple' -%}{%- endif -%}
+                                      {%- if product.variants.size > 1 -%}
+                                         <div class="single_variation_wrap">
+                                             {%- if product.price_varies -%}
+                                             <div class="shopify-variation single_variation">
+                                                 <div class="shopify-variation-price">
+                                                   <span class="price" id="productPrice">
+                                                     {%- if on_sale -%}<del id="old-product-price">{{ current_variant.compare_at_price | money }}</del> <ins id="product-price">{{ current_variant.price | money }}</ins>
+                                                     {%- else -%}
+                                                     <span id="product-price">{{ current_variant.price | money }}</span> 
+                                                     {%- endif -%}
+                                                   </span>
+                                                 </div>
+                                              </div>
+                                              {%- endif -%}
+                                             {%- if settings.product_quantity_message -%}
+                                                <div id="variantQuantity" class="variant-quantity{%- if product.has_only_default_variant and current_variant.inventory_management %} show{%- endif -%}">
+                                                   {%- if product.has_only_default_variant and current_variant.inventory_management -%}
+                                                      {%- if current_variant.inventory_quantity < 10 and current_variant.inventory_quantity > 0 -%}
+                                                         {{ 'products.product.only_left' | t: count: current_variant.inventory_quantity }}
+                                                      {%- elsif current_variant.inventory_quantity <= 0 and current_variant.incoming -%}
+                                                        {%- assign next_incoming_date = current_variant.next_incoming_date | date: format: 'month_day_year' -%}
+                                          {{ 'products.product.will_not_ship_until' | t: date:next_incoming_date }}
+                                                      {%- endif -%}
+                                                   {%- endif -%}
+                                                </div>
+                                                {%- endif -%}
+                                            <div class="shopify-variation-add-to-cart variations_button shopify-variation-add-to-cart-enabled">
+                                                <div id="shopify_quantity" class="quantity">
+                                                   <input type="button" value="-" class="minus">
+                                                   <input type="number" step="1" min="1" max="{%- if current_variant.inventory_quantity <= 0 and current_variant.available and current_variant.inventory_management != null -%}999{%- elsif current_variant.inventory_management != null -%}{{current_variant.inventory_quantity}}{%- else -%}999{%- endif -%}" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="[0-9]*" inputmode="numeric">
+                                                   <input type="button" value="+" class="plus">
+                                                </div>
+                                                <p class="stock out-of-stock variant_stock" id="out-of-stock-gl" style="display: none">{{ 'products.product.outofstock' | t }}</p>
+                                                {% comment %}<input required class="required" id="product" type="hidden" name="attributes[product]" value="{{ get_group_handle }}">{% endcomment %}
+                                                {%- if check_external == false -%}
+                                                {%- if current_variant.inventory_quantity <= 0 and current_variant.available and current_variant.inventory_management == 'shopify' -%}
+                                                <button type="submit" id="shopify_add_to_cart" class="add_to_cart_button ajax_form_cart single_add_to_cart_button button alt">{{ 'products.product.pre_orders' | t }}</button>
+                                               {%- else -%}
+                                               <button type="submit" id="shopify_add_to_cart" class="add_to_cart_button ajax_form_cart single_add_to_cart_button button alt">{{ 'products.product.add_to_cart' | t }}</button>
+                                               {%- endif -%}
+                                                {%- else -%}
+                                                <a href="{{ check }}" rel="nofollow" class="single_add_to_cart_button button alt">{{ product.metafields.external | first | first }}</a>
+                                                {%- endif -%}
+                                             </div>
+                                         </div>
+                                      {%- else -%}
+                                          {%- if settings.product_quantity_message -%}
+                                             <div id="variantQuantity" class="variant-quantity{%- if product.has_only_default_variant and current_variant.inventory_management %} show{%- endif -%}">
+                                                {%- if product.has_only_default_variant and current_variant.inventory_management -%}
+                                                   {%- if current_variant.inventory_quantity < 10 and current_variant.inventory_quantity > 0 -%}
+                                                      {{ 'products.product.only_left' | t: count: current_variant.inventory_quantity }}
+                                                   {%- elsif current_variant.inventory_quantity <= 0 and current_variant.incoming -%}
+                                                      {%- assign next_incoming_date = current_variant.next_incoming_date | date: format: 'month_day_year' -%}
+                                          {{ 'products.product.will_not_ship_until' | t: date:next_incoming_date }}
+                                                   {%- endif -%}
+                                                {%- endif -%}
+                                             </div>
+                                          {%- endif -%}
+                                          <div id="shopify_quantity" class="quantity">
+                                             <input type="button" value="-" class="minus">
+                                             <input type="number" step="1" min="1" max="{%- if current_variant.inventory_quantity <= 0 and current_variant.available and current_variant.inventory_management != null -%}999{%- elsif current_variant.inventory_management != null -%}{{current_variant.inventory_quantity}}{%- else -%}999{%- endif -%}" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="[0-9]*" inputmode="numeric">
+                                             <input type="button" value="+" class="plus">
+                                          </div>
+                                          <p class="stock out-of-stock variant_stock" id="out-of-stock-gl" style="display: none">{{ 'products.product.outofstock' | t }}</p>
+                                          {%- if check_external == false -%}
+                                            {%- if current_variant.inventory_quantity <= 0 and current_variant.available and current_variant.inventory_management == 'shopify' -%}
+                                             <button type="submit" id="shopify_add_to_cart" class="add_to_cart_button ajax_form_cart single_add_to_cart_button button alt">{{ 'products.product.pre_orders' | t }}</button>
+                                            {%- else -%}
+                                            <button type="submit" id="shopify_add_to_cart" class="add_to_cart_button ajax_form_cart single_add_to_cart_button button alt">{{ 'products.product.add_to_cart' | t }}</button>
+                                            {%- endif -%}
+                                          {%- else -%}
+                                          <a href="{{ check }}" rel="nofollow" class="single_add_to_cart_button button alt">{{ product.metafields.external | first | first }}</a>
+                                          {%- endif -%}
+                                      {%- endif -%}
+                                    </form>
+                                 {%- endif -%}
+                              {%- else -%}
+                                 <form class="cart" method="post" enctype="multipart/form-data">
+                                    <table cellspacing="0" class="group_table">
+                                       <tbody>
+                                       {%- include 'product_group' -%}
+                                       </tbody>
+                                    </table>
+                                    {%- if check_external == false -%}
+                                     <button type="submit" id="multi-variant-add" class="add_to_cart_button single_add_to_cart_button button alt">{{ 'products.product.add_to_cart' | t }}</button>
+                                    {%- else -%}
+                                    <a href="{{ check }}" rel="nofollow" class="single_add_to_cart_button button alt">{{ product.metafields.external | first | first }}</a>
+                                    {%- endif -%}
+                                 </form>
+                                 {%- if settings.product_img_trust_seal and settings.img_trust_seal != blank -%}{%- include 'product_img_trust_seal',padding_class:'gl_mb_20' -%}{%- endif -%}
+                              {%- endif -%}
+                           {%- endif -%}
+                           {%- if settings.use_wishlist and pages['wishlist'].empty? != true -%}{%- include 'gl-wishlist-product' -%}{%- endif -%}
+                           {%- if product.variants.size == 1 -%}<div class="clear"></div>{%- endif -%}
+                           {%- if product.variants.size > 1 and settings.product_img_trust_seal == false -%}<div class="clear"></div>{%- endif -%}
+                           {%- if settings.use_compare or settings.size_chart  -%}
+                           <div class="compare-btn-wrapper">
+                              {%- if settings.use_compare and pages['compare'].empty? != true -%}
+                              <a href="#compare_popup" data-pid="{{product.handle}}_sp_{{product.id}}" class="compare button" data-pid="{{product.handle}}" rel="nofollow">{{ 'products.product.compare' | t }}</a>
+                              {%- endif -%}
+                              {%- if settings.size_chart -%}
+                              {%- if product.metafields.meta.image_size_chart != blank or settings.image_size_chart != blank -%}
+                              <a class="cd chp jas-magnific-image button size_guide" href="{%- if product.metafields.meta.image_size_chart != blank-%}{{product.metafields.meta.image_size_chart}}{%- else -%}{{ settings.image_size_chart | img_url: '1x1' | replace: '_1x1', ''  }}{%- endif -%}" data-effect="mfp-zoom-in">{{ 'products.product.product_size_guide' | t }}</a>
+                              {%- endif -%}
+                              {%- endif -%}
+                           </div>
+                           {%- endif -%}
+                           {%- if settings.product_img_trust_seal and settings.img_trust_seal != blank -%}
+                            {%- if product.variants.size > 1 -%}<div class="clear"></div>{%- endif -%}
+                           {%- if settings.design_products == '4' -%}{%- include 'product_img_trust_seal',padding_class:'gl_mb_20' -%}{%- elsif product.variants.size > 1 -%}{%- include 'product_img_trust_seal',padding_class:'gl_pt_15' -%}{%- else-%}{%- include 'product_img_trust_seal',padding_class:'gl_pt_15' -%}{%- endif -%}
+                           {%- endif -%}
+                           {%- if design_products_page == 'product-design-compact' -%}<div class="shopify-tabs sp-tabs-wrapper tabs-layout-accordion">{%- section 'gl-product-page-description' -%}</div>{%- endif -%}
+                           <div class="product_meta">
+                              {%- if settings.show_sku -%}<span class="sku_wrapper">{{ 'products.product.product_sku' | t }} <span class="sku variant-sku" id="product-sku" itemprop="sku">{%- if current_variant.sku != blank -%}{{current_variant.sku}}{%-else-%}{{ 'products.product.na' | t }}{%-endif-%}</span></span>{%- endif -%}
+                              {%- if product.collections.size > 0 and settings.show_category_product -%}
+                              <span class="posted_in">{{ 'products.product.product_category' | t }} 
+                              {% for collection in product.collections limit:10 -%}
+                                {{ collection.title | link_to: collection.url }}{%- if forloop.last == false -%},{%- endif %}
+                                {%- endfor -%}
+                              </span>
+                              {%- endif -%}
+                              {%- if product.tags.size > 0 and settings.show_tag_product and product.collections.size > 0 -%}
+                              <span class="tagged_as">{{ 'products.product.product_tag' | t }}
+                                 {%- for tag in product.tags limit:10 -%}
+                                 <a href="{%- if collection != blank -%}{{ collection.url }}{%- else -%}{{ product.collections.first.url }}{%- endif -%}/{{ tag | handle }}">{{ tag | remove:'type ' | remove:'Type ' }}</a>{%- unless forloop.last -%}, {% endunless -%}
+                                 {%- endfor -%}
+                              </span>
+                              {%- endif -%}
+                           </div>
+                           {%- if settings.show_share_btn and design_products_page != 'product-design-alt' -%}
+                           <div class="product-share">
+                              <span class="share-title">{{ 'products.product.product_share' | t }}</span>
+                              {%- include 'social-sharing', follow_social:gl_follow_social -%}
+                           </div>
+                           {%- endif -%}
+                           {%- if settings.show_real_time_visitor -%}<div class="fake_counter_real_time gl_pt_15" style="display:none">{{settings.text_real}} <span id="number_counter"><span>296</span><i class="fa fa-bolt" aria-hidden="true"></i></span> {{settings.text_visitor}}</div>{%- endif -%}
+                        {%- if product.has_only_default_variant == false or linklists[product.handle].links.size == 0 -%}</div>{%- endif-%}      
+                     </div>
+                  </div>
+               </div><!-- .summary --> 
+            </div>  
+         </div>
+         {%- if settings.product_sidebar != '1' -%}
+         <aside class="sidebar-container {{class_sidebar}} sidebar-{{settings.product_sidebar}}" role="complementary">
+            <div class="sidebar-inner">
+               {%- section 'gl_section_sidebar_product' -%}<!-- .widget-area -->
+            </div><!-- .sidebar-inner -->
+         </aside><!-- .sidebar-container -->
+         {%- endif -%}
+      </div>
+   </div>
+   {%- if settings.show_share_btn and design_products_page == 'product-design-alt' -%}
+   <div class="product-share">{%- include 'social-sharing', gl_design:'icons-design-colored', gl_size:'icons-size-default', follow_social:gl_follow_social -%}</div>
+   {%- endif -%}
+   {%- if design_products_page != 'product-design-compact' -%}
+   <div class="product-tabs-wrapper">
+      <div class="container">
+         <div class="row">
+            <div class="col-sm-12">
+               <div class="shopify-tabs sp-tabs-wrapper tabs-layout-tabs">{%- section 'gl-product-page-description' -%}</div>
+            </div>
+         </div>
+      </div>
+   </div>
+   {%- endif -%}
+</div>
+

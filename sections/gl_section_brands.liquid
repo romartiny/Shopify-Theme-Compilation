@@ -1,0 +1,516 @@
+{%- if section.settings.hidden_section -%}{%- capture check_admin -%}{{ content_for_header  }}{%- endcapture -%}<style> #shopify-section-{{ section.id }} { {%- if check_admin contains 'design_mode' -%}opacity: .5;filter: alpha(opacity=50){%- else -%}display: none !important{%- endif -%}}</style>{%- endif -%}
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{%- capture data_section -%}
+  {%- if section.settings.row_stretch == 'stretch_row' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true'
+  {%- elsif section.settings.row_stretch == 'stretch_row_content' or section.settings.row_stretch == 'stretch_row_content_no_spaces' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true' data-gl-stretch-content='true'
+  {%- else -%}
+  {%- assign class_has_fill = '' -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- assign number = section.settings.silder_per_view | plus: 0 -%}
+{%- assign photoswipe = section.settings.use_photowipe -%}
+{{ style_block_section }}
+{%- if section.blocks.size > 0 -%}
+  <div {{ data_section }}{%- if section.settings.use_video and section.settings.video_url != blank %} data-gl-video-bg="{{ section.settings.video_url }}"{%- endif %} class="gl_custom_{{section.id}} {% if section.settings.row_stretch == 'stretch_row_content_no_spaces' %}gl_row-no-padding{%- endif %}{%- if section.settings.use_parallax -%} basel-parallax{%- endif %} gl_row spb_row gl_row-fluid {{class_has_fill}} {%- if section.settings.use_video and section.settings.video_url != blank %} opacity-video-bg gl_video-bg-container gl_has_youtube{%- endif %}{%- if section.settings.full_height %} gl_row-o-full-height gl_row-o-columns-{{section.settings.columns_position}}{%- endif %}{%- if section.settings.equal_height %} gl_row-o-equal-height{%- endif %}{%- unless section.settings.content_position == 'default' %} gl_row-o-content-{{section.settings.content_position}}{%- endunless %}{%- if section.settings.equal_height or section.settings.content_position != 'default' %} gl_row-flex{%- endif -%}">
+     {%- if section.settings.title != blank -%}
+     <div class="spb_column gl_column_container gl_col-sm-3 gl_hidden-md gl_hidden-sm gl_hidden-xs">
+        <div class="gl_column-inner gl_pt_0">
+           <div class="spb_wrapper">
+              <div class="spb_text_column spb_content_element gl_mb_0">
+                  {%- if section.settings.padding_title != blank -%}{%- assign s_t_padding = section.settings.padding_title | remove: ' ' | split: '-' | join: ' ' -%}{%- endif -%}
+                 <div class="spb_wrapper"><h2 style="letter-spacing: 1px; margin: 0px;border-right-width: 2px; border-right-style: solid; border-right-color: #E4E4E4; text-align: center;{%- if section.settings.padding_title != blank -%}padding: {{s_t_padding}}{%- endif -%}">{{ section.settings.title }}</h2></div>
+              </div>
+           </div>
+        </div>
+     </div>
+     {%- endif -%}
+     <div class="{%- if photoswipe -%}gl_has_photowipe {% endif -%}spb_column gl_column_container{%- if section.settings.title != blank %} gl_col-sm-12 gl_col-lg-9 gl_col-md-12{%- else %} gl_col-sm-12{%- endif %}{%- if section.settings.hide_small %} gl_hidden-sm{%- endif %}{%- if section.settings.hide_extra_small %} gl_hidden-xs{%- endif %}{%- if section.settings.hide_medium %} gl_hidden-md{%- endif -%}">
+        <div class="gl_column-inner ">
+           <div class="spb_wrapper"> 
+              <div id="gallery_{{ section.id }}" class="basel-images-gallery spacing-{{ section.settings.space | plus: 0 }} columns-{{ section.settings.columns | plus: 0 }} view-{{ section.settings.view }} photoswipe-images gl_mb_0">
+                 {%- if section.settings.view != 'carousel' -%}
+                  <div class="gallery-images">
+                  {%- else -%}
+                  <div class="gallery-images owl-carousel ins-owl-carousel" data-time='{{ section.settings.silder_speed | plus: 0 }}' data-nav='{%- if section.settings.hide_button -%}false{%- else -%}true{%- endif -%}' data-items='{{ number }}' data-medium='{%- if number > 1 -%}{{ number | minus: 1 }}{%- else -%}1{%- endif -%}' data-small='{%- if number > 1 -%}{{ number | minus: 1 }}{%- else -%}1{%- endif -%}' data-exsmall='{%- if number > 1 -%}2{%- else -%}1{%- endif -%}' data-dots='{%- if section.settings.hide_pagination -%}false{%- else -%}true{%- endif -%}' data-autoplay='{%- if section.settings.autoplay -%}true{%- else -%}false{%- endif -%}' data-loop='{%- if section.settings.slider_loop -%}true{%- else -%}false{%- endif -%}'>
+                  {%- endif -%}
+                      {%- for block in section.blocks -%}
+                        {%- assign image = block.settings.image -%}
+                        {%- assign link = block.settings.link -%}
+                        {%- assign image_size = image.width | append:'x' -%}
+                        <div class="basel-gallery-item" {{ block.shopify_attributes }}>
+                          {%- if link != blank or photoswipe -%}
+                            <a{% if photoswipe == false %} onclick="window.location.href='{{ link }}'" {% endif %}href="{%- if photoswipe -%}{%-include 'gl_image_format',src: image , size: image_size -%}{%- else -%}{{ link }}{%- endif -%}" class="logo-bar__link" data-width="{{image.width}}" data-height="{{image.height}}" >
+                          {%- endif -%}
+                          {%- if image != blank -%}
+                            <img width="{{ image.width }}" height="{{ image.height }}" src="{%-include 'gl_image_format',src: image , size: image_size -%}" alt="{{ image.alt }}" class="basel-gallery-image image-1 attachment-full">                           
+                          {%- else -%}
+                            {{ 'logo' | placeholder_svg_tag: 'gl_placeholder_svg' }}
+                          {%- endif -%}
+                          {%- if link != blank or photoswipe -%}
+                            </a>
+                          {%- endif -%}
+                        </div>
+                      {%- endfor -%}
+                 </div>
+              </div>
+           </div>
+           {%- if section.settings.view == 'masonry' -%}
+           <script type="text/javascript">
+              jQuery( document ).ready(function( $ ) {
+                        if (typeof($.fn.isotope) == 'undefined' || typeof($.fn.imagesLoaded) == 'undefined') return;
+                        var $container = $('.view-masonry .gallery-images');
+
+                        // initialize Masonry after all images have loaded
+                        $container.imagesLoaded(function() {
+                            $container.isotope({
+                                gutter: 0,
+                                isOriginLeft: ! $('body').hasClass('rtl'),
+                                itemSelector: '.basel-gallery-item'
+                            });
+                        });
+              });
+            </script>
+            {%- endif -%}
+        </div>
+     </div>
+  </div>
+  {%- unless section.settings.row_stretch == 'default' -%}
+  <div class="gl_row-full-width gl_clearfix"></div>
+  {%- endunless -%}
+{%- else -%}
+    {%- include 'no-blocks' -%}
+{%- endif -%}
+{%- schema -%}
+  {
+    "name": "Logo list",
+    "class": "index-section section_gl_bands",
+    "max_blocks": 20,
+    "settings": [
+      {
+        "type": "header",
+        "content": "== General Settings"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "___ Heading",
+        "default": "OUR PARTNERS"
+      },
+      {
+        "type": "text",
+        "id": "padding_title",
+        "label": "Paddings Title ( top-right-bottom-left )",
+        "default": "78px-30px",
+        "info": "60px-60px-0-60px"
+      },
+      {
+        "type": "select",
+        "id": "row_stretch",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "stretch_row",
+            "label": "Stretch row"
+          },
+          {
+            "value": "stretch_row_content",
+            "label": "Stretch row and content"
+          },
+          {
+            "value": "stretch_row_content_no_spaces",
+            "label": "Stretch row and content (no paddings)"
+          }
+        ],
+        "label": "___ Row stretch",
+        "info": "Select stretching options for row and content (Note: stretched may not work properly if parent container has 'overflow: hidden' CSS property).",
+        "default": "default"
+      },
+    {
+        "type": "select",
+        "id": "content_position",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "middle",
+            "label": "Middle"
+          },
+         {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "label": "___ Content position",
+        "info": "Select content position within columns.",
+        "default": "default"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_photowipe",
+        "default": false,
+        "label": "Use PhotoSwipe?"
+      },
+      {
+        "type": "select",
+        "id": "view",
+        "options": [
+         {
+            "value": "grid",
+            "label": "Default grid"
+          },
+         {
+            "value": "masonry",
+            "label": "Masonry grid"
+          },
+          {
+            "value": "carousel",
+            "label": "Carousel"
+          },
+          {
+            "value": "justified",
+            "label": "Justified gallery"
+          }
+        ],
+        "label": "___ View",
+        "default": "carousel"
+      },
+      {
+        "type": "select",
+        "id": "space",
+        "options": [
+         {
+            "value": "0",
+            "label": "0"
+          },
+         {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "6",
+            "label": "6"
+          },
+          {
+            "value": "10",
+            "label": "10"
+          },
+          {
+            "value": "20",
+            "label": "20"
+          },
+          {
+            "value": "30",
+            "label": "30"
+          }
+        ],
+        "label": "___ Space between images",
+        "default": "30"
+      },
+      {
+        "type": "header",
+        "content": "___ Default grid Settings"
+      },
+      {
+        "type": "select",
+        "id": "columns",
+        "options": [
+         {
+            "value": "1",
+            "label": "1"
+          },
+         {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          },
+          {
+            "value": "6",
+            "label": "6"
+          }
+        ],
+        "label": "____ Columns",
+        "default": "4"
+      },
+      {
+        "type": "header",
+        "content": "___ Carousel Settings"
+      },
+      {
+        "type": "text",
+        "id": "silder_speed",
+        "label": "____ Slider speed ( integer )",
+        "info": "Duration of animation between slides (in ms).",
+        "default": "5000"
+      },
+      {
+        "type": "select",
+        "id": "silder_per_view",
+        "options": [
+          {
+            "value": "1",
+            "label": "1"
+          },
+          {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          },
+          {
+            "value": "5",
+            "label": "5"
+          },
+          {
+            "value": "6",
+            "label": "6"
+          },
+          {
+            "value": "7",
+            "label": "7"
+          },
+          {
+            "value": "8",
+            "label": "8"
+          }
+        ],
+        "label": "____ Slides per view",
+        "default": "4",
+        "info": "Set numbers of slides you want to display at the same time on slider's container for carousel mode."
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_pagination",
+        "default": false,
+        "label": "____ Hide pagination control?",
+        "info": "pagination control will be removed"
+      },
+       {
+        "type": "checkbox",
+        "id": "hide_button",
+        "default": false,
+        "label": "____ Hide prev/next buttons?",
+        "info": "prev/next control will be removed"
+      },
+       {
+        "type": "checkbox",
+        "id": "slider_loop",
+        "default": false,
+        "label": "____ Slider loop?",
+        "info": "Enables loop mode."
+      },
+      {
+       "type": "checkbox",
+       "id": "autoplay",
+       "label": "____ Slider autoplay",
+       "info": "Enables autoplay mode.",
+       "default": false
+     },
+     {
+        "type": "header",
+        "content": "==  Hide on device?"
+      },
+      {
+       "type": "checkbox",
+         "id": "hide_medium",
+         "label": "___ Device medium",
+         "info": "Device medium ( 1199px - 992px )",
+         "default": false
+       },
+       {
+       "type": "checkbox",
+         "id": "hide_small",
+         "label": "___ Device small",
+         "info": "Device small ( 991px - 768px )",
+         "default": false
+       },
+       {
+       "type": "checkbox",
+         "id": "hide_extra_small",
+         "label": "___ Device Extra small",
+         "info": "Device small ( less 767px )",
+         "default": false
+       },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "color",
+        "id": "section_bg_color",
+        "label": "Background color"
+      },
+      {
+        "type": "color",
+        "id": "section_border_color",
+        "label": "Border color"
+      },
+      {
+        "type": "select",
+        "id": "section_border_style",
+        "options": [
+         {
+            "value": "solid",
+            "label": "Solid"
+          },
+         {
+            "value": "dotted",
+            "label": "Dotted"
+          },
+          {
+            "value": "dashed",
+            "label": "Dashed"
+          },
+          {
+            "value": "double",
+            "label": "Double"
+          },
+          {
+            "value": "groove",
+            "label": "Groove"
+          },
+          {
+            "value": "Ridge",
+            "label": "Ridge"
+          },
+          {
+            "value": "inset",
+            "label": "Inset"
+          },
+          {
+            "value": "outset",
+            "label": "Outset"
+          }
+        ],
+        "label": "Border style",
+        "default": "solid"
+      },
+      {
+        "type": "text",
+        "id": "section_border",
+        "label": "Borders Integer px ( top-right-bottom-left )",
+        "info": "0-0-1px-0"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      },
+      {
+        "type": "header",
+        "content": "== Basel Extras"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden_section",
+        "label": "Disable Section?",
+        "info": "If checked the section won't be visible on the public side of your website. You can switch it back any time.",
+        "default": false
+      }
+    ],
+    "blocks": [
+      {
+        "type": "logo_image",
+        "name": "Logo",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Link",
+            "info": "Optional"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Logo list",
+        "category": "Image",
+        "blocks": [
+          {
+            "type": "logo_image"
+          },
+          {
+            "type": "logo_image"
+          },
+          {
+            "type": "logo_image"
+          },
+          {
+            "type": "logo_image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

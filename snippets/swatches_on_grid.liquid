@@ -1,0 +1,53 @@
+{%- if settings.color_name_check != blank -%}{%- assign _gl_color_name = settings.color_name_check | replace: ' ,', ',' | replace: ', ', ',' | split: ',' -%}{%- assign gl_color_name = _gl_color_name | downcase -%}{%-else-%}{%- assign gl_color_name = '\nathan_dt\' -%}{%-endif-%}
+<div class="swatches-on-grid">
+{%- if crop_nt != blank -%}
+   {%- for option in product.options -%}
+   {%- assign downcased_option = option | downcase -%}
+   {%- assign downcased_option_check = downcased_option | prepend: '"' | append: '"' | strip -%} 
+   {%- if downcased_option == 'color' or downcased_option == 'colour' or gl_color_name contains downcased_option_check -%}
+   {%- assign option_index = forloop.index0 -%}
+   {%- assign displayed_option_values = '' -%}
+   {%- for variant in product.variants -%}
+   {%- assign option_value = variant.options[option_index] -%}
+   {%- unless displayed_option_values contains option_value -%}
+   {%- unless variant.featured_image.src == blank -%}
+         {%- assign image = variant.featured_image -%}
+         {%- assign image_width_append = crop_nt -%}
+             {%- assign image_width_append_arr = image_width_append | replace: ' x', 'x' | replace: 'x ', 'x' | replace: ' x ', 'x' | split: 'x' -%}
+           {%- assign image_width = image_width_append_arr[0] -%}
+            {%- assign image_size_first = image_width | plus:0 -%}
+           {%- assign image_height = image_size_first | divided_by: image.aspect_ratio | round -%}
+         <div class="swatch-on-grid basel-tooltip{%- if settings.product_layout_setting == '3' %} swatch-has-image{%- endif %} swatch-size-{{settings.swatch_home_size}} bg_color_{{ option_value | handleize }} bg_{{ option_value | handleize }}{%- if current_variant.title contains option_value and template contains 'collection' and current_tags != blank %} current-swatch{%- endif -%}" style="background-size: cover; {%- if settings.product_layout_setting == '3' -%}background-color:#fff;background-image: url({%-include 'gl_image_format',src: image.src , size: '118x' -%}){%- endif -%}" data-image-src="{%-include 'gl_image_format_crop',src: image.src , size: crop_nt,position:'top' -%}" data-image-srcset="{%-include 'gl_image_format_crop',src: image.src , size: crop_nt,position:'top' %} {{image_size_first}}w{%- if image_size_first > 235 -%}{%- assign image_height = 235 | divided_by: image.aspect_ratio | round -%}{%- assign image_size_el = 235 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 235w{%- endif -%} {%- if image_size_first > 768 -%}{%- assign image_height = 768 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 768 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 768w{%- endif -%}{%- if image_size_first > 803 -%}{%- assign image_height = 803 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 803 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 803w{%- endif -%}{%- if image_size_first > 266 -%}{%- assign image_height = 266 | divided_by: image.aspect_ratio | round -%}{%- assign image_size_el = 266 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 266w{%- endif -%}{%- if image_size_first > 219 -%}{%- assign image_height = 219 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 219 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 219w{%- endif -%}{%- if image_size_first > 526 -%}{%- assign image_height = 526 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 526 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 526w{%- endif -%}" data-image-sizes="(max-width: {{ image_size_first }}px) 100vw, {{ image_size_first }}px"><span class="basel-tooltip-label">{{ option_value | capitalize }}</span>{{ option_value | capitalize }}</div>
+  {%- assign displayed_option_values = displayed_option_values | join: ',' -%}
+   {%- assign displayed_option_values = displayed_option_values | append: ',' | append: option_value -%}
+   {%- assign displayed_option_values = displayed_option_values | split: ',' -%}
+   {%- endunless -%}{%- endunless -%}
+   {%- endfor -%}
+   {%- endif -%}
+   {%- endfor -%}
+{%- else -%}
+  {%- for option in product.options -%}
+   {%- assign downcased_option = option | downcase -%}
+   {%- assign downcased_option_check = downcased_option | prepend: '"' | append: '"' | strip -%} 
+   {%- if downcased_option == 'color' or downcased_option == 'colour' or gl_color_name contains downcased_option_check -%}
+   {%- assign option_index = forloop.index0 -%}
+   {%- assign displayed_option_values = '' -%}
+   {%- for variant in product.variants -%}
+   {%- assign option_value = variant.options[option_index] -%}
+   {%- unless displayed_option_values contains option_value -%}
+   {%- unless variant.featured_image.src == blank -%}
+         {%- assign image = variant.featured_image -%}
+         {%- assign image_size_first = image_size | split: 'x' | first -%}
+          {%- assign image_width = image.width -%}
+          {%- assign image_height = image_size_first | divided_by: image.aspect_ratio | round -%}
+          {%- assign image_width_append = image_width | append:'x' -%}
+         <div class="swatch-on-grid basel-tooltip{%- if settings.product_layout_setting == '3' %} swatch-has-image{%- endif %} swatch-size-{{settings.swatch_home_size}} bg_color_{{ option_value | handleize }} bg_{{ option_value | handleize }}{%- if current_variant.title contains option_value and template contains 'collection' and current_tags != blank %} current-swatch{%- endif -%}" style="background-size: cover; {%- if settings.product_layout_setting == '3' -%}background-color:#fff;background-image: url({%-include 'gl_image_format',src: image.src , size: '118x' -%}){%- endif -%}" data-image-src="{%-include 'gl_image_format',src: image.src , size: image_size -%}" data-image-srcset="{%-include 'gl_image_format',src: image.src , size: image_size %} {{image_size_first}}w{%- if image_width > 235 -%},{%-include 'gl_image_format',src: image.src , size: '235x' %} 235w{%- endif -%} {%- if image_width > 768 -%},{%-include 'gl_image_format',src: image.src , size: '768x' %} 768w{%- endif -%}{%- if image_width > 803 -%},{%-include 'gl_image_format',src: image.src , size: '803x' %} 803w{%- endif -%}{%- if image_width > 266 -%},{%-include 'gl_image_format',src: image.src , size: '266x' %} 266w{%- endif -%}{%- if image_width > 219 -%},{%-include 'gl_image_format',src: image.src , size: '219x' %} 219w{%- endif -%}{%- if image_width > 526 -%},{%-include 'gl_image_format',src: image.src , size: '526x' %} 526w{%- endif -%},{%-include 'gl_image_format',src: image.src , size: image_width_append %} {{image_width}}w" data-image-sizes="(max-width: {{ image_size_first }}px) 100vw, {{ image_height }}px"><span class="basel-tooltip-label">{{ option_value | capitalize }}</span>{{ option_value | capitalize }}</div>
+  {%- assign displayed_option_values = displayed_option_values | join: ',' -%}
+   {%- assign displayed_option_values = displayed_option_values | append: ',' | append: option_value -%}
+   {%- assign displayed_option_values = displayed_option_values | split: ',' -%}
+   {%- endunless -%}{%- endunless -%}
+   {%- endfor -%}
+   {%- endif -%}
+   {%- endfor -%}
+{%- endif -%}
+</div>

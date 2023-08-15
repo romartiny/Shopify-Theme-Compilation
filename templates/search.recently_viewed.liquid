@@ -1,0 +1,58 @@
+{%- layout none -%}
+{%- if settings.use_wishlist -%}{%- include 'nitro-wishlist' -%}{%- endif -%}
+{%- assign related_number = settings.recently_silder_per_view | plus: 0 -%}
+{%- assign gl_colum_width = 'col-galaxy' -%}
+{%- case settings.recently_products_hover -%}
+    {%- when 'base' -%}
+      {%- assign gl_include = 'section_loop_product_base' -%} 
+    {%- when 'alt' -%}
+      {%- assign gl_include = 'section_loop_product_alt' -%}
+    {%- when 'button' -%}
+      {%- assign gl_include = 'section_loop_product_button' -%}
+   {%- when 'info' -%}
+      {%- assign gl_include = 'section_loop_product_info' -%}
+   {%- when 'link' -%}
+      {%- assign gl_include = 'section_loop_product_link' -%}
+   {%- when 'standard' -%}
+      {%- assign gl_include = 'section_loop_product_standard' -%}
+   {%- when 'excerpt' -%}
+      {%- assign gl_include = 'section_loop_product_excerpt' -%}
+   {%- when 'quick' -%}
+      {%- assign gl_include = 'section_loop_product_quick' -%}
+{%- endcase -%}
+{%- case settings.recently_countdown_style -%}
+    {%- when 'light' -%}
+      {%- assign countdown_style = 'color-scheme-dark timer-size-small timer-style-standard' -%} 
+    {%- when 'dark' -%}
+      {%- assign countdown_style = 'color-scheme-light timer-size-small timer-style-standard' -%}
+    {%- when 'transparent_1' -%}
+      {%- assign countdown_style = 'color-scheme-light timer-size-small timer-style-transparent' -%}
+   {%- when 'transparent_2' -%}
+      {%- assign countdown_style = 'color-scheme-dark timer-size-small timer-style-transparent' -%}
+{%- endcase -%}
+{%- if settings.recently_sale_countdown -%}
+   {%- assign section_settings_countdown = true -%}
+{%- else -%}
+   {%- assign section_settings_countdown = false -%}
+{%- endif -%}
+{%- assign num_limit = settings.many_recently_products | plus: 0 -%}
+{%- assign canonical_url = canonical_url | split: 'recently-viewed-products/' | last | split:'?q=' -%}
+{%- assign canonical_url_one = canonical_url[0] -%}
+{%- assign _canonical_url_current = canonical_url[1] | split: '+' -%}
+{%- assign canonical_url_current = _canonical_url_current[0] | plus: 0 -%}
+{%- assign collection_url_current = _canonical_url_current[1] -%}
+{%- if collection_url_current != blank -%}{%- assign collection = collections[collection_url_current] -%}{%- endif -%}
+{%- assign arr_canonical_url = canonical_url_one | replace: ' ,', ',' | replace: ', ', ',' | split: ',' -%}
+{%- assign num_limit_ = 0 -%}
+{%- for handle_product in arr_canonical_url -%}
+  {%-if handle_product != blank -%}
+	{%- assign product = all_products[handle_product] -%}
+	{%-if canonical_url_current != product.id -%}
+		<div class="product-item owl-carousel-item"><div class="owl-carousel-item-inner">{%- include gl_include -%}</div></div>
+		{%- if num_limit < arr_canonical_url.size -%}
+			{%- assign num_limit_ = num_limit_ | plus: 1 -%}
+			{%- if num_limit ==  num_limit -%}{%-break-%}{%-endif-%}
+		{%- endif-%}
+	{%- endif -%}
+  {%- endif-%}
+{%- endfor -%}

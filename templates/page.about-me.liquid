@@ -1,0 +1,95 @@
+{%- if settings.show_share_btn_about_me and settings.share_type_about_me == '1' -%}
+   {%- assign gl_follow_social = false -%}
+{%- elsif settings.show_share_btn_about_me and settings.share_type_about_me == '2' -%}
+   {%- assign gl_follow_social = true -%}
+{%- endif -%}
+{%- if settings.about_me_margin_top != blank or settings.about_me_margin_bottom != blank or settings.about_me_padding != blank  -%}
+{%- assign s_margin_top = settings.about_me_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = settings.about_me_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_padding = settings.about_me_padding  | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if settings.about_me_margin_top != blank or settings.about_me_margin_bottom != blank or settings.about_me_padding != blank -%}
+   style="{%- if settings.about_me_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if settings.about_me_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if settings.about_me_padding != blank -%}padding: {{s_padding}} !important;{%- endif -%}"
+   {%- endif -%}
+{%- endcapture -%}
+<div class="main-page-wrapper">
+	<!-- MAIN CONTENT AREA -->
+	<div class="container">
+		<div class="row">
+			<div class="site-content col-sm-12" role="main">
+				<article id="post-{{page.id}}" class="post-{{page.id}} page type-page status-publish hentry{%- if settings.general_layout == 'boxed' %} gl_mt_40{%- endif -%}">
+					<div class="entry-content">
+						<div data-gl-full-width="true" data-gl-full-width-init="true" data-gl-stretch-content="{%- if settings.general_layout == 'boxed' %}false{%- else -%}true{%- endif -%}" class="gl_row spb_row gl_row-fluid gl_row-no-padding gl_row-o-content-middle gl_row-flex" {{style_block_section}}>
+							<div class="spb_column gl_column_container gl_col-sm-12 gl_col-md-6">
+								<div class="gl_column-inner ">
+									<div class="spb_wrapper">
+										<div class="spb_single_image spb_content_element gl_align_center gl_mb_0">
+											<figure class="spb_wrapper gl_figure">
+											   <div class="gl_single_image-wrapper gl_box_border_grey">
+											   	{%- if settings.image_about_me != blank -%}
+											         {%- assign image = settings.image_about_me -%}
+								                  {%- assign blog_image_size = image.width | append: 'x' -%}
+								                   {%- if image.width > 2048 -%}{%- assign blog_image_size = '2048x' -%}{%- endif -%}
+												   	<img width="{{image.width}}" height="{{image.height}}" src="{%-include 'gl_image_format',cache:true,src: image.src, size: blog_image_size -%}" class="gl_single_image-img attachment-full" alt="" 
+												   		srcset="{%-include 'gl_image_format',cache:true,src: image.src, size: blog_image_size %} {{image.width}}w 
+											         	{%- if image.width > 150 -%},{%-include 'gl_image_format',cache:true,src: image.src, size: '150x150' %} 150w{%-endif-%} 
+											         	{%- if image.width > 300 -%},{%-include 'gl_image_format',cache:true,src: image.src, size: '300x300' %} 300w{%-endif-%} 
+											         	{%- if image.width > 768 -%},{%-include 'gl_image_format',cache:true,src: image.src, size: '768x768' %} 768w{%-endif-%}  
+											         	{%- if image.width > 270 -%},{%-include 'gl_image_format',cache:true,src: image.src, size: '270x270' %} 270w{%-endif-%}  
+											         	{%- if image.width > 280 -%},{%-include 'gl_image_format',cache:true,src: image.src, size: '280x280' %} 280w{%-endif-%}  
+											         	{%- if image.width > 273 -%},{%-include 'gl_image_format',cache:true,src: image.src, size: '273x273' %} 273w{%-endif-%}  
+											         	{%- if image.width > 546 -%},{%-include 'gl_image_format',cache:true,src: image.src, size: '546x546' %} 546w{%-endif-%}  
+											         	{%- if image.width > 45 -%},{%-include 'gl_image_format',cache:true,src: image.src, size: '45x45' %} 45w{%-endif-%}" sizes="(max-width: {{image.width}}px) 100vw, {{image.width}}px">
+											   	{%- else -%}
+											   		<img width="1000" height="1000" src="https://via.placeholder.com/1000x1000" class="gl_single_image-img attachment-full" alt="">
+											   	{%- endif -%}
+											   </div> 
+											</figure>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="spb_column gl_column_container gl_col-sm-12 gl_col-md-6">
+							   <div class="gl_column-inner" style="margin-top: 25px;margin-bottom: 40px;padding-right: 10%;padding-left: 10%">
+							      <div class="spb_wrapper">
+							      	{%- if settings.title_about_me != blank -%}
+							         <div class="spb_text_column spb_content_element gl_mb_30">
+							         	{%- assign title_about_me =  settings.title_about_me -%}
+							            <div class="spb_wrapper">
+							               <h1 class="font-title" style="text-align: center; font-size: 42px; text-transform: capitalize;">{{ title_about_me | split:'[' | first }}{%- if title_about_me contains '[' -%}<span style="border-bottom: 1px solid #BDBDBD; padding-bottom: 4px;">{%- assign _title_about_me =  settings.title_about_me | split:'[' | last -%}{{ _title_about_me | split:']' | first }}</span>{%- endif -%}</h1>
+							            </div>
+							         </div>
+							         {%- endif -%}
+							         {%- if settings.sub_tetx_about_me != blank -%}
+							         <div class="spb_text_column spb_content_element" style="padding-right: 30px;padding-left: 30px;">
+							            <div class="spb_wrapper">
+							               <p style="text-align: center; line-height: 1.8;">{{settings.sub_tetx_about_me}}</p>
+							            </div>
+							         </div>
+							         {%- endif -%}
+							         {%- if settings.signature_about_me != blank -%}
+							         <div class="spb_single_image spb_content_element gl_align_center gl_mb_30">
+							            <figure class="spb_wrapper gl_figure">
+							               <div class="gl_single_image-wrapper gl_box_border_grey">
+							               	{%- assign image = settings.signature_about_me -%}
+								               {%- assign signature_image_size = image.width | append: 'x' -%}
+							               	<img width="{{image.width}}" height="{{image.height}}" src="{%-include 'gl_image_format',cache:true,src: image.src, size: signature_image_size -%}" class="gl_single_image-img attachment-full" alt="{{image.alt}}">
+							               </div>
+							            </figure>
+							         </div>
+							         {%- endif -%}
+							         {%- if settings.show_share_btn_about_me -%}{%- include 'social-sharing', gl_design:'icons-design-circle', gl_size:'icons-size-default', follow_social:gl_follow_social -%}{%- endif -%}
+							      </div>
+							   </div>
+							</div>
+						</div>
+						<div class="gl_row-full-width gl_clearfix"></div>
+					</div>
+				</article>
+			</div><!-- .site-content -->
+		</div><!-- end row -->
+	</div><!-- end container -->
+</div><!-- .main-page-wrapper -->
+<!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'js_cp_gl.min.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+<!--[if lte IE 9]><script src="{{ 'js_cp_gl.min.js' | asset_url }}"></script><![endif]-->

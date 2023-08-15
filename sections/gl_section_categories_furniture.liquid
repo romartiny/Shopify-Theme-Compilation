@@ -1,0 +1,491 @@
+{%- case section.settings.categories_layout -%}
+   {%- when 'default' -%}
+      {%- assign layout = "categories-style-default" -%}
+   {%- when 'masonry' -%}
+      {%- assign  layout = "categories-style-masonry categories-masonry" -%}
+   {%- when 'masonry_first' -%}
+      {%- assign layout = "categories-style-masonry-first categories-masonry" -%}
+   {%- when 'carousel' -%}
+      {%- assign layout = "categories-style-carousel" -%}
+{%- endcase -%}
+{%- if section.settings.hidden_section -%}{%- capture check_admin -%}{{ content_for_header  }}{%- endcapture -%}<style> #shopify-section-{{ section.id }} { {%- if check_admin contains 'design_mode' -%}opacity: .5;filter: alpha(opacity=50){%- else -%}display: none !important{%- endif -%}}</style>{%- endif -%}
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_145{{section.id}} {margin-top: -250px;margin-bottom: 0;padding-top: 0;padding-right: 15px;padding-bottom: 20px;padding-left: 15px;background-color: #ffffff;}{%- if section.settings.section_margin_bottom != blank -%}.gl_custom_194{{section.id}} { margin-top: {{s_margin_bottom}} !important} {%- endif -%} .gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{%- capture data_section -%}
+  {%- if section.settings.row_stretch == 'stretch_row' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true'
+  {%- elsif section.settings.row_stretch == 'stretch_row_content' or section.settings.row_stretch == 'stretch_row_content_no_spaces' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true' data-gl-stretch-content='true'
+  {%- else -%}
+  {%- assign class_has_fill = '' -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- assign number = section.settings.silder_per_view | plus: 0 -%}
+{{ style_block_section }}
+<div data-gl-full-width="true" data-gl-full-width-init="true" data-gl-stretch-content="true" class="gl_custom_{{section.id}} gl_row spb_row gl_row-fluid gl_custom_1488180501195 gl_row-has-fill gl_row-no-padding">
+  <div class="spb_column gl_column_container gl_col-sm-12">
+    <div class="gl_column-inner ">
+      <div class="spb_wrapper"></div>
+    </div>
+  </div>
+</div>
+<div class="gl_row-full-width gl_clearfix"></div>
+<div data-section-id="{{ section.id }}" data-section-type="categories" class="gl_row spb_row gl_row-fluid position-relative z-index-h gl_custom_145{{section.id}} gl_row-has-fill">
+  <div class="spb__column gl_column_container gl_col-sm-12">
+    <div class="gl_column-inner gl_custom_194{{section.id}}">
+      <div class="spb__wrapper">
+        {%- if section.settings.title != blank -%}
+        <div class="title-wrapper basel-title-color-primary basel-title-style-default basel-title-size-default text-center gl_mb_40">
+          {%- if section.settings.sub_title != blank -%}<span class="title-subtitle font-default">{{section.settings.sub_title}}</span>{%- endif -%}
+          <div class="liner-continer">
+            <span class="left-line"></span> 
+            <h4 class="title">{{section.settings.title}}<span class="title-separator"><span></span></span></h4>
+            <span class="right-line"></span> 
+          </div>
+        </div>
+        {%- endif -%}
+        <div class="row shopify {{ layout }} categories-space-{{ section.settings.space_categories }}">
+          {%- if section.settings.categories_layout == 'carousel' -%}<div id="carousel-{{ section.id }}" class="gl_carousel_container"><div id="carousel-{{ section.id }}" class="gl_carousel_data owl-carousel" data-time='{{ section.settings.silder_speed | plus: 0 }}' data-nav='{%- if section.settings.hide_button -%}false{%- else -%}true{%- endif -%}' data-items='{{ number }}' data-dots='{%- if section.settings.hide_pagination -%}false{%- else -%}true{%- endif -%}' data-autoplay='{%- if section.settings.autoplay -%}true{%- else -%}false{%- endif -%}' data-loop='{%- if section.settings.slider_loop -%}true{%- else -%}false{%- endif -%}' data-medium='{%- if number > 2 -%}{{ number | minus: 1 }}{%- else -%}2{%- endif -%}'>{%- endif -%}
+          {%- for block in section.blocks -%}
+          {%- assign collection = collections[block.settings.id_collection] -%}
+          {%- assign number_of_collection = collection.all_products_count  -%}
+          {%- case block.settings.width -%}
+             {% when '3' %}
+                    {%- assign image_size = '270x' -%}
+             {% when '4' %}
+                 {%- assign image_size = '370x' -%}
+             {% when '6' %}
+                 {%- assign image_size = '570x' -%}
+             {% when '8' %}
+                 {%- assign image_size = '770x' -%}
+             {% when '12' %}
+                 {%- assign image_size = '1170x' -%}
+          {%- endcase -%}
+          {%- if section.settings.categories_layout != 'carousel'  -%}
+          <div class="col-xs-6 col-sm-4 col-md-{{ block.settings.width | plus: 0 }} category-grid-item cat-design-{{ section.settings.categories_design }} product-category product" {{ block.shopify_attributes }}>
+            {%- else -%} 
+            <div class="category-item" {{ block.shopify_attributes }}>
+              <div class="category-grid-item cat-design-{{ section.settings.categories_design }} product-category product">
+                {%- endif -%}
+                <div class="category-content">
+                  <a href="{%- if collection.empty? -%}/admin/collections{%- else -%}{{ collection.url }}{%- endif -%}" class="category-link">
+                    <div class="product-category-thumbnail">
+                      {%- if block.settings.image != blank -%}
+                         {%- assign image = block.settings.image -%}
+                         {%- if section.settings.row_stretch != 'default' and section.settings.row_stretch != 'stretch_row' -%}{%- assign image_size = image.width | append:'x' -%}{%- endif -%}
+                         <img src="{%-include 'gl_image_format',src: image , size: image_size -%}" alt="{{ image.alt }}" width="{{ image.width }}" height="{{ image.height }}">
+                      {%- else -%}
+                         {%- if collection != blank -%}
+                            {%- if collection.image -%}
+                               {%- assign image = collection.image -%}
+                               {%- if section.settings.row_stretch != 'default' and section.settings.row_stretch != 'stretch_row' -%}{%- assign image_size = image.width | append:'x' -%}{%- endif -%}
+                               <img src="{%-include 'gl_image_format',src: image , size: image_size -%}" alt="{{ image.alt }}" width="{{ image.width }}" height="{{ image.height }}">
+                            {%- elsif collection.products.first and collection.products.first.images != empty -%}
+                               {%- assign image = collection.products.first.featured_image -%}
+                               {%- if section.settings.row_stretch != 'default' and section.settings.row_stretch != 'stretch_row' -%}{%- assign image_size = image.width | append:'x' -%}{%- endif -%}
+                               <img src="{%-include 'gl_image_format',src: image , size: image_size -%}" alt="{{ image.alt }}" width="{{ image.width }}" height="{{ image.height }}">
+                            {%- else -%}
+                               <img src="//cdn.shopify.com/s/files/1/1933/6253/files/portfolio-placeholder.jpg" alt="{{ shop.name }} category" width="{{ image_size | split: 'x'| first }}" height="{{ image_size | split: 'x'| last | plus: 200 }}">
+                            {%- endif -%}
+                         {%- else -%}
+                         <img src="//cdn.shopify.com/s/files/1/1933/6253/files/portfolio-placeholder.jpg" alt="{{ shop.name }} category" width="{{ image_size | split: 'x'| first }}" height="{{ image_size | split: 'x'| last | plus: 200 }}">
+                         {%- endif -%}
+                      {%- endif -%}
+                     </div>
+                    {%- if collection != blank and number_of_collection > 2 -%}
+                    <span class="products-cat-number">{{ 'sections.categories.products_cat_number' | t: count: number_of_collection }}</span>
+                    {%- endif -%}
+                  </a>
+                  <div class="hover-mask">
+                    <a href="{%- if collection.empty? -%}/admin/collections{%- else -%}{{ collection.url }}{%- endif -%}" class="category-link-overlay"></a>
+                    <h3>{%- if collection.empty? -%}{{ 'homepage.onboarding.collection_title' | t }}{%- else -%}{{ collection.title }}{%- endif -%}</h3>
+                    <a href="{%- if collection.empty? -%}/admin/collections{%- else -%}{{ collection.url }}{%- endif -%}">{{ 'sections.categories.View' | t }}</a>
+                  </div>
+                </div>
+                {%- if section.settings.categories_layout == 'carousel'  -%}</div>{%- endif -%}
+            </div>
+            {%- endfor -%}
+            {%- if section.settings.categories_layout == 'carousel' -%}</div></div>{%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- unless section.settings.row_stretch == 'default' -%}
+<div class="gl_row-full-width gl_clearfix"></div>
+{%- endunless -%}
+{%- schema -%}
+  {
+    "name": "Product categories",
+    "class": "index-section tea_categories",
+    "max_blocks": 10,
+    "settings": [
+      {
+        "type": "header",
+        "content": "== General Settings"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "info": "MADE THE HARD WAY[highlight]",
+        "default": "FEATURED CATEGORIES"
+      },
+      {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Sub Title",
+        "default": "MADE THE HARD WAY"
+      },
+      {
+        "type": "select",
+        "id": "categories_layout",
+        "options": [
+            {
+               "value": "default",
+               "label": "Default"
+             },
+             {
+               "value": "masonry",
+               "label": "Masonry"
+             },
+             {
+               "value": "masonry_first",
+               "label": "Masonry (with first wide)"
+             },
+             {
+               "value": "carousel",
+               "label": "Carousel"
+             }
+           ],
+           "label": "Layout",
+           "default": "default"
+         },
+         {
+           "type": "select",
+           "id": "categories_design",
+           "options": [
+            {
+               "value": "default",
+               "label": "Default"
+             },
+             {
+               "value": "alt",
+               "label": "Alternative"
+             },
+             {
+               "value": "center",
+               "label": "Center title"
+             }
+           ],
+           "label": "Categories design",
+           "default": "default"
+         },
+         {
+           "type": "select",
+           "id": "space_categories",
+           "options": [
+            {
+               "value": "30",
+               "label": "30"
+             },
+             {
+               "value": "20",
+               "label": "20"
+             },
+             {
+               "value": "10",
+               "label": "10"
+             },
+             {
+               "value": "6",
+               "label": "6"
+             },
+             {
+               "value": "2",
+               "label": "2"
+             },
+             {
+               "value": "0",
+               "label": "0"
+             }
+           ],
+           "label": "Space between categories",
+           "default": "30"
+         },
+         {
+        "type": "header",
+        "content": "== Carousel Options ( Only for Carousel layout )"
+      },
+      {
+        "type": "text",
+        "id": "silder_speed",
+        "label": "Slider speed ( integer )",
+        "info": "Duration of animation between slides (in ms).",
+        "default": "5000"
+      },
+      {
+        "type": "select",
+        "id": "silder_per_view",
+        "options": [
+          {
+            "value": "1",
+            "label": "1"
+          },
+          {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          },
+          {
+            "value": "5",
+            "label": "5"
+          },
+          {
+            "value": "6",
+            "label": "6"
+          },
+          {
+            "value": "7",
+            "label": "7"
+          },
+          {
+            "value": "8",
+            "label": "8"
+          }
+        ],
+        "label": "Slides per view",
+        "default": "4",
+        "info": "Set numbers of slides you want to display at the same time on slider's container for carousel mode."
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_pagination",
+        "default": false,
+        "label": "Hide pagination control?",
+        "info": "pagination control will be removed"
+      },
+       {
+        "type": "checkbox",
+        "id": "hide_button",
+        "default": false,
+        "label": "Hide prev/next buttons?",
+        "info": "prev/next control will be removed"
+      },
+       {
+        "type": "checkbox",
+        "id": "slider_loop",
+        "default": false,
+        "label": "Slider loop?",
+        "info": "Enables loop mode."
+      },
+      {
+       "type": "checkbox",
+       "id": "autoplay",
+       "label": "___ Slider autoplay",
+       "info": "Enables autoplay mode.",
+       "default": false
+      },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+  {
+        "type": "image_picker",
+        "id": "section_bg_image",
+        "label": "Background Image"
+      },
+      {
+        "type": "color",
+        "id": "section_bg_color",
+        "label": "Background color"
+      },
+      {
+        "type": "color",
+        "id": "section_border_color",
+        "label": "Border color"
+      },
+      {
+        "type": "select",
+        "id": "section_border_style",
+        "options": [
+         {
+            "value": "solid",
+            "label": "Solid"
+          },
+         {
+            "value": "dotted",
+            "label": "Dotted"
+          },
+          {
+            "value": "dashed",
+            "label": "Dashed"
+          },
+          {
+            "value": "double",
+            "label": "Double"
+          },
+          {
+            "value": "groove",
+            "label": "Groove"
+          },
+          {
+            "value": "Ridge",
+            "label": "Ridge"
+          },
+          {
+            "value": "inset",
+            "label": "Inset"
+          },
+          {
+            "value": "outset",
+            "label": "Outset"
+          }
+        ],
+        "label": "Border style",
+        "default": "solid"
+      },
+      {
+        "type": "text",
+        "id": "section_border",
+        "label": "Borders Integer px ( top-right-bottom-left )",
+        "info": "0-0-1px-0"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      },
+      {
+        "type": "header",
+        "content": "== Basel Extras"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden_section",
+        "label": "Disable Section?",
+        "info": "If checked the section won't be visible on the public side of your website. You can switch it back any time.",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "== Block Options"
+      }
+    ],
+    "blocks": [
+    {
+      "type": "masonry_image",
+      "name": "Categories Masonry",
+      "settings": [
+      {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+             "type":"collection",
+             "id":"id_collection",
+             "label":"Choose collection",
+             "info": "Optional"
+         },
+         {
+        "type": "select",
+        "id": "width",
+        "options": [
+         {
+            "value": "3",
+            "label": "25%"
+          },
+          {
+            "value": "4",
+            "label": "33.33333333%"
+          },
+          {
+            "value": "6",
+            "label": "50%"
+          },
+          {
+            "value": "8",
+            "label": "66.66666667%"
+          },
+          {
+            "value": "12",
+            "label": "100%"
+          }
+        ],
+        "label": "Select column width",
+        "default": "3"
+      } 
+      ]
+    }
+  ],
+    "presets": [
+      {
+        "name": "Collection categories furniture",
+        "category": "categories",
+        "blocks": [
+          {
+            "type": "masonry_image"
+          },
+          {
+            "type": "masonry_image"
+          },
+          {
+            "type": "masonry_image"
+          },
+          {
+            "type": "masonry_image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

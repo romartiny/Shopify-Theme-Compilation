@@ -1,0 +1,1014 @@
+{%- if section.settings.hidden_section -%}{%- capture check_admin -%}{{ content_for_header  }}{%- endcapture -%}<style> #shopify-section-{{ section.id }} { {%- if check_admin contains 'design_mode' -%}opacity: .5;filter: alpha(opacity=50){%- else -%}display: none !important{%- endif -%}}</style>{%- endif -%}
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{%- capture data_section -%}
+  {%- if section.settings.row_stretch == 'stretch_row' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true'
+  {%- elsif section.settings.row_stretch == 'stretch_row_content' or section.settings.row_stretch == 'stretch_row_content_no_spaces' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true' data-gl-stretch-content='true'
+  {%- else -%}
+  {%- assign class_has_fill = '' -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- capture data_grid -%}
+  {%- if section.settings.photo_design == 'grid' -%}
+  instagram-grid
+  {%- elsif section.settings.photo_design == 'slider' -%}
+  instagram-slider
+  {%- else -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- capture style_title -%}
+  {%- if section.settings.bg_title != blank -%}
+  style="background-color: {{section.settings.bg_title}} !important"
+  {%- endif -%}
+{%- endcapture -%}
+{%- unless image_size != blank -%}
+  {%- assign image_size = '100x100' -%}
+{%- endunless -%}
+{%- assign number = section.settings.photo_per_row | plus: 0 -%}
+{%- assign number_tes = section.settings.silder_per_view_tes | plus: 0 -%}
+{{ style_block_section }}
+<div data-section-id="{{ section.id }}" data-section-type="gl_instagram_testimonal" {{ data_section }}{%- if section.settings.use_video and section.settings.video_url != blank %} data-gl-video-bg="{{ section.settings.video_url }}"{%- endif %} class="gl_custom_{{section.id}} {% if section.settings.row_stretch == 'stretch_row_content_no_spaces' %}gl_row-no-padding{%- endif %}{%- if section.settings.use_parallax %} basel-parallax{%- endif %} gl_row spb_row gl_row-fluid {{class_has_fill}} {%- if section.settings.use_video and section.settings.video_url != blank %} opacity-video-bg gl_video-bg-container gl_has_youtube{%- endif %}{%- if section.settings.full_height %} gl_row-o-full-height gl_row-o-columns-{{section.settings.columns_position}}{%- endif %}{%- if section.settings.equal_height %} gl_row-o-equal-height{%- endif %}{%- unless section.settings.content_position == 'default' %} gl_row-o-content-{{section.settings.content_position}}{%- endunless %}{%- if section.settings.equal_height or section.settings.full_height or section.settings.content_position != 'default' %} gl_row-flex{%- endif -%}">
+   <div class="spb_column gl_column_container gl_col-sm-{{section.settings.block_width_tes}}">
+      <div class="gl_column-inner">
+         <div class="spb_wrapper">
+            {%- if section.settings.title_tes != blank -%}
+            <div class="title-wrapper basel-title-color-black basel-title-style-{{ section.settings.title_style }} basel-title-size-default text-center ">
+               <div class="liner-continer"> <span class="left-line"></span> <span class="title">{{ section.settings.title_tes }}<span class="title-separator"><span></span></span></span> <span class="right-line"></span> </div>
+            </div>
+            {%- endif -%}
+            <div class="testimonials-wrapper">
+               {%- if section.blocks.size > 0 -%}
+                  {% comment %}{%- if section.settings.title != blank and section.settings.title_style == 'silder_title' -%}<h2 class="title slider-title">{{section.settings.title}}</h2>{%- endif -%}{% endcomment %}
+                  <div class="testimonials testimonials-{{section.settings.layout}} testimon-style-{{section.settings.style}} testimon-columns-{{section.settings.columns}} testimon-align-{{section.settings.align}} {%- if section.settings.layout =='slider' %}ins-owl-carousel owl-carousel{%- endif -%}" data-autoheight='true' data-time='{{ section.settings.silder_speed_tes | plus: 0 }}' data-nav='{%- if section.settings.hide_button_tes -%}false{%- else -%}true{%- endif -%}' data-items='{{ number_tes }}' data-dots='{%- if section.settings.hide_pagination_tes -%}false{%- else -%}true{%- endif -%}' data-autoplay='{%- if section.settings.autoplay_tes -%}true{%- else -%}false{%- endif -%}' data-loop='{%- if section.settings.slider_loop_tes -%}true{%- else -%}false{%- endif -%}' data-medium='1' data-small='1' data-exsmall='1'>
+                     {%- for block in section.blocks -%}
+                     <div class="testimonial" {{ block.shopify_attributes }}>
+                        <div class="testimonial-inner">
+                           <div class="testimonial-avatar">
+                              {%- if block.settings.avatar != blank -%}
+                              {%- assign image = block.settings.avatar -%}
+                                 <img class="testimonial-avatar-image" src="{%-include 'gl_image_format',src: image , size: image_size -%}" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt }}" title="{{ image.alt }}">                 
+                              {%- else -%}
+                                 <img class="testimonial-avatar-image" src="//cdn.shopify.com/s/files/1/1933/6253/files/testimonials-placeholder.jpg?14557201033594249559" width="100" height="100" alt="client1" title="client1">
+                              {%- endif -%}
+                           </div>
+                           <div class="testimonial-content">
+                              {%- if block.settings.quote != blank -%}{{ block.settings.quote | strip_html }}{%- endif -%}         
+                              {%- if block.settings.author != blank -%}
+                              <footer>
+                                 {{ block.settings.author }}{%- if block.settings.user_title != blank -%}<span>{{block.settings.user_title}}</span>{%- endif -%}
+                              </footer>
+                              {%- endif -%}
+                           </div>
+                        </div>
+                     </div>
+                     {%- endfor -%}
+                  </div>
+               {%- endif -%}
+               {%- if section.blocks.size == 0 -%}
+                {%- include 'no-blocks' -%}
+               {%- endif -%}
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="spb_column gl_column_container gl_col-sm-{{section.settings.block_width}}">
+      <div class="gl_column-inner">
+         <div class="spb_wrapper">
+            <div class="spb_raw_code spb_content_element spb_raw_html">
+               <div class="spb_wrapper">
+                  {%- if section.settings.show_title and section.settings.title != blank -%}
+                  {%- if section.settings.title contains '[' -%}
+                     {%- assign title = section.settings.title | split: ']' -%}
+                     {%- assign title_two = title[1] -%}
+                     {%- assign title_one = title[0]| split: '[' | last -%}
+                  {%- endif -%}
+                  {%- case section.settings.style_title -%}
+                     {%- when '1' -%}
+                     <div class="spb_text_column spb_content_element" {{ style_title }}>
+                        <div class="title-wrapper basel-title-color-default basel-title-style-cross basel-title-size-default text-center ">
+                           <div class="liner-continer"><span class="left-line"></span><span class="title"><strong>{%- if section.settings.title contains '[' -%}<i class="icon-{{title_one}} icons" style="margin-right: 7px; font-size: 18px;"></i>{{title_two}}{%- else -%}{{ section.settings.title }}{%- endif -%}</strong><span class="title-separator"><span></span></span></span> <span class="right-line"></span> </div>
+                        </div>
+                     </div>
+                     {%- when '2' -%}
+                     <div class="spb_text_column spb_content_element" {{ style_title }}>
+                        <div class="spb_wrapper">
+                           <h3 style="text-align: center; color: black;"><strong>{%- if section.settings.title contains '[' -%}<i class="icon-{{title_one}} icons" style="margin-right: 7px; font-size: 18px;"></i>{{title_two}}{%- else -%}{{ section.settings.title }}{%- endif -%}</strong></h3>
+                        </div>
+                     </div>
+                     {%- when '3' -%}
+                     <div class="title-wrapper basel-title-color-default basel-title-style-default basel-title-size-large text-center gl_mb_30" {{ style_title }}>
+                        <div class="liner-continer"> <span class="left-line"></span> <span class="title">{%- if section.settings.title contains '[' -%}<i class="icon-{{title_one}} icons" style="margin-right: 7px; font-size: 25px;"></i>{{title_two}}{%- else -%}{{ section.settings.title }}{%- endif -%}<span class="title-separator"><span></span></span></span> <span class="right-line"></span> </div>
+                     </div>
+                     {%- when '4' -%}
+                     <div class="spb_text_column spb_content_element gl_mb_0 gl_pt_30 gl_pb_30 color-scheme-dark" {{ style_title }}>
+                        <div class="spb_wrapper">
+                           <h4 class="font-title" style="text-align: center; letter-spacing: 1px;">{%- if section.settings.title contains '[' -%}<i class="icon-{{title_one}} icons" style="margin-right: 7px; font-size: 15px;"></i>{{title_two}}{%- else -%}{{ section.settings.title }}{%- endif -%}</h4>
+                        </div>
+                     </div>
+                  {%- endcase -%}
+                  {%- endif -%}
+                  <div class="gl_instagram instagram-widget instagram-per-row-{{section.settings.photo_per_row}} {{data_grid }}{%- if section.settings.spaces_section %} instagram-with-spaces{%- endif %}{%- if section.settings.rounded_section %} instagram-rounded{%- endif -%}" data-username='{{section.settings.username}}' data-limit='{{section.settings.limit | plus:0 }}' data-target='{{section.settings.open_link}}' data-size='{{section.settings.photo_size }}'>
+                     {%- if section.settings.show_ins_text -%}
+                     <div class="instagram-content">
+                        <div class="instagram-content-inner">
+                           <p></p>
+                           {%- if section.settings.overlay_title != blank -%}<h2 style="text-align: center; margin-bottom: 10px;">{{ section.settings.overlay_title }}</h2>{%- endif -%}
+                           {%- if section.settings.subtext != blank or section.settings.button_label != blank -%}<hr style="text-align: center; margin-bottom: 10px; border-width: 3px; border-color: black;">{%- endif -%}
+                           {%- if section.settings.subtext != blank -%}<p style="text-align: center;">{{ section.settings.subtext }}</p>{%- endif -%}
+                           {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+                           <p style="text-align: center;"><a class="btn btn-color-{{ section.settings.button_color }} btn-style-{{ section.settings.button_style }} btn-size-{{ section.settings.button_size }}" style="text-align: center;" href="{{ section.settings.button_link }}" target="{{section.settings.open_link}}">{{ section.settings.button_label }}</a></p>
+                           {%- endif -%}
+                           <p></p>
+                        </div>
+                     </div>
+                     {%- endif -%}
+                     <ul class="instagram-pics{%-if section.settings.photo_design == 'slider' %} ins-owl-carousel{%- endif -%}" data-time='{{ section.settings.silder_speed | plus: 0 }}' data-nav='{%- if section.settings.hide_button -%}false{%- else -%}true{%- endif -%}' data-items='{{ number }}' data-dots='{%- if section.settings.hide_pagination -%}false{%- else -%}true{%- endif -%}' data-autoplay='{%- if section.settings.autoplay -%}true{%- else -%}false{%- endif -%}' data-loop='{%- if section.settings.slider_loop -%}true{%- else -%}false{%- endif -%}' data-medium='{%- if number > 2 -%}{{ number | minus: 1 }}{%- else -%}2{%- endif -%}' data-small='{%- if number > 2 -%}{{ number | minus: 1 }}{%- else -%}2{%- endif -%}' data-exsmall='2'></ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{%- unless section.settings.row_stretch == 'default' -%}
+  <div class="gl_row-full-width gl_clearfix"></div>
+{%- endunless -%}
+{%- schema -%}
+  {
+    "name": "Instagram",
+    "class": "index-section index-section_instagram",
+    "settings": [
+      {
+      "type": "header",
+      "content": "== General Settings"
+      },
+      {
+        "type": "select",
+        "id": "row_stretch",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "stretch_row",
+            "label": "Stretch row"
+          },
+          {
+            "value": "stretch_row_content",
+            "label": "Stretch row and content"
+          },
+          {
+            "value": "stretch_row_content_no_spaces",
+            "label": "Stretch row and content (no paddings)"
+          }
+        ],
+        "label": "___ Row stretch",
+        "info": "Select stretching options for row and content (Note: stretched may not work properly if parent container has 'overflow: hidden' CSS property).",
+        "default": "default"
+      },
+      {
+        "type": "checkbox",
+        "id": "full_height",
+        "label": "Full height row?",
+        "info": "if checked row will be set to full height.",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "columns_position",
+        "options": [
+         {
+            "value": "middle",
+            "label": "Middle"
+          },
+         {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "stretch",
+            "label": "Stretch"
+          }
+        ],
+        "label": "___ Columns position (only for full height)",
+        "info": "Select columns position within row.",
+        "default": "middle"
+      },
+      {
+        "type": "checkbox",
+        "id": "equal_height",
+        "label": "Equal height?",
+        "info": "If checked columns will be set to equal height.",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "content_position",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "middle",
+            "label": "Middle"
+          },
+         {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "label": "___ Content position",
+        "info": "Select content position within columns.",
+        "default": "default"
+      },
+      {
+        "type": "header",
+        "content": "== Testimonials Options"
+      },
+      {
+        "type": "select",
+        "id": "block_width_tes",
+        "options": [
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "Select column width",
+        "default": "6"
+      },
+      {
+        "type": "text",
+        "id": "title_tes",
+        "label": "Title"
+      },
+      {
+        "type": "select",
+        "id": "title_style",
+        "label": "Title style",
+        "options": [
+        {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "simple",
+            "label": "Simple"
+          },
+          {
+            "value": "cross",
+            "label": "X sign"
+          },
+          {
+            "value": "bordered",
+            "label": "Bordered"
+          },
+          {
+            "value": "shadow",
+            "label": "Shadow"
+          }
+        ],
+        "default": "default"
+      },
+      {
+        "type": "select",
+        "id": "layout",
+        "label": "Layout",
+        "default": "slider",
+        "options": [
+          {
+            "label": "Slider",
+            "value": "slider"
+          },
+          {
+            "label": "Grid",
+            "value": "grid"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "style",
+        "label": "Style",
+        "default": "standard",
+        "options": [
+          {
+            "label": "Standard",
+            "value": "standard"
+          },
+          {
+            "label": "Boxed",
+            "value": "boxed"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "align",
+        "label": "Align",
+        "default": "center",
+        "options": [
+          {
+            "label": "Center",
+            "value": "center"
+          },
+          {
+            "label": "Left",
+            "value": "left"
+          },
+          {
+            "label": "Right",
+            "value": "right"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "columns",
+        "label": "Columns",
+        "info": "only for layout grid",
+        "default": "1",
+        "options": [
+          {
+            "label": "1",
+            "value": "1"
+          },
+          {
+            "label": "2",
+            "value": "2"
+          },
+          {
+            "label": "3",
+            "value": "3"
+          },
+          {
+            "label": "4",
+            "value": "4"
+          },
+          {
+            "label": "5",
+            "value": "5"
+          },
+          {
+            "label": "6",
+            "value": "6"
+          },
+          {
+            "label": "7",
+            "value": "7"
+          },
+          {
+            "label": "8",
+            "value": "8"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "___ Carousel Settings"
+      },
+      {
+        "type": "text",
+        "id": "silder_speed_tes",
+        "label": "Slider speed ( integer )",
+        "info": "Duration of animation between slides (in ms).",
+        "default": "5000"
+      },
+      {
+        "type": "select",
+        "id": "silder_per_view_tes",
+        "options": [
+          {
+            "value": "1",
+            "label": "1"
+          },
+          {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          },
+          {
+            "value": "5",
+            "label": "5"
+          },
+          {
+            "value": "6",
+            "label": "6"
+          },
+          {
+            "value": "7",
+            "label": "7"
+          },
+          {
+            "value": "8",
+            "label": "8"
+          }
+        ],
+        "label": "Slides per view",
+        "default": "1",
+        "info": "Set numbers of slides you want to display at the same time on slider's container for carousel mode."
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_pagination_tes",
+        "default": false,
+        "label": "Hide pagination control?",
+        "info": "pagination control will be removed"
+      },
+       {
+        "type": "checkbox",
+        "id": "hide_button_tes",
+        "default": true,
+        "label": "Hide prev/next buttons?",
+        "info": "prev/next control will be removed"
+      },
+       {
+        "type": "checkbox",
+        "id": "slider_loop_tes",
+        "default": false,
+        "label": "Slider loop?",
+        "info": "Enables loop mode."
+      },
+      {
+       "type": "checkbox",
+       "id": "autoplay_tes",
+       "label": "Slider autoplay",
+       "info": "Enables autoplay mode.",
+       "default": false
+     },
+     {
+      "type": "header",
+      "content": "== Instagram Settings"
+      },
+      {
+        "type": "select",
+        "id": "block_width",
+        "options": [
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "Select column width",
+        "default": "6"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_title",
+        "label": "Show title?",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "info": "[icon_name]text",
+        "default": "[social-instagram]FOLLOW @INSTAGRAM"
+      },
+      {
+        "type": "paragraph",
+        "content": "[Simple line icons](http:\/\/simplelineicons.com)"
+      },
+      {
+        "type": "select",
+        "id": "style_title",
+        "options": [
+          {
+            "value": "1",
+            "label": "Style 1 (home-lingerie)"
+          },
+         {
+            "value": "2",
+            "label": "Style 2 (hero-slider)"
+          },
+         {
+            "value": "3",
+            "label": "Style 3 (home-wine)"
+          },
+         {
+            "value": "4",
+            "label": "Style 4 (home-flowers)"
+          }
+        ],
+        "label": "Style title",
+        "default": "1"
+      },
+      {
+        "type": "color",
+        "id": "bg_title",
+        "label": "Background Title Color" 
+      },
+      {
+        "type": "text",
+        "id": "username",
+        "label": "Username Instagram",
+        "default": "southern_blooms"
+      },
+      {
+        "type": "text",
+        "id": "limit",
+        "label": "Number of photos (integer)",
+        "info": "max: 12 photos",
+        "default": "6"
+      },
+      {
+        "type": "select",
+        "id": "photo_size",
+        "options": [
+          {
+            "value": "s150x150",
+            "label": "150x150"
+          },
+         {
+            "value": "s480x480",
+            "label": "480x480"
+          },
+         {
+            "value": "s640x640",
+            "label": "640x640"
+          }
+        ],
+        "label": "Photo size",
+        "default": "s150x150"
+      },
+      {
+        "type": "select",
+        "id": "open_link",
+        "options": [
+          {
+            "value": "_self",
+            "label": "Current window (_self)"
+          },
+         {
+            "value": "_blank",
+            "label": "New window (_blank)"
+          }
+        ],
+        "label": "Open link in",
+        "default": "_self"
+      },
+      {
+        "type": "select",
+        "id": "photo_design",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default"
+         },
+         {
+            "value": "grid",
+            "label": "Grid"
+         },
+         {
+            "value": "slider",
+            "label": "Slider"
+          }
+        ],
+        "label": "Design",
+        "default": "default"
+      },
+      {
+        "type": "select",
+        "id": "photo_per_row",
+        "options": [
+          {
+            "value": "1",
+            "label": "1"
+         },
+         {
+            "value": "2",
+            "label": "2"
+         },
+         {
+            "value": "3",
+            "label": "3"
+          },
+           {
+            "value": "4",
+            "label": "4"
+         },
+         {
+            "value": "5",
+            "label": "5"
+         },
+         {
+            "value": "6",
+            "label": "6"
+          },
+           {
+            "value": "7",
+            "label": "7"
+         },
+         {
+            "value": "8",
+            "label": "8"
+         },
+         {
+            "value": "9",
+            "label": "9"
+          },
+           {
+            "value": "10",
+            "label": "10"
+         },
+         {
+            "value": "11",
+            "label": "11"
+         },
+         {
+            "value": "12",
+            "label": "12"
+          }
+        ],
+        "label": "Photos per row",
+        "info":"Number of photos per row for grid design or items in slider per view.",
+        "default": "3"
+      },
+      {
+        "type": "checkbox",
+        "id": "spaces_section",
+        "label": "Add spaces between photos?",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "rounded_section",
+        "label": "Rounded corners for images?",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "___ slider settings"
+      },
+      {
+        "type": "text",
+        "id": "silder_speed",
+        "label": "Slider speed ( integer )",
+        "info": "Duration of animation between slides (in ms).",
+        "default": "5000"
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_pagination",
+        "default": false,
+        "label": "Hide pagination control?",
+        "info": "pagination control will be removed"
+      },
+       {
+        "type": "checkbox",
+        "id": "hide_button",
+        "default": false,
+        "label": "Hide prev/next buttons?",
+        "info": "prev/next control will be removed"
+      },
+       {
+        "type": "checkbox",
+        "id": "slider_loop",
+        "default": false,
+        "label": "Slider loop?",
+        "info": "Enables loop mode."
+      },
+      {
+       "type": "checkbox",
+       "id": "autoplay",
+       "label": "Slider autoplay",
+       "info": "Enables autoplay mode.",
+       "default": false
+     },
+      {
+        "type": "header",
+        "content": "___ Instagram text"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_ins_text",
+        "label": "Show Instagram text?",
+        "info": "Add here few words about your instagram profile.",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "overlay_title",
+        "label": "Heading",
+        "default": "INSTAGRAM"
+      },
+      {
+        "type": "text",
+        "id": "subtext",
+        "label": "Subtext",
+        "default": "Posuere eget ut sed consectetur litora lobortis cras"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button label"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      },
+      {
+        "type": "select",
+        "id": "button_color",
+        "label": "Button color",
+        "default": "white",
+        "options": [
+          {
+            "label": "Default",
+            "value": "default"
+          },
+          {
+            "label": "Primary color",
+            "value": "primary"
+          },
+          {
+            "label": "Alternative color",
+            "value": "alt"
+          },
+          {
+            "label": "Black",
+            "value": "black"
+          },
+          {
+            "label": "White",
+            "value": "white"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "button_style",
+        "label": "Button style",
+        "default": "bordered",
+        "options": [
+          {
+            "label": "Default",
+            "value": "default"
+          },
+          {
+            "label": "Bordered",
+            "value": "bordered"
+          },
+          {
+            "label": "Link button",
+            "value": "link"
+          },
+          {
+            "label": "Rounded",
+            "value": "round"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "button_size",
+        "label": "Button size",
+        "default": "default",
+        "options": [
+          {
+            "label": "Default",
+            "value": "default"
+          },
+          {
+            "label": "Extra Small",
+            "value": "extra-small"
+          },
+          {
+            "label": "Small",
+            "value": "small"
+          },
+          {
+            "label": "Large",
+            "value": "large"
+          },
+          {
+            "label": "extra-large",
+            "value": "Extra Large"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "color",
+        "id": "section_bg_color",
+        "label": "Background color"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      },
+      {
+        "type": "header",
+        "content": "== Basel Extras"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden_section",
+        "label": "Disable Section?",
+        "info": "If checked the section won't be visible on the public side of your website. You can switch it back any time.",
+        "default": false
+      }
+    ],
+    "blocks": [
+      {
+        "type": "quote",
+        "name": "Testimonial",
+        "settings": [
+            {
+               "type": "text",
+               "id": "author",
+               "label": "Author",
+               "info": "User name",
+               "default": "Author's name"
+            },
+            {
+               "type": "text",
+               "id": "user_title",
+               "label": "Title",
+               "info": "User title",
+               "default": "User title"
+            },
+            {
+              "type": "image_picker",
+              "id": "avatar",
+              "label": "User Avatar (100x100)"
+            },
+            {
+               "type": "textarea",
+               "id": "quote",
+               "label": "Text",
+               "default": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.</p>"
+            }
+        ]
+      }
+    ],
+    "presets": [{
+      "name": "Instagram with Testimonial",
+      "category": "Advanced layout",
+      "blocks": [
+          {
+            "type": "quote"
+          },
+          {
+            "type": "quote"
+          },
+          {
+            "type": "quote"
+          }
+      ]
+    }]
+  }
+{% endschema %}

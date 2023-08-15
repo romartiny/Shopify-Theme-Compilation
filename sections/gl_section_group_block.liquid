@@ -1,0 +1,497 @@
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{%- capture data_section -%}
+  {%- if section.settings.row_stretch == 'stretch_row' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true'
+  {%- elsif section.settings.row_stretch == 'stretch_row_content' or section.settings.row_stretch == 'stretch_row_content_no_spaces' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true' data-gl-stretch-content='true'
+  {%- else -%}
+  {%- assign class_has_fill = '' -%}
+  {%- endif -%}
+{%- endcapture -%}
+{{ style_block_section }}
+<div {{ data_section }}{%- if section.settings.use_video and section.settings.video_url != blank %} data-gl-video-bg="{{ section.settings.video_url }}"{%- endif %} class="gl_custom_{{section.id}} {% if section.settings.row_stretch == 'stretch_row_content_no_spaces' %}gl_row-no-padding{%- endif %}{%- if section.settings.use_parallax -%} basel-parallax{%- endif %} gl_row spb_row gl_row-fluid {{class_has_fill}} {%- if section.settings.use_video and section.settings.video_url != blank %} opacity-video-bg gl_video-bg-container gl_has_youtube{%- endif %}{%- if section.settings.full_height %} gl_row-o-full-height gl_row-o-columns-{{section.settings.columns_position}}{%- endif %}{%- if section.settings.equal_height %} gl_row-o-equal-height{%- endif %}{%- unless section.settings.content_position == 'default' %} gl_row-o-content-{{section.settings.content_position}}{%- endunless %}{%- if section.settings.equal_height or section.settings.content_position != 'default' %} gl_row-flex{%- endif -%}">
+  {%- case section.blocks.size -%}
+    {%- when 1 -%}
+      {%- assign size = 12 -%}
+    {%- when 2 -%}
+      {%- assign size = 6 -%}
+    {%- when 3 -%}
+      {%- assign size = 4 -%}
+    {%- else -%}
+      {%- assign size = 3 -%}
+  {%- endcase -%}
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+      {%- when 'collection' -%}
+         {%- if block.settings.featured_product_list_collection == blank -%}
+            {%- assign side_bar_collection = collections["all"] -%}
+         {%- else -%}
+            {%- assign side_bar_collection = collections[block.settings.featured_product_list_collection ] -%}
+         {%- endif -%}
+         {%- assign limit_num = block.settings.featured_product_limit_all | plus: 0 -%}
+         <div class="spb_column gl_column_container gl_col-sm-{%- if size == 12 %}12{%- else %}6{%- endif %} gl_col-lg-{{size}} gl_col-md-{{size}} gl_col-xs-12">
+            <div class="gl_column-inner ">
+               <div class="spb_wrapper">
+                  {%- if block.settings.title != blank -%}
+                  <div class="title-wrapper  basel-title-color-default basel-title-style-simple basel-title-size-default text-left ">
+                     <div class="liner-continer">
+                        <span class="left-line"></span> 
+                        <h4 class="title">{{block.settings.title}}<span class="title-separator"><span></span></span></h4>
+                        <span class="right-line"></span> 
+                     </div>
+                  </div>
+                  {%- endif -%}
+                  <div class="spb_raw_code spb_content_element spb_raw_html">
+                     <div class="spb_wrapper">
+                        <div class="widget_products">
+                           <div class="widget shopify widget_products">
+                              {%- if side_bar_collection != blank -%}
+                              <ul class="product_list_widget">
+                                 {%- for side_bar_product in side_bar_collection.products limit:limit_num -%}
+                                 {%- if porduct.id != side_bar_product.id -%}
+                                 <li>
+                                    {%- assign current_variant = side_bar_product.selected_or_first_available_variant -%}
+                                    {%- assign featured_image = current_variant.featured_image | default: side_bar_product.featured_image -%}
+                                    {%- assign product_image_size = '70x' -%}
+                                    {%- assign on_sale = false -%}
+                                    {%- if current_variant.compare_at_price_min > current_variant.price_min -%}
+                                      {%- assign on_sale = true -%}
+                                    {%- endif -%}
+                                    {%- assign image = featured_image -%}
+                                    <a href="{{ side_bar_product.url | within: collection }}">
+                                       {%- if image != blank -%}
+                                       <img width="219" height="280" src="{%-include 'gl_image_format',src: image.src, size: product_image_size -%}" class="attachment-shop_single size-shop_single sp-post-image" alt="{{image.alt}}" title="{{side_bar_product.title}}">
+                                       {%- endif -%}
+                                       <span class="product-title">{{ side_bar_product.title }}</span>
+                                    </a>
+                                    <span class="amount">
+                                        {%- if side_bar_product.price_varies -%}
+                                        {{ side_bar_product.price_min | money }} – {{ side_bar_product.price_max | money }}
+                                        {%- elsif on_sale -%}<del>{{ current_variant.compare_at_price  | money }}</del> <ins>{{ current_variant.price | money }}</ins>
+                                        {%- else -%}
+                                        {{ current_variant.price | money }}
+                                        {%- endif -%}
+                                     </span>
+                                 </li>
+                                 {%- endif -%}
+                                 {%- endfor -%}
+                              </ul>
+                              {%- endif -%}
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      {%- when 'twitter' -%}
+         <div class="spb_column gl_column_container gl_col-sm-{%- if size == 12 %}12{%- else %}6{%- endif %} gl_col-lg-{{size}} gl_col-md-{{size}} gl_col-xs-12">
+            <div class="gl_column-inner ">
+               <div class="spb_wrapper">
+                  {%- if block.settings.title != blank -%}
+                  <div class="title-wrapper  basel-title-color-default basel-title-style-simple basel-title-size-default text-left ">
+                     <div class="liner-continer">
+                        <span class="left-line"></span> 
+                        <h4 class="title">{{block.settings.title}}<span class="title-separator"><span></span></span></h4>
+                        <span class="right-line"></span> 
+                     </div>
+                  </div>
+                  {%- endif -%}
+                  <div class="spb_widgetised_column spb_content_element">
+                     <div class="spb_wrapper">
+                        <div id="pi_simpletwittertweets-{{block.id}}" class="sidebar-widget PI_SimpleTwitterTweets">
+                           {{block.settings.embed_code}}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      {%- when 'facebook' -%}
+         <div class="spb_column gl_column_container gl_col-sm-{%- if size == 12 %}12{%- else %}6{%- endif %} gl_col-lg-{{size}} gl_col-md-{{size}} gl_col-xs-12">
+            <div class="gl_column-inner ">
+               <div class="spb_wrapper">
+                  {%- if block.settings.title != blank -%}
+                  <div class="title-wrapper  basel-title-color-default basel-title-style-simple basel-title-size-default text-left ">
+                     <div class="liner-continer">
+                        <span class="left-line"></span> 
+                        <h4 class="title">{{block.settings.title}}<span class="title-separator"><span></span></span></h4>
+                        <span class="right-line"></span> 
+                     </div>
+                  </div>
+                  {%- endif -%}
+                  <div class="spb_raw_code spb_content_element spb_raw_html">
+                     <div class="spb_wrapper">{{block.settings.embed_code}}</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      {%- when 'instagram' -%}
+      {%- if block.settings.username != blank -%}
+         <div class="spb_column gl_column_container gl_col-sm-{%- if size == 12 %}12{%- else %}6{%- endif %} gl_col-lg-{{size}} gl_col-md-{{size}} gl_col-xs-12">
+            <div class="gl_column-inner ">
+               <div class="spb_wrapper">
+                  {%- if block.settings.title != blank -%}
+                  <div class="title-wrapper  basel-title-color-default basel-title-style-simple basel-title-size-default text-left ">
+                     <div class="liner-continer">
+                        <span class="left-line"></span> 
+                        <h4 class="title">{{block.settings.title}}<span class="title-separator"><span></span></span></h4>
+                        <span class="right-line"></span> 
+                     </div>
+                  </div>
+                  {%- endif -%}
+                  <div id="carousel-{{block.id}}" class="instagram-widget instagram-grid instagram-with-spaces instagram-per-row-3">
+                     <ul class="instagram-pics"></ul>
+                     {%- if block.settings.view_profile != blank -%}<p class="clear"><a href="//instagram.com/{{block.settings.username}}" rel="me" target="_blank">{{block.settings.view_profile}}</a></p>{%- endif -%}
+                  </div>
+               </div>
+            </div>
+         </div>
+         <script type="text/javascript">
+           var user_name = '{{block.settings.username}}',
+               limit = '9',
+               target = '_self',
+               ul_ins = $(".instagram-pics");
+             $.ajax({
+               url: 'https://api.teathemes.net/instagram?username='+user_name,
+               dataType: 'json',
+               type: 'GET',
+               success: function(responsive) {
+                 //console.log(responsive);
+                 var html = '',
+                     data = responsive.entry_data.ProfilePage[0].user.media.nodes;
+                 $.each(data,function(index,element){
+                   if(index >= limit ) return 0;
+                   html += '<li><a href="//instagram.com/p/'+element.code+'" target="'+target+'"></a><div class="wrapp-pics"><img src="'+element.thumbnail_src+'" alt="'+user_name+'"><div class="hover-mask"></div></div></li>';
+                 });
+                 ul_ins.html(html);
+               },
+               error: function(data) {
+                 console.log('ajax error');
+               }
+             }); 
+         </script>
+      {%- endif -%}
+    {%- endcase -%}
+  {%- endfor -%}      
+</div>
+{%- unless section.settings.row_stretch == 'default' -%}
+  <div class="gl_row-full-width gl_clearfix"></div>
+  {%- endunless -%}
+{%- schema -%}
+  {
+    "name": "Group block",
+    "class": "index-section section_group_block",
+    "max_blocks":4,
+    "settings": [
+      {
+      "type": "header",
+      "content": "== General"
+      },
+      {
+        "type": "select",
+        "id": "row_stretch",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "stretch_row",
+            "label": "Stretch row"
+          },
+          {
+            "value": "stretch_row_content",
+            "label": "Stretch row and content"
+          },
+          {
+            "value": "stretch_row_content_no_spaces",
+            "label": "Stretch row and content (no paddings)"
+          }
+        ],
+        "label": "___ Row stretch",
+        "info": "Select stretching options for row and content (Note: stretched may not work properly if parent container has 'overflow: hidden' CSS property).",
+        "default": "default"
+      },
+      {
+        "type": "checkbox",
+        "id": "full_height",
+        "label": "Full height row?",
+        "info": "if checked row will be set to full height.",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "columns_position",
+        "options": [
+         {
+            "value": "middle",
+            "label": "Middle"
+          },
+         {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "stretch",
+            "label": "Stretch"
+          }
+        ],
+        "label": "___ Columns position (only for full height)",
+        "info": "Select columns position within row.",
+        "default": "middle"
+      },
+      {
+        "type": "checkbox",
+        "id": "equal_height",
+        "label": "Equal height?",
+        "info": "If checked columns will be set to equal height.",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "content_position",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "middle",
+            "label": "Middle"
+          },
+         {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "label": "___ Content position",
+        "info": "Select content position within columns.",
+        "default": "default"
+      },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "color",
+        "id": "section_bg_color",
+        "label": "Background color"
+      },
+      {
+        "type": "color",
+        "id": "section_border_color",
+        "label": "Border color"
+      },
+      {
+        "type": "select",
+        "id": "section_border_style",
+        "options": [
+         {
+            "value": "solid",
+            "label": "Solid"
+          },
+         {
+            "value": "dotted",
+            "label": "Dotted"
+          },
+          {
+            "value": "dashed",
+            "label": "Dashed"
+          },
+          {
+            "value": "double",
+            "label": "Double"
+          },
+          {
+            "value": "groove",
+            "label": "Groove"
+          },
+          {
+            "value": "Ridge",
+            "label": "Ridge"
+          },
+          {
+            "value": "inset",
+            "label": "Inset"
+          },
+          {
+            "value": "outset",
+            "label": "Outset"
+          }
+        ],
+        "label": "Border style",
+        "default": "solid"
+      },
+      {
+        "type": "text",
+        "id": "section_border",
+        "label": "Borders Integer px ( top-right-bottom-left )",
+        "info": "0-0-1px-0"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Featured Products",
+        "settings": [
+         {
+          "type":"text",
+          "id":"title",
+          "label":"Title",
+          "default":"Sale Products"
+          },
+          {
+           "type": "collection",
+           "id": "featured_product_list_collection",
+           "label": "Collection to use"
+         },
+          {
+           "type": "text",
+           "id": "featured_product_limit_all",
+           "label": "Number of products to show",
+           "default": "3"
+         }
+        ]
+      },
+      {
+        "type": "twitter",
+        "name": "Twitter",
+        "limit": 1,
+        "settings": [
+          {
+          "type":"text",
+          "id":"title",
+          "label":"Title",
+          "default":"Recent tweets"
+          },
+          {
+          "type": "textarea",
+          "id": "embed_code",
+          "label": "embed code",
+          "info": "instructions [here](https:\/\/www.help.shopify.com\/themes\/customization\/social-media\/embed-twitter-feed)"
+          }
+         ]
+      },
+      {
+        "type": "facebook",
+        "name": "Facebook",
+        "limit": 1,
+        "settings": [
+          {
+          "type":"text",
+          "id":"title",
+          "label":"Title",
+          "default":"Facebook"
+          },
+          {
+          "type": "textarea",
+          "id": "embed_code",
+          "label": "embed code",
+          "info": "instructions [here](https:\/\/developers.facebook.com\/docs\/plugins\/page-plugin)"
+          }
+         ]
+      },
+      {
+        "type": "instagram",
+        "name": "Instagram feed",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Instagram"
+          },
+          {
+           "type": "text",
+           "id": "username",
+           "label": "Username Instagram",
+           "default": "mikutas"
+         },
+         {
+           "type": "text",
+           "id": "view_profile",
+           "label": "View profile",
+           "default": "View profile"
+         }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Group block",
+        "category": "Advanced layout",
+        "blocks": [
+          {
+            "type": "collection"
+          },
+          {
+            "type": "collection"
+          },
+          {
+            "type": "twitter"
+          },
+          {
+            "type": "instagram"
+          }
+         ]
+      }
+    ]
+  }
+{% endschema %}

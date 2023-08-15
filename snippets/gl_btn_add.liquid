@@ -1,0 +1,41 @@
+{% comment %}7:30 - 17:50 catelog on
+{%- include 'last_catelog_mod' -%}
+{% endcomment %}
+{%- assign catalog_mode = settings.catalog_mode -%}
+{%- if product.metafields.external and catalog_mode == false -%}
+  {%- assign check = product.metafields.external | first | last -%}
+  {%- if check contains 'https:' or check  contains 'http:' -%}{%- assign check_external = true -%}{%-else-%}{%- assign check_external = false -%}{%-endif-%}
+{%-endif-%}
+{%- if tab_button and catalog_mode == false -%}
+   {%- if linklists[product.handle].links.size == 0 -%}
+       {%- if product.variants.size > 1-%}
+       <a href="{{ url_nt | within: collection }}" rel="nofollow" class="btn btn-color-primary btn-style-default btn-size-small">{{'products.product.select_option'|t}}</a>      
+       {%- elsif check_external == true -%}
+       <a href="{{ check }}" rel="nofollow" class="btn btn-color-primary btn-style-default btn-size-small">{{ product.metafields.external | first | first }}</a>
+       {%- else -%}
+          {%- if sold_out -%}
+          <a rel="nofollow" href="{{ url_nt | within: collection }}" class="btn btn-color-primary btn-style-default btn-size-small">{{'products.product.read_more'|t}}</a>
+          {%- else -%}
+          <a rel="nofollow" href="{{ url_nt | within: collection }}" data-pid="{{ product.variants.first.id}}" class="btn btn-color-primary btn-style-default btn-size-small ajax_add_to_cart">{{'products.product.add_to_cart'|t}}</a>
+          {%- endif -%}
+       {%- endif -%}
+    {%- else -%}
+    <a rel="nofollow" href="{{ url_nt | within: collection }}" class="btn btn-color-primary btn-style-default btn-size-small">{{'products.product.view'|t}}</a>
+    {%- endif -%}
+{%- elsif catalog_mode == false -%}
+  {%- if linklists[product.handle].links.size == 0 -%}
+     {%- if product.variants.size > 1 and check_external == false -%}
+     <a href="{{ url_nt | within: collection }}" rel="nofollow" class="button add_to_cart_button basel-tooltip"><span class="basel-tooltip-label">{{ 'sections.basel_tooltip.select_options' | t }}</span>{{'products.product.select_option'|t}}</a>      
+     {%- elsif check_external == true -%}
+       <a href="{{ check }}" rel="nofollow" class="button add_to_cart_button basel-tooltip"><span class="basel-tooltip-label">{{ product.metafields.external | first | first }}</span>{{ product.metafields.external | first | first }}</a>
+     {%- else -%}
+        {%- if sold_out -%}
+        <a rel="nofollow" href="{{ url_nt | within: collection }}" class="button product_type_simple basel-tooltip"><span class="basel-tooltip-label">{{ 'sections.basel_tooltip.read_more' | t }}</span>{{'products.product.read_more'|t}}</a>
+        {%- else -%}
+        <a rel="nofollow" href="{{ url_nt | within: collection }}" data-pid="{{ product.variants.first.id}}" class="button product_type_simple add_to_cart_button ajax_add_to_cart basel-tooltip"><span class="basel-tooltip-label">{{ 'sections.basel_tooltip.add_to_cart' | t }}</span>{{'products.product.add_to_cart'|t}}</a>
+        {%- endif -%}
+     {%- endif -%}
+  {%- else -%}
+  <a rel="nofollow" href="{{ url_nt | within: collection }}" class="button product_type_simple basel-tooltip"><span class="basel-tooltip-label">{{ 'sections.basel_tooltip.view' | t }}</span>{{'products.product.view'|t}}</a>
+  {%- endif -%}
+{%- endif -%}

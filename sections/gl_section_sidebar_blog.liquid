@@ -1,0 +1,371 @@
+{%- if section.blocks.size > 0 -%}
+   {%- case settings.size_sidebar -%}
+     {% when '1' %}
+       {%- assign size_place_holer = '165x106' -%}
+       {%- assign image_size_banner = '165x' -%}
+       {%- assign image_size = '60x' -%}
+     {% when '2' %}
+       {%- assign size_place_holer = '263x207' -%}
+       {%- assign image_size_banner = '263x' -%}
+       {%- assign image_size = '60x' -%}
+     {% when '3' %}
+      {%- assign size_place_holer = '360x307' -%}
+       {%- assign image_size_banner = '360x' -%}
+       {%- assign image_size = '60x' -%}
+   {%- endcase -%}
+   {%- for block in section.blocks -%}
+      {%- case block.type -%}
+         {% when 'search' %}
+         <div id="search-{{ block.id }}" class="sidebar-widget widget_search">
+            {%- if block.settings.title != blank -%}<h5 class="widget-title">{{block.settings.title}}</h5>{%- endif -%}
+            <form role="search" method="get" id="searchform-{{ block.id }}" class="searchform gl_search_post" action="/search">
+               <div>
+                  <input type="hidden" name="type" value="article" />
+                  <label class="screen-reader-text" for="q"></label>
+                  <input type="text" placeholder="{{ 'general.search.blog_placeholder' | t }}" name="q"{%- if search.performed %} value="{{ search.terms | escape | downcase }}"{%- endif %} id="q" autocomplete="off">
+                  <button type="submit" id="searchsubmit">{{ 'general.search.search_submit' | t }}</button>
+               </div>
+            </form>
+         </div>
+         {%- when 'categories' -%}
+            <div id="categories-{{block.id}}" class="sidebar-widget widget_categories">
+               {%- if block.settings.title != blank -%}<h5 class="widget-title">{{block.settings.title}}</h5>{%- endif -%}
+               <ul>
+                  {%- for link in linklists[block.settings.menu].links -%}
+                     {%- if link.type == 'blog_link' -%}
+                        {%- assign gl_blog = link.object -%}
+                        {%- if gl_blog.articles_count > 0 -%}
+                         <li class="cat-item{%- if blog.handle == gl_blog.handle %} current-cat{%- endif -%}"><a href="{{ gl_blog.url }}">{{ gl_blog.title }}</a> ({{ gl_blog.articles_count }})</li>
+                        {%- endif -%}
+                     {%- endif -%}
+                  {%- else -%}
+                    {%- capture theme_settings_footer_linklist_path -%}<strong>Blog sidebar</strong> > <strong>Quick links link list</strong>{%- endcapture -%}
+                    <li class="cat-item">{{ 'layout.footer.instructions_for_linklist_html' | t: theme_settings_link: theme_settings_link, theme_settings_footer_linklist_path: theme_settings_footer_linklist_path }}</li>
+                  {%- endfor -%}
+               </ul>
+            </div>
+         {%- when 'instagram' -%}
+         {%- if block.settings.username != blank -%}
+            <div id="basel-instagram-{{block.id}}" class="sidebar-widget basel-instagram">
+               <h5 class="widget-title">{{ block.settings.title }}</h5>
+               <div id="carousel-{{block.id}}" class="instagram-widget instagram-per-row-">
+                  <ul class="instagram-pics"></ul>
+                  {%- if block.settings.view_profile != blank -%}<p class="clear"><a href="//instagram.com/{{block.settings.username}}" rel="me" target="_blank">{{block.settings.view_profile}}</a></p>{%- endif -%}
+               </div>
+            </div>
+            <script type="text/javascript">
+              var user_name = '{{block.settings.username}}',
+                  limit = '9',
+                  target = '_self',
+                  ul_ins = $(".instagram-pics");
+                $.ajax({
+                  url: 'https://api.teathemes.net/instagram?username='+user_name,
+                  dataType: 'json',
+                  type: 'GET',
+                  success: function(responsive) {
+                    //console.log(responsive);
+                    var html = '',
+                        data = responsive.entry_data.ProfilePage[0].user.media.nodes;
+                    $.each(data,function(index,element){
+                      if(index >= limit ) return 0;
+                      html += '<li><a href="//instagram.com/p/'+element.code+'" target="'+target+'"></a><div class="wrapp-pics"><img src="'+element.thumbnail_src+'" alt="'+user_name+'"><div class="hover-mask"></div></div></li>';
+                    });
+                    ul_ins.html(html);
+                  },
+                  error: function(data) {
+                    console.log('ajax error');
+                  }
+                }); 
+            </script>
+         {%- endif -%}
+         {%- when 'recent' -%}
+         {%- if template.name == 'blog' and blogs[blog.handle].articles_count > 0 -%}
+            {%- assign featured_posts_limit_all = block.settings.featured_posts_limit_all | plus:0 -%}
+            <style>
+            .rpwe-block ul{list-style:none!important;margin-left:0!important;padding-left:0!important;}.rpwe-block li{border-bottom:1px solid #eee;margin-bottom:10px;padding-bottom:10px;list-style-type: none;}.rpwe-block a{display:inline!important;text-decoration:none;}.rpwe-block h3{background:none!important;clear:none;margin-bottom:0!important;margin-top:0!important;font-weight:400;font-size:12px!important;line-height:1.5em;}.rpwe-thumb{border:1px solid #EEE!important;box-shadow:none!important;margin:2px 10px 2px 0;padding:3px!important;}.rpwe-summary{font-size:12px;}.rpwe-time{color:#bbb;font-size:11px;}.rpwe-comment{color:#bbb;font-size:11px;padding-left:5px;}.rpwe-alignleft{display:inline;float:left;}.rpwe-alignright{display:inline;float:right;}.rpwe-aligncenter{display:block;margin-left: auto;margin-right: auto;}.rpwe-clearfix:before,.rpwe-clearfix:after{content:"";display:table !important;}.rpwe-clearfix:after{clear:both;}.rpwe-clearfix{zoom:1;}
+            </style>
+            <div id="rpwe_widget-{{block.id}}" class="sidebar-widget rpwe_widget recent-posts-extended">
+               {%- if block.settings.title != blank -%}<h5 class="widget-title">{{block.settings.title}}</h5>{%- endif -%}
+               <div class="rpwe-block">
+                  <ul class="rpwe-ul">
+                     {%- for article in blogs[blog.handle].articles limit:featured_posts_limit_all -%}
+                     <li class="rpwe-li rpwe-clearfix">
+                        {%- if article.image -%}
+                        <a class="rpwe-img" href="{{ article.url }}" rel="bookmark">
+                           <img class="rpwe-alignleft rpwe-thumb" src="{%-include 'gl_image_format_crop',src: article.image.src, size: '70x' -%}" alt="article.image.alt">
+                        </a>
+                        {%- endif -%}
+                        <h3 class="rpwe-title"><a href="{{ article.url }}" title="Permalink to Venenatis veulum peus" rel="bookmark">{{ article.title }}</a></h3>
+                        <time class="rpwe-time published" datetime="{{ article.published_at | remove: " " }}">{{ article.published_at | date: '%b %d, %Y' }}</time>
+                     </li>
+                     {%- endfor -%}
+                  </ul>
+               </div>
+            </div>
+         {% elsif template == "article" and blogs[blog.handle].articles_count > 1 %}
+            {%- assign featured_posts_limit_all = block.settings.featured_posts_limit_all | plus:0 -%}
+            <style>
+            .rpwe-block ul{list-style:none!important;margin-left:0!important;padding-left:0!important;}.rpwe-block li{border-bottom:1px solid #eee;margin-bottom:10px;padding-bottom:10px;list-style-type: none;}.rpwe-block a{display:inline!important;text-decoration:none;}.rpwe-block h3{background:none!important;clear:none;margin-bottom:0!important;margin-top:0!important;font-weight:400;font-size:12px!important;line-height:1.5em;}.rpwe-thumb{border:1px solid #EEE!important;box-shadow:none!important;margin:2px 10px 2px 0;padding:3px!important;}.rpwe-summary{font-size:12px;}.rpwe-time{color:#bbb;font-size:11px;}.rpwe-comment{color:#bbb;font-size:11px;padding-left:5px;}.rpwe-alignleft{display:inline;float:left;}.rpwe-alignright{display:inline;float:right;}.rpwe-aligncenter{display:block;margin-left: auto;margin-right: auto;}.rpwe-clearfix:before,.rpwe-clearfix:after{content:"";display:table !important;}.rpwe-clearfix:after{clear:both;}.rpwe-clearfix{zoom:1;}
+            </style>
+            <div id="rpwe_widget-{{block.id}}" class="sidebar-widget rpwe_widget recent-posts-extended">
+               {%- if block.settings.title != blank -%}<h5 class="widget-title">{{block.settings.title}}</h5>{%- endif -%}
+               <div class="rpwe-block">
+                  <ul class="rpwe-ul">
+                     {%- for f_article in blogs[blog.handle].articles limit:featured_posts_limit_all -%}
+                        {%- if article.id != f_article.id -%}
+                        <li class="rpwe-li rpwe-clearfix">
+                           {%- if f_article.image -%}
+                           <a class="rpwe-img" href="{{ f_article.url }}" rel="bookmark">
+                              <img class="rpwe-alignleft rpwe-thumb" src="{%-include 'gl_image_format_crop',src: f_article.image.src, size: '70x' -%}" alt="f_article.image.alt">
+                           </a>
+                           {%- endif -%}
+                           <h3 class="rpwe-title"><a href="{{ f_article.url }}" title="Permalink to Venenatis veulum peus" rel="bookmark">{{ f_article.title }}</a></h3>
+                           <time class="rpwe-time published" datetime="{{ f_article.published_at | remove: " " }}">{{ f_article.published_at | date: '%b %d, %Y' }}</time>
+                        </li>
+                        {%- endif -%}
+                     {%- endfor -%}
+                  </ul>
+               </div>
+            </div>
+         {%- endif -%}
+         {%- when 'collection' -%}
+            {%- if block.settings.featured_product_list_collection == blank -%}
+               {%- assign side_bar_collection = collections["all"] -%}
+            {%- else -%}
+               {%- assign side_bar_collection = collections[block.settings.featured_product_list_collection ] -%}
+            {%- endif -%}
+            {%- assign limit_num = block.settings.featured_product_limit_all | plus: 0 -%}
+            <div id="shopify-{{block.id}}" class="sidebar-widget shopify widget_products">
+               {%- if block.settings.title != blank -%}<h5 class="widget-title">{{block.settings.title}}</h5>{%- endif -%}
+               {%- if side_bar_collection != blank -%}
+               <ul class="product_list_widget">
+                  {%- for side_bar_product in side_bar_collection.products limit:limit_num -%}
+                  {%- if porduct.id != side_bar_product.id -%}
+                  <li>
+                     {%- assign current_variant = side_bar_product.selected_or_first_available_variant -%}
+                     {%- assign featured_image = current_variant.featured_image | default: side_bar_product.featured_image -%}
+                     {%- assign product_image_size = '219x' -%}
+                     {%- assign on_sale = false -%}
+                     {%- if current_variant.compare_at_price_min > current_variant.price_min -%}
+                       {%- assign on_sale = true -%}
+                     {%- endif -%}
+                     {%- assign image = featured_image -%}
+                     <a href="{{ side_bar_product.url | within: collection }}">
+                        {%- if image != blank -%}
+                        <img width="219" height="280" src="{%-include 'gl_image_format',src: image.src, size: product_image_size -%}" class="attachment-shop_single size-shop_single sp-post-image" alt="{{image.alt}}" title="{{side_bar_product.title}}" 
+                           srcset="{%-include 'gl_image_format',src: image.src, size: product_image_size %} {{ image.width }}w, 
+                           {%-include 'gl_image_format',src: image.src, size: '235x300' %} 235w, 
+                           {%-include 'gl_image_format',src: image.src, size: '768x980' %} 768w, 
+                           {%-include 'gl_image_format',src: image.src, size: '803x1024' %} 803w, 
+                           {%-include 'gl_image_format',src: image.src, size: '266x340' %} 266w, 
+                           {%-include 'gl_image_format',src: image.src, size: '219x280' %} 219w, 
+                           {%-include 'gl_image_format',src: image.src, size: '263x336' %} 263w, 
+                           {%-include 'gl_image_format',src: image.src, size: '526x671' %} 526w" sizes="(max-width: 219px) 100vw, 219px">
+                           {%- endif -%}
+                           <span class="product-title">{{ side_bar_product.title }}</span>
+                     </a>
+                     <span class="amount">
+                         {%- if side_bar_product.price_varies -%}
+                         {{ side_bar_product.price_min | money }} – {{ side_bar_product.price_max | money }}
+                         {%- elsif on_sale -%}<del>{{ current_variant.compare_at_price  | money }}</del> <ins>{{ current_variant.price | money }}</ins>
+                         {%- else -%}
+                         {{ current_variant.price | money }}
+                         {%- endif -%}
+                      </span>
+                  </li>
+                  {%- endif -%}
+                  {%- endfor -%}
+               </ul>
+               {%- endif -%}
+            </div>
+         {%- when 'tags' -%}
+            {%- if blog.all_tags.size > 0 -%}
+            <div id="shopify_product_tag_cloud-{{block.id}}" class="sidebar-widget shopify widget_tag_cloud">
+               {%- if block.settings.title != blank -%}<h5 class="widget-title">{{block.settings.title}}</h5>{%- endif -%}
+               <div class="tagcloud">
+                {%- for tag in blog.all_tags -%}
+                  {%- if current_tags contains tag -%}
+                     <a class="chosen" href="/blogs/blog" style="pointer-events: auto">{{ tag }}{%- if block.settingscount %} ({{ tag.total_count }}){%- endif -%}</a>
+                  {%- else -%}
+                     <a href="/blogs/blog/tagged/{{ tag | handleize }}" title="Show articles tagged {{ tag }}">{{ tag }}{%- if block.settingscount %} ({{ tag.total_count }}){%- endif -%}</a>
+                  {%- endif -%}
+                  {%- endfor -%}
+               </div>
+            </div>
+            {%- endif -%}
+         {%- when 'html' -%}
+            <div id="shopify-{{block.id}}" class="sidebar-widget shopify widget_products">
+               {%- if block.settings.title != blank -%}<h5 class="widget-title">{{block.settings.title}}</h5>{%- endif -%}
+               {%- if block.settings.code != blank -%}{{block.settings.code}}{%- endif -%}
+            </div>
+         {%- when 'text' -%}
+            <div id="shopify-{{block.id}}" class="sidebar-widget shopify widget_products">
+               {%- if block.settings.title != blank -%}<h5 class="widget-title">{{block.settings.title}}</h5>{%- endif -%}
+               {%- if block.settings.text != blank -%}{{block.settings.text}}{%- endif -%}
+            </div>
+       {%- endcase -%}
+   {%- endfor -%}
+{%- else -%}
+<div class="text-center">{%- include 'no-blocks'-%}</div>   
+{%- endif -%}
+{%- schema -%}
+  {
+    "name": "Posts Sidebar",
+    "class": "widget-area",
+    "blocks": [
+      {
+        "type": "search",
+        "name": "Search",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Search"
+          }
+        ]
+      },
+      {
+        "type": "categories",
+        "name": "Categories",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Categories"
+          },
+          {
+            "type": "link_list",
+            "id": "menu",
+            "label": "Blogs Categories menu",
+            "default": "main-menu"
+          }
+        ]
+      },
+      {
+        "type": "instagram",
+        "name": "Instagram feed",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Instagram"
+          },
+          {
+           "type": "text",
+           "id": "username",
+           "label": "Username Instagram",
+           "default": "mikutas"
+         },
+         {
+           "type": "text",
+           "id": "view_profile",
+           "label": "View profile",
+           "default": "View profile"
+         }
+        ]
+      },
+      {
+        "type": "recent",
+        "name": "Recent Post",
+        "limit": 1,
+        "settings": [
+         {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Recent Post"
+         },
+         {
+           "type": "text",
+           "id": "featured_posts_limit_all",
+           "label": "Number of posts to show",
+           "default": "5"
+         }
+        ]
+      },
+      {
+        "type": "collection",
+        "name": "Featured Products Sidebar",
+        "settings": [
+         {
+          "type":"text",
+          "id":"title",
+          "label":"Title",
+          "default":"Sale Products"
+          },
+          {
+           "type": "collection",
+           "id": "featured_product_list_collection",
+           "label": "Collection to use"
+         },
+          {
+           "type": "text",
+           "id": "featured_product_limit_all",
+           "label": "Number of products to show",
+           "default": "5"
+         }
+        ]
+      },
+      {
+        "type": "tags",
+        "name": "Blog Tags",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Blog Tags"
+          },
+          {
+            "type": "checkbox",
+            "id": "count",
+            "label": "Show counnt tag?",
+            "default": true
+          }
+        ]
+      },
+      {
+        "type": "html",
+        "name": "Custom HTML",
+        "settings": [
+         {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Custom HTML"
+          },
+          {
+            "type": "html",
+            "id": "code",
+            "label": "HTML"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "name": "Text",
+        "settings": [
+            {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Talk about your brand"
+            },
+            {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+            }
+         ]
+      }
+    ]
+  }
+{% endschema %}

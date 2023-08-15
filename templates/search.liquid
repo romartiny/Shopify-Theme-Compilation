@@ -1,0 +1,288 @@
+{%- if canonical_url contains 'collections/all' -%}
+      {%- assign underscore = false -%}
+{%- else -%}
+      {%- assign underscore = true -%}
+{%- endif -%}
+{%- if canonical_url contains 'collections' and underscore -%}
+    {%- if search.terms != blank -%}
+        {%- assign search_list_handle = '' -%}
+        {%- assign collection_gl = canonical_url | split:'/collections/' | last | split:'?q=' | first -%}
+       {%- paginate search.results by search.results_count -%}
+        {%- for item in search.results -%}
+            {%- assign product = item -%}
+            {%- for collection in product.collections -%}
+                {%- if collection.handle == collection_gl -%}
+                  {%- assign collection_title = collection.title -%}
+                  {%- assign search_list_handle = search_list_handle | append:product.handle | append:',' -%}
+                  {%- break -%}
+                {%- endif -%}
+            {%- endfor -%}
+        {%- endfor -%}
+        {%- assign arr_search_list_handle = search_list_handle | split:',' -%}
+        <div class="main-page-wrapper{%- if arr_search_list_handle.size == 0 or search.performed == false %} search-no-results shopify{%- endif -%}">
+          <div class="gl_page_title page-title page-title-default title-size-{{settings.page_title_size}} color-scheme-{{settings.page_title_color}} title-design-{{settings.page_title_design}}">
+            <div class="container">
+                <header class="entry-header">
+                  <h1 class="entry-title">{%- if arr_search_list_handle.size == 0 or search.performed == false -%}{{ 'general.search.title' | t }}{%- else -%}{{ 'general.search.results_with_collection' | t: terms: search.terms, collection: collection_title }}{%- endif -%}</h1>          
+                </header>
+               <!-- .entry-header -->
+            </div>
+          </div>
+          <div class="container">
+             <div class="row">
+                <div class="site-content col-sm-12" role="main">
+                   <div class="basel-products-loader"></div>
+                   <div class="products elements-grid row grid-columns-4">
+                      {%- assign gl_colum_width = 'col-xs-6 col-sm-4 col-md-3' -%}
+                      {%- assign general_layout = false -%}
+                      {%- if settings.general_layout == 'wide' or settings.general_layout == 'contetn_full' -%}
+                         {%- assign general_layout = true -%}
+                      {%- endif -%}
+                      {%- if general_layout -%}{%- assign image_size = '370x' -%}{%- else-%}{%- assign image_size = '263x' -%}{%-endif-%}
+                      {%- case settings.products_hover -%}
+                          {%- when 'base' -%}
+                            {%- assign gl_include = 'section_loop_product_base' -%} 
+                          {%- when 'alt' -%}
+                            {%- assign gl_include = 'section_loop_product_alt' -%}
+                          {%- when 'button' -%}
+                            {%- assign gl_include = 'section_loop_product_button' -%}
+                         {%- when 'info' -%}
+                            {%- assign gl_include = 'section_loop_product_info' -%}
+                         {%- when 'link' -%}
+                            {%- assign gl_include = 'section_loop_product_link' -%}
+                         {%- when 'standard' -%}
+                            {%- assign gl_include = 'section_loop_product_standard' -%}
+                         {%- when 'excerpt' -%}
+                            {%- assign gl_include = 'section_loop_product_excerpt' -%}
+                         {%- when 'quick' -%}
+                            {%- assign gl_include = 'section_loop_product_quick' -%}
+                      {%- endcase -%}
+                      {%- case settings.blog_design -%}
+                          {%- when '1' -%}
+                            {%- assign gl_include_blog = 'section_loop_blog_default' -%} 
+                          {%- when '2' -%}
+                            {%- assign gl_include_blog = 'section_loop_blog_default_alt' -%}
+                          {%- when '3' -%}
+                            {%- assign gl_include_blog = 'section_loop_blog_small_images' -%}
+                         {%- when '4' -%}
+                            {%- assign gl_include_blog = 'section_loop_blog_masonry' -%}
+                         {%- when '5' -%}
+                            {%- assign gl_include_blog = 'section_loop_blog_mask' -%}
+                      {%- endcase -%}
+                      {%- for item in search.results -%}
+                            {%- assign product = item -%}
+                            {%- for collection in product.collections -%}
+                                {%- if collection.handle == collection_gl -%}
+                                  {%- assign search_list_handle = search_list_handle | append:product.handle | append:',' -%}
+                                  {%- assign collection_title = collection.title -%}
+                                  {%- include gl_include -%}
+                                  {%- cycle '', '<div class="clearfix visible-xs-block"></div>' -%}
+                                  {%- cycle '','','<div class="clearfix clearfix visible-sm-block"></div>' -%}
+                                  {%- cycle '','','','<div class="clearfix visible-md-block visible-lg-block"></div>' -%}
+                                  {%- break -%}
+                                {%- endif -%}
+                            {%- endfor -%}
+                       {%- endfor -%}
+                      </div>
+                  {%- if paginate.pages > 1 and arr_search_list_handle.size > 0 -%}
+                  <div class="products-footer">
+                    <nav class="shopify-pagination">
+                      {%- if paginate.previous.is_link -%}
+                      <li><a class="prev page-numbers" href="{{ paginate.previous.url }}">←</a></li>
+                      {%- endif -%}
+                      {%- if paginate.next.is_link -%}
+                      <li><a class="next page-numbers" href="{{ paginate.next.url }}">→</a></li>
+                      {%- endif -%}
+                    </nav>
+                  </div>
+                  {%- elsif paginate.pages > 1 and arr_search_list_handle.size == 0 -%}
+                  <script type="text/javascript">
+                    jQuery( document ).ready(function( $ ) {
+                      window.location.href = '{{ paginate.next.url }}';
+                    });
+                  </script>
+                  {%- endif -%}
+                   {%- if arr_search_list_handle.size == 0 or search.performed == false -%}
+                      {%- if paginate.next.is_link == false or paginate.previous.is_link == false -%}
+                      <p class="shopify-info">{{ 'general.search.no_products_page' | t }}</p>
+                      <div class="no-products-footer">
+                         <div class="search-extended gl_search-extended">
+                            <form role="search" method="get" id="searchform" class="searchform{%- if settings.ajax_search %} basel-ajax-search{%- endif -%}" action="/search">
+                               <div>
+                                  <label class="screen-reader-text" for="q"></label>
+                                  <input type="text" placeholder="{{ 'general.search.placeholder' | t }}" value="{{ search.terms | escape }}" name="q" id="q" autocomplete="off">
+                                  {%- if settings.only_search_products -%}<input type="hidden" name="type" value="product" />{%- endif -%}
+                                  <button type="submit" id="searchsubmit">{{ 'general.search.submit' | t }}</button>
+                               </div>
+                            </form>
+                            <div class="search-results-wrapper">
+                               <div class="basel-search-results">
+                                  <div class="autocomplete-suggestions" style="position: absolute; display: none; max-height: 300px; z-index: 9999;"></div>
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                      {%- endif -%}
+                   {%- endif -%}
+                </div>
+             </div>
+          </div>
+      </div>
+      {%- endpaginate -%}
+  {%- endif -%}
+{%- else -%}
+  {%- paginate search.results by 12 -%}
+    <div class="main-page-wrapper{%- if search.results_count == 0 or search.performed == false %} search-no-results shopify{%- endif -%}">
+        <div class="gl_page_title page-title page-title-default title-size-{{settings.page_title_size}} color-scheme-{{settings.page_title_color}} title-design-{{settings.page_title_design}}">
+          <div class="container">
+              <header class="entry-header">
+                <h1 class="entry-title">{%- if search.results_count == 0 or search.performed == false -%}{{ 'general.search.title' | t }}{%- else -%}{{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}{%- endif -%}</h1>          
+              </header>
+             <!-- .entry-header -->
+          </div>
+        </div>
+        <div class="container">
+           <div class="row">
+              <div class="site-content col-sm-12" role="main">
+                 <div class="basel-products-loader"></div>
+                 <div class="products elements-grid row grid-columns-4">
+                    {%- assign gl_colum_width = 'col-xs-6 col-sm-4 col-md-3' -%}
+                    {%- assign general_layout = false -%}
+                    {%- if settings.general_layout == 'wide' or settings.general_layout == 'contetn_full' -%}
+                       {%- assign general_layout = true -%}
+                    {%- endif -%}
+                    {%- if general_layout -%}{%- assign image_size = '370x' -%}{%- else-%}{%- assign image_size = '263x' -%}{%-endif-%}
+                    {%- case settings.products_hover -%}
+                        {%- when 'base' -%}
+                          {%- assign gl_include = 'section_loop_product_base' -%} 
+                        {%- when 'alt' -%}
+                          {%- assign gl_include = 'section_loop_product_alt' -%}
+                        {%- when 'button' -%}
+                          {%- assign gl_include = 'section_loop_product_button' -%}
+                       {%- when 'info' -%}
+                          {%- assign gl_include = 'section_loop_product_info' -%}
+                       {%- when 'link' -%}
+                          {%- assign gl_include = 'section_loop_product_link' -%}
+                       {%- when 'standard' -%}
+                          {%- assign gl_include = 'section_loop_product_standard' -%}
+                       {%- when 'excerpt' -%}
+                          {%- assign gl_include = 'section_loop_product_excerpt' -%}
+                       {%- when 'quick' -%}
+                          {%- assign gl_include = 'section_loop_product_quick' -%}
+                    {%- endcase -%}
+                    {%- case settings.blog_design -%}
+                        {%- when '1' -%}
+                          {%- assign gl_include_blog = 'section_loop_blog_default' -%} 
+                        {%- when '2' -%}
+                          {%- assign gl_include_blog = 'section_loop_blog_default_alt' -%}
+                        {%- when '3' -%}
+                          {%- assign gl_include_blog = 'section_loop_blog_small_images' -%}
+                       {%- when '4' -%}
+                          {%- assign gl_include_blog = 'section_loop_blog_masonry' -%}
+                       {%- when '5' -%}
+                          {%- assign gl_include_blog = 'section_loop_blog_mask' -%}
+                    {%- endcase -%}
+                    {%- for item in search.results -%}
+                       {%- if item.object_type == 'product' -%}
+                          {%- assign product = item -%}
+                          {%- assign collection = product.collections.first -%}
+                          {%- include gl_include -%}
+                          {%- cycle '', '<div class="clearfix visible-xs-block"></div>' -%}
+                          {%- cycle '','','<div class="clearfix clearfix visible-sm-block"></div>' -%}
+                          {%- cycle '','','','<div class="clearfix visible-md-block visible-lg-block"></div>' -%}
+                       {%- elsif item.object_type == 'article' -%}
+                          <div class="clear"></div>
+                          {%- assign article = item -%}
+                          <article id="post-{{article.id}}" class="col-xs-12 blog-design-default-alt blog-post-loop post-{{article.id}} page type-page status-publish hentry">
+                             <h3 class="entry-title"><a href="{{ article.url }}" rel="bookmark" >{{ article.title | highlight: search.terms }}</a></h3>
+                          {%- if article.image -%}
+                             <header class="entry-header">
+                                <figure class="entry-thumbnail">
+                                   <div class="post-date">
+                                   <span class="post-date-day">{{ article.published_at | date: "%d" }}</span><span class="post-date-month">{{ article.published_at | date: "%b" }}</span>
+                                   </div>
+                                   <div class="post-img-wrapp">
+                                      <a href="{{ article.url }}">
+                                      <img src="{%-include 'gl_image_format',src: article.image.src, size: '2048x' -%}" width="{{ image_size | split: 'x'| first }}" height="{{ image_size | split: 'x'| last }}" title="{%- if article.image.alt != blank -%}{{ article.image.alt }}{%- else -%}{{ article.title }}{%- endif -%}" alt="{%- if article.image.alt != blank -%}{{ article.image.alt }}{%- else -%}{{ article.title }}{%- endif -%}" class="attachment-large attachment-medium">
+                                      </a>
+                                   </div>
+                                </figure>
+                             </header><!-- .entry-header -->
+                          {%- endif -%}
+                             <!-- .entry-header -->
+                             <div class="entry-summary">
+                                <p>
+                                   {%- if article.excerpt.size > 0 -%}
+                                      {{ article.excerpt | highlight: search.terms }}
+                                   {%- else -%}
+                                     {{ article.content | strip_html | truncatewords: 56 | highlight: search.terms }}
+                                   {%- endif -%}
+                                </p>
+                             </div>
+                             <!-- .entry-summary -->
+                             <div class="liner-continer">
+                                {%- capture permalinkURL -%}{{ shop.url }}{{ article.url }}{%- endcapture -%}
+                                {%- capture shareTitle -%}{{ article.title | url_param_escape }}{%- endcapture -%}
+                                <span class="left-line"></span>
+                                {% include 'social-sharing', gl_design: 'icons-design-circle', gl_size: 'icons-size-small' %}
+                                <span class="right-line"></span>
+                             </div>
+                          </article>
+                          <div class="clear"></div>
+                       {%- else -%}
+                          {%- assign page = item -%}
+                          <div class="clear"></div>
+                          <article id="post-{{page.id}}" class="col-xs-12 blog-design-default-alt blog-post-loop post-{{page.id}} page type-page status-publish hentry">
+                             <h3 class="entry-title">
+                                <a href="{{page.url}}" rel="bookmark">{{page.title | highlight: search.terms}}</a>
+                             </h3>
+                             <!-- .entry-header -->
+                             <div class="entry-summary"><p>{{ page.content | strip_html | truncatewords: 56 | highlight: search.terms }}</p></div>
+                             <!-- .entry-summary -->
+                             <div class="liner-continer">
+                                {%- capture permalinkURL -%}{{ shop.url }}{{ page.url }}{%- endcapture -%}
+                                {%- capture shareTitle -%}{{ page.title | url_param_escape }}{%- endcapture -%}
+                                <span class="left-line"></span>
+                                {% include 'social-sharing', gl_design: 'icons-design-circle', gl_size: 'icons-size-small' %}
+                                <span class="right-line"></span>
+                             </div>
+                          </article>
+                          <div class="clear"></div>
+                       {%- endif -%}
+                    {%- endfor -%}
+                    </div>
+                    {%- if paginate.pages > 1 -%}
+                    <div class="products-footer">
+                       <nav class="shopify-pagination">
+                        {%- include 'pagination' -%}
+                       </nav>
+                    </div>
+                    {%- endif -%}
+                 {%- if search.results_count == 0 or search.performed == false -%}
+                    <p class="shopify-info">{{ 'general.search.no_products_page' | t }}</p>
+                    <div class="no-products-footer">
+                       <div class="search-extended gl_search-extended">
+                          <form role="search" method="get" id="searchform" class="searchform{%- if settings.ajax_search %} basel-ajax-search{%- endif -%}" action="/search">
+                             <div>
+                                <label class="screen-reader-text" for="q"></label>
+                                <input type="text" placeholder="{{ 'general.search.placeholder' | t }}" value="{{ search.terms | escape }}" name="q" id="q" autocomplete="off">
+                                {%- if settings.only_search_products -%}<input type="hidden" name="type" value="product" />{%- endif -%}
+                                <button type="submit" id="searchsubmit">{{ 'general.search.submit' | t }}</button>
+                             </div>
+                          </form>
+                          <div class="search-results-wrapper">
+                             <div class="basel-search-results">
+                                <div class="autocomplete-suggestions" style="position: absolute; display: none; max-height: 300px; z-index: 9999;"></div>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                 {%- endif -%}
+              </div>
+           </div>
+        </div>
+    </div>
+  {%- endpaginate -%}
+{%- endif -%}
+
+

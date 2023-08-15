@@ -1,0 +1,581 @@
+{%- if section.settings.hidden_section -%}{%- capture check_admin -%}{{ content_for_header  }}{%- endcapture -%}<style> #shopify-section-{{ section.id }} { {%- if check_admin contains 'design_mode' -%}opacity: .5;filter: alpha(opacity=50){%- else -%}display: none !important{%- endif -%}}</style>{%- endif -%}
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{%- capture data_section -%}
+  {%- if section.settings.row_stretch == 'stretch_row' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true'
+  {%- elsif section.settings.row_stretch == 'stretch_row_content' or section.settings.row_stretch == 'stretch_row_content_no_spaces' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true' data-gl-stretch-content='true'
+  {%- else -%}
+  {%- assign class_has_fill = '' -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- unless image_size != blank -%}
+  {%- assign image_size = '2048x' -%}
+{%- endunless -%}
+     {{style_block_section}}
+<div {{ data_section }}{%- if section.settings.use_video and section.settings.video_url != blank %} data-gl-video-bg="{{ section.settings.video_url }}"{%- endif %} class="gl_custom_{{section.id}} {% if section.settings.use_parallax -%}basel-parallax{%- endif %} gl_row spb_row gl_row-fluid {{class_has_fill}} gl_row-flex{%- if section.settings.use_video and section.settings.video_url != blank %} opacity-video-bg gl_video-bg-container gl_has_youtube{%- endif %}{%- if section.settings.full_height %} gl_row-o-full-height gl_row-o-columns-{{section.settings.columns_position}}{%- endif -%}">
+   <div class="spb_column gl_column_container gl_col-sm-12">
+      <div class="gl_column-inner ">
+         <div class="spb_wrapper">
+            <div class="gl_row spb_row gl_inner gl_row-fluid text-center gl_custom_infor_one gl_row-has-fill">
+               {%- for block in section.blocks -%}
+               {%- case block.type -%}
+                  {%- when 'image' -%}
+                  <div class="spb_column gl_column_container gl_col-sm-6">
+                     <div class="gl_column-inner gl_mt_40 gl_mb_40 gl_pt_0">
+                        <div class="spb_wrapper">
+                           <div class="spb_single_image spb_content_element gl_align_center gl_mt_m15 gl_mb_0">
+                              <figure class="spb_wrapper gl_figure">
+                                 <div class="gl_single_image-wrapper gl_box_border_grey">
+                                 {%- if block.settings.image != blank and block.settings.disabled_logo == false -%}
+                                    {%- assign image = block.settings.image -%}
+                                    <img width="{{ image.width }}" height="{{ image.height }}" src="{%-include 'gl_image_format',src: image , size: image_size -%}" class="gl_single_image-img attachment-full" alt="{{ image.alt }}" 
+                                    srcset="{%-include 'gl_image_format',src: image , size: image_size %} 330w, 
+                                    {%-include 'gl_image_format',src: image , size: '300x73' %} 300w, 
+                                    {%-include 'gl_image_format',src: image , size: '270x65' %} 270w, 
+                                    {%-include 'gl_image_format',src: image , size: '280x68' %} 280w, 
+                                    {%-include 'gl_image_format',src: image , size: '263x64' %} 263w" sizes="(max-width: {{ image.width }}px) 100vw, {{ image.width }}px">
+                                 {%- elsif block.settings.disabled_logo == false  -%}
+                                    <img src="//cdn.shopify.com/s/files/1/1933/6253/files/logo_237af5d7-e893-453b-8a62-6970fb38c976.png" alt="basel shopify">
+                                 {%- endif -%}
+                                 </div>
+                              </figure>
+                           </div>
+                           {%- if block.settings.title != blank -%}
+                           <div class="spb_text_column spb_content_element gl_mb_10">
+                              <div class="spb_wrapper">
+                                 <p style="color: #676767; font-size: 14px; letter-spacing: 1.5px;">{{ block.settings.title }}</p>
+                              </div>
+                           </div>
+                           {%- endif -%}
+                           {%- if block.settings.richtext != blank -%}
+                           <div class="spb_text_column spb_content_element gl_mb_25">
+                              <div class="spb_wrapper gl_color_dark" style="margin: 0 auto 20px; width: 90%; min-width: 100px">
+                                 {{ block.settings.richtext }}
+                              </div>
+                           </div>
+                           {%- endif -%}
+                           {%- if block.settings.button_label != blank and block.settings.button_link != blank -%}
+                           <div class="basel-button-wrapper text-center }}">
+                              <a href="{{ block.settings.button_link }}" class="btn btn-color-{{ block.settings.button_color }} btn-style-{{ block.settings.button_style }} btn-size-{{ block.settings.button_size }}">{{ block.settings.button_label }}</a>
+                           </div>
+                           {%- endif -%}
+                        </div>
+                     </div>
+                  </div>
+                  {%- when 'text' -%}
+                  <div class="spb_column gl_column_container gl_col-sm-6 gl_hidden-xs gl_col-has-fill">
+                     <div class="gl_column-inner gl_custom_infor_text_one">
+                        <div class="spb_wrapper">
+                           {%- if block.settings.title != blank -%}
+                           <div class="spb_text_column spb_content_element gl_mb_0">
+                              <div class="spb_wrapper">
+                                 <h3 class="font-alt" style="margin: 0;">{{ block.settings.title }}</h3>
+                              </div>
+                           </div>
+                           {%- endif -%}
+                           {%- if block.settings.icon != blank -%}
+                           <div class="gl_icon_element gl_icon_element-outer gl_mb_0 gl_icon_element-align-center">
+                              <div class="gl_icon_element-inner gl_icon_element-color-black gl_icon_element-size-md gl_icon_element-style- gl_icon_element-background-color-grey">
+                                 <span class="gl_icon_element-icon fa fa-{{block.settings.icon}}"></span>
+                              </div>
+                           </div>
+                           {%- endif -%}
+                           {%- if block.settings.richtext != blank -%}
+                           <div class="spb_text_column spb_content_element gl_mb_25">
+                              <div class="spb_wrapper gl_color_dark" style="margin: 0 auto 20px; width: 90%; min-width: 100px;">
+                                 {{ block.settings.richtext }}
+                              </div>
+                           </div>
+                           {%- endif -%}
+                           {%- if block.settings.button_label != blank and block.settings.button_link != blank -%}
+                           <div class="basel-button-wrapper text-center">
+                              <a href="{{ block.settings.button_link }}" class="btn btn-color-{{ block.settings.button_color }} btn-style-{{ block.settings.button_style }} btn-size-{{ block.settings.button_size }}">{{ block.settings.button_label }}</a>
+                           </div>
+                           {%- endif -%}
+                        </div>
+                     </div>
+                  </div>
+               {%- endcase -%}
+               {%- endfor -%}
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{%- unless section.settings.row_stretch == 'default' -%}
+  <div class="gl_row-full-width gl_clearfix"></div>
+  {%- endunless -%}
+{%- schema -%}
+  {
+    "name": "information 1",
+    "class": "index-section has_section_gl_js",
+    "settings": [
+      {
+      "type": "header",
+      "content": "== General"
+      },
+      {
+        "type": "select",
+        "id": "row_stretch",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "stretch_row",
+            "label": "Stretch row"
+          },
+          {
+            "value": "stretch_row_content",
+            "label": "Stretch row and content"
+          },
+          {
+            "value": "stretch_row_content_no_spaces",
+            "label": "Stretch row and content (no paddings)"
+          }
+        ],
+        "label": "___ Row stretch",
+        "info": "Select stretching options for row and content (Note: stretched may not work properly if parent container has 'overflow: hidden' CSS property).",
+        "default": "default"
+      },
+      {
+        "type": "checkbox",
+        "id": "full_height",
+        "label": "Full height row?",
+        "info": "if checked row will be set to full height.",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "columns_position",
+        "options": [
+         {
+            "value": "middle",
+            "label": "Middle"
+          },
+         {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "stretch",
+            "label": "Stretch"
+          }
+        ],
+        "label": "___ Columns position (only for full height)",
+        "info": "Select columns position within row.",
+        "default": "middle"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_video",
+        "label": "Use video background?",
+        "info": "If checked, video will be used as row background.",
+        "default": false
+      },
+      {
+        "id": "video_url",
+        "type": "video_url",
+        "label": "YouTube link",
+        "accept": ["youtube"],
+        "default": "https://www.youtube.com/watch?v=flTcrOns02I"
+      },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "image_picker",
+        "id": "section_bg_image",
+        "label": "Background Image"
+      },
+      {
+        "type": "color",
+        "id": "section_bg_color",
+        "label": "Background color"
+      },
+      {
+        "type": "color",
+        "id": "section_border_color",
+        "label": "Border color"
+      },
+      {
+        "type": "select",
+        "id": "section_border_style",
+        "options": [
+         {
+            "value": "solid",
+            "label": "Solid"
+          },
+         {
+            "value": "dotted",
+            "label": "Dotted"
+          },
+          {
+            "value": "dashed",
+            "label": "Dashed"
+          },
+          {
+            "value": "double",
+            "label": "Double"
+          },
+          {
+            "value": "groove",
+            "label": "Groove"
+          },
+          {
+            "value": "Ridge",
+            "label": "Ridge"
+          },
+          {
+            "value": "inset",
+            "label": "Inset"
+          },
+          {
+            "value": "outset",
+            "label": "Outset"
+          }
+        ],
+        "label": "Border style",
+        "default": "solid"
+      },
+      {
+        "type": "text",
+        "id": "section_border",
+        "label": "Borders Integer px ( top-right-bottom-left )",
+        "info": "0-0-1px-0"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      },
+      {
+        "type": "header",
+        "content": "== Basel Extras"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden_section",
+        "label": "Hidden Section?",
+        "info": "if checked section will be set to hidden.",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "use_parallax",
+        "label": "Use Basel parallax?",
+        "default": false
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+        "limit": 1,
+        "settings": [
+            {
+              "type": "checkbox",
+              "id": "disabled_logo",
+              "label": "Disabled logo img?",
+              "info": "If checked, logo will be as disabled.",
+              "default": false
+            },
+            {
+             "type": "image_picker",
+             "id": "image",
+             "label": "Image"
+            },
+            {
+              "id": "title",
+              "type": "text",
+              "label": "Overlay heading",
+              "default": "MINIMALISTIC AJAX E-COMMERCE THEME"
+            },
+            {
+              "id": "richtext",
+              "type": "richtext",
+              "label": "Text intro shop",
+              "default": "<p>Adipiscing dignissim euismod ad venenatis volutpat sociis feugiat purus ridiculus rhoncus nullam sodales euismod ad venenatis volutpa ridiculus.</p>"
+            },
+            {
+              "type": "header",
+              "content": "== Button Settings"
+            },
+            {
+              "type": "text",
+              "id": "button_label",
+              "label": "___ Button label"
+            },
+            {
+              "type": "url",
+              "id": "button_link",
+              "label": "___ Button link"
+            },
+            {
+              "type": "select",
+              "id": "button_color",
+              "label": "___ Button color",
+              "default": "white",
+              "options": [
+                {
+                  "label": "Default",
+                  "value": "default"
+                },
+                {
+                  "label": "Primary color",
+                  "value": "primary"
+                },
+                {
+                  "label": "Alternative color",
+                  "value": "alt"
+                },
+                {
+                  "label": "Black",
+                  "value": "black"
+                },
+                {
+                  "label": "White",
+                  "value": "white"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "id": "button_style",
+              "label": "___ Button style",
+              "default": "bordered",
+              "options": [
+                {
+                  "label": "Default",
+                  "value": "default"
+                },
+                {
+                  "label": "Bordered",
+                  "value": "bordered"
+                },
+                {
+                  "label": "Link button",
+                  "value": "link"
+                },
+                {
+                  "label": "Rounded",
+                  "value": "round"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "id": "button_size",
+              "label": "___ Button size",
+              "default": "default",
+              "options": [
+                {
+                  "label": "Default",
+                  "value": "default"
+                },
+                {
+                  "label": "Extra Small",
+                  "value": "extra-small"
+                },
+                {
+                  "label": "Small",
+                  "value": "small"
+                },
+                {
+                  "label": "Large",
+                  "value": "large"
+                },
+                {
+                  "label": "extra-large",
+                  "value": "Extra Large"
+                }
+              ]
+            }
+        ]
+      },
+      {
+        "type": "text",
+        "name": "Text",
+        "limit": 1,
+        "settings": [
+            {
+              "id": "title",
+              "type": "text",
+              "label": "Overlay heading",
+              "default": "About the shop"
+            },
+            {
+              "type": "text",
+              "id": "icon",
+              "label": "___ Enter your icon name",
+              "default": "heart-o",
+              "info": "ex:heart-o [Select icon from library](http:\/\/www.fontawesome.io\/icons\/)"
+            },
+            {
+              "id": "richtext",
+              "type": "richtext",
+              "label": "Text intro shop",
+              "default": "<p>Basel &amp; Company – is a famous worldwide fashion store dipiscing dignissim euismod ad venenatis volutpat sociis feugiat purus ridiculus.</p>"
+            },
+            {
+              "type": "header",
+              "content": "== Button Settings"
+            },
+            {
+              "type": "text",
+              "id": "button_label",
+              "label": "___ Button label"
+            },
+            {
+              "type": "url",
+              "id": "button_link",
+              "label": "___ Button link"
+            },
+            {
+              "type": "select",
+              "id": "button_color",
+              "label": "___ Button color",
+              "default": "white",
+              "options": [
+                {
+                  "label": "Default",
+                  "value": "default"
+                },
+                {
+                  "label": "Primary color",
+                  "value": "primary"
+                },
+                {
+                  "label": "Alternative color",
+                  "value": "alt"
+                },
+                {
+                  "label": "Black",
+                  "value": "black"
+                },
+                {
+                  "label": "White",
+                  "value": "white"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "id": "button_style",
+              "label": "___ Button style",
+              "default": "bordered",
+              "options": [
+                {
+                  "label": "Default",
+                  "value": "default"
+                },
+                {
+                  "label": "Bordered",
+                  "value": "bordered"
+                },
+                {
+                  "label": "Link button",
+                  "value": "link"
+                },
+                {
+                  "label": "Rounded",
+                  "value": "round"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "id": "button_size",
+              "label": "___ Button size",
+              "default": "default",
+              "options": [
+                {
+                  "label": "Default",
+                  "value": "default"
+                },
+                {
+                  "label": "Extra Small",
+                  "value": "extra-small"
+                },
+                {
+                  "label": "Small",
+                  "value": "small"
+                },
+                {
+                  "label": "Large",
+                  "value": "large"
+                },
+                {
+                  "label": "extra-large",
+                  "value": "Extra Large"
+                }
+              ]
+            }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "information style 1",
+        "category": "Store information",
+        "blocks": [
+          {
+            "type": "image"
+          },
+          {
+            "type": "text"
+          }
+         ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,59 @@
+{%- include 'check_not_feature_img' -%}
+<table id="nt_variations" class="variations{%- if settings.swatch_design == '2' %} variant_square{%- elsif settings.swatch_design == '3' %} variant_simple{%- endif -%}" cellspacing="0">
+   {%- assign option_index = 0 -%}
+   {%- if settings.color_name_check != blank -%}{%- assign _gl_color_name = settings.color_name_check | replace: ' ,', ',' | replace: ', ', ',' | split: ',' -%}{%- assign gl_color_name = _gl_color_name | downcase -%}{%-else-%}{%- assign gl_color_name = '\nathan_dt\' -%}{%-endif-%}
+   <tbody>
+   {%- for option in product.options_with_values -%}
+      {%- assign option_index = forloop.index0 -%}
+      {%- assign downcased_option = option.name | downcase -%}
+      {%- assign downcased_option_check = option.name | downcase | prepend: '"' | append: '"' | strip -%} 
+      {%- if downcased_option == 'color' or downcased_option == 'colour' or gl_color_name contains downcased_option_check -%}
+            <tr data-option-index="{{ option_index }}" id="gl_select_{{ option_index }}">
+               <td class="label"><label for="{{ option_index }}">{{ option.name }}</label></td>
+               <td class="value with-swatches">
+                 <div class="input-dropdown-inner" data-option-index="{{ option_index }}">
+                     {%-assign index = 0 %}
+                     {%- for value in option.values -%}
+                        {%- if forloop.first == true and product.selected_variant == blank %}
+                     <a href="#" data-val="{{ value | handleize }}">{{ value }}</a>
+                     {%- break -%}
+                     {%- elsif option.selected_value == value and product.selected_variant != blank %}
+                     <a href="#" data-val="{{ value | handleize }}">{{ value }}</a>
+                     {%- break -%}
+                     {%- endif %}
+                     {%- endfor -%}
+                     <ul class="dropdown-list swatches-select" data-id="{{ option_index }}" style="display: none;">
+                     {%- for value in option.values -%}
+                            <li class="basel-swatch bg_color bg_{{ value | handleize  }}{%- if forloop.first == true and product.selected_variant == blank %} current-item active-swatch{%- elsif option.selected_value == value and product.selected_variant != blank %} current-item active-swatch{%- endif -%}" data-value='{{ value | handleize}}' data-handle='bg_{{ value | handleize}}' data-image-id="{{ featured_image_id[index] }}"><a href="javascript:void(0);" data-val='{{ value | handleize  }}'>{{ value }}</a></li>
+                           {%-assign index = index | plus: 1 %}
+                        {%- endfor -%}
+                     </ul>
+                  </div>
+               </td>
+            </tr>
+      {%- else- %}
+         <tr data-option-index="{{ option_index }}" id="gl_select_{{ option_index }}">
+            <td class="label"><label for="{{ option_index }}">{{ option.name }}</label></td>
+            <td class="value with-swatches">
+               <div class="input-dropdown-inner" data-id="{{ option_index }}">
+                  {%- for value in option.values -%}
+                     {%- if forloop.first == true and product.selected_variant == blank %}
+                     <a href="#" data-val="{{ value | handleize }}">{{ value }}</a>
+                     {%- break -%}
+                     {%- elsif option.selected_value == value and product.selected_variant != blank %}
+                     <a href="#" data-val="{{ value | handleize }}">{{ value }}</a>
+                     {%- break -%}
+                     {%- endif %}
+                  {%- endfor -%}
+                  <ul class="dropdown-list swatches-select" data-id="{{ option_index }}" style="display: none;">
+                    {%- for value in option.values -%}
+                         <li class="basel-swatch bg_{{ value | handleize }}{%- if forloop.first == true and product.selected_variant == blank %} current-item active-swatch{%- elsif option.selected_value == value and product.selected_variant != blank %} current-item active-swatch{%- endif -%}" data-value='{{ value | handleize}}' data-handle='bg_{{ value | handleize}}'><a href="javascript:void(0);" data-val='{{ value | handleize  }}'>{{ value }}</a></li>
+                    {%- endfor -%}
+                 </ul>
+               </div>
+            </td>
+         </tr>
+      {%- endif -%}
+   {%- endfor -%}
+   </tbody>
+</table>

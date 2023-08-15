@@ -1,0 +1,68 @@
+{%- unless var_last -%}
+{%- assign var_last = false -%}
+{%- endunless -%}
+{%- assign catalog_mode = settings.catalog_mode -%}
+{%- if settings.catalog_mode and settings.time_catalog_mode != blank -%}
+ {%- assign time_hr_start = "now" | date: "%H" | plus:0 -%}
+ {%- assign time_mn_start = "now" | date: "%M" | plus:0 -%}
+{%- assign plus_start = time_hr_start | times: 60 | plus:time_mn_start -%}
+
+ {%- assign user_tme = settings.time_catalog_mode | replace: '_', '-' | replace: ' -', '-' | replace: '- ', '-' | replace: ' - ', '-' | split: '-' -%}
+{%- assign user_text_start = user_tme[0] | replace: ' :', ':' | replace: ': ', ':' | replace: ' : ', ':' | split: ':' -%}
+{%- assign text_start = user_text_start[0] | times: 60 | plus: user_text_start[1] -%}
+{%- assign user_text_end = user_tme[1] | replace: ' :', ':' | replace: ': ', ':' | replace: ' : ', ':' | split: ':' -%}
+{%- assign text_end = user_text_end[0] | times: 60 | plus: user_text_end[1] -%}
+
+{%- comment -%}start_time <= current_time and end_time >= current_time{%- endcomment -%}
+ {%- if plus_start < text_start or plus_start > text_end -%}
+    {%- assign catalog_mode = false -%}
+ {%- else -%}
+    {%- assign catalog_mode = true -%}
+  {%- endif -%}
+{%- endif -%}
+{%- comment -%}check last time 10 minutes 7:00 run to 6:50{%- endcomment -%}
+{%- if var_last and catalog_mode -%}
+   {%- assign usr_script = false -%}
+   {%- assign t_minus_js = 0 -%}
+   {%- if time_hr_start == user_text_start[0] or time_mn_start == user_text_end[0] -%}
+      {%- if user_text_start[1] > 9 or user_text_end[1] > 9 -%}
+		   {%- assign check_mn_start = user_text_start[1] | minus:10 -%}
+		   {%- assign check_mn_end = user_text_end[1] | minus:10 -%}
+		   {%- if check_mn_start <= time_mn_start and time_hr_start == user_text_start[0] -%}
+		      {%- assign usr_script = true -%}
+		      {%- assign minus_js = user_text_end[1] | minus:time_mn_start -%}
+		   {%- else check_mn_end <= time_mn_start and time_hr_start == user_text_end[0] -%}
+		      {%- assign usr_script = true -%}
+		      {%- assign minus_js = user_text_end[1] | minus:time_mn_start -%}
+		   {%- endif -%}
+      {%- endif -%}
+   {%- else -%}
+      {%- comment -%}check 6:50{%- endcomment -%}
+      {%- assign check_text_start = user_text_start[0] | minus:1 -%}
+		{%- assign check_text_end = user_text_end[0] | minus:1 -%}
+		{%- if time_hr_start == check_text_start or time_mn_start == check_text_end -%}
+		    {%- if user_text_start[1] <= 10 and time_hr_start == check_text_start -%}
+		      {%- assign usr_script = true -%}
+		      {%- if user_text_start[1] == 0 -%}
+		         {%- assign t_minus_js = 100 -%}
+		      {%- else -%}
+		         {%- assign minus_js = user_text_start[1] |plus:0 -%}
+		      {%- endif -%}
+		   {%- else user_text_end[1] <= 10 and time_mn_start == check_text_end -%}
+		      {%- assign usr_script = true -%}
+		      {%- if user_text_start[1] == 0 -%}
+		         {%- assign t_minus_js = 100 -%}
+		      {%- else -%}
+		         {%- assign minus_js = user_text_start[1] |plus:0 -%}
+		      {%- endif -%}
+		   {%- endif -%}
+		{%- endif -%}
+   {%- endif -%}
+{%- endif -%}
+{%- if usr_script -%}
+<script>
+jQuery(document).ready(function($) {
+	setTimeout(function(){ window.location.reload(); }, {%- if t_minus_js > 0 -%}100{%- else -%}{{minus_js}}000{%- endif -%});
+});
+</script>
+{%- endif -%}

@@ -1,0 +1,312 @@
+{%- if section.settings.section_margin_left != blank or section.settings.section_margin_right != blank or section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_left = section.settings.section_margin_left | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_right = section.settings.section_margin_right | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_left != blank or section.settings.section_margin_right != blank or section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if s_margin_left != blank -%}margin-left: {{s_margin_left}} !important;{%- endif -%}{%- if s_margin_right != blank -%}margin-right: {{s_margin_right}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{%- capture data_section -%}
+  {%- if section.settings.row_stretch == 'stretch_row' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true'
+  {%- elsif section.settings.row_stretch == 'stretch_row_content' or section.settings.row_stretch == 'stretch_row_content_no_spaces' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true' data-gl-stretch-content='true'
+  {%- else -%}
+  {%- assign class_has_fill = '' -%}
+  {%- endif -%}
+{%- endcapture -%}
+{{style_block_section}}
+<div {{ data_section }}{%- if section.settings.use_video and section.settings.video_url != blank %} data-gl-video-bg="{{ section.settings.video_url }}"{%- endif %} class="gl_custom_{{section.id}} {{class_has_fill}}{%- if section.settings.row_stretch == 'stretch_row_content_no_spaces' %} gl_row-no-padding{%- endif %}{%- if section.settings.use_parallax %} basel-parallax{%- endif %} gl_row spb_row gl_row-fluid {{class_has_fill}} {%- if section.settings.use_video and section.settings.video_url != blank %} opacity-video-bg gl_video-bg-container gl_has_youtube{%- endif %}{%- if section.settings.full_height %} gl_row-o-full-height gl_row-o-columns-{{section.settings.columns_position}}{%- endif %}{%- if section.settings.equal_height %} gl_row-o-equal-height{%- endif -%}">
+   <div class="spb_column gl_column_container gl_col-sm-12">
+      <div class="gl_column-inner ">
+         <div class="spb_wrapper">
+            <div class="basel-row-divider svg-wrap-{{section.id}} dvr-position-{{section.settings.position}} dvr-style-{{section.settings.style}}{%- if section.settings.overlap %} dvr-overlap-enable{%- endif -%}">
+               {%- case section.settings.style -%}
+                  {%- when 'waves-small' -%}
+                     {%- if section.settings.position == 'bottom'  -%}
+                       {%- include 'waves-small-bottom' -%}
+                     {%- else -%}
+                       {%- include 'waves-small-top' -%}
+                     {%- endif -%}
+                  {%- when 'waves-wide' -%}
+                     {%- if section.settings.position == 'bottom'  -%}
+                       {%- include 'waves-wide-bottom' -%}
+                     {%- else -%}
+                       {%- include 'waves-wide-top' -%}
+                     {%- endif -%}
+                  {%- when 'curved-line' -%}
+                     {%- if section.settings.position == 'bottom'  -%}
+                       {%- include 'curved-line-bottom' -%}
+                     {%- else -%}
+                       {%- include 'curved-line-top' -%}
+                     {%- endif -%}
+                  {%- when 'triangle' -%}
+                     {%- if section.settings.position == 'bottom'  -%}
+                       {%- include 'triangle-bottom' -%}
+                     {%- else -%}
+                       {%- include 'triangle-top' -%}
+                     {%- endif -%} 
+                  {%- when 'clouds' -%}
+                     {%- if section.settings.position == 'bottom'  -%}
+                       {%- include 'clouds-bottom' -%}
+                     {%- else -%}
+                       {%- include 'clouds-top' -%}
+                     {%- endif -%}
+                  {%- when 'diagonal-right' -%}
+                      {%- if section.settings.position == 'bottom'  -%}
+                       {%- include 'diagonal-right-bottom' -%}
+                     {%- else -%}
+                       {%- include 'diagonal-right-top' -%}
+                     {%- endif -%}                
+                  {%- when 'diagonal-left' -%}
+                     {%- if section.settings.position == 'bottom'  -%}
+                       {%- include 'diagonal-left-bottom' -%}
+                     {%- else -%}
+                       {%- include 'diagonal-left-top' -%}
+                     {%- endif -%}
+                  {%- when 'half-circle' -%}
+                     {%- if section.settings.position == 'bottom'  -%}
+                       {%- include 'half-circle-bottom' -%}
+                     {%- else -%}
+                       {%- include 'half-circle-top' -%}
+                     {%- endif -%}
+               {%- endcase -%}
+               <style>.svg-wrap-{{section.id}} svg {
+                  fill: {{section.settings.overlap_color}};
+                  }
+               </style>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{%- unless section.settings.row_stretch == 'default' -%}
+<div class="gl_row-full-width gl_clearfix"></div>
+{%- endunless -%}
+{%- schema -%}
+  {
+    "name": "Section divider",
+    "class": "index-section tea_section_divider",
+    "presets": [{
+      "name": "Section divider",
+      "category": "Image"
+    }],
+    "settings": [
+      {
+        "type": "header",
+        "content": "== Row Settings"
+      },
+      {
+        "type": "select",
+        "id": "row_stretch",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "stretch_row",
+            "label": "Stretch row"
+          },
+          {
+            "value": "stretch_row_content",
+            "label": "Stretch row and content"
+          },
+          {
+            "value": "stretch_row_content_no_spaces",
+            "label": "Stretch row and content (no paddings)"
+          }
+        ],
+        "label": "___ Row stretch",
+        "info": "Select stretching options for row and content (Note: stretched may not work properly if parent container has 'overflow: hidden' CSS property).",
+        "default": "default"
+      },
+      {
+        "type": "header",
+        "content": "== Section divider Settings"
+      },
+      {
+        "type": "select",
+        "id": "position",
+        "options": [
+         {
+            "value": "top",
+            "label": "Top"
+          },
+         {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "label": "Position",
+        "default": "bottom"
+      },
+      {
+        "type": "checkbox",
+        "id": "overlap",
+        "label": "Overlap?",
+        "default": true
+      },
+      {
+        "type": "color",
+        "id": "overlap_color",
+        "label": "Select Color",
+        "default": "#fff"
+      },
+      {
+        "type": "select",
+        "id": "style",
+        "options": [
+         {
+            "value": "waves-small",
+            "label": "Waves Small"
+          },
+         {
+            "value": "waves-wide",
+            "label": "Waves Wide"
+          },
+         {
+            "value": "curved-line",
+            "label": "Curved Line"
+          },
+         {
+            "value": "triangle",
+            "label": "Triangle"
+          },
+         {
+            "value": "clouds",
+            "label": "Clouds"
+          },
+         {
+            "value": "diagonal-right",
+            "label": "Diagonal Right"
+          },
+         {
+            "value": "diagonal-left",
+            "label": "Diagonal Left"
+          },
+         {
+            "value": "half-circle",
+            "label": "Half Circle"
+          }
+        ],
+        "label": "Style",
+        "default": "clouds"
+      },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "color",
+        "id": "section_bg_color",
+        "label": "Background color"
+      },
+      {
+        "type": "color",
+        "id": "section_border_color",
+        "label": "Border color"
+      },
+      {
+        "type": "select",
+        "id": "section_border_style",
+        "options": [
+         {
+            "value": "solid",
+            "label": "Solid"
+          },
+         {
+            "value": "dotted",
+            "label": "Dotted"
+          },
+          {
+            "value": "dashed",
+            "label": "Dashed"
+          },
+          {
+            "value": "double",
+            "label": "Double"
+          },
+          {
+            "value": "groove",
+            "label": "Groove"
+          },
+          {
+            "value": "Ridge",
+            "label": "Ridge"
+          },
+          {
+            "value": "inset",
+            "label": "Inset"
+          },
+          {
+            "value": "outset",
+            "label": "Outset"
+          }
+        ],
+        "label": "Border style",
+        "default": "solid"
+      },
+      {
+        "type": "text",
+        "id": "section_border",
+        "label": "Borders Integer px ( top-right-bottom-left )",
+        "info": "0-0-1px-0"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_left",
+        "label": "Margin left",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_right",
+        "label": "Margin right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,141 @@
+{%- if settings.show_share_btn_our_shop and settings.share_type_our_shop == '1' -%}
+   {%- assign gl_follow_social = false -%}
+{%- elsif settings.show_share_btn_our_shop and settings.share_type_our_shop == '2' -%}
+   {%- assign gl_follow_social = true -%}
+{%- endif -%}
+{%- if settings.our_shop_margin_top != blank or settings.our_shop_margin_bottom != blank or settings.our_shop_padding != blank  -%}
+{%- assign s_margin_top = settings.our_shop_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = settings.our_shop_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_padding = settings.our_shop_padding  | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if settings.our_shop_margin_top != blank or settings.our_shop_margin_bottom != blank or settings.our_shop_padding != blank or settings.image_our_shop != blank or settings.our_shop_bg_color != blank -%}
+   style="{%- if settings.our_shop_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if settings.our_shop_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if settings.our_shop_padding != blank -%}padding: {{s_padding}} !important;{%- endif -%}{%- if settings.image_our_shop != blank -%} background-image: url({%-include 'gl_image_format',src: settings.image_our_shop , size: '2048x' -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if settings.our_shop_bg_color != blank -%}background-color: {{ settings.our_shop_bg_color }} !important{%- endif -%}"
+   {%- endif -%}
+{%- endcapture -%}
+<div class="main-page-wrapper">
+	<!-- MAIN CONTENT AREA -->
+	<div class="container">
+		<div class="row">
+			<div class="site-content col-sm-12" role="main">
+				<article id="post-{{page.id}}" class="post-{{page.id}} page type-page status-publish hentry">
+					<div class="entry-content">
+						<div data-gl-full-width="true" data-gl-full-width-init="true" data-gl-stretch-content="{%- if settings.general_layout == 'boxed' %}false{%- else -%}true{%- endif -%}" class="gl_row spb_row gl_row-fluid gl_row-has-fill gl_row-no-padding gl_row-o-full-height gl_row-o-columns-middle gl_row-o-content-middle gl_row-flex" {{style_block_section}}>
+						   <div class="spb_column gl_column_container gl_col-sm-12">
+						      <div class="gl_column-inner ">
+						         <div class="spb_wrapper">
+						         	{%- if settings.title_our_shop != blank -%}
+						            <div class="spb_text_column spb_content_element color-scheme-light">
+						            	{%- assign title_our_shop = settings.title_our_shop -%}
+						               <div class="spb_wrapper">
+						                  <h1 class="font-title" style="text-align: center; margin-bottom: 0px; font-size: 56px; text-transform: capitalize; line-height: 1.1;">{{ title_our_shop | split:'[' | first }}
+												{%- if title_our_shop contains '[' -%}{%- if title_our_shop contains '-' -%}{%- assign _title_our_shop_br = settings.title_our_shop | split:'[' | last -%}<br>{{ _title_our_shop_br | split:'-' | first }}{%- endif -%}<span style="border-bottom: 2px solid white">{%- assign _title_our_shop =  settings.title_our_shop | split:'[' | last -%}{%- assign last_title = _title_our_shop | split:']' | first -%}{%- if title_our_shop contains '-' -%}{{last_title| split:'-' | last}}{%-else-%}{{last_title}}{%- endif -%}</span>{%- endif -%}
+						                  </h1>
+						               </div>
+						            </div>
+						            {%- endif -%}
+						            <div class="gl_row spb_row gl_inner gl_row-fluid">
+                                 {%- if settings.info_shop_1 != blank and settings.info_shop_2 == blank and settings.info_shop_3 == blank and settings.info_shop_4 == blank -%}
+                                 <div class="text-center spb_column gl_column_container gl_col-sm-12">
+						                  <div class="gl_column-inner ">
+						                     <div class="spb_wrapper">
+						                        <div class="spb_text_column spb_content_element ">
+						                           <div class="spb_wrapper">
+						                              <p style="text-align: center; color: white;">
+						                              {{settings.info_shop_1}}
+						                              </p>
+						                           </div>
+						                        </div>
+						                     </div>
+						                  </div>
+						               </div>
+                                 <div class="text-center spb_column gl_column_container gl_col-sm-12">
+						                  <div class="gl_column-inner ">
+						                     <div class="spb_wrapper">
+						                     	{%- if settings.info_shop_btn_title != blank and settings.info_shop_btn_url != blank -%}
+						                        <div class="basel-button-wrapper text-center">
+						                        	<a href="{{settings.info_shop_btn_url}}" class="btn btn-color-white btn-style-link btn-size-extra-large">{{settings.info_shop_btn_title}}</a>
+						                        </div>
+						                        {%- endif -%}
+						                        <div class="spb_text_column spb_content_element gl_mb_20"><div class="spb_wrapper"> </div></div>
+						                        {%- if settings.show_share_btn_our_shop -%}{%- include 'social-sharing', gl_design:'icons-design-colored', gl_size:'icons-size-small', follow_social:gl_follow_social -%}{%- endif -%}
+						                     </div>
+						                  </div>
+						               </div>
+                                 {%- else -%}
+                                 <div class="spb_column gl_column_container gl_col-sm-3 gl_col-lg-offset-3 gl_col-md-offset-3 gl_col-sm-offset-3">
+						                  <div class="gl_column-inner ">
+						                     <div class="spb_wrapper">
+						                     	{%- if settings.info_shop_1 != blank -%}
+						                        <div class="spb_text_column spb_content_element">
+						                           <div class="spb_wrapper">
+						                              <p style="text-align: center; color: white;">
+						                              {{settings.info_shop_1 }}
+						                              </p>
+						                           </div>
+						                        </div>
+						                        {%- endif -%}
+						                        {%- if settings.info_shop_3 != blank -%}
+						                        <div class="spb_text_column spb_content_element ">
+						                           <div class="spb_wrapper">
+						                              <p style="text-align: center; color: white;">
+						                              {{settings.info_shop_3 }}
+						                              </p>
+						                           </div>
+						                        </div>
+						                        {%- endif -%}
+						                     </div>
+						                  </div>
+						               </div>
+						               <div class="spb_column gl_column_container gl_col-sm-3">
+						                  <div class="gl_column-inner ">
+						                     <div class="spb_wrapper">
+						                     	{%- if settings.info_shop_2 != blank -%}
+						                        <div class="spb_text_column spb_content_element ">
+						                           <div class="spb_wrapper">
+						                              <p style="text-align: center; color: white;">
+						                              {{settings.info_shop_2 }}
+						                              </p>
+						                           </div>
+						                        </div>
+						                        {%- endif -%}
+						                        {%- if settings.info_shop_4 != blank -%}
+						                        <div class="spb_text_column spb_content_element ">
+						                           <div class="spb_wrapper">
+						                              <p style="text-align: center; color: white;">
+						                              {{settings.info_shop_4 }}
+						                              </p>
+						                           </div>
+						                        </div>
+						                        {%- endif -%}
+						                     </div>
+						                  </div>
+						               </div>
+						               <div class="text-center spb_column gl_column_container gl_col-sm-4 gl_col-lg-offset-4 gl_col-md-offset-4 gl_col-sm-offset-4">
+						                  <div class="gl_column-inner ">
+						                     <div class="spb_wrapper">
+						                     	{%- if settings.info_shop_btn_title != blank and settings.info_shop_btn_url != blank -%}
+						                        <div class="basel-button-wrapper text-center">
+						                        	<a href="{{settings.info_shop_btn_url}}" class="btn btn-color-white btn-style-link btn-size-extra-large">{{settings.info_shop_btn_title}}</a>
+						                        </div>
+						                        {%- endif -%}
+						                        <div class="spb_text_column spb_content_element gl_mb_20"><div class="spb_wrapper"> </div></div>
+						                        {%- if settings.show_share_btn_our_shop -%}{%- include 'social-sharing', gl_design:'icons-design-colored', gl_size:'icons-size-small', follow_social:gl_follow_social -%}{%- endif -%}
+						                     </div>
+						                  </div>
+						               </div>
+                                 {%- endif  -%}
+                              </div>
+						         </div>
+						      </div>
+						   </div>
+						</div>
+						<div class="gl_row-full-width gl_clearfix"></div>
+					</div>
+				</article>
+			</div><!-- .site-content -->
+		</div><!-- end row -->
+	</div><!-- end container -->
+</div><!-- .main-page-wrapper -->
+<!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'js_cp_gl.min.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+<!--[if lte IE 9]><script src="{{ 'js_cp_gl.min.js' | asset_url }}"></script><![endif]-->

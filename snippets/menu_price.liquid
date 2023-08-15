@@ -1,0 +1,30 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+ <div class="basel-menu-price cursor-pointer" onclick="window.location.href='{{ product.url | within: collection }}'">
+    {%- if section.settings.show_image -%}
+    <div class="menu-price-image">
+    {%- if featured_image != blank -%}
+       <img width="35" height="77" src="{%-include 'gl_image_format',src: featured_image , size: image_size -%}" class="attachment-full" alt="">           
+    {%- else -%}
+       <img width="35" height="77" src="https://cdn.shopify.com/s/files/1/1933/6253/files/portfolio-placeholder_35x77_crop_center.jpg?12790048884060573015" width="100" height="100" alt="client1" title="client1">
+    {%- endif -%}
+    </div>
+    {%- endif -%}
+    <div class="menu-price-description-wrapp">
+       <h3 class="menu-price-title font-title"><span>{{product.title}}</span></h3>
+       <div class="menu-price-description">
+          <div class="menu-price-details">
+             {%- if product.metafields.meta.description_excerpt -%}
+              {{  product.metafields.meta.description_excerpt  | strip_html }}
+            {% elsif product.description contains  '[' %}
+              {% assign pr_des = product.description | split: '[' %}
+              {% assign pr_des = pr_des[1] | split: ']' | first | append:']' | prepend:'[' %}
+              {{ product.description | remove: pr_des | strip_html | truncatewords: 15 }}
+            {%-else-%}
+              {{ product.description | strip_html | truncatewords: 15 }}
+            {%-endif-%}
+          </div>
+          <div class="menu-price-price">{{ current_variant.price | money }}</div>
+       </div>
+    </div>
+ </div>

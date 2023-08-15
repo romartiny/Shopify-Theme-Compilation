@@ -1,0 +1,496 @@
+{%- if section.settings.hidden_section -%}{%- capture check_admin -%}{{ content_for_header  }}{%- endcapture -%}<style> #shopify-section-{{ section.id }} { {%- if check_admin contains 'design_mode' -%}opacity: .5;filter: alpha(opacity=50){%- else -%}display: none !important{%- endif -%}}</style>{%- endif -%}
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{%- capture data_section -%}
+  {%- if section.settings.row_stretch == 'stretch_row' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true'
+  {%- elsif section.settings.row_stretch == 'stretch_row_content' or section.settings.row_stretch == 'stretch_row_content_no_spaces' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true' data-gl-stretch-content='true'
+  {%- else -%}
+  {%- assign class_has_fill = '' -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- unless image_size != blank -%}
+  {%- assign image_size = 'master' -%}
+{%- endunless -%}
+ {{ style_block_section }}
+<div data-section-id="{{ section.id }}" data-section-type="banners-section" {{ data_section }}{%- if section.settings.use_video and section.settings.video_url != blank %} data-gl-video-bg="{{ section.settings.video_url }}"{%- endif %} class="gl_custom_{{section.id}} {% if section.settings.row_stretch == 'stretch_row_content_no_spaces' %}gl_row-no-padding{%- endif %}{%- if section.settings.use_parallax %} basel-parallax{%- endif %} gl_row spb_row gl_row-fluid {{class_has_fill}} {%- if section.settings.use_video and section.settings.video_url != blank %} opacity-video-bg gl_video-bg-container gl_has_youtube{%- endif %}{%- if section.settings.full_height %} gl_row-o-full-height gl_row-o-columns-{{section.settings.columns_position}}{%- endif %}{%- if section.settings.equal_height %} gl_row-o-equal-height{%- endif %}{%- unless section.settings.content_position == 'default' %} gl_row-o-content-{{section.settings.content_position}}{%- endunless %}{%- if section.settings.equal_height or section.settings.content_position != 'default' %} gl_row-flex{%- endif -%}">
+   {%- for block in section.blocks -%}
+    {%- case block.type -%}
+      {%- when 'banner' -%}
+      <div class="spb_column gl_column_container gl_col-sm-6" {{ block.shopify_attributes }}>
+         <div class="gl_column-inner gl_pt_0">
+            <div class="spb_wrapper">
+               <div class="promo-banner gl_mb_0 text-center vertical-alignment-middle banner-2 hover-4 color-scheme-light{%- if block.settings.banner_link != blank %} cursor-pointer{%- endif -%}" {% if block.settings.banner_link != blank -%}onclick="window.location.href='{{ block.settings.banner_link }}'"{%- endif -%}>
+                  <div class="main-wrapp-img">
+                     <div class="banner-image">
+                     {%- if block.settings.img_banner != blank -%}
+                        {%- assign image = block.settings.img_banner -%}
+                        <img width="{{ image.width }}" height="{{ image.height }}" src="{%-include 'gl_image_format',src: image , size: image_size -%}" class="promo-banner-image image-1 attachment-full" alt="{{ image.alt }}" 
+                        srcset="{%-include 'gl_image_format',src: image , size: image_size -%} 950w, 
+                        {%-include 'gl_image_format',src: image , size: '300x189' %} 300w, 
+                        {%-include 'gl_image_format',src: image , size: '768x485' %} 768w, 
+                        {%-include 'gl_image_format',src: image , size: '270x171' %} 270w, 
+                        {%-include 'gl_image_format',src: image , size: '280x177' %} 280w, 
+                        {%-include 'gl_image_format',src: image , size: '263x166' %} 263w, 
+                        {%-include 'gl_image_format',src: image , size: '526x332' %} 526w" sizes="(max-width: {{ image.width }}px) 100vw, {{ image.width }}px">                                                    
+                     {%- else -%}
+                        <img width="950" height="600" src="https://cdn.shopify.com/s/files/1/1933/6253/files/portfolio-placeholder_950x600_crop_center.jpg?12790048884060573015">
+                     {%- endif -%}
+                     </div>
+                  </div>
+                  {%- if block.settings.heading != blank -%}
+                  <div class="wrapper-content-baner">
+                     <div class="banner-inner">
+                        <p></p>
+                        <h1 class="font-alt font_gl_alt color-primary" style="font-size: 50px; margin-bottom: 0;">{{ block.settings.heading }}</h1>
+                        <p></p>
+                     </div>
+                  </div>
+                  {%- endif -%}
+               </div>
+            </div>
+         </div>
+      </div>
+      {%- when 'text' -%}
+      <div class="text-center spb_column gl_column_container gl_col-sm-6 gl_col-has-fill" {{ block.shopify_attributes }}>
+         <div class="gl_column-inner gl_custom_lingerie">
+            <div class="spb_wrapper">
+               <div class="spb_single_image spb_content_element gl_align_center gl_mt_m15 gl_mb_0">
+                  <figure class="spb_wrapper gl_figure">
+                     <div class="gl_single_image-wrapper gl_box_border_grey">
+                     {%- if block.settings.image != blank -%}
+                        {%- assign image = block.settings.image -%}
+                        <img width="{{ image.width }}" height="{{ image.height }}" src="{%-include 'gl_image_format',src: image , size: image_size -%}" class="gl_single_image-img attachment-full" alt="{{ image.alt }}" 
+                        srcset="{%-include 'gl_image_format',src: image , size: image_size %} 330w, 
+                        {%-include 'gl_image_format',src: image , size: '300x73' %} 300w, 
+                        {%-include 'gl_image_format',src: image , size: '270x65' %} 270w, 
+                        {%-include 'gl_image_format',src: image , size: '280x68' %} 280w, 
+                        {%-include 'gl_image_format',src: image , size: '263x64' %} 263w" sizes="(max-width: {{ image.width }}px) 100vw, {{ image.width }}px">
+                     {%- else -%}
+                        <img src="//cdn.shopify.com/s/files/1/1933/6253/files/logo_237af5d7-e893-453b-8a62-6970fb38c976.png" alt="basel shopify">
+                     {%- endif -%}
+                     </div>
+                  </figure>
+               </div>
+               {%- if block.settings.title != blank -%}
+               <div class="newsletter_text_three_title spb_text_column spb_content_element gl_mb_10">
+                  <div class="spb_wrapper">
+                     <p style="">{{ block.settings.title }}</p>
+                  </div>
+               </div>
+               {%- endif -%}
+               {%- if block.settings.richtext != blank -%}
+               <div class="spb_text_column spb_content_element gl_mb_25 gl_pr_40 gl_pl_40">
+                  <div class="spb_wrapper gl_color_dark" style="margin: 0 auto 20px; width: 90%; min-width: 100px">
+                     {{ block.settings.richtext }}
+                  </div>
+               </div>
+               {%- endif -%}
+               {%- if block.settings.button_label != blank and block.settings.button_link != blank -%}
+               <div class="basel-button-wrapper text-center }}">
+                  <a href="{{ block.settings.button_link }}" class="btn btn-color-{{ block.settings.button_color }} btn-style-{{ block.settings.button_style }} btn-size-{{ block.settings.button_size }}">{{ block.settings.button_label }}</a>
+               </div>
+               {%- endif -%}
+            </div>
+         </div>
+      </div>
+      {%- when 'newsletter' -%}
+      <div class="text-center spb_column gl_column_container gl_col-sm-6 gl_col-has-fill" {{ block.shopify_attributes }}>
+         <div class="gl_column-inner gl_custom_lingerie">
+            <div class="spb_wrapper">
+               {%- if block.settings.title != blank and block.settings.subtitle != blank -%}
+               <div class="spb_text_column spb_content_element gl_mb_15 newsletter_three_title">
+                  <div class="spb_wrapper">
+                     {%- if block.settings.title != blank -%}<h6 style="">{{ block.settings.title }}</h6>{%- endif -%}
+                     {%- if block.settings.subtitle != blank -%}<h1 style="margin: 0;"><strong>{{block.settings.subtitle}}</strong></h1>{%- endif -%}
+                  </div>
+               </div>
+               {%- endif -%}
+               {%- if block.settings.richtext != blank -%}
+               <div class="spb_text_column spb_content_element gl_mb_25 gl_pr_40 gl_pl_40">
+                  <div class="spb_wrapper gl_color_dark" style="margin: 0 auto 20px; width: 90%; min-width: 100px">
+                     {{ block.settings.richtext }}
+                  </div>
+               </div>
+               {%- endif -%}
+               <div class="spb_text_column spb_content_element gl_mb_0">
+                  <div class="spb_wrapper">
+                     {%- include 'gl_form_newlester' -%}
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+    {%- endcase -%}
+  {%- endfor -%}
+</div>
+{%- unless section.settings.row_stretch == 'default' -%}
+  <div class="gl_row-full-width gl_clearfix"></div>
+{%- endunless -%}
+{%- schema -%}
+  {
+    "name": "Newsletter",
+    "class": "index-section index-section--flush",
+    "settings": [
+      {
+      "type": "header",
+      "content": "== General Settings"
+      },
+      {
+        "type": "paragraph",
+        "content": "Use Default Shopify: Any customers who sign up will have an account created for them in Shopify. [View customers](/admin/customers?query=&accepts_marketing=1)"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_mailchimp",
+        "label": "Use Mailchimp?",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "row_stretch",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "stretch_row",
+            "label": "Stretch row"
+          },
+          {
+            "value": "stretch_row_content",
+            "label": "Stretch row and content"
+          },
+          {
+            "value": "stretch_row_content_no_spaces",
+            "label": "Stretch row and content (no paddings)"
+          }
+        ],
+        "label": "___ Row stretch",
+        "info": "Select stretching options for row and content (Note: stretched may not work properly if parent container has 'overflow: hidden' CSS property).",
+        "default": "stretch_row_content_no_spaces"
+      },
+      {
+        "type": "checkbox",
+        "id": "full_height",
+        "label": "Full height row?",
+        "info": "if checked row will be set to full height.",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "columns_position",
+        "options": [
+         {
+            "value": "middle",
+            "label": "Middle"
+          },
+         {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "stretch",
+            "label": "Stretch"
+          }
+        ],
+        "label": "___ Columns position (only for full height)",
+        "info": "Select columns position within row.",
+        "default": "middle"
+      },
+      {
+        "type": "checkbox",
+        "id": "equal_height",
+        "label": "Equal height?",
+        "info": "If checked columns will be set to equal height.",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "content_position",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "middle",
+            "label": "Middle"
+          },
+         {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "label": "___ Content position",
+        "info": "Select content position within columns.",
+        "default": "middle"
+      },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "color",
+        "id": "section_bg_color",
+        "label": "Background color",
+        "default":"#03AAE9"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      },
+      {
+        "type": "header",
+        "content": "== Basel Extras"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden_section",
+        "label": "Disable Section?",
+        "info": "If checked the section won't be visible on the public side of your website. You can switch it back any time.",
+        "default": false
+      }
+    ],
+    "blocks": [
+      {
+        "type": "banner",
+        "name": "Promo Banner",
+        "limit": 2,
+        "settings": [
+          {
+             "type": "image_picker",
+             "id": "img_banner",
+             "label": "Image",
+             "info": "950x600 (Width x Height)."
+         },
+        {
+           "type": "text",
+           "id": "heading",
+           "label": "Heading",
+           "default": "Read more about<br>our lingerie store."
+         },
+        {
+          "type": "url",
+          "id": "banner_link",
+          "label": "Banner link",
+          "info": "Enter URL if you want this banner to have a link."
+        }
+        ]
+      },
+      {
+        "type": "newsletter",
+        "name": "Newsletter",
+        "limit": 1,
+        "settings": [
+         {
+           "type": "text",
+           "id": "title",
+           "label": "Heading",
+           "default": "Subscribe to our newsletter"
+         },
+         {
+           "type": "text",
+           "id": "subtitle",
+           "label": "Subtitle",
+           "default": "Join Our Newsletter"
+         },
+         {
+           "type": "richtext",
+           "id": "richtext",
+           "label": "Subtext",
+           "default": "<p>A short sentence describing what someone will receive by subscribing</p>"
+         }
+        ]
+      },
+      {
+        "type": "text",
+        "name": "Text Block",
+        "limit": 2,
+        "settings": [
+          {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+         },
+         {
+           "id": "title",
+           "type": "text",
+           "label": "Overlay heading",
+           "default": "MINIMALISTIC AJAX E-COMMERCE THEME"
+         },
+         {
+           "id": "richtext",
+           "type": "richtext",
+           "label": "Text intro shop",
+           "default": "<p>Adipiscing dignissim euismod ad venenatis volutpat sociis feugiat purus ridiculus rhoncus nullam sodales euismod ad venenatis volutpa ridiculus.</p>"
+         },
+         {
+           "type": "header",
+           "content": "== Button Settings"
+         },
+         {
+           "type": "text",
+           "id": "button_label",
+           "label": "___ Button label"
+         },
+         {
+           "type": "url",
+           "id": "button_link",
+           "label": "___ Button link"
+         },
+         {
+           "type": "select",
+           "id": "button_color",
+           "label": "___ Button color",
+           "default": "white",
+           "options": [
+             {
+               "label": "Default",
+               "value": "default"
+             },
+             {
+               "label": "Primary color",
+               "value": "primary"
+             },
+             {
+               "label": "Alternative color",
+               "value": "alt"
+             },
+             {
+               "label": "Black",
+               "value": "black"
+             },
+             {
+               "label": "White",
+               "value": "white"
+             }
+           ]
+         },
+         {
+           "type": "select",
+           "id": "button_style",
+           "label": "___ Button style",
+           "default": "bordered",
+           "options": [
+             {
+               "label": "Default",
+               "value": "default"
+             },
+             {
+               "label": "Bordered",
+               "value": "bordered"
+             },
+             {
+               "label": "Link button",
+               "value": "link"
+             },
+             {
+               "label": "Rounded",
+               "value": "round"
+             }
+           ]
+         },
+         {
+           "type": "select",
+           "id": "button_size",
+           "label": "___ Button size",
+           "default": "default",
+           "options": [
+             {
+               "label": "Default",
+               "value": "default"
+             },
+             {
+               "label": "Extra Small",
+               "value": "extra-small"
+             },
+             {
+               "label": "Small",
+               "value": "small"
+             },
+             {
+               "label": "Large",
+               "value": "large"
+             },
+             {
+               "label": "extra-large",
+               "value": "Extra Large"
+             }
+           ]
+         }
+        ]
+      }
+    ],
+    "presets": [{
+      "name": "Newsletter signup 3 (lingerie)",
+      "category": "Promotional",
+      "blocks": [
+          {
+            "type": "banner"
+          },
+          {
+            "type": "text"
+          },
+          {
+            "type": "newsletter"
+          },
+          {
+            "type": "banner"
+          }
+        ]
+    }]
+  }
+{% endschema %}

@@ -1,0 +1,117 @@
+<div class="{%- if settings.cart_position == 'side' -%}cart-widget-side{%-else-%}dropdown-cat{%-endif-%}">
+   {%- if settings.cart_position == 'side' -%}
+   <div class="widget-heading">
+      <h3 class="widget-title">{{ 'cart.widget.title' | t }}</h3>
+      <a href="#" class="widget-close">{{ 'cart.widget.close' | t }}</a>
+   </div>
+   {%- endif -%}
+   <div class="widget shopify widget_shopping_cart">
+      <div class="widget_shopping_cart_content">
+         <ul class="cart_list product_list_widget ">
+            {%- if cart.item_count > 0 -%}
+               {%- for item in cart.items -%}
+                  <li class="mini_cart_item item-{{ item.id }}{%- if item.product.options.size > 1 %} mini_variant_gl{%- endif -%}">
+                     <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="remove" title="{{ 'cart.general.remove' | t }}" data-product_id="{{item.id}}" data-product_sku="{{item.sku}}">×</a>                                       
+                     <a href="{{ item.url | within: item.product.collections.last }}">
+                     {%- if item.image -%}
+                        {%- assign check_break = false -%}
+                        {%- assign check_not_img_one = false -%}
+                        {%- if item.variant.featured_image != null or item.product.has_only_default_variant -%}
+                          <img width="219" height="280" class="attachment-shop_thumbnail size-shop_thumbnail sp-post-image" alt="{{ item.title | escape }}" 
+                             src="{%-include 'gl_image_format',cache:true,src:item, size: '219x' -%}" 
+                             srcset="{%-include 'gl_image_format',cache:true,src:item, size: '219x' %} 219w, 
+                             {%-include 'gl_image_format',cache:true,src:item, size: '235x300' %} 235w, 
+                             {%-include 'gl_image_format',cache:true,src:item, size: '768x980' %} 768w, 
+                             {%-include 'gl_image_format',cache:true,src:item, size: '803x1024' %} 803w, 
+                             {%-include 'gl_image_format',cache:true,src:item, size: '266x340' %} 266w, 
+                             {%-include 'gl_image_format',cache:true,src:item, size: '263x336' %} 263w, 
+                             {%-include 'gl_image_format',cache:true,src:item, size: '526x671' %} 526w, 
+                             {%-include 'gl_image_format',cache:true,src:item, size: 'master' %} 870w" sizes="(max-width: 219px) 100vw, 219px">                    
+                        {%- else -%}
+                           {%- if settings.color_name_check != blank -%}{%- assign _gl_color_name = settings.color_name_check | replace: ' ,', ',' | replace: ', ', ',' | split: ',' -%}{%- assign gl_color_name = _gl_color_name | downcase -%}{%-else-%}{%- assign gl_color_name = '\nathan_dt\' -%}{%-endif-%}
+                           {%- assign check_break = false -%}
+                           {%- assign check_not_img_one = false -%}
+                           {%- for option in item.product.options -%}
+                              {%- assign downcased_option = option | downcase -%}
+                              {%- if downcased_option == 'color' or downcased_option == 'colour' or gl_color_name contains downcased_option_check -%}
+                                 {%- assign item_title_variant = item.variant.options[forloop.index0] -%}
+                                 {%- for image in item.product.images -%}
+                                    {%- if image.attached_to_variant? -%}
+                                       {% for variant in image.variants %}
+                                          {%- if variant.title contains item_title_variant and variant.image.src != blank -%}
+                                             <img width="219" height="280" class="img_no_feature attachment-shop_thumbnail size-shop_thumbnail sp-post-image" alt="{{ image.alt | escape }}" 
+                                               src="{%-include 'gl_image_format',cache:true,src:image.src, size: '219x' -%}" 
+                                               srcset="{%-include 'gl_image_format',cache:true,src:image.src, size: '219x' %} 219w, 
+                                               {%-include 'gl_image_format',cache:true,src:image.src, size: '235x300' %} 235w, 
+                                               {%-include 'gl_image_format',cache:true,src:image.src, size: '768x980' %} 768w, 
+                                               {%-include 'gl_image_format',cache:true,src:image.src, size: '803x1024' %} 803w, 
+                                               {%-include 'gl_image_format',cache:true,src:image.src, size: '266x340' %} 266w, 
+                                               {%-include 'gl_image_format',cache:true,src:image.src, size: '263x336' %} 263w, 
+                                               {%-include 'gl_image_format',cache:true,src:image.src, size: '526x671' %} 526w, 
+                                               {%-include 'gl_image_format',cache:true,src:image.src, size: 'master' %} 870w" sizes="(max-width: 219px) 100vw, 219px">
+                                             {%- assign check_not_img_one = false -%}
+                                             {%- assign check_break = true -%}
+                                             {%- break -%}
+                                          {%- else -%}
+                                             {%- assign check_not_img_one = true -%}
+                                          {%- endif-%}
+                                       {% endfor %}
+                                       {%- if check_break -%}{%- break -%}{%- endif-%}
+                                    {%- else -%}
+                                       {%- assign check_not_img_one = true -%}
+                                    {%- endif-%}
+                                 {%- endfor -%}
+                              {%- else -%}
+                                 {%- assign check_not_img_one = true -%}
+                              {%- endif -%}
+                           {%- endfor -%}
+                        {%- endif -%}
+                        {%- if check_not_img_one and check_break == false -%}
+                        <img width="219" height="280" class="gl_b attachment-shop_thumbnail size-shop_thumbnail sp-post-image" alt="{{ item.title | escape }}" 
+                          src="{%-include 'gl_image_format',cache:true,src:item, size: '219x' -%}" 
+                          srcset="{%-include 'gl_image_format',cache:true,src:item, size: '219x' %} 219w, 
+                          {%-include 'gl_image_format',cache:true,src:item, size: '235x300' %} 235w, 
+                          {%-include 'gl_image_format',cache:true,src:item, size: '768x980' %} 768w, 
+                          {%-include 'gl_image_format',cache:true,src:item, size: '803x1024' %} 803w, 
+                          {%-include 'gl_image_format',cache:true,src:item, size: '266x340' %} 266w, 
+                          {%-include 'gl_image_format',cache:true,src:item, size: '263x336' %} 263w, 
+                          {%-include 'gl_image_format',cache:true,src:item, size: '526x671' %} 526w, 
+                          {%-include 'gl_image_format',cache:true,src:item, size: 'master' %} 870w" sizes="(max-width: 219px) 100vw, 219px"> 
+                        {%- endif -%}
+                     {%- else-%}
+                        <img width="219" height="280" src="{{ 'noimage.gif' | asset_img_url: '219x' }}" alt="no image">
+                     {%- endif -%}
+                        {{item.product.title}}
+                    </a>   
+                     {%- if item.product.has_only_default_variant == false -%}
+                     <dl class="variation">
+                     {%- for option in item.product.options -%}
+                        <dt class="variation-Color">{{ option | capitalize }}:</dt>
+                        <dd class="variation-Color"><p>{{ item.variant.options[forloop.index0] | capitalize }}</p></dd>
+                     {%- endfor -%}
+                     </dl>
+                     {%- endif -%}
+                <span class="quantity"><input max="{%- if item.variant.inventory_management == blank or item.variant.inventory_policy == 'continue' -%}999{%- else -%}{{ item.variant.inventory_quantity }}{%- endif -%}" type="number" data-format="{{shop.money_format}}" data-price="{{item.price}}" name="quantity" data-vid="{{item.id}}"  class="custom-qty qty" value="{{ item.quantity }}" min="1"  pattern="[0-9]*" inputmode="numeric"/> × <span class="shopify-Price-amount amount">{{ item.price | money }}</span></span>       
+           </li>
+               {%- endfor -%}
+            {%- else -%}
+            <li class="empty">{{ 'cart.general.empty' | t }}</li>
+            {%- endif -%}
+         </ul>
+         <!-- end product list -->
+         {%- if cart.item_count > 0 -%}
+            {%- if settings.cart_notes_widget_enable -%}
+            <div class="gl_ajax_note">
+               <label for="CartSpecialInstructions" class="mb__10">{{ 'cart.general.note' | t }}</label>
+               <textarea name="note" class="input-full w__100" id="CartSpecialInstructions">{{ cart.note }}</textarea>
+            </div>
+            {%- endif -%}
+         <p class="total"><strong>{{ 'cart.general.subtotal' | t }}</strong><span class="shopify-Price-amount amount">{{ cart.total_price | money }}</p>
+         <p class="buttons">
+            <a href="/cart" class="button wc-forward">{{ 'cart.general.view_cart' | t }}</a>
+            <a href="/checkout" class="button checkout wc-forward">{{ 'cart.general.checkout' | t }}</a>
+         </p>
+         {%- endif -%}
+      </div>
+   </div>
+</div>

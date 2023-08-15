@@ -1,0 +1,152 @@
+{%- if product.metafields.nitro_bundle.bundle -%}
+{%- assign bundle = product.metafields.nitro_bundle.bundle -%}
+{%- assign items = bundle | split: '[items]' | last | split: '[/items]' | first-%}
+{%- assign description = bundle | split: '[description]' | last | split: '[/description]' | first -%}
+{%- assign title = bundle | split: '[title]' | last | split: '[/title]' | first -%}
+{%- assign style = bundle | split: '[style]' | last | split: '[/style]' | first-%}
+{%- assign handles = bundle | split: '[handles]' | last | split: '[/handles]' | first | split: ','-%}
+{%- assign rule = bundle | split: '[rule]' | last | split: '[/rule]' | first -%}
+{%- assign button = bundle | split: '[button]' | last | split: '[/button]' | first -%}
+{%- assign bid = bundle | split: '[bid]' | last | split: '[/bid]' | first -%}
+{%- assign time = bundle | split: '[time]' | last | split: '[/time]' | first -%}
+{%- capture  vs-%}{
+  {%- for h in handles -%}
+	"{{all_products[h].id}}":{{all_products[h].variants | json }}{%-if forloop.last == false-%},{%- endif -%}
+  {%- endfor -%}}
+{%- endcapture-%}
+  <form action="" class="nitro-bundle-section style-{{style}}" data-bid="{{bid}}">
+    {%- assign pid = product.id -%}
+    {%- assign old = product -%}
+    {%-comment-%}
+    Countdown Event
+    {%- endcomment -%}
+    <div class="nitro-bundle-countdown">
+      {%- if product.metafields.nitro_bundle.countdown -%}
+      {{ product.metafields.nitro_bundle.countdown }}
+      {%- endif -%}
+    </div>
+	<div class="nitro-bundle-block" data-id="{{product.id}}" data-handle="{{product.handle}}">
+      <div class="nitro-bundle-title"><h4>{{title}}</h4></div>
+      <div class="nitro-bundle-description">
+        <p>{{description}}</p>
+      </div>
+      <div class="bundles-content">
+        <div class="list-products-bundle bundle-select nitro-products-bundle" data-start="{{time | split: '|' | first}}" data-end="{{time | split: '|' | last}}" data-variants='{{vs}}' data-items="{{items}}" data-bid="{{bid}}" data-handles="{{handles | join: ','}}" data-rule="{{rule}}">
+        {%- if style == '1' -%}
+          <div class="list-images flxwr">
+            {%- for h in handles -%}
+            {%- assign product = all_products[h] -%}
+              <div class="item flx alc" data-item="{{forloop.index}}" target="_blank">
+                <div class="image">
+                  <a href="{{product.url}}" title="{{product.title}}">
+                  	<img width="70" height="70" src="{{product.featured_image | img_url: 'medium'}}" class="bundle-item-image" alt="{{product.title}}">
+                  </a>
+                </div>
+                <span class="plus">+</span>
+              </div>
+            {%- endfor -%}
+          </div>
+			 {%- for h in handles -%}
+            	{%- assign product = all_products[h] -%}
+                <div class="bundle-item" data-id="{{product.id }}" data-handle="{{product.handle}}" data-price="{{ product.price}}" data-price-with-money="{{ product.price | money | strip_html  }}">
+                  <div class="bundle-item-checkbox">
+                    <label class="control control--checkbox">
+                      <input name="bundle-item[{{forloop.index}}]"  data-quantity=".input-quantity-{{product.id}}" data-key="{{forloop.index}}" data-pid="{{product.id}}" class="bundle-checkbox bundle-checkbox-{{product.id}}" type="checkbox" value="{{product.variants.first.id }}" {% if product.available%}checked{% endif %} {% if forloop.first%}disabled="disabled"{% endif%} {% if forloop.first == false  and product.available == false %}disabled {% endif %} />
+                      <div class="control__indicator"></div>
+                    </label>
+                  </div>
+                  <div class="bundle-item-title">
+                    <div class="nitro-box-info">
+                      <a href="{{product.url}}" title="{{product.title}}">{{product.title}}</a>
+                      <div class="bundle-item-price">
+                          <span class="current-price">{{product.price | money }}</span>
+                          <span class="saved-price"></span>
+                        </div>
+                    </div>
+                    <div class="bundle-item-variants">
+                      {%- if product.variants.size > 1-%}
+                      <label>{%if product.options.size == 1%}{{product.options | first }}{%else%}Variants:{% for option in product.options %}{{ option }}{%if forloop.last == false%}/{%endif%}{% endfor %}{% endif%}</label>
+                      <select class="bundle-variant-select" data-target=".bundle-checkbox-{{product.id}}">
+                        {%- for variant in product.variants -%}
+                        <option value="{{variant.id}}" {% if variant.available == false %}disabled{%- endif -%}>{{variant.title}}</option>
+                        {%- endfor -%}
+                      </select>
+                      {%- endif -%}
+                    </div>
+                  </div>
+
+                  <div class="bundle-item-quantity">
+                    <label>Quantity:</label>
+                    <input type="number" step="1" min="1" max="" data-target=".bundle-checkbox-{{product.id}}"  name="quantity" value="1" class="input-text tc input-quantity-{{product.id}}" size="4">
+                  </div>
+
+                </div>
+             {%- endfor -%}
+            {%- else -%}
+          <div class="block-items">
+            {%- for h in handles -%}
+            {%- assign product = all_products[h] -%}
+            <div class="bundle-item" data-id="{{product.id }}" data-handle="{{product.handle}}" data-price="{{ product.price}}" data-price-with-money="{{ product.price | money | strip_html  }}">
+              <a href="javascript:;">
+                <img width="219" height="280" src="{{ product.featured_image | img_url: '219x280'}}" class="bundle-item-image" alt="{{product.title}}"
+                     srcset="{{ product.featured_image | img_url: '219x280'}} 219w,
+                             {{ product.featured_image | img_url: '235x300'}} 235w,
+                             {{ product.featured_image | img_url: '768x980'}} 768w,
+                             {{ product.featured_image | img_url: '803x1024'}} 803w,
+                             {{ product.featured_image | img_url: '266x340'}} 266w,
+                             {{ product.featured_image | img_url: '263x336'}} 263w,
+                             {{ product.featured_image | img_url: '526x671'}} 526w,
+                             {{ product.featured_image | img_url: 'master'}} 870w" sizes="(max-width: 219px) 100vw, 219px">
+                <span class="bundle-item-checkbox">
+                  <div class="bundle-item-checkbox">
+                    <label class="control control--checkbox">
+                      <input name="bundle-item[{{forloop.index}}]" data-quantity=".input-quantity-{{product.id}}" data-key="{{forloop.index}}" data-pid="{{product.id}}" class="bundle-checkbox bundle-checkbox-{{product.id}}" type="checkbox" value="{{product.variants.first.id }}" {% if product.available%}checked{% endif %} {% if forloop.first%}disabled="disabled"{% endif%} {% if forloop.first == false  and product.available == false %}disabled {% endif %} />
+                      <div class="control__indicator"></div>
+                    </label>
+                  </div>
+
+                </span>
+              </a>
+
+              <h4><a href="{{product.url}}">{{product.title}}</a></h4>
+
+              <div class="bundle-item-variants">
+                {%- if product.variants.size > 1-%}
+                 <label>{%if product.options.size == 1%}{{product.options | first }}{%else%}Variants:{% for option in product.options %}{{ option }}{%if forloop.last == false%}/{%endif%}{% endfor %}{% endif%}</label>
+                <select class="bundle-variant-select" data-target=".bundle-checkbox-{{product.id}}">
+                  {%- for variant in product.variants -%}
+                  <option value="{{variant.id}}" {% if variant.available == false %}disabled{%- endif -%}>{{variant.title}}</option>
+                  {%- endfor -%}
+                </select>
+                {%- endif -%}
+              </div>
+              <div class="bundle-item-quantity">
+                <label>Quantity:</label>
+                <input type="number" step="1" min="1" max="" data-target=".bundle-checkbox-{{product.id}}"  name="quantity" value="1" class="input-text tc input-quantity-{{product.id}}" size="4">
+              </div>
+              <div class="bundle-item-price">
+                <span class="current-price">{{product.price | money }}</span>
+                <span class="saved-price"></span>
+              </div>
+            </div>
+            {%- endfor -%}
+          </div>
+
+            {%- endif -%}
+
+            <div class="bundle-product-action">
+              <h5 class="bundle-addition-info"></h5>
+              <div class="bundle-product-general {%- if style == '2'%} tc{%- endif -%}">
+                <div >Subtotal: <span class="nitro-bundle-subtotal">{{0 | money }}</span></div>
+                <div>Total:  <span class="nitro-bundle-saved">{{0 | money }}</span></div>
+              </div>
+              <div class="bundle-product-button {%- if style == '2'%} tc{%- endif -%}">
+                	{{button}}
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    {%- assign product = old -%}
+  </form>
+{%- endif -%}

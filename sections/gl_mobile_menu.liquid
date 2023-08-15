@@ -1,0 +1,135 @@
+<div class="basel-search-mobile">
+  <form role="search" method="get" id="searchform" class="searchform{%- if settings.ajax_search_mobile %} basel-ajax-search{%- endif -%}" action="/search">
+    <div>
+      <label class="screen-reader-text" for="q"></label>
+      <input type="text" placeholder="{{ 'general.search.placeholder' | t }}" value="{{ search.terms | escape }}" name="q" id="q" autocomplete="off">
+      {%- if settings.only_search_products -%}<input type="hidden" name="type" value="product" />{%- endif -%}
+      <button type="submit" id="searchsubmit">{{ 'general.search.submit' | t }}</button>
+    </div>
+  </form>
+  {%- if settings.ajax_search_mobile -%}
+  <div class="search-results-wrapper">
+    <div class="basel-search-results">
+      <div class="autocomplete-suggestions" style="position: absolute; display: none; max-height: 300px; z-index: 9999;"></div>
+    </div>
+  </div>
+  {%- endif -%}
+</div>
+<div class="menu-mobile-nav-container">
+   {%- if section.settings.menu != blank -%}
+   <ul id="menu-mobile-nav" class="site-mobile-menu">
+      {%- for link in linklists[section.settings.menu].links -%}
+         {%- assign child_list_handle = link.title | split: '[' | first | handleize -%}
+         {%- if linklists[link.handle].links.size > 0 or linklists[child_list_handle].links != blank -%}
+            <li class="menu-item menu-item-home current-menu-ancestor current-menu-parent menu-item-has-children menu-item-design-default item-event-hover{%- if link.active %} current_page_item{%- endif -%}">
+               <a href="{{ link.url }}">{{ link.title | split: '[' | first | capitalize }}</a>
+               <div class="sub-menu-dropdown color-scheme-dark">
+                  <div class="container">
+                     <ul class="sub-menu color-scheme-dark">
+                     {%- if linklists[link.handle].links.size > 0 -%}
+                      {%- assign menu_sub_link  = linklists[link.handle] -%}
+                     {%- elsif  linklists[child_list_handle].links != blank -%}
+                      {%- assign menu_sub_link  = linklists[child_list_handle] -%}
+                     {%- endif -%}
+                     {%- for childlink in menu_sub_link.links -%}
+                        {%- assign third_list_handle = childlink.title | split: '[' | first | handleize -%}
+                        {%- if linklists[childlink.handle].links.size > 0 or linklists[third_list_handle].links != blank -%}
+                            <li class="menu-item menu-item-home current-menu-ancestor current-menu-parent menu-item-has-children menu-item-design-default item-event-hover{%- if childlink.active %} current_page_item{%- endif -%}">
+                              <a href="{{ childlink.url }}">{{ childlink.title | split: '[' | first | capitalize }}</a>
+                              <div class="sub-menu-dropdown color-scheme-dark">
+                                 <div class="container">
+                                    <ul class="sub-menu color-scheme-dark">
+                                    {%- if linklists[childlink.handle].links.size > 0 -%}
+                                     {%- assign menu_sub_sub_link  = linklists[childlink.handle] -%}
+                                    {%- elsif linklists[third_list_handle].links != blank -%}
+                                     {%- assign menu_sub_sub_link  = linklists[third_list_handle] -%}
+                                    {%- endif -%}
+                                    {%- for thirdlink in menu_sub_sub_link.links -%}
+                                          <li class="menu-item menu-item-design-default item-event-hover{%- if thirdlink.active %} current_page_item{%- endif -%}"><a href="{{ thirdlink.url }}">{{ thirdlink.title | split: '[' | first | capitalize }}</a></li>
+                                    {%- endfor -%}
+                                    </ul>
+                                 </div>
+                              </div>
+                           </li>
+                        {%- else -%}
+                           <li class="menu-item menu-item-design-default item-event-hover{%- if childlink.active %} current_page_item{%- endif -%}"><a href="{{ childlink.url }}">{{ childlink.title | split: '[' | first | capitalize }}</a></li>
+                        {%- endif -%}
+                     {%- endfor -%}
+                     </ul>
+                  </div>
+               </div>
+            </li>
+         {%- else -%}
+            <li class="menu-item menu-item-design-default item-event-hover{%- if link.active %} current_page_item{%- endif -%}"><a href="{{ link.url }}">{{ link.title | split: '[' | first | capitalize }}</a></li>
+         {%- endif -%}
+      {%- endfor -%}
+      {%- if settings.show_multiple_currencies -%}
+      {%- assign supported_codes = settings.supported_currencies | split: '|' -%}
+      <li class="currency menu-item menu-item-home current-menu-ancestor current-menu-parent menu-item-has-children menu-item-design-default item-event-hover{%- if link.active %} current_page_item{%- endif -%}">
+         <a href="#" class="value current-currency">{{ shop.currency }}</a>
+         <div class="sub-menu-dropdown color-scheme-dark">
+            <div class="container">
+               <ul class="sub-menu color-scheme-dark">
+            {%- assign codes = 'USD,EUR,GBP,CAD,ARS,AUD,BBD,BDT,BSD,BHD,BRL,BOB,BND,BGN,ILS,MMK,KYD,CLP,CNY,COP,CRC,HRK,CZK,DKK,DOP,XCD,EGP,XPF,FJD,GHS,GTQ,GYD,GEL,HKD,HUF,ISK,INR,IDR,NIS,JMD,JPY,JOD,KZT,KES,KWD,LVL,LTL,MXN,MYR,MUR,MDL,MAD,MNT,MZN,ANG,NZD,NGN,NOK,OMR,PKR,PYG,PEN,PHP,PLN,QAR,RON,RUB,SAR,RSD,SCR,SGD,SYP,ZAR,KRW,LKR,SEK,CHF,TWD,THB,TZS,TTD,TRY,UAH,AED,UYU,VEB,VND,ZMK' | split: ',' -%}
+            {%- assign check = true -%}
+            {%- for code in supported_codes -%}
+               {%- assign array_money = code | split: '-' -%}
+               {%- assign data_currency = array_money | first | strip | upcase -%}
+               {%- assign name_money = array_money | last | strip -%}
+               {%- if data_currency contains 'EUR' -%}{%- assign data_currency = 'EUR' -%}{%- endif -%}
+               {%- if data_currency == shop.currency and codes contains data_currency -%}
+                  {%- assign check = false -%}
+                  {%- break -%}
+               {%- endif -%}
+            {%- endfor -%}
+            {%- if check and codes contains shop.currency -%}
+                   <li data-currency="{{ shop.currency }}" class="active menu-item menu-item-design-default item-event-hover"><a href="#">{{ shop.currency }}</a></li>
+            {%- endif -%}
+            {%- for code in supported_codes -%}
+                 {%- assign array_money = code | split: '-' -%}
+                 {%- assign data_currency = array_money | first | strip | upcase -%}
+                 {%- assign name_money = array_money | last | strip -%}
+                 {%- if data_currency contains 'EUR' -%}{%- assign data_currency = 'EUR' -%}{%- endif -%}
+                 {%- if codes contains data_currency -%}
+                  <li data-currency="{{data_currency}}" class="menu-item menu-item-design-default item-event-hover"><a href="#">{{ name_money }}</a></li>
+                 {%- endif -%}
+            {%- endfor -%}
+         </ul>
+            </div>
+         </div>
+      </li>
+      {%- endif -%}
+      {%- if settings.show_language_currencies and settings.language_link_list != blank -%}
+      <li class="language menu-item menu-item-home current-menu-ancestor current-menu-parent menu-item-has-children menu-item-design-default item-event-hover{%- if link.active %} current_page_item{%- endif -%}">
+         <a href="#">{{ settings.language_title }}</a>
+         <div class="sub-menu-dropdown color-scheme-dark">
+            <div class="container">
+               <ul class="sub-menu color-scheme-dark">
+                  {%- for link in linklists[settings.language_link_list].links -%}
+                     <li class="menu-item menu-item-design-default item-event-hover{%- if childlink.active %} current_page_item{%- endif -%}"><a href="{{ link.url }}">{{ link.title | split: '[' | first }}</a></li>
+                  {%- endfor -%}
+               </ul>
+            </div>
+         </div>
+      </li>
+      {%- endif -%}
+   </ul>
+   {%- else -%}
+   <br><h5 style="color: white;padding-top: 12px;padding-bottom: 12px;padding-right: 15px;padding-left: 15px;text-transform: uppercase;">Create your first navigation menu sidebar using the sidebar.</h5>
+   {%- endif -%}
+</div>
+{%- include 'header_account' -%}
+{%- schema -%}
+  {
+    "name": "Mobile Side Menu",
+    "class": "mobile-nav",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "menu",
+        "label": "Add Menu",
+        "default": "main-menu"
+      }
+   ]
+  }
+{% endschema %}

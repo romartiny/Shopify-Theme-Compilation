@@ -1,0 +1,78 @@
+{%- include 'current_variant' -%}
+{%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+{%- unless image_size -%}
+{%- assign image_size = '263x' -%}
+{%- endunless -%}
+{%- unless gl_colum_width -%}
+{%- assign gl_colum_width = 'col-xs-6 col-sm-4 col-md-3' -%}
+{%- endunless -%}
+{%- include 'check_label_gl' -%}
+{%- include 'check_color' -%}
+{%- if product.metafields.external and settings.catalog_mode == false -%}
+  {%- assign check = product.metafields.external | first | last -%}
+  {%- if check contains 'https:' or check  contains 'http:' -%}{%- assign check_external = true -%}{%-else-%}{%- assign check_external = false -%}{%-endif-%}
+{%-endif-%}
+<div class="product-grid-item product shopify-hover-base basel-hover-quick {{ gl_colum_width }} purchasable{%- if sold_out %} outofstock{%- endif %}">
+   <div class="content-product-imagin"></div>
+   <div class="product-element-top">
+      {%- include 'product_element_image' -%}
+      <div class="wrapp-swatches">
+         {%- if settings.show_product_color and colour_count > 1 -%}
+         <div class="swatches-wrapper">{%- include 'swatches_on_grid' -%}</div>
+         {%- endif -%}
+         {%- if settings.use_compare and pages['compare'].empty? != true -%}<div class="product-compare-button"><a href="#compare_popup" data-pid="{{product.handle}}_sp_{{product.id}}" class="compare button basel-tooltip" rel="nofollow"><span class="basel-tooltip-label">{{ 'sections.basel_tooltip.compare' | t }}</span>{{ 'sections.basel_tooltip.compare' | t }}</a></div>{%- endif -%}
+      </div>
+      <div class="quick-shop-wrapper">
+          <div class="quick-shop-close"><span>{{'sections.close_quick_shop' | t }}</span></div>
+         <div class="quick-shop-form"></div>
+      </div>
+   </div>
+   <div class="product-information">
+      <h3 class="product-title"><a href="{{ current_variant.url | within: collection }}">{{ product.title }}</a></h3>
+      {%- if product.collections.size > 0 -%}
+      <div class="basel-product-cats">
+         {% for collection in product.collections limit:2 -%}
+         {{ collection.title | link_to: collection.url }}{%- unless forloop.last == true -%},{%- endunless %}
+         {%- endfor -%}
+      </div>
+      {%- endif -%}
+      <div class="product-rating-price">
+         <div class="wrapp-product-price">
+            {%- if settings.show_product_rating -%}<div class="gl_star-rating"><span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span></div>{%- endif -%}
+            <span class="price">
+                {%- if product.price_varies -%}
+                {{ product.price_min | money }} – {{ product.price_max | money }}
+                {%- elsif on_sale -%}<del>{{ current_variant.compare_at_price  | money }}</del> <ins>{{ current_variant.price | money }}</ins>
+                {%- else -%}
+                {{ current_variant.price | money }}
+                {%- endif -%}
+            </span>
+         </div>
+      </div>
+      <div class="fade-in-block">
+         <div class="hover-content">
+            <div class="hover-content-inner">
+               {%- if product.metafields.meta.description_excerpt -%}
+                {{ product.metafields.meta.description_excerpt  }}
+              {% elsif product.description contains  '[' %}
+                {% assign pr_des = product.description | split: '[' %}
+                {% assign pr_des = pr_des[1] | split: ']' | first | append:']' | prepend:'[' %}
+                <p>{{ product.description | remove: pr_des | strip_html | truncatewords: 31 }}</p>
+              {%-else-%}
+                <p>{{ product.description | strip_html | truncatewords: 31 }}</p>
+              {%-endif-%}
+            </div>
+         </div>
+         <div class="basel-buttons">
+            <div class="wrap-wishlist-button">
+               {%- if settings.use_wishlist and pages['wishlist'].empty? != true -%} {%- include 'gl-wishlist-product' -%}{%- endif -%}
+               <div class="clear"></div>
+            </div>
+            <div class="basel-add">{%- include 'gl_btn_add' -%}</div>
+            <div class="wrap-quickview-button">
+               {%- if settings.use_quickview -%}<div class="quick-view"><a href="javascript void(0);" data-get="{{ current_variant.url | within: collection }}&view=quick_view" class="open-quick-view basel-tooltip"><span class="basel-tooltip-label">{{ 'sections.basel_tooltip.quick_view' | t }}</span>{{ 'sections.basel_tooltip.quick_view' | t }}</a></div>{%- endif -%}
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

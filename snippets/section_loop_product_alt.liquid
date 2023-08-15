@@ -1,0 +1,61 @@
+{%- include 'current_variant' -%}
+{%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+{%- unless image_size -%}
+{%- assign image_size = '263x' -%}
+{%- endunless -%}
+{%- unless gl_colum_width -%}
+{%- assign gl_colum_width = 'col-sm-4 col-md-3' -%}
+{%- else -%}
+{%- assign gl_colum_width = gl_colum_width | remove: "col-xs-6 " -%}
+{%- endunless -%}
+{%- assign gl_colum_mobile = ' ' -%}
+{%- if gl_colum_width != 'col-galaxy' -%}{%- assign gl_colum_mobile = ' col-xs-6 ' -%}{%- endif -%}
+{%- if settings.show_col_mobile -%}
+{%- assign gl_colum_mobile = ' col-xs-12 ' -%}
+{%- endif -%}
+{%- include 'check_label_gl' -%}
+{%- include 'check_color' -%}
+{%- unless collection -%}
+{%- assign collection = product.collections.last -%}
+{%- endunless -%}
+{%- if template contains 'collection' and current_tags.size > 0 and product.has_only_default_variant == false -%}
+   {%- assign url_nt = current_variant.url -%}
+{%- assign url_nt_bl = true -%}
+{%- else -%}
+{%- assign url_nt_bl = false -%}
+   {%- assign url_nt = product.url -%}
+{%- endif -%}
+<div class="product-grid-item product basel-hover-alt{{gl_colum_mobile}}{{ gl_colum_width }} purchasable{%- if sold_out %} outofstock{%- else %} instock{%- endif -%}">
+   <div class="product-element-top">
+      {%- include 'product_element_image' -%}
+      <div class="basel-buttons">
+         {%- if settings.use_wishlist and pages['wishlist'].empty? != true -%} {%- include 'gl-wishlist-product' -%}{%- endif -%}
+         <div class="clear"></div>
+         {%- if settings.use_compare and pages['compare'].empty? != true -%}<div class="product-compare-button"><a href="#compare_popup" data-pid="{{product.handle}}_sp_{{product.id}}" class="compare button basel-tooltip" rel="nofollow"><span class="basel-tooltip-label">{{ 'sections.basel_tooltip.compare' | t }}</span>{{ 'sections.basel_tooltip.compare' | t }}</a></div>{%- endif -%}
+         {%- if settings.use_quickview -%}<div class="quick-view"><a href="javascript void(0);" data-get="{{ url_nt | within: collection }}{%- if url_nt_bl -%}&{%- else %}/?{%- endif -%}view=quick_view" class="open-quick-view basel-tooltip"><span class="basel-tooltip-label">{{ 'sections.basel_tooltip.quick_view' | t }}</span>{{ 'sections.basel_tooltip.quick_view' | t }}</a></div>{%- endif -%}
+      </div>
+   </div>
+   <h3 class="product-title"><a href="{{ url_nt | within: collection }}">{{ product.title }}</a></h3>
+    {%- if settings.show_product_rating -%}<div class="gl_star-rating"><span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span></div>{%- endif -%}
+   <div class="wrap-price">
+      <div class="wrapp-swap">
+         <div class="swap-elements">
+            <span class="price">
+                {%- if product.price_varies -%}
+                {{ product.price_min | money }} – {{ product.price_max | money }}
+                {%- elsif on_sale -%}<del>{{ current_variant.compare_at_price  | money }}</del> <ins>{{ current_variant.price | money }}</ins>
+                {%- else -%}
+                {{ current_variant.price | money }}
+                {%- endif -%}
+             </span>
+            <div class="btn-add">
+               {%- include 'gl_btn_add' -%}
+            </div>
+         </div>
+      </div>
+      {%- if settings.show_product_color and colour_count > 1 -%}
+         {%- include 'swatches_on_grid' -%}
+      {%- endif -%}
+   </div>
+   {%- include 'basel_count_down' -%}
+</div>

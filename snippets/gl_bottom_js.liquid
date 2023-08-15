@@ -1,0 +1,27 @@
+{%- unless template contains 'product' -%}{%- include 'theme_string' -%}{%- endunless -%}
+<!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'libraries.min.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+<!--[if lte IE 9]><script src="{{ 'libraries.min.js' | asset_url }}"></script><![endif]-->
+{%- if template contains 'product' or template contains 'article' or check_photowipe  %}
+<!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'page.min.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+<!--[if lte IE 9]><script src="{{ 'page.min.js' | asset_url }}"></script><![endif]-->
+{%- endif %}
+{%- if template contains 'product' and settings.show_grouped_variant_image %}
+<!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'jquery.blockUI.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+<!--[if lte IE 9]><script src="{{ 'jquery.blockUI.js' | asset_url }}"></script><![endif]-->
+{%- endif %}
+{%- if page.handle == 'wishlist' %}
+<!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'jquery.blockUI.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+<!--[if lte IE 9]><script src="{{ 'jquery.blockUI.js' | asset_url }}"></script><![endif]-->
+{%- endif %}
+{%- unless template contains 'product' -%}
+<!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'option_selection.js' | shopify_asset_url }}" defer="defer"></script><!--<![endif]-->
+<!--[if lte IE 9]><script src="{{ 'option_selection.js' | shopify_asset_url }}"></script><![endif]-->
+{%- endunless -%}
+{% if admin_shopify -%}
+<!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'functions_section.min.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+<!--[if lte IE 9]><script src="{{ 'functions_section.min.js' | asset_url }}"></script><![endif]-->
+{%- else -%}
+<!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'functions.min.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+<!--[if lte IE 9]><script src="{{ 'functions.min.js' | asset_url }}"></script><![endif]-->
+{%- endif %}
+{%- if admin_shopify -%}<script type="text/javascript" src="https://www.youtube.com/iframe_api"></script>{%- elsif check_youtube -%}<script type="text/javascript" src="https://www.youtube.com/iframe_api"></script>{%- endif %}

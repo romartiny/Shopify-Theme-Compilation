@@ -1,0 +1,237 @@
+<div class="main-page-wrapper">
+	{%- include 'page_heading', article_portfolio:true -%}
+	<!-- MAIN CONTENT AREA -->
+	<div class="container">
+		<div class="row">
+			<div class="site-content col-sm-12" role="main">
+				<div class="portfolio-single-content">
+				{%- if article.content contains '<iframe' or article.content contains ']' -%}
+					{%- if article.content contains '<iframe' -%}
+					<div class="gl_row spb_row gl_row-fluid gl_row-o-content-middle gl_row-flex" style="margin-top: 10px">
+					{%- elsif settings.portfolio_full_width -%}
+					<div data-gl-full-width="true" data-gl-full-width-init="true" data-gl-stretch-content="true" class="gl_row spb_row gl_row-fluid gl_custom_article_full gl_row-has-fill gl_column-gap-30 gl_row-no-padding gl_row-o-equal-height gl_row-o-content-middle gl_row-flex">
+					{%- else -%}
+					<div class="gl_row spb_row gl_row-fluid">
+					{%- endif -%}
+						{%- if article.excerpt.size > 0 -%}
+						<div class="spb_column gl_column_container{%- if article.content contains '<iframe' -%} gl_col-sm-12 gl_col-lg-9 gl_col-md-9{%- elsif settings.portfolio_full_width %} gl_col-sm-9{%- else %} gl_col-sm-8{%- endif -%}">
+						{%- else -%}
+						<div class="spb_column gl_column_container gl_col-sm-12">
+						{%- endif -%}
+							{%- if article.content contains '<iframe' -%} 
+							<div class="gl_column-inner gl_mb_30">
+								<div class="spb_wrapper">
+									<div class="spb_video_widget spb_content_element gl_clearfix gl_video-aspect-ratio-169 gl_video-el-width-100 gl_video-align-left">
+										<div class="spb_wrapper">
+											<div class="spb_video_wrapper">
+												{%- assign iframe = article.content | split: '[' -%}
+												{%- assign iframe = iframe[1] | split: ']' | first -%}
+												{{iframe}}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							{%- else -%}
+							<div class="gl_column-inner">
+								<div class="spb_wrapper">
+									<div id="gallery_{{article.id}}" class="basel-images-gallery spacing-0 columns-3 view-carousel photoswipe-images">
+										<div class="gallery-images owl-carousel">
+											{%- if article.image -%}
+											{%- assign image = article.image -%}
+											{%- assign blog_image_size = image.width | append: 'x' -%}
+											{%- assign _blog_image_size = '1000x833' -%}
+											{%- assign count_num = 1 -%}
+											{%- assign image_two = false -%}
+											<div class="basel-gallery-item"><a href="{%-include 'gl_image_format',cache:true,src: image.src, size: blog_image_size -%}" data-index="1" data-width="{{image.width}}" data-height="{{image.height}}">
+												<img class="basel-gallery-image image-1" src="{%-include 'gl_image_format_crop',cache:true,src: image.src, size: _blog_image_size -%}" width="{{image.width}}" height="{{image.height}}" alt="{{image.alt}}" title="{{ article.title }}">																
+											</a></div>
+				                     {%- endif -%}
+				                     {%- if article.content contains ']' -%}
+				                     	{%- assign array_img_name = article.content | split: '[' -%}
+													{%- assign array_img_name = array_img_name[1] | split: ']' | first -%}
+													{%- assign _array_img_name = array_img_name | replace: ' ,', ',' | replace: ', ', ',' | split: ',' -%}
+													{%- if _array_img_name.size > 0 -%}{%- assign image_two = true -%}{%- endif -%}
+													{%- for image_src in _array_img_name -%}
+														{%- assign _image = image_src | file_url -%}
+														{%- assign file_img_url = image_src | file_img_url: _blog_image_size, crop: 'center' -%}
+														<div class="basel-gallery-item">	
+															<a href="{{_image}}" data-index="{{count_num}}" data-width="{{image.width}}" data-height="{{image.height}}">
+																<img class="basel-gallery-image image-{{count_num}}" src="{{file_img_url}}" width="{{image.width}}" height="{{image.height}}" alt="{{image_src.alt}}" title="{{ article.title }}">																
+															</a>
+														</div>
+													{%- assign count_num = count_num | plus:1 -%}
+													{%- endfor -%}
+				                     {%- endif -%}
+										</div>
+									</div>
+								</div>
+							</div>
+							{%- endif -%}
+						</div>
+						{%- if article.excerpt.size > 0 -%}
+						<div class="spb_column gl_column_container{%- if article.content contains 'iframe' -%} gl_col-sm-12 gl_col-lg-3 gl_col-md-3{%- elsif settings.portfolio_full_width %} gl_col-sm-3{%- else %} gl_col-sm-4{%- endif -%}">
+							<div class="gl_column-inner">
+								<div class="spb_wrapper">
+									{{article.excerpt}}
+								</div>
+							</div>
+						</div>
+						{%- endif -%}
+					</div>
+					{%- endif -%}
+					{%- if settings.portfolio_full_width -%}
+						<div class="gl_row-full-width gl_clearfix"></div>
+						{{ article.content | split:']' | last }}
+						<div data-gl-full-width="true" data-gl-full-width-init="true" class="gl_row spb_row gl_row-fluid text-center gl_custom_social_full gl_row-has-fill">
+							<div class="spb_column gl_column_container gl_col-sm-12">
+								<div class="gl_column-inner gl_pt_0">
+									<div class="spb_wrapper">{%- include 'social-sharing', gl_design:'icons-design-colored', gl_size:'icons-size-large' -%}</div>
+								</div>
+							</div>
+						</div>
+						<div class="gl_row-full-width gl_clearfix"></div>
+					{%- else -%}
+						<section class="gl_section gl_custom_article gl_section-has-fill">
+							<div class="gl_row spb_row gl_row-fluid">{{ article.content | split:']' | last }}</div>
+							<div class="gl_row spb_row gl_row-fluid gl_mt_35">
+								<div class="spb_column gl_column_container gl_col-sm-12">
+									<div class="gl_column-inner">
+										<div class="spb_wrapper">
+											{%- include 'social-sharing', gl_design:'icons-design-colored', gl_size:'icons-size-large' -%}
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+					{%- endif -%}
+				</div>
+				{%- if settings.show_related_portfolio and blogs[blog.handle].articles_count > 1 -%}
+					{%- assign f_article = blogs[blog.handle].f_article | sort: 'title' -%}
+					{%- assign number_limit = settings.how_many_related_portfolio | plus:0 -%}
+					{%- if settings.title_related_portfolio != blank -%}<h3 class="title slider-title">{{ settings.title_related_portfolio }}</h3>{%- endif -%}
+					<div id="carousel-470-{{article.id}}" class="gl_carousel_container">
+						<div class="owl-carousel product-items">
+							{%- for f_article in blogs[blog.handle].articles limit:number_limit -%}
+								{%- if article.id != f_article.id -%}
+								<div class="product-item owl-carousel-item">
+								   <div class="owl-carousel-item-inner">
+								      <article id="post-{{ f_article.id }}" class="post-slide blog-design-masonry post-{{ f_article.id }} portfolio type-portfolio status-publish has-post-thumbnail hentry project-cat-mock-ups project-cat-print project-cat-templates">
+								         {%- if article.image -%}
+								         {%- assign image = f_article.image -%}
+					                  {%- assign blog_image_size = image.width | append: 'x' -%}
+								         <div class="post-head">
+								            <a href="{{ f_article.url }}">
+								               <figure class="entry-thumbnail">
+									               <img width="{{image.width}}" height="{{image.height}}" src="{%-include 'gl_image_format',cache:true,src: image.src, size: blog_image_size -%}" class="content-slider-image attachment-large" alt="{{image.alt}}" 
+											         	srcset="{%-include 'gl_image_format',cache:true,src: image.src, size: blog_image_size %} {{image.width}}w 
+											         	{%- if image.width > 150 -%},{%-include 'gl_image_format',cache:true,src: image.src, size: '150x150' %} 150w{%-endif-%} 
+											         	{%- if image.width > 300 -%},{%-include 'gl_image_format',cache:true,src: image.src, size: '300x300' -%} 300w{%-endif-%} 
+											         	{%- if image.width > 768 -%},{%-include 'gl_image_format',cache:true,src: image.src, size: '768x768' -%} 768w{%-endif-%}  
+											         	{%- if image.width > 270 -%},{%-include 'gl_image_format',cache:true,src: image.src, size: '270x270' -%} 270w{%-endif-%}  
+											         	{%- if image.width > 280 -%},{%-include 'gl_image_format',cache:true,src: image.src, size: '280x280' -%} 280w{%-endif-%}  
+											         	{%- if image.width > 273 -%},{%-include 'gl_image_format',cache:true,src: image.src, size: '273x273' -%} 273w{%-endif-%}  
+											         	{%- if image.width > 546 -%},{%-include 'gl_image_format',cache:true,src: image.src, size: '546x546' -%} 546w{%-endif-%}  
+											         	{%- if image.width > 45 -%},{%-include 'gl_image_format',cache:true,src: image.src, size: '45x45' -%} 45w{%-endif-%}" sizes="(max-width: {{image.width}}px) 100vw, {{image.width}}px">
+								               </figure>
+								            </a>
+								            <div class="post-date">
+					                     <span class="post-date-day">{{ article.published_at | date: "%d" }}</span><span class="post-date-month">{{ article.published_at | date: "%b" }}</span>
+					                     </div>
+								         </div>
+								         {%- endif -%}
+								         <div class="post-mask">
+								            <h3 class="entry-title">
+								               <a href="{{ f_article.url }}" rel="bookmark">{{ f_article.title }}</a>
+								            </h3>
+								         </div>
+								      </article>
+								      <!-- #post -->
+								   </div>
+								</div>
+								{%- endif -%}
+							{%- endfor -%}
+						</div>
+					</div>
+				{%- endif -%}
+			</div><!-- .site-content -->
+		</div>
+	</div>
+</div>
+{%- if image_two -%}
+<script type="text/javascript">
+	jQuery( document ).ready(function( $ ) {
+      var owl = $("#gallery_{{article.id}} .owl-carousel");
+		$( window ).bind( "gl_js", function() {
+			owl.trigger('refresh.owl.carousel');
+		} );
+		var options = {
+      		rtl: $('body').hasClass('rtl'),
+            items: {%- if settings.portfolio_full_width and image_two %}2{%- else -%}1{%- endif -%}, 
+            responsive: {
+            	979: {
+            		items: {%- if settings.portfolio_full_width and image_two %}2{%- else -%}1{%- endif -%}},
+            	768: {
+            		items: 1			            	},
+            	479: {
+            		items: 1			            	},
+            	0: {
+            		items: 1			            	}
+            },
+            autoplay: false,
+            autoplayTimeout: 5000,
+            dots: {%- if settings.portfolio_full_width %}false{%- else -%}true{%- endif -%},
+            nav: false,
+            autoheight: true,
+            slideBy:  'page',
+            navText:false,
+            loop: false,
+            onRefreshed: function() {
+            	$(window).resize();
+            }
+		};
+		owl.owlCarousel(options);
+	});
+</script>
+{%- endif -%}
+{%- if settings.show_related_portfolio and blogs[blog.handle].articles_count > 1 -%}
+<script type="text/javascript">
+jQuery( document ).ready(function( $ ) {
+
+       var owl = $("#carousel-470-{{article.id}} .owl-carousel");
+
+	$( window ).bind( "gl_js", function() {
+		owl.trigger('refresh.owl.carousel');
+	} );
+
+	var options = {
+   		rtl: $('body').hasClass('rtl'),
+         items: 3, 
+         responsive: {
+         	979: {
+         		items: 3			            	},
+         	768: {
+         		items: 2			            	},
+         	479: {
+         		items: 2			            	},
+         	0: {
+         		items: 1			            	}
+         },
+         autoplay: false,
+         autoplayTimeout: 5000,
+         dots: false,
+         nav: true,
+         autoheight: true,
+         slideBy:  'page',
+         navText:false,
+         loop: false,
+         onRefreshed: function() {
+         	$(window).resize();
+         }
+	};
+
+       owl.owlCarousel(options);
+
+});
+</script>
+{%- endif -%}

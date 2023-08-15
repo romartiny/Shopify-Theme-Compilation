@@ -1,0 +1,2174 @@
+{%- if section.settings.hidden_section -%}{%- capture check_admin -%}{{ content_for_header  }}{%- endcapture -%}<style> #shopify-section-{{ section.id }} { {%- if check_admin contains 'design_mode' -%}opacity: .5;filter: alpha(opacity=50){%- else -%}display: none !important{%- endif -%}}</style>{%- endif -%}
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{%- capture data_section -%}
+  {%- if section.settings.row_stretch == 'stretch_row' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true'
+  {%- elsif section.settings.row_stretch == 'stretch_row_content' or section.settings.row_stretch == 'stretch_row_content_no_spaces' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true' data-gl-stretch-content='true'
+  {%- else -%}
+  {%- assign class_has_fill = '' -%}
+  {%- endif -%}
+{%- endcapture -%}
+{{style_block_section}}
+<div {{ data_section }}{%- if section.settings.use_video and section.settings.video_url != blank %} data-gl-video-bg="{{ section.settings.video_url }}"{%- endif %} class="gl_custom_{{section.id}} {% if section.settings.row_stretch == 'stretch_row_content_no_spaces' %} gl_row-no-padding{%- endif %}{%- if section.settings.use_parallax %} basel-parallax{%- endif %} gl_row spb_row gl_row-fluid {%- if section.settings.use_video and section.settings.video_url != blank %} opacity-video-bg gl_video-bg-container gl_has_youtube{%- endif %}{%- if section.settings.full_height %} gl_row-o-full-height gl_row-o-columns-{{section.settings.columns_position}}{%- endif %}{%- if section.settings.equal_height %} gl_row-o-equal-height{%- endif -%}">
+{%- for block in section.blocks -%}
+  {%- if block.settings.padding != blank or block.settings.margin != blank -%}
+  {%- assign margin = block.settings.margin | remove: ' ' | split: '-' | join: ' ' -%}
+  {%- assign padding = block.settings.padding | remove: ' ' | split: '-' | join: ' ' -%}
+  {%- endif -%}
+  {%- capture style_block -%}
+     {%- if block.settings.body_bg_image != blank -%}
+        {%- if block.settings.body_bg != blank -%}background-color: {{ block.settings.body_bg }} !important;{%- endif -%}
+        background-image: url({{ block.settings.body_bg_image | img_url: 'master' | split:'?' | first  }}) !important;
+        {%- if block.settings.body_bg_position != 'default' -%}
+        {%- case block.settings.body_bg_position -%}
+        {%- when 'left_top' -%}
+           {%- assign position = "left top" -%}
+        {%- when 'left_center' -%}
+           {%- assign  position = "left center" -%}
+        {%- when 'left_bottom' -%}
+           {%- assign position = "left bottom" -%}
+        {%- when 'center_top' -%}
+           {%- assign position = "center top" -%}
+        {%- when 'center_center' -%}
+           {%- assign position = "center center" -%}
+        {%- when 'center_bottom' -%}
+           {%- assign position = "center bottom" -%}
+        {%- endcase -%}
+        background-position: {{ position }} !important;
+        {%- endif -%}
+        {%- if block.settings.body_bg_repeat != 'default' -%}background-repeat: {{ block.settings.body_bg_repeat }} !important;{%- endif -%}
+        {%- if block.settings.body_bg_size != 'default' -%}background-size: {{ block.settings.body_bg_size }} !important;{%- endif -%}
+     {%- else -%}
+        background-color: {{ block.settings.body_bg }};
+     {%- endif -%}
+     {%- if block.settings.margin != blank -%} margin: {{margin}} !important;{%- endif -%}{%- if block.settings.padding != blank -%}padding: {{padding}} !important{%- endif -%}
+  {%- endcapture -%}
+  {%- capture class_block -%}
+     {%- if block.settings.offset_width != 'none' -%} gl_col-md-offset-{{ block.settings.offset_width | plus: 0 }}{%- endif -%}{%- if block.settings.offset_width_Small != 'none' -%} gl_col-sm-offset-{{ block.settings.offset_width_Small | plus: 0 }}{%- endif -%}{%- if block.settings.offset_width_Extra != 'none' -%} gl_col-xs-offset-{{ block.settings.offset_width_Extra | plus: 0 }}{% endif %}{% if block.settings.hide_medium == 'on' %} hidden-md{% endif %}{% if block.settings.hide_Small == 'on' %} hidden-sm{% endif %}{% if block.settings.hide_Extra == 'on' %} hidden-xs{%- endif -%}
+  {%- endcapture -%}
+  <div class="spb__column gl_column_container color-scheme-{{ block.settings.color_scheme }} text-{{ block.settings.text_align }} gl_col-xs-{{ block.settings.block_width_Extra | plus: 0 }} gl_col-sm-{{ block.settings.block_width_Small | plus: 0 }} gl_col-md-{{ block.settings.block_width_medium | plus: 0 }} gl_col-lg-{{ block.settings.block_width | plus: 0 }} {{ class_block }}" {{ block.shopify_attributes }}>
+     <div class="gl_column-inner "><div class="spb_wrapper">
+       <div class="tea_custom_{{ block.id }}" style="{{ style_block }}">
+       {%- case block.type -%}
+        {%- when 'page' -%}
+          {{ pages[block.settings.home_page_content].content }}
+        {%- when 'text' -%}
+          {{ block.settings.home_page_richtext }}
+       {%- when 'custom_html' -%}
+          {{ block.settings.code }}
+      {%- endcase -%}
+      </div>
+    </div></div>
+  </div>
+{%- endfor -%}
+</div>
+{%- unless section.settings.row_stretch == 'default' -%}
+<div class="gl_row-full-width gl_clearfix"></div>
+{%- endunless -%}
+{%- schema -%}
+  {
+    "name": "Text Block",
+    "class": "index-section tea_text_block",
+    "max_blocks": 6,
+    "settings": [
+      {
+        "type": "header",
+        "content": "== Row Settings"
+      },
+      {
+        "type": "select",
+        "id": "row_stretch",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "stretch_row",
+            "label": "Stretch row"
+          },
+          {
+            "value": "stretch_row_content",
+            "label": "Stretch row and content"
+          },
+          {
+            "value": "stretch_row_content_no_spaces",
+            "label": "Stretch row and content (no paddings)"
+          }
+        ],
+        "label": "___ Row stretch",
+        "info": "Select stretching options for row and content (Note: stretched may not work properly if parent container has 'overflow: hidden' CSS property).",
+        "default": "default"
+      },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "color",
+        "id": "section_bg_color",
+        "label": "Background color"
+      },
+      {
+        "type": "color",
+        "id": "section_border_color",
+        "label": "Border color"
+      },
+      {
+        "type": "select",
+        "id": "section_border_style",
+        "options": [
+         {
+            "value": "solid",
+            "label": "Solid"
+          },
+         {
+            "value": "dotted",
+            "label": "Dotted"
+          },
+          {
+            "value": "dashed",
+            "label": "Dashed"
+          },
+          {
+            "value": "double",
+            "label": "Double"
+          },
+          {
+            "value": "groove",
+            "label": "Groove"
+          },
+          {
+            "value": "Ridge",
+            "label": "Ridge"
+          },
+          {
+            "value": "inset",
+            "label": "Inset"
+          },
+          {
+            "value": "outset",
+            "label": "Outset"
+          }
+        ],
+        "label": "Border style",
+        "default": "solid"
+      },
+      {
+        "type": "text",
+        "id": "section_border",
+        "label": "Borders Integer px ( top-right-bottom-left )",
+        "info": "0-0-1px-0"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      },
+      {
+        "type": "header",
+        "content": "== Basel Extras"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden_section",
+        "label": "Disable Section?",
+        "info": "If checked the section won't be visible on the public side of your website. You can switch it back any time.",
+        "default": false
+      }
+    ],
+    "presets": [{
+      "name": "Text Block",
+      "category": "Text",
+      "blocks": [
+        {
+          "type": "text"
+        }
+      ]
+    }],
+    "blocks": [
+      {
+        "type": "page",
+        "name": "Page",
+        "settings": [
+            {
+              "type": "header",
+              "content": "== General"
+            },
+            {
+            "type": "page",
+            "id": "home_page_content",
+            "label": "Pages"
+            },
+            {
+              "type": "select",
+              "id": "color_scheme",
+              "options": [
+               {
+                  "value": "default",
+                  "label": "Default"
+                },
+                {
+                  "value": "dark",
+                  "label": "Dark"
+                },
+                {
+                  "value": "light",
+                  "label": "Light"
+                }
+              ],
+              "label": "Color Scheme",
+              "default": "default"
+            },
+            {
+              "type": "select",
+              "id": "text_align",
+              "options": [
+                {
+                  "value": "center",
+                  "label": "Center"
+                },
+                {
+                  "value": "left",
+                  "label": "Left"
+                }
+                ,
+                {
+                  "value": "right",
+                  "label": "Right"
+                }
+              ],
+              "label": "Text Align",
+              "default": "center"
+            },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "color",
+        "id": "body_bg",
+        "label": "Select Color",
+        "default": "#fff"
+      },
+      {
+        "type": "image_picker",
+        "id": "body_bg_image",
+        "label": "Background image"
+      },
+      {
+        "type": "header",
+        "content": "=== Design settings"
+      },
+      {
+        "type": "paragraph",
+        "content": "To horizontally center a block element (like <div>), use margin: auto;"
+      },
+      {
+        "type": "text",
+        "id": "margin",
+        "label": "Margins ( top-right-bottom-left )",
+        "info": "60px-auto-60px-auto"
+      },
+      {
+        "type": "text",
+        "id": "padding",
+        "label": "Paddings Integer px ( top-right-bottom-left )",
+        "info": "60px-60px-0-60px"
+      },
+      {
+        "type": "select",
+        "id": "body_bg_repeat",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "no-repeat",
+            "label": "No Repeat"
+          },
+          {
+            "value": "repeat",
+            "label": "Repeat All"
+          },
+          {
+            "value": "repeat-x",
+            "label": "Repeat Horizontally"
+          },
+          {
+            "value": "repeat-y",
+            "label": "Repeat Vertically"
+          },
+          {
+            "value": "inherit",
+            "label": "Inherit"
+          }
+        ],
+        "label": "=== Background Repeat",
+        "default": "default",
+        "info": "[Specifies how to repeat the background images](https:\/\/w3schools.com\/cssref\/pr_background-repeat.asp)"
+      },
+      {
+        "type": "select",
+        "id": "body_bg_size",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "inherit",
+            "label": "Inherit"
+          },
+          {
+            "value": "cover",
+            "label": "Cover"
+          },
+          {
+            "value": "contain",
+            "label": "Contain"
+          }
+        ],
+        "label": "=== Background Size",
+        "default": "default",
+        "info": "[Specifies the size of the background images](https:\/\/w3schools.com\/cssref\/css3_pr_background-size.asp)"
+      },
+      {
+        "type": "select",
+        "id": "body_bg_position",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "left_top",
+            "label": "Left Top"
+          },
+          {
+            "value": "left_center",
+            "label": "Left Center"
+          },
+          {
+            "value": "left_bottom",
+            "label": "Left Bottom"
+          },
+          {
+            "value": "center_top",
+            "label": "Center Top"
+          },
+          {
+            "value": "center_center",
+            "label": "Center Center"
+          },
+          {
+            "value": "center_bottom",
+            "label": "Center Bottom"
+          }
+        ],
+        "label": "=== Background Position",
+        "default": "default",
+        "info": "[Specifies the position of the background images](https:\/\/w3schools.com\/cssref\/pr_background-position.asp)"
+      },
+   {
+        "type": "header",
+        "content": "== Responsive Options"
+      },
+      {
+        "type": "header",
+        "content": "=== Width"
+      },
+      {
+        "type": "select",
+        "id": "block_width",
+        "options": [
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "Select column width",
+        "default": "12"
+      },
+      {
+        "type": "header",
+        "content": "=== Responsiveness"
+      },
+       {
+        "type": "header",
+        "content": "==== Medium devices Desktops (≥992px)"
+      },
+      {
+        "type": "select",
+        "id": "offset_width",
+        "options": [
+        {
+            "value": "none",
+            "label": "No offset"
+          },
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "Offset",
+        "default": "none",
+        "info": "[Specifies the position of the background images](https:\/\/getbootstrap.com\/css\/#grid-offsetting)"
+      },
+      {
+        "type": "select",
+        "id": "block_width_medium",
+        "options": [
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "Width",
+        "default": "12"
+      },
+      {
+        "type":      "radio",
+        "id":        "hide_medium",
+        "label": "Hide on device?",
+        "options": [
+          { "value": "on", "label": "On" },
+          { "value": "off", "label": "Off" }
+        ],
+        "default":   "off"
+      },
+      {
+        "type": "header",
+        "content": "==== Small devices Tablets (≥768px)"
+      },
+      {
+        "type": "select",
+        "id": "offset_width_Small",
+        "options": [
+        {
+            "value": "none",
+            "label": "No offset"
+          },
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "Offset",
+        "default": "none",
+        "info": "[Specifies the position of the background images](https:\/\/getbootstrap.com\/css\/#grid-offsetting)"
+      },
+      {
+        "type": "select",
+        "id": "block_width_Small",
+        "options": [
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "Width",
+        "default": "12"
+      },
+      {
+        "type":      "radio",
+        "id":        "hide_Small",
+        "label": "Hide on device?",
+        "options": [
+          { "value": "on", "label": "On" },
+          { "value": "off", "label": "Off" }
+        ],
+        "default":   "off"
+      },
+      {
+        "type": "header",
+        "content": "==== Extra small devices Phones ( less 768px)"
+      },
+      {
+        "type": "select",
+        "id": "offset_width_Extra",
+        "options": [
+        {
+            "value": "none",
+            "label": "No offset"
+          },
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "Offset",
+        "default": "none",
+        "info": "[Specifies the position of the background images](https:\/\/getbootstrap.com\/css\/#grid-offsetting)"
+      },
+      {
+        "type": "select",
+        "id": "block_width_Extra",
+        "options": [
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "Width",
+        "default": "12"
+      },
+      {
+        "type":      "radio",
+        "id":        "hide_Extra",
+        "label": "Hide on device?",
+        "options": [
+          { "value": "on", "label": "On" },
+          { "value": "off", "label": "Off" }
+        ],
+        "default":   "off"
+      }
+        ]
+      },
+      {
+        "type": "text",
+        "name": "Text",
+        "settings": [
+        {
+           "type": "header",
+           "content": "== General"
+         },
+          {
+            "id": "home_page_richtext",
+            "type": "richtext",
+            "label": "Text",
+            "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+          },
+          {
+              "type": "select",
+              "id": "color_scheme",
+              "options": [
+               {
+                  "value": "default",
+                  "label": "Default"
+                },
+                {
+                  "value": "dark",
+                  "label": "Dark"
+                },
+                {
+                  "value": "light",
+                  "label": "Light"
+                }
+              ],
+              "label": "Color Scheme",
+              "default": "default"
+            },
+            {
+              "type": "select",
+              "id": "text_align",
+              "options": [
+                {
+                  "value": "center",
+                  "label": "Center"
+                },
+                {
+                  "value": "left",
+                  "label": "Left"
+                }
+                ,
+                {
+                  "value": "right",
+                  "label": "Right"
+                }
+              ],
+              "label": "Text Align",
+              "default": "center"
+            },
+          {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "color",
+        "id": "body_bg",
+        "label": "Select Color",
+        "default": "#fff"
+      },
+      {
+        "type": "image_picker",
+        "id": "body_bg_image",
+        "label": "Background image"
+      },
+      {
+        "type": "header",
+        "content": "=== Design settings"
+      },
+      {
+        "type": "paragraph",
+        "content": "To horizontally center a block element (like <div>), use margin: auto;"
+      },
+      {
+        "type": "text",
+        "id": "margin",
+        "label": "Margins ( top-right-bottom-left )",
+        "info": "60px-auto-60px-auto"
+      },
+      {
+        "type": "text",
+        "id": "padding",
+        "label": "Paddings Integer px ( top-right-bottom-left )",
+        "info": "60px-60px-0-60px"
+      },
+      {
+        "type": "select",
+        "id": "body_bg_repeat",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "no-repeat",
+            "label": "No Repeat"
+          },
+          {
+            "value": "repeat",
+            "label": "Repeat All"
+          },
+          {
+            "value": "repeat-x",
+            "label": "Repeat Horizontally"
+          },
+          {
+            "value": "repeat-y",
+            "label": "Repeat Vertically"
+          },
+          {
+            "value": "inherit",
+            "label": "Inherit"
+          }
+        ],
+        "label": "=== Background Repeat",
+        "default": "default",
+        "info": "[Specifies how to repeat the background images](https:\/\/w3schools.com\/cssref\/pr_background-repeat.asp)"
+      },
+      {
+        "type": "select",
+        "id": "body_bg_size",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "inherit",
+            "label": "Inherit"
+          },
+          {
+            "value": "cover",
+            "label": "Cover"
+          },
+          {
+            "value": "contain",
+            "label": "Contain"
+          }
+        ],
+        "label": "=== Background Size",
+        "default": "default",
+        "info": "[Specifies the size of the background images](https:\/\/w3schools.com\/cssref\/css3_pr_background-size.asp)"
+      },
+      {
+        "type": "select",
+        "id": "body_bg_position",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "left_top",
+            "label": "Left Top"
+          },
+          {
+            "value": "left_center",
+            "label": "Left Center"
+          },
+          {
+            "value": "left_bottom",
+            "label": "Left Bottom"
+          },
+          {
+            "value": "center_top",
+            "label": "Center Top"
+          },
+          {
+            "value": "center_center",
+            "label": "Center Center"
+          },
+          {
+            "value": "center_bottom",
+            "label": "Center Bottom"
+          }
+        ],
+        "label": "=== Background Position",
+        "default": "default",
+        "info": "[Specifies the position of the background images](https:\/\/w3schools.com\/cssref\/pr_background-position.asp)"
+      },
+      {
+        "type": "header",
+        "content": "== Responsive Options"
+      },
+      {
+        "type": "header",
+        "content": "=== Width"
+      },
+      {
+        "type": "select",
+        "id": "block_width",
+        "options": [
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "Select column width",
+        "default": "12"
+      },
+      {
+        "type": "header",
+        "content": "=== Responsiveness"
+      },
+       {
+        "type": "header",
+        "content": "==== Medium devices Desktops (≥992px)"
+      },
+      {
+        "type": "select",
+        "id": "offset_width",
+        "options": [
+        {
+            "value": "none",
+            "label": "No offset"
+          },
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "Offset",
+        "default": "none",
+        "info": "[Specifies the position of the background images](https:\/\/getbootstrap.com\/css\/#grid-offsetting)"
+      },
+      {
+        "type": "select",
+        "id": "block_width_medium",
+        "options": [
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "Width",
+        "default": "12"
+      },
+      {
+        "type":      "radio",
+        "id":        "hide_medium",
+        "label": "Hide on device?",
+        "options": [
+          { "value": "on", "label": "On" },
+          { "value": "off", "label": "Off" }
+        ],
+        "default":   "off"
+      },
+      {
+        "type": "header",
+        "content": "==== Small devices Tablets (≥768px)"
+      },
+      {
+        "type": "select",
+        "id": "offset_width_Small",
+        "options": [
+        {
+            "value": "none",
+            "label": "No offset"
+          },
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "Offset",
+        "default": "none",
+        "info": "[Specifies the position of the background images](https:\/\/getbootstrap.com\/css\/#grid-offsetting)"
+      },
+      {
+        "type": "select",
+        "id": "block_width_Small",
+        "options": [
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "Width",
+        "default": "12"
+      },
+      {
+        "type":      "radio",
+        "id":        "hide_Small",
+        "label": "Hide on device?",
+        "options": [
+          { "value": "on", "label": "On" },
+          { "value": "off", "label": "Off" }
+        ],
+        "default":   "off"
+      },
+      {
+        "type": "header",
+        "content": "==== Extra small devices Phones ( less 768px)"
+      },
+      {
+        "type": "select",
+        "id": "offset_width_Extra",
+        "options": [
+        {
+            "value": "none",
+            "label": "No offset"
+          },
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "Offset",
+        "default": "none",
+        "info": "[Specifies the position of the background images](https:\/\/getbootstrap.com\/css\/#grid-offsetting)"
+      },
+      {
+        "type": "select",
+        "id": "block_width_Extra",
+        "options": [
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "Width",
+        "default": "12"
+      },
+      {
+        "type":      "radio",
+        "id":        "hide_Extra",
+        "label": "Hide on device?",
+        "options": [
+          { "value": "on", "label": "On" },
+          { "value": "off", "label": "Off" }
+        ],
+        "default":   "off"
+      }
+        ]
+      },
+      {
+        "type": "custom_html",
+        "name": "Custom HTML",
+        "settings": [
+          {
+            "type": "html",
+           "id": "code",
+           "label": "Custom HTML",
+           "default": "<div style='text-align:center;'><h2>Use HTML to format your text so it can be easily read.</h2>This text can be used to share information about your brand with customers.</div>"
+          },
+          {
+              "type": "select",
+              "id": "color_scheme",
+              "options": [
+               {
+                  "value": "default",
+                  "label": "Default"
+                },
+                {
+                  "value": "dark",
+                  "label": "Dark"
+                },
+                {
+                  "value": "light",
+                  "label": "Light"
+                }
+              ],
+              "label": "Color Scheme",
+              "default": "default"
+            },
+            {
+              "type": "select",
+              "id": "text_align",
+              "options": [
+                {
+                  "value": "center",
+                  "label": "Center"
+                },
+                {
+                  "value": "left",
+                  "label": "Left"
+                }
+                ,
+                {
+                  "value": "right",
+                  "label": "Right"
+                }
+              ],
+              "label": "Text Align",
+              "default": "center"
+            },
+          {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "color",
+        "id": "body_bg",
+        "label": "Select Color",
+        "default": "#fff"
+      },
+      {
+        "type": "image_picker",
+        "id": "body_bg_image",
+        "label": "Background image"
+      },
+      {
+        "type": "header",
+        "content": "=== Design settings"
+      },
+      {
+        "type": "paragraph",
+        "content": "To horizontally center a block element (like <div>), use margin: auto;"
+      },
+      {
+        "type": "text",
+        "id": "margin",
+        "label": "Margins ( top-right-bottom-left )",
+        "info": "60px-auto-60px-auto"
+      },
+      {
+        "type": "text",
+        "id": "padding",
+        "label": "Paddings Integer px ( top-right-bottom-left )",
+        "info": "60px-60px-0-60px"
+      },
+      {
+        "type": "select",
+        "id": "body_bg_repeat",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "no-repeat",
+            "label": "No Repeat"
+          },
+          {
+            "value": "repeat",
+            "label": "Repeat All"
+          },
+          {
+            "value": "repeat-x",
+            "label": "Repeat Horizontally"
+          },
+          {
+            "value": "repeat-y",
+            "label": "Repeat Vertically"
+          },
+          {
+            "value": "inherit",
+            "label": "Inherit"
+          }
+        ],
+        "label": "=== Background Repeat",
+        "default": "default",
+        "info": "[Specifies how to repeat the background images](https:\/\/w3schools.com\/cssref\/pr_background-repeat.asp)"
+      },
+      {
+        "type": "select",
+        "id": "body_bg_size",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "inherit",
+            "label": "Inherit"
+          },
+          {
+            "value": "cover",
+            "label": "Cover"
+          },
+          {
+            "value": "contain",
+            "label": "Contain"
+          }
+        ],
+        "label": "=== Background Size",
+        "default": "default",
+        "info": "[Specifies the size of the background images](https:\/\/w3schools.com\/cssref\/css3_pr_background-size.asp)"
+      },
+      {
+        "type": "select",
+        "id": "body_bg_position",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "left_top",
+            "label": "Left Top"
+          },
+          {
+            "value": "left_center",
+            "label": "Left Center"
+          },
+          {
+            "value": "left_bottom",
+            "label": "Left Bottom"
+          },
+          {
+            "value": "center_top",
+            "label": "Center Top"
+          },
+          {
+            "value": "center_center",
+            "label": "Center Center"
+          },
+          {
+            "value": "center_bottom",
+            "label": "Center Bottom"
+          }
+        ],
+        "label": "=== Background Position",
+        "default": "default",
+        "info": "[Specifies the position of the background images](https:\/\/w3schools.com\/cssref\/pr_background-position.asp)"
+      },
+      {
+        "type": "header",
+        "content": "== Responsive Options"
+      },
+      {
+        "type": "header",
+        "content": "=== Width"
+      },
+      {
+        "type": "select",
+        "id": "block_width",
+        "options": [
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "Select column width",
+        "default": "12"
+      },
+      {
+        "type": "header",
+        "content": "=== Responsiveness"
+      },
+       {
+        "type": "header",
+        "content": "==== Medium devices Desktops (≥992px)"
+      },
+      {
+        "type": "select",
+        "id": "offset_width",
+        "options": [
+        {
+            "value": "none",
+            "label": "No offset"
+          },
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "Offset",
+        "default": "none",
+        "info": "[Specifies the position of the background images](https:\/\/getbootstrap.com\/css\/#grid-offsetting)"
+      },
+      {
+        "type": "select",
+        "id": "block_width_medium",
+        "options": [
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "Width",
+        "default": "12"
+      },
+      {
+        "type":      "radio",
+        "id":        "hide_medium",
+        "label": "Hide on device?",
+        "options": [
+          { "value": "on", "label": "On" },
+          { "value": "off", "label": "Off" }
+        ],
+        "default":   "off"
+      },
+      {
+        "type": "header",
+        "content": "==== Small devices Tablets (≥768px)"
+      },
+      {
+        "type": "select",
+        "id": "offset_width_Small",
+        "options": [
+        {
+            "value": "none",
+            "label": "No offset"
+          },
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "Offset",
+        "default": "none",
+        "info": "[Specifies the position of the background images](https:\/\/getbootstrap.com\/css\/#grid-offsetting)"
+      },
+      {
+        "type": "select",
+        "id": "block_width_Small",
+        "options": [
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "Width",
+        "default": "12"
+      },
+      {
+        "type":      "radio",
+        "id":        "hide_Small",
+        "label": "Hide on device?",
+        "options": [
+          { "value": "on", "label": "On" },
+          { "value": "off", "label": "Off" }
+        ],
+        "default":   "off"
+      },
+      {
+        "type": "header",
+        "content": "==== Extra small devices Phones ( less 768px)"
+      },
+      {
+        "type": "select",
+        "id": "offset_width_Extra",
+        "options": [
+        {
+            "value": "none",
+            "label": "No offset"
+          },
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "Offset",
+        "default": "none",
+        "info": "[Specifies the position of the background images](https:\/\/getbootstrap.com\/css\/#grid-offsetting)"
+      },
+      {
+        "type": "select",
+        "id": "block_width_Extra",
+        "options": [
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "Width",
+        "default": "12"
+      },
+      {
+        "type":      "radio",
+        "id":        "hide_Extra",
+        "label": "Hide on device?",
+        "options": [
+          { "value": "on", "label": "On" },
+          { "value": "off", "label": "Off" }
+        ],
+        "default":   "off"
+      }
+        ]
+      }
+    ]
+  }
+{% endschema %}

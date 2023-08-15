@@ -1,0 +1,237 @@
+{%- for block in section.blocks-%}
+{%- assign collection_id = block.settings.collection_id -%}
+{%- assign title = block.settings.title | strip | downcase  -%}
+{%- if collection_id == blank and title == 'all' -%}{%- assign collection_id = 'all' -%}{%- else -%}{%- assign collection_id = collection_id -%}{%- endif -%}
+{%- if collection_id == collection.handle -%}
+<div class="gl_row spb_row gl_row-fluid">
+   <div class="spb_column gl_column_container gl_col-sm-12">
+      <div class="gl_column-inner ">
+         <div class="spb_wrapper">
+            <div class="promo-banner text-{{ block.settings.banner_alignment }} vertical-alignment-{{ block.settings.banner_vertical_alignment }} banner-{{ block.settings.banner_content_style }} hover-{{ block.settings.banner_effect }} color-scheme-{{ block.settings.banner_color }} {%- if block.settings.enable_increase %} increased-padding{%- endif %}{%- if block.settings.banner_link != blank %} cursor-pointer{%- endif -%}" onclick="window.location.href='{{ block.settings.banner_link }}'">
+               <div class="main-wrapp-img">
+                  <div class="banner-image">
+                     {%- if block.settings.image == blank -%}
+                        <img src="https://placehold.it/1600x400" alt ="placehold">
+                     {%- else -%}
+                     {%- assign image = block.settings.image -%}
+                     {%- assign image_width = image.width -%}
+                     {%- assign image_width_append = image_width | append:'x' -%}
+                     <img width="{{image_width}}" height="{{image.height}}" src="{%-include 'gl_image_format',src: image.src , size: image_width_append -%}" class="gl_single_image-img attachment-full" alt="{{image.alt}}" 
+                          srcset="{%-include 'gl_image_format',src: image.src , size: image_width_append %} {{image_width}}w 
+                                  {%- if image_width > 285 -%},{%-include 'gl_image_format',src: image.src , size: '285x' %} 285w{%- endif -%} 
+                                  {%- if image_width > 270 -%},{%-include 'gl_image_format',src: image.src , size: '270x' %} 270w{%- endif -%}
+                                  {%- if image_width > 266 -%},{%-include 'gl_image_format',src: image.src , size: '266x' %} 266w{%- endif -%}
+                                  {%- if image_width > 263 -%},{%-include 'gl_image_format',src: image.src , size: '263x' %} 263w{%- endif -%}
+                                  {%- if image_width > 526 -%},{%-include 'gl_image_format',src: image.src , size: '526x' %} 526w{%- endif -%}" sizes="(max-width: {{image_width}}px) 100vw, {{image_width}}px">
+                     {%- endif -%}
+                  </div>
+               </div>
+               <div class="wrapper-content-baner">
+                  <div class="banner-inner">
+                     {%- if block.settings.banner_content != blank -%}
+                        {{ block.settings.banner_content }}
+                     {%- else -%}
+                        <h6 style="margin-bottom: 10px;"><span style="color: #a6a6a6;">jThemes ELEMENT</span></h6>
+                        <h1 class="hidden-xs" style="margin-bottom: 5px;"><strong>THIS IS A SIMPLE</strong></h1>
+                        <h1 style="margin-bottom: 10px;"><strong>BANNER ON CATEGORY</strong></h1>
+                     {%- endif -%}
+                    {%- if block.settings.banner_link != blank and block.settings.banner_btn_title != blank  -%}{%- if block.settings.banner_color == 'dark' -%}{%- assign class_name = 'black' -%}{%- else -%}{%- assign class_name = 'white' -%}{%- endif -%}<a class="btn btn-color-{{ class_name }} btn-size-small hidden-xs {{ block.settings.button_style_color }}" href="{{ block.settings.banner_link }}">{{ block.settings.banner_btn_title }}</a>{%- endif -%}
+                   </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{%- break -%}
+{%- endif -%}
+{%- endfor -%}
+{%- schema -%}
+  {
+    "name": "Promo Banner",
+    "class":"term-description",
+   "blocks": [
+      {
+        "type": "item",
+        "name": "Promo Banner by item",
+        "settings": [
+         {
+            "type": "text",
+            "id": "title",
+            "label": "Collection Title"
+         },
+         {
+            "type": "collection",
+            "id": "collection_id",
+            "label": "Chose collection using Promo Banner"
+         },
+         {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Background image"
+         },
+         {
+             "type": "html",
+             "id": "banner_content",
+             "label": "Banner content",
+             "info": "Add here few words to your banner image."
+         },
+         {
+          "type": "text",
+          "id": "banner_btn_title",
+          "label": "Button title",
+          "info": "Add here few words to your title button."
+        },
+        {
+          "type": "url",
+          "id": "banner_link",
+          "label": "Banner link",
+          "info": "Enter URL if you want this banner to have a link."
+        },
+        {
+          "type": "select",
+          "id": "button_style_color",
+          "options": [
+           {
+              "value": "default",
+              "label": "Default"
+            },
+           {
+              "value": "btn-style-link",
+              "label": "Style Link"
+            },
+            {
+              "value": "btn-style-bordered",
+              "label": "Style Bordered"
+            }
+          ],
+          "label": "== Button Style",
+          "default": "default"
+        },
+        {
+          "type": "select",
+          "id": "banner_alignment",
+          "options": [
+           {
+              "value": "left",
+              "label": "Align left"
+            },
+            {
+              "value": "right",
+              "label": "Align right"
+            },
+            {
+              "value": "center",
+              "label": "Align center"
+            }
+          ],
+          "label": "== Text alignment",
+          "info": "Select image alignment.",
+          "default": "center"
+        },
+        {
+          "type": "select",
+          "id": "banner_vertical_alignment",
+          "options": [
+           {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "middle",
+              "label": "Middle"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            }
+          ],
+          "label": "== Content vertical alignment",
+          "default": "top"
+        },
+        {
+          "type": "select",
+          "id": "banner_effect",
+          "options": [
+           {
+              "value": "default",
+              "label": "Default"
+            },
+            {
+              "value": "1",
+              "label": "Zoom image"
+            },
+            {
+              "value": "2",
+              "label": "Bordered"
+            },
+            {
+              "value": "3",
+              "label": "Content animation"
+            },
+            {
+              "value": "4",
+              "label": "Translate and scale"
+            }
+          ],
+          "label": "== Hover effect",
+          "info": "Set beautiful hover effects for your banner.",
+          "default": "default"
+        },
+        {
+          "type": "select",
+          "id": "banner_content_style",
+          "options": [
+           {
+              "value": "default",
+              "label": "Default"
+            },
+            {
+              "value": "2",
+              "label": "Color mask"
+            },
+            {
+              "value": "3",
+              "label": "Mask with border"
+            },
+            {
+              "value": "1",
+              "label": "Content with line background"
+            },
+            {
+              "value": "5",
+              "label": "Content with rectangular background"
+            }
+          ],
+          "label": "== Content style",
+          "info": "You can use some of our predefined styles for your banner content.",
+          "default": "default"
+        },
+        {
+          "type": "select",
+          "id": "banner_color",
+          "options": [
+           {
+              "value": "light",
+              "label": "Light"
+            },
+            {
+              "value": "dark",
+              "label": "Dark"
+            }
+          ],
+          "label": "== Color Scheme",
+          "default": "light"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_increase",
+          "label": "== Enable Increase spaces",
+          "info": "Suggest to use this option if you have large banners. Padding will be set in percentage to your screen width.",
+          "default": false
+        }
+        ]
+      }
+    ]
+  }
+{% endschema %}

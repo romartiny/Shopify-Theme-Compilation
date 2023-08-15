@@ -1,0 +1,583 @@
+{%- if section.blocks.size > 0 -%}
+   {%- case settings.size_sidebar -%}
+     {% when '1' %}
+       {%- assign size_place_holer = '165x106' -%}
+       {%- assign image_size_banner = '165x' -%}
+       {%- assign image_size = '60x' -%}
+     {% when '2' %}
+       {%- assign size_place_holer = '263x207' -%}
+       {%- assign image_size_banner = '263x' -%}
+       {%- assign image_size = '60x' -%}
+     {% when '3' %}
+      {%- assign size_place_holer = '360x307' -%}
+       {%- assign image_size_banner = '360x' -%}
+       {%- assign image_size = '60x' -%}
+   {%- endcase -%}
+   {%- assign has_current_tags = false -%}
+   {%- if current_tags != blank -%}
+      {%- assign has_current_tags = true -%} 
+   {%- endif -%}
+   {%- if collection.products_count > 1000 -%}
+      {% assign tag_arr =  collection.all_tags | downcase | json %}
+   {%- else -%}
+      {% assign tag_arr =  collection.tags | downcase | json %}
+   {%- endif -%}
+   {%- assign _current_tags = current_tags | json | downcase  -%}
+   {%- assign collection_handle = collection.handle -%}
+   {%- assign secure_url = '/collections' -%}
+   {%- if canonical_url contains '?page' -%}
+      {%- assign _canonical_url_remove = canonical_url | split:secure_url | last | prepend: '/collections' -%}
+      {%- assign canonical_url_remove = _canonical_url_remove | split:'?page' | first -%}
+   {%- else -%}
+      {%- assign canonical_url_remove = canonical_url | split:secure_url | last | prepend: '/collections' -%}
+   {%- endif -%}
+   <div class="gl_row spb_row gl_row-fluid">
+      <div class="spb_column gl_column_container gl_col-sm-12 categories-accordion-on">
+         <div class="gl_column-inner ">
+            <div class="spb_wrapper">
+            {%- for block in section.blocks -%}
+               {%- case block.type -%}
+                  {%- when 'category' -%}
+                  <div id="shopify_product_categories-{{block.id}}" class="sidebar-widget shopify widget_product_categories" {{ block.shopify_attributes }}>
+                     {%- if block.settings.title != blank -%}<h5 class="widget-title">{{ block.settings.title }}</h5>{%- endif -%}
+                     <ul class="product-categories">
+                        {%- case block.top_categories_source -%}
+                           {%- when 'top_categories_show_all' -%}
+                              <li class="cat-link shop-all-link{%- if collection.handle == 'all' %} current-cat-parent{%- endif -%}"><a href="/collections/all">{{ 'collections.general.title_all' | t }}</a></li>
+                              {%- for category in collections -%}
+                                 {%- if category.products.size > 0 and forloop.index < 8 and category.handle != 'all' -%}
+                                 <li class="cat-item{%- if collection.handle == category.handle %} current-cat-parent{%- endif -%}"><a href="{{ category.url }}">{{ category.title }}</a></li>
+                                 {%- endif -%}
+                              {%- endfor -%}
+                              {%- if collections.size > 7 -%}
+                                 <li class="cat-item cat-parent">
+                                   <a href="javascript:void(0)">{{ 'collections.general.other' | t }}</a>
+                                   <ul class="children">
+                                   {%- for category in collections offset:7 -%}
+                                       {%- if category.products.size > 0 -%}
+                                       <li class="cat-item{%- if collection.handle == category.handle %} current-cat-parent{%- endif -%}"><a href="{{ category.url }}">{{ category.title }}</a></li>
+                                       {%- endif -%}
+                                   {%- endfor -%}
+                                   </ul>
+                                 </li>
+                              {%- endif -%}
+                           {%- else -%}
+                           {%- assign top_link_list = settings.top_categories_link_list -%}
+                           {%- if block.settings.top_categories_link_list != blank -%}
+                           {%- assign top_link_list = block.settings.top_categories_link_list -%}
+                           {%- else -%}
+                           {%- endif -%}
+                           {%- for link in linklists[top_link_list].links -%}
+                              {%- if link.type == 'collection_link' or link.type == 'catalog_link' -%}
+                                 {%- assign child_list_handle = link.title | split: '[' | first | handleize -%}
+                                 {%- if link.links == blank -%}
+                                    <li class="cat-item{%- if link.active or collection.handle == link.object.handle %} current-cat-parent{%- endif -%}"><a href="{{ link.url }}">{{ link.title | split: '[' | first }}</a></li>
+                                    {%- else -%}
+                                    <li class="cat-item cat-parent{%- if link.active or collection.handle == link.object.handle %} current-cat-parent{%- endif -%}">
+                                      <a href="{{ link.url }}">{{ link.title | split: '[' | first }}</a>
+                                      <ul class="children">
+                                      {%- for childlink in link.links -%}
+                                          {%- if childlink.type == 'collection_link' or childlink.type == 'catalog_link' -%}
+                                          <li class="cat-item{%- if collection.handle == childlink.object.handle %} current-cat-parent{%- endif -%}"><a href="{{ childlink.url }}">{{ childlink.title | split: '[' | first }}</a></li>
+                                          {%- endif -%}
+                                      {%- endfor -%}
+                                      </ul>
+                                    </li>
+                                 {%- endif -%}
+                              {%- endif -%}
+                           {%- else -%}
+                           {{ 'homepage.onboarding.no_content' | t }}
+                           {%- endfor -%}
+                        {%- endcase -%}
+                    </ul>
+                  </div>
+                  {%- when 'color' -%}
+                  <div id="basel-shopify-layered-nav-{{block.id}}" class="sidebar-widget basel-shopify-layered-nav" {{ block.shopify_attributes }}>
+                     {%- if block.settings.title != blank -%}<h5 class="widget-title">{{ block.settings.title }}</h5>{%- endif -%}
+                     {%- assign tags = block.settings.shop_by_tags_color  | replace: ' ,', ',' | replace: ', ', ',' | split: ',' -%}
+                     {%- if tags.size > 0 -%}{%- include 'filter_color' -%}{%- endif -%}
+                     {%- if check_tag_hide or tags.size == 0 -%}<style type="text/css">#basel-shopify-layered-nav-{{block.id}}{display: none}</style>{%- endif -%}
+                  </div>
+                  {%- when 'size' -%}
+                  <div id="basel-shopify-layered-nav-{{block.id}}" class="sidebar-widget basel-shopify-layered-nav" {{ block.shopify_attributes }}>
+                     {%- if block.settings.title != blank -%}<h5 class="widget-title">{{ block.settings.title }}</h5>{%- endif -%}
+                     {%- assign tags = block.settings.shop_by_tags_size  | replace: ' ,', ',' | replace: ', ', ',' | split: ',' -%}
+                     {%- if tags.size > 0 -%}{%- include 'filter_size' -%}{%- endif -%}
+                     {%- if check_tag_hide or tags.size == 0 -%}<style type="text/css">#basel-shopify-layered-nav-{{block.id}}{display: none}</style>{%- endif -%}
+                  </div>
+                  {%- when 'price' -%}
+                  <div id="shopify_price_filter-9" class="sidebar-widget shopify widget_product_categories" {{ block.shopify_attributes }}>
+                     {%- if block.settings.title != blank -%}<h5 class="widget-title">{{ block.settings.title }}</h5>{%- endif -%}
+                     {%- assign tags = block.settings.shop_by_tags_price  | replace: ' ,', ',' | replace: ', ', ',' | split: ',' -%}
+                     {%- if tags.size > 0 -%}{%- include 'filter_price' -%}{%- endif -%}
+                     {%- if check_tag_hide or tags.size == 0 -%}<style type="text/css">#shopify_price_filter-9{display: none}</style>{%- endif -%}
+                  </div>
+                  {%- when 'brand' -%}
+                     <div id="basel-shopify-layered-nav-{{block.id}}" class="sidebar-widget basel-shopify-layered-nav" {{ block.shopify_attributes }}>
+                        {%- if block.settings.title != blank -%}<h5 class="widget-title">{{ block.settings.title }}</h5>{%- endif -%}
+                        {%- assign tags = block.settings.shop_by_tags  | replace: ' ,', ',' | replace: ', ', ',' | split: ',' -%}
+                        {%- if tags.size > 0 or collection.all_vendors > 0 -%}{%- include 'filter_brand' -%}{%- endif -%}
+                        {%- if check_tag_hide or tags.size == 0 or collection.all_vendors == 0 -%}<style type="text/css">#basel-shopify-layered-nav-{{block.id}}{display: none}</style>{%- endif -%}
+                     </div>
+                  {%- when 'tag' -%}
+                     <div id="shopify_product_tag_cloud-5" class="sidebar-widget shopify widget_product_tag_cloud">
+                        {%- if block.settings.title != blank -%}<h5 class="widget-title">{{ block.settings.title }}</h5>{%- endif -%}
+                        {%- assign tags = block.settings.shop_by_tags  | replace: ' ,', ',' | replace: ', ', ',' | split: ',' | uniq -%}
+                        {%- assign check_tag_hide = true -%}
+                        {%- if tags.size > 0 -%}
+                        <div class="tagcloud">
+                           {%- for t in tags -%}
+                              {%- assign tag = t | strip -%}
+                              {%- assign tag_downcase = tag | downcase | prepend:'"' | append:'"' -%}
+                              {%- assign tag_value = tag | handleize -%} 
+                              {%- if has_current_tags -%}
+                                 {% if _current_tags contains tag_downcase %}
+                                    {%- assign check_tag_hide = false -%}
+                                    {%- if current_tags.size > 1 -%}
+                                       {%- assign splt = collection_handle | append:"/" -%}
+                                       {%- assign tag_value_append = tag_value | append:"+" -%}
+                                       {%- assign tag_value_prepend = tag_value | prepend:"+" -%}
+                                       {%- assign _url = canonical_url | split:splt | last  | split:'?page' | first -%}
+                                       <a class="chosen tag-link-position-{{forloop.index}}" href="/collections/{{collection_handle}}/{{_url | replace: tag_value_prepend, '' | replace: tag_value_append, '' }}{%- if check_template_list -%}?&view=list{%- endif-%}">{{ tag }}</a>
+                                    {%- elsif current_tags.size == 1 -%}
+                                        <a class="chosen tag-link-position-{{forloop.index}}" href="/collections/{{collection_handle}}{%- if check_template_list -%}?&view=list{%- endif-%}">{{ tag }}</a>
+                                    {%- endif -%}
+                                 {%- else -%}
+                                    {%- assign _tag = tag | downcase | prepend: '\"' | append: '\"' -%}
+                                    {%- if tag_arr contains _tag -%}
+                                        {%- assign check_tag_hide = false -%}  
+                                       <a class="tag-link-position-{{forloop.index}}" href="{{canonical_url_remove}}+{{ tag_value | handleize }}{%- if check_template_list -%}?&view=list{%- endif-%}">{{ tag }}</a>
+                                    {%- endif -%}
+                                 {%- endif -%}
+                              {%- else -%}
+                                 {%- assign _tag = tag | downcase | prepend: '\"' | append: '\"' -%} 
+                                 {%- if tag_arr contains _tag -%}
+                                     {%- assign check_tag_hide = false -%}
+                                    <a class="tag-link-position-{{forloop.index}}" href="{{canonical_url_remove}}/{{ tag_value | handleize }}{%- if check_template_list -%}?&view=list{%- endif-%}">{{ tag }}</a> 
+                                 {%- endif -%}
+                              {%- endif -%}
+                           {%- endfor -%}                        
+                        </div>
+                        {%- endif -%}
+                        {%- if check_tag_hide or tags.size == 0 -%}<style type="text/css">#shopify_product_tag_cloud-5{display: none}</style>{%- endif -%}
+                     </div>
+                  {%- when 'collection' -%}
+                     {%- if block.settings.featured_product_list_collection == blank -%}
+                        {%- assign side_bar_collection = collections["all"] -%}
+                     {%- else -%}
+                        {%- assign side_bar_collection = collections[block.settings.featured_product_list_collection ] -%}
+                     {%- endif -%}
+                     {%- assign limit_num = block.settings.featured_product_limit_all | plus: 0 -%}
+                     <div id="shopify-{{block.id}}" class="sidebar-widget shopify widget_products" {{ block.shopify_attributes }}>
+                        {%- if block.settings.title != blank -%}<h5 class="widget-title">{{block.settings.title}}</h5>{%- endif -%}
+                        {%- if side_bar_collection != blank -%}
+                        <ul class="product_list_widget">
+                           {%- for side_bar_product in side_bar_collection.products limit:limit_num -%}
+                           {%- if porduct.id != side_bar_product.id -%}
+                           <li>
+                              {%- assign current_variant = side_bar_product.selected_or_first_available_variant -%}
+                              {%- assign featured_image = current_variant.featured_image | default: side_bar_product.featured_image -%}
+                              {%- assign product_image_size = '219x' -%}
+                              {%- assign on_sale = false -%}
+                              {%- if current_variant.compare_at_price_min > current_variant.price_min -%}
+                                {%- assign on_sale = true -%}
+                              {%- endif -%}
+                              {%- assign image = featured_image -%}
+                              <a href="{{ side_bar_product.url | within: collection }}">
+                                 {%- if image != blank -%}
+                                 <img width="219" height="280" src="{%-include 'gl_image_format',src: image.src, size: product_image_size -%}" class="attachment-shop_single size-shop_single sp-post-image" alt="{{image.alt}}" title="{{side_bar_product.title}}" 
+                                    srcset="{%-include 'gl_image_format',src: image.src, size: product_image_size %} {{ image.width }}w, 
+                                    {%-include 'gl_image_format',src: image.src, size: '235x300' %} 235w, 
+                                    {%-include 'gl_image_format',src: image.src, size: '768x980' %} 768w, 
+                                    {%-include 'gl_image_format',src: image.src, size: '803x1024' %} 803w, 
+                                    {%-include 'gl_image_format',src: image.src, size: '266x340' %} 266w, 
+                                    {%-include 'gl_image_format',src: image.src, size: '219x280' %} 219w, 
+                                    {%-include 'gl_image_format',src: image.src, size: '263x336' %} 263w, 
+                                    {%-include 'gl_image_format',src: image.src, size: '526x671' %} 526w" sizes="(max-width: 219px) 100vw, 219px">
+                                    {%- endif -%}
+                                    <span class="product-title">{{ side_bar_product.title }}</span>
+                              </a>
+                              <span class="amount">
+                                  {%- if side_bar_product.price_varies -%}
+                                  {{ side_bar_product.price_min | money }} – {{ side_bar_product.price_max | money }}
+                                  {%- elsif on_sale -%}<del>{{ current_variant.compare_at_price  | money }}</del> <ins>{{ current_variant.price | money }}</ins>
+                                  {%- else -%}
+                                  {{ current_variant.price | money }}
+                                  {%- endif -%}
+                               </span>
+                           </li>
+                           {%- endif -%}
+                           {%- endfor -%}
+                        </ul>
+                        {%- endif -%}
+                     </div>
+                  {%- when 'banner' -%}
+                     <div class="promo-banner cursor-pointer text-right vertical-alignment-middle banner- hover- color-scheme-dark"{%- if block.settings.link != blank %} onclick="window.location.href='{{block.settings.link}}'"{%-endif-%} {{ block.shopify_attributes }}>
+                        <div class="main-wrapp-img">
+                           <div class="banner-image">                              
+                              {%- if block.settings.img_banner == blank -%}
+                              <img class="promo-banner-image image-1" src="https://via.placeholder.com/{{size_place_holer}}" width="600" height="420" alt="market-banner-sport" title="market-banner-sport">                                                     
+                              {%- else -%}
+                              {%- assign image = block.settings.img_banner -%}
+                                 <img width="{{ image.width }}" height="{{ image.height }}" class="promo-banner-image image-1 attachment-full" alt="{{ image.alt }}" 
+                                 src="{%-include 'gl_image_format',src: image , size: image_size_banner -%}" 
+                                 srcset="{%-include 'gl_image_format',src: image , size: image_size_banner -%} {{ image.width }}w, 
+                                 {%-include 'gl_image_format',src: image , size: '270x213' -%} 270w, 
+                                 {%-include 'gl_image_format',src: image , size: '280x221' -%} 280w, 
+                                 {%-include 'gl_image_format',src: image , size: '263x208' -%} 263w" sizes="(max-width: {{ image.width }}px) 100vw, {{ image.width }}px">
+                              {%- endif -%}
+                           </div>
+                        </div>
+                     </div>
+                  {%- when 'shipping' -%}
+                     {%- if block.settings.title != blank -%}
+                        {%- assign class_p = '' -%}
+                        {%- if block.settings.style == '1' -%}
+                        {%- assign class_p = 'gl_pl_30' -%}
+                        <div class="title-wrapper  basel-title-color-default basel-title-style-bordered basel-title-size-small text-center gl_mb_20">
+                           <div class="liner-continer">
+                              <span class="left-line"></span> 
+                              <h4 class="title"><strong>{{block.settings.title}}</strong><span class="title-separator"><span></span></span></h4>
+                              <span class="right-line"></span> 
+                           </div>
+                        </div>
+                        {%- else -%}
+                        {%- assign class_p = '' -%}
+                        <h5 class="widget-title">{{block.settings.title}}</h5>
+                        {%- endif -%}
+                     {%- endif -%}
+                     {%- for i in (1..6) -%}
+                        {%- assign shipping = 'shipping_' | append:i -%}
+                        {%- assign shipping_id = block.settings[shipping] -%}
+                        {%- if shipping_id != blank -%}
+                        <div class="spb__text_column spb__content_element {{class_p}} gl_mb_35">
+                           {%- assign shipping = shipping_id | replace: ' ,', ',' | replace: ', ', ',' | split: ',' -%}
+                           <div class="spb__wrapper">
+                              <p>{%- if shipping[0] != blank -%}<i class="fa fa-{{shipping[0]}}" style="font-size: 40px; color: #f1f1f0; float: left; margin: 3px 5px 15px 6px;">&nbsp;</i>{%- endif -%}<strong>{{shipping[1]}}</strong><br>
+                                 {{shipping[2]}}
+                              </p>
+                           </div>
+                        </div>
+                        {%- endif -%}
+                     {%- endfor -%}
+                  {%- when 'html' -%}
+                     <div id="shopify-{{block.id}}" class="sidebar-widget shopify widget_products" {{ block.shopify_attributes }}>
+                        {%- if block.settings.title != blank -%}<h5 class="widget-title">{{block.settings.title}}</h5>{%- endif -%}
+                        {%- if block.settings.code != blank -%}{{block.settings.code}}{%- endif -%}
+                     </div>
+                  {%- when 'text' -%}
+                     <div id="shopify-{{block.id}}" class="sidebar-widget shopify widget_products" {{ block.shopify_attributes }}>
+                        {%- if block.settings.title != blank -%}<h5 class="widget-title">{{block.settings.title}}</h5>{%- endif -%}
+                        {%- if block.settings.text != blank -%}{{block.settings.text}}{%- endif -%}
+                     </div>
+                  {%- else -%}
+                     <div id="basel-shopify-layered-nav-{{block.id}}" class="sidebar-widget basel-shopify-layered-nav" {{ block.shopify_attributes }}>
+                        {%- if block.settings.title != blank -%}<h5 class="widget-title">{{ block.settings.title }}</h5>{%- endif -%}
+                        {%- assign tags = block.settings.shop_by_tags  | replace: ' ,', ',' | replace: ', ', ',' | split: ',' -%}
+                        {%- if tags.size > 0 -%}{%- include 'filter_other' -%}{%- endif -%}
+                        {%- if check_tag_hide or tags.size == 0 -%}<style type="text/css">#basel-shopify-layered-nav-{{block.id}}{display: none}</style>{%- endif -%}
+                     </div>
+                {%- endcase -%}
+            {%- endfor -%}
+            </div>
+         </div>
+      </div>
+   </div>
+{%- else -%}
+<div class="text-center">{%- include 'no-blocks'-%}</div>   
+{%- endif -%}
+{%- schema -%}
+  {
+    "name": "Collections Sidebar",
+    "class": "widget-area",
+    "max_blocks": 15,
+    "blocks": [
+      {
+        "type": "category",
+        "name": "Categories",
+        "limit": 1,
+        "settings": [
+         { 
+          "type":"text",
+          "id":"title",
+          "label":"Categories",
+          "default":"Product Categories"
+          },
+          {
+            "type": "radio",
+            "id": "top_categories_source",
+            "label": "Show all \/ Show a link list",
+            "options": [
+              {
+                "value": "top_categories_show_all",
+                "label": "Show all"
+              },
+              {
+                "value": "top_categories_link_list",
+                "label": "Show a link list"
+              }
+            ]
+          },
+          {
+           "type": "link_list",
+           "id": "top_categories_link_list",
+           "label": "Choose a link list"
+         }
+        ]
+      },
+      {
+        "type": "collection",
+        "name": "Featured Products",
+        "settings": [
+         {
+          "type":"text",
+          "id":"title",
+          "label":"Title",
+          "default":"Sale Products"
+          },
+          {
+           "type": "collection",
+           "id": "featured_product_list_collection",
+           "label": "Collection to use"
+         },
+          {
+           "type": "text",
+           "id": "featured_product_limit_all",
+           "label": "Number of products to show",
+           "default": "3"
+         }
+        ]
+      },
+      {
+        "type": "color",
+        "name": "By Color",
+        "limit": 1,
+        "settings": [
+         { 
+          "type":"text",
+          "id":"title",
+          "label":"Filter Title",
+          "default":"Filter by color"
+          },
+          {
+           "type": "textarea",
+           "id": "shop_by_tags_color",
+           "label": "Shop by tags list",
+           "default":"Blue, White, Red, Black, Brown",
+           "info": "Separate by a comma, Ex: Tag1, Tag2, Tag3"
+         }
+        ]
+      },
+      {
+        "type": "size",
+        "name": "By size",
+        "limit": 1,
+        "settings": [
+         { 
+          "type":"text",
+          "id":"title",
+          "label":"Filter Title",
+          "default":"Filter by size"
+          },
+          {
+           "type": "textarea",
+           "id": "shop_by_tags_size",
+           "label": "Shop by tags list",
+           "default":"L, M, XL, S, XS",
+           "info": "Separate by a comma, Ex: Tag1, Tag2, Tag3"
+         }
+        ]
+      },
+      {
+        "type": "price",
+        "name": "By price",
+        "limit": 1,
+        "settings": [
+         { 
+          "type":"text",
+          "id":"title",
+          "label":"Filter Title",
+          "default":"Price filter"
+          },
+          {
+           "type": "textarea",
+           "id": "shop_by_tags_price",
+           "label": "Shop by tags list",
+           "default":"£0.00 - £140.00, £140.00 - £280.00, £280.00 - £420.00, £420.00 - £560.00, £560.00 +",
+           "info": "Separate by a comma, Ex: Tag1, Tag2, Tag3"
+         }
+        ]
+      },
+      {
+        "type": "brand",
+        "name": "By Brand",
+        "limit": 1,
+        "settings": [
+         { 
+          "type":"text",
+          "id":"title",
+          "label":"Filter Title",
+          "default":"Brand filter"
+          },
+          {
+           "type": "textarea",
+           "id": "shop_by_tags_brand",
+           "label": "Shop by tags list",
+           "info": "Separate by a comma, Ex: Tag1, Tag2, Tag3"
+         }
+        ]
+      },
+      {
+        "type": "tag",
+        "name": "By tag",
+        "limit": 1,
+        "settings": [
+         { 
+          "type":"text",
+          "id":"title",
+          "label":"Filter Title",
+          "default":"Product Tags"
+          },
+          {
+           "type": "textarea",
+           "id": "shop_by_tags",
+           "label": "Shop by tags list",
+           "info": "Separate by a comma, Ex: Tag1, Tag2, Tag3"
+         }
+        ]
+      },
+      {
+        "type": "banner",
+        "name": "Banner",
+        "settings": [
+          {
+           "type": "image_picker",
+           "id": "img_banner",
+           "label":"Image"
+         },
+          {
+           "type": "url",
+           "id": "link",
+           "label": "Choose link"
+         }
+        ]
+      },
+      {
+        "type": "shipping",
+        "name": "SHIPPING DELIVERY",
+        "limit": 1,
+        "settings": [
+         {
+          "type":"text",
+          "id":"title",
+          "label":"Title",
+          "default":"SHIPPING & DELIVERY"
+         },
+         {
+           "type": "select",
+           "id": "style",
+           "label": "Style",
+           "default": "2",
+           "options": [
+             {
+               "value": "1",
+               "label": "Style 1"
+             },
+             {
+               "value": "2",
+               "label": "Style 2"
+             }
+           ]
+         },
+         {
+           "type": "paragraph",
+           "content": "ex:clock-o,Save up to 20%,limited time [Font Awesome](http:\/\/fontawesome.io\/icons\/)"
+         },
+         {
+           "type": "textarea",
+           "id": "shipping_1",
+           "label":"Shipping Block 1"
+         },
+         {
+           "type": "textarea",
+           "id": "shipping_2",
+           "label":"Shipping Block 2"
+         },
+         {
+           "type": "textarea",
+           "id": "shipping_3",
+           "label":"Shipping Block 3"
+         },
+         {
+           "type": "textarea",
+           "id": "shipping_4",
+           "label":"Shipping Block 4"
+         },
+         {
+           "type": "textarea",
+           "id": "shipping_5",
+           "label":"Shipping Block 5"
+         },
+         {
+           "type": "textarea",
+           "id": "shipping_6",
+           "label":"Shipping Block 6"
+         }
+        ]
+      },
+      {
+        "type": "html",
+        "name": "Custom HTML",
+        "settings": [
+         {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Custom HTML"
+          },
+          {
+            "type": "html",
+            "id": "code",
+            "label": "HTML"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "name": "Text",
+        "settings": [
+            {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Talk about your brand"
+            },
+            {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+            }
+         ]
+      },
+      {
+        "type": "others",
+        "name": "Filter By Others",
+        "settings": [
+         { 
+          "type":"text",
+          "id":"title",
+          "label":"Filter Title",
+          "default":"Filter by other"
+          },
+          {
+           "type": "textarea",
+           "id": "shop_by_tags",
+           "label": "Shop by tags list",
+           "info": "Separate by a comma, Ex: Tag1, Tag2, Tag3"
+         }
+        ]
+      }
+    ]
+  }
+{% endschema %}

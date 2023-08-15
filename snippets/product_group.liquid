@@ -1,0 +1,40 @@
+{%- for link in linklists[product.handle].links -%}
+{% if link.type == 'product_link' %}
+{% assign pr = link.object %}
+{%- assign product_image_size = '80x' -%}
+{%- assign sold_out = true -%}
+{% if pr.available  %}
+{%- assign sold_out = false -%}
+{%- endif -%}
+
+   {% unless sold_out or product.id == pr.id %}
+          {% for variant in pr.variants %}
+            {% assign featured_image = variant.image | default: pr.featured_image %}
+            {% assign on_sale = false %}
+            {% if variant.compare_at_price > variant.price %}
+            {% assign on_sale = true %}
+            {% endif %}
+            {% if variant.available %}
+               <tr id=product-{{product.id}} class="{% cycle 'tea-table-odd', '' %}">
+                  <td>
+                    <div class="quantity">
+                      <input type="button" value="-" class="minus">
+                      <input type="number" step="1" min="0"{%- if variant.inventory_management == blank or variant.inventory_policy == 'continue' %} max=""{%- else %} max="{{ variant.inventory_quantity }}"{%- endif %} name="updates[{{ variant.id }}]" data-variant_id="{{ variant.id }}" onfocus="this.select()" id="Quantity_{{ variant.id }}" value="0" title="Qty" class="gl_group_quantity input-text qty text" size="4" pattern="[0-9]*" inputmode="numeric">
+                      <input type="button" value="+" class="plus">
+                    </div>
+                  </td>
+                  <td class="label tea_variation">
+                      <label for="product-{{ pr.id }}"><a href="{{  variant.url | within: collection }}">{{ pr.title }}{% if pr.has_only_default_variant == false -%} - {{ variant.title }}{%- endif -%}</a></label>
+                  </td>
+                  <td class="price">
+                     {%- if on_sale -%}<del class="old-product-price">{{ variant.compare_at_price | money }}</del> <ins class="product-price">{{ variant.price | money }}</ins>
+                      {%- else -%}
+                      <span class="product-price">{{ variant.price | money }}</span> 
+                      {%- endif -%}
+                  </td>
+               </tr>
+            {% endif %}
+          {% endfor %}
+{%- endunless -%}
+{%- endif -%}
+{%- endfor -%}

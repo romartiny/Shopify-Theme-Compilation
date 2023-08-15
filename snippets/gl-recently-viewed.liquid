@@ -1,0 +1,62 @@
+{%- assign section_settings_countdown = settings.recently_sale_countdown -%}
+{%- assign loop_countdown = settings.loop_recently_countdown -%}
+{%- assign recently_number = settings.recently_silder_per_view | plus: 0 -%}
+<section class="widget_recently_viewed_products products" id="recently-viewed-products" style="display:none">
+	<h3 class="title slider-title">{{settings.title_pr_recently}}</h3>
+      <div id="carousel-{{product.id}}" class="gl_carousel_container">
+        <div id="recently_wrap"	class="product-items owl-carousel" data-time='{{ settings.recently_silder_speed | plus: 0 }}' data-nav='{%- if settings.recently_hide_button -%}false{%- else -%}true{%- endif -%}' data-items='{{ recently_number }}' data-dots='{%- if settings.recently_hide_pagination -%}false{%- else -%}true{%- endif -%}' data-autoplay='{%- if settings.recently_autoplay -%}true{%- else -%}false{%- endif -%}' data-loop='{%- if settings.recently_slider_loop -%}true{%- else -%}false{%- endif -%}' data-medium='{%- if recently_number > 2 -%}{{ recently_number | minus: 1 }}{%- else -%}2{%- endif -%}'>
+        </div><!-- end product-items -->
+      </div><!-- end #carousel-{{product.id}} -->
+</section>
+<script>
+  jQuery(document).ready(function($) {
+    var ls = gl_Currency.cookie.tearead('tea-recent');
+    if(ls != null){ 
+      ls = ls.split(',');
+      var ls = ls.reverse();
+      //var length = ls.length;
+      // show many products
+      //ls = ls.slice(0,2);
+       //console.log(ls);
+      if(ls.length > 1){
+      	$("#recently-viewed-products").show();
+      } else if (ls != '{{product.handle}}') {
+      	$("#recently-viewed-products").show();
+      }
+      $.ajax({
+	      url: '/pages/recently-viewed-products/'+ls+'?q={{product.id}}{%- if collection -%}+{{collection.handle}}{%- endif -%}',
+	      dataType: 'html',
+	      type: 'GET',
+	      success: function(responsive) {
+	        //console.log(responsive);
+	         $('#recently_wrap').html(responsive).addClass('gl_carousel_data');
+	      },
+	      error: function(data) {
+	        console.log('ajax error');
+	      },
+	      complete: function() {
+	        baselThemeModule.shopcarousel();
+	        //countDown
+            baselThemeModule.countDownTimer();
+           //currency
+           $('.currency .active').trigger('click');
+           //product review
+           if ($(".shopify-product-reviews-badge").length > 0 && theme.gl_productreviews ) {
+              return window.SPR.registerCallbacks(), window.SPR.initRatingHandler(), window.SPR.initDomEls(), window.SPR.loadProducts(), window.SPR.loadBadges();
+           }
+	      }
+	    }); 
+    }else{
+      ls = new Array();
+    }
+    var c = '{{product.handle}}';
+    if(ls.indexOf(c)< 0 ){
+      if(ls.length >= 10){
+     ls.pop();
+      }
+   ls[ls.length]= (c);
+      try{ ls = ls.join(',');}catch(ex){}
+      gl_Currency.cookie.teawrite('tea-recent',ls);
+    }
+  });
+</script>

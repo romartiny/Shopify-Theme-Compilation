@@ -1,0 +1,334 @@
+{%- if section.settings.hidden_section -%}{%- capture check_admin -%}{{ content_for_header  }}{%- endcapture -%}<style> #shopify-section-{{ section.id }} { {%- if check_admin contains 'design_mode' -%}opacity: .5;filter: alpha(opacity=50){%- else -%}display: none !important{%- endif -%}}</style>{%- endif -%}
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{%- capture data_section -%}
+  {%- if section.settings.row_stretch == 'stretch_row' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true'
+  {%- elsif section.settings.row_stretch == 'stretch_row_content' or section.settings.row_stretch == 'stretch_row_content_no_spaces' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true' data-gl-stretch-content='true'
+  {%- else -%}
+  {%- assign class_has_fill = '' -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- unless image_size != blank -%}
+  {%- assign image_size = '2048x' -%}
+{%- endunless -%}
+{%- case section.settings.overlay_width -%}
+   {%- when '4' -%}
+      {%- assign class_phu = '4' -%}
+   {%- when '6' -%}
+      {%- assign class_phu = '3' -%}
+   {%- when '8' -%}
+      {%- assign class_phu = '2' -%}
+   {%- when '10' -%}
+      {%- assign class_phu = '1' -%}
+   {%- when '12' -%}
+      {%- assign class_phu = '12' -%}
+{%- endcase -%}
+{{ style_block_section }}
+<div {{ data_section }}{%- if section.settings.use_video and section.settings.video_url != blank %} data-gl-video-bg="{{ section.settings.video_url }}"{%- endif %} class="gl_custom_{{section.id}} {% if section.settings.use_parallax -%}basel-parallax{%- endif %} gl_row spb_row gl_row-fluid {{class_has_fill}} gl_row-flex{%- if section.settings.use_video and section.settings.video_url != blank %} opacity-video-bg gl_video-bg-container gl_has_youtube{%- endif %}{%- if section.settings.full_height %} gl_row-o-full-height gl_row-o-columns-{{section.settings.columns_position}}{%- endif -%}">
+   <div class="spb_column gl_column_container gl_col-sm-12">
+      <div class="gl_column-inner ">
+         <div class="spb_wrapper">
+            <div class="gl_row spb_row gl_inner gl_row-fluid text-center">
+               <div class="spb_column gl_column_container gl_col-md-{{ class_phu }} gl_hidden-sm gl_hidden-xs">
+                  <div class="gl_column-inner ">
+                     <div class="spb_wrapper"></div>
+                  </div>
+               </div>
+               <div class="spb_column gl_column_container gl_col-sm-12 gl_col-md-{{ section.settings.overlay_width }} gl_col-xs-12">
+                  <div class="gl_column-inner ">
+                     <div class="spb_wrapper">
+                        <div class="spb_text_column spb_content_element gl_custom_hour text-center">
+                           <div class="spb_wrapper gl_color_dark gl_p_same_strong">
+                              {%- if section.settings.title != blank -%}<h4 class="font-title" style="margin-bottom: 10px;">{{ section.settings.title }}</h4>{%- endif -%}
+                              {%- if section.settings.sub_title != blank or section.settings.richtext != blank -%}
+                              <hr style="margin-bottom: 10px;">
+                              {%- if section.settings.sub_title != blank -%}<h5 style="margin-bottom: 10px;">{{ section.settings.sub_title }}</h5>{%- endif -%}
+                              {{ section.settings.richtext}}
+                              {%- endif -%}
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="spb_column gl_column_container gl_col-md-{{ class_phu }} gl_hidden-sm gl_hidden-xs">
+                  <div class="gl_column-inner ">
+                     <div class="spb_wrapper"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{%- unless section.settings.row_stretch == 'default' -%}
+  <div class="gl_row-full-width gl_clearfix"></div>
+  {%- endunless -%}
+{%- schema -%}
+  {
+    "name": "information 2",
+    "class": "index-section has_section_gl_js",
+    "settings": [
+      {
+      "type": "header",
+      "content": "== General"
+      },
+      {
+        "type": "select",
+        "id": "row_stretch",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "stretch_row",
+            "label": "Stretch row"
+          },
+          {
+            "value": "stretch_row_content",
+            "label": "Stretch row and content"
+          },
+          {
+            "value": "stretch_row_content_no_spaces",
+            "label": "Stretch row and content (no paddings)"
+          }
+        ],
+        "label": "___ Row stretch",
+        "info": "Select stretching options for row and content (Note: stretched may not work properly if parent container has 'overflow: hidden' CSS property).",
+        "default": "default"
+      },
+      {
+        "type": "checkbox",
+        "id": "full_height",
+        "label": "Full height row?",
+        "info": "if checked row will be set to full height.",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "columns_position",
+        "options": [
+         {
+            "value": "middle",
+            "label": "Middle"
+          },
+         {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "stretch",
+            "label": "Stretch"
+          }
+        ],
+        "label": "___ Columns position (only for full height)",
+        "info": "Select columns position within row.",
+        "default": "middle"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_video",
+        "label": "Use video background?",
+        "info": "If checked, video will be used as row background.",
+        "default": false
+      },
+      {
+        "id": "video_url",
+        "type": "video_url",
+        "label": "YouTube link",
+        "accept": ["youtube"],
+        "default": "https://www.youtube.com/watch?v=flTcrOns02I"
+      },
+      {
+        "type": "header",
+        "content": "== Overlay settings"
+      },
+      {
+       "type": "select",
+       "id": "overlay_width",
+       "options": [
+         {
+           "value": "4",
+           "label": "4 columns - 33%"
+         },
+         {
+           "value": "6",
+           "label": "6 columns - 50%"
+         },
+         {
+           "value": "8",
+           "label": "8 columns - 66%"
+         },
+         {
+           "value": "10",
+           "label": "10 columns - 83%"
+         },
+         {
+           "value": "12",
+           "label": "12 columns - 100%"
+         }
+       ],
+       "label": "== Select column width",
+       "default": "4"
+      },
+      {
+        "id": "title",
+        "type": "text",
+        "label": "Overlay heading",
+        "default": "VISIT OUR STORE IN PARIS"
+      },
+      {
+        "id": "sub_title",
+        "type": "text",
+        "label": "sub Overlay heading",
+        "default": "OPENING HOURS:"
+      },
+      {
+        "id": "richtext",
+        "type": "richtext",
+        "label": "Text address and hours",
+        "default": "<p>Mon - Fri <strong>8am – 6.30pm</strong><br>Saturday <strong>8am – 6pm</strong><br>Sunday <strong>CLOSED</strong></p>"
+      },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "image_picker",
+        "id": "section_bg_image",
+        "label": "Background Image"
+      },
+      {
+        "type": "color",
+        "id": "section_bg_color",
+        "label": "Background color"
+      },
+      {
+        "type": "color",
+        "id": "section_border_color",
+        "label": "Border color"
+      },
+      {
+        "type": "select",
+        "id": "section_border_style",
+        "options": [
+         {
+            "value": "solid",
+            "label": "Solid"
+          },
+         {
+            "value": "dotted",
+            "label": "Dotted"
+          },
+          {
+            "value": "dashed",
+            "label": "Dashed"
+          },
+          {
+            "value": "double",
+            "label": "Double"
+          },
+          {
+            "value": "groove",
+            "label": "Groove"
+          },
+          {
+            "value": "Ridge",
+            "label": "Ridge"
+          },
+          {
+            "value": "inset",
+            "label": "Inset"
+          },
+          {
+            "value": "outset",
+            "label": "Outset"
+          }
+        ],
+        "label": "Border style",
+        "default": "solid"
+      },
+      {
+        "type": "text",
+        "id": "section_border",
+        "label": "Borders Integer px ( top-right-bottom-left )",
+        "info": "0-0-1px-0"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      },
+      {
+        "type": "header",
+        "content": "== Basel Extras"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden_section",
+        "label": "Hidden Section?",
+        "info": "if checked section will be set to hidden.",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "use_parallax",
+        "label": "Use Basel parallax?",
+        "default": false
+      }
+    ],
+    "presets": [
+      {
+        "name": "information style 2",
+        "category": "Store information"
+      }
+    ]
+  }
+{% endschema %}

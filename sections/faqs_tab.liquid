@@ -1,0 +1,384 @@
+{%- if section.settings.hidden_section -%}{%- capture check_admin -%}{{ content_for_header  }}{%- endcapture -%}<style> #shopify-section-{{ section.id }} { {%- if check_admin contains 'design_mode' -%}opacity: .5;filter: alpha(opacity=50){%- else -%}display: none !important{%- endif -%}}</style>{%- endif -%}
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{{style_block_section}}
+<div class="gl_custom_{{section.id}} gl_row spb_row gl_row-fluid gl_row-has-fill">
+	{%- if section.blocks.size > 0 -%}
+   <div class="spb_column gl_column_container{%- if section.settings.use_form_question %} gl_col-sm-7{%- else %} gl_col-sm-12{%-endif-%}">
+      <div class="gl_column-inner"{%- if section.settings.use_form_question %} style="padding-right: 50px"{%- endif -%}>
+         <div class="spb_wrapper">
+            <div class="gl_tta-container" data-gl-action="collapse">
+               <div class="shopify-tabs gl_general gl_tta gl_tta-tabs gl_tta-color-white gl_tta-style-classic gl_tta-shape-rounded gl_tta-spacing-1 gl_tta-o-no-fill gl_tta-tabs-position-top gl_tta-controls-align-left">
+                  <div class="gl_tta-tabs-container">
+                     <ul class="gl_tta-tabs-list">
+                     	{%- for block in section.blocks -%}
+                        <li class="gl_tta-tab{%- if forloop.first == true %} gl_active{%- endif -%}" data-gl-tab=""><a href="#{{block.id}}" data-gl-tabs="" data-gl-container=".gl_tta"><span class="gl_tta-title-text">{{ block.settings.title }}</span></a></li>
+                     	{%- endfor -%}
+                     </ul>
+                  </div>
+                  <div class="gl_tta-panels-container">
+                     <div class="gl_tta-panels">
+                     	{%- for block in section.blocks -%}
+                        {%- assign f_index = forloop.index -%}
+                        <div class="gl_tta-panel{%- if forloop.first == true %} gl_active{%- endif -%}" id="{{block.id}}" data-gl-content=".gl_tta-panel-body">
+                           <div class="gl_tta-panel-heading">
+                              <h4 class="gl_tta-panel-title"><a href="#{{block.id}}" data-gl-accordion="" data-gl-container=".gl_tta-container"><span class="gl_tta-title-text">{{ block.settings.title }}</span></a></h4>
+                           </div>
+                           <div class="gl_tta-panel-body">
+                           {%- for i in (1..10) -%}
+                              {%- assign question = 'question_' | append:i -%}
+                              {%- assign answering = 'answering_' | append:i -%}
+                              {%- assign question_id = block.settings[question] -%}
+                              {%- assign answering_id = block.settings[answering] -%}
+                              {%- if question_id != blank and answering_id != blank -%}
+                              <div id="{{block.id}}-9e8e0d41-a38d" class="gl_toggle gl_toggle_arrow gl_toggle_color_grey gl_toggle_size_md{%-if f_index == forloop.index %} gl_toggle_active{%- endif -%}">
+                                 <div class="gl_toggle_title">
+                                    <h4>{{question_id}}</h4>
+                                    <i class="gl_toggle_icon"></i>
+                                 </div>
+                                 <div class="gl_toggle_content">
+                                    {{answering_id}}
+                                 </div>
+                              </div>
+                              {%- endif -%}
+                           {%- endfor -%}
+                           </div>
+                        </div>
+                        {%- endfor -%}
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   {%- endif -%}
+   {%- if section.settings.use_form_question -%}
+   <div class="spb_column gl_column_container gl_col-has-fill{%- if section.blocks.size < 1 %} gl_col-sm-12{%- else %} gl_col-sm-5{%- endif -%}">
+      <div class="gl_column-inner gl_custom_1450202410260" style="margin-top: 30px !important; border-top-width: 5px !important;border-right-width: 5px !important; border-bottom-width: 5px !important;border-left-width: 5px !important;padding-top: 20px !important;padding-right: 20px !important;padding-bottom: 10px !important;padding-left: 20px !important; border-left-color: #f4f4f4 !important;border-left-style: solid !important;border-right-color: #f4f4f4 !important;border-right-style: solid !important; border-top-color: #f4f4f4 !important;border-top-style: solid !important; border-bottom-color: #f4f4f4 !important; border-bottom-style: solid !important;">
+         <div class="spb_wrapper">
+            <div role="form" class="wpcf7" lang="{{ shop.locale }}" dir="ltr">
+               <div class="screen-reader-response"></div>
+               {%- form 'contact' -%}
+               	{%- if form.posted_successfully? -%}
+                     <div class="wpcf7-response-output wpcf7-mail-sent-ok" role="alert">{{ 'contact.form.post_success' | t }}</div>
+                  {%- elsif form.errors -%}
+                     <div class="wpcf7-response-output wpcf7-validation-errors" role="alert">{{ form.errors | default_errors }}</div>
+                  {%- endif -%}
+                  {%- if section.settings.title != blank -%}<p><span style="color:#383838; font-size:18px; font-weight:bold;">{{ section.settings.title }}</span></p>{%- endif -%}
+                  {%- if section.settings.sub_text != blank -%}<p style="color:#b4b4b4;">{{ section.settings.sub_text }}</p>{%- endif -%}
+                  {%- if section.settings.hidden_form_name == false -%}
+                  <p>
+                     <label>{{ section.settings.name }}</label> 
+                     <span class="wpcf7-form-control-wrap your-name">
+                     <input type="text" name="contact[name]" value="{%- if form[name] -%}{{ form[name] }}{%- elsif customer -%}{{ customer.name }}{%- endif -%}" size="40" class="{%- if form.errors contains 'name' -%}input__error{%- else -%}input__ok{%- endif -%}" aria-required="true" aria-invalid="false">
+                     </span> 
+                  </p>
+                  {%- endif -%}
+                  <p>
+                     <label>{{ section.settings.email }}</label> 
+                     <span class="wpcf7-form-control-wrap your-email">
+                        <input type="email" name="contact[email]" value="{%- if form.email -%}{{ form.email }}{%- elsif customer -%}{{ customer.email }}{%- endif -%}" size="40" class="{%- if form.errors contains 'email' -%}input__error{%- else -%}input__ok{%- endif -%}" aria-required="true" aria-invalid="false">
+                     </span> 
+                  </p>
+                  <p>
+                  	<label>{{ section.settings.message }}</label> 
+                  	<span class="wpcf7-form-control-wrap your-message">
+                        <textarea name="contact[body]" cols="40" rows="10" class="{%- if form.errors contains 'body' -%}input__error{%- else -%}input__ok{%- endif -%}" aria-required="true" aria-invalid="false">{%- if form.body -%}{{ form.body }}{%- endif -%}</textarea>
+                     </span>
+                  </p>
+                  <p>
+                  	<input type="submit" value="{{ section.settings.submit }}" class="wpcf7-form-control wpcf7-submit btn-color-primary btn">
+                  </p>
+                {%- endform -%}
+            </div>
+         </div>
+      </div>
+   </div>
+   {%- endif -%}
+</div>
+{%- schema -%}
+  {
+    "name": "FaQs Tabs",
+    "class": "index-section gl_tabs",
+    "settings": [
+      {
+      "type": "header",
+      "content": "== Ask a Question settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_form_question",
+        "label": "Show Ask a Question?",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden_form_name",
+        "label": "Hidden form name?",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Ask a Question"
+      },
+      {
+        "type": "textarea",
+        "id": "sub_text",
+        "label": "Sub text",
+        "default": "Sed primis eu conubia erat ut nam vitae a habitant dui adipiscing a dignissim eu a ad venenatis. Non vivamus enim himenaeos porta id morbi montes ut sem scelerisque in"
+      },
+      {
+        "type": "text",
+        "id": "name",
+        "label": "form name",
+        "default": "Your Name"
+      },
+      {
+        "type": "text",
+        "id": "email",
+        "label": "form email",
+        "default": "Your Email (required)"
+      },
+      {
+        "type": "text",
+        "id": "message",
+        "label": "form message",
+        "default": "Your Message"
+      },
+      {
+        "type": "text",
+        "id": "submit",
+        "label": "form submit",
+        "default": "ASK A QUESTION"
+      },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      },
+      {
+        "type": "header",
+        "content": "== Basel Extras"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden_section",
+        "label": "Hidden Section?",
+        "info": "if checked section will be set to hidden.",
+        "default": false
+      }
+    ],
+    "blocks": [
+      {
+        "type": "block",
+        "name": "Text block",
+        "settings": [
+        	{
+              "id": "title",
+              "type": "text",
+              "label": "Question",
+              "default": "Privacy Policy"
+            },
+        	{
+		        "type": "header",
+		        "content": "== Question/Answering 1"
+		    },
+            {
+              "id": "question_1",
+              "type": "text",
+              "label": "Question",
+              "default": "Eu dictumst cum at sed euismod condimentum?"
+            },
+            {
+              "id": "answering_1",
+              "type": "textarea",
+              "label": "Answering",
+              "default": "Justo est cum sit fames ac convallis est non leo rhoncus feugiat scelerisque tempus nec sapien vestibulum dis parturient felis a taciti."
+            },
+            {
+		        "type": "header",
+		        "content": "== Question/Answering 2"
+		    },
+            {
+              "id": "question_2",
+              "type": "text",
+              "label": "Question",
+              "default": "Odio molestie hac eros consectetur scelerisque?"
+            },
+            {
+              "id": "answering_2",
+              "type": "textarea",
+              "label": "Answering",
+              "default": "Eu tincidunt magnis erat malesuada vulputate parturient nisl a nisl in a facilisis porttitor ullamcorper nec a a lectus eget non leo ad ad parturient pretium magna.A ligula dis vestibulum dapibus."
+            },
+            {
+		        "type": "header",
+		        "content": "== Question/Answering 3"
+		    },
+            {
+              "id": "question_3",
+              "type": "text",
+              "label": "Question",
+              "default": "Odio molestie hac eros consectetur scelerisque?"
+            },
+            {
+              "id": "answering_3",
+              "type": "textarea",
+              "label": "Answering",
+              "default": "Eu tincidunt magnis erat malesuada vulputate parturient nisl a nisl in a facilisis porttitor ullamcorper nec a a lectus eget non leo ad ad parturient pretium magna.A ligula dis vestibulum dapibus."
+            },
+            {
+		        "type": "header",
+		        "content": "== Question/Answering 4"
+		    },
+            {
+              "id": "question_4",
+              "type": "text",
+              "label": "Question",
+              "default": "Odio molestie hac eros consectetur scelerisque?"
+            },
+            {
+              "id": "answering_4",
+              "type": "textarea",
+              "label": "Answering",
+              "default": "Eu tincidunt magnis erat malesuada vulputate parturient nisl a nisl in a facilisis porttitor ullamcorper nec a a lectus eget non leo ad ad parturient pretium magna.A ligula dis vestibulum dapibus."
+            },
+            {
+		        "type": "header",
+		        "content": "== Question/Answering 5"
+		    },
+            {
+              "id": "question_5",
+              "type": "text",
+              "label": "Question",
+              "default": "Odio molestie hac eros consectetur scelerisque?"
+            },
+            {
+              "id": "answering_5",
+              "type": "textarea",
+              "label": "Answering",
+              "default": "Eu tincidunt magnis erat malesuada vulputate parturient nisl a nisl in a facilisis porttitor ullamcorper nec a a lectus eget non leo ad ad parturient pretium magna.A ligula dis vestibulum dapibus."
+            },
+            {
+		        "type": "header",
+		        "content": "== Question/Answering 6"
+		    },
+            {
+              "id": "question_6",
+              "type": "text",
+              "label": "Question",
+              "default": "Odio molestie hac eros consectetur scelerisque?"
+            },
+            {
+              "id": "answering_6",
+              "type": "textarea",
+              "label": "Answering",
+              "default": "Eu tincidunt magnis erat malesuada vulputate parturient nisl a nisl in a facilisis porttitor ullamcorper nec a a lectus eget non leo ad ad parturient pretium magna.A ligula dis vestibulum dapibus."
+            },
+            {
+		        "type": "header",
+		        "content": "== Question/Answering 7"
+		    },
+            {
+              "id": "question_7",
+              "type": "text",
+              "label": "Question"
+            },
+            {
+              "id": "answering_7",
+              "type": "textarea",
+              "label": "Answering"
+            },
+            {
+		        "type": "header",
+		        "content": "== Question/Answering 8"
+		    },
+            {
+              "id": "question_8",
+              "type": "text",
+              "label": "Question"
+            },
+            {
+              "id": "answering_8",
+              "type": "textarea",
+              "label": "Answering"
+            },
+            {
+		        "type": "header",
+		        "content": "== Question/Answering 9"
+		    },
+            {
+              "id": "question_9",
+              "type": "text",
+              "label": "Question"
+            },
+            {
+              "id": "answering_9",
+              "type": "textarea",
+              "label": "Answering"
+            },
+            {
+		        "type": "header",
+		        "content": "== Question/Answering 10"
+		    },
+            {
+              "id": "question_10",
+              "type": "text",
+              "label": "Question"
+            },
+            {
+              "id": "answering_10",
+              "type": "textarea",
+              "label": "Answering"
+            }
+        ]
+      }
+    ]
+  }
+{% endschema %}

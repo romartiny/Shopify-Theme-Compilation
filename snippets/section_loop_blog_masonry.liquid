@@ -1,0 +1,54 @@
+{%- unless image_size -%}
+{%- assign image_size = '360x220' -%}
+{%- endunless -%}
+{%- unless gl_colum_width -%}
+{%- assign gl_colum_width = 'col-xs-6 col-sm-4 col-md-3' -%}
+{%- endunless -%}
+{%- unless posts_excerpt_length -%}
+{%- assign posts_excerpt_length = 19 -%}
+{%- endunless -%}
+{%- assign number_of_comments = article.comments_count -%}
+<article id="post-{{ article.id }}" class="blog-design-masonry post-{{ article.id }} post type-post {{ gl_colum_width }} {{gl_masonry}}{%- if article.image %} has-post-thumbnail{%- endif %}{%- if gl_slide %} post-slide{%- else %} blog-post-loop{%- endif -%}">
+   <header class="entry-header">
+      {%- if article.image -%}
+      <figure class="entry-thumbnail">
+         <div class="post-img-wrapp">
+            <a href="{{ article.url }}">
+            <img src="{%-include 'gl_image_format_crop',src: article.image.src, size: image_size -%}" width="{{ image_size | split: 'x'| first }}" height="{{ image_size | split: 'x'| last }}" title="{%- if article.image.alt != blank -%}{{ article.image.alt }}{%- else -%}{{ article.title }}{%- endif -%}" alt="{%- if article.image.alt != blank -%}{{ article.image.alt }}{%- else -%}{{ article.title }}{%- endif -%}" class="attachment-large attachment-medium">
+            </a>
+         </div>
+      </figure>
+      {%- endif -%}
+     {%- if enable_post_date == 'true' or enable_post_date == true -%}
+      <div class="post-date">
+      <span class="post-date-day">{{ article.published_at | date: "%d" }}</span><span class="post-date-month">{{ article.published_at | date: "%b" }}</span>
+      </div>
+     {%- endif -%}
+      <div class="post-mask">
+         {%- if enable_post_categories == 'true' or enable_post_categories == true -%}<div class="meta-post-categories"><a href="{{ blog.url }}" rel="category tag" >{{ blog.title }}</a></div>{%- endif -%}
+         {%- if enable_title == 'true' or enable_title == true -%}<h3 class="entry-title"><a href="{{ article.url }}" rel="bookmark" >{{ article.title }}</a></h3>{%- endif -%}
+         {%- if enable_meta == 'true' or enable_meta == true or blog.comments_enabled? -%}
+         <div class="entry-meta">
+            <ul class="entry-meta-list">
+               {%- if enable_meta == 'true' or enable_meta == true -%}<li class="meta-author">{{ 'blogs.article.posted_by' | t }} <span class="name_author">{{ article.author }}</span></li>{%- endif -%}
+               {%- if blog.comments_enabled? -%}<li><span class="meta-reply"><a href="{{ article.url }}#comments" >{%- if number_of_comments > 0 -%}{{ 'blogs.comments.with_count' | t: count: number_of_comments }}{%- else -%}{{ 'blogs.comments.title_leave' | t }}{%- endif -%}</a></span></li>{%- endif -%}
+            </ul>
+         </div><!-- .entry-meta -->
+         {%- endif -%}
+      </div>
+   </header>
+   <!-- .entry-header -->
+   <div class="entry-content">
+      {%- if enable_text == 'true' or enable_text == true -%}
+      <p>
+         {%- if article.excerpt.size > 0 -%}
+            {{ article.excerpt }}
+         {%- else -%}
+           {{ article.content | strip_html | truncatewords: posts_excerpt_length }}
+         {%- endif -%}
+      </p>
+      {%- endif -%}
+      {%- if enable_button == 'true' or enable_button == true -%}<p class="read-more-section"><a class="btn btn-style-link btn-read-more more-link" href="{{ article.url }}" >{{ 'blogs.article.read_more' | t }}</a></p>{%- endif -%}
+   </div>
+   <!-- .entry-content -->
+</article>

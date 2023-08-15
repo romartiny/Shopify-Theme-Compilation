@@ -1,0 +1,957 @@
+{%- if section.settings.hidden_section -%}{%- capture check_admin -%}{{ content_for_header  }}{%- endcapture -%}<style> #shopify-section-{{ section.id }} { {%- if check_admin contains 'design_mode' -%}opacity: .5;filter: alpha(opacity=50){%- else -%}display: none !important{%- endif -%}}</style>{%- endif -%}
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{%- capture data_section -%}
+  {%- if section.settings.row_stretch == 'stretch_row' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true'
+  {%- elsif section.settings.row_stretch == 'stretch_row_content' or section.settings.row_stretch == 'stretch_row_content_no_spaces' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true' data-gl-stretch-content='true'
+  {%- else -%}
+  {%- assign class_has_fill = '' -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- capture data_grid -%}
+  {%- if section.settings.photo_design == 'grid' -%}
+  instagram-grid
+  {%- elsif section.settings.photo_design == 'slider' -%}
+  instagram-slider
+  {%- else -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- capture style_title -%}
+  {%- if section.settings.bg_title != blank -%}
+  style="background-color: {{section.settings.bg_title}} !important"
+  {%- endif -%}
+{%- endcapture -%}
+{%- unless image_size != blank -%}
+  {%- assign image_size = '35x' -%}
+{%- endunless -%}
+{%- case section.settings.width -%}
+   {%- when '8' -%}
+      {%- assign class_phu = '2' -%}
+      {%- assign class_left = '4' -%}
+      {%- assign class_double = '4' -%}
+   {%- when '10' -%}
+      {%- assign class_phu = '1' -%}
+       {%- assign class_left = '2' -%}
+       {%- assign class_double = '5' -%}
+   {%- when '12' -%}
+      {%- assign class_phu = '12' -%}
+      {%- assign class_left = '12' -%}
+      {%- assign class_double = '6' -%}
+{%- endcase -%}
+{%- assign number = section.settings.silder_per_view | plus: 0 -%}
+{%- if section.settings.conditions_setting == '1' -%}
+   {%- assign num_limit = section.settings.number | plus: 0 -%}
+{%- else -%}
+   {%- assign num_limit = section.blocks.size | plus: 0 -%}
+{%- endif -%}
+{%- assign collection = collections[section.settings.id_collection] -%}
+{%- if section.settings.conditions_setting == '1' -%}
+   {%- if collection.products_count > num_limit -%}
+      {%- assign limit = num_limit | divided_by: 2 -%}
+      {%- assign times_limit = limit | times: 2 -%}
+      {%- assign minus_limit = num_limit | minus: times_limit -%}
+      {%- assign limit = limit | plus: minus_limit -%}
+      {%- assign re_limit = limit | plus: 1 -%} 
+   {%- else -%}
+      {%- assign limit = collection.products_count | divided_by: 2 -%}
+      {%- assign times_limit = limit | times: 2 -%}
+      {%- assign minus_limit = collection.products_count | minus: times_limit -%}
+      {%- assign limit = limit | plus: minus_limit -%}
+      {%- assign re_limit = limit | plus: 1 -%}   
+   {%- endif -%}
+{%- else -%}
+   {%- assign limit = num_limit | divided_by: 2 -%}
+   {%- assign times_limit = limit | times: 2 -%}
+   {%- assign minus_limit = num_limit | minus: times_limit -%}
+   {%- assign limit = limit | plus: minus_limit -%}
+   {%- assign re_limit = limit | plus: 1 -%} 
+{%- endif -%}
+ {{ style_block_section }}
+<div {{ data_section }}{%- if section.settings.use_video and section.settings.video_url != blank %} data-gl-video-bg="{{ section.settings.video_url }}"{%- endif %} class="gl_custom_{{section.id}} {% if section.settings.row_stretch == 'stretch_row_content_no_spaces' %}gl_row-no-padding{%- endif %}{%- if section.settings.use_parallax %} basel-parallax{%- endif %} gl_row spb_row gl_row-fluid {{class_has_fill}} {%- if section.settings.use_video and section.settings.video_url != blank %} opacity-video-bg gl_video-bg-container gl_has_youtube{%- endif %}{%- if section.settings.full_height %} gl_row-o-full-height gl_row-o-columns-{{section.settings.columns_position}}{%- endif %}{%- if section.settings.equal_height %} gl_row-o-equal-height{%- endif %}{%- unless section.settings.content_position == 'default' %} gl_row-o-content-{{section.settings.content_position}}{%- endunless %}{%- if section.settings.equal_height or section.settings.full_height or section.settings.content_position != 'default' %} gl_row-flex{%- endif -%}">
+   <div class="spb_column gl_column_container gl_col-sm-12">
+      <div class="gl_column-inner gl_pt_0">
+      {%- case section.settings.menu_price_position -%}
+         {%- when 'right' -%}
+            <div class="spb_wrapper">
+               {%- if section.settings.title != blank -%}
+               <div class="gl_row spb_row gl_inner gl_row-fluid">
+                  <div class="spb_column gl_column_container gl_col-md-{{class_left}}"><div class="gl_column-inner"><div class="spb_wrapper"></div></div></div>
+                  <div class="spb_column gl_column_container gl_col-sm-{{section.settings.width}}">
+                     <div class="gl_column-inner ">
+                        <div class="spb_wrapper">
+                           <div class="title-wrapper basel-title-color-{{ section.settings.title_color }} basel-title-style-{{ section.settings.title_style }} basel-title-size-{{ section.settings.title_size }} text-{{ section.settings.title_align }} gl_mb_40">
+                              {%- if section.settings.sub_title != blank -%}
+                              <span class="title-subtitle font-{{ section.settings.subtitle_font }}">{{ section.settings.sub_title }}</span>
+                              {%- endif -%}
+                              {%- if section.settings.title != blank -%}
+                              <div class="liner-continer"> 
+                                 <span class="left-line"></span> 
+                                 <span class="title">{{ section.settings.title }}<span class="title-separator"><span></span></span></span> 
+                                 <span class="right-line"></span> 
+                              </div>
+                              {%- endif -%}
+                              {%- if section.settings.text_after_title != blank -%}
+                              <span class="title-after_title">{{ section.settings.text_after_title }}</span>
+                              {%- endif -%}
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               {%- endif -%}
+               <div class="gl_row spb_row gl_inner gl_row-fluid color-scheme-{{section.settings.text_color}} {%- if section.settings.button_label != blank and section.settings.button_link != blank %} gl_mb_20{%- endif -%}">
+                  <div class="spb_column gl_column_container gl_col-md-{{class_left}}"><div class="gl_column-inner"><div class="spb_wrapper"></div></div></div>
+               {%- assign check =  true -%}
+               {%- assign check_numr =  0 -%}
+               {%- if section.settings.conditions_setting == '1' -%}
+                  {%- for product in collection.products limit: num_limit -%}
+                     {%- if check -%}
+                        <div class="spb_column gl_column_container gl_col-sm-6 gl_col-md-{{class_double}} gl_col-xs-12">
+                           <div class="gl_column-inner ">
+                              <div class="spb_wrapper">
+                     {%- endif -%}
+                                 {%- include 'menu_price' -%}
+                     {%- assign check =  false -%}
+                     {%- assign check_numr  =  check_numr | plus: 1  -%}
+                     {%- if check_numr == limit or forloop.last == true  -%}
+                              </div>
+                           </div>
+                        </div>
+                     {%- assign check =  true -%}
+                     {%- assign check_numr =  0 -%}
+                     {%- endif -%}
+                  {%- endfor -%}
+               {%- else -%}
+                  {%- for block in section.blocks -%}
+                  {%- assign product = all_products[block.settings.product_id] -%}
+                     {%- if check -%}
+                        <div class="spb_column gl_column_container gl_col-sm-6 gl_col-md-{{class_double}} gl_col-xs-12" {{ block.shopify_attributes }}>
+                           <div class="gl_column-inner ">
+                              <div class="spb_wrapper">
+                     {%- endif -%}
+                                 {%- include 'menu_price_block' -%}
+                     {%- assign check =  false -%}
+                     {%- assign check_numr  =  check_numr | plus: 1  -%}
+                     {%- if check_numr == limit or forloop.last == true  -%}
+                              </div>
+                           </div>
+                        </div>
+                     {%- assign check =  true -%}
+                     {%- assign check_numr =  0 -%}
+                     {%- endif -%}
+                  {%- endfor -%}
+               {%- endif -%}
+               </div>
+               {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+               <div class="gl_row spb_row gl_inner gl_row-fluid">
+                  <div class="spb_column gl_column_container gl_col-md-{{class_left}}"><div class="gl_column-inner"><div class="spb_wrapper"></div></div></div>
+                  <div class="spb_column gl_column_container gl_col-sm-{{section.settings.width}}">
+                     <div class="gl_column-inner ">
+                        <div class="spb_wrapper">
+                           <div class="basel-button-wrapper text-{{section.settings.btn_align}}">
+                              <a href="{{ section.settings.button_link }}" class="btn btn-color-{{ section.settings.button_color }} btn-style-{{ section.settings.button_style }} btn-size-{{ section.settings.button_size }}">{{ section.settings.button_label }}</a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               {%- endif -%}
+            </div>
+         {%- when 'left' -%}
+            <div class="spb_wrapper">
+               {%- if section.settings.title != blank -%}
+               <div class="gl_row spb_row gl_inner gl_row-fluid">
+                  <div class="spb_column gl_column_container gl_col-sm-{{section.settings.width}}">
+                     <div class="gl_column-inner ">
+                        <div class="spb_wrapper">
+                           <div class="title-wrapper basel-title-color-{{ section.settings.title_color }} basel-title-style-{{ section.settings.title_style }} basel-title-size-{{ section.settings.title_size }} text-{{ section.settings.title_align }}">
+                              {%- if section.settings.sub_title != blank -%}
+                              <span class="title-subtitle font-{{ section.settings.subtitle_font }}">{{ section.settings.sub_title }}</span>
+                              {%- endif -%}
+                              {%- if section.settings.title != blank -%}
+                              <div class="liner-continer"> 
+                                 <span class="left-line"></span> 
+                                 <span class="title">{{ section.settings.title }}<span class="title-separator"><span></span></span></span> 
+                                 <span class="right-line"></span> 
+                              </div>
+                              {%- endif -%}
+                              {%- if section.settings.text_after_title != blank -%}
+                              <span class="title-after_title">{{ section.settings.text_after_title }}</span>
+                              {%- endif -%}
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="spb_column gl_column_container gl_col-md-{{class_left}}"><div class="gl_column-inner"><div class="spb_wrapper"></div></div></div>
+               </div>
+               {%- endif -%}
+               <div class="gl_row spb_row gl_inner gl_row-fluid color-scheme-{{section.settings.text_color}}{%- if section.settings.button_label != blank and section.settings.button_link != blank %} gl_mb_20{%- endif -%}">
+               {%- assign check =  true -%}
+               {%- assign check_numr =  0 -%}
+               {%- if section.settings.conditions_setting == '1' -%}
+                  {%- for product in collection.products limit: num_limit -%}
+                     {%- if check -%}
+                        <div class="spb_column gl_column_container gl_col-sm-6 gl_col-md-{{class_double}} gl_col-xs-12">
+                           <div class="gl_column-inner ">
+                              <div class="spb_wrapper">
+                     {%- endif -%}
+                                 {%- include 'menu_price' -%}
+                     {%- assign check =  false -%}
+                     {%- assign check_numr  =  check_numr | plus: 1  -%}
+                     {%- if check_numr == limit or forloop.last == true  -%}
+                              </div>
+                           </div>
+                        </div>
+                     {%- assign check =  true -%}
+                     {%- assign check_numr =  0 -%}
+                     {%- endif -%}
+                  {%- endfor -%}
+               {%- else -%}
+                  {%- for block in section.blocks -%}
+                  {%- assign product = all_products[block.settings.product_id] -%}
+                     {%- if check -%}
+                        <div class="spb_column gl_column_container gl_col-sm-6 gl_col-md-{{class_double}} gl_col-xs-12" {{ block.shopify_attributes }}>
+                           <div class="gl_column-inner ">
+                              <div class="spb_wrapper">
+                     {%- endif -%}
+                                 {%- include 'menu_price_block' -%}
+                     {%- assign check =  false -%}
+                     {%- assign check_numr  =  check_numr | plus: 1  -%}
+                     {%- if check_numr == limit or forloop.last == true  -%}
+                              </div>
+                           </div>
+                        </div>
+                     {%- assign check =  true -%}
+                     {%- assign check_numr =  0 -%}
+                     {%- endif -%}
+                  {%- endfor -%}
+               {%- endif -%}
+                  <div class="spb_column gl_column_container gl_col-md-{{class_left}}"><div class="gl_column-inner"><div class="spb_wrapper"></div></div></div>
+               </div>
+               {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+               <div class="gl_row spb_row gl_inner gl_row-fluid">
+                  <div class="spb_column gl_column_container gl_col-sm-{{section.settings.width}}">
+                     <div class="gl_column-inner ">
+                        <div class="spb_wrapper">
+                           <div class="basel-button-wrapper text-{{section.settings.btn_align}}">
+                              <a href="{{ section.settings.button_link }}" class="btn btn-color-{{ section.settings.button_color }} btn-style-{{ section.settings.button_style }} btn-size-{{ section.settings.button_size }}">{{ section.settings.button_label }}</a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="spb_column gl_column_container gl_col-md-{{class_left}}"><div class="gl_column-inner"><div class="spb_wrapper"></div></div></div>
+               </div>
+               {%- endif -%}
+            </div>
+         {%- when 'center' -%}
+            <div class="spb_wrapper">
+               {%- if section.settings.title != blank -%}
+               <div class="gl_row spb_row gl_inner gl_row-fluid">
+                  <div class="spb_column gl_column_container gl_col-md-{{class_phu}}"><div class="gl_column-inner"><div class="spb_wrapper"></div></div></div>
+                  <div class="spb_column gl_column_container gl_col-sm-{{section.settings.width}}">
+                     <div class="gl_column-inner ">
+                        <div class="spb_wrapper">
+                           <div class="title-wrapper basel-title-color-{{ section.settings.title_color }} basel-title-style-{{ section.settings.title_style }} basel-title-size-{{ section.settings.title_size }} text-{{ section.settings.title_align }}">
+                              {%- if section.settings.sub_title != blank -%}
+                              <span class="title-subtitle font-{{ section.settings.subtitle_font }}">{{ section.settings.sub_title }}</span>
+                              {%- endif -%}
+                              {%- if section.settings.title != blank -%}
+                              <div class="liner-continer"> 
+                                 <span class="left-line"></span> 
+                                 <span class="title">{{ section.settings.title }}<span class="title-separator"><span></span></span></span> 
+                                 <span class="right-line"></span> 
+                              </div>
+                              {%- endif -%}
+                              {%- if section.settings.text_after_title != blank -%}
+                              <span class="title-after_title">{{ section.settings.text_after_title }}</span>
+                              {%- endif -%}
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="spb_column gl_column_container gl_col-md-{{class_phu}}"><div class="gl_column-inner"><div class="spb_wrapper"></div></div></div>
+               </div>
+               {%- endif -%}
+               <div class="gl_row spb_row gl_inner gl_row-fluid color-scheme-{{section.settings.text_color}}{%- if section.settings.button_label != blank and section.settings.button_link != blank %} gl_mb_20{%- endif -%}">
+                  <div class="spb_column gl_column_container gl_col-md-{{class_phu}}"><div class="gl_column-inner"><div class="spb_wrapper"></div></div></div>
+               {%- assign check =  true -%}
+               {%- assign check_numr =  0 -%}
+               {%- if section.settings.conditions_setting == '1' -%}
+                  {%- for product in collection.products limit: num_limit -%}
+                     {%- if check -%}
+                        <div class="spb_column gl_column_container gl_col-sm-6 gl_col-md-{{class_double}} gl_col-xs-12">
+                           <div class="gl_column-inner ">
+                              <div class="spb_wrapper">
+                     {%- endif -%}
+                                 {%- include 'menu_price' -%}
+                     {%- assign check =  false -%}
+                     {%- assign check_numr  =  check_numr | plus: 1  -%}
+                                 {%- unless check_numr == limit or forloop.last == true -%}{%- if section.settings.spaces_section -%}<div class="gl_empty_space" style="height: 20px"><span class="gl_empty_space_inner"></span></div>{%- endif-%}{%-endunless-%}
+                     
+                     {%- if check_numr == limit or forloop.last == true  -%}
+                              </div>
+                           </div>
+                        </div>
+                     {%- assign check =  true -%}
+                     {%- assign check_numr =  0 -%}
+                     {%- endif -%}
+                  {%- endfor -%}
+               {%- else -%}
+                  {%- for block in section.blocks -%}
+                  {%- assign product = all_products[block.settings.product_id] -%}
+                     {%- if check -%}
+                        <div class="spb_column gl_column_container gl_col-sm-6 gl_col-md-{{class_double}} gl_col-xs-12" {{ block.shopify_attributes }}>
+                           <div class="gl_column-inner ">
+                              <div class="spb_wrapper">
+                     {%- endif -%}
+                                 {%- include 'menu_price_block' -%}
+                                 {%- unless check_numr == limit or forloop.last == true -%}{%- if section.settings.spaces_section -%}<div class="gl_empty_space" style="height: 20px"><span class="gl_empty_space_inner"></span></div>{%- endif-%}{%-endunless-%}
+                     {%- assign check =  false -%}
+                     {%- assign check_numr  =  check_numr | plus: 1  -%}
+                     {%- if check_numr == limit or forloop.last == true  -%}
+                              </div>
+                           </div>
+                        </div>
+                     {%- assign check =  true -%}
+                     {%- assign check_numr =  0 -%}
+                     {%- endif -%}
+                  {%- endfor -%}
+               {%- endif -%}
+                  <div class="spb_column gl_column_container gl_col-md-{{class_phu}}"><div class="gl_column-inner"><div class="spb_wrapper"></div></div></div>
+               </div>
+               {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+               <div class="gl_row spb_row gl_inner gl_row-fluid">
+                  <div class="spb_column gl_column_container gl_col-md-{{class_phu}}"><div class="gl_column-inner"><div class="spb_wrapper"></div></div></div>
+                  <div class="spb_column gl_column_container gl_col-sm-{{section.settings.width}}">
+                     <div class="gl_column-inner ">
+                        <div class="spb_wrapper">
+                           <div class="basel-button-wrapper text-{{section.settings.btn_align}}">
+                              <a href="{{ section.settings.button_link }}" class="btn btn-color-{{ section.settings.button_color }} btn-style-{{ section.settings.button_style }} btn-size-{{ section.settings.button_size }}">{{ section.settings.button_label }}</a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="spb_column gl_column_container gl_col-md-{{class_phu}}"><div class="gl_column-inner"><div class="spb_wrapper"></div></div></div>
+               </div>
+               {%- endif -%}
+            </div>
+      {%- endcase -%}
+      {% if section.blocks.size == 0 and collection.empty? %}
+         <img src="//cdn.shopify.com/s/files/1/1933/6253/files/menu_price.jpg?3928687484376054942" class="w__100" alt="Collection Featured">
+      {% endif %}
+      </div>
+   </div>
+</div>
+{%- unless section.settings.row_stretch == 'default' -%}
+  <div class="gl_row-full-width gl_clearfix"></div>
+{%- endunless -%}
+{%- schema -%}
+  {
+    "name": "Menu Price",
+    "class": "index-section index-section_menu_price",
+    "settings": [
+      {
+      "type": "header",
+      "content": "== General Settings"
+      },
+      {
+        "type": "select",
+        "id": "row_stretch",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "stretch_row",
+            "label": "Stretch row"
+          },
+          {
+            "value": "stretch_row_content",
+            "label": "Stretch row and content"
+          },
+          {
+            "value": "stretch_row_content_no_spaces",
+            "label": "Stretch row and content (no paddings)"
+          }
+        ],
+        "label": "___ Row stretch",
+        "info": "Select stretching options for row and content (Note: stretched may not work properly if parent container has 'overflow: hidden' CSS property).",
+        "default": "default"
+      },
+      {
+        "type": "checkbox",
+        "id": "full_height",
+        "label": "Full height row?",
+        "info": "if checked row will be set to full height.",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "columns_position",
+        "options": [
+         {
+            "value": "middle",
+            "label": "Middle"
+          },
+         {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "stretch",
+            "label": "Stretch"
+          }
+        ],
+        "label": "___ Columns position (only for full height)",
+        "info": "Select columns position within row.",
+        "default": "middle"
+      },
+      {
+        "type": "header",
+        "content": "== Menu Price Options"
+      },
+      {
+        "type": "select",
+        "id": "width",
+        "options": [
+          {
+            "value": "8",
+            "label": "8 columns"
+          },
+          {
+            "value": "10",
+            "label": "10 columns"
+          },
+          {
+            "value": "12",
+            "label": "12 columns"
+          }
+        ],
+        "label": "== Select column width",
+        "default": "8"
+      },
+      {
+        "type": "select",
+        "id": "menu_price_position",
+        "options": [
+         {
+            "value": "left",
+            "label": "Left"
+          },
+         {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "label": "== Menu Price position",
+        "info": "Select columns position within row.",
+        "default": "center"
+      },
+      {
+          "type": "select",
+          "id": "text_color",
+          "options": [
+           {
+              "value": "light",
+              "label": "Light"
+            },
+            {
+              "value": "dark",
+              "label": "Dark"
+            }
+          ],
+          "label": "== Color Scheme",
+          "info": "only for style Testimonials Boxed",
+          "default": "dark"
+      },
+      {
+        "type": "header",
+        "content": "== Section Title Settings"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Sub Title"
+      },
+      {
+        "type": "text",
+        "id": "text_after_title",
+        "label": "Text after title"
+      },
+      {
+        "type": "select",
+        "id": "title_style",
+        "label": "Title style",
+        "options": [
+        {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "simple",
+            "label": "Simple"
+          },
+          {
+            "value": "cross",
+            "label": "X sign"
+          },
+          {
+            "value": "bordered",
+            "label": "Bordered"
+          },
+          {
+            "value": "shadow",
+            "label": "Shadow"
+          }
+        ],
+        "default": "default"
+      },
+      {
+        "type": "select",
+        "id": "title_color",
+        "label": "Title color",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "primary",
+            "label": "Primary color"
+          },
+          {
+            "value": "alt",
+            "label": "Alternative color"
+          },
+          {
+            "value": "black",
+            "label": "Black"
+          },
+          {
+            "value": "white",
+            "label": "White"
+          },
+          {
+            "value": "gradient",
+            "label": "Gradient"
+          }
+        ],
+        "default": "default"
+      },
+      {
+        "type": "select",
+        "id": "title_size",
+        "label": "Title size",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "small",
+            "label": "Small"
+          },
+          {
+            "value": "large",
+            "label": "Large"
+          },
+          {
+            "value": "extra_large",
+            "label": "Extra Large"
+          }
+        ],
+        "default": "default"
+      },
+      {
+        "type": "select",
+        "id": "subtitle_font",
+        "label": "Subtitle font",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "alt",
+            "label": "Alternative"
+          }
+        ],
+        "default": "default"
+      },
+      {
+        "type": "select",
+        "id": "title_align",
+        "label": "Title align",
+        "options": [
+         {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "left"
+      },
+      {
+        "type": "header",
+        "content": "== Button Settings"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "___ Button label"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "___ Button link"
+      },
+      {
+        "type": "select",
+        "id": "button_color",
+        "label": "___ Button color",
+        "default": "white",
+        "options": [
+          {
+            "label": "Default",
+            "value": "default"
+          },
+          {
+            "label": "Primary color",
+            "value": "primary"
+          },
+          {
+            "label": "Alternative color",
+            "value": "alt"
+          },
+          {
+            "label": "Black",
+            "value": "black"
+          },
+          {
+            "label": "White",
+            "value": "white"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "button_style",
+        "label": "___ Button style",
+        "default": "bordered",
+        "options": [
+          {
+            "label": "Default",
+            "value": "default"
+          },
+          {
+            "label": "Bordered",
+            "value": "bordered"
+          },
+          {
+            "label": "Link button",
+            "value": "link"
+          },
+          {
+            "label": "Rounded",
+            "value": "round"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "button_size",
+        "label": "___ Button size",
+        "default": "default",
+        "options": [
+          {
+            "label": "Default",
+            "value": "default"
+          },
+          {
+            "label": "Extra Small",
+            "value": "extra-small"
+          },
+          {
+            "label": "Small",
+            "value": "small"
+          },
+          {
+            "label": "Large",
+            "value": "large"
+          },
+          {
+            "label": "extra-large",
+            "value": "Extra Large"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "btn_align",
+        "label": "Button align",
+        "options": [
+         {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "left"
+      },
+      {
+        "type": "radio",
+        "id": "conditions_setting",
+        "options": [
+         {
+            "value": "1",
+            "label": "Automatically select products based on conditions"
+          },
+          {
+            "value": "2",
+            "label": "Manually select products"
+          }
+          
+        ],
+        "label": "== Conditions"
+      },
+      {
+        "type": "checkbox",
+        "id": "spaces_section",
+        "label": "== Add spaces between basel menu price?",
+        "default": false
+      },
+      {
+       "type": "header",
+       "content": "== Automatically select products "
+      },
+      {
+        "type": "collection",
+        "id": "id_collection",
+        "label": "Collection to use"
+      },
+      {
+        "type": "text",
+        "id": "number",
+        "label": "Number of products to show at one time (integer)",
+        "default": "14"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_image",
+        "label": "Show image product?",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "image_picker",
+        "id": "section_bg_image",
+        "label": "Background Image"
+      },
+      {
+        "type": "color",
+        "id": "section_bg_color",
+        "label": "Background color"
+      },
+      {
+        "type": "color",
+        "id": "section_border_color",
+        "label": "Border color"
+      },
+      {
+        "type": "select",
+        "id": "section_border_style",
+        "options": [
+         {
+            "value": "solid",
+            "label": "Solid"
+          },
+         {
+            "value": "dotted",
+            "label": "Dotted"
+          },
+          {
+            "value": "dashed",
+            "label": "Dashed"
+          },
+          {
+            "value": "double",
+            "label": "Double"
+          },
+          {
+            "value": "groove",
+            "label": "Groove"
+          },
+          {
+            "value": "Ridge",
+            "label": "Ridge"
+          },
+          {
+            "value": "inset",
+            "label": "Inset"
+          },
+          {
+            "value": "outset",
+            "label": "Outset"
+          }
+        ],
+        "label": "Border style",
+        "default": "solid"
+      },
+      {
+        "type": "text",
+        "id": "section_border",
+        "label": "Borders Integer px ( top-right-bottom-left )",
+        "info": "0-0-1px-0"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      },
+      {
+        "type": "header",
+        "content": "== Basel Extras"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden_section",
+        "label": "Disable Section?",
+        "info": "If checked the section won't be visible on the public side of your website. You can switch it back any time.",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "use_parallax",
+        "label": "Use Basel parallax?",
+        "default": false
+      },
+      {
+       "type": "header",
+       "content": "== Manually select products"
+      }
+    ],
+    "blocks": [
+      {
+        "type":"collection_featured",
+         "name":"Choose product",
+        "settings": [
+         {
+             "type":"product",
+             "id":"product_id",
+             "label":"Choose product"
+         },
+         {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "info": "Leave empty to use 'Product title' title."
+         },
+         {
+            "type": "textarea",
+            "id": "description",
+            "label": "Description",
+            "info": "Leave empty to use 'Product Description' description."
+         },
+         {
+            "type": "text",
+            "id": "price",
+            "label": "Price",
+            "info": "Leave empty to use 'Product price' price."
+         },
+         {
+           "type": "checkbox",
+           "id": "show_image",
+           "label": "Show image product?",
+           "default": false
+         },
+         {
+           "type": "image_picker",
+           "id": "image",
+           "label": "Image (35x77)",
+           "info": "Leave empty to use 'Product image' image."
+         }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Menu Price",
+        "category": "Collections"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,95 @@
+{%- if canonical_url contains 'collections/all' -%}
+      {%- assign underscore = false -%}
+{%- else -%}
+      {%- assign underscore = true -%}
+{%- endif -%}
+{%- assign collection_obj = '' -%}
+{%- if template.name == 'search' and canonical_url contains 'collections' and underscore -%}
+{%- assign collection_gl = canonical_url | split:'/collections/' | last | split:'?q=' | first -%}
+{%- assign collection_obj = collections[collection_gl] -%}
+<div class="input-dropdown-inner">
+ <input type="hidden" id="product_cat" name="product_cat" value="all">
+ <a href="{{collection_obj.url}}" data-val="{{collection_obj.handle}}">{{ collection_obj.title | capitalize }}</a>
+ <ul class="dropdown-list" style="display:none;">
+    <li><a href="#" data-val="all">{{ 'general.search.select_category' | t }}</a></li>
+    {%- if section.settings.top_categories == '1' -%}
+    	{%- for category in collections -%}
+    		{%- if category.products.size > 0 -%}
+    		<li class="cat-item cat-item-25{%- if category.handle == collection_obj.handle %} current-item{%- endif -%}"><a href="{{ category.url }}" data-val="{{ category.handle }}" target="_self">{{ category.title | capitalize }}</a></li>
+    		{%- endif -%}
+    	{%- endfor -%}
+    {%- else -%}
+        {%- assign block_size = section.blocks.size -%}
+        {%- for block in section.blocks -%}
+        {%- assign category = collections[block.settings.collection_id] -%}
+        {%- if category.products.size > 0 -%}
+    		<li class="cat-item cat-item-25{%- if category.handle == collection_obj.handle %} current-item{%- endif -%}"><a href="{{ category.url }}" data-val="{{ category.handle }}" target="_self">{{ category.title | capitalize }}</a></li>
+    	{%- endif -%}
+    	{%- endfor -%}
+    {%- endif -%}
+ </ul>
+</div>
+{%- else -%}
+<div class="input-dropdown-inner">
+ <input type="hidden" id="product_cat" name="product_cat" value="all">
+ <a href="#" data-val="all">{{ 'general.search.select_category' | t }}</a>
+ <ul class="dropdown-list" style="display:none;">
+    <li style="display:none;"><a href="#" data-val="all">{{ 'general.search.select_category' | t }}</a></li>
+    {%- if section.settings.top_categories == '1' -%}
+    	{%- for category in collections -%}
+    		{%- if category.products.size > 0 -%}
+    		<li class="cat-item cat-item-25"><a href="{{ category.url }}" data-val="{{ category.title | handleize }}" target="_self">{{ category.title | capitalize }}</a></li>
+    		{%- endif -%}
+    	{%- endfor -%}
+    {%- else -%}
+        {%- assign block_size = section.blocks.size -%}
+        {%- for block in section.blocks -%}
+        {%- assign category = collections[block.settings.collection_id ] -%}
+        {%- if category.products.size > 0 -%}
+    		<li class="cat-item cat-item-25"><a href="{{ category.url }}" data-val="{{ category.title | handleize }}" target="_self">{{ category.title | capitalize }}</a></li>
+    	{%- endif -%}
+    	{%- endfor -%}
+    {%- endif -%}
+ </ul>
+</div>
+{%- endif -%}
+{%- schema -%}
+  {
+    "name": "Search By Category",
+    "class": "gl_search-by-category search-by-category input-dropdown",
+    "settings": [
+      {
+        "type": "radio",
+        "id": "top_categories",
+        "options": [
+          {
+            "value": "1",
+            "label": "Automatically Show All "
+          },
+          {
+            "value": "2",
+            "label": "Manually select category"
+          }
+        ],
+        "label": "Conditions"
+      },
+      {
+       "type": "header",
+       "content": "== Manually select category"
+      }
+   	],
+   	"blocks": [
+      {
+        "type":"collection_featured",
+         "name":"Choose collection",
+        "settings": [
+          {
+             "type":"collection",
+             "id":"collection_id",
+             "label":"Choose collection"
+           }
+        ]
+      }
+    ]
+  }
+{% endschema %}

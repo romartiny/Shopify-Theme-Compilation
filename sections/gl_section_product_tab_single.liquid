@@ -1,0 +1,1974 @@
+{%- if settings.use_wishlist -%}{%- include 'nitro-wishlist' -%}{%- endif -%}
+{%- if section.settings.hidden_section -%}{%- capture check_admin -%}{{ content_for_header  }}{%- endcapture -%}<style> #shopify-section-{{ section.id }} { {%- if check_admin contains 'design_mode' -%}opacity: .5;filter: alpha(opacity=50){%- else -%}display: none !important{%- endif -%}}</style>{%- endif -%}
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{%- capture data_section -%}
+  {%- if section.settings.row_stretch == 'stretch_row' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true'
+  {%- elsif section.settings.row_stretch == 'stretch_row_content' or section.settings.row_stretch == 'stretch_row_content_no_spaces' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true' data-gl-stretch-content='true'
+  {%- else -%}
+  {%- assign class_has_fill = '' -%}
+  {%- endif -%}
+{%- endcapture -%}
+ {{ style_block_section }}
+   <div {{ data_section }} data-section-id="{{ section.id }}" data-section-type="tab-single-section" {%- if section.settings.use_video and section.settings.video_url != blank %} data-gl-video-bg="{{ section.settings.video_url }}"{%- endif %} class="gl_custom_{{section.id}} tab-single tab-collection section_tab_gl_css{%- if section.settings.row_stretch == 'stretch_row_content_no_spaces' %} gl_row-no-padding{%- endif %}{%- if section.settings.use_parallax %} basel-parallax{%- endif %} gl_row spb_row gl_row-fluid {{class_has_fill}} {%- if section.settings.use_video and section.settings.video_url != blank %} opacity-video-bg gl_video-bg-container gl_has_youtube{%- endif %}{%- if section.settings.full_height %} gl_row-o-full-height gl_row-o-columns-{{section.settings.columns_position}}{%- endif %}{%- if section.settings.equal_height %} gl_row-o-equal-height{%- endif -%}">
+       <div class="spb_column gl_column_container gl_col-sm-12">
+         <div class="gl_column-inner">
+           <div class="spb_wrapper">   
+               <div class="gl_tta-container">
+                  <div class="gl_general gl_tta gl_tta-tabs gl_tta-color-{{ section.settings.color }} gl_tta-style-{{ section.settings.style }} gl_tta-shape-{{ section.settings.shape }} gl_tta-o-no-fill gl_tta-tabs-position-{{ section.settings.position }}  gl_tta-spacing-{{ section.settings.spacing }} gl_tta-gap-{{ section.settings.gap }} gl_tta-controls-align-{{ section.settings.alignment }}">
+                     {%- if section.settings.position == 'top' -%}
+                     <div class="gl_tta-tabs-container">
+                        <ul class="gl_tta-tabs-list">
+                        {%- for block in section.blocks -%}
+                           {% assign product = all_products[block.settings.product_single] %}
+                           <li class="gl_tta-tab{%- if forloop.first %} gl_active{%- endif -%}">
+                           <a href="#{{block.id}}"><span class="gl_tta-title-text">{%- if block.settings.title_block != blank -%}{{ block.settings.title_block }}{%- elsif block.settings.product_single != blank -%}{{product.title}}{%- else -%}{{ 'homepage.onboarding.product_title' | t }}{%- endif -%}</span></a>
+                           </li>
+                        {%- endfor -%}
+                        </ul>
+                     </div>
+                     {%- endif -%}
+                     <div class="gl_tta-panels-container">
+                        <div class="gl_tta-panels">
+                        {%- for block in section.blocks -%}
+                           {% assign product = all_products[block.settings.product_single] %}
+                           <div class="gl_tta-panel{%- if forloop.first %} gl_active{%- endif -%}" id="{{block.id}}">
+                              <div class="gl_tta-panel-heading">
+                                 <h4 class="gl_tta-panel-title"><a href="#{{block.id}}"><span class="gl_tta-title-text">{%- if block.settings.title_block != blank -%}{{ block.settings.title_block }}{%- elsif block.settings.product_single != blank -%}{{product.title}}{%- else -%}{{ 'homepage.onboarding.product_title' | t }}{%- endif -%}</span></a></h4>
+                              </div>
+                              <div class="gl_tta-panel-body">
+                               <div class="gl_row spb_row gl_inner gl_row-fluid gl_row-o-content-middle gl_row-flex">
+                                 {%- case block.type -%}
+                                   {%- when 'left' -%}
+                                       {%- include 'gl_left_text',left_text:true -%}
+                                   {%- when 'center' -%}
+                                       {%- include 'gl_left_text',center_text:true -%}
+                                   {%- when 'right' -%}
+                                       {%- include 'gl_left_text'-%}
+                                 {%- endcase -%}
+                               </div>
+                              </div>
+                           </div>
+                        {%- endfor -%}
+                        </div>
+                     </div>
+                     {%- if section.settings.position == 'bottom' -%}
+                     <div class="gl_tta-tabs-container">
+                        <ul class="gl_tta-tabs-list">
+                        {%- for block in section.blocks -%}
+                           {% assign product = all_products[block.settings.product_single] %}
+                           <li class="gl_tta-tab{%- if forloop.first %} gl_active{%- endif -%}">
+                           <a href="#{{block.id}}"><span class="gl_tta-title-text">{%- if block.settings.title_block != blank -%}{{ block.settings.title_block }}{%- elsif block.settings.product_single != blank -%}{{product.title}}{%- else -%}{{ 'homepage.onboarding.product_title' | t }}{%- endif -%}</span></a>
+                           </li>
+                        {%- endfor -%}
+                        </ul>
+                     </div>
+                     {%- endif -%}
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   {%- unless section.settings.row_stretch == 'default' -%}
+   <div class="gl_row-full-width gl_clearfix"></div>
+  {%- endunless -%}
+{%- schema -%}
+  {
+    "name": "Product Tab Single",
+    "class": "index-section section_tab_single",
+    "settings": [{
+        "type": "header",
+        "content": "== Row Settings"
+      },
+      {
+        "type": "select",
+        "id": "row_stretch",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "stretch_row",
+            "label": "Stretch row"
+          },
+          {
+            "value": "stretch_row_content",
+            "label": "Stretch row and content"
+          },
+          {
+            "value": "stretch_row_content_no_spaces",
+            "label": "Stretch row and content (no paddings)"
+          }
+        ],
+        "label": "___ Row stretch",
+        "info": "Select stretching options for row and content (Note: stretched may not work properly if parent container has 'overflow: hidden' CSS property).",
+        "default": "default"
+      },
+      {
+        "type": "header",
+        "content": "== General Settings"
+      },
+         {
+           "type": "select",
+           "id": "style",
+           "options": [
+             {
+               "value": "classic",
+               "label": "Classic"
+             },
+             {
+               "value": "modern",
+               "label": "Modern"
+             },
+             {
+               "value": "flat",
+               "label": "Flat"
+             },
+             {
+               "value": "outline",
+               "label": "Outline"
+             }
+           ],
+           "label": "___ Style",
+           "default": "classic",
+           "info": "Select tabs display style."
+         },
+         {
+           "type": "select",
+           "id": "shape",
+           "options": [
+             {
+               "value": "rounded",
+               "label": "Rounded"
+             },
+             {
+               "value": "square",
+               "label": "Square"
+             },
+             {
+               "value": "round",
+               "label": "Round"
+             }
+           ],
+           "label": "___ Shape",
+           "default": "rounded",
+           "info": "Select tabs shape. ( not support style classic )"
+         },
+         {
+           "type": "select",
+           "id": "color",
+           "options": [
+             {
+               "value": "blue",
+               "label": "Blue"
+             },
+             {
+               "value": "turquoise",
+               "label": "Turquoise"
+             },
+             {
+               "value": "pink",
+               "label": "Pink"
+             },
+             {
+               "value": "violet",
+               "label": "Violet"
+             },
+             {
+               "value": "peacoc",
+               "label": "Peacoc"
+             },
+             {
+               "value": "chino",
+               "label": "Chino"
+             },
+             {
+               "value": "mulled-wine",
+               "label": "Mulled Wine"
+             },
+             {
+               "value": "vista-blue",
+               "label": "Vista Blue"
+             },
+             {
+               "value": "black",
+               "label": "Black"
+             },
+             {
+               "value": "grey",
+               "label": "Grey"
+             },
+             {
+               "value": "orange",
+               "label": "Orange"
+             },
+             {
+               "value": "sky",
+               "label": "Sky"
+             },
+             {
+               "value": "green",
+               "label": "Green"
+             },
+             {
+               "value": "juicy-pink",
+               "label": "Juicy pink"
+             },
+             {
+               "value": "sandy-brown",
+               "label": "Sandy brown"
+             },
+             {
+               "value": "purple",
+               "label": "Purple"
+             },
+             {
+               "value": "white",
+               "label": "White"
+             }
+           ],
+           "label": "___ Color",
+           "default": "grey",
+           "info": "Select tabs color. ( not support style classic )"
+         },
+         {
+           "type": "select",
+           "id": "spacing",
+           "options": [
+             {
+               "value": "0",
+               "label": "None"
+             },
+             {
+               "value": "1",
+               "label": "1px"
+             },
+             {
+               "value": "2",
+               "label": "2px"
+             },
+             {
+               "value": "3",
+               "label": "3px"
+             },
+             {
+               "value": "4",
+               "label": "4px"
+             },
+             {
+               "value": "5",
+               "label": "5px"
+             },
+             {
+               "value": "10",
+               "label": "10px"
+             },
+             {
+               "value": "15",
+               "label": "15px"
+             },
+             {
+               "value": "20",
+               "label": "20px"
+             },
+             {
+               "value": "25",
+               "label": "25px"
+             },
+             {
+               "value": "30",
+               "label": "30px"
+             },
+             {
+               "value": "35",
+               "label": "35px"
+             }
+           ],
+           "label": "___ Spacing",
+           "default": "0",
+           "info": "Select tabs spacing. ( not support style classic )"
+         },
+         {
+           "type": "select",
+           "id": "gap",
+           "options": [
+             {
+               "value": "0",
+               "label": "None"
+             },
+             {
+               "value": "1",
+               "label": "1px"
+             },
+             {
+               "value": "2",
+               "label": "2px"
+             },
+             {
+               "value": "3",
+               "label": "3px"
+             },
+             {
+               "value": "4",
+               "label": "4px"
+             },
+             {
+               "value": "5",
+               "label": "5px"
+             },
+             {
+               "value": "10",
+               "label": "10px"
+             },
+             {
+               "value": "15",
+               "label": "15px"
+             },
+             {
+               "value": "20",
+               "label": "20px"
+             },
+             {
+               "value": "25",
+               "label": "25px"
+             },
+             {
+               "value": "30",
+               "label": "30px"
+             },
+             {
+               "value": "35",
+               "label": "35px"
+             }
+           ],
+           "label": "___ Gap",
+           "default": "0",
+           "info": "Select tabs gap."
+         },
+         {
+           "type": "select",
+           "id": "position",
+           "options": [
+             {
+               "value": "top",
+               "label": "Top"
+             },
+             {
+               "value": "bottom",
+               "label": "Bottom"
+             }
+           ],
+           "label": "___ Position",
+           "default": "top",
+           "info": "Select tabs navigation position. ( not support style classic )"
+         },
+         {
+           "type": "select",
+           "id": "alignment",
+           "options": [
+             {
+               "value": "left",
+               "label": "Left"
+             },
+             {
+               "value": "right",
+               "label": "Right"
+             },
+             {
+               "value": "center",
+               "label": "Center"
+             }
+           ],
+           "label": "___ Alignment",
+           "default": "center",
+           "info": "Select tabs section title alignment."
+         },
+         {
+          "type": "header",
+          "content": "== Design Settings"
+        },
+         {
+        "type": "color",
+        "id": "section_bg_color",
+        "label": "Background color"
+      },
+      {
+        "type": "color",
+        "id": "section_border_color",
+        "label": "Border color"
+      },
+      {
+        "type": "select",
+        "id": "section_border_style",
+        "options": [
+         {
+            "value": "solid",
+            "label": "Solid"
+          },
+         {
+            "value": "dotted",
+            "label": "Dotted"
+          },
+          {
+            "value": "dashed",
+            "label": "Dashed"
+          },
+          {
+            "value": "double",
+            "label": "Double"
+          },
+          {
+            "value": "groove",
+            "label": "Groove"
+          },
+          {
+            "value": "Ridge",
+            "label": "Ridge"
+          },
+          {
+            "value": "inset",
+            "label": "Inset"
+          },
+          {
+            "value": "outset",
+            "label": "Outset"
+          }
+        ],
+        "label": "Border style",
+        "default": "solid"
+      },
+      {
+        "type": "text",
+        "id": "section_border",
+        "label": "Borders Integer px ( top-right-bottom-left )",
+        "info": "0-0-1px-0"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      },
+      {
+        "type": "header",
+        "content": "== Basel Extras"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden_section",
+        "label": "Disable Section?",
+        "info": "If checked the section won't be visible on the public side of your website. You can switch it back any time.",
+        "default": false
+      }],
+   "blocks": [
+      {
+        "type": "left",
+        "name": "Left Text",
+        "settings": [{
+           "type": "header",
+           "content": "== General"
+         },
+         {
+            "type": "text",
+            "id": "title_block",
+            "label": "Title block (optional)",
+            "info": "Leave empty to use 'Product title' title.",
+            "default": "Product 1"
+          },
+          {
+           "type": "radio",
+           "id": "source",
+           "options": [
+             {
+               "value": "1",
+               "label": "choose product"
+             },
+             {
+               "value": "2",
+               "label": "custom product"
+             }
+           ],
+           "label": "___ source",
+           "default": "1"
+         },
+         {
+           "type": "header",
+           "content": "=== Text Block Settings"
+         },
+         {
+        "type": "select",
+        "id": "text_width",
+        "options": [
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "___ Select column width",
+        "default": "4"
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_text_tablets",
+        "label": "___ Hide on Small devices Tablets (≥768px)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_text_phones",
+        "label": "___ Extra small devices Phones ( less 768px)",
+        "default": false
+      },
+          {
+           "type": "header",
+           "content": "___ Text Block Settings ( only for choose product)"
+         },
+         {
+            "id": "product_single",
+            "type": "product",
+            "label": "Product to use"
+          },
+          {
+        "type": "checkbox",
+        "id": "show_vendor",
+        "label": "Show product vendor"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_type",
+        "label": "Show product type"
+      },
+         {
+           "type": "header",
+           "content": "___ Text Block Settings (only for custom product)"
+         },
+         {
+          "type": "text",
+          "id": "author",
+          "label": "Author",
+          "default": "Designers: Valentino Rachelli"
+        },
+        {
+          "type": "text",
+          "id": "product_title",
+          "label": "Product Title",
+          "default": "Eames Sofa",
+          "info":"The title of the product."
+        },
+        {
+          "type": "text",
+          "id": "sub_product_title",
+          "label": "Sub Product Title",
+          "default": "Compact",
+          "info":"Sub Product Title."
+        },
+        {
+          "type": "text",
+          "id": "product_price",
+          "label": "Product Price",
+          "default": "$800",
+          "info":"The price of the product."
+        },
+          {
+          "type": "textarea",
+          "id": "product_description",
+          "label": "Product Description",
+          "default": "Vel himenaeos quam fringilla a interdum blandit adipiscing ullamcorper per consequat in ut a enim suspendisse luctus commodo varius dictumst egestas at curae ultricies nam.",
+          "info":"The description of the product."
+        },
+        {
+            "type": "text",
+            "id": "title_btn",
+            "label": "Button Title",
+            "default": "read more"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "link"
+          },
+         {
+           "type": "header",
+           "content": "=== Image Settings"
+         },
+         {
+           "type": "image_picker",
+           "id": "image_source_one",
+           "label": "___ Image (only for custom product)"
+         },
+         {
+           "type": "image_picker",
+           "id": "image_source_two",
+           "label": "___ Image 2 (only for custom product)"
+         },
+         {
+           "type": "header",
+           "content": "=== Image 1 Settings"
+         },
+         {
+           "type": "select",
+           "id": "one_width",
+           "options": [
+            {
+               "value": "1",
+               "label": "1 column - 1/12"
+             },
+             {
+               "value": "2",
+               "label": "2 columns - 1/6"
+             },
+             {
+               "value": "3",
+               "label": "3 columns - 1/4"
+             },
+             {
+               "value": "4",
+               "label": "4 columns - 1/3"
+             },
+             {
+               "value": "5",
+               "label": "5 columns - 5/12"
+             },
+             {
+               "value": "6",
+               "label": "6 columns - 1/2"
+             },
+             {
+               "value": "7",
+               "label": "7 columns - 7/12"
+             },
+             {
+               "value": "8",
+               "label": "8 columns - 2/3"
+             },
+             {
+               "value": "9",
+               "label": "9 columns - 3/4"
+             },
+             {
+               "value": "10",
+               "label": "10 columns - 5/6"
+             },
+             {
+               "value": "11",
+               "label": "11 columns - 11/12"
+             },
+             {
+               "value": "12",
+               "label": "12 columns - 1/1"
+             }
+           ],
+           "label": "___ Select column width",
+           "default": "4"
+         },
+         {
+           "type": "checkbox",
+           "id": "hide_one_tablets",
+           "label": "___ Hide on Small devices Tablets (≥768px)",
+           "default": false
+         },
+         {
+           "type": "checkbox",
+           "id": "hide_one_phones",
+           "label": "___ Extra small devices Phones ( less 768px)",
+           "default": false
+         },
+         {
+           "type": "select",
+           "id": "image_alignment_one",
+           "options": [
+             {
+               "value": "left",
+               "label": "Left"
+             },
+             {
+               "value": "right",
+               "label": "Right"
+             },
+             {
+               "value": "center",
+               "label": "Center"
+             }
+           ],
+           "label": "___ Image alignment",
+           "default": "center",
+           "info": "Select image alignment."
+         },
+         {
+           "type": "select",
+           "id": "image_style_one",
+           "options": [
+             {
+               "value": "default",
+               "label": "Default"
+             },
+             {
+               "value": "gl_box_rounded",
+               "label": "Rounded"
+             },
+             {
+               "value": "gl_box_border",
+               "label": "Border"
+             },
+             {
+               "value": "gl_box_outline",
+               "label": "Outline"
+             },
+             {
+               "value": "gl_box_shadow",
+               "label": "Shadow"
+             },
+             {
+               "value": "gl_box_shadow_border",
+               "label": "Bordered shadow"
+             },
+             {
+               "value": "gl_box_shadow_3d",
+               "label": "3D Shadow"
+             },
+             {
+               "value": "gl_box_circle",
+               "label": "Round"
+             },
+             {
+               "value": "gl_box_border_circle",
+               "label": "Round Border"
+             },
+             {
+               "value": "gl_box_outline_circle",
+               "label": "Round Outline"
+             },
+             {
+               "value": "gl_box_shadow_circle",
+               "label": "Round Shadow"
+             },
+             {
+               "value": "gl_box_shadow_border_circle",
+               "label": "Round Border Shadow"
+             }
+           ],
+           "label": "___ Image style",
+           "default": "default",
+           "info": "Select image display style."
+         },
+         {
+           "type": "header",
+           "content": "=== Image 2 Settings"
+         },
+         {
+           "type": "select",
+           "id": "two_width",
+           "options": [
+            {
+               "value": "1",
+               "label": "1 column - 1/12"
+             },
+             {
+               "value": "2",
+               "label": "2 columns - 1/6"
+             },
+             {
+               "value": "3",
+               "label": "3 columns - 1/4"
+             },
+             {
+               "value": "4",
+               "label": "4 columns - 1/3"
+             },
+             {
+               "value": "5",
+               "label": "5 columns - 5/12"
+             },
+             {
+               "value": "6",
+               "label": "6 columns - 1/2"
+             },
+             {
+               "value": "7",
+               "label": "7 columns - 7/12"
+             },
+             {
+               "value": "8",
+               "label": "8 columns - 2/3"
+             },
+             {
+               "value": "9",
+               "label": "9 columns - 3/4"
+             },
+             {
+               "value": "10",
+               "label": "10 columns - 5/6"
+             },
+             {
+               "value": "11",
+               "label": "11 columns - 11/12"
+             },
+             {
+               "value": "12",
+               "label": "12 columns - 1/1"
+             }
+           ],
+           "label": "___ Select column width",
+           "default": "4"
+         },
+         {
+           "type": "checkbox",
+           "id": "hide_two_tablets",
+           "label": "___ Hide on Small devices Tablets (≥768px)",
+           "default": false
+         },
+         {
+           "type": "checkbox",
+           "id": "hide_two_phones",
+           "label": "___ Extra small devices Phones ( less 768px)",
+           "default": false
+         },
+         {
+           "type": "select",
+           "id": "image_alignment_two",
+           "options": [
+             {
+               "value": "left",
+               "label": "Left"
+             },
+             {
+               "value": "right",
+               "label": "Right"
+             },
+             {
+               "value": "center",
+               "label": "Center"
+             }
+           ],
+           "label": "___ Image alignment",
+           "default": "center",
+           "info": "Select image alignment."
+         },
+         {
+           "type": "select",
+           "id": "image_style_two",
+           "options": [
+             {
+               "value": "default",
+               "label": "Default"
+             },
+             {
+               "value": "gl_box_rounded",
+               "label": "Rounded"
+             },
+             {
+               "value": "gl_box_border",
+               "label": "Border"
+             },
+             {
+               "value": "gl_box_outline",
+               "label": "Outline"
+             },
+             {
+               "value": "gl_box_shadow",
+               "label": "Shadow"
+             },
+             {
+               "value": "gl_box_shadow_border",
+               "label": "Bordered shadow"
+             },
+             {
+               "value": "gl_box_shadow_3d",
+               "label": "3D Shadow"
+             },
+             {
+               "value": "gl_box_circle",
+               "label": "Round"
+             },
+             {
+               "value": "gl_box_border_circle",
+               "label": "Round Border"
+             },
+             {
+               "value": "gl_box_outline_circle",
+               "label": "Round Outline"
+             },
+             {
+               "value": "gl_box_shadow_circle",
+               "label": "Round Shadow"
+             },
+             {
+               "value": "gl_box_shadow_border_circle",
+               "label": "Round Border Shadow"
+             }
+           ],
+           "label": "___ Image style",
+           "default": "default",
+           "info": "Select image display style."
+         }
+        ]
+   },
+   {
+        "type": "center",
+        "name": "Center Text",
+        "settings": [{
+           "type": "header",
+           "content": "== General"
+         },
+         {
+            "type": "text",
+            "id": "title_block",
+            "label": "Title block (optional)",
+            "default": "Product 1"
+          },
+          {
+           "type": "radio",
+           "id": "source",
+           "options": [
+             {
+               "value": "1",
+               "label": "choose product"
+             },
+             {
+               "value": "2",
+               "label": "custom product"
+             }
+           ],
+           "label": "___ source",
+           "default": "1"
+         },
+         {
+           "type": "header",
+           "content": "=== Text Block Settings"
+         },
+         {
+        "type": "select",
+        "id": "text_width",
+        "options": [
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "___ Select column width",
+        "default": "4"
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_text_tablets",
+        "label": "___ Hide on Small devices Tablets (≥768px)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_text_phones",
+        "label": "___ Extra small devices Phones ( less 768px)",
+        "default": false
+      },
+          {
+           "type": "header",
+           "content": "___ Text Block Settings ( only for choose product)"
+         },
+         {
+            "id": "product_single",
+            "type": "product",
+            "label": "Product to use"
+          },
+          {
+        "type": "checkbox",
+        "id": "show_vendor",
+        "label": "Show product vendor"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_type",
+        "label": "Show product type"
+      },
+         {
+           "type": "header",
+           "content": "___ Text Block Settings (only for custom product)"
+         },
+         {
+          "type": "text",
+          "id": "author",
+          "label": "Author",
+          "default": "Designers: Valentino Rachelli"
+        },
+        {
+          "type": "text",
+          "id": "product_title",
+          "label": "Product Title",
+          "default": "Eames Sofa",
+          "info":"The title of the product."
+        },
+        {
+          "type": "text",
+          "id": "sub_product_title",
+          "label": "Sub Product Title",
+          "default": "Compact",
+          "info":"Sub Product Title."
+        },
+        {
+          "type": "text",
+          "id": "product_price",
+          "label": "Product Price",
+          "default": "$800",
+          "info":"The price of the product."
+        },
+          {
+          "type": "textarea",
+          "id": "product_description",
+          "label": "Product Description",
+          "default": "Vel himenaeos quam fringilla a interdum blandit adipiscing ullamcorper per consequat in ut a enim suspendisse luctus commodo varius dictumst egestas at curae ultricies nam.",
+          "info":"The description of the product."
+        },
+        {
+            "type": "text",
+            "id": "title_btn",
+            "label": "Button Title",
+            "default": "read more"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "link"
+          },
+         {
+           "type": "header",
+           "content": "=== Image Settings"
+         },
+         {
+           "type": "image_picker",
+           "id": "image_source_one",
+           "label": "___ Image (only for custom product)"
+         },
+         {
+           "type": "image_picker",
+           "id": "image_source_two",
+           "label": "___ Image 2 (only for custom product)"
+         },
+         {
+           "type": "header",
+           "content": "=== Image 1 Settings"
+         },
+         {
+           "type": "select",
+           "id": "one_width",
+           "options": [
+            {
+               "value": "1",
+               "label": "1 column - 1/12"
+             },
+             {
+               "value": "2",
+               "label": "2 columns - 1/6"
+             },
+             {
+               "value": "3",
+               "label": "3 columns - 1/4"
+             },
+             {
+               "value": "4",
+               "label": "4 columns - 1/3"
+             },
+             {
+               "value": "5",
+               "label": "5 columns - 5/12"
+             },
+             {
+               "value": "6",
+               "label": "6 columns - 1/2"
+             },
+             {
+               "value": "7",
+               "label": "7 columns - 7/12"
+             },
+             {
+               "value": "8",
+               "label": "8 columns - 2/3"
+             },
+             {
+               "value": "9",
+               "label": "9 columns - 3/4"
+             },
+             {
+               "value": "10",
+               "label": "10 columns - 5/6"
+             },
+             {
+               "value": "11",
+               "label": "11 columns - 11/12"
+             },
+             {
+               "value": "12",
+               "label": "12 columns - 1/1"
+             }
+           ],
+           "label": "___ Select column width",
+           "default": "4"
+         },
+         {
+           "type": "checkbox",
+           "id": "hide_one_tablets",
+           "label": "___ Hide on Small devices Tablets (≥768px)",
+           "default": false
+         },
+         {
+           "type": "checkbox",
+           "id": "hide_one_phones",
+           "label": "___ Extra small devices Phones ( less 768px)",
+           "default": false
+         },
+         {
+           "type": "select",
+           "id": "image_alignment_one",
+           "options": [
+             {
+               "value": "left",
+               "label": "Left"
+             },
+             {
+               "value": "right",
+               "label": "Right"
+             },
+             {
+               "value": "center",
+               "label": "Center"
+             }
+           ],
+           "label": "___ Image alignment",
+           "default": "center",
+           "info": "Select image alignment."
+         },
+         {
+           "type": "select",
+           "id": "image_style_one",
+           "options": [
+             {
+               "value": "default",
+               "label": "Default"
+             },
+             {
+               "value": "gl_box_rounded",
+               "label": "Rounded"
+             },
+             {
+               "value": "gl_box_border",
+               "label": "Border"
+             },
+             {
+               "value": "gl_box_outline",
+               "label": "Outline"
+             },
+             {
+               "value": "gl_box_shadow",
+               "label": "Shadow"
+             },
+             {
+               "value": "gl_box_shadow_border",
+               "label": "Bordered shadow"
+             },
+             {
+               "value": "gl_box_shadow_3d",
+               "label": "3D Shadow"
+             },
+             {
+               "value": "gl_box_circle",
+               "label": "Round"
+             },
+             {
+               "value": "gl_box_border_circle",
+               "label": "Round Border"
+             },
+             {
+               "value": "gl_box_outline_circle",
+               "label": "Round Outline"
+             },
+             {
+               "value": "gl_box_shadow_circle",
+               "label": "Round Shadow"
+             },
+             {
+               "value": "gl_box_shadow_border_circle",
+               "label": "Round Border Shadow"
+             }
+           ],
+           "label": "___ Image style",
+           "default": "default",
+           "info": "Select image display style."
+         },
+         {
+           "type": "header",
+           "content": "=== Image 2 Settings"
+         },
+         {
+           "type": "select",
+           "id": "two_width",
+           "options": [
+            {
+               "value": "1",
+               "label": "1 column - 1/12"
+             },
+             {
+               "value": "2",
+               "label": "2 columns - 1/6"
+             },
+             {
+               "value": "3",
+               "label": "3 columns - 1/4"
+             },
+             {
+               "value": "4",
+               "label": "4 columns - 1/3"
+             },
+             {
+               "value": "5",
+               "label": "5 columns - 5/12"
+             },
+             {
+               "value": "6",
+               "label": "6 columns - 1/2"
+             },
+             {
+               "value": "7",
+               "label": "7 columns - 7/12"
+             },
+             {
+               "value": "8",
+               "label": "8 columns - 2/3"
+             },
+             {
+               "value": "9",
+               "label": "9 columns - 3/4"
+             },
+             {
+               "value": "10",
+               "label": "10 columns - 5/6"
+             },
+             {
+               "value": "11",
+               "label": "11 columns - 11/12"
+             },
+             {
+               "value": "12",
+               "label": "12 columns - 1/1"
+             }
+           ],
+           "label": "___ Select column width",
+           "default": "4"
+         },
+         {
+           "type": "checkbox",
+           "id": "hide_two_tablets",
+           "label": "___ Hide on Small devices Tablets (≥768px)",
+           "default": false
+         },
+         {
+           "type": "checkbox",
+           "id": "hide_two_phones",
+           "label": "___ Extra small devices Phones ( less 768px)",
+           "default": false
+         },
+         {
+           "type": "select",
+           "id": "image_alignment_two",
+           "options": [
+             {
+               "value": "left",
+               "label": "Left"
+             },
+             {
+               "value": "right",
+               "label": "Right"
+             },
+             {
+               "value": "center",
+               "label": "Center"
+             }
+           ],
+           "label": "___ Image alignment",
+           "default": "center",
+           "info": "Select image alignment."
+         },
+         {
+           "type": "select",
+           "id": "image_style_two",
+           "options": [
+             {
+               "value": "default",
+               "label": "Default"
+             },
+             {
+               "value": "gl_box_rounded",
+               "label": "Rounded"
+             },
+             {
+               "value": "gl_box_border",
+               "label": "Border"
+             },
+             {
+               "value": "gl_box_outline",
+               "label": "Outline"
+             },
+             {
+               "value": "gl_box_shadow",
+               "label": "Shadow"
+             },
+             {
+               "value": "gl_box_shadow_border",
+               "label": "Bordered shadow"
+             },
+             {
+               "value": "gl_box_shadow_3d",
+               "label": "3D Shadow"
+             },
+             {
+               "value": "gl_box_circle",
+               "label": "Round"
+             },
+             {
+               "value": "gl_box_border_circle",
+               "label": "Round Border"
+             },
+             {
+               "value": "gl_box_outline_circle",
+               "label": "Round Outline"
+             },
+             {
+               "value": "gl_box_shadow_circle",
+               "label": "Round Shadow"
+             },
+             {
+               "value": "gl_box_shadow_border_circle",
+               "label": "Round Border Shadow"
+             }
+           ],
+           "label": "___ Image style",
+           "default": "default",
+           "info": "Select image display style."
+         }
+        ]
+   },
+   {
+        "type": "right",
+        "name": "Right Text",
+        "settings": [{
+           "type": "header",
+           "content": "== General"
+         },
+         {
+            "type": "text",
+            "id": "title_block",
+            "label": "Title block (optional)",
+            "default": "Product 1"
+          },
+          {
+           "type": "radio",
+           "id": "source",
+           "options": [
+             {
+               "value": "1",
+               "label": "choose product"
+             },
+             {
+               "value": "2",
+               "label": "custom product"
+             }
+           ],
+           "label": "___ source",
+           "default": "1"
+         },
+         {
+           "type": "header",
+           "content": "=== Text Block Settings"
+         },
+         {
+        "type": "select",
+        "id": "text_width",
+        "options": [
+         {
+            "value": "1",
+            "label": "1 column - 1/12"
+          },
+          {
+            "value": "2",
+            "label": "2 columns - 1/6"
+          },
+          {
+            "value": "3",
+            "label": "3 columns - 1/4"
+          },
+          {
+            "value": "4",
+            "label": "4 columns - 1/3"
+          },
+          {
+            "value": "5",
+            "label": "5 columns - 5/12"
+          },
+          {
+            "value": "6",
+            "label": "6 columns - 1/2"
+          },
+          {
+            "value": "7",
+            "label": "7 columns - 7/12"
+          },
+          {
+            "value": "8",
+            "label": "8 columns - 2/3"
+          },
+          {
+            "value": "9",
+            "label": "9 columns - 3/4"
+          },
+          {
+            "value": "10",
+            "label": "10 columns - 5/6"
+          },
+          {
+            "value": "11",
+            "label": "11 columns - 11/12"
+          },
+          {
+            "value": "12",
+            "label": "12 columns - 1/1"
+          }
+        ],
+        "label": "___ Select column width",
+        "default": "4"
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_text_tablets",
+        "label": "___ Hide on Small devices Tablets (≥768px)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_text_phones",
+        "label": "___ Extra small devices Phones ( less 768px)",
+        "default": false
+      },
+          {
+           "type": "header",
+           "content": "___ Text Block Settings ( only for choose product)"
+         },
+         {
+            "id": "product_single",
+            "type": "product",
+            "label": "Product to use"
+          },
+          {
+        "type": "checkbox",
+        "id": "show_vendor",
+        "label": "Show product vendor"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_type",
+        "label": "Show product type"
+      },
+         {
+           "type": "header",
+           "content": "___ Text Block Settings (only for custom product)"
+         },
+         {
+          "type": "text",
+          "id": "author",
+          "label": "Author",
+          "default": "Designers: Valentino Rachelli"
+        },
+        {
+          "type": "text",
+          "id": "product_title",
+          "label": "Product Title",
+          "default": "Eames Sofa",
+          "info":"The title of the product."
+        },
+        {
+          "type": "text",
+          "id": "sub_product_title",
+          "label": "Sub Product Title",
+          "default": "Compact",
+          "info":"Sub Product Title."
+        },
+        {
+          "type": "text",
+          "id": "product_price",
+          "label": "Product Price",
+          "default": "$800",
+          "info":"The price of the product."
+        },
+          {
+          "type": "textarea",
+          "id": "product_description",
+          "label": "Product Description",
+          "default": "Vel himenaeos quam fringilla a interdum blandit adipiscing ullamcorper per consequat in ut a enim suspendisse luctus commodo varius dictumst egestas at curae ultricies nam.",
+          "info":"The description of the product."
+        },
+        {
+            "type": "text",
+            "id": "title_btn",
+            "label": "Button Title",
+            "default": "read more"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "link"
+          },
+         {
+           "type": "header",
+           "content": "=== Image Settings"
+         },
+         {
+           "type": "image_picker",
+           "id": "image_source_one",
+           "label": "___ Image (only for custom product)"
+         },
+         {
+           "type": "image_picker",
+           "id": "image_source_two",
+           "label": "___ Image 2 (only for custom product)"
+         },
+         {
+           "type": "header",
+           "content": "=== Image 1 Settings"
+         },
+         {
+           "type": "select",
+           "id": "one_width",
+           "options": [
+            {
+               "value": "1",
+               "label": "1 column - 1/12"
+             },
+             {
+               "value": "2",
+               "label": "2 columns - 1/6"
+             },
+             {
+               "value": "3",
+               "label": "3 columns - 1/4"
+             },
+             {
+               "value": "4",
+               "label": "4 columns - 1/3"
+             },
+             {
+               "value": "5",
+               "label": "5 columns - 5/12"
+             },
+             {
+               "value": "6",
+               "label": "6 columns - 1/2"
+             },
+             {
+               "value": "7",
+               "label": "7 columns - 7/12"
+             },
+             {
+               "value": "8",
+               "label": "8 columns - 2/3"
+             },
+             {
+               "value": "9",
+               "label": "9 columns - 3/4"
+             },
+             {
+               "value": "10",
+               "label": "10 columns - 5/6"
+             },
+             {
+               "value": "11",
+               "label": "11 columns - 11/12"
+             },
+             {
+               "value": "12",
+               "label": "12 columns - 1/1"
+             }
+           ],
+           "label": "___ Select column width",
+           "default": "4"
+         },
+         {
+           "type": "checkbox",
+           "id": "hide_one_tablets",
+           "label": "___ Hide on Small devices Tablets (≥768px)",
+           "default": false
+         },
+         {
+           "type": "checkbox",
+           "id": "hide_one_phones",
+           "label": "___ Extra small devices Phones ( less 768px)",
+           "default": false
+         },
+         {
+           "type": "select",
+           "id": "image_alignment_one",
+           "options": [
+             {
+               "value": "left",
+               "label": "Left"
+             },
+             {
+               "value": "right",
+               "label": "Right"
+             },
+             {
+               "value": "center",
+               "label": "Center"
+             }
+           ],
+           "label": "___ Image alignment",
+           "default": "center",
+           "info": "Select image alignment."
+         },
+         {
+           "type": "select",
+           "id": "image_style_one",
+           "options": [
+             {
+               "value": "default",
+               "label": "Default"
+             },
+             {
+               "value": "gl_box_rounded",
+               "label": "Rounded"
+             },
+             {
+               "value": "gl_box_border",
+               "label": "Border"
+             },
+             {
+               "value": "gl_box_outline",
+               "label": "Outline"
+             },
+             {
+               "value": "gl_box_shadow",
+               "label": "Shadow"
+             },
+             {
+               "value": "gl_box_shadow_border",
+               "label": "Bordered shadow"
+             },
+             {
+               "value": "gl_box_shadow_3d",
+               "label": "3D Shadow"
+             },
+             {
+               "value": "gl_box_circle",
+               "label": "Round"
+             },
+             {
+               "value": "gl_box_border_circle",
+               "label": "Round Border"
+             },
+             {
+               "value": "gl_box_outline_circle",
+               "label": "Round Outline"
+             },
+             {
+               "value": "gl_box_shadow_circle",
+               "label": "Round Shadow"
+             },
+             {
+               "value": "gl_box_shadow_border_circle",
+               "label": "Round Border Shadow"
+             }
+           ],
+           "label": "___ Image style",
+           "default": "default",
+           "info": "Select image display style."
+         },
+         {
+           "type": "header",
+           "content": "=== Image 2 Settings"
+         },
+         {
+           "type": "select",
+           "id": "two_width",
+           "options": [
+            {
+               "value": "1",
+               "label": "1 column - 1/12"
+             },
+             {
+               "value": "2",
+               "label": "2 columns - 1/6"
+             },
+             {
+               "value": "3",
+               "label": "3 columns - 1/4"
+             },
+             {
+               "value": "4",
+               "label": "4 columns - 1/3"
+             },
+             {
+               "value": "5",
+               "label": "5 columns - 5/12"
+             },
+             {
+               "value": "6",
+               "label": "6 columns - 1/2"
+             },
+             {
+               "value": "7",
+               "label": "7 columns - 7/12"
+             },
+             {
+               "value": "8",
+               "label": "8 columns - 2/3"
+             },
+             {
+               "value": "9",
+               "label": "9 columns - 3/4"
+             },
+             {
+               "value": "10",
+               "label": "10 columns - 5/6"
+             },
+             {
+               "value": "11",
+               "label": "11 columns - 11/12"
+             },
+             {
+               "value": "12",
+               "label": "12 columns - 1/1"
+             }
+           ],
+           "label": "___ Select column width",
+           "default": "4"
+         },
+         {
+           "type": "checkbox",
+           "id": "hide_two_tablets",
+           "label": "___ Hide on Small devices Tablets (≥768px)",
+           "default": false
+         },
+         {
+           "type": "checkbox",
+           "id": "hide_two_phones",
+           "label": "___ Extra small devices Phones ( less 768px)",
+           "default": false
+         },
+         {
+           "type": "select",
+           "id": "image_alignment_two",
+           "options": [
+             {
+               "value": "left",
+               "label": "Left"
+             },
+             {
+               "value": "right",
+               "label": "Right"
+             },
+             {
+               "value": "center",
+               "label": "Center"
+             }
+           ],
+           "label": "___ Image alignment",
+           "default": "center",
+           "info": "Select image alignment."
+         },
+         {
+           "type": "select",
+           "id": "image_style_two",
+           "options": [
+             {
+               "value": "default",
+               "label": "Default"
+             },
+             {
+               "value": "gl_box_rounded",
+               "label": "Rounded"
+             },
+             {
+               "value": "gl_box_border",
+               "label": "Border"
+             },
+             {
+               "value": "gl_box_outline",
+               "label": "Outline"
+             },
+             {
+               "value": "gl_box_shadow",
+               "label": "Shadow"
+             },
+             {
+               "value": "gl_box_shadow_border",
+               "label": "Bordered shadow"
+             },
+             {
+               "value": "gl_box_shadow_3d",
+               "label": "3D Shadow"
+             },
+             {
+               "value": "gl_box_circle",
+               "label": "Round"
+             },
+             {
+               "value": "gl_box_border_circle",
+               "label": "Round Border"
+             },
+             {
+               "value": "gl_box_outline_circle",
+               "label": "Round Outline"
+             },
+             {
+               "value": "gl_box_shadow_circle",
+               "label": "Round Shadow"
+             },
+             {
+               "value": "gl_box_shadow_border_circle",
+               "label": "Round Border Shadow"
+             }
+           ],
+           "label": "___ Image style",
+           "default": "default",
+           "info": "Select image display style."
+         }
+        ]
+   }],
+    "presets": [{
+      "name": "Product Tab Single",
+      "category": "Collections",
+      "blocks": [
+          {
+            "type": "left"
+          }
+        ]
+    }]
+  }
+{% endschema %}

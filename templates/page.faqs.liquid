@@ -1,0 +1,97 @@
+<div class="main-page-wrapper">
+	<!-- MAIN CONTENT AREA -->
+	<div class="container">
+		<div class="row">
+			<div class="site-content col-sm-12" role="main">
+				<article id="post-{{page.id}}" class="post-{{page.id}} page type-page status-publish hentry">
+					<div class="entry-content">
+						{%- comment -%}faq,question,tab,counter,page_content{%- endcomment -%}
+						{%- if settings.sort_faq != blank -%}
+							{%- assign _sort_faq = settings.sort_faq | replace: ' >', '>' | replace: '> ', '>' | split: '>' | uniq -%}
+							{%- for el_faq in _sort_faq -%}
+								{%- case forloop.index -%} 
+									{%- when 1 -%}
+										{%- if el_faq  == 'faq' -%}
+											{%- section 'faqs_faq' -%}
+										{%- elsif el_faq  == 'question' -%}
+											{%- section 'faqs_question' -%} 
+										{%- elsif el_faq  == 'tab' -%}
+											{%- section 'faqs_tab' -%} 
+										{%- elsif el_faq  == 'counter' -%}
+											{%- section 'faqs_counter' -%}
+										{%- elsif el_faq  == 'page_content' -%}
+											{{page.content}}
+										{%- endif -%}
+									{%- when 2 -%}
+										{%- if el_faq  == 'faq' -%}
+											{%- section 'faqs_faq' -%}
+										{%- elsif el_faq  == 'question' -%}
+											{%- section 'faqs_question' -%} 
+										{%- elsif el_faq  == 'tab' -%}
+											{%- section 'faqs_tab' -%} 
+										{%- elsif el_faq  == 'counter' -%}
+											{%- section 'faqs_counter' -%}
+										{%- elsif el_faq  == 'page_content' -%}
+											{{page.content}}
+										{%- endif -%}
+									{%- when 3 -%}
+										{%- if el_faq  == 'faq' -%}
+											{%- section 'faqs_faq' -%}
+										{%- elsif el_faq  == 'question' -%}
+											{%- section 'faqs_question' -%} 
+										{%- elsif el_faq  == 'tab' -%}
+											{%- section 'faqs_tab' -%} 
+										{%- elsif el_faq  == 'counter' -%}
+											{%- section 'faqs_counter' -%}
+										{%- elsif el_faq  == 'page_content' -%}
+											{{page.content}}
+										{%- endif -%}
+									{%- when 4 -%}
+										{%- if el_faq  == 'faq' -%}
+											{%- section 'faqs_faq' -%}
+										{%- elsif el_faq  == 'question' -%}
+											{%- section 'faqs_question' -%} 
+										{%- elsif el_faq  == 'tab' -%}
+											{%- section 'faqs_tab' -%} 
+										{%- elsif el_faq  == 'counter' -%}
+											{%- section 'faqs_counter' -%}
+										{%- elsif el_faq  == 'page_content' -%}
+											{{page.content}}
+										{%- endif -%}
+									{%- when 5 -%}
+										{%- if el_faq  == 'faq' -%}
+											{%- section 'faqs_faq' -%}
+										{%- elsif el_faq  == 'question' -%}
+											{%- section 'faqs_question' -%} 
+										{%- elsif el_faq  == 'tab' -%}
+											{%- section 'faqs_tab' -%} 
+										{%- elsif el_faq  == 'counter' -%}
+											{%- section 'faqs_counter' -%}
+										{%- elsif el_faq  == 'page_content' -%}
+											{{page.content}}
+										{%- endif -%}
+								{%- endcase -%}
+									{% comment %}{%- section 'el_faq' -%}{% endcomment %}
+							{%- endfor -%}
+						{%- else -%}
+							{%- comment -%}faq info{%- endcomment -%}
+							{%- section 'faqs_faq' -%}
+							{%- comment -%}Question General Information{%- endcomment -%}
+							{%- section 'faqs_question' -%} 
+							{%- comment -%}faq tab{%- endcomment -%}
+							{%- section 'faqs_tab' -%} 
+							{%- comment -%}basel-counter{%- endcomment -%}
+							{%- section 'faqs_counter' -%}
+							{{page.content}}
+						{%- endif -%}
+					</div>
+				</article>
+			</div><!-- .site-content -->
+		</div><!-- end row -->
+	</div><!-- end container -->
+</div><!-- .main-page-wrapper -->
+{{ 'tta.min.css' | asset_url | stylesheet_tag }}
+{{ 'animate.min.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'waypoints.min.js' | asset_url }}"></script>
+<!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'js_cp_gl.min.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+<!--[if lte IE 9]><script src="{{ 'js_cp_gl.min.js' | asset_url }}"></script><![endif]-->

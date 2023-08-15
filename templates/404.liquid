@@ -1,0 +1,30 @@
+<div class="main-page-wrapper">
+   <!-- MAIN CONTENT AREA -->
+   <div class="container">
+      <div class="row">
+         <div class="site-content col-md-12" role="main">
+            <header class="page-header">
+               <h1 class="page-title">{{ 'general.404.header_title' | t }}</h1>
+            </header>
+            <div class="page-wrapper">
+               <div class="page-content">
+                  <h2>{{ 'general.404.title' | t }}</h2>
+                  <h6>{{ 'general.404.sub_text' | t }}</h6>
+                  <form role="search" method="get" id="searchform_404" class="searchform" action="/search">
+                     <div>
+                        <label class="screen-reader-text" for="q"></label>
+                        <input type="text" placeholder="{{ 'general.search.placeholder' | t }}" value="" name="q" id="q">
+                        <button type="submit" id="searchsubmit">{{ 'general.search.search_submit' | t }}</button>
+                     </div>
+                  </form>
+               </div>
+               <!-- .page-content -->
+            </div>
+            <!-- .page-wrapper -->
+         </div>
+         <!-- .site-content -->
+      </div>
+      <!-- end row -->
+   </div>
+   <!-- end container -->
+</div>

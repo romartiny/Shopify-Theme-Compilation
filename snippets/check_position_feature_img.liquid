@@ -1,0 +1,58 @@
+{%- comment -%}check loop position variants image{%- endcomment -%}
+  {%-assign map_position = ""-%}{%-assign variant_image = ""-%}
+  {%- for option in product.options -%}
+  {%- assign downcased_option = option | downcase -%}
+  {%- if downcased_option == 'color' or downcased_option == 'colour' -%}
+  {%- assign option_index = forloop.index0 -%}
+  {%- assign displayed_option_values = '' -%}
+  {%- for image in product.images -%}
+    {%- for variant in image.variants -%}
+      {%- assign option_value = variant.options[option_index] -%}
+      
+        {%- unless displayed_option_values contains option_value -%}
+          {%-assign map_position = map_position | append: variant.image.position | append: "," -%}
+          {%- assign displayed_option_values = displayed_option_values | join: ',' -%}
+          {%- assign displayed_option_values = displayed_option_values | append: ',' | append: option_value -%}
+          {%- assign displayed_option_values = displayed_option_values | split: ',' -%}
+        {%- endunless -%}
+    {%- endfor -%}
+  {%- endfor -%}
+  {%- endif -%}
+  {%- endfor -%}
+  {%- assign map_position = map_position | split: "," -%}
+  {%- comment -%} end check loop position variants image {%- endcomment -%}
+{%- assign img_arr = '' -%}
+{%-assign check_step = 1-%}
+{%-for position_img in map_position-%}
+{%-assign count_positionx = map_position[forloop.index0] | plus: 0 -%}
+{%-for image in product.images-%}
+ {%-assign position_imgx = position_img | plus: 0-%}
+ {%-assign position = image.position | plus: 0-%}
+ {%- if position_imgx != 0 and count_positionx != 0 -%}
+   {%-if position_imgx == position and position >= check_step-%}
+       {%- unless forloop.first -%}{%- assign img_arr = img_arr | append: ':' -%}{%-endunless-%}
+       {%- assign src = image -%}
+       {%- assign img_arr = img_arr | append: src| append: ','  -%}
+       {%-assign position_imgxx = position | plus: 0 -%}
+       {%-assign last_image_variant = position_imgxx | plus: 0-%}
+   {%-endif-%}
+   {%-if position > position_imgxx and position < count_positionx and position > check_step -%}
+     {%- assign src = image -%}
+     {%- assign img_arr = img_arr | append: src| append: ',' -%}
+     {%-assign last_image_variant = count_positionx | plus: 0-%}
+   {%-endif-%}
+   {%-if position == count_positionx -%}
+     {%-assign check_step = last_image_variant | plus: 0 -%}
+     {%-break-%}
+   {%-endif-%}
+ {%-endif-%}
+ {%-endfor-%}
+{%-endfor-%}
+{%-for image in product.images-%}
+ {%-assign position = image.position | plus: 0 %}
+ {%-if position  > last_image_variant -%}
+   {%- assign src = image -%}
+   {%- assign img_arr = img_arr | append: src| append: ','  -%}
+ {%-endif-%}
+{%-endfor-%}
+{%- assign imgs_arr = img_arr | split:':'  -%}

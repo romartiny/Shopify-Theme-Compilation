@@ -1,0 +1,37 @@
+{%- if blog_ajax -%}
+  {%- for part in paginate.parts -%}
+    {%- if part.is_link -%}
+      <a href="{{ part.url }}" class="inactive">{{ part.title }}</a>
+    {%- else -%}
+      {%- if part.title == paginate.current_page -%}
+        <span class="current">{{ part.title }}</span>
+      {%- else -%}
+        <span class="inactive">{{ part.title }}</span>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor- %}
+{%- else -%}
+  <ul class="page-numbers">
+      {%- if paginate.previous -%}
+      <li><a class="prev page-numbers" href="{{ paginate.previous.url }}">←</a></li>
+      {%- endif -%}
+
+      {%- for part in paginate.parts -%}
+      {%- if part.is_link -%}
+        <li>
+          <a href="{{ part.url }}" class="page-numbers">{{ part.title }}</a>
+        </li>
+      {%- else -%}
+        {%- if part.title == paginate.current_page -%}
+          <li><span class="page-numbers current">{{ part.title }}</span></li>
+        {%- else -%}
+          <li><span class="page-numbers dots">{{ part.title }}</span></li>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%} 
+
+    {%- if paginate.next -%}
+      <li><a class="next page-numbers" href="{{ paginate.next.url }}">→</a></li>
+    {%- endif -%}
+  </ul>
+{%- endif -%}

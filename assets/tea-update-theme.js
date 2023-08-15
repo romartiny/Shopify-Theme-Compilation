@@ -1,0 +1,119 @@
+(function($) {
+    window.teaUpdate = {};
+    window.teaUpdate.settings_data_json_url = '//cdn.shopify.com/s/files/1/2285/2483/t/43/assets/settings_presets.json?18114642945109452704';
+    var $data = {};
+
+    function BindEvent() {}
+
+    function updateContentForIndex() {
+        var t = [];
+        $(top.document).find("[data-content-for-index]").children("li").each(function() {
+            var e = $(this).attr("data-section-id");
+            e && t.push(e)
+        }), t.length > 0 && (top.window.jsContentForIndex = t)
+    }
+
+    function isObject(t) {
+        return t === Object(t)
+    }
+
+    function isArray(t) {
+        return Array.isArray(t)
+    }
+
+    function isFile(t) {
+        return t instanceof File
+    }
+
+    function mapToJson(t, e, n) {
+        var n = n || {};
+        return 1 === t.length ? (e.indexOf("[]") > -1 ? e = [] : e.indexOf('["') > -1 && (e = e.replace('["', "").replace('"]', "").replace(new RegExp('","', "g"), "|").split("|")), n[t[0]] = e, n) : (n[t[0]] = n[t[0]] || {}, n[t[0]] = mapToJson(t.slice(1), e, n[t[0]]), n)
+    }
+
+    function jsonToMap(t, e, n) {
+        return e = e || [], Object.keys(t).forEach(function(o) {
+            var i = n ? n + "[" + o + "]" : o;
+            !isObject(t[o]) || isArray(t[o]) || isFile(t[o]) ? isArray(t[o]) ? t[o].forEach(function(t) {
+                var n = i + "[]";
+                isObject(t) && !isFile(t) ? jsonToMap(t, e, n) : e.push({
+                    name: n,
+                    value: t
+                })
+            }) : e.push({
+                name: i,
+                value: t[o]
+            }) : jsonToMap(t[o], e, i)
+        }), e
+    }
+
+    function getCurrentFormSettings() {
+        var t = $(top.document).find(".te-sidebar").serializeArray();
+        t.push({
+            name: "settings[content_for_index]",
+            value: '["' + top.window.jsContentForIndex.join('","') + '"]'
+        });
+        for (var e = {}, n = 0; n < t.length; n++) {
+            var o = t[n].name.replace("settings", "").split("][").join("|").replace("[", "").replace("]", "").split("|"),
+                i = t[n].value;
+            mapToJson(o, i, e)
+        }
+        return e
+    }
+
+    function MergerSectionsData(t) {
+        var e = getCurrentFormSettings(),
+            n = {
+                sections: {},
+                accessToken: e.CurrentSettings
+            };
+        return console.log(e), console.log(t), console.log($.extend({}, n, t)), $.extend({}, n, t)
+    }
+
+    function importData(t, e) {
+        var n = {
+                method: "PATCH",
+                url: top.Shopify.routes.theme_editor_save(top.THEME_ID).html,
+                data: t
+            },
+            o = $.extend({}, n, e);
+        console.log(o), top.Shopify.ajax(o).done(function(t) {
+            setTimeout(function() {
+                top.window.location.reload()
+            }, 3000);
+        }).fail(function(t) {
+            console.info("fail", t)
+        })
+    }
+    top.window.jsContentForIndex || (top.window.jsContentForIndex = top.window.Shopify.contentForIndex), $(document).on("shopify:section:load", updateContentForIndex), $(document).on("shopify:section:reorder", updateContentForIndex);
+    var $top = $(top.document),
+        $action_list = $top.find(".ui-action-list").first();
+    console.log($action_list), $action_list.find(".theme-editor-action-list__item--separator + li").hide(), 0 == $action_list.find("li.tea-update-theme").length && $action_list.append($('<li><a href="#" class="theme-editor-action-list__item tea-update-theme">Import demo</a></li>')), $action_list.find("li:gt(4)").hide();
+    var $importBtn = window.top.document.querySelector(".tea-update-theme");
+    $importBtn.addEventListener("click", function() {
+      console.log('aasdsad clicked')
+        $("#tea-theme-update").trigger("click")
+    }), $.get(window.teaUpdate.settings_data_json_url, function(t, e) {
+        console.log(t, e), "success" == e && ($data = t.presets)
+    }), $(document).on("click", "#tea-import-from-btn", function() {
+        var t = $("#tea-import-from-text").val();
+        $(".preloader").fadeIn(500, function() {
+            $(".preloader").children().fadeIn(100)
+        });
+        try {
+            importData(jsonToMap(JSON.parse(t), !1, "settings"))
+        } catch (e) {
+            console.log(e), alert("Import Errors"), $(".preloader").fadeOut(500, function() {
+                $(".preloader").children().fadeOut(100)
+            })
+        }
+    }), $(document).on("shopify:section:select", BindEvent), $(document).on("shopify:section:reorder", BindEvent), $(document).on("click", ".import-btn", function(t) {
+        t.preventDefault(), $(".preloader").fadeIn(500, function() {
+            $(".preloader").children().fadeIn(100)
+        });
+        var e = $(this),
+            n = e.data("layout");
+        importData(jsonToMap(MergerSectionsData($data[n]), !1, "settings")), $(".import-btn").removeClass("active"), e.addClass("active")
+    }), $(document).on("change", '[name="tab-group-1"]', function() {
+        "export" == $(this).val() && $("#tea-form-export").val(JSON.stringify(getCurrentFormSettings()))
+    });
+})(jQuery);

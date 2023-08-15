@@ -1,0 +1,19 @@
+{%- assign check_label = false -%}
+{%- if hot and settings.use_hot_label -%}
+{%- assign check_label = true -%}
+{%- elsif new_label != blank and settings.use_new_label -%}
+{%- assign check_label = true -%}
+{%- elsif on_sale and settings.use_sale_label -%}
+{%- assign check_label = true -%}
+{%- elsif sold_out and settings.use_sold_out_label -%}
+{%- assign check_label = true -%}
+{%- endif -%}
+{%- if settings.label_sale_style == '2' and on_sale and settings.use_sale_label -%}{%- assign save = current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price -%}{%- endif -%}
+{%- if check_label -%}
+<div class="product-labels labels-{{settings.label_settings}}">
+  {%- if on_sale and settings.use_sale_label -%}{%- if settings.label_sale_style == '1' -%}<span class="onsale product-label">{{ 'products.product.on_sale' | t }}</span>{%- elsif save >=1 -%}<span class="onsale product-label">-{{save}}%</span>{%- endif -%}{%- endif -%}
+  {%- if hot and settings.use_hot_label -%}<span class="hot product-label">{{ 'products.product.hot' | t }}</span>{%- endif -%}
+  {%- if new_label != blank and settings.use_new_label -%}<span class="new product-label">{{ 'products.product.new' | t }}</span>{%- endif -%}
+  {%- if sold_out and settings.use_sold_out_label -%}<span class="out-of-stock product-label">{{ 'products.product.sold_out' | t }}</span>{%- endif -%}
+</div>
+{%- endif -%}

@@ -1,0 +1,13 @@
+{%- assign template_id = template | split: '.' | first -%}
+{%- assign st = 'display_popup_cookies_' | append: template_id -%}
+{%- if settings[st] -%}
+<div class="basel-cookies-popup">
+  <div class="basel-cookies-inner">
+    <div class="cookies-info-text">{{ settings.text_cookies_popup | strip_html }}</div>
+    <div class="cookies-buttons">
+      <a href="#" class="cookies-accept-btn">{{ 'general.cookiespopup.accept' | t }}</a>
+      {%- if settings.link_btn_infor != blank -%}<a href="{{ settings.link_btn_infor }}" class="cookies-more-btn">{{ 'general.cookiespopup.more' | t }}</a>{%- endif -%}
+    </div>
+  </div>
+</div>
+{%- endif -%}

@@ -1,0 +1,86 @@
+{%- comment -%}2017/07/30{%- endcomment -%}
+{%- if section_settings_countdown and product.metafields.meta.countdown -%}
+	{%- assign check_countdown = true -%}
+	{%- assign check_day = false -%}
+	{%- assign check_hople = false -%}
+	{%- assign _user_countdown = '' -%}
+	{%- assign user_countdown = product.metafields.meta.countdown -%}
+	{%- assign countdown = user_countdown | replace: ' /', '/' | replace: '/ ', '/' | replace: ' / ', '/' | split: '/' -%}
+	{%- assign year = countdown[0] | plus:0 -%}
+	{%- assign month = countdown[1] | plus:0 -%}
+	{%- assign day = countdown[2] | plus:0 -%}
+	{%- assign year_now = "now" | date: "%Y" | plus:0 -%}
+	{%- assign month_now_text = "now" | date: "%m" | downcase -%}
+	{%- assign month_now = "now" | date: "%m" | plus:0 -%}
+	{%- assign day_now = "now" | date: "%e" | plus:0 -%}
+	{%- assign day_now_text = "now" | date: "%e" | downcase -%}
+	{%- if year > 0 and month > 0 and month < 13 and day > 0 and day < 32 -%}{%- assign check_hople = true -%}{%- endif -%}
+	{%- if check_hople -%}
+	    {%- if year < year_now -%}{%- assign check_countdown = false -%}
+        {%- elsif year < year_now and month < month_now -%}{%- assign check_countdown = false -%}
+		{%- elsif year <= year_now and month <= month_now and day <= day_now -%}{%- assign check_countdown = false -%}
+        {%- endif -%}
+		{%- if check_countdown == false -%}
+         {%- if loop_countdown or product.metafields.meta.loop_countdown contains 'true' -%}
+				{%- assign _user_countdown = "now" | date: "%Y/%m/%d" -%}
+				{%- assign _user_countdown = _user_countdown | split: '/' -%}
+				{%- assign _user_countdown_one = _user_countdown[0] -%}
+				{%- if month_now == 2 -%}
+				   {%- comment -%}check leap year{%- endcomment -%}
+				   {%- assign year_now_1 = year_now | modulo:4 -%}
+				   {%- assign year_now_2 = year_now | modulo:100 -%}
+				   {%- assign year_now_3 = year_now | modulo:400 -%}
+				   {%- if year_now_1 == 0 and year_now_2 != 0 -%}
+				      {%- assign feb = 29 -%}
+				   {%- elsif year_now_3 == 0 -%}
+				      {%- assign feb = 29 -%}
+				   {%- else -%}
+				      {%- assign feb = 28 -%}
+				   {%- endif -%}
+				    {%- if day > feb -%}
+				      {%- assign _user_countdown_three = feb | strip -%}
+				      {%- assign check_day = true -%}
+				    {%- else -%}
+				      {%- assign _user_countdown_three = day | strip -%}
+				    {%- endif -%}
+				{%- elsif month_now == 4 or month_now == 6 or month_now == 9 or month_now == 11 -%}
+				     {%- if day > 30 -%}
+				        {%- assign _user_countdown_three = 30 | strip -%}
+				        {%- assign check_day = true -%}
+				     {%- else -%}
+				        {%- assign _user_countdown_three = day | strip -%}
+				     {%- endif -%}
+				{%- else -%}
+				   {%- assign _user_countdown_three = day_now_text | strip -%}
+				{%- endif -%}
+                {%- if month_now > 11 -%}
+					{%- assign month_text = 1 -%}
+				{%- else -%}
+					{%- assign _month_text = month_now | plus:1 -%}
+				    {%- assign month_text = _month_text | downcase -%}
+				{%- endif -%}
+                {%- comment -%}
+				{%- if month_now > 11 -%}
+					{%- assign month_text = 1 -%}
+				{%- elsif check_day -%}
+				   {%- assign _month_text = month_now | plus:1 -%}
+				   {%- assign month_text = _month_text | downcase -%}
+				{%- else -%}
+					{%- assign _month_text = month_now -%}
+					{%- assign month_text = _month_text | downcase -%}
+				{%- endif -%}
+                {%- endcomment -%}
+				{%- assign _user_countdown_two = _user_countdown[1] | replace: month_now_text, month_text -%}
+				{%- assign _user_countdown = _user_countdown_one | append: '/' | append: _user_countdown_two | append: '/' | append: _user_countdown_three -%}
+			{%- endif -%}
+		{%- else -%}
+			{%- assign check_countdown = true -%}
+			{%- assign _user_countdown = user_countdown -%}
+		{%- endif -%}
+		{%- if check_countdown or loop_countdown -%}
+		<div class="basel-countdown-timer {{ countdown_style }}">
+		  <div class="basel-product-countdown basel-timer" data-end-date="{{ _user_countdown }}"></div>
+		</div>
+		{%- endif -%}
+	{%- endif -%}
+{%- endif -%}

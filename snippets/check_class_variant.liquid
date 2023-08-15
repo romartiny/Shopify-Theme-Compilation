@@ -1,0 +1,9 @@
+{%- if product.options.size == 2 -%}
+	{%- for variant in product.variants -%}
+	{{ variant.title }} <br>
+	{%- endfor -%}
+{%- elsif product.options.size == 3 -%}
+	{%- for variant in product.variants -%}
+	{{ variant.title }} <br>
+	{%- endfor -%}
+{%- endif -%}

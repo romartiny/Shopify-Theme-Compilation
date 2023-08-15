@@ -1,0 +1,106 @@
+{%- assign template_id = template | split: '.' | first -%}
+{%- assign st = 'display_' | append: template_id -%}
+{%- if settings[st] -%}
+{%- assign collection_opj = collections[settings.collection_suggest] -%}
+{%- if collection_opj.handle != "" or collection_opj.handle != empty -%}
+{%- assign colections = collection_opj.products -%}
+{%- capture index -%}{{ 'now' | date: '%S' | times: shop.collections_count | divided_by: 60 }}{%- endcapture -%}
+{%- assign index_number = index | plus:0 -%}
+{%- if index_number <= collection_opj.all_products_count and index_number < 50 -%}
+  {%- for product in colections offset:index -%}
+      {%- assign ps = product -%}
+      {%- break -%}
+  {%- endfor -%}
+{%- else -%}
+ {%- assign ps = colections | first -%}
+{%- endif -%}
+<div class="basel-products-suggest">
+  <div class="product-suggest">
+    {%- if settings.show_close_suggest -%}<a class="suggest-close" onclick="jQuery(this).parent().parent().remove()">×</a>{%- endif -%}
+    <div class="table_suggest">
+      <div class="table-cell-top img"><a href="{{ ps.url | within: collection_opj }}">
+        <img src="{{ps.featured_image | img_url: '70x' | split:'?' | first }}" class="attachment-shop_thumbnail" alt="{{ps.title}}"> 
+      </a></div>
+      <div class="table-cell-top">
+        <span style="font-size: 12px">{{'general.suggest.title' | t}}</span>
+        <a href="{{ ps.url | within: collection_opj }}" class="product-title">{{ps.title}}</a>
+        {%- if settings.use_suggest -%}
+        {%- assign ago_suggest = 'now' | date: '%S' | plus:0 -%}
+        <div class="minutes-ago">
+          <span class="minute-number">{%- if ago_suggest == 0 -%}1{%- else -%}{{ago_suggest}}{%- endif -%}</span> <span>{{'general.suggest.minutes_ago' | t}}</span>
+        </div>
+        {%- endif -%}
+        {%- if settings.use_fake_location and settings.fake_location != blank -%}
+        {%- assign arr_fake_location = settings.fake_location | replace: ' | ', '|' | replace: ' |', '|' | replace: '| ', '|' | split: '|' -%}
+        {%- assign ago_index = 'now' | date: '%S' | plus:0 -%}
+        <div class="from-ago">{{'general.suggest.from' | t}} <span class="from">{%- if ago_index > arr_fake_location.size -%}{%- assign ago_index = 0 -%}{%- endif -%}{{arr_fake_location[ago_index]}}</span></div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    jQuery(document).ready(function($) {
+      if ((typeof Shopify) === 'undefined') {
+      Shopify = {};
+    }
+    Shopify.getProduct = function(handle, callback) {
+      $.ajax({
+        url: '/products/' + handle + '.js',
+        dataType: 'json',
+         success: function(data) {
+            callback( data );
+        },
+        cache:true,
+        timeout: 1000 //1 second timeout
+      });
+      // jQuery.getJSON('/products/' + handle + '.js', function (product, textStatus) {
+      //   if ((typeof callback) === 'function') {
+      //     callback(product);
+      //   }
+      //   else {
+      //     Shopify.onProduct(product);
+      //   }
+      // });
+    };
+    Shopify.resizeImage = function(image, size) {
+      try {
+        if(size == 'original') { return image; }
+        else {      
+          var matches = image.match(/(.*\/[\w\-\_\.]+)\.(\w{2,4})/);
+          return matches[1] + '_' + size + '.' + matches[2];
+        }    
+      } catch (e) { return image; }
+    };
+    var newsArray = {{ colections | map:'handle' | json }};   // your code puts strings into this array
+    var curNewsIndex = 0;
+    function advanceNewsItem() {
+      ++curNewsIndex;
+      if (curNewsIndex >= newsArray.length) {
+        curNewsIndex = 0;
+      }
+      //setTickerNews(newsArray[curNewsIndex]);   // set new news item into the ticker
+       //jQuery('.basel-products-suggest').slideToggle("slow");
+      jQuery('.basel-products-suggest').slideToggle('slow', function() {
+         setTimeout(function() {
+            Shopify.getProduct(newsArray[curNewsIndex],function(data){
+              {%- if settings.use_fake_location and settings.fake_location != blank -%}var myArray = {{ arr_fake_location | json }},rand = Math.floor(Math.random() *{{arr_fake_location.size}});{% endif %}
+                var fakeTimeOrder = Math.floor((Math.random() * 60) + 1);
+              $('.basel-products-suggest .product-title').html(data.title).attr('href','/collections/{{collection_opj.handle}}'+data.url);
+              $('.basel-products-suggest .table-cell-top.img a').attr('href','/collections/{{collection_opj.handle}}'+data.url);
+              $('.basel-products-suggest .table-cell-top.img img').attr( { src:Shopify.resizeImage(data.featured_image,'70x'), alt:data.title } );
+              $('.basel-products-suggest .minute-number').html(fakeTimeOrder);
+              {%- if settings.use_fake_location and settings.fake_location != blank -%}$('.basel-products-suggest .from').html(myArray[rand]);{% endif %}
+              jQuery('.basel-products-suggest').slideToggle("slow");
+            });
+         }, 1000);
+      });
+    }
+    if ($(window).width() > 767){
+      {%- assign interval_time = settings.interval_time | plus: 0 -%}
+      var intervalID = setInterval(advanceNewsItem, {{ interval_time | plus: 1000}});
+    }
+ });
+</script>
+{%- endif -%}
+{%- endif -%}

@@ -1,0 +1,589 @@
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position:{%- if section.settings.bg_img_center  -%}center{%- else %}0 0{%- endif %} !important; background-repeat: no-repeat !important;{%- if section.settings.bg_size_cover -%} background-size: cover !important;{%- endif %}{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{%- capture data_section -%}
+  {%- if section.settings.row_stretch == 'stretch_row' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true'
+  {%- elsif section.settings.row_stretch == 'stretch_row_content' or section.settings.row_stretch == 'stretch_row_content_no_spaces' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true' data-gl-stretch-content='true'
+  {%- else -%}
+  {%- assign class_has_fill = '' -%}
+  {%- endif -%}
+{%- endcapture -%}
+ {{ style_block_section }}
+<div {{ data_section }}{%- if section.settings.use_video and section.settings.video_url != blank %} data-gl-video-bg="{{ section.settings.video_url }}"{%- endif %} class="gl_custom_{{section.id}} {% if section.settings.row_stretch == 'stretch_row_content_no_spaces' %}gl_row-no-padding{%- endif %}{%- if section.settings.use_parallax %} basel-parallax{%- endif %} gl_row spb_row gl_row-fluid {{class_has_fill}} {%- if section.settings.use_video and section.settings.video_url != blank %} opacity-video-bg gl_video-bg-container gl_has_youtube{%- endif %}{%- if section.settings.full_height %} gl_row-o-full-height gl_row-o-columns-{{section.settings.columns_position}}{%- endif %}{%- if section.settings.equal_height %} gl_row-o-equal-height{%- endif %}{%- unless section.settings.content_position == 'default' %} gl_row-o-content-{{section.settings.content_position}}{%- endunless %}{%- if section.settings.equal_height or section.settings.content_position != 'default' %} gl_row-flex{%- endif -%}">
+   {%- if section.settings.use_gradient and section.settings.color_gradient_one != blank and section.settings.color_gradient_two != blank -%}
+   {%- capture style_gradient_section -%}
+      style="
+      {%- assign color_gradient_one = section.settings.color_gradient_one -%}
+      {%- assign color_gradient_two = section.settings.color_gradient_two -%}
+      {%- assign color_gradient_three = section.settings.color_gradient_three -%}
+      {%- assign color_gradient_four = section.settings.color_gradient_four -%}
+      {%- assign color_opacity_one = section.settings.color_opacity_one | plus:0 -%}
+      {%- assign color_opacity_two = section.settings.color_opacity_two | plus:0 -%}
+      {%- assign color_opacity_three = section.settings.color_opacity_three | plus:0 -%}
+      {%- assign color_opacity_four = section.settings.color_opacity_four | plus:0 -%}
+      {%- assign color_percent_one = section.settings.color_percent_one | plus:0 -%}
+      {%- assign color_percent_two = section.settings.color_percent_two | plus:0 -%}
+      {%- assign color_percent_three = section.settings.color_percent_three | plus:0 -%}
+      {%- assign color_percent_four = section.settings.color_percent_four | plus:0 -%}
+      {%- if section.settings.gradient contains 'circle' -%}
+         {%- assign gradient_one = section.settings.gradient -%}
+         {%- assign arry_gradient = gradient_one | split: '_' -%}
+         background: {{ color_gradient_one }}; /* For browsers that do not support gradients */
+         background: -webkit-radial-gradient({{arry_gradient[1] }} {{arry_gradient[2] }},circle cover, {{ color_gradient_one | color_modify: 'alpha', color_opacity_one }} {{ color_percent_one }}%, {{ color_gradient_two | color_modify: 'alpha', color_opacity_two }} {{ color_percent_two }}%{%- if section.settings.use_color_gradient_three and section.settings.color_gradient_three != blank and section.settings.color_opacity_three != blank and section.settings.color_percent_three != blank %}, {{ color_gradient_three | color_modify: 'alpha', color_opacity_three }} {{ color_percent_three }}%{%- endif -%}{%- if section.settings.use_color_gradient_four and section.settings.color_gradient_four != blank and section.settings.color_opacity_four != blank and section.settings.color_percent_four != blank %}, {{ color_gradient_four | color_modify: 'alpha', color_opacity_four }} {{ color_percent_four }}%{%- endif -%}); /* For Safari 5.1 to 6.0 */
+         background: -o-radial-gradient({{arry_gradient[1] }} {{arry_gradient[2] }},circle cover, {{ color_gradient_one | color_modify: 'alpha', color_opacity_one }} {{ color_percent_one }}%, {{ color_gradient_two | color_modify: 'alpha', color_opacity_two }} {{ color_percent_two }}%{%- if section.settings.use_color_gradient_three and section.settings.color_gradient_three != blank and section.settings.color_opacity_three != blank and section.settings.color_percent_three != blank %}, {{ color_gradient_three | color_modify: 'alpha', color_opacity_three }} {{ color_percent_three }}%{%- endif -%}{%- if section.settings.use_color_gradient_four and section.settings.color_gradient_four != blank and section.settings.color_opacity_four != blank and section.settings.color_percent_four != blank %}, {{ color_gradient_four | color_modify: 'alpha', color_opacity_four }} {{ color_percent_four }}%{%- endif -%}); /* For Opera 11.1 to 12.0 */
+         background: -moz-radial-gradient({{arry_gradient[1] }} {{arry_gradient[2] }},circle cover, {{ color_gradient_one | color_modify: 'alpha', color_opacity_one }} {{ color_percent_one }}%, {{ color_gradient_two | color_modify: 'alpha', color_opacity_two }} {{ color_percent_two }}%{%- if section.settings.use_color_gradient_three and section.settings.color_gradient_three != blank and section.settings.color_opacity_three != blank and section.settings.color_percent_three != blank %}, {{ color_gradient_three | color_modify: 'alpha', color_opacity_three }} {{ color_percent_three }}%{%- endif -%}{%- if section.settings.use_color_gradient_four and section.settings.color_gradient_four != blank and section.settings.color_opacity_four != blank and section.settings.color_percent_four != blank %}, {{ color_gradient_four | color_modify: 'alpha', color_opacity_four }} {{ color_percent_four }}%{%- endif -%}); /* For Firefox 3.6 to 15 */
+         background: radial-gradient({{arry_gradient[1] }} {{arry_gradient[2] }},circle cover, {{ color_gradient_one | color_modify: 'alpha', color_opacity_one }} {{ color_percent_one }}%, {{ color_gradient_two | color_modify: 'alpha', color_opacity_two }} {{ color_percent_two }}%{%- if section.settings.use_color_gradient_three and section.settings.color_gradient_three != blank and section.settings.color_opacity_three != blank and section.settings.color_percent_three != blank %}, {{ color_gradient_three | color_modify: 'alpha', color_opacity_three }} {{ color_percent_three }}%{%- endif -%}{%- if section.settings.use_color_gradient_four and section.settings.color_gradient_four != blank and section.settings.color_opacity_four != blank and section.settings.color_percent_four != blank %}, {{ color_gradient_four | color_modify: 'alpha', color_opacity_four }} {{ color_percent_four }}%{%- endif -%}); /* Standard syntax */
+      {% elsif section.settings.gradient contains 'ellipse' %}
+         {%- assign gradient_two = section.settings.gradient -%}
+         {%- assign arry_gradient_two = gradient_two | split: '_' -%}
+         background: {{ color_gradient_one }}; /* For browsers that do not support gradients */
+         background: -webkit-radial-gradient({{arry_gradient_two[1] }} {{arry_gradient_two[2] }},ellipse cover, {{ color_gradient_one | color_modify: 'alpha', color_opacity_one }} {{ color_percent_one }}%, {{ color_gradient_two | color_modify: 'alpha', color_opacity_two }} {{ color_percent_two }}%{%- if section.settings.use_color_gradient_three and section.settings.color_gradient_three != blank and section.settings.color_opacity_three != blank and section.settings.color_percent_three != blank %}, {{ color_gradient_three | color_modify: 'alpha', color_opacity_three }} {{ color_percent_three }}%{%- endif -%}{%- if section.settings.use_color_gradient_four and section.settings.color_gradient_four != blank and section.settings.color_opacity_four != blank and section.settings.color_percent_four != blank %}, {{ color_gradient_four | color_modify: 'alpha', color_opacity_four }} {{ color_percent_four }}%{%- endif -%}); /* For Safari 5.1 to 6.0 */
+         background: -o-radial-gradient({{arry_gradient_two[1] }} {{arry_gradient_two[2] }},ellipse cover, {{ color_gradient_one | color_modify: 'alpha', color_opacity_one }} {{ color_percent_one }}%, {{ color_gradient_two | color_modify: 'alpha', color_opacity_two }} {{ color_percent_two }}%{%- if section.settings.use_color_gradient_three and section.settings.color_gradient_three != blank and section.settings.color_opacity_three != blank and section.settings.color_percent_three != blank %}, {{ color_gradient_three | color_modify: 'alpha', color_opacity_three }} {{ color_percent_three }}%{%- endif -%}{%- if section.settings.use_color_gradient_four and section.settings.color_gradient_four != blank and section.settings.color_opacity_four != blank and section.settings.color_percent_four != blank %}, {{ color_gradient_four | color_modify: 'alpha', color_opacity_four }} {{ color_percent_four }}%{%- endif -%}); /* For Opera 11.1 to 12.0 */
+         background: -moz-radial-gradient({{arry_gradient_two[1] }} {{arry_gradient_two[2] }},ellipse cover, {{ color_gradient_one | color_modify: 'alpha', color_opacity_one }} {{ color_percent_one }}%, {{ color_gradient_two | color_modify: 'alpha', color_opacity_two }} {{ color_percent_two }}%{%- if section.settings.use_color_gradient_three and section.settings.color_gradient_three != blank and section.settings.color_opacity_three != blank and section.settings.color_percent_three != blank %}, {{ color_gradient_three | color_modify: 'alpha', color_opacity_three }} {{ color_percent_three }}%{%- endif -%}{%- if section.settings.use_color_gradient_four and section.settings.color_gradient_four != blank and section.settings.color_opacity_four != blank and section.settings.color_percent_four != blank %}, {{ color_gradient_four | color_modify: 'alpha', color_opacity_four }} {{ color_percent_four }}%{%- endif -%}); /* For Firefox 3.6 to 15 */
+         background: radial-gradient({{arry_gradient_two[1] }} {{arry_gradient_two[2] }},ellipse cover, {{ color_gradient_one | color_modify: 'alpha', color_opacity_one }} {{ color_percent_one }}%, {{ color_gradient_two | color_modify: 'alpha', color_opacity_two }} {{ color_percent_two }}%{%- if section.settings.use_color_gradient_three and section.settings.color_gradient_three != blank and section.settings.color_opacity_three != blank and section.settings.color_percent_three != blank %}, {{ color_gradient_three | color_modify: 'alpha', color_opacity_three }} {{ color_percent_three }}%{%- endif -%}{%- if section.settings.use_color_gradient_four and section.settings.color_gradient_four != blank and section.settings.color_opacity_four != blank and section.settings.color_percent_four != blank %}, {{ color_gradient_four | color_modify: 'alpha', color_opacity_four }} {{ color_percent_four }}%{%- endif -%}); /* Standard syntax */
+      {%- else -%}
+         background: {{ color_gradient_one }}; /* For browsers that do not support gradients */
+         background: -webkit-linear-gradient({{ section.settings.gradient }} , {{ color_gradient_one | color_modify: 'alpha', color_opacity_one }} {{ color_percent_one }}%, {{ color_gradient_two | color_modify: 'alpha', color_opacity_two }} {{ color_percent_two }}%{%- if section.settings.use_color_gradient_three and section.settings.color_gradient_three != blank and section.settings.color_opacity_three != blank and section.settings.color_percent_three != blank %}, {{ color_gradient_three | color_modify: 'alpha', color_opacity_three }} {{ color_percent_three }}%{%- endif -%}{%- if section.settings.use_color_gradient_four and section.settings.color_gradient_four != blank and section.settings.color_opacity_four != blank and section.settings.color_percent_four != blank %}, {{ color_gradient_four | color_modify: 'alpha', color_opacity_four }} {{ color_percent_four }}%{%- endif -%}); /* For Safari 5.1 to 6.0 */
+         background: -o-linear-gradient({{ section.settings.gradient }} , {{ color_gradient_one | color_modify: 'alpha', color_opacity_one }} {{ color_percent_one }}%, {{ color_gradient_two | color_modify: 'alpha', color_opacity_two }} {{ color_percent_two }}%{%- if section.settings.use_color_gradient_three and section.settings.color_gradient_three != blank and section.settings.color_opacity_three != blank and section.settings.color_percent_three != blank %}, {{ color_gradient_three | color_modify: 'alpha', color_opacity_three }} {{ color_percent_three }}%{%- endif -%}{%- if section.settings.use_color_gradient_four and section.settings.color_gradient_four != blank and section.settings.color_opacity_four != blank and section.settings.color_percent_four != blank %}, {{ color_gradient_four | color_modify: 'alpha', color_opacity_four }} {{ color_percent_four }}%{%- endif -%}); /* For Opera 11.1 to 12.0 */
+         background: -moz-linear-gradient({{ section.settings.gradient }} , {{ color_gradient_one | color_modify: 'alpha', color_opacity_one }} {{ color_percent_one }}%, {{ color_gradient_two | color_modify: 'alpha', color_opacity_two }} {{ color_percent_two }}%{%- if section.settings.use_color_gradient_three and section.settings.color_gradient_three != blank and section.settings.color_opacity_three != blank and section.settings.color_percent_three != blank %}, {{ color_gradient_three | color_modify: 'alpha', color_opacity_three }} {{ color_percent_three }}%{%- endif -%}{%- if section.settings.use_color_gradient_four and section.settings.color_gradient_four != blank and section.settings.color_opacity_four != blank and section.settings.color_percent_four != blank %}, {{ color_gradient_four | color_modify: 'alpha', color_opacity_four }} {{ color_percent_four }}%{%- endif -%}); /* For Firefox 3.6 to 15 */
+         background: linear-gradient({{ section.settings.gradient }} , {{ color_gradient_one | color_modify: 'alpha', color_opacity_one }} {{ color_percent_one }}%, {{ color_gradient_two | color_modify: 'alpha', color_opacity_two }} {{ color_percent_two }}%{%- if section.settings.use_color_gradient_three and section.settings.color_gradient_three != blank and section.settings.color_opacity_three != blank and section.settings.color_percent_three != blank %}, {{ color_gradient_three | color_modify: 'alpha', color_opacity_three }} {{ color_percent_three }}%{%- endif -%}{%- if section.settings.use_color_gradient_four and section.settings.color_gradient_four != blank and section.settings.color_opacity_four != blank and section.settings.color_percent_four != blank %}, {{ color_gradient_four | color_modify: 'alpha', color_opacity_four }} {{ color_percent_four }}%{%- endif -%}); /* Standard syntax */
+      {%- endif -%}"
+   {%- endcapture -%}
+   <div class="basel-row-gradient" {{ style_gradient_section }}></div>
+   {%- endif -%}
+   <div class="spb_column gl_column_container gl_col-sm-12 newsletter_dark">
+     <div class="gl_column-inner ">
+       <div class="spb_wrapper">
+         {%- if section.settings.title != blank -%}<h2 style="" class="newsletter_dark_title gl_custom_heading title-alt">{{ section.settings.title }}</h2>{%- endif -%}
+         {%- if section.settings.subtitle != blank -%}<h2 style="" class="newsletter_dark_sub_title gl_custom_heading font-title">{{ section.settings.subtitle }}</h2>{%- endif -%}
+         {%- if section.settings.subtext != blank -%}<p style="" class="newsletter_dark_sub_text gl_custom_heading gl_mb_35">{{ section.settings.subtext }}</p>{%- endif -%}
+         <div class="spb_text_column spb_content_element gl_mb_0">
+           <div class="spb_wrapper">
+             {%- include 'gl_form_newlester' -%}
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+</div>
+{%- unless section.settings.row_stretch == 'default' -%}
+  <div class="gl_row-full-width gl_clearfix"></div>
+{%- endunless -%}
+{%- schema -%}
+  {
+    "name": "Newsletter",
+    "class": "index-section index-section--flush",
+    "settings": [
+      {
+      "type": "header",
+      "content": "== General Settings"
+      },
+      {
+        "type": "paragraph",
+        "content": "Use Default Shopify: Any customers who sign up will have an account created for them in Shopify. [View customers](/admin/customers?query=&accepts_marketing=1)"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_mailchimp",
+        "label": "Use Mailchimp?",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "row_stretch",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "stretch_row",
+            "label": "Stretch row"
+          },
+          {
+            "value": "stretch_row_content",
+            "label": "Stretch row and content"
+          },
+          {
+            "value": "stretch_row_content_no_spaces",
+            "label": "Stretch row and content (no paddings)"
+          }
+        ],
+        "label": "___ Row stretch",
+        "info": "Select stretching options for row and content (Note: stretched may not work properly if parent container has 'overflow: hidden' CSS property).",
+        "default": "default"
+      },
+      {
+        "type": "checkbox",
+        "id": "full_height",
+        "label": "Full height row?",
+        "info": "if checked row will be set to full height.",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "columns_position",
+        "options": [
+         {
+            "value": "middle",
+            "label": "Middle"
+          },
+         {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "stretch",
+            "label": "Stretch"
+          }
+        ],
+        "label": "___ Columns position (only for full height)",
+        "info": "Select columns position within row.",
+        "default": "middle"
+      },
+      {
+        "type": "checkbox",
+        "id": "equal_height",
+        "label": "Equal height?",
+        "info": "If checked columns will be set to equal height.",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "content_position",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "middle",
+            "label": "Middle"
+          },
+         {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "label": "___ Content position",
+        "info": "Select content position within columns.",
+        "default": "default"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_video",
+        "label": "Use video background?",
+        "info": "If checked, video will be used as row background.",
+        "default": true
+      },
+      {
+        "id": "video_url",
+        "type": "video_url",
+        "label": "YouTube link",
+        "accept": ["youtube"],
+        "default": "https://www.youtube.com/watch?v=4GNBkO7IhZA"
+      },
+      {
+        "type": "header",
+        "content": "== Text settings"
+      },
+      {
+           "type": "text",
+           "id": "title",
+           "label": "Heading",
+           "default": "Subscribe to our newsletter"
+         },
+         {
+           "type": "text",
+           "id": "subtitle",
+           "label": "Subtitle",
+           "default": "Join Our Newsletter"
+         },
+         {
+           "type": "textarea",
+           "id": "subtext",
+           "label": "Subtext",
+           "default": "A short sentence describing what someone will receive by subscribing"
+         },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "image_picker",
+        "id": "section_bg_image",
+        "label": "Background Image"
+      },
+      {
+        "type": "checkbox",
+        "id": "bg_img_center",
+        "label": "Background Image Center?",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "bg_size_cover",
+        "label": "Background size cover?",
+        "default": true
+      },
+      {
+        "type": "color",
+        "id": "section_bg_color",
+        "label": "Background color",
+        "default":"#3bc6bf"
+      },
+      {
+        "type": "color",
+        "id": "section_border_color",
+        "label": "Border color"
+      },
+      {
+        "type": "select",
+        "id": "section_border_style",
+        "options": [
+         {
+            "value": "solid",
+            "label": "Solid"
+          },
+         {
+            "value": "dotted",
+            "label": "Dotted"
+          },
+          {
+            "value": "dashed",
+            "label": "Dashed"
+          },
+          {
+            "value": "double",
+            "label": "Double"
+          },
+          {
+            "value": "groove",
+            "label": "Groove"
+          },
+          {
+            "value": "Ridge",
+            "label": "Ridge"
+          },
+          {
+            "value": "inset",
+            "label": "Inset"
+          },
+          {
+            "value": "outset",
+            "label": "Outset"
+          }
+        ],
+        "label": "Border style",
+        "default": "solid"
+      },
+      {
+        "type": "text",
+        "id": "section_border",
+        "label": "Borders Integer px ( top-right-bottom-left )",
+        "info": "0-0-1px-0"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      },
+      {
+        "type": "header",
+        "content": "== Basel Extras"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_parallax",
+        "label": "Use Basel parallax?",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "use_gradient",
+        "label": "Use Basel gradient?",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "=== Gradient Options"
+      },
+      {
+        "type": "select",
+        "id": "gradient",
+        "options": [
+            {
+               "value": "left",
+               "label": "horizontal left",
+               "group": "Linear"
+             },
+             {
+               "value": "right",
+               "label": "horizontal right",
+               "group": "Linear"
+             },
+             {
+               "value": "top",
+               "label": "horizontal top",
+               "group": "Linear"
+             },
+             {
+               "value": "bottom",
+               "label": "horizontal bottom",
+               "group": "Linear"
+             },
+             {
+               "value": "circle_center_center",
+               "label": "horizontal center - vertical center",
+               "group": "Radial - Circle"
+             },
+             {
+               "value": "circle_center_top",
+               "label": "horizontal center - vertical top",
+               "group": "Radial - Circle"
+             },
+             {
+               "value": "circle_center_bottom",
+               "label": "horizontal center - vertical bottom",
+               "group": "Radial - Circle"
+             },
+             {
+               "value": "circle_left_center",
+               "label": "horizontal left - vertical center",
+               "group": "Radial - Circle"
+             },
+             {
+               "value": "circle_left_top",
+               "label": "horizontal left - vertical top",
+               "group": "Radial - Circle"
+             },
+             {
+               "value": "circle_left_bottom",
+               "label": "horizontal left - vertical bottom",
+               "group": "Radial - Circle"
+             },
+             {
+               "value": "circle_right_center",
+               "label": "horizontal right - vertical center",
+               "group": "Radial - Circle"
+             },
+             {
+               "value": "circle_right_top",
+               "label": "horizontal right - vertical top",
+               "group": "Radial - Circle"
+             },
+             {
+               "value": "circle_right_bottom",
+               "label": "horizontal right - vertical bottom",
+               "group": "Radial - Circle"
+             },
+             {
+               "value": "ellipse_center_center",
+               "label": "horizontal center - vertical center",
+               "group": "Radial - Ellipse"
+             },
+             {
+               "value": "ellipse_center_top",
+               "label": "horizontal center - vertical top",
+               "group": "Radial - Ellipse"
+             },
+             {
+               "value": "ellipse_center_bottom",
+               "label": "horizontal center - vertical bottom",
+               "group": "Radial - Ellipse"
+             },
+             {
+               "value": "ellipse_left_center",
+               "label": "horizontal left - vertical center",
+               "group": "Radial - Ellipse"
+             },
+             {
+               "value": "ellipse_left_top",
+               "label": "horizontal left - vertical top",
+               "group": "Radial - Ellipse"
+             },
+             {
+               "value": "ellipse_left_bottom",
+               "label": "horizontal left - vertical bottom",
+               "group": "Radial - Ellipse"
+             },
+             {
+               "value": "ellipse_right_center",
+               "label": "horizontal right - vertical center",
+               "group": "Radial - Ellipse"
+             },
+             {
+               "value": "ellipse_right_top",
+               "label": "horizontal right - vertical top",
+               "group": "Radial - Ellipse"
+             },
+             {
+               "value": "ellipse_right_bottom",
+               "label": "horizontal right - vertical bottom",
+               "group": "Radial - Ellipse"
+             }
+         ],
+        "label": "___ Gradient Style",
+        "default": "left"
+      },
+      {
+        "type": "header",
+        "content": "___ color gradient 1"
+      },
+      {
+        "type": "color",
+        "id": "color_gradient_one",
+        "label": "color gradient 1"
+      },
+      {
+        "type": "text",
+        "id": "color_opacity_one",
+        "label": "color opacity 1",
+        "info":"Note: Default value is 1, min value is 0.1",
+        "default": "1"
+      },
+      {
+        "type": "text",
+        "id": "color_percent_one",
+        "label": "color Location 1 (integer)",
+        "default": "1",
+        "info":"Note: min value is 1%, max value is 100%"
+      },
+      {
+        "type": "header",
+        "content": "___ color gradient 2"
+      },
+      {
+        "type": "color",
+        "id": "color_gradient_two",
+        "label": "color gradient 2"
+      },
+      {
+        "type": "text",
+        "id": "color_opacity_two",
+        "label": "color opacity 2",
+        "info":"Note: Default value is 1, min value is 0.1",
+        "default": "1"
+      },
+      {
+        "type": "text",
+        "id": "color_percent_two",
+        "label": "color Location 2 (integer)",
+        "default": "33",
+        "info":"Note: min value is 1%, max value is 100%"
+      },
+      {
+        "type": "header",
+        "content": "___ color gradient 3"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_color_gradient_three",
+        "label": "Use color gradient 3?",
+        "default": false
+      },
+      {
+        "type": "color",
+        "id": "color_gradient_three",
+        "label": "color gradient 3"
+      },
+      {
+        "type": "text",
+        "id": "color_opacity_three",
+        "label": "color opacity 3",
+        "info":"Note: Default value is 1, min value is 0.1",
+        "default": "1"
+      },
+      {
+        "type": "text",
+        "id": "color_percent_three",
+        "label": "color Location 3 (integer)",
+        "default": "66",
+        "info":"Note: min value is 1%, max value is 100%"
+      },
+      {
+        "type": "header",
+        "content": "___ color gradient 4"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_color_gradient_four",
+        "label": "Use color gradient 4?",
+        "default": false
+      },
+      {
+        "type": "color",
+        "id": "color_gradient_four",
+        "label": "color gradient 4"
+      },
+      {
+        "type": "text",
+        "id": "color_opacity_four",
+        "label": "color opacity 4",
+        "info":"Note: Default value is 1, min value is 0.1",
+        "default": "1"
+      },
+      {
+        "type": "text",
+        "id": "color_percent_four",
+        "label": "color Location 4 (integer)",
+        "default": "100",
+        "info":"Note: min value is 1%, max value is 100%"
+      }
+    ],
+    "presets": [{
+      "name": "Newsletter signup dark",
+      "category": "Promotional"
+    }]
+  }
+{% endschema %}

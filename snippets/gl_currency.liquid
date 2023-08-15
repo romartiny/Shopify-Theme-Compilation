@@ -1,0 +1,35 @@
+{%- comment -%}https://gist.github.com/carolineschnapp/773649{%- endcomment -%}
+{%- assign supported_codes = settings.supported_currencies | split: '|' -%}
+<li id="menu-item-19041994" class="currency menu-item menu-item-19041994 menu-item-has-children menu-item-design-default item-event-hover">
+   <a href="#" class="value current-currency">{{ shop.currency }}</a>
+   <div class="sub-menu-dropdown color-scheme-dark">
+      <div class="container">
+         <ul class="sub-menu color-scheme-dark">
+            {%- assign codes = 'USD,EUR,GBP,CAD,ARS,AUD,BBD,BDT,BSD,BHD,BRL,BOB,BND,BGN,ILS,MMK,KYD,CLP,CNY,COP,CRC,HRK,CZK,DKK,DOP,XCD,EGP,XPF,FJD,GHS,GTQ,GYD,GEL,HKD,HUF,ISK,INR,IDR,NIS,JMD,JPY,JOD,KZT,KES,KWD,LVL,LTL,MXN,MYR,MUR,MDL,MAD,MNT,MZN,ANG,NZD,NGN,NOK,OMR,PKR,PYG,PEN,PHP,PLN,QAR,RON,RUB,SAR,RSD,SCR,SGD,SYP,ZAR,KRW,LKR,SEK,CHF,TWD,THB,TZS,TTD,TRY,UAH,AED,UYU,VEB,VND,ZMK' | split: ',' -%}
+            {%- assign check = true -%}
+            {%- for code in supported_codes -%}
+               {%- assign array_money = code | split: '-' -%}
+               {%- assign data_currency = array_money | first | strip | upcase -%}
+               {%- assign name_money = array_money | last | strip -%}
+               {%- if data_currency contains 'EUR' -%}{%- assign data_currency = 'EUR' -%}{%- endif -%}
+               {%- if data_currency == shop.currency and codes contains data_currency -%}
+                  {%- assign check = false -%}
+                  {%- break -%}
+               {%- endif -%}
+            {%- endfor -%}
+            {%- if check and codes contains shop.currency -%}
+                   <li data-currency="{{ shop.currency }}" class="active menu-item menu-item-design-default item-event-hover"><a href="#">{{ shop.currency }}</a></li>
+            {%- endif -%}
+            {%- for code in supported_codes -%}
+                 {%- assign array_money = code | split: '-' -%}
+                 {%- assign data_currency = array_money | first | strip | upcase -%}
+                 {%- assign name_money = array_money | last | strip -%}
+                 {%- if data_currency contains 'EUR' -%}{%- assign data_currency = 'EUR' -%}{%- endif -%}
+                 {%- if codes contains data_currency -%}
+                  <li data-currency="{{data_currency}}" class="menu-item menu-item-design-default item-event-hover"><a href="#">{{ name_money }}</a></li>
+                 {%- endif -%}
+            {%- endfor -%}
+         </ul>
+      </div>
+   </div>
+</li>

@@ -1,0 +1,27 @@
+{%- assign font_body_text = settings.font_body_text -%}
+{%- assign font_titles_text = settings.font_titles_text -%}
+{%- assign font_title_products = settings.font_title_products -%}
+{%- assign font_secondary_products = settings.font_secondary_products -%}
+{%- assign font_post = settings.font_post -%}
+{%- assign font_info = settings.font_info -%}
+{%- assign font_navigation = settings.font_navigation -%}
+WebFontConfig = {
+  google: {
+    families: [
+     {%- if font_body_text != blank -%}"{{font_body_text}}:100,200,300,400,500,600,700,800,900,100italic,200italic,300italic,400italic,500italic,600italic,700italic,800italic,900italic"{%- endif -%} 
+     {%- if font_titles_text != blank and font_titles_text != font_body_text -%},"{{ font_titles_text }}:100,200,300,400,500,600,700,800,900,100italic,200italic,300italic,400italic,500italic,600italic,700italic,800italic,900italic"{%- endif -%}
+     {%- if font_title_products != blank and font_title_products != font_body_text and font_title_products != font_titles_text -%},"{{ font_title_products }}:100,200,300,400,500,600,700,800,900,100italic,200italic,300italic,400italic,500italic,600italic,700italic,800italic,900italic"{%- endif -%}
+     {%- if font_secondary_products != blank and font_secondary_products != font_body_text and font_secondary_products != font_titles_text and font_secondary_products != font_title_products -%},"{{ font_secondary_products }}:100,200,300,400,500,600,700,800,900,100italic,200italic,300italic,400italic,500italic,600italic,700italic,800italic,900italic"{%- endif -%}
+     {%- if font_post != blank and font_post != font_secondary_products and font_post != font_body_text and font_post != font_titles_text and font_post != font_title_products -%},"{{ font_post }}:100,200,300,400,500,600,700,800,900,100italic,200italic,300italic,400italic,500italic,600italic,700italic,800italic,900italic"{%- endif -%}
+      {%- if font_info != blank and font_info != font_post and font_info != font_secondary_products and font_info != font_body_text and font_info != font_titles_text and font_info != font_title_products -%},"{{ font_info }}:100,200,300,400,500,600,700,800,900,100italic,200italic,300italic,400italic,500italic,600italic,700italic,800italic,900italic"{%- endif -%}
+      {%- if font_navigation != blank and font_navigation != font_info and font_navigation != font_post and font_navigation != font_secondary_products and font_navigation != font_body_text and font_navigation != font_titles_text and font_navigation != font_title_products -%},"{{ font_navigation }}:100,200,300,400,500,600,700,800,900,100italic,200italic,300italic,400italic,500italic,600italic,700italic,800italic,900italic"{%- endif -%}
+    ]
+  }
+};
+
+(function(d) {
+  var wf = d.createElement('script'), s = d.scripts[0];
+  wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
+  wf.async = true;
+  s.parentNode.insertBefore(wf, s);
+})(document);

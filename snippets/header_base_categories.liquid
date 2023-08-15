@@ -1,0 +1,62 @@
+<div class="container">
+   <div class="wrapp-header">
+      {%- include 'gl_logo' -%}
+      <div class="widgetarea-head">
+         {%- if settings.header_text_ss != blank -%}
+         <div id="text-10" class="header-widget widget_text">
+            <div class="textwidget">{%- if settings.header_text_ss contains 'social_buttons_share' -%}{%- include 'social-sharing', gl_design:'icons-design-default', gl_size:'icons-size-default',gl_text_align:'left' -%}{%- elsif settings.header_text_ss contains 'social_buttons_follow' -%}{%- include 'social-sharing', gl_design:'icons-design-default', gl_size:'icons-size-default',gl_text_align:'left', follow_social:true -%}{%- else -%}{{settings.header_text_ss}}{%- endif -%}</div>
+         </div>
+        {%- endif -%}
+        <div id="shopify_product_search-14" class="header-widget shopify widget_product_search">
+          <div class="search-extended">
+            <form role="search" method="get" id="searchform" class="searchform has-categories-dropdown{%- if settings.ajax_search %} basel-ajax-search{%- endif -%}" action="/search?q=bags">
+              <div>
+                <label class="screen-reader-text" for="q"></label>
+                <input type="text" placeholder="{{ 'general.search.placeholder' | t }}" value="{%- if search.terms != blank -%}{{search.terms}}{%- endif -%}" name="q" id="q" autocomplete="off">
+                <input type="hidden" name="type" value="product" />
+                {%- if settings.enable_select_category -%}
+                {%- section 'gl_search-by-category' -%}
+                {%-  endif -%}
+                <button type="submit" id="searchsubmit">{{ 'general.search.submit' | t }}</button>
+              </div>
+            </form>
+            <div class="search-results-wrapper">
+              <div class="basel-search-results">
+                <div class="autocomplete-suggestions" style="position: absolute; display: none; max-height: 300px; z-index: 9999;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="right-column">
+         {%- include 'header_account' -%}
+         {%- include 'header_search' -%}
+         {%- include 'header_wishlist' -%}
+         {%- unless settings.cart_design == 'disable' or settings.catalog_mode or template contains 'cart' -%}
+         <div class="shopping-cart basel-cart-design-{{settings.cart_design}} basel-cart-icon{%- if settings.cart_position == 'side' %} cart-widget-opener{%- endif %}{%- if settings.shopping_icon_alt %} basel-cart-alt{%- endif -%}">
+            <a href="/cart">
+               <span>Cart (<span class="cartCount">{{ cart.item_count }}</span>)</span>
+               <span class="basel-cart-totals">
+                  <span class="basel-cart-number cartCount">{{ cart.item_count }}</span>
+                  <span class="subtotal-divider">/</span> 
+                  <span class="basel-cart-subtotal"><span class="shopify-Price-amount amount">{{ cart.total_price | money }}</span></span>
+               </span>
+            </a>
+            {%- if settings.cart_position == 'dropdown' -%}
+            <div class="dropdown-wrap-cat">{%- include 'cart_widget_side' -%}</div>
+            {%- endif -%}
+         </div>
+         {%- endunless -%}
+         <div class="mobile-nav-icon">
+            <span class="basel-burger"></span>
+         </div>
+         <!--END MOBILE-NAV-ICON-->
+      </div>
+   </div>
+</div>
+<div class="navigation-wrap">
+   <div class="container">
+      <div class="main-nav site-navigation basel-navigation menu-{{settings.basel_menu_align}}" role="navigation">{%- section 'gl_mega_menu' -%}</div>
+      <!--END MAIN-NAV-->
+   </div>
+</div>

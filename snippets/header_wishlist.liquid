@@ -1,0 +1,6 @@
+{%- if settings.use_wishlist and shop.customer_accounts_enabled and settings.display_wishlist_icon -%}
+{%- include 'nitro-wishlist' -%}
+<div class="wishlist-info-widget">
+<a href="{%- if customer -%}/pages/wishlist{%- else -%}/account/login{%- endif -%}">Wishlist <span class="gl_count_wishlist">{{ NITRO_WISHLIST_COUNT }}</span></a>
+</div>
+{%- endif -%}

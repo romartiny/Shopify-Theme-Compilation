@@ -1,0 +1,317 @@
+{%- assign products_columns = settings.products_columns -%}
+{%- assign shop_different_grid = settings.shop_different_grid -%}
+{%- assign loop_countdown = settings.loop_sale_countdown -%}
+{%- assign general_layout = false -%}
+{%- if current_tags != blank -%}
+      {%- assign has_current_tags = true -%}
+      {%- assign list_current_tag = '' -%}
+      {%- for current_tag in current_tags -%}
+          {%- assign current_tag_downcase = current_tag | downcase -%}
+          {%- assign list_current_tag = list_current_tag | append:current_tag_downcase | append:',' -%}
+       {%- endfor -%}
+       {%- assign current_tags = list_current_tag | split:',' -%}
+   {%- endif -%}  
+{%- if settings.general_layout == 'wide' or settings.general_layout == 'contetn_full' -%}
+   {%- assign general_layout = true -%}
+{%- endif -%}
+{%- if settings.shop_sidebar == 'left' -%}
+   {%- case settings.shop_size_sidebar -%}
+     {% when '1' %}
+       {%- assign class_gl = 'col-sm-10 col-sm-push-2' -%}
+       {%- assign class_sidebar = 'col-sm-2 col-sm-pull-10' -%}
+     {% when '2' %}
+       {%- assign class_gl = 'col-sm-9 col-sm-push-3' -%}
+       {%- assign class_sidebar = 'col-sm-3 col-sm-pull-9' -%}
+     {% when '3' %}
+       {%- assign class_gl = 'col-sm-8 col-sm-push-4' -%}
+       {%- assign class_sidebar = 'col-sm-4 col-sm-pull-8' -%}
+   {%- endcase -%}
+{%- elsif settings.shop_sidebar == 'right' -%}
+   {%- case settings.shop_size_sidebar -%}
+     {% when '1' %}
+       {%- assign class_gl = 'col-sm-10' -%}
+       {%- assign class_sidebar = 'col-sm-2' -%}
+     {% when '2' %}
+       {%- assign class_gl = 'col-sm-9' -%}
+       {%- assign class_sidebar = 'col-sm-3' -%}
+     {% when '3' %}
+       {%- assign class_gl = 'col-sm-8' -%}
+       {%- assign class_sidebar = 'col-sm-4' -%}
+   {%- endcase -%}
+{%- else -%}
+   {%- assign class_gl = 'col-sm-12' -%}
+{%- endif -%}
+{%- assign image_size = '263x' -%}
+{%- case settings.collection_countdown_style -%}
+    {%- when 'light' -%}
+      {%- assign countdown_style = 'color-scheme-dark timer-size-small timer-style-standard' -%} 
+    {%- when 'dark' -%}
+      {%- assign countdown_style = 'color-scheme-light timer-size-small timer-style-standard' -%}
+    {%- when 'transparent_1' -%}
+      {%- assign countdown_style = 'color-scheme-light timer-size-small timer-style-transparent' -%}
+   {%- when 'transparent_2' -%}
+      {%- assign countdown_style = 'color-scheme-dark timer-size-small timer-style-transparent' -%}
+{%- endcase -%}
+{%- if settings.sale_countdown -%}
+   {%- assign section_settings_countdown = true -%}
+{%- else -%}
+   {%- assign section_settings_countdown = false -%}
+{%- endif -%}
+{%- if settings.shop_image_size != blank -%}{%- assign crop_nt = settings.shop_image_size -%}{%- endif -%}
+{%- if settings.use_wishlist -%}{%- include 'nitro-wishlist' -%}{%- endif -%}
+{%- if current_tags != blank -%}
+   {%- assign __color_current_tags = canonical_url | split: collection.handle -%}
+   {%- assign color_current_tags = __color_current_tags[1] | split:'?page' | first | remove_first: "/" -%}
+   {%- assign _no_current_tags = color_current_tags | split: "+" -%}
+   {%- assign _color_current_tags = color_current_tags | split: "+" | reverse -%}
+{%- endif -%}
+{%- if template.suffix != blank -%}
+   {%- assign template_suffix = template.suffix -%}
+   {%- assign check_template_list = true -%} 
+{%- else -%}
+   {%- assign check_template_list = false -%} 
+{%- endif -%}
+{%- capture cat_link_nathan_xxx -%}{{ 'nathan_xyz' | link_to_remove_tag: '' }}{%- endcapture -%}
+{%- assign cat_link_nathan_xx = cat_link_nathan_xxx | split:'href="' | last | split:'"' | first -%}
+{%- assign sort_symboy = '&'-%}{% if collection.current_vendor %}{%- assign sort_symboy = '&'-%}{%- endif -%}
+<div class="main-page-wrapper">
+  {%- if settings.use_top_categories -%}
+  <div class="page-title page-title-default title-size-small color-scheme-light title-design-centered without-title title-shop"{%- if settings.use_specify_image and collection.image %} style="{%- assign image = collection.image -%}{%- assign image_width = image.width | append:'x' -%}background-image: url({%-include 'gl_image_format',src: image , size: image_width -%})"{%- endif -%}>
+     <div class="container">
+        <div class="nav-shop">
+            <a href="javascript:baselThemeModule.backHistory()" class="basel-back-btn basel-tooltip"><span class="basel-tooltip-label">Back</span><span>Back</span></a>
+           <a href="#" class="basel-show-categories">{{ 'collections.general.categories' | t }}</a>
+           <ul class="basel-product-categories">
+               {%- case settings.top_categories_source -%}
+                  {%- when 'top_categories_show_all' -%}
+                     {%- comment -%}<li class="cat-link shop-all-link{%- if collection.handle == 'all' %} current-cat{%- endif -%}"><a href="/collections/all{%- if check_template_list -%}?&view={{template_suffix}}{%- endif-%}">{{ 'collections.general.title_all' | t }}</a></li>{%- endcomment -%}
+                     {%- for category in collections -%}
+                        {%- if category.products.size > 0 and forloop.index < 8 and category.handle != 'all' -%}
+                        <li class="cat-item{%- if collection.handle == category.handle %} current-cat{%- endif -%}"><a href="{{ category.url }}{%- if check_template_list -%}?&view={{template_suffix}}{%- endif-%}">{{ category.title }}</a></li>
+                        {%- endif -%}
+                     {%- endfor -%}
+                     {%- if collections.size > 7 -%}
+                        <li class="cat-item">
+                          <a href="/collections/all">{{ 'collections.general.other' | t }}</a>
+                          <ul class="children">
+                          {%- for category in collections offset:7 -%}
+                              {%- if category.products.size > 0 -%}
+                              <li class="cat-item{%- if collection.handle == category.handle %} current-cat{%- endif -%}"><a href="{{ category.url }}{%- if check_template_list -%}?&view={{template_suffix}}{%- endif-%}">{{ category.title }}</a></li>
+                              {%- endif -%}
+                          {%- endfor -%}
+                          </ul>
+                        </li>
+                     {%- endif -%}
+                  {%- else -%}
+                  {%- assign top_link_list = settings.top_categories_link_list -%}
+                  {%- for link in linklists[top_link_list].links -%}
+                     {%- if link.type == 'collection_link' or link.type == 'catalog_link' -%}
+                     {%- assign child_list_handle = link.title | split: '[' | first | handleize -%}
+                     {%- if linklists[child_list_handle].links == blank -%}
+                        <li class="cat-item{%- if link.active %} current-cat{%- endif -%}"><a href="{{ link.url }}{%- if check_template_list -%}?&view={{template_suffix}}{%- endif-%}">{{ link.title | split: '[' | first }}</a></li>
+                     {%- else -%}
+                        <li class="cat-item{%- if link.active %} current-cat{%- endif -%}">
+                          <a href="{{ link.url }}{%- if check_template_list -%}?&view={{template_suffix}}{%- endif-%}">{{ link.title | split: '[' | first }}</a>
+                          <ul class="children">
+                          {%- for childlink in linklists[child_list_handle].links -%}
+                              {%- if childlink.type == 'collection_link' -%}
+                              <li class="cat-item{%- if link.active %} current-cat{%- endif -%}"><a href="{{ childlink.url }}{%- if check_template_list -%}?&view={{template_suffix}}{%- endif-%}">{{ childlink.title | split: '[' | first }}</a></li>
+                              {%- endif -%}
+                          {%- endfor -%} 
+                          </ul>
+                        </li>
+                     {%- endif -%}
+                     {%- endif -%}
+                  {%- else -%}
+                     {{ 'homepage.onboarding.no_content' | t }}
+                  {%- endfor -%}
+               {%- endcase -%}
+           </ul>
+        </div>
+     </div>
+  </div>
+  {%- endif -%}
+   <div class="container">
+      <div class="row">
+         <div class="site-content {{class_gl}}" role="main">
+         {%- paginate collection.products by limit -%}
+            {%- if settings.use_promo_banner_collection -%}{%- section 'promo_banner_collection' -%}{%- endif -%}
+            {%- if collection.description != blank and settings.show_des_collection -%}<div class="term-description promo-banner text-center" id="des_{{collection.id}}"><h2>{{collection.title}}</h2>{{collection.description}}</div>{%- endif -%}
+            <div class="shop-loop-head">
+               <nav class="shopify-breadcrumb"><a href="/">{{ 'general.breadcrumbs.home' | t }}</a><span class="breadcrumb-last"> {{collection.title | capitalize}}</span></nav>
+               <p class="shopify-result-count">{%- assign current_offset = paginate.current_offset | plus:1 -%}{%- assign current_product_size = collection.products.size | plus:paginate.current_offset -%}{%- if current_tags == blank -%}{%- if limit > paginate.items -%}{{ 'collections.general.results_limit' | t: count: paginate.items }}{%- else -%}{{ 'collections.general.results_with_count' | t:count:current_offset,curent_count:current_product_size,pr_count:collection.all_products_count }}{%- endif -%}{%- elsif limit > paginate.items -%}{{ 'collections.general.results_limit' | t: count: paginate.items }}{%- else -%}{%- assign current_offset = paginate.current_offset | plus:1 -%}{%- assign current_product_size = collection.products.size | plus:paginate.current_offset -%}{{ 'collections.general.results_with_count' | t:count:current_offset,curent_count:current_product_size,pr_count:paginate.items }}{%- endif -%}</p>
+               {%- if settings.grid_list -%}{%- include 'grid_list_switch' -%}{%- endif -%}
+               {%- if settings.shop_show_per_page %}
+              <form class="shopify-ordering shopify-show-per-page" method="get" action="{{cat_link_nathan_xx}}">
+                  {%- assign show = settings.products_per_page -%}
+                  <label for="show" class="label_show">{{ 'collections.sorting.show' | t }}</label>
+                  <select name="show" id="show" class="orderby collection-show__input orderbyshow">
+                      <option data-value="{{cat_link_nathan_xx }}?&view=list" value="manual"{%- if check_template_list == false %} selected="selected"{%- endif -%}>12</option>
+                      <option data-value="{{cat_link_nathan_xx }}?&view=list_24" value="best-selling"{%- if template.suffix == "list_24" %} selected="selected"{%- endif -%}>24</option>
+                      <option data-value="{{cat_link_nathan_xx }}?&view=list_36" value="best-selling"{%- if template.suffix == "list_36" %} selected="selected"{%- endif -%}>36</option>
+                      <option data-value="{{cat_link_nathan_xx }}?&view=list_50" value="title-ascending"{%- if template.suffix == "list_50"  %}selected="selected"{%- endif -%}>50</option>
+                  </select>
+                  <input class="collection-header__default-show" type="hidden" value="{{show}}" />
+               </form>
+              {%- endif -%}
+              {%- if settings.shop_filters %}
+               <div class="basel-filter-buttons">
+                  <a href="#" class="open-filters">{{ 'collections.filters.filters_title' | t }}</a>
+               </div>
+               {%- else -%}
+               <form class="shopify-ordering" method="get" action="{{cat_link_nathan_xx}}">
+                  {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+                  <label for="sort_by" class="label--hidden hide hidden">{{ 'collections.sorting.title' | t }}</label>
+                  <select name="sort_by" id="sort_by" class="collection-sort__input orderby">
+                      <option data-value="{{cat_link_nathan_xx | replace: sort_by, 'manual' }}{{sort_symboy}}sort_by=manual" value="manual"{%- if sort_by == "manual" or sort_by == "manual?" %} selected="selected"{%- endif -%}>{{ 'collections.sorting.featured' | t }}</option>
+                      <option data-value="{{cat_link_nathan_xx | replace: sort_by, 'best-selling' }}{{sort_symboy}}sort_by=best-selling" value="best-selling"{%- if sort_by == "best-selling" or sort_by == "best-selling?" %} selected="selected"{%- endif -%}>{{ 'collections.sorting.best_selling' | t }}</option>
+                      <option data-value="{{cat_link_nathan_xx | replace: sort_by, 'title-ascending' }}{{sort_symboy}}sort_by=title-ascending" value="title-ascending"{%- if sort_by == "title-ascending" or sort_by == "title-ascending?" %}selected="selected"{%- endif -%}>{{ 'collections.sorting.az' | t }}</option>
+                      <option data-value="{{cat_link_nathan_xx | replace: sort_by, 'title-descending' }}{{sort_symboy}}sort_by=title-descending" value="title-descending"{%- if sort_by == "title-descending" or sort_by == "title-descending?" %} selected="selected"{%- endif -%}>{{ 'collections.sorting.za' | t }}</option>
+                      <option data-value="{{cat_link_nathan_xx | replace: sort_by, 'price-ascending' }}{{sort_symboy}}sort_by=price-ascending" value="price-ascending"{%- if sort_by == "price-ascending" or sort_by == "price-ascending?" %} selected="selected"{%- endif -%}>{{ 'collections.sorting.price_ascending' | t }}</option>
+                      <option data-value="{{cat_link_nathan_xx | replace: sort_by, 'price-descending' }}{{sort_symboy}}sort_by=price-descending" value="price-descending"{%- if sort_by == "price-descending" or sort_by == "price-descending?" %} selected="selected"{%- endif -%}>{{ 'collections.sorting.price_descending' | t }}</option>
+                      <option data-value="{{cat_link_nathan_xx | replace: sort_by, 'created-descending' }}{{sort_symboy}}sort_by=created-descending" value="created-descending"{%- if sort_by == "created-descending" or sort_by == "created-descending?" %} selected="selected"{%- endif -%}>{{ 'collections.sorting.date_descending' | t }}</option>
+                      <option data-value="{{cat_link_nathan_xx | replace: sort_by, 'created-ascending' }}{{sort_symboy}}sort_by=created-ascending" value="created-ascending"{%- if sort_by == "created-ascending" or sort_by == "created-ascending?" %} selected="selected"{%- endif -%}>{{ 'collections.sorting.date_ascending' | t }}</option>
+                  </select>
+                  <input class="collection-header__default-sort" type="hidden" value="{{ collection.default_sort_by }}" />
+               </form>
+               {%- endif -%}
+            </div>
+            {%- if settings.shop_filters %}{%- section 'gl_filter_area' -%}{%- endif -%}
+            <!-- .filters-area -->
+            {%- if current_tags != blank -%}
+               <div class="basel-active-filters">
+                  <div class="widget shopify widget_layered_nav_filters">
+                     <ul>
+                       {%- for t in current_tags -%}
+                         {%- assign t_downcase = t | downcase  -%}
+                         {%- assign tag_value_remove = t | split: '_' | last -%} 
+                         {%- capture cat_link_remove -%}{{ tag_value_remove | append: '&nbsp;x' | link_to_remove_tag: t }}{%- endcapture -%}
+                           {%- assign get_link_remove = cat_link_remove | split:'href="' | last | split:'"' | first -%}
+                           <li class="chosen">
+                             <a href="{{get_link_remove}}" aria-label="Remove filter {{tag_value_remove | html}}">{%- if t_downcase contains 'size'-%}{{ tag_value_remove | upcase }}{%- else -%}{{ tag_value_remove | capitalize }}{%-endif-%}</a>
+                          </li>
+                       {%- endfor -%}
+                        {%- if current_tags.size > 1 -%}<li class="chosen"><a aria-label="Remove filter All" href="/collections/{{collection.handle}}">{{ 'collections.filters.all_reset' | t }}</a></li>{%-endif-%}
+                     </ul>
+                  </div>
+               </div>
+            {%- endif -%}
+            <div class="basel-products-loader"></div>
+            {%- if collection.products.size == 0 -%}<p class="shopify-info">{{ 'collections.general.no_matches' | t }}</p>{%- endif -%}
+            <div class="products elements-grid row pagination-{{settings.use_pagination}} grid-columns-{{settings.products_columns}}{%- if settings.use_pagination == 'gl_more' or settings.use_pagination == 'infinit' %} basel-products-holder{%- endif -%}">
+               {%- for product in collection.products -%}
+                  {%- assign check_my_variant = false -%}
+                  {%- if _color_current_tags != blank and product.has_only_default_variant != true -%}
+                    {%- for tag_color in _color_current_tags -%}
+                        {%- assign downcased_tag_color = tag_color | downcase | replace: '["', '' | replace: '"]', '' -%}
+                        {%- for variant in product.variants -%}
+                           {%- assign downcased_variant_title = variant.title | downcase -%}
+                           {%- if downcased_variant_title contains downcased_tag_color -%}
+                             {%- assign current_variant = variant -%}{%- assign check_my_variant = true -%}
+                             {%- break -%}
+                           {%- endif  -%}
+                        {%- endfor -%}
+                        {%- if check_my_variant -%}{%- break -%}{%- endif  -%}
+                    {%- endfor -%}
+                  {%- endif -%}
+                  {%- if check_my_variant == false -%}
+                   {%- assign current_variant = product.selected_or_first_available_variant -%}
+                  {%- endif -%}
+                  {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+                  {%- include 'check_label_gl' -%}
+                  {%- if settings.show_product_color -%}
+                  {%- if settings.color_name_check != blank -%}{%- assign _gl_color_name = settings.color_name_check | replace: ' ,', ',' | replace: ', ', ',' | split: ',' -%}{%- assign gl_color_name = _gl_color_name | downcase -%}{%-else-%}{%- assign gl_color_name = '\nathan_dt\' -%}{%-endif-%}
+                  {%- assign colour_count = 0 -%}
+                  {%- for option in product.options_with_values -%}
+                     {%- assign downcased_option = option.name | downcase -%}
+                     {%- assign downcased_option_check = option | downcase | prepend: '"' | append: '"' | strip -%} 
+                     {%- if downcased_option == 'color' or downcased_option == 'colour' or gl_color_name contains downcased_option_check -%}
+                       {%- assign colour_count = option.values.size | plus:0 -%}
+                     {%- endif -%}
+                  {%- endfor -%}
+                  {%- endif -%}
+                  {%- if template contains 'collection' and current_tags.size > 0 and product.has_only_default_variant == false -%}
+                     {%- assign url_nt = current_variant.url -%}
+                  {%- assign url_nt_bl = true -%}
+                  {%- else -%}
+                  {%- assign url_nt_bl = false -%}
+                     {%- assign url_nt = product.url -%}
+                  {%- endif -%}
+                  <div class="product-grid-item product-list-item product col-xs-12 col-sm-12 col-md-12 purchasable{%- if sold_out %} outofstock{%- else %} instock{%- endif -%}">
+                     <div class="product-list-image product-element-top">
+                        {%- include 'product_element_image' -%}
+                        {%- if settings.use_quickview -%}<div class="basel-buttons"><div class="quick-view"><a href="{{ current_variant.url | within: collection }}&view=quick_view" class="open-quick-view basel-tooltip"><span class="basel-tooltip-label">{{ 'sections.basel_tooltip.quick_view' | t }}</span>{{ 'sections.basel_tooltip.quick_view' | t }}</a></div></div>{%- endif -%}
+                     </div>
+                     <div class="product-list-content">
+                        <div class="product-list-info">
+                           <h3 class="product-title"><a href="{{ current_variant.url | within: collection }}">{{ product.title }}</a></h3>
+                           {%- if settings.show_product_rating -%}<div class="gl_star-rating"><span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span></div>{%- endif -%}
+                           {%- assign _prodcut_excerpt_length = settings.prodcut_excerpt_length | plus:0 -%}
+                        {%- assign prodcut_excerpt_length = _prodcut_excerpt_length | default: 31 -%}
+                           <div class="shopify-product-details__short-description">
+                              <p>
+                                 {%- if product.metafields.meta.description_excerpt -%}
+                                  {{  product.metafields.meta.description_excerpt | strip }}
+                                {% elsif product.description contains  '[' %}
+                                  {% assign pr_des = product.description | split: '[' %}
+                                  {% assign pr_des = pr_des[1] | split: ']' | first | append:']' | prepend:'[' %}
+                                  {{ product.description | remove: pr_des | strip_html | truncatewords: prodcut_excerpt_length }}
+                                {%-else-%}
+                                  {{ product.description | strip_html | truncatewords: prodcut_excerpt_length }}
+                                {%-endif-%}
+                              </p>
+                           </div>
+                           {%- if settings.show_product_color and colour_count > 1 -%}
+                              {%- include 'swatches_on_grid' -%}
+                           {%- endif -%}
+                           {%- include 'basel_count_down' -%}
+                        </div>
+                        <div class="product-list-buttons">
+                           <span class="price">
+                               {%- if product.price_varies -%}
+                               {{ product.price_min | money }} – {{ product.price_max | money }}
+                               {%- elsif on_sale -%}<del>{{ current_variant.compare_at_price  | money }}</del> <ins>{{ current_variant.price | money }}</ins>
+                               {%- else -%}
+                               {{ current_variant.price | money }}
+                               {%- endif -%}
+                            </span>
+                           {%- include 'gl_btn_add' -%}
+                           {%- if settings.use_wishlist and pages['wishlist'].empty? != true -%} {%- include 'gl-wishlist-product' -%}{%- endif -%}
+                           <div class="clear"></div>
+                           {%- if settings.use_compare and pages['compare'].empty? != true -%}<div class="product-compare-button"><a href="#compare_popup" data-pid="{{product.handle}}_sp_{{product.id}}" class="compare button basel-tooltip" rel="nofollow"><span class="basel-tooltip-label">{{ 'sections.basel_tooltip.compare' | t }}</span>{{ 'sections.basel_tooltip.compare' | t }}</a></div>{%- endif -%}
+                        </div>
+                     </div>
+                  </div>
+               {%- endfor -%}
+            </div>
+            {%- if paginate.pages > 1 -%}
+            <div class="products-footer">
+                {%- if settings.use_pagination == 'gl_more' or settings.use_pagination == 'infinit' -%}
+                     {%- if check_template_list -%}{%- assign view_ajax = 'ajax_' |append:template_suffix -%}{%- endif-%}
+                      <a href="{%- if check_template_list -%}{{ paginate.next.url | replace: template_suffix, view_ajax }}{%-else-%}{{ paginate.next.url | append: '&view=ajax_grid' }}{%- endif -%}" class="btn basel-load-more basel-products-load-more{%- if settings.use_pagination == 'infinit' %} load-on-scroll{%- endif -%}">{{ 'sections.product_gird_carousel.load_more' | t }}</a>
+                {%- else -%}
+                   <nav class="shopify-pagination">
+                    {%- include 'pagination' -%}
+                   </nav>
+                {%- endif -%}
+             </div>
+            {%- endif -%}
+         {%- endpaginate -%}  
+         </div>
+         {%- if settings.shop_sidebar != '1' -%}
+         <aside class="sidebar-container {{class_sidebar}} sidebar-{{settings.shop_size_sidebar}}" role="complementary">
+            <div class="sidebar-inner">
+               {%- section 'gl_section_sidebar_shop' -%}<!-- .widget-area -->
+            </div><!-- .sidebar-inner -->
+         </aside><!-- .sidebar-container -->
+         {%- endif -%}
+      </div>
+   </div><!-- end container -->
+</div><!-- MAIN CONTENT AREA -->
+{%- if settings.ajax_shop == false -%}
+<script type="text/javascript">
+$('.shopify-ordering' ).on( 'change', 'select.orderby', function() {
+      $( this ).closest( 'form' ).submit();
+});
+</script>
+{%- endif -%}

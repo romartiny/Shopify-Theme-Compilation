@@ -1,0 +1,655 @@
+{%- if section.settings.hidden_section -%}{%- capture check_admin -%}{{ content_for_header  }}{%- endcapture -%}<style> #shopify-section-{{ section.id }} { {%- if check_admin contains 'design_mode' -%}opacity: .5;filter: alpha(opacity=50){%- else -%}display: none !important{%- endif -%}}</style>{%- endif -%}
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{%- capture data_section -%}
+  {%- if section.settings.row_stretch == 'stretch_row' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true'
+  {%- elsif section.settings.row_stretch == 'stretch_row_content' or section.settings.row_stretch == 'stretch_row_content_no_spaces' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true' data-gl-stretch-content='true'
+  {%- else -%}
+  {%- assign class_has_fill = '' -%}
+  {%- endif -%}
+{%- endcapture -%}
+ {{ style_block_section }}
+<div {{ data_section }}{%- if section.settings.use_video and section.settings.video_url != blank %} data-gl-video-bg="{{ section.settings.video_url }}"{%- endif %} class="gl_custom_{{section.id}} {% if section.settings.row_stretch == 'stretch_row_content_no_spaces' %}gl_row-no-padding{%- endif %}{%- if section.settings.use_parallax %} basel-parallax{%- endif %} gl_row spb_row gl_row-fluid {{class_has_fill}} {%- if section.settings.use_video and section.settings.video_url != blank %} opacity-video-bg gl_video-bg-container gl_has_youtube{%- endif %}{%- if section.settings.full_height %} gl_row-o-full-height gl_row-o-columns-{{section.settings.columns_position}}{%- endif %}{%- if section.settings.equal_height %} gl_row-o-equal-height{%- endif %}{%- unless section.settings.content_position == 'default' %} gl_row-o-content-{{section.settings.content_position}}{%- endunless %}{%- if section.settings.equal_height or section.settings.full_height or section.settings.content_position != 'default' %} gl_row-flex{%- endif -%}">
+   {%- case section.blocks.size -%}
+      {%- when 1 -%}
+        {%- assign class_w = 'gl_col-sm-12' -%}
+      {%- when 2 -%}
+        {%- assign class_w = 'gl_col-sm-6' -%}
+      {%- when 3 -%}
+        {%- assign class_w = 'gl_col-sm-4' -%}
+      {%- else -%}
+        {%- assign class_w = 'gl_col-sm-3' -%}
+   {%- endcase -%}
+   {%- for block in section.blocks -%}
+      <div class="text-{{block.settings.text_alignment}} spb_column gl_column_container {{class_w}} color-scheme-{{block.settings.banner_color}}">
+         <div class="gl_column-inner gl_custom_{{block.id}} gl_pt_35 gl_mb_0">
+            <div class="spb_wrapper">
+               {%- if block.settings.icon != blank -%}
+               <div class="gl_icon_element gl_icon_element-outer gl_mb_15 gl_icon_element-align-{{ block.settings.icon_alignment }}">
+                  <div class="gl_icon_element-inner gl_icon_element-color-black gl_icon_element-size-{{ block.settings.icon_size }} gl_icon_element-style-{{ block.settings.bg_shape }}{%- if block.settings.bg_shape != 'none' %} gl_icon_element-have-style-inner{%- endif %}{%- if block.settings.bg_shape contains 'outline' %} gl_icon_element-outline{%- endif -%}"{%- unless block.settings.bg_shape contains 'outline' -%}{%- if block.settings.bg_icon_color != blank and block.settings.bg_shape != 'none' %} style="background-color: {{block.settings.bg_icon_color}}"{%- endif -%}{%- else %} style="border-color: {{block.settings.bg_icon_color}}"{%- endunless -%}>
+                     {%- if block.settings.icon_library == 'basel' -%}
+                     <span class="gl_icon_element-icon gl_li gl_li-{{block.settings.icon}}"{%- if block.settings.icon_color != blank %} style="color: {{block.settings.icon_color}}"{%- endif -%}></span>
+                     {%- else -%}
+                     <span class="gl_icon_element-icon fa fa-{{block.settings.icon}}"{%- if block.settings.icon_color != blank %} style="color: {{block.settings.icon_color}}"{%- endif -%}></span>
+                     {%- endif -%}
+                  </div>
+               </div>
+               {%- endif -%}
+               {%- if block.settings.section_margin_top != blank or block.settings.section_margin_bottom != blank or block.settings.section_border != blank -%}
+               {%- assign s_margin_top = block.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+               {%- assign s_margin_bottom = block.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+               {%- assign s_border = block.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+               {%- endif -%}
+               {%- capture style_block_section -%}
+                  {%- if block.settings.section_margin_top != blank or block.settings.section_margin_bottom != blank or block.settings.section_padding_top != blank or block.settings.section_padding_right != blank or block.settings.section_padding_left != blank or block.settings.section_padding_bottom != blank or block.settings.section_bg_color != blank or block.settings.section_bg_image != blank or block.settings.section_border != blank -%}
+                  style="{%- if block.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if block.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if block.settings.section_padding_top != blank -%}padding-top: {{block.settings.section_padding_top}} !important;{%- endif-%}{%- if block.settings.section_padding_right != blank -%}padding-right: {{block.settings.section_padding_right}} !important;{%- endif-%}{%- if block.settings.section_padding_bottom != blank -%}padding-bottom: {{block.settings.section_padding_bottom}} !important;{%- endif-%}{%- if block.settings.section_padding_left != blank -%}padding-left: {{block.settings.section_padding_left}} !important; {%- endif -%}{%- if block.settings.section_bg_color != blank -%}background-color: {{ block.settings.section_bg_color }} !important;{%- endif -%}{%- if block.settings.section_bg_image != blank -%}{%- assign image = block.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: contain !important;{%- endif -%}{%- if block.settings.section_border != blank and block.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{block.settings.section_border_color}} !important; border-style: {{block.settings.section_border_style}} !important{%- endif -%}"
+                  {%- endif -%}
+               {%- endcapture -%}
+               <div class="spb_text_column spb_content_element gl_custom_{{block.id}} color-scheme-{{block.settings.banner_color}}" {{style_block_section}}>
+                  <div class="spb_wrapper">
+                     {%- if block.settings.heading != blank -%}<h5 style="margin-bottom: 10px; font-weight: bold; text-transform: uppercase">{{block.settings.heading}}</h5>{%- endif -%}
+                     {%- if block.settings.content != blank -%}<p style="margin-bottom: 10px;">{{block.settings.content}}</p>{%- endif -%}
+                     {%- if block.settings.banner_link != blank  and block.settings.banner_btn_title != blank  -%}
+                     <p><a href="{{ block.settings.banner_link }}" target="{{ block.settings.open_link }}" class="btn btn-style-link btn-size-small{% if block.settings.banner_color == 'dark' %} btn-color-blacknt{%- else %} btn-color-white{%- endif -%}">{{ block.settings.banner_btn_title }}</a></p>
+                     {%- endif -%}
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   {%- endfor -%}
+   {%- if section.blocks.size == 0 -%}
+    {%- include 'no-blocks' -%}
+   {%- endif -%}
+</div>
+{%- unless section.settings.row_stretch == 'default' -%}
+  <div class="gl_row-full-width gl_clearfix"></div>
+{%- endunless -%}
+{%- schema -%}
+{
+  "name": "Shipping Info",
+  "class": "index-section index-section_shipping_fashion",
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "header",
+      "content": "== General Settings"
+    },
+    {
+      "type": "select",
+      "id": "row_stretch",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "stretch_row",
+          "label": "Stretch row"
+        },
+        {
+          "value": "stretch_row_content",
+          "label": "Stretch row and content"
+        },
+        {
+          "value": "stretch_row_content_no_spaces",
+          "label": "Stretch row and content (no paddings)"
+        }
+      ],
+      "label": "___ Row stretch",
+      "info": "Select stretching options for row and content (Note: stretched may not work properly if parent container has 'overflow: hidden' CSS property).",
+      "default": "default"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_height",
+      "label": "Full height row?",
+      "info": "if checked row will be set to full height.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "columns_position",
+      "options": [
+        {
+          "value": "middle",
+          "label": "Middle"
+        },
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "stretch",
+          "label": "Stretch"
+        }
+      ],
+      "label": "___ Columns position (only for full height)",
+      "info": "Select columns position within row.",
+      "default": "middle"
+    },
+    {
+      "type": "checkbox",
+      "id": "equal_height",
+      "label": "Equal height?",
+      "info": "If checked columns will be set to equal height.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "middle",
+          "label": "Middle"
+        },
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "label": "___ Content position",
+      "info": "Select content position within columns.",
+      "default": "default"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_video",
+      "label": "Use video background?",
+      "info": "If checked, video will be used as row background.",
+      "default": false
+    },
+    {
+      "id": "video_url",
+      "type": "video_url",
+      "label": "YouTube link",
+      "accept": ["youtube"],
+      "default": "https://www.youtube.com/watch?v=flTcrOns02I"
+    },
+    {
+      "type": "header",
+      "content": "== Design Options"
+    },
+    {
+      "type": "image_picker",
+      "id": "section_bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "section_border_color",
+      "label": "Border color"
+    },
+    {
+      "type": "select",
+      "id": "section_border_style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "dotted",
+          "label": "Dotted"
+        },
+        {
+          "value": "dashed",
+          "label": "Dashed"
+        },
+        {
+          "value": "double",
+          "label": "Double"
+        },
+        {
+          "value": "groove",
+          "label": "Groove"
+        },
+        {
+          "value": "Ridge",
+          "label": "Ridge"
+        },
+        {
+          "value": "inset",
+          "label": "Inset"
+        },
+        {
+          "value": "outset",
+          "label": "Outset"
+        }
+      ],
+      "label": "Border style",
+      "default": "solid"
+    },
+    {
+      "type": "text",
+      "id": "section_border",
+      "label": "Borders Integer px ( top-right-bottom-left )",
+      "info": "0-0-1px-0"
+    },
+    {
+      "type": "text",
+      "id": "section_margin_top",
+      "label": "Margin top",
+      "info": "60px"
+    },
+    {
+      "type": "text",
+      "id": "section_margin_bottom",
+      "label": "Margin bottom",
+      "info": "60px"
+    },
+    {
+      "type": "text",
+      "id": "section_padding_top",
+      "label": "Padding top",
+      "info": "60px"
+    },
+    {
+      "type": "text",
+      "id": "section_padding_right",
+      "label": "Padding right",
+      "info": "60px"
+    },
+    {
+      "type": "text",
+      "id": "section_padding_bottom",
+      "label": "Padding bottom",
+      "info": "60px"
+    },
+    {
+      "type": "text",
+      "id": "section_padding_left",
+      "label": "Padding left",
+      "info": "60px"
+    },
+    {
+      "type": "header",
+      "content": "== Basel Extras"
+    },
+    {
+      "type": "checkbox",
+      "id": "hidden_section",
+      "label": "Disable Section?",
+      "info": "If checked the section won't be visible on the public side of your website. You can switch it back any time.",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "use_parallax",
+      "label": "Use Basel parallax?",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type":"text_block",
+      "name":"Shipping",
+      "settings": [
+        {
+           "type": "header",
+           "content": "== Icon Settings"
+         },
+         {
+           "type": "select",
+           "id": "icon_library",
+           "options": [
+            {
+               "value": "basel",
+               "label": "Basel icon"
+             },
+            {
+               "value": "fontawesome",
+               "label": "Font Awesome"
+             }
+           ],
+           "label": "___ Icon library",
+           "default": "basel"
+         },
+         {
+           "type": "paragraph",
+           "content": "[Font Awesome](http:\/\/fontawesome.io\/icons\/)"
+         },
+         {
+           "type": "paragraph",
+           "content": "[Basel icons](https:\/\/demo-basel.myshopify.com\/pages\/basel-icon)"
+         },
+         {
+           "type": "text",
+           "id": "icon",
+           "label": "___ Icon",
+           "info": "icon_name ex:heart"
+         },
+         {
+           "type": "color",
+           "id": "bg_icon_color",
+           "label": "Background color",
+           "info": "Select background color for icon.",
+           "default":"#EBEBEB"
+         },
+         {
+           "type": "color",
+           "id": "icon_color",
+           "label": "Icon color",
+           "info": "Select icon color.",
+           "default":"#2A2A2A"
+         },
+         {
+           "type": "select",
+           "id": "bg_shape",
+           "options": [
+            {
+               "value": "none",
+               "label": "None"
+            },
+            {
+               "value": "rounded",
+               "label": "Circle"
+            },
+            {
+               "value": "boxed",
+               "label": "Square"
+            },
+            {
+               "value": "rounded-less",
+               "label": "Rounded"
+            },
+            {
+               "value": "rounded-outline",
+               "label": "Outline Circle"
+            },
+            {
+               "value": "boxed-outline",
+               "label": "Outline Square"
+            },
+            {
+               "value": "rounded-less-outline",
+               "label": "Outline Rounded"
+            }
+           ],
+           "label": "___ Background shape",
+           "info": "Select background shape and style for icon.",
+           "default": "none"
+         },
+         {
+           "type": "select",
+           "id": "icon_size",
+           "options": [
+            {
+               "value": "xs",
+               "label": "Mini"
+            },
+            {
+               "value": "sm",
+               "label": "Small"
+            },
+            {
+               "value": "md",
+               "label": "Normal"
+            },
+            {
+               "value": "lg",
+               "label": "Large"
+            },
+            {
+               "value": "xl",
+               "label": "Extra Large"
+            }
+           ],
+           "label": "___ Size",
+           "info": "Icon size.",
+           "default": "lg"
+         },
+         {
+           "type": "select",
+           "id": "icon_alignment",
+           "options": [
+            {
+               "value": "left",
+               "label": "Left"
+            },
+            {
+               "value": "right",
+               "label": "Right"
+            },
+            {
+               "value": "center",
+               "label": "Center"
+            }
+           ],
+           "label": "___ Icon alignment",
+           "info": "Select icon alignment.",
+           "default": "center"
+         },
+        {
+          "type": "header",
+          "content": "== Information box Settings"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Free Shipping &amp; Delivery"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "content",
+          "default": "Quam natoque magna conubia odio vestibulum dui sagittis."
+        },
+        {
+          "type": "text",
+          "id": "banner_btn_title",
+          "label": "___ Button title",
+          "info": "Add here few words to your title button."
+        },
+        {
+          "type": "url",
+          "id": "banner_link",
+          "label": "___ Banner link",
+          "info": "Enter URL if you want this banner to have a link."
+        },
+        {
+          "type": "select",
+          "id": "open_link",
+          "options": [
+            {
+              "value": "_self",
+              "label": "Current window (_self)"
+            },
+            {
+              "value": "_blank",
+              "label": "New window (_blank)"
+            }
+          ],
+          "label": "___ Open link in",
+          "default": "_self"
+        },
+        {
+          "type": "select",
+          "id": "text_alignment",
+          "options": [
+            {
+              "value": "left",
+              "label": "Align left"
+            },
+            {
+              "value": "right",
+              "label": "Align right"
+            },
+            {
+              "value": "center",
+              "label": "Align center"
+            }
+          ],
+          "label": "___ Text alignment",
+          "info": "Select Text alignment.",
+          "default": "center"
+        },
+        {
+          "type": "select",
+          "id": "banner_color",
+          "options": [
+            {
+              "value": "light",
+              "label": "Light"
+            },
+            {
+              "value": "dark",
+              "label": "Dark"
+            }
+          ],
+          "label": "___ Color Scheme",
+          "default": "dark"
+        },
+        {
+          "type": "header",
+          "content": "== Design Options"
+        },
+        {
+          "type": "image_picker",
+          "id": "section_bg_image",
+          "label": "Background Image"
+        },
+        {
+          "type": "color",
+          "id": "section_bg_color",
+          "label": "Background color"
+        },
+        {
+          "type": "color",
+          "id": "section_border_color",
+          "label": "Border color"
+        },
+        {
+          "type": "select",
+          "id": "section_border_style",
+          "options": [
+            {
+              "value": "solid",
+              "label": "Solid"
+            },
+            {
+              "value": "dotted",
+              "label": "Dotted"
+            },
+            {
+              "value": "dashed",
+              "label": "Dashed"
+            },
+            {
+              "value": "double",
+              "label": "Double"
+            },
+            {
+              "value": "groove",
+              "label": "Groove"
+            },
+            {
+              "value": "Ridge",
+              "label": "Ridge"
+            },
+            {
+              "value": "inset",
+              "label": "Inset"
+            },
+            {
+              "value": "outset",
+              "label": "Outset"
+            }
+          ],
+          "label": "Border style",
+          "default": "solid"
+        },
+        {
+          "type": "text",
+          "id": "section_border",
+          "label": "Borders Integer px ( top-right-bottom-left )",
+          "info": "0-0-1px-0"
+        },
+        {
+          "type": "text",
+          "id": "section_margin_top",
+          "label": "Margin top",
+          "info": "60px"
+        },
+        {
+          "type": "text",
+          "id": "section_margin_bottom",
+          "label": "Margin bottom",
+          "info": "60px"
+        },
+        {
+          "type": "text",
+          "id": "section_padding_top",
+          "label": "Padding top",
+          "info": "60px"
+        },
+        {
+          "type": "text",
+          "id": "section_padding_right",
+          "label": "Padding right",
+          "info": "60px"
+        },
+        {
+          "type": "text",
+          "id": "section_padding_bottom",
+          "label": "Padding bottom",
+          "info": "60px"
+        },
+        {
+          "type": "text",
+          "id": "section_padding_left",
+          "label": "Padding left",
+          "info": "60px"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shipping Info (fashion)",
+      "category": "Shipping",
+      "blocks": [
+        {
+          "type": "text_block"
+        },
+        {
+          "type": "text_block"
+        },
+        {
+          "type": "text_block"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,153 @@
+{%- if block.settings.id_collection == blank -%}
+   {%- if collections["frontpage"].products.size > 0 -%}
+      {%- assign collection = collections["frontpage"] -%}
+   {%- else -%}
+      {%- assign collection = collections["all"] -%}
+   {%- endif -%}
+{%- else -%}
+   {%- assign collection = collections[block.settings.id_collection] -%}
+{%- endif -%}
+{%- assign gl_colum_width = 'col-galaxy' -%}
+{%- case block.settings.silder_per_view -%}
+    {%- when '1' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size = '1140x' -%}
+      {%- else -%}
+         {%- assign image_size = '2048x' -%}
+      {%- endif -%} 
+    {%- when '2' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size = '557x' -%}
+      {%- else -%}
+         {%- assign image_size = '1000x' -%}
+      {%- endif -%}
+    {%- when '3' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size = '370x' -%}
+      {%- else -%}
+         {%- assign image_size = '620x' -%}
+      {%- endif -%}
+    {%- when '4' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size = '263x' -%}
+      {%- else -%}
+         {%- assign image_size = '500x' -%}
+      {%- endif -%}
+    {%- when '5' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size = '236x' -%}
+      {%- else -%}
+         {%- assign image_size = '370x' -%}
+      {%- endif -%}
+   {%- when '6' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size = '165x' -%}
+      {%- else -%}
+         {%- assign image_size = '300x' -%}
+      {%- endif -%}
+    {%- when '7' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size = '136x' -%}
+      {%- else -%}
+         {%- assign image_size = '252x' -%}
+      {%- endif -%}
+    {%- when '8' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size = '127x' -%}
+      {%- else -%}
+         {%- assign image_size = '230x' -%}
+      {%- endif -%}   
+{%- endcase -%}
+{%- case block.settings.products_hover -%}
+    {%- when 'base' -%}
+      {%- assign gl_include = 'section_loop_product_base' -%} 
+    {%- when 'alt' -%}
+      {%- assign gl_include = 'section_loop_product_alt' -%}
+    {%- when 'button' -%}
+      {%- assign gl_include = 'section_loop_product_button' -%}
+   {%- when 'info' -%}
+      {%- assign gl_include = 'section_loop_product_info' -%}
+   {%- when 'link' -%}
+      {%- assign gl_include = 'section_loop_product_link' -%}
+   {%- when 'standard' -%}
+      {%- assign gl_include = 'section_loop_product_standard' -%}
+   {%- when 'excerpt' -%}
+      {%- assign gl_include = 'section_loop_product_excerpt' -%}
+   {%- when 'quick' -%}
+      {%- assign gl_include = 'section_loop_product_quick' -%}
+{%- endcase -%}
+{%- case block.settings.countdown_style -%}
+    {%- when 'light' -%}
+      {%- assign countdown_style = 'color-scheme-dark timer-size-small timer-style-standard' -%} 
+    {%- when 'dark' -%}
+      {%- assign countdown_style = 'color-scheme-light timer-size-small timer-style-standard' -%}
+    {%- when 'transparent_1' -%}
+      {%- assign countdown_style = 'color-scheme-light timer-size-small timer-style-transparent' -%}
+   {%- when 'transparent_2' -%}
+      {%- assign countdown_style = 'color-scheme-dark timer-size-small timer-style-transparent' -%}
+{%- endcase -%}
+{%- if block.settings.sale_countdown -%}
+   {%- assign section_settings_countdown = true -%}
+{%- else -%}
+   {%- assign section_settings_countdown = false -%}
+{%- endif -%}
+{%- if block.settings.section_margin != blank or block.settings.section_padding != blank -%}
+{%- assign s_margin = block.settings.section_margin | remove: ' ' | split: '-' | join: ' ' -%}
+{%- assign s_padding = block.settings.section_padding | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if block.settings.section_margin != blank or block.settings.section_padding != blank -%}
+   style="{%- if block.settings.section_margin != blank -%} margin: {{s_margin}} !important;{%- endif -%}{%- if block.settings.section_padding != blank -%}padding: {{s_padding}} !important{%- endif -%}"
+   {%- endif -%}
+{%- endcapture -%}
+{%- assign paginate_index = block.settings.paginate_index | plus: 0 -%}
+{%- assign number = block.settings.silder_per_view | plus: 0 -%}
+{%- assign current_page = '1' -%}
+{%- paginate collection.products by paginate_index -%}
+<div id="carousel-{{ block.id }}" class="gl_carousel_container">
+     <div class="owl-carousel gl_carousel_data" data-time='{{ block.settings.silder_speed | plus: 0 }}' data-nav='{%- if block.settings.hide_button -%}false{%- else -%}true{%- endif -%}' data-items='{{ number }}' data-dots='{%- if block.settings.hide_pagination -%}false{%- else -%}true{%- endif -%}' data-autoplay='{%- if block.settings.autoplay -%}true{%- else -%}false{%- endif -%}' data-loop='{%- if block.settings.slider_loop -%}true{%- else -%}false{%- endif -%}' data-medium='{%- if number > 2 -%}{{ number | minus: 1 }}{%- else -%}2{%- endif -%}'>
+        {%- for product in collection.products -%}
+          <div class="product-item owl-carousel-item">
+             <div class="owl-carousel-item-inner">
+              {%- include gl_include -%}
+             </div>
+          </div>
+        {%- else -%}
+           {%- comment -%}
+             If collection is empty, show onboarding state
+             For onboarding new users to your theme, we add some default products and onboarding tutorials to help populate their store
+           {%- endcomment -%}
+           {%- assign home_onboarding_index = 1 -%}
+           {%- for i in (1..8) -%}
+           {%- case i -%}
+              {%- when 7 -%}
+                 {%- assign home_onboarding_index = 1 -%}
+              {%- when 8 -%}
+                 {%- assign home_onboarding_index = 2 -%}
+           {%- endcase -%}
+           <div class="product-item owl-carousel-item">
+             <div class="owl-carousel-item-inner">
+                 <div class="product-grid-item product basel-hover-alt">
+                    <div class="product-element-top">
+                       <a href="/admin/products">
+                          {{ 'product-' | append: home_onboarding_index | placeholder_svg_tag: 'product-item__image icon icon--placeholder' }}
+                       </a>
+                    </div>
+                    <h3 class="product-title"><a href="/admin/products">{{ 'homepage.onboarding.product_title' | t }}</a></h3>
+                    <div class="wrap-price">
+                       <div class="wrapp-swap">
+                          <div class="swap-elements">
+                             <span class="price">£219.00</span>
+                             <div class="btn-add"><a href="/admin/products" class="button add_to_cart_button">{{ 'products.product.add_to_cart' | t }}</a></div>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+           {%- assign home_onboarding_index = home_onboarding_index | plus: 1 -%}
+           {%- endfor -%}
+        {%- endfor -%}
+     </div>
+ </div>
+{%- endpaginate -%}

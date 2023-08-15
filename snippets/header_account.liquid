@@ -1,0 +1,12 @@
+{%- if settings.account_header_enable -%}
+<div class="header-links">
+   <ul>
+      {%- if customer -%}
+      <li><a href="/account">{{ 'layout.customer.my_account' | t }}</a></li>
+      <li><a href="/account/logout">{{ 'layout.customer.log_out' | t }}</a></li>
+      {%- else -%}
+      <li><a href="/account/login">{{ 'layout.customer.log_in' | t }}</a></li>
+       {%- endif -%}
+   </ul>
+</div>
+{%- endif -%}

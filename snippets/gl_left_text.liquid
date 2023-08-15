@@ -1,0 +1,1023 @@
+{%- if left_text -%}
+  <div class="text-right spb_column gl_column_container gl_col-md-4 gl_col-lg-{{ block.settings.text_width }}{%- if block.settings.hide_text_tablets %} gl_hidden-sm{%- else %} gl_col-sm-6{%- endif %}{%- if block.settings.hide_text_phones %} gl_hidden-xs{%- endif -%}">
+    <div class="gl_column-inner ">
+       <div class="spb_wrapper">
+          <div class="spb_text_column spb_content_element{%- if block.settings.animation != 'none' %} spb_animate_when_almost_visible spb_{{ block.settings.animation }} {{ block.settings.animation }} spb_start_animation animated{%- endif -%}">
+             <div class="spb_wrapper">
+                {%- if block.settings.source == '1' -%}
+                   {%- if block.settings.product_single != blank -%}
+                      {%- if block.settings.show_vendor and product.vendor != blank -%}<p style="margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.4px; font-size: 12px; color: #b1b1b1;">{{ product.vendor }}</p>{%- endif -%}
+                      <h1 style="margin-bottom: -10px; font-weight: bold; text-transform: uppercase; font-size: 42px;">{{ product.title }}</h1>
+                      {%- if block.settings.show_type and product.type != blank -%}<h1 style="margin-bottom: -10px; font-weight: bold; text-transform: uppercase; font-size: 42px;">{{ product.type }}</h1>{%- endif -%}
+                      <h1 class="color-primary" style="margin-bottom: 10px; font-weight: bold; text-transform: uppercase; font-size: 48px; line-height: 1;">{{ product.price | money }}</h1>
+                      {%- if settings.use_description_excerpt_custom == '2' and page_description.size > 0 -%}
+                     <p>{{ page_description }}</p>
+                     {%- elsif product.metafields.meta.description_excerpt and settings.use_description_excerpt_custom == '3' -%}
+                       {{  product.metafields.meta.description_excerpt  }}
+                     {% elsif product.description contains  '[' %}
+                       {% assign pr_des = product.description | split: '[' %}
+                       {% assign pr_des = pr_des[1] | split: ']' | first | append:']' | prepend:'[' %}
+                       <p>{{ product.description | remove: pr_des | strip_html | truncatewords: 31 }}</p>
+                     {%-else-%}
+                       <p>{{ product.description | strip_html | truncatewords: 31 }}</p>
+                     {%-endif-%}
+                      <p>{%- include 'gl_btn_add', tab_button:true -%}</p>
+                   {%- else -%}
+                      <h1 style="margin-bottom: -10px; font-weight: bold; text-transform: uppercase; font-size: 42px;">Eames Sofa</h1>
+                      <h1 style="margin-bottom: 0px; font-weight: bold; text-transform: uppercase; font-size: 42px;">Compact</h1>
+                      <h1 class="color-primary" style="margin-bottom: 10px; font-weight: bold; text-transform: uppercase; font-size: 48px; line-height: 1;">$800</h1>
+                      <p>Vel himenaeos quam fringilla a interdum blandit adipiscing ullamcorper per consequat in ut a enim suspendisse luctus commodo varius dictumst egestas at curae ultricies nam.</p>
+                      <p><a class="btn btn-color-primary btn-style-default btn-size-small" href="/admin/products">read more</a></p>
+                   {%- endif -%}
+                {%- else -%}
+                      {%- if block.settings.author != blank -%}<p style="margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.4px; font-size: 12px; color: #b1b1b1;">{{ block.settings.author }}</p>{%- endif -%}
+                      {%- if block.settings.product_title != blank -%}<h1 style="margin-bottom: -10px; font-weight: bold; text-transform: uppercase; font-size: 42px;">{{ block.settings.product_title }}</h1>{%- endif -%}
+                      {%- if block.settings.sub_product_title != blank -%}<h1 style="margin-bottom: 0px; font-weight: bold; text-transform: uppercase; font-size: 42px;">{{ block.settings.sub_product_title }}</h1>{%- endif -%}
+                      {%- if block.settings.product_price != blank -%}<h1 class="color-primary" style="margin-bottom: 10px; font-weight: bold; text-transform: uppercase; font-size: 48px; line-height: 1;">{{ block.settings.product_price }}</h1>{%- endif -%}
+                      {%- if block.settings.product_description != blank -%}<p>{{ block.settings.product_description | strip_html }}</p>{%- endif -%}
+                      {%- if block.settings.link != blank -%}<p><a class="btn btn-color-primary btn-style-default btn-size-small" href="{{ block.settings.link }}">{{ block.settings.title_btn }}</a></p>{%- endif -%}
+                {%- endif -%}
+             </div>
+          </div>
+       </div>
+    </div>
+  </div>
+  <div class="spb_column gl_column_container gl_col-md-4 gl_col-lg-{{ block.settings.one_width }}{%- if block.settings.hide_one_tablets %} gl_hidden-sm{%- else %} gl_col-sm-6{%- endif %}{%- if block.settings.hide_one_phones %} gl_hidden-xs{%- endif -%}">
+    <div class="gl_column-inner ">
+       <div class="spb_wrapper">
+          <div class="spb_single_image spb_content_element gl_mb_0 gl_align_{{ block.settings.image_alignment_one }} {%- if block.settings.animation_img_one != 'none' %} spb_animate_when_almost_visible spb_{{ block.settings.animation_img_one }} {{ block.settings.animation_img_one }} spb_start_animation animated{%- endif -%}">
+             <figure class="spb_wrapper gl_figure">
+                <div class="gl_single_image-wrapper gl_box_border_grey {{ block.settings.image_style_one }}">
+                   {%- if block.settings.product_single != blank or block.settings.image_source_one != blank -%}
+                         {%- if block.settings.source == '1' -%}
+                            {%- case block.settings.one_width -%}
+                              {%- when '1' -%}
+                                  {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                     {%- assign image_size_one = '165x' -%}
+                                  {%- else -%}
+                                     {%- assign image_size_one = '230x' -%}
+                                  {%- endif -%}
+                              {%- when '2' -%}
+                                  {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                     {%- assign image_size_one = '165x' -%}
+                                  {%- else -%}
+                                     {%- assign image_size_one = '300x' -%}
+                                  {%- endif -%}
+                              {%- when '3' -%}
+                                  {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                     {%- assign image_size_one = '263x' -%}
+                                  {%- else -%}
+                                     {%- assign image_size_one = '500x' -%}
+                                  {%- endif -%}
+                              {%- when '4' -%}
+                                  {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                     {%- assign image_size_one = '360x' -%}
+                                  {%- else -%}
+                                     {%- assign image_size_one = '620x' -%}
+                                  {%- endif -%}
+                              {%- when '5' -%}
+                                {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                   {%- assign image_size_one = '457x' -%}
+                                {%- else -%}
+                                   {%- assign image_size_one = '1000x' -%}
+                                {%- endif -%}
+                              {%- when '6' -%}
+                                {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                   {%- assign image_size_one = '554x' -%}
+                                {%- else -%}
+                                   {%- assign image_size_one = '1024x' -%}
+                                {%- endif -%}
+                              {%- when '7' -%}
+                                {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                   {%- assign image_size_one = '554x' -%}
+                                {%- else -%}
+                                   {%- assign image_size_one = '2048x' -%}
+                                {%- endif -%}
+                              {%- when '8' -%}
+                                {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                   {%- assign image_size_one = '779x' -%}
+                                {%- else -%}
+                                   {%- assign image_size_one = '2048x' -%}
+                                {%- endif -%}
+                              {%- when '9' -%}
+                                {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                   {%- assign image_size_one = '876x' -%}
+                                {%- else -%}
+                                   {%- assign image_size_one = '2048x' -%}
+                                {%- endif -%}
+                              {%- when '10' -%}
+                                {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                   {%- assign image_size_one = '974x' -%}
+                                {%- else -%}
+                                   {%- assign image_size_one = '2048x' -%}
+                                {%- endif -%}
+                              {%- when '11' -%}
+                                {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                   {%- assign image_size_one = '1074x' -%}
+                                {%- else -%}
+                                   {%- assign image_size_one = '2048x' -%}
+                                {%- endif -%}
+                              {%- when '12' -%}
+                                {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                   {%- assign image_size_one = '1140x' -%}
+                                {%- else -%}
+                                   {%- assign image_size_one = '1000x' -%}
+                                {%- endif -%}
+                            {%- endcase -%}
+                            <img width="360" height="415" src="{%-include 'gl_image_format',src: product.featured_image.src , size: image_size_one -%}" class="gl_single_image-img attachment-full" alt="{{ product.title }}" 
+                              srcset="{%-include 'gl_image_format',src: product.featured_image.src , size: image_size_one %} 360w, 
+                              {%-include 'gl_image_format',src: product.featured_image.src , size: '260x300' %} 260w, 
+                              {%-include 'gl_image_format',src: product.featured_image.src , size: '270x311' %} 270w, 
+                              {%-include 'gl_image_format',src: product.featured_image.src , size: '243x280' %} 243w, 
+                              {%-include 'gl_image_format',src: product.featured_image.src , size: '263x303' %} 263w" sizes="(max-width: 360px) 100vw, 360px">
+                         {%- elsif block.settings.image_source_one != blank -%}
+                            {%- assign image = block.settings.image_source_one -%}
+                            {%- assign image_size = image.width | append:'x' -%}
+                            <img width="{{ image.width }}" height="{{ image.height }}" src="{%-include 'gl_image_format',src: image , size: image_size -%}" class="gl_single_image-img attachment-full" alt="{{ image.alt }}" 
+                              srcset="{%-include 'gl_image_format',src: image , size: image_size %} {{ image.width }}w, 
+                              {%-include 'gl_image_format',src: image , size: '260x' %} 260w, 
+                              {%-include 'gl_image_format',src: image , size: '270x' %} 270w, 
+                              {%-include 'gl_image_format',src: image , size: '243x' %} 243w, 
+                              {%-include 'gl_image_format',src: image , size: '263x' %} 263w" sizes="(max-width: {{ image.width }}px) 100vw, {{ image.width }}px">
+                         {%- else -%}
+                         <img width="360" height="415" src="https://cdn.shopify.com/s/files/1/1933/6253/files/element-furniture-1.jpg?13506386045270342697" class="gl_single_image-img attachment-full" alt="">
+                         {%- endif -%}
+                   {%- else -%}
+                      <img width="360" height="415" src="https://cdn.shopify.com/s/files/1/1933/6253/files/element-furniture-1.jpg?13506386045270342697" class="gl_single_image-img attachment-full" alt="">
+                   {%- endif -%}
+                </div>
+             </figure>
+          </div>
+       </div>
+    </div>
+  </div>
+  {%- if product.images.size > 1 and block.settings.source == '1' -%}
+  {%- case block.settings.two_width -%}
+    {%- when '1' -%}
+        {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+           {%- assign image_size_two = '165x' -%}
+        {%- else -%}
+           {%- assign image_size_two = '230x' -%}
+        {%- endif -%}
+    {%- when '2' -%}
+        {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+           {%- assign image_size_two = '165x' -%}
+        {%- else -%}
+           {%- assign image_size_two = '300x' -%}
+        {%- endif -%}
+    {%- when '3' -%}
+        {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+           {%- assign image_size_two = '263x' -%}
+        {%- else -%}
+           {%- assign image_size_two = '500x' -%}
+        {%- endif -%}
+    {%- when '4' -%}
+        {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+           {%- assign image_size_two = '360x' -%}
+        {%- else -%}
+           {%- assign image_size_two = '620x' -%}
+        {%- endif -%}
+    {%- when '5' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '457x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '1000x' -%}
+      {%- endif -%}
+    {%- when '6' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '554x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '1024x' -%}
+      {%- endif -%}
+    {%- when '7' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '554x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '8' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '779x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '9' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '876x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '10' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '974x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '11' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '1074x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '12' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '1140x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '1000x' -%}
+      {%- endif -%}
+  {%- endcase -%}
+  <div class="spb_column gl_column_container gl_col-md-4 gl_col-lg-{{ block.settings.two_width }}{%- if block.settings.hide_two_tablets %} gl_hidden-sm{%- else %} gl_col-sm-6{%- endif %}{%- if block.settings.hide_two_phones %} gl_hidden-xs{%- endif -%}">
+    <div class="gl_column-inner ">
+       <div class="spb_wrapper">
+          <div class="spb_single_image spb_content_element gl_mb_0 gl_align_{{ block.settings.image_alignment_two }}{%- if block.settings.animation_img_one != 'none' %} spb_animate_when_almost_visible spb_{{ block.settings.animation_img_one }} {{ block.settings.animation_img_one }}{%- endif -%}">
+             <figure class="spb_wrapper gl_figure">
+                <div class="gl_single_image-wrapper gl_box_border_grey">
+                  <img width="360" height="415" src="{%-include 'gl_image_format',src: product.images[1].src , size: image_size_one -%}" class="gl_single_image-img attachment-full" alt="{{ product.title }}" 
+                    srcset="{%-include 'gl_image_format',src: product.images[1].src , size: image_size_one %} 360w, 
+                    {%-include 'gl_image_format',src: product.images[1].src , size: '260x300' %} 260w, 
+                    {%-include 'gl_image_format',src: product.images[1].src , size: '270x311' %} 270w, 
+                    {%-include 'gl_image_format',src: product.images[1].src , size: '243x280' %} 243w, 
+                    {%-include 'gl_image_format',src: product.images[1].src , size: '263x303' %} 263w" sizes="(max-width: 360px) 100vw, 360px">
+                </div>
+             </figure>
+          </div>
+       </div>
+    </div>
+  </div>
+  {%- elsif block.settings.image_source_two != blank and block.settings.source == '2' -%}
+  {%- case block.settings.two_width -%}
+    {%- when '1' -%}
+        {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+           {%- assign image_size_two = '165x' -%}
+        {%- else -%}
+           {%- assign image_size_two = '230x' -%}
+        {%- endif -%}
+    {%- when '2' -%}
+        {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+           {%- assign image_size_two = '165x' -%}
+        {%- else -%}
+           {%- assign image_size_two = '300x' -%}
+        {%- endif -%}
+    {%- when '3' -%}
+        {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+           {%- assign image_size_two = '263x' -%}
+        {%- else -%}
+           {%- assign image_size_two = '500x' -%}
+        {%- endif -%}
+    {%- when '4' -%}
+        {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+           {%- assign image_size_two = '360x' -%}
+        {%- else -%}
+           {%- assign image_size_two = '620x' -%}
+        {%- endif -%}
+    {%- when '5' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '457x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '1000x' -%}
+      {%- endif -%}
+    {%- when '6' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '554x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '1024x' -%}
+      {%- endif -%}
+    {%- when '7' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '554x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '8' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '779x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '9' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '876x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '10' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '974x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '11' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '1074x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '12' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '1140x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '1000x' -%}
+      {%- endif -%}
+  {%- endcase -%}
+  <div class="spb_column gl_column_container gl_col-md-4 gl_col-lg-{{ block.settings.two_width }}{%- if block.settings.hide_two_tablets %} gl_hidden-sm{%- else %} gl_col-sm-6{%- endif %}{%- if block.settings.hide_two_phones %} gl_hidden-xs{%- endif -%}">
+    <div class="gl_column-inner ">
+       <div class="spb_wrapper">
+          <div class="spb_single_image spb_content_element gl_mb_0 gl_align_{{ block.settings.image_alignment_two }}{%- if block.settings.animation_img_two != 'none' %} spb_animate_when_almost_visible spb_start_animation animated spb_{{ block.settings.animation_img_two }} {{ block.settings.animation_img_two }}{%- endif -%}">
+             <figure class="spb_wrapper gl_figure">
+                <div class="gl_single_image-wrapper gl_box_border_grey">
+                  {%- assign image = block.settings.image_source_two -%}
+                  {%- assign image_size = image.width | append:'x' -%}
+                  <img width="{{ image.width }}" height="{{ image.height }}" src="{%-include 'gl_image_format',src: image , size: image_size -%}" class="gl_single_image-img attachment-full" alt="{{ image.alt }}" 
+                       srcset="{%-include 'gl_image_format',src: image , size: image_size %} {{ image.width }}w, 
+                               {%-include 'gl_image_format',src: image , size: '260x' %} 260w, 
+                               {%-include 'gl_image_format',src: image , size: '270x' %} 270w, 
+                               {%-include 'gl_image_format',src: image , size: '243x' %} 243w, 
+                               {%-include 'gl_image_format',src: image , size: '263x' %} 263w" sizes="(max-width: {{ image.width }}px) 100vw, {{ image.width }}px">
+                </div>
+             </figure>
+          </div>
+       </div>
+    </div>
+  </div>
+  {%- endif -%}
+{%- elsif center_text -%}
+  <div class="spb_column gl_column_container gl_col-md-4 gl_col-lg-{{ block.settings.one_width }}{%- if block.settings.hide_one_tablets %} gl_hidden-sm{%- else %} gl_col-sm-6{%- endif %}{%- if block.settings.hide_one_phones %} gl_hidden-xs{%- endif -%}">
+    <div class="gl_column-inner ">
+       <div class="spb_wrapper">
+          <div class="spb_single_image spb_content_element gl_mb_0 gl_align_{{ block.settings.image_alignment_one }} {%- if block.settings.animation_img_one != 'none' %} spb_animate_when_almost_visible spb_start_animation animated spb_{{ block.settings.animation_img_one }} {{ block.settings.animation_img_one }}{%- endif -%}">
+             <figure class="spb_wrapper gl_figure">
+                <div class="gl_single_image-wrapper gl_box_border_grey {{ block.settings.image_style_one }}">
+                   {%- if block.settings.product_single != blank or block.settings.image_source_one != blank -%}
+                         {%- if block.settings.source == '1' -%}
+                            {%- case block.settings.one_width -%}
+                              {%- when '1' -%}
+                                  {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                     {%- assign image_size_one = '165x' -%}
+                                  {%- else -%}
+                                     {%- assign image_size_one = '230x' -%}
+                                  {%- endif -%}
+                              {%- when '2' -%}
+                                  {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                     {%- assign image_size_one = '165x' -%}
+                                  {%- else -%}
+                                     {%- assign image_size_one = '300x' -%}
+                                  {%- endif -%}
+                              {%- when '3' -%}
+                                  {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                     {%- assign image_size_one = '263x' -%}
+                                  {%- else -%}
+                                     {%- assign image_size_one = '500x' -%}
+                                  {%- endif -%}
+                              {%- when '4' -%}
+                                  {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                     {%- assign image_size_one = '360x' -%}
+                                  {%- else -%}
+                                     {%- assign image_size_one = '620x' -%}
+                                  {%- endif -%}
+                              {%- when '5' -%}
+                                {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                   {%- assign image_size_one = '457x' -%}
+                                {%- else -%}
+                                   {%- assign image_size_one = '1000x' -%}
+                                {%- endif -%}
+                              {%- when '6' -%}
+                                {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                   {%- assign image_size_one = '554x' -%}
+                                {%- else -%}
+                                   {%- assign image_size_one = '1024x' -%}
+                                {%- endif -%}
+                              {%- when '7' -%}
+                                {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                   {%- assign image_size_one = '554x' -%}
+                                {%- else -%}
+                                   {%- assign image_size_one = '2048x' -%}
+                                {%- endif -%}
+                              {%- when '8' -%}
+                                {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                   {%- assign image_size_one = '779x' -%}
+                                {%- else -%}
+                                   {%- assign image_size_one = '2048x' -%}
+                                {%- endif -%}
+                              {%- when '9' -%}
+                                {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                   {%- assign image_size_one = '876x' -%}
+                                {%- else -%}
+                                   {%- assign image_size_one = '2048x' -%}
+                                {%- endif -%}
+                              {%- when '10' -%}
+                                {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                   {%- assign image_size_one = '974x' -%}
+                                {%- else -%}
+                                   {%- assign image_size_one = '2048x' -%}
+                                {%- endif -%}
+                              {%- when '11' -%}
+                                {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                   {%- assign image_size_one = '1074x' -%}
+                                {%- else -%}
+                                   {%- assign image_size_one = '2048x' -%}
+                                {%- endif -%}
+                              {%- when '12' -%}
+                                {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                   {%- assign image_size_one = '1140x' -%}
+                                {%- else -%}
+                                   {%- assign image_size_one = '1000x' -%}
+                                {%- endif -%}
+                            {%- endcase -%}
+                            <img width="360" height="415" src="{%-include 'gl_image_format',src: product.featured_image.src , size: image_size_one -%}" class="gl_single_image-img attachment-full" alt="{{ product.title }}" 
+                              srcset="{%-include 'gl_image_format',src: product.featured_image.src , size: image_size_one %} 360w, 
+                              {%-include 'gl_image_format',src: product.featured_image.src , size: '260x300' %} 260w, 
+                              {%-include 'gl_image_format',src: product.featured_image.src , size: '270x311' %} 270w, 
+                              {%-include 'gl_image_format',src: product.featured_image.src , size: '243x280' %} 243w, 
+                              {%-include 'gl_image_format',src: product.featured_image.src , size: '263x303' %} 263w" sizes="(max-width: 360px) 100vw, 360px">
+                         {%- elsif block.settings.image_source_one != blank -%}
+                            {%- assign image = block.settings.image_source_one -%}
+                            <img width="{{ image.width }}" height="{{ image.height }}" src="{%-include 'gl_image_format',src: image , size: '2048x' -%}" class="gl_single_image-img attachment-full" alt="{{ image.alt }}" 
+                            srcset="{%-include 'gl_image_format',src: image , size: '2048x' %} 360w, 
+                            {%-include 'gl_image_format',src: image , size: '260x300' %} 260w, 
+                            {%-include 'gl_image_format',src: image , size: '270x311' %} 270w, 
+                            {%-include 'gl_image_format',src: image , size: '243x280' %} 243w, 
+                            {%-include 'gl_image_format',src: image , size: '263x303' %} 263w" sizes="(max-width: {{ image.width }}px) 100vw, {{ image.width }}px">
+                         {%- else -%}
+                         <img width="360" height="415" src="https://cdn.shopify.com/s/files/1/1933/6253/files/element-furniture-1.jpg?13506386045270342697" class="gl_single_image-img attachment-full" alt="">
+                         {%- endif -%}
+                   {%- else -%}
+                      <img width="360" height="415" src="https://cdn.shopify.com/s/files/1/1933/6253/files/element-furniture-1.jpg?13506386045270342697" class="gl_single_image-img attachment-full" alt="">
+                   {%- endif -%}
+                </div>
+             </figure>
+          </div>
+       </div>
+    </div>
+  </div>
+   <div class="text-center spb_column gl_column_container gl_col-md-4 gl_col-lg-{{ block.settings.text_width }}{%- if block.settings.hide_text_tablets %} gl_hidden-sm{%- else %} gl_col-sm-6{%- endif %}{%- if block.settings.hide_text_phones %} gl_hidden-xs{%- endif -%}">
+    <div class="gl_column-inner ">
+       <div class="spb_wrapper">
+          <div class="spb_text_column spb_content_element gl_mb_0{%- if block.settings.animation != 'none' %} spb_animate_when_almost_visible spb_{{ block.settings.animation }} {{ block.settings.animation }}{%- endif -%}">
+             <div class="spb_wrapper">
+                {%- if block.settings.source == '1' -%}
+                   {%- if block.settings.product_single != blank -%}
+                      {%- if block.settings.show_vendor and product.vendor != blank -%}<p style="margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.4px; font-size: 12px; color: #b1b1b1;">{{ product.vendor }}</p>{%- endif -%}
+                      <h1 style="margin-bottom: -10px; font-weight: bold; text-transform: uppercase; font-size: 42px;">{{ product.title }}</h1>
+                      {%- if block.settings.show_type and product.type != blank -%}<h1 style="margin-bottom: -10px; font-weight: bold; text-transform: uppercase; font-size: 42px;">{{ product.type }}</h1>{%- endif -%}
+                      <h1 class="color-primary" style="margin-bottom: 10px; font-weight: bold; text-transform: uppercase; font-size: 48px; line-height: 1;">{{ product.price | money }}</h1>
+                      {%- if settings.use_description_excerpt_custom == '2' and page_description.size > 0 -%}
+                     <p>{{ page_description }}</p>
+                     {%- elsif product.metafields.meta.description_excerpt and settings.use_description_excerpt_custom == '3' -%}
+                       {{  product.metafields.meta.description_excerpt  }}
+                     {% elsif product.description contains  '[' %}
+                       {% assign pr_des = product.description | split: '[' %}
+                       {% assign pr_des = pr_des[1] | split: ']' | first | append:']' | prepend:'[' %}
+                       <p>{{ product.description | remove: pr_des | strip_html | truncatewords: 31 }}</p>
+                     {%-else-%}
+                       <p>{{ product.description | strip_html | truncatewords: 31 }}</p>
+                     {%-endif-%}
+                      <p>{%- include 'gl_btn_add', tab_button:true -%}</p>
+                   {%- else -%}
+                      <h1 style="margin-bottom: -10px; font-weight: bold; text-transform: uppercase; font-size: 42px;">Eames Sofa</h1>
+                      <h1 style="margin-bottom: 0px; font-weight: bold; text-transform: uppercase; font-size: 42px;">Compact</h1>
+                      <h1 class="color-primary" style="margin-bottom: 10px; font-weight: bold; text-transform: uppercase; font-size: 48px; line-height: 1;">$800</h1>
+                      <p>Vel himenaeos quam fringilla a interdum blandit adipiscing ullamcorper per consequat in ut a enim suspendisse luctus commodo varius dictumst egestas at curae ultricies nam.</p>
+                      <p><a class="btn btn-color-primary btn-style-default btn-size-small" href="/admin/products">read more</a></p>
+                   {%- endif -%}
+                {%- else -%}
+                      {%- if block.settings.author != blank -%}<p style="margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.4px; font-size: 12px; color: #b1b1b1;">{{ block.settings.author }}</p>{%- endif -%}
+                      {%- if block.settings.product_title != blank -%}<h1 style="margin-bottom: -10px; font-weight: bold; text-transform: uppercase; font-size: 42px;">{{ block.settings.product_title }}</h1>{%- endif -%}
+                      {%- if block.settings.sub_product_title != blank -%}<h1 style="margin-bottom: 0px; font-weight: bold; text-transform: uppercase; font-size: 42px;">{{ block.settings.sub_product_title }}</h1>{%- endif -%}
+                      {%- if block.settings.product_price != blank -%}<h1 class="color-primary" style="margin-bottom: 10px; font-weight: bold; text-transform: uppercase; font-size: 48px; line-height: 1;">{{ block.settings.product_price }}</h1>{%- endif -%}
+                      {%- if block.settings.product_description != blank -%}<p>{{ block.settings.product_description | strip_html }}</p>{%- endif -%}
+                      {%- if block.settings.link != blank -%}<p><a class="btn btn-color-primary btn-style-default btn-size-small" href="{{ block.settings.link }}">{{ block.settings.title_btn }}</a></p>{%- endif -%}
+                {%- endif -%}
+             </div>
+          </div>
+       </div>
+    </div>
+  </div>
+  {%- if product.images.size > 1 and block.settings.source == '1' -%}
+  {%- case block.settings.two_width -%}
+    {%- when '1' -%}
+        {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+           {%- assign image_size_two = '165x' -%}
+        {%- else -%}
+           {%- assign image_size_two = '230x' -%}
+        {%- endif -%}
+    {%- when '2' -%}
+        {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+           {%- assign image_size_two = '165x' -%}
+        {%- else -%}
+           {%- assign image_size_two = '300x' -%}
+        {%- endif -%}
+    {%- when '3' -%}
+        {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+           {%- assign image_size_two = '263x' -%}
+        {%- else -%}
+           {%- assign image_size_two = '500x' -%}
+        {%- endif -%}
+    {%- when '4' -%}
+        {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+           {%- assign image_size_two = '360x' -%}
+        {%- else -%}
+           {%- assign image_size_two = '620x' -%}
+        {%- endif -%}
+    {%- when '5' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '457x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '1000x' -%}
+      {%- endif -%}
+    {%- when '6' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '554x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '1024x' -%}
+      {%- endif -%}
+    {%- when '7' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '554x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '8' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '779x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '9' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '876x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '10' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '974x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '11' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '1074x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '12' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '1140x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '1000x' -%}
+      {%- endif -%}
+  {%- endcase -%}
+  <div class="spb_column gl_column_container gl_col-md-4 gl_col-lg-{{ block.settings.two_width }}{%- if block.settings.hide_two_tablets %} gl_hidden-sm{%- else %} gl_col-sm-6{%- endif %}{%- if block.settings.hide_two_phones %} gl_hidden-xs{%- endif -%}">
+    <div class="gl_column-inner ">
+       <div class="spb_wrapper">
+          <div class="spb_single_image spb_content_element gl_mb_0 gl_align_{{ block.settings.image_alignment_two }}{%- if block.settings.animation_img_one != 'none' %} spb_animate_when_almost_visible spb_{{ block.settings.animation_img_one }} {{ block.settings.animation_img_one }}{%- endif -%}">
+             <figure class="spb_wrapper gl_figure">
+                <div class="gl_single_image-wrapper gl_box_border_grey">
+                  <img width="360" height="415" src="{%-include 'gl_image_format',src: product.images[1].src , size: image_size_one -%}" class="gl_single_image-img attachment-full" alt="{{ product.title }}" 
+                    srcset="{%-include 'gl_image_format',src: product.images[1].src , size: image_size_one %} 360w, 
+                    {%-include 'gl_image_format',src: product.images[1].src , size: '260x300' %} 260w, 
+                    {%-include 'gl_image_format',src: product.images[1].src , size: '270x311' %} 270w, 
+                    {%-include 'gl_image_format',src: product.images[1].src , size: '243x280' %} 243w, 
+                    {%-include 'gl_image_format',src: product.images[1].src , size: '263x303' %} 263w" sizes="(max-width: 360px) 100vw, 360px">
+                </div>
+             </figure>
+          </div>
+       </div>
+    </div>
+  </div>
+  {%- elsif block.settings.image_source_two != blank and block.settings.source == '2' -%}
+  {%- case block.settings.two_width -%}
+    {%- when '1' -%}
+        {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+           {%- assign image_size_two = '165x' -%}
+        {%- else -%}
+           {%- assign image_size_two = '230x' -%}
+        {%- endif -%}
+    {%- when '2' -%}
+        {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+           {%- assign image_size_two = '165x' -%}
+        {%- else -%}
+           {%- assign image_size_two = '300x' -%}
+        {%- endif -%}
+    {%- when '3' -%}
+        {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+           {%- assign image_size_two = '263x' -%}
+        {%- else -%}
+           {%- assign image_size_two = '500x' -%}
+        {%- endif -%}
+    {%- when '4' -%}
+        {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+           {%- assign image_size_two = '360x' -%}
+        {%- else -%}
+           {%- assign image_size_two = '620x' -%}
+        {%- endif -%}
+    {%- when '5' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '457x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '1000x' -%}
+      {%- endif -%}
+    {%- when '6' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '554x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '1024x' -%}
+      {%- endif -%}
+    {%- when '7' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '554x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '8' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '779x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '9' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '876x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '10' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '974x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '11' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '1074x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '12' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '1140x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '1000x' -%}
+      {%- endif -%}
+  {%- endcase -%}
+  <div class="spb_column gl_column_container gl_col-md-4 gl_col-lg-{{ block.settings.two_width }}{%- if block.settings.hide_two_tablets %} gl_hidden-sm{%- else %} gl_col-sm-6{%- endif %}{%- if block.settings.hide_two_phones %} gl_hidden-xs{%- endif -%}">
+    <div class="gl_column-inner ">
+       <div class="spb_wrapper">
+          <div class="spb_single_image spb_content_element gl_mb_0 gl_align_{{ block.settings.image_alignment_two }}{%- if block.settings.animation_img_two != 'none' %} spb_animate_when_almost_visible spb_{{ block.settings.animation_img_two }} {{ block.settings.animation_img_two }}{%- endif -%}">
+             <figure class="spb_wrapper gl_figure">
+                <div class="gl_single_image-wrapper gl_box_border_grey">
+                  {%- assign image = block.settings.image_source_two -%}
+                    <img width="{{ image.width }}" height="{{ image.height }}" src="{%-include 'gl_image_format',src: image , size: '2048x' -%}" class="gl_single_image-img attachment-full" alt="{{ image.alt }}" 
+                    srcset="{%-include 'gl_image_format',src: image , size: '2048x' %} {{ image.width }}w, 
+                    {%-include 'gl_image_format',src: image , size: '260x300' %} 260w, 
+                    {%-include 'gl_image_format',src: image , size: '270x311' %} 270w, 
+                    {%-include 'gl_image_format',src: image , size: '243x280' %} 243w, 
+                    {%-include 'gl_image_format',src: image , size: '263x303' %} 263w" sizes="(max-width: {{ image.width }}px) 100vw, {{ image.width }}px">
+                </div>
+             </figure>
+          </div>
+       </div>
+    </div>
+  </div>
+  {%- endif -%}
+{%- else -%}
+  <div class="spb_column gl_column_container gl_col-md-4 gl_col-lg-{{ block.settings.one_width }}{%- if block.settings.hide_one_tablets %} gl_hidden-sm{%- else %} gl_col-sm-6{%- endif %}{%- if block.settings.hide_one_phones %} gl_hidden-xs{%- endif -%}">
+    <div class="gl_column-inner ">
+       <div class="spb_wrapper">
+          <div class="spb_single_image spb_content_element gl_mb_0 gl_align_{{ block.settings.image_alignment_one }} {%- if block.settings.animation_img_one != 'none' %} spb_animate_when_almost_visible spb_{{ block.settings.animation_img_one }} {{ block.settings.animation_img_one }}{%- endif -%}">
+             <figure class="spb_wrapper gl_figure">
+                <div class="gl_single_image-wrapper gl_box_border_grey {{ block.settings.image_style_one }}">
+                   {%- if block.settings.product_single != blank or block.settings.image_source_one != blank -%}
+                         {%- if block.settings.source == '1' -%}
+                            {%- case block.settings.one_width -%}
+                              {%- when '1' -%}
+                                  {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                     {%- assign image_size_one = '165x' -%}
+                                  {%- else -%}
+                                     {%- assign image_size_one = '230x' -%}
+                                  {%- endif -%}
+                              {%- when '2' -%}
+                                  {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                     {%- assign image_size_one = '165x' -%}
+                                  {%- else -%}
+                                     {%- assign image_size_one = '300x' -%}
+                                  {%- endif -%}
+                              {%- when '3' -%}
+                                  {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                     {%- assign image_size_one = '263x' -%}
+                                  {%- else -%}
+                                     {%- assign image_size_one = '500x' -%}
+                                  {%- endif -%}
+                              {%- when '4' -%}
+                                  {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                     {%- assign image_size_one = '360x' -%}
+                                  {%- else -%}
+                                     {%- assign image_size_one = '620x' -%}
+                                  {%- endif -%}
+                              {%- when '5' -%}
+                                {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                   {%- assign image_size_one = '457x' -%}
+                                {%- else -%}
+                                   {%- assign image_size_one = '1000x' -%}
+                                {%- endif -%}
+                              {%- when '6' -%}
+                                {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                   {%- assign image_size_one = '554x' -%}
+                                {%- else -%}
+                                   {%- assign image_size_one = '1024x' -%}
+                                {%- endif -%}
+                              {%- when '7' -%}
+                                {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                   {%- assign image_size_one = '554x' -%}
+                                {%- else -%}
+                                   {%- assign image_size_one = '2048x' -%}
+                                {%- endif -%}
+                              {%- when '8' -%}
+                                {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                   {%- assign image_size_one = '779x' -%}
+                                {%- else -%}
+                                   {%- assign image_size_one = '2048x' -%}
+                                {%- endif -%}
+                              {%- when '9' -%}
+                                {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                   {%- assign image_size_one = '876x' -%}
+                                {%- else -%}
+                                   {%- assign image_size_one = '2048x' -%}
+                                {%- endif -%}
+                              {%- when '10' -%}
+                                {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                   {%- assign image_size_one = '974x' -%}
+                                {%- else -%}
+                                   {%- assign image_size_one = '2048x' -%}
+                                {%- endif -%}
+                              {%- when '11' -%}
+                                {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                   {%- assign image_size_one = '1074x' -%}
+                                {%- else -%}
+                                   {%- assign image_size_one = '2048x' -%}
+                                {%- endif -%}
+                              {%- when '12' -%}
+                                {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+                                   {%- assign image_size_one = '1140x' -%}
+                                {%- else -%}
+                                   {%- assign image_size_one = '1000x' -%}
+                                {%- endif -%}
+                            {%- endcase -%}
+                            <img width="360" height="415" src="{%-include 'gl_image_format',src: product.featured_image.src , size: image_size_one -%}" class="gl_single_image-img attachment-full" alt="{{ product.title }}" 
+                              srcset="{%-include 'gl_image_format',src: product.featured_image.src , size: image_size_one %} 360w, 
+                              {%-include 'gl_image_format',src: product.featured_image.src , size: '260x300' %} 260w, 
+                              {%-include 'gl_image_format',src: product.featured_image.src , size: '270x311' %} 270w, 
+                              {%-include 'gl_image_format',src: product.featured_image.src , size: '243x280' %} 243w, 
+                              {%-include 'gl_image_format',src: product.featured_image.src , size: '263x303' %} 263w" sizes="(max-width: 360px) 100vw, 360px">
+                         {%- elsif block.settings.image_source_one != blank -%}
+                            {%- assign image = block.settings.image_source_one -%}
+                            <img width="{{ image.width }}" height="{{ image.height }}" src="{%-include 'gl_image_format',src: image , size: '2048x' -%}" class="gl_single_image-img attachment-full" alt="{{ image.alt }}" 
+                            srcset="{%-include 'gl_image_format',src: image , size: '2048x' %} 360w, 
+                            {%-include 'gl_image_format',src: image , size: '260x300' %} 260w, 
+                            {%-include 'gl_image_format',src: image , size: '270x311' %} 270w, 
+                            {%-include 'gl_image_format',src: image , size: '243x280' %} 243w, 
+                            {%-include 'gl_image_format',src: image , size: '263x303' %} 263w" sizes="(max-width: {{ image.width }}px) 100vw, {{ image.width }}px">
+                         {%- else -%}
+                         <img width="360" height="415" src="https://cdn.shopify.com/s/files/1/1933/6253/files/element-furniture-1.jpg?13506386045270342697" class="gl_single_image-img attachment-full" alt="">
+                         {%- endif -%}
+                   {%- else -%}
+                      <img width="360" height="415" src="https://cdn.shopify.com/s/files/1/1933/6253/files/element-furniture-1.jpg?13506386045270342697" class="gl_single_image-img attachment-full" alt="">
+                   {%- endif -%}
+                </div>
+             </figure>
+          </div>
+       </div>
+    </div>
+  </div>
+  {%- if product.images.size > 1 and block.settings.source == '1' -%}
+  {%- case block.settings.two_width -%}
+    {%- when '1' -%}
+        {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+           {%- assign image_size_two = '165x' -%}
+        {%- else -%}
+           {%- assign image_size_two = '230x' -%}
+        {%- endif -%}
+    {%- when '2' -%}
+        {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+           {%- assign image_size_two = '165x' -%}
+        {%- else -%}
+           {%- assign image_size_two = '300x' -%}
+        {%- endif -%}
+    {%- when '3' -%}
+        {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+           {%- assign image_size_two = '263x' -%}
+        {%- else -%}
+           {%- assign image_size_two = '500x' -%}
+        {%- endif -%}
+    {%- when '4' -%}
+        {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+           {%- assign image_size_two = '360x' -%}
+        {%- else -%}
+           {%- assign image_size_two = '620x' -%}
+        {%- endif -%}
+    {%- when '5' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '457x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '1000x' -%}
+      {%- endif -%}
+    {%- when '6' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '554x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '1024x' -%}
+      {%- endif -%}
+    {%- when '7' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '554x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '8' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '779x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '9' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '876x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '10' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '974x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '11' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '1074x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '12' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '1140x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '1000x' -%}
+      {%- endif -%}
+  {%- endcase -%}
+  <div class="spb_column gl_column_container gl_col-md-4 gl_col-lg-{{ block.settings.two_width }}{%- if block.settings.hide_two_tablets %} gl_hidden-sm{%- else %} gl_col-sm-6{%- endif %}{%- if block.settings.hide_two_phones %} gl_hidden-xs{%- endif -%}">
+    <div class="gl_column-inner ">
+       <div class="spb_wrapper">
+          <div class="spb_single_image spb_content_element gl_mb_0 gl_align_{{ block.settings.image_alignment_two }}{%- if block.settings.animation_img_one != 'none' %} spb_animate_when_almost_visible spb_{{ block.settings.animation_img_one }} {{ block.settings.animation_img_one }}{%- endif -%}">
+             <figure class="spb_wrapper gl_figure">
+                <div class="gl_single_image-wrapper gl_box_border_grey">
+                  <img width="360" height="415" src="{%-include 'gl_image_format',src: product.images[1].src , size: image_size_one -%}" class="gl_single_image-img attachment-full" alt="{{ product.title }}" 
+                    srcset="{%-include 'gl_image_format',src: product.images[1].src , size: image_size_one %} 360w, 
+                    {%-include 'gl_image_format',src: product.images[1].src , size: '260x300' %} 260w, 
+                    {%-include 'gl_image_format',src: product.images[1].src , size: '270x311' %} 270w, 
+                    {%-include 'gl_image_format',src: product.images[1].src , size: '243x280' %} 243w, 
+                    {%-include 'gl_image_format',src: product.images[1].src , size: '263x303' %} 263w" sizes="(max-width: 360px) 100vw, 360px">
+                </div>
+             </figure>
+          </div>
+       </div>
+    </div>
+  </div>
+  {%- elsif block.settings.image_source_two != blank and block.settings.source == '2' -%}
+  {%- case block.settings.two_width -%}
+    {%- when '1' -%}
+        {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+           {%- assign image_size_two = '165x' -%}
+        {%- else -%}
+           {%- assign image_size_two = '230x' -%}
+        {%- endif -%}
+    {%- when '2' -%}
+        {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+           {%- assign image_size_two = '165x' -%}
+        {%- else -%}
+           {%- assign image_size_two = '300x' -%}
+        {%- endif -%}
+    {%- when '3' -%}
+        {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+           {%- assign image_size_two = '263x' -%}
+        {%- else -%}
+           {%- assign image_size_two = '500x' -%}
+        {%- endif -%}
+    {%- when '4' -%}
+        {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+           {%- assign image_size_two = '360x' -%}
+        {%- else -%}
+           {%- assign image_size_two = '620x' -%}
+        {%- endif -%}
+    {%- when '5' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '457x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '1000x' -%}
+      {%- endif -%}
+    {%- when '6' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '554x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '1024x' -%}
+      {%- endif -%}
+    {%- when '7' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '554x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '8' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '779x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '9' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '876x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '10' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '974x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '11' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '1074x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '2048x' -%}
+      {%- endif -%}
+    {%- when '12' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size_two = '1140x' -%}
+      {%- else -%}
+         {%- assign image_size_two = '1000x' -%}
+      {%- endif -%}
+  {%- endcase -%}
+  <div class="spb_column gl_column_container gl_col-md-4 gl_col-lg-{{ block.settings.two_width }}{%- if block.settings.hide_two_tablets %} gl_hidden-sm{%- else %} gl_col-sm-6{%- endif %}{%- if block.settings.hide_two_phones %} gl_hidden-xs{%- endif -%}">
+    <div class="gl_column-inner ">
+       <div class="spb_wrapper">
+          <div class="spb_single_image spb_content_element gl_mb_0 gl_align_{{ block.settings.image_alignment_two }} {%- if block.settings.animation_img_two != 'none' %} spb_animate_when_almost_visible spb_{{ block.settings.animation_img_two }} {{ block.settings.animation_img_two }}{%- endif -%}">
+             <figure class="spb_wrapper gl_figure">
+                <div class="gl_single_image-wrapper gl_box_border_grey">
+                  {%- assign image = block.settings.image_source_two -%}
+                    <img width="{{ image.width }}" height="{{ image.height }}" src="{%-include 'gl_image_format',src: image , size: '2048x' -%}" class="gl_single_image-img attachment-full" alt="{{ image.alt }}" 
+                    srcset="{%-include 'gl_image_format',src: image , size: '2048x' %} {{ image.width }}w, 
+                    {%-include 'gl_image_format',src: image , size: '260x300' %} 260w, 
+                    {%-include 'gl_image_format',src: image , size: '270x311' %} 270w, 
+                    {%-include 'gl_image_format',src: image , size: '243x280' %} 243w, 
+                    {%-include 'gl_image_format',src: image , size: '263x303' %} 263w" sizes="(max-width: {{ image.width }}px) 100vw, {{ image.width }}px">
+                </div>
+             </figure>
+          </div>
+       </div>
+    </div>
+  </div>
+  {%- endif -%}
+  <div class="spb_column gl_column_container gl_col-md-4 gl_col-lg-{{ block.settings.text_width }}{%- if block.settings.hide_text_tablets %} gl_hidden-sm{%- else %} gl_col-sm-6{%- endif %}{%- if block.settings.hide_text_phones %} gl_hidden-xs{%- endif -%}">
+    <div class="gl_column-inner ">
+       <div class="spb_wrapper">
+          <div class="spb_text_column gl_mb_0 spb_content_element{%- if block.settings.animation != 'none' %} spb_animate_when_almost_visible spb_{{ block.settings.animation }} {{ block.settings.animation }}{%- endif -%}">
+             <div class="spb_wrapper">
+                {%- if block.settings.source == '1' -%}
+                   {%- if block.settings.product_single != blank -%}
+                      {%- if block.settings.show_vendor and product.vendor != blank -%}<p style="margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.4px; font-size: 12px; color: #b1b1b1;">{{ product.vendor }}</p>{%- endif -%}
+                      <h1 style="margin-bottom: -10px; font-weight: bold; text-transform: uppercase; font-size: 42px;">{{ product.title }}</h1>
+                      {%- if block.settings.show_type and product.type != blank -%}<h1 style="margin-bottom: -10px; font-weight: bold; text-transform: uppercase; font-size: 42px;">{{ product.type }}</h1>{%- endif -%}
+                      <h1 class="color-primary" style="margin-bottom: 10px; font-weight: bold; text-transform: uppercase; font-size: 48px; line-height: 1;">{{ product.price | money }}</h1>
+                      {%- if settings.use_description_excerpt_custom == '2' and page_description.size > 0 -%}
+                     <p>{{ page_description }}</p>
+                     {%- elsif product.metafields.meta.description_excerpt and settings.use_description_excerpt_custom == '3' -%}
+                       {{  product.metafields.meta.description_excerpt  }}
+                     {% elsif product.description contains  '[' %}
+                       {% assign pr_des = product.description | split: '[' %}
+                       {% assign pr_des = pr_des[1] | split: ']' | first | append:']' | prepend:'[' %}
+                       <p>{{ product.description | remove: pr_des | strip_html | truncatewords: 31 }}</p>
+                     {%-else-%}
+                       <p>{{ product.description | strip_html | truncatewords: 31 }}</p>
+                     {%-endif-%}
+                      <p>{%- include 'gl_btn_add', tab_button:true -%}</p>
+                   {%- else -%}
+                      <h1 style="margin-bottom: -10px; font-weight: bold; text-transform: uppercase; font-size: 42px;">Eames Sofa</h1>
+                      <h1 style="margin-bottom: 0px; font-weight: bold; text-transform: uppercase; font-size: 42px;">Compact</h1>
+                      <h1 class="color-primary" style="margin-bottom: 10px; font-weight: bold; text-transform: uppercase; font-size: 48px; line-height: 1;">$800</h1>
+                      <p>Vel himenaeos quam fringilla a interdum blandit adipiscing ullamcorper per consequat in ut a enim suspendisse luctus commodo varius dictumst egestas at curae ultricies nam.</p>
+                      <p><a class="btn btn-color-primary btn-style-default btn-size-small" href="/admin/products">read more</a></p>
+                   {%- endif -%}
+                {%- else -%}
+                      {%- if block.settings.author != blank -%}<p style="margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.4px; font-size: 12px; color: #b1b1b1;">{{ block.settings.author }}</p>{%- endif -%}
+                      {%- if block.settings.product_title != blank -%}<h1 style="margin-bottom: -10px; font-weight: bold; text-transform: uppercase; font-size: 42px;">{{ block.settings.product_title }}</h1>{%- endif -%}
+                      {%- if block.settings.sub_product_title != blank -%}<h1 style="margin-bottom: 0px; font-weight: bold; text-transform: uppercase; font-size: 42px;">{{ block.settings.sub_product_title }}</h1>{%- endif -%}
+                      {%- if block.settings.product_price != blank -%}<h1 class="color-primary" style="margin-bottom: 10px; font-weight: bold; text-transform: uppercase; font-size: 48px; line-height: 1;">{{ block.settings.product_price }}</h1>{%- endif -%}
+                      {%- if block.settings.product_description != blank -%}<p>{{ block.settings.product_description | strip_html }}</p>{%- endif -%}
+                      {%- if block.settings.link != blank -%}<p><a class="btn btn-color-primary btn-style-default btn-size-small" href="{{ block.settings.link }}">{{ block.settings.title_btn }}</a></p>{%- endif -%}
+                {%- endif -%}
+             </div>
+          </div>
+       </div>
+    </div>
+  </div>
+{%- endif -%}

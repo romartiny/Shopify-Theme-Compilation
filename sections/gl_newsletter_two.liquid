@@ -1,0 +1,455 @@
+{%- if section.settings.hidden_section -%}{%- capture check_admin -%}{{ content_for_header  }}{%- endcapture -%}<style> #shopify-section-{{ section.id }} { {%- if check_admin contains 'design_mode' -%}opacity: .5;filter: alpha(opacity=50){%- else -%}display: none !important{%- endif -%}}</style>{%- endif -%}
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{%- capture data_section -%}
+  {%- if section.settings.row_stretch == 'stretch_row' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true'
+  {%- elsif section.settings.row_stretch == 'stretch_row_content' or section.settings.row_stretch == 'stretch_row_content_no_spaces' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true' data-gl-stretch-content='true'
+  {%- else -%}
+  {%- assign class_has_fill = '' -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- unless image_size != blank -%}
+  {%- assign image_size = 'master' -%}
+{%- endunless -%}
+{{ style_block_section }}
+<div {{ data_section }}{%- if section.settings.use_video and section.settings.video_url != blank %} data-gl-video-bg="{{ section.settings.video_url }}"{%- endif %} class="gl_custom_{{section.id}} {% if section.settings.row_stretch == 'stretch_row_content_no_spaces' %}gl_row-no-padding{%- endif %}{%- if section.settings.use_parallax %} basel-parallax{%- endif %} gl_row spb_row gl_row-fluid {{class_has_fill}} {%- if section.settings.use_video and section.settings.video_url != blank %} opacity-video-bg gl_video-bg-container gl_has_youtube{%- endif %}{%- if section.settings.full_height %} gl_row-o-full-height gl_row-o-columns-{{section.settings.columns_position}}{%- endif %}{%- if section.settings.equal_height %} gl_row-o-equal-height{%- endif %}{%- unless section.settings.content_position == 'default' %} gl_row-o-content-{{section.settings.content_position}}{%- endunless %}{%- if section.settings.equal_height or section.settings.content_position != 'default' %} gl_row-flex{%- endif -%}">
+   {%- for block in section.blocks -%}
+    {%- case block.type -%}
+      {%- when 'banner' -%}
+      <div class="spb_column gl_column_container gl_col-sm-6 gl_col-lg-4 gl_col-md-4" {{ block.shopify_attributes }}>
+         <div class="gl_column-inner ">
+            <div class="spb_wrapper">
+               <div class="promo-banner text-center vertical-alignment-middle banner-2 hover-1 color-scheme-light{%- if block.settings.banner_link != blank %} cursor-pointer{%- endif -%}" {% if block.settings.banner_link != blank -%}onclick="window.location.href='{{ block.settings.banner_link }}'"{%- endif -%}>
+                  <div class="main-wrapp-img">
+                     <div class="banner-image">
+                         {%- if block.settings.img_banner == blank -%}
+                         <img class="promo-banner-image image-1" src="https://via.placeholder.com/360x228" width="600" height="420" alt="market-banner-sport" title="market-banner-sport">                                                     
+                         {%- else -%}
+                         {%- assign image = block.settings.img_banner -%}
+                         <img class="promo-banner-image image-1" src="{%-include 'gl_image_format',src: image , size: image_size -%}" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt }}" title="{{ image.alt }}">
+                         {%- endif -%}
+                      </div>
+                  </div>
+                  <div class="wrapper-content-baner">
+                     <div class="banner-inner">
+                        <p></p>
+                        {%- if block.settings.title != blank -%}<h2 class="font-title" style="text-transform: uppercase; margin-bottom: 10px;">{{block.settings.title}}</h2>{%- endif -%}
+                        <hr style="margin-bottom: 10px;">
+                         {%- if block.settings.banner_content != blank -%}<p class="newsletter_two_banner_text" style="">{{block.settings.banner_content}}</p>{%- endif -%}
+                        <p></p>
+                     </div>
+                  </div>
+               </div>
+               <div class="promo-banner cursor-pointer text-center vertical-alignment-middle banner-2 hover-1 color-scheme-light " onclick="window.location.href='http://#'">
+                  <div class="main-wrapp-img">
+                     <div class="banner-image">
+                         {%- if block.settings.img_banner_two == blank -%}
+                         <img class="promo-banner-image image-1" src="https://via.placeholder.com/360x228" width="600" height="420" alt="market-banner-sport" title="market-banner-sport">                                                     
+                         {%- else -%}
+                         {%- assign image = block.settings.img_banner_two -%}
+                         <img class="promo-banner-image image-1" src="{%-include 'gl_image_format',src: image , size: image_size -%}" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt }}" title="{{ image.alt }}">
+                         {%- endif -%}
+                      </div>
+                  </div>
+                  <div class="wrapper-content-baner">
+                     <div class="banner-inner">
+                        <p></p>
+                        {%- if block.settings.title_two != blank -%}<h2 class="font-title" style="text-transform: uppercase; margin-bottom: 10px;">{{block.settings.title_two}}</h2>{%- endif -%}
+                        <hr style="margin-bottom: 10px;">
+                        {%- if block.settings.banner_content_two != blank -%}<p class="newsletter_two_text" style="">{{block.settings.banner_content_two}}</p>{%- endif -%}
+                        <p></p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      {%- when 'newsletter' -%}
+      {%- if  block.settings.block_padding != blank or block.settings.block_border != blank -%}
+      {%- assign b_padding = block.settings.block_padding | remove: ' ' | split: '-' | join: ' ' -%}
+      {%- assign b_border = block.settings.block_border | remove: ' ' | split: '-' | join: ' ' -%}
+      {%- endif -%}
+      {%- capture style_block_new -%}
+         {%- if block.settings.block_padding != blank or block.settings.block_bg_color != blank or block.settings.block_border != blank -%}
+         style="{%- if block.settings.block_padding != blank -%}padding: {{b_padding}} !important;{%- endif -%}{%- if block.settings.block_bg_color != blank -%}background-color: {{ block.settings.block_bg_color }} !important;{%- endif -%}{%- if block.settings.block_border != blank and block.settings.block_border_color != blank -%}border-width: {{ b_border }} !important; border-color: {{block.settings.block_border_color}} !important; border-style: {{block.settings.block_border_style}} !important{%- endif -%}"
+         {%- endif -%}
+      {%- endcapture -%}
+      <div class="spb_column gl_column_container gl_col-sm-4 gl_hidden-sm gl_hidden-xs color-scheme-light" {{ block.shopify_attributes }}>
+         <div class="gl_column-inner ">
+            <div class="spb_wrapper">
+               <div class="gl_row spb_row gl_inner gl_row-fluid gl_p_10 gl_row_0 gl_row-has-fill" style="background-color: {{ block.settings.block_bg_color }}">
+                  <div class="spb_column gl_column_container gl_col-sm-12 gl_col-has-fill">
+                     <div class="gl_column-inner" {{ style_block_new }}>
+                        <div class="spb_wrapper">
+                           <div class="title-wrapper basel-title-color-white basel-title-style-cross basel-title-size-default text-center ">
+                              {%- if block.settings.title != blank -%}<div class="liner-continer"> <span class="left-line"></span> <span class="title">{{ block.settings.title }}<span class="title-separator"><span></span></span></span> <span class="right-line"></span> </div>{%- endif -%}
+                              {%- if block.settings.subtext != blank -%}<span class="title-after_title">{{ block.settings.subtext }}</span>{%- endif -%}
+                           </div>
+                           <div class="spb_text_column spb_content_element ">
+                              <div class="spb_wrapper">
+                                 {%- include 'gl_form_newlester',bottom:true -%}
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+    {%- endcase -%}
+  {%- endfor -%}
+</div>
+{%- unless section.settings.row_stretch == 'default' -%}
+  <div class="gl_row-full-width gl_clearfix"></div>
+{%- endunless -%}
+{%- schema -%}
+  {
+    "name": "Newsletter",
+    "class": "index-section index-section--flush",
+    "settings": [
+      {
+      "type": "header",
+      "content": "== General Settings"
+      },
+      {
+        "type": "paragraph",
+        "content": "Use Default Shopify: Any customers who sign up will have an account created for them in Shopify. [View customers](/admin/customers?query=&accepts_marketing=1)"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_mailchimp",
+        "label": "Use Mailchimp?",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "row_stretch",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "stretch_row",
+            "label": "Stretch row"
+          },
+          {
+            "value": "stretch_row_content",
+            "label": "Stretch row and content"
+          },
+          {
+            "value": "stretch_row_content_no_spaces",
+            "label": "Stretch row and content (no paddings)"
+          }
+        ],
+        "label": "___ Row stretch",
+        "info": "Select stretching options for row and content (Note: stretched may not work properly if parent container has 'overflow: hidden' CSS property).",
+        "default": "default"
+      },
+      {
+        "type": "checkbox",
+        "id": "full_height",
+        "label": "Full height row?",
+        "info": "if checked row will be set to full height.",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "columns_position",
+        "options": [
+         {
+            "value": "middle",
+            "label": "Middle"
+          },
+         {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "stretch",
+            "label": "Stretch"
+          }
+        ],
+        "label": "___ Columns position (only for full height)",
+        "info": "Select columns position within row.",
+        "default": "middle"
+      },
+      {
+        "type": "checkbox",
+        "id": "equal_height",
+        "label": "Equal height?",
+        "info": "If checked columns will be set to equal height.",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "content_position",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "middle",
+            "label": "Middle"
+          },
+         {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "label": "___ Content position",
+        "info": "Select content position within columns.",
+        "default": "default"
+      },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      },
+      {
+        "type": "header",
+        "content": "== Basel Extras"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden_section",
+        "label": "Disable Section?",
+        "info": "If checked the section won't be visible on the public side of your website. You can switch it back any time.",
+        "default": false
+      }
+    ],
+    "blocks": [
+      {
+        "type": "banner",
+        "name": "Promo Banner",
+        "limit": 2,
+        "settings": [
+         {
+           "type": "header",
+           "content": "== Promo Banner 1"
+         },
+          {
+             "type": "image_picker",
+             "id": "img_banner",
+             "label": "Image",
+             "info": "360x228 (Width x Height)."
+         },
+        {
+           "type": "text",
+           "id": "title",
+           "label": "Heading",
+           "default": "Love & Romance"
+         },
+        {
+          "type": "textarea",
+          "id": "banner_content",
+          "label": "Banner content",
+          "default": "Add here few words to your banner image.",
+          "info": "Add here few words to your banner image."
+        },
+        {
+          "type": "url",
+          "id": "banner_link",
+          "label": "Banner link",
+          "info": "Enter URL if you want this banner to have a link."
+        },
+        {
+           "type": "header",
+           "content": "== Promo Banner 2"
+         },
+          {
+             "type": "image_picker",
+             "id": "img_banner_two",
+             "label": "Image",
+             "info": "360x228 (Width x Height)."
+         },
+        {
+           "type": "text",
+           "id": "title_two",
+           "label": "Heading",
+           "default": "Wedding bouquet"
+         },
+        {
+          "type": "textarea",
+          "id": "banner_content_two",
+          "label": "Banner content",
+          "default": "Add here few words to your banner image.",
+          "info": "Add here few words to your banner image."
+        },
+        {
+          "type": "url",
+          "id": "banner_link_two",
+          "label": "Banner link",
+          "info": "Enter URL if you want this banner to have a link."
+        }
+        ]
+      },
+      {
+        "type": "newsletter",
+        "name": "Newsletter",
+        "limit": 1,
+        "settings": [
+          {
+           "type": "text",
+           "id": "title",
+           "label": "Heading",
+           "default": "NEWSLETTER"
+         },
+         {
+           "type": "text",
+           "id": "subtext",
+           "label": "Subtext",
+           "default": "Don't miss our best deals and promo every weekend"
+         },
+         {
+           "type": "header",
+           "content": "== Design Options"
+         },
+         {
+           "type": "image_picker",
+           "id": "block_bg_image",
+           "label": "Background Image"
+         },
+         {
+           "type": "color",
+           "id": "block_bg_color",
+           "label": "Background color",
+           "default": "#9ce5dc"
+         },
+         {
+           "type": "color",
+           "id": "block_border_color",
+           "label": "Border color",
+           "default": "#fff"
+         },
+         {
+           "type": "select",
+           "id": "block_border_style",
+           "options": [
+            {
+               "value": "solid",
+               "label": "Solid"
+             },
+            {
+               "value": "dotted",
+               "label": "Dotted"
+             },
+             {
+               "value": "dashed",
+               "label": "Dashed"
+             },
+             {
+               "value": "double",
+               "label": "Double"
+             },
+             {
+               "value": "groove",
+               "label": "Groove"
+             },
+             {
+               "value": "Ridge",
+               "label": "Ridge"
+             },
+             {
+               "value": "inset",
+               "label": "Inset"
+             },
+             {
+               "value": "outset",
+               "label": "Outset"
+             }
+           ],
+           "label": "Border style",
+           "default": "solid"
+         },
+         {
+           "type": "text",
+           "id": "block_border",
+           "label": "Borders Integer px ( top-right-bottom-left )",
+           "default": "2px",
+           "info": "0-0-1px-0"
+         },
+         {
+           "type": "text",
+           "id": "block_padding",
+           "label": "Paddings Integer px ( top-right-bottom-left )",
+           "default": "91px-30px",
+           "info": "60px-60px-0-60px"
+         }
+        ]
+      }
+    ],
+    "presets": [{
+      "name": "Newsletter signup 2 (flowers)",
+      "category": "Promotional",
+      "blocks": [
+          {
+            "type": "banner"
+          },
+          {
+            "type": "newsletter"
+          },
+          {
+            "type": "banner"
+          }
+        ]
+    }]
+  }
+{% endschema %}

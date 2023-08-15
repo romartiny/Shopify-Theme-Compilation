@@ -1,0 +1,238 @@
+{%- assign title = 'customer.account.title' | t -%}
+<div class="main-page-wrapper">
+   {%- include 'page_heading', page_title:title -%}
+   <!-- MAIN CONTENT AREA -->
+   <div class="container">
+      <div class="row">
+         <div class="site-content col-sm-12" role="main">
+            <article id="post-9" class="post-9 page type-page status-publish hentry">
+               <div class="entry-content">
+                  <div class="shopify">
+                     <div class="basel-my-account-sidebar">
+                        <h3 class="shopify-MyAccount-title entry-title">{{title}}</h3>
+                        <nav class="shopify-MyAccount-navigation">
+                           <ul>
+                              <li class="shopify-MyAccount-navigation-link shopify-MyAccount-navigation-link--dashboard">
+                                 <a href="/account">{{ 'customer.account.dashboard' | t }}</a>
+                              </li>
+                              <li class="shopify-MyAccount-navigation-link shopify-MyAccount-navigation-link--edit-address is-active" style="pointer-events: none">
+                                 <a href="/account/addresses">{{ 'customer.addresses.title' | t }} ({{ customer.addresses_count }})</a>
+                              </li>
+                              {%- if settings.use_wishlist and pages['wishlist'].empty? != true -%}
+                              {%- include 'nitro-wishlist' -%}
+                              <li class="shopify-MyAccount-navigation-link shopify-MyAccount-navigation-link--wishlist">
+                                 <a href="/pages/wishlist">{{ 'customer.account.wishlist' | t }} ({{ NITRO_WISHLIST_COUNT }})</a>
+                              </li>
+                              {%- endif -%}
+                              <li class="shopify-MyAccount-navigation-link shopify-MyAccount-navigation-link--customer-logout">
+                                 {{ 'layout.customer.log_out' | t | customer_logout_link }}
+                              </li>
+                           </ul>
+                        </nav>
+                     </div>
+                     <!-- .basel-my-account-sidebar -->
+                     <div class="shopify-MyAccount-content">
+                        <p>{{ 'customer.addresses.infor' | t }}</p>
+                        <div class="gl_address-new-toggle gl_mb_20">
+                           <button type="button" class="btn btn-color-black btn-style-default btn-size-medium address-new-toggle">{{ 'customer.addresses.add_new' | t }}</button>
+                        </div>
+                        <div class="clear"></div>
+                        <div id="AddressNewForm" class="form-vertical hide">
+                           {%- form 'customer_address', customer.new_address -%}
+                              {{ form.errors | default_errors }}
+                              <div class="shopify-address-fields">
+                                 <div class="shopify-address-fields__field-wrapper">
+                                    <p class="form-row form-row-first validate-required" id="billing_first_name_field">
+                                       <label for="AddressFirstNameNew">{{ 'customer.addresses.first_name' | t }}</label>
+                                       <input type="text" id="AddressFirstNameNew" name="address[first_name]" value="{{ form.first_name }}">
+                                    </p>
+                                    <p class="form-row form-row-last validate-required" id="billing_last_name_field">
+                                       <label for="AddressLastNameNew">{{ 'customer.addresses.last_name' | t }}</label>
+                                       <input type="text" id="AddressLastNameNew" name="address[last_name]" value="{{ form.last_name }}">
+                                    </p>
+                                    <p class="form-row form-row-wide" id="billing_company_field" data-priority="30">
+                                       <label for="AddressCompanyNew">{{ 'customer.addresses.company' | t }}</label>
+                                       <input type="text" id="AddressCompanyNew" name="address[company]" value="{{ form.company }}">
+                                    </p>
+                                    <p class="form-row form-row-wide address-field validate-required" id="billing_address_1_field">
+                                       <label for="AddressAddress1New">{{ 'customer.addresses.address1' | t }}</label>
+                                       <input type="text" id="AddressAddress1New" name="address[address1]" value="{{ form.address1 }}">
+                                    </p>
+                                    <p class="form-row form-row-wide address-field validate-required" id="billing_address_2_field">
+                                       <label for="AddressAddress2New">{{ 'customer.addresses.address2' | t }}</label>
+                                       <input type="text" id="AddressAddress2New" name="address[address2]" value="{{ form.address2 }}">
+                                    </p>
+                                    <p class="form-row form-row-wide address-field validate-required" id="billing_city_field">
+                                        <label for="AddressCityNew">{{ 'customer.addresses.city' | t }}</label>
+                                        <input type="text" id="AddressCityNew" name="address[city]" value="{{ form.city }}">
+                                    </p>
+                                    <p class="form-row form-row-wide address-field validate-state" id="billing_state_field">
+                                       <label for="AddressCountryNew">{{ 'customer.addresses.country' | t }}</label>
+                                       <select id="AddressCountryNew" name="address[country]" data-default="{{ form.country }}">{{ country_option_tags }}</select>
+                                    </p>
+                                    <p class="form-row form-row-wide address-field validate-state" id="AddressProvinceContainerNew" style="display:none">
+                                       <label for="AddressProvinceNew">{{ 'customer.addresses.province' | t }}</label>
+                                       <select id="AddressProvinceNew" name="address[province]" data-default="{{ form.province }}"></select> 
+                                    </p>
+                                    <p class="form-row form-row-first validate-required validate-phone" id="billing_postcode_field">
+                                        <label for="AddressZipNew">{{ 'customer.addresses.zip' | t }}</label>
+                                        <input type="text" id="AddressZipNew" name="address[zip]" value="{{ form.zip }}" autocapitalize="characters">
+                                    </p>
+                                    <p class="form-row form-row-last validate-required validate-phone" id="billing_phone_field">
+                                        <label for="AddressPhoneNew">{{ 'customer.addresses.phone' | t }}</label>
+                                        <input type="tel" id="AddressPhoneNew" name="address[phone]" value="{{ form.phone }}">
+                                    </p>
+                                    <p class="clear">
+                                       {{ form.set_as_default_checkbox }}
+                                       <label for="address_default_address_new" style="display: inline-block;margin: 0">{{ 'customer.addresses.set_default' | t }}</label>
+                                       <div class="clear" style="margin-bottom: 20px"></div>
+                                       <input type="submit" class="btn btn-color-black btn-style-default btn-size-medium" value="{{ 'customer.addresses.add' | t }}">
+                                       <button type="button" class="btn btn-color-black btn-style-default btn-size-medium address-new-toggle btn_cancel">{{ 'customer.addresses.cancel' | t }}</button>
+                                    </p>
+                                 </div>
+                              </div>
+                           {%- endform -%}
+                        </div>
+                        <div class="u-columns shopify-Addresses col2-set addresses">
+                        {%- paginate customer.addresses by 5 -%}
+                        {%- for address in customer.addresses -%}
+                           <div class="u-column1 address shopify-Address">
+                              {%- if address == customer.default_address -%}
+                              <header class="shopify-Address-title title">
+                                 <h3>{{ 'customer.addresses.default' | t }}</h3>
+                              </header>
+                              {%- endif -%}
+                              {{ address | format_address }}
+                              <p>
+                                 <button type="button" class="btn btn-color-black btn-style-default btn-size-medium btn--small address-edit-toggle" data-form-id="{{ address.id }}">{{ 'customer.addresses.edit' | t }}</button>
+                                 <button type="button" class="btn btn-color-black btn-style-default btn-size-medium btn--secondary btn--small address-delete" data-form-id="{{ address.id }}" data-confirm-message="{{ 'customer.addresses.delete_confirm' | t }}">{{ 'customer.addresses.delete' | t }}</button>
+                              </p>
+                           </div>
+                           <div id="EditAddress_{{ address.id }}" class="form-vertical hide">
+                              {%- form 'customer_address', address, class:'edit_customer_address' -%}
+                                 <h3>{{ 'customer.addresses.edit_address' | t }}</h3>
+                                 <div class="shopify-address-fields">
+                                    <div class="shopify-address-fields__field-wrapper">
+                                       <p class="form-row form-row-first validate-required" id="billing_first_name_field">
+                                          <label for="AddressFirstName_{{ form.id }}">{{ 'customer.addresses.first_name' | t }}</label>
+                                          <input type="text" id="AddressFirstName_{{ form.id }}" name="address[first_name]" value="{{ form.first_name }}">
+                                       </p>
+                                       <p class="form-row form-row-last validate-required" id="billing_last_name_field">
+                                          <label for="AddressLastName_{{ form.id }}">{{ 'customer.addresses.last_name' | t }}</label>
+                                          <input type="text" id="AddressLastName_{{ form.id }}" name="address[last_name]" value="{{ form.last_name }}">
+                                       </p>
+                                       <p class="form-row form-row-wide" id="billing_company_field" data-priority="30">
+                                          <label for="AddressCompany_{{ form.id }}">{{ 'customer.addresses.company' | t }}</label>
+                                          <input type="text" id="AddressCompany_{{ form.id }}" name="address[company]" value="{{ form.company }}">
+                                       </p>
+                                       <p class="form-row form-row-wide address-field validate-required" id="billing_address_1_field">
+                                          <label for="AddressAddress1_{{ form.id }}">{{ 'customer.addresses.address1' | t }}</label>
+                                          <input type="text" id="AddressAddress1_{{ form.id }}" name="address[address1]" value="{{ form.address1 }}">
+                                       </p>
+                                       <p class="form-row form-row-wide address-field validate-required" id="billing_address_2_field">
+                                          <label for="AddressAddress2_{{ form.id }}">{{ 'customer.addresses.address2' | t }}</label>
+                                          <input type="text" id="AddressAddress2_{{ form.id }}" name="address[address2]" value="{{ form.address2 }}">
+                                       </p>
+                                       <p class="form-row form-row-wide address-field validate-required" id="billing_city_field">
+                                           <label for="AddressCity_{{ form.id }}">{{ 'customer.addresses.city' | t }}</label>
+                                           <input type="text" id="AddressCity_{{ form.id }}" name="address[city]" value="{{ form.city }}">
+                                       </p>
+                                       <p class="form-row form-row-wide address-field validate-state" id="billing_state_field">
+                                           <label for="AddressCountry_{{ form.id }}">{{ 'customer.addresses.country' | t }}</label>
+                                           <select id="AddressCountry_{{ form.id }}" class="address-country-option" data-form-id="{{ form.id }}" name="address[country]" data-default="{{ form.country }}">{{ country_option_tags }}</select>
+                                       </p>
+                                       <p class="form-row form-row-wide address-field validate-state" id="AddressProvinceContainer_{{ form.id }}" style="display:none">
+                                            <label for="AddressProvince_{{ form.id }}">{{ 'customer.addresses.province' | t }}</label>
+                                            <select id="AddressProvince_{{ form.id }}" name="address[province]" data-default="{{ form.province }}"></select>
+                                       </p>
+
+                                       <p class="form-row form-row-first validate-required validate-phone" id="billing_postcode_field">
+                                           <label for="AddressZip_{{ form.id }}">{{ 'customer.addresses.zip' | t }}</label>
+                                           <input type="text" id="AddressZip_{{ form.id }}" name="address[zip]" value="{{ form.zip }}" autocapitalize="characters">
+                                       </p>
+                                       <p class="form-row form-row-last validate-required validate-phone" id="billing_phone_field">
+                                           <label for="AddressPhone_{{ form.id }}">{{ 'customer.addresses.phone' | t }}</label>
+                                           <input type="tel" id="AddressPhone_{{ form.id }}" name="address[phone]" value="{{ form.phone }}">
+                                       </p>
+                                       <p class="clear">
+                                          {%- if address != customer.default_address -%}
+                                          {{ form.set_as_default_checkbox }}
+                                          <label for="address_default_address_{{ form.id }}" style="display: inline-block;margin: 0">{{ 'customer.addresses.set_default' | t }}</label>
+                                          <span class="clear"></span>
+                                          {%- endif -%}
+                                          <input type="submit" class="btn btn-color-black btn-style-default btn-size-medium" value="{{ 'customer.addresses.update' | t }}">
+                                          <button type="button" class="btn btn-color-black btn-style-default btn-size-medium address-edit-toggle btn_cancel" data-form-id="{{ form.id }}">{{ 'customer.addresses.cancel' | t }}</button>
+                                       </p>
+                                    </div>
+                                 </div>
+                              {%- endform -%}
+                           </div>
+                        {%- endfor -%}
+                        {%- if paginate.pages > 1 -%}
+                           <div class="clear"></div>
+                           <div class="basel-pagination">{%- include 'pagination',blog_ajax:true -%}</div>
+                        {%- endif -%}
+                        {%- endpaginate -%}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </article>
+         </div>
+      </div>
+   </div><!-- end container -->
+</div><!-- .main-page-wrapper -->
+<script type="text/javascript">
+(function($) {
+  function customerAddressForm() {
+    var $newAddressForm = $('#AddressNewForm');
+
+    if (!$newAddressForm.length) {
+      return;
+    }
+
+    // Initialize observers on address selectors, defined in shopify_common.js
+    if (Shopify) {
+      // eslint-disable-next-line no-new
+      new Shopify.CountryProvinceSelector('AddressCountryNew', 'AddressProvinceNew', {
+        hideElement: 'AddressProvinceContainerNew'
+      });
+    }
+
+    // Initialize each edit form's country/province selector
+    $('.address-country-option').each(function() {
+      var formId = $(this).data('form-id');
+      var countrySelector = 'AddressCountry_' + formId;
+      var provinceSelector = 'AddressProvince_' + formId;
+      var containerSelector = 'AddressProvinceContainer_' + formId;
+
+      // eslint-disable-next-line no-new
+      new Shopify.CountryProvinceSelector(countrySelector, provinceSelector, {
+        hideElement: containerSelector
+      });
+    });
+
+    // Toggle new/edit address forms
+    $('.address-new-toggle').on('click', function() {
+      $newAddressForm.toggleClass('hide');
+    });
+
+    $('.address-edit-toggle').on('click', function() {
+      var formId = $(this).data('form-id');
+      $('#EditAddress_' + formId).toggleClass('hide');
+    });
+
+    $('.address-delete').on('click', function() {
+      var $el = $(this);
+      var formId = $el.data('form-id');
+      var confirmMessage = $el.data('confirm-message');
+
+      // eslint-disable-next-line no-alert
+      if (confirm(confirmMessage || 'Are you sure you wish to delete this address?')) {
+        Shopify.postLink('/account/addresses/' + formId, {parameters: {_method: 'delete'}});
+      }
+    });
+  }
+  customerAddressForm();
+}(jQuery));
+</script>

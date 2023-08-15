@@ -1,0 +1,25 @@
+{%- if shop.customer_accounts_enabled -%}
+<div class="yith-wcwl-add-to-wishlist add-to-wishlist-{{ product.id }} {{customer}}">
+   {%- if customer -%}
+      {%- if NITRO_WISHLIST contains product.id -%}
+         <div class="yith-wcwl-wishlistexistsbrowse">
+            <a href="/pages/wishlist" rel="nofollow" class="add_to_wishlist basel-tooltip"><span class="basel-tooltip-label">{{ 'sections.basel_tooltip.browse_Wishlist' | t }}</span> {{ 'products.wishlist.browse_Wishlist' | t }}</a>
+         </div>
+      {%- else -%}
+         <div class="yith-wcwl-add-button gl_add_wishlist">
+            <a href="{{ product.handle | handleize }}" data-customer_id="{{customer.id}}" data-email="{{customer.email}}" data-action="add" data-handle="{{product.handle}}" data-id="{{product.id}}" rel="nofollow" class="add_nitro_wishlist add_to_wishlist basel-tooltip"><span class="basel-tooltip-label">{{ 'sections.basel_tooltip.add_to_wishlist' | t }}</span> {{ 'products.wishlist.add_to_wishlist' | t }}</a>
+         </div>
+         <div class="yith-wcwl-add-button gl_adding_wishlist feid-in" style="display: none; pointer-events: none">
+            <a href="{{ product.handle | handleize }}" rel="nofollow" class="load_nitro_wishlist add_to_wishlist basel-tooltip"><span class="basel-tooltip-label">{{ 'sections.basel_tooltip.adding_to_wishlist' | t }}</span> {{ 'products.wishlist.adding_to_wishlist' | t }}</a>
+         </div>
+         <div class="yith-wcwl-wishlistaddedbrowse gl_addedbrowse_wishlist" style="display:none;">
+            <a href="/pages/wishlist" rel="nofollow" class="add_to_wishlist basel-tooltip"><span class="basel-tooltip-label">{{ 'sections.basel_tooltip.browse_Wishlist' | t }}</span> {{ 'products.wishlist.browse_Wishlist' | t }}</a>
+         </div>
+      {%- endif -%}
+   {%- else -%}
+      <div class="yith-wcwl-add-button">
+         <a href="/account" rel="nofollow" class="nitro_wishlist_login add_to_wishlist basel-tooltip"><span class="basel-tooltip-label">{{ 'sections.basel_tooltip.login_to_wishlist' | t }}</span> {{ 'products.wishlist.login_to_wishlist' | t }}</a>
+      </div>
+   {%- endif -%}
+</div>
+{%- endif -%}

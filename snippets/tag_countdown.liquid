@@ -1,0 +1,12 @@
+{%- assign tagCount = 0 -%}
+{%- assign current_page = '1' -%}
+{%- paginate collection.products by collection.all_products_count -%}
+  {%- for product in collection.products -%}
+      {% assign product_tag_arr =  product.tags | downcase | json %}
+      {%- assign tag_downcase = tag | downcase | prepend:'\"' | append:'\"' -%}
+      {%- if product_tag_arr contains tag_downcase -%}
+      {%- assign tagCount = tagCount | plus: 1 -%}
+      {%- endif -%}
+  {%- endfor -%}
+{%- endpaginate -%}
+{%- if collection.products_count < 1001 -%}<span class="count">({{ tagCount }})</span>{%- endif -%}

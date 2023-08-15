@@ -1,0 +1,70 @@
+{%- if product.tags.size > 0 -%}
+  {%- assign counter = 0 -%}
+  {%- assign break_at = settings.many_related_products | plus: 0 -%}
+  {%- assign current_product = product -%}
+{%- assign related_number = settings.related_silder_per_view | plus: 0 -%}
+{%- assign gl_colum_width = 'col-galaxy' -%}
+{%- case settings.related_products_hover -%}
+    {%- when 'base' -%}
+      {%- assign gl_include = 'section_loop_product_base' -%} 
+    {%- when 'alt' -%}
+      {%- assign gl_include = 'section_loop_product_alt' -%}
+    {%- when 'button' -%}
+      {%- assign gl_include = 'section_loop_product_button' -%}
+   {%- when 'info' -%}
+      {%- assign gl_include = 'section_loop_product_info' -%}
+   {%- when 'link' -%}
+      {%- assign gl_include = 'section_loop_product_link' -%}
+   {%- when 'standard' -%}
+      {%- assign gl_include = 'section_loop_product_standard' -%}
+   {%- when 'excerpt' -%}
+      {%- assign gl_include = 'section_loop_product_excerpt' -%}
+   {%- when 'quick' -%}
+      {%- assign gl_include = 'section_loop_product_quick' -%}
+{%- endcase -%}
+{%- case settings.related_countdown_style -%}
+    {%- when 'light' -%}
+      {%- assign countdown_style = 'color-scheme-dark timer-size-small timer-style-standard' -%} 
+    {%- when 'dark' -%}
+      {%- assign countdown_style = 'color-scheme-light timer-size-small timer-style-standard' -%}
+    {%- when 'transparent_1' -%}
+      {%- assign countdown_style = 'color-scheme-light timer-size-small timer-style-transparent' -%}
+   {%- when 'transparent_2' -%}
+      {%- assign countdown_style = 'color-scheme-dark timer-size-small timer-style-transparent' -%}
+{%- endcase -%}
+{%- if settings.related_sale_countdown -%}
+   {%- assign section_settings_countdown = true -%}
+{%- else -%}
+   {%- assign section_settings_countdown = false -%}
+{%- endif -%}
+  
+  {%- capture related_items -%}
+    {%- for product in collection.products -%}
+      {% for tag in product.tags %}
+      {%- unless product.handle == current_product.handle -%}
+          {%- if current_product.handle == tag -%}
+             <div class="product-item owl-carousel-item"><div class="owl-carousel-item-inner">{%- include gl_include -%}</div></div>
+             {%- assign counter = counter | plus: 1 -%}
+             {%- if counter == break_at -%}
+               {%- break -%}
+             {%- endif -%}
+          {%- endif -%}
+      {%- endunless -%}
+    {%- endfor -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+
+  {%- assign related_items = related_items | trim -%}
+
+  {%- unless related_items == blank -%}
+    <section class="related products">
+      <h3 class="title slider-title">{{settings.title_pr_related}}</h3>
+      <div id="carousel-{{product.id}}" class="gl_carousel_container">
+        <div class="product-items owl-carousel gl_carousel_data" data-time='{{ settings.related_silder_speed | plus: 0 }}' data-nav='{%- if settings.related_hide_button -%}false{%- else -%}true{%- endif -%}' data-items='{{ related_number }}' data-dots='{%- if settings.related_hide_pagination -%}false{%- else -%}true{%- endif -%}' data-autoplay='{%- if settings.related_autoplay -%}true{%- else -%}false{%- endif -%}' data-loop='{%- if settings.related_slider_loop -%}true{%- else -%}false{%- endif -%}' data-medium='{%- if related_number > 2 -%}{{ related_number | minus: 1 }}{%- else -%}2{%- endif -%}'>
+          {{ related_items }}
+        </div><!-- end product-items -->
+      </div><!-- end #carousel-{{product.id}} -->
+    </section>
+  {%- endunless -%}
+
+{%- endif -%}

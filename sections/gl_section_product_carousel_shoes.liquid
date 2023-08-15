@@ -1,0 +1,554 @@
+{%- if settings.use_wishlist -%}{%- include 'nitro-wishlist' -%}{%- endif -%}
+{%- assign paginate_index = section.settings.paginate_index | plus: 0 -%}
+{%- if section.settings.home_featured_products == blank -%}
+   {%- if collections["frontpage"].products.size > 0 -%}
+      {%- assign collection = collections["frontpage"] -%}
+   {%- else -%}
+      {%- assign collection = collections["all"] -%}
+   {%- endif -%}
+{%- else -%}
+   {%- assign collection = collections[section.settings.home_featured_products ] -%}
+{%- endif -%}
+{%- assign gl_colum_width = 'col-galaxy' -%}
+{%- case section.settings.products_hover -%}
+    {%- when 'base' -%}
+      {%- assign gl_include = 'section_loop_product_base' -%} 
+    {%- when 'alt' -%}
+      {%- assign gl_include = 'section_loop_product_alt' -%}
+    {%- when 'button' -%}
+      {%- assign gl_include = 'section_loop_product_button' -%}
+   {%- when 'info' -%}
+      {%- assign gl_include = 'section_loop_product_info' -%}
+   {%- when 'link' -%}
+      {%- assign gl_include = 'section_loop_product_link' -%}
+   {%- when 'standard' -%}
+      {%- assign gl_include = 'section_loop_product_standard' -%}
+   {%- when 'excerpt' -%}
+      {%- assign gl_include = 'section_loop_product_excerpt' -%}
+   {%- when 'quick' -%}
+      {%- assign gl_include = 'section_loop_product_quick' -%}
+{%- endcase -%}
+{%- assign loop_countdown = section.settings.loop_sale_countdown -%}
+{%- case section.settings.countdown_style -%}
+    {%- when 'light' -%}
+      {%- assign countdown_style = 'color-scheme-dark timer-size-small timer-style-standard' -%} 
+    {%- when 'dark' -%}
+      {%- assign countdown_style = 'color-scheme-light timer-size-small timer-style-standard' -%}
+    {%- when 'transparent_1' -%}
+      {%- assign countdown_style = 'color-scheme-light timer-size-small timer-style-transparent' -%}
+   {%- when 'transparent_2' -%}
+      {%- assign countdown_style = 'color-scheme-dark timer-size-small timer-style-transparent' -%}
+{%- endcase -%}
+{%- if section.settings.sale_countdown -%}
+   {%- assign section_settings_countdown = true -%}
+{%- else -%}
+   {%- assign section_settings_countdown = false -%}
+{%- endif -%}
+{%- if section.settings.hidden_section -%}{%- capture check_admin -%}{{ content_for_header  }}{%- endcapture -%}<style> #shopify-section-{{ section.id }} { {%- if check_admin contains 'design_mode' -%}opacity: .5;filter: alpha(opacity=50){%- else -%}display: none !important{%- endif -%}}</style>{%- endif -%}
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{%- capture data_section -%}
+  {%- if section.settings.row_stretch == 'stretch_row' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true'
+  {%- elsif section.settings.row_stretch == 'stretch_row_content' or section.settings.row_stretch == 'stretch_row_content_no_spaces' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true' data-gl-stretch-content='true'
+  {%- else -%}
+  {%- assign class_has_fill = '' -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- case section.settings.silder_per_view -%}
+    {%- when '1' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size = '1140x' -%}
+      {%- else -%}
+         {%- assign image_size = '700x' -%}
+      {%- endif -%} 
+    {%- when '2' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size = '557x' -%}
+      {%- else -%}
+         {%- assign image_size = '292x' -%}
+      {%- endif -%}
+    {%- when '3' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size = '370x' -%}
+      {%- else -%}
+         {%- assign image_size = '292x' -%}
+      {%- endif -%}
+    {%- when '4' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size = '263x' -%}
+      {%- else -%}
+         {%- assign image_size = '292x' -%}
+      {%- endif -%}  
+{%- endcase -%}
+{%- assign number = section.settings.silder_per_view | plus: 0 -%}
+{%- if section.settings.shop_image_size != blank -%}{%- assign crop_nt = section.settings.shop_image_size -%}{%- endif -%}
+{%- assign current_page = '1' -%}
+ {{ style_block_section }}
+   {%- paginate collection.products by paginate_index -%}
+   <div {{ data_section }} {%- if section.settings.use_video and section.settings.video_url != blank %} data-gl-video-bg="{{ section.settings.video_url }}"{%- endif %} class="gl_custom_{{section.id}} featured-collection{%- if section.settings.row_stretch == 'stretch_row_content_no_spaces' %} gl_row-no-padding{%- endif %}{%- if section.settings.use_parallax %} basel-parallax{%- endif %} gl_row spb_row gl_row-fluid {{class_has_fill}} {%- if section.settings.use_video and section.settings.video_url != blank %} opacity-video-bg gl_video-bg-container gl_has_youtube{%- endif %}{%- if section.settings.full_height %} gl_row-o-full-height gl_row-o-columns-{{section.settings.columns_position}}{%- endif %}{%- if section.settings.equal_height %} gl_row-o-equal-height{%- endif -%}">
+      <div class="spb_column gl_column_container gl_col-sm-6 gl_col-has-fill"><div class="gl_column-inner"><div class="spb_wrapper"></div></div></div>
+      <div class="spb_column gl_column_container gl_col-sm-6">
+         <div class="gl_column-inner">
+           {%- comment -%}
+             By default, featured products come from your Frontpage collection.
+             This collection is empty by default and must have products added to it
+           {%- endcomment -%}
+           <div class="spb_wrapper">
+               <div class="gl_row spb_row gl_inner gl_row-fluid gl_mb_25">
+                  <div class="spb_column gl_column_container gl_col-sm-2">
+                     <div class="gl_column-inner ">
+                        <div class="spb_wrapper"></div>
+                     </div>
+                  </div>
+                  <div class="spb_column gl_column_container gl_col-sm-8">
+                     <div class="gl_column-inner ">
+                        <div class="spb_wrapper">
+                           {%- if section.settings.sub_title != blank -%}<h3 style="font-size: 38px;color: #b57b00;line-height: 1;text-align: center" class="gl_custom_heading font-alt gl_mb_0">{{ section.settings.sub_title }}</h3>{%- endif -%}
+                           {%- if section.settings.title != blank -%}<h3 style="font-size: 42px;line-height: 1.1;text-align: center" class="gl_custom_heading"><strong>{{section.settings.title}}</strong></h3>{%- endif -%}
+                           {%- if section.settings.text_after_title != blank -%}
+                           <div class="spb_text_column spb_content_element gl_mb_0">
+                              <div class="spb_wrapper">
+                                 <p style="text-align: center;font-weight:400;font-style:normal">{{ section.settings.text_after_title }}</p>
+                              </div>
+                           </div>
+                           {%- endif -%}
+                        </div>
+                     </div>
+                  </div>
+                  <div class="spb_column gl_column_container gl_col-sm-2">
+                     <div class="gl_column-inner ">
+                        <div class="spb_wrapper"></div>
+                     </div>
+                  </div>
+               </div>
+               <div class="gl_row spb_row gl_inner gl_row-fluid gl_mb_20">
+                  <div class="spb_column gl_column_container gl_col-sm-2">
+                     <div class="gl_column-inner ">
+                        <div class="spb_wrapper"></div>
+                     </div>
+                  </div>
+                  <div class="spb_column gl_column_container gl_col-sm-8">
+                     <div class="gl_column-inner ">
+                        <div class="spb_wrapper">
+                           <div class="gl_carousel_container">
+                             <div class="owl-carousel gl_carousel_data" data-time='{{ section.settings.silder_speed | plus: 0 }}' data-nav='{%- if section.settings.hide_button -%}false{%- else -%}true{%- endif -%}' data-items='{{ number }}' data-dots='{%- if section.settings.hide_pagination -%}false{%- else -%}true{%- endif -%}' data-autoplay='{%- if section.settings.autoplay -%}true{%- else -%}false{%- endif -%}' data-loop='{%- if section.settings.slider_loop -%}true{%- else -%}false{%- endif -%}' data-medium='{%- if number > 2 -%}{{ number | minus: 1 }}{%- else -%}2{%- endif -%}'>
+                                {%- for product in collection.products -%}
+                                  <div class="product-item owl-carousel-item">
+                                     <div class="owl-carousel-item-inner">
+                                      {%- include gl_include -%}
+                                     </div>
+                                  </div>
+                                {%- else -%}
+                                   {%- comment -%}
+                                     If collection is empty, show onboarding state
+                                     For onboarding new users to your theme, we add some default products and onboarding tutorials to help populate their store
+                                   {%- endcomment -%}
+                                   {%- assign home_onboarding_index = 1 -%}
+                                   {%- for i in (1..4) -%}
+                                   {%- case i -%}
+                                      {%- when 7 -%}
+                                         {%- assign home_onboarding_index = 1 -%}
+                                      {%- when 8 -%}
+                                         {%- assign home_onboarding_index = 2 -%}
+                                   {%- endcase -%}
+                                   <div class="product-item owl-carousel-item">
+                                     <div class="owl-carousel-item-inner">
+                                         <div class="product-grid-item product basel-hover-alt">
+                                            <div class="product-element-top">
+                                               <a href="/admin/products">
+                                                  {{ 'product-' | append: home_onboarding_index | placeholder_svg_tag: 'product-item__image icon icon--placeholder' }}
+                                               </a>
+                                            </div>
+                                            <h3 class="product-title"><a href="/admin/products">{{ 'homepage.onboarding.product_title' | t }}</a></h3>
+                                            <div class="wrap-price">
+                                               <div class="wrapp-swap">
+                                                  <div class="swap-elements">
+                                                     <span class="price">£219.00</span>
+                                                     <div class="btn-add"><a href="/admin/products" class="button add_to_cart_button">{{ 'products.product.add_to_cart' | t }}</a></div>
+                                                  </div>
+                                               </div>
+                                            </div>
+                                         </div>
+                                      </div>
+                                   </div>
+                                   {%- assign home_onboarding_index = home_onboarding_index | plus: 1 -%}
+                                   {%- endfor -%}
+                                {%- endfor -%}
+                             </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="spb_column gl_column_container gl_col-sm-2">
+                     <div class="gl_column-inner ">
+                        <div class="spb_wrapper"></div>
+                     </div>
+                  </div>
+               </div>
+           </div>
+         </div>
+      </div>
+   </div>
+   {%- endpaginate -%}
+{%- unless section.settings.row_stretch == 'default' -%}
+  <div class="gl_row-full-width gl_clearfix"></div>
+{%- endunless -%}
+{%- schema -%}
+  {
+    "name": "Featured collection",
+    "class": "index-section carousel-collection-section",
+    "settings": [{
+        "type": "header",
+        "content": "== Row Settings"
+      },
+      {
+        "type": "select",
+        "id": "row_stretch",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "stretch_row",
+            "label": "Stretch row"
+          },
+          {
+            "value": "stretch_row_content",
+            "label": "Stretch row and content"
+          },
+          {
+            "value": "stretch_row_content_no_spaces",
+            "label": "Stretch row and content (no paddings)"
+          }
+        ],
+        "label": "___ Row stretch",
+        "info": "Select stretching options for row and content (Note: stretched may not work properly if parent container has 'overflow: hidden' CSS property).",
+        "default": "default"
+      },
+{
+        "type": "checkbox",
+        "id": "full_height",
+        "label": "Full height row?",
+        "info": "if checked row will be set to full height.",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "== General Settings"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Brand new collection winter 2017"
+      },
+      {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Sub Title",
+        "default": "New collection shoes"
+      },
+      {
+        "type": "textarea",
+        "id": "text_after_title",
+        "label": "Text after title",
+        "default": "Cursus mollis justo scelerisque mollis justo placerat massa dis a consectetur libero ac mollis justo quam fames."
+      },
+      {
+        "type": "collection",
+        "id": "home_featured_products",
+        "label": "___ Collection"
+      },
+      {
+        "type": "text",
+        "id": "paginate_index",
+        "label": "___ Items per page ( integer )",
+        "info": "Number of items to show per page.",
+        "default": "4"
+      },
+      {
+        "type": "header",
+        "content": "___ Carousel Settings"
+      },
+      {
+        "type": "text",
+        "id": "silder_speed",
+        "label": "Slider speed ( integer )",
+        "info": "Duration of animation between slides (in ms).",
+        "default": "5000"
+      },
+      {
+        "type": "select",
+        "id": "silder_per_view",
+        "options": [
+          {
+            "value": "1",
+            "label": "1"
+          },
+          {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          }
+        ],
+        "label": "Slides per view",
+        "default": "2",
+        "info": "Set numbers of slides you want to display at the same time on slider's container for carousel mode."
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_pagination",
+        "default": true,
+        "label": "Hide pagination control?",
+        "info": "pagination control will be removed"
+      },
+       {
+        "type": "checkbox",
+        "id": "hide_button",
+        "default": false,
+        "label": "Hide prev/next buttons?",
+        "info": "prev/next control will be removed"
+      },
+       {
+        "type": "checkbox",
+        "id": "slider_loop",
+        "default": false,
+        "label": "Slider loop?",
+        "info": "Enables loop mode."
+      },
+      {
+       "type": "checkbox",
+       "id": "autoplay",
+       "label": "___ Slider autoplay",
+       "info": "Enables autoplay mode.",
+       "default": false
+     },
+      {
+        "type": "header",
+        "content": "== Design settings"
+      },
+      {
+        "type": "select",
+        "id": "products_hover",
+        "label": "Products hover",
+        "default": "alt",
+        "options": [
+          {
+            "value": "base",
+            "label": "Base"
+          },
+          {
+            "value": "alt",
+            "label": "Alternative"
+          },
+          {
+            "value": "button",
+            "label": "Show button on hover on image"
+          },
+          {
+            "value": "info",
+            "label": "Full info on hover"
+          },
+          {
+            "value": "link",
+            "label": "Button on hover"
+          },
+          {
+            "value": "standard",
+            "label": "Standard button"
+          },
+          {
+            "value": "excerpt",
+            "label": "With excerpt"
+          },
+          {
+            "value": "quick",
+            "label": "Quick shop"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "shop_image_size",
+        "label": "Image Size (optional)",
+        "info": "Products may have different sizes 'width x height'",
+        "placeholder": "300x200"
+      },
+      {
+        "type": "paragraph",
+        "content": "Products hover not support Image Second: Show button on hover on image, Full info on hover."
+      },
+      {
+        "type": "checkbox",
+        "id": "sale_countdown",
+        "default": false,
+        "label": "Use Sale countdown",
+        "info": "Countdown to the end sale date will be shown. Be sure you have set final date of the product sale price. product.metafields.meta.countdown ( 2017/08/17 )"
+      },
+      {
+        "type": "checkbox",
+        "id": "loop_sale_countdown",
+        "default": false,
+        "label": "Use Auto Loop countdown"
+      },
+      {
+        "type": "select",
+        "id": "countdown_style",
+        "label": "Countdown style",
+        "default": "dark",
+        "options": [
+          {
+            "value": "light",
+            "label": "Countdown timer light"
+          },
+          {
+            "value": "dark",
+            "label": "Countdown timer dark"
+          },
+          {
+            "value": "transparent_1",
+            "label": "Countdown timer transparent 1"
+          },
+          {
+            "value": "transparent_2",
+            "label": "Countdown timer transparent 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "image_picker",
+        "id": "section_bg_image",
+        "label": "Background Image"
+      },
+      {
+        "type": "color",
+        "id": "section_bg_color",
+        "label": "Background color"
+      },
+      {
+        "type": "color",
+        "id": "section_border_color",
+        "label": "Border color"
+      },
+      {
+        "type": "select",
+        "id": "section_border_style",
+        "options": [
+         {
+            "value": "solid",
+            "label": "Solid"
+          },
+         {
+            "value": "dotted",
+            "label": "Dotted"
+          },
+          {
+            "value": "dashed",
+            "label": "Dashed"
+          },
+          {
+            "value": "double",
+            "label": "Double"
+          },
+          {
+            "value": "groove",
+            "label": "Groove"
+          },
+          {
+            "value": "Ridge",
+            "label": "Ridge"
+          },
+          {
+            "value": "inset",
+            "label": "Inset"
+          },
+          {
+            "value": "outset",
+            "label": "Outset"
+          }
+        ],
+        "label": "Border style",
+        "default": "solid"
+      },
+      {
+        "type": "text",
+        "id": "section_border",
+        "label": "Borders Integer px ( top-right-bottom-left )",
+        "info": "0-0-1px-0"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      },
+      {
+        "type": "header",
+        "content": "== Basel Extras"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_parallax",
+        "label": "Use Basel parallax?",
+        "default": true
+      }],
+    "presets": [{
+      "name": "Product Carousel Banner Shoes",
+      "category": "Collections"
+    }]
+  }
+{% endschema %}

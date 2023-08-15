@@ -1,0 +1,40 @@
+<div class="navigation-wrap">
+   <div class="container">
+      <div class="mobile-nav-icon">
+         <span class="basel-burger"></span>
+      </div>
+      <!--END MOBILE-NAV-ICON-->
+      <div class="main-nav site-navigation basel-navigation menu-{{settings.basel_menu_align}}" role="navigation">{%- section 'gl_mega_menu' -%}</div>
+      <!--END MAIN-NAV-->
+      {%- if settings.header_text_ss != blank -%}
+      <div class="widgetarea-head">
+         <div id="text-10" class="header-widget widget_text">
+            <div class="textwidget">{%- if settings.header_text_ss contains 'social_buttons_share' -%}{%- include 'social-sharing', gl_design:'icons-design-default', gl_size:'icons-size-default',gl_text_align:'left' -%}{%- elsif settings.header_text_ss contains 'social_buttons_follow' -%}{%- include 'social-sharing', gl_design:'icons-design-default', gl_size:'icons-size-default',gl_text_align:'left', follow_social:true -%}{%- else -%}{{settings.header_text_ss}}{%- endif -%}</div>
+         </div>
+      </div>
+      {%- endif -%}
+      <div class="right-column">
+         {%- include 'header_account' -%}
+         {%- include 'header_search' -%}
+         {%- include 'header_wishlist' -%}
+         {%- unless settings.cart_design == 'disable' or settings.catalog_mode or template contains 'cart' -%}
+         <div class="shopping-cart basel-cart-design-{{settings.cart_design}} basel-cart-icon{%- if settings.cart_position == 'side' %} cart-widget-opener{%- endif %}{%- if settings.shopping_icon_alt %} basel-cart-alt{%- endif -%}">
+            <a href="/cart">
+               <span>Cart (<span class="cartCount">{{ cart.item_count }}</span>)</span>
+               <span class="basel-cart-totals">
+                  <span class="basel-cart-number cartCount">{{ cart.item_count }}</span>
+                  <span class="subtotal-divider">/</span> 
+                  <span class="basel-cart-subtotal"><span class="shopify-Price-amount amount">{{ cart.total_price | money }}</span></span>
+               </span>
+            </a>
+            {%- if settings.cart_position == 'dropdown' -%}
+            <div class="dropdown-wrap-cat">{%- include 'cart_widget_side' -%}</div>
+            {%- endif -%}
+         </div>
+         {%- endunless -%}
+      </div>
+   </div>
+</div>
+<div class="container">
+   {%- include 'gl_logo' -%}
+</div>

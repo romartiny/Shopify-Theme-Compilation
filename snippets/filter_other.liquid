@@ -1,0 +1,110 @@
+<div class="basel-price-filter basel-scroll">
+   {%- assign check_tag_hide = true -%}
+   <ul class="show-labels-on swatches-normal swatches-display-list basel-scroll-content">
+      {%- assign key = block.settings.key_2 | downcase  -%}
+      {%- assign key_2 = block.settings.key | downcase  -%}
+      {%- if cat_array.size > 0 and block.settings.use_auto_filter_tag -%}
+            {%- for i in cat_array -%}
+               {%- assign i = i | downcase  -%}
+               {%- if i == key or i == key_2 -%}
+                     {%- for t in tag_arr -%}
+                        {%- assign t = t | downcase  -%}
+                        {%- assign t_split = t | split:'_' | first -%}
+                        {%- if i == t_split -%}
+                          {%- if current_tags contains t -%}
+                             {%- assign tag_value_remove = t | remove: i | remove: '_' -%} 
+                             {%- capture cat_link_remove -%}{{ tag_value_remove | append: '&nbsp;x' | link_to_remove_tag: t }}{%- endcapture -%}
+                             {%- assign get_link_remove = cat_link_remove | split:'href="' | last | split:'"' | first -%}
+                             <li class="sc-layered-nav-term">
+                               <a class="current-state" href="{{get_link_remove}}">{{ tag_value_remove | upcase }}</a>
+                               {%- if block.settings.use_tag_countdown -%}{%- include 'tag_countdown',tag:t -%}{%- endif -%}
+                            </li>
+                          {%- else -%}
+                           {%- assign tag_value = t | remove: i | remove: '_' -%} 
+                           {%- capture cat_link -%}{{ tag_value | link_to_add_tag: t }}{%- endcapture -%}
+                           {%- assign get_link = cat_link | split:'href="' | last | split:'"' | first -%}
+                            <li class="sc-layered-nav-term">
+                               <a href="{{get_link}}">{{ tag_value | upcase }}</a>
+                               {%- if block.settings.use_tag_countdown -%}{%- include 'tag_countdown',tag:t -%}{%- endif -%}
+                            </li>
+                          {%- endif -%}
+                         {%- assign check_tag_hide = false -%}
+                       {%- endif -%}
+                      {%- endfor -%}
+               {%- break -%}
+               {%- endif -%}
+            {%- endfor -%}
+     {%- elsif tags.size > 0 -%}
+          {%- for t_o in tags -%}
+             {%- assign tag = t_o | downcase  -%}
+             {%- if current_tags contains tag -%}
+                 {%- assign tag_value_remove = tag | remove:key_2 | remove:key | remove: '_' -%} 
+                 {%- capture cat_link_remove -%}{{ tag_value_remove | append: '&nbsp;x' | link_to_remove_tag: tag }}{%- endcapture -%}
+                 {%- assign get_link_remove = cat_link_remove | split:'href="' | last | split:'"' | first -%}
+                 <li class="sc-layered-nav-term">
+                   <a class="current-state" href="{{get_link_remove}}">{{ tag_value_remove | upcase }}</a>
+                   {%- if block.settings.use_tag_countdown -%}{%- include 'tag_countdown',tag:t -%}{%- endif -%}
+                 </li>
+                  {%- assign check_tag_hide = false -%}
+              {%- else -%}
+                {%- for t_d in tag_arr -%}
+                   {%- assign t = t_d | downcase -%}
+                   {%- if t == tag -%}
+                     {%- assign tag_value = t | remove:key_2 | remove:key | remove: '_' -%} 
+                     {%- capture cat_link -%}{{ tag_value | link_to_add_tag: t }}{%- endcapture -%}
+                     {%- assign get_link = cat_link | split:'href="' | last | split:'"' | first -%}
+                     <li class="sc-layered-nav-term">
+                         <a href="{{get_link}}">{{ tag_value | upcase }}</a>
+                         {%- if block.settings.use_tag_countdown -%}{%- include 'tag_countdown',tag:t -%}{%- endif -%}
+                      </li>
+                      {%- assign check_tag_hide = false -%}
+                    {%- endif -%} 
+                 {%- endfor -%}
+              {%- endif -%} 
+           {%- endfor -%}
+      {%- endif -%}
+     
+     
+   {%- comment -%}
+      {%- for t in tags -%}
+         {%- assign tag = t | strip -%}
+         {%- assign tag_downcase = tag | downcase | prepend:'"' | append:'"' -%}
+         {%- assign tag_value = tag | handleize -%} 
+         {%- if has_current_tags -%}
+            {%- if  _current_tags contains tag_downcase -%}
+               {%- assign check_tag_hide = false -%}
+               {%- if current_tags.size > 1 -%}
+                  {%- assign splt = collection_handle | append:"/" -%}
+                  {%- assign tag_value_append = tag_value | append:"+" -%}
+                  {%- assign tag_value_prepend = tag_value | prepend:"+" -%}
+                  {%- assign _url = canonical_url | split:splt | last  | split:'?page' | first -%}
+                  <li class="sc-layered-nav-term">
+                     <a class="current-state" href="/collections/{{collection_handle}}/{{_url | replace: tag_value_prepend, '' | replace: tag_value_append, '' | replace: tag_value, '' }}{%- if check_template_list -%}?&view=list{%- endif-%}">{{ tag | capitalize }}</a>
+                  </li>
+               {%- elsif current_tags.size == 1 -%}
+                  <li class="sc-layered-nav-term">
+                     <a class="current-state" href="/collections/{{collection_handle}}{%- if check_template_list -%}?&view=list{%- endif-%}">{{ tag | capitalize }}</a>
+                  </li>
+               {%- endif -%}
+            {%- else -%}
+               {%- assign _tag = tag | downcase | prepend: '\"' | append: '\"' -%}
+               {%- if tag_arr contains _tag -%}
+                  {%- assign check_tag_hide = false -%}  
+                  <li class="sc-layered-nav-term">
+                     <a href="{{canonical_url_remove}}+{{ tag_value | handleize }}{%- if check_template_list -%}?&view=list{%- endif-%}">{{ tag | capitalize }}</a>
+                  </li>
+               {%- endif -%}
+            {%- endif -%}
+         {%- else -%}
+            {%- assign _tag = tag | downcase | prepend: '\"' | append: '\"' -%} 
+            {%- if tag_arr contains _tag -%}
+               {%- assign check_tag_hide = false -%} 
+               <li class="sc-layered-nav-term">
+                  <a href="{{canonical_url_remove}}/{{ tag_value | handleize }}{%- if check_template_list -%}?&view=list{%- endif-%}">{{ tag | capitalize }}</a>
+               </li>
+            {%- endif -%}
+         {%- endif -%}
+      {%- endfor -%}
+     {%- endcomment -%}
+   </ul>
+</div>

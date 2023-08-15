@@ -1,0 +1,13 @@
+{%- if position == 'top' -%}
+	{%-if root == blank -%}{%-assign src_ = src | img_url: '23x'-%}
+	{%-if src_ contains '.jpg' -%}{%-assign src__= src | img_url: size, format: 'pjpg', crop: 'top' %}{%-else-%}{%-assign src__ = src | img_url: size, crop: 'center' %}{%-endif-%}
+	{%-elsif root == 'asset'-%}{%-assign src_ = src | asset_img_url: '23x'-%}
+	{%-if src_ contains '.jpg' -%}{%-assign src__= src | asset_img_url: size, format: 'pjpg', crop: 'top' %}{%-else-%}{%-assign src__ = src | asset_img_url: size, crop: 'center' %}{%-endif-%}
+	{%-endif-%}{{src__}}
+{%- else -%}
+	{%-if root == blank -%}{%-assign src_ = src | img_url: '23x'-%}
+	{%-if src_ contains '.jpg' -%}{%-assign src__= src | img_url: size, format: 'pjpg', crop: 'center' %}{%-else-%}{%-assign src__ = src | img_url: size, crop: 'center' %}{%-endif-%}
+	{%-elsif root == 'asset'-%}{%-assign src_ = src | asset_img_url: '23x'-%}
+	{%-if src_ contains '.jpg' -%}{%-assign src__= src | asset_img_url: size, format: 'pjpg', crop: 'center' %}{%-else-%}{%-assign src__ = src | asset_img_url: size, crop: 'center' %}{%-endif-%}
+	{%-endif-%}{{src__}}
+{%- endif -%}

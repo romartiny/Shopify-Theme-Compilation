@@ -1,0 +1,35 @@
+<div class="site-logo">
+   {%- if template == 'index' -%}
+     <h1 class="basel-logo-wrap" itemscope itemtype="http://schema.org/Organization">
+   {%- else -%}
+     <div class="basel-logo-wrap" itemscope itemtype="http://schema.org/Organization">
+   {%- endif -%}
+      <a href="/" class="basel-logo basel-main-logo" rel="home" itemprop="url">
+      {%- if settings.body_logo_svg != blank -%}
+        <img src="{{ settings.body_logo_svg | file_url }}" alt="{{ image.alt | default: shop.name }}" itemprop="logo">               
+      {%- elsif settings.body_logo_image != blank -%}
+      {%- assign image = settings.body_logo_image -%}
+      {%- assign image_width = image.width | append:'x' -%}
+       {%- if image.width > 600 -%}
+        {%- assign image_width = '600x' -%}
+        {%- endif -%}
+      <img class="regular-logo" src="{%-include 'gl_image_format',src: image , size: image_width -%}" srcset="{{ image | img_url: image_width }} 1x, {{ image | img_url: image_width, scale: 2 }} 2x" alt="{{ image.alt | default: shop.name }}" itemprop="logo">
+      {%- if settings.body_logo_image_retina != blank -%}{%- assign image = settings.body_logo_image_retina -%}{%- assign image_width = image.width | append:'x' -%}<img class="retina-logo" src="{%-include 'gl_image_format',src: image , size: image_width -%}" alt="{{ image.alt | default: shop.name }}" itemprop="logo">{%- endif -%}
+      {%- else -%}
+      {{shop.name}}
+      {%- endif -%}
+      {%- if settings.body_logo_image_sticky != blank -%}
+         {%- assign image = settings.body_logo_image_sticky -%}
+         {%- assign image_width = image.width | append:'x' -%}
+         {%- if image.width > 600 -%}
+            {%- assign image_width = '600x' -%}
+         {%- endif -%}
+         <img class="sticky-logo" src="{%-include 'gl_image_format',src: image , size: image_width -%}" srcset="{{ image | img_url: image_width }} 1x, {{ image | img_url: image_width, scale: 2 }} 2x" alt="{{ image.alt | default: shop.name }}" itemprop="logo">
+      {%- endif -%}
+      </a>
+   {%- if template == 'index' -%}
+     </h1>
+   {%- else -%}
+     </div>
+   {%- endif -%}
+</div>

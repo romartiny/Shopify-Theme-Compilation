@@ -1,0 +1,402 @@
+{%- if section.settings.hidden_section -%}{%- capture check_admin -%}{{ content_for_header  }}{%- endcapture -%}<style> #shopify-section-{{ section.id }} { {%- if check_admin contains 'design_mode' -%}opacity: .5;filter: alpha(opacity=50){%- else -%}display: none !important{%- endif -%}}</style>{%- endif -%}
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{%- capture data_section -%}
+  {%- if section.settings.row_stretch == 'stretch_row' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true'
+  {%- elsif section.settings.row_stretch == 'stretch_row_content' or section.settings.row_stretch == 'stretch_row_content_no_spaces' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true' data-gl-stretch-content='true'
+  {%- else -%}
+  {%- assign class_has_fill = '' -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- unless image_size != blank -%}
+  {%- assign image_size = 'master' -%}
+{%- endunless -%}
+{{style_block_section}}
+<section {{ data_section }}{%- if section.settings.use_video and section.settings.video_url != blank %} data-gl-video-bg="{{ section.settings.video_url }}"{%- endif %} class="gl_custom_{{section.id}} {% if section.settings.row_stretch == 'stretch_row_content_no_spaces' %} gl_row-no-padding{%- endif %}{%- if section.settings.use_parallax -%} basel-parallax{%- endif %} gl_row spb_row gl_row-fluid {{class_has_fill}} {%- if section.settings.use_video and section.settings.video_url != blank %} opacity-video-bg gl_video-bg-container gl_has_youtube{%- endif %}{%- if section.settings.full_height %} gl_row-o-full-height gl_row-o-columns-{{section.settings.columns_position}}{%- endif %}{%- if section.settings.equal_height %} gl_row-o-equal-height{%- endif %}{%- unless section.settings.content_position == 'default' %} gl_row-o-content-{{section.settings.content_position}}{%- endunless %}{%- if section.settings.equal_height or section.settings.content_position != 'default' %} gl_row-flex{%- endif -%}">
+   {%- if section.settings.title != blank -%}
+   <div class="gl_row spb_row gl_row-fluid gl_mb_20">
+     <div class="spb_column gl_column_container gl_col-sm-3">
+        <div class="gl_column-inner">
+           <div class="spb_wrapper"></div>
+        </div>
+     </div>
+     <div class="spb_column gl_column_container gl_col-sm-6">
+        <div class="gl_column-inner ">
+           <div class="spb_wrapper">
+              {%- if section.settings.style =='style_electronics' -%}
+                 <div class="title-wrapper  basel-title-color-default basel-title-style-simple basel-title-size-large text-center gl_mb_40">
+                   <div class="liner-continer">
+                     <span class="left-line"></span>
+                      {%- if section.settings.title contains '[' -%}
+                        {%- assign title = section.settings.title | split: ']' -%}
+                        {%- assign title_two = title[1] -%}
+                        {%- assign title_one = title[0]| split: '[' | last -%}
+                    {%- endif -%}
+                      <h4 class="title">{%- if section.settings.title contains '[' -%}{{title_one}} <span class="color-primary"> {{title_two}}</span>{%- else -%}{{ section.settings.title }}{%- endif -%}<span class="title-separator"><span></span></span></h4>
+                     <span class="right-line"></span> 
+                   </div>
+                    {%- if section.settings.subtext != blank -%}
+                   <span class="title-after_title">{{ section.settings.subtext }}</span>
+                   {%- endif -%}
+             </div>
+             {%- else -%}
+                  <div class="spb_text_column spb_content_element gl_mb_15">
+                    {%- if section.settings.title contains '[' -%}
+                        {%- assign title = section.settings.title | split: ']' -%}
+                        {%- assign title_two = title[1] -%}
+                        {%- assign title_one = title[0]| split: '[' | last -%}
+                    {%- endif -%}
+                     <div class="spb_wrapper"><h4 style="font-size: 42px; text-align: center;">{%- if section.settings.title contains '[' -%}{{title_one}} <span class="color-primary"> {{title_two}}</span>{%- else -%}{{ section.settings.title }}{%- endif -%}</h4></div>
+                  </div>
+                  <div class="gl_separator spb_content_element gl_separator_align_center gl_sep_width_10 gl_sep_border_width_2 gl_sep_pos_align_center gl_separator_no_text gl_sep_color_grey gl_mb_20"><span class="gl_sep_holder gl_sep_holder_l"><span class="gl_sep_line"></span></span><span class="gl_sep_holder gl_sep_holder_r"><span class="gl_sep_line"></span></span></div>
+                   {%- if section.settings.subtext != blank -%}
+                   <div class="spb_text_column spb_content_element gl_mb_20">
+                      <div class="spb_wrapper text-center">{{ section.settings.subtext }}</div>
+                   </div>
+                   {%- endif -%}
+            {%- endif -%}
+           </div>
+        </div>
+     </div>
+     <div class="spb_column gl_column_container gl_col-sm-3">
+        <div class="gl_column-inner ">
+           <div class="spb_wrapper"></div>
+        </div>
+     </div>
+  </div>
+   {%- endif -%}
+   <div class="gl_row spb_row gl_row-fluid gl_mb_0">
+   {%- if section.blocks.size > 0 -%}
+      {%- for block in section.blocks -%}
+         <div class="spb_column gl_column_container gl_col-sm-6 gl_col-lg-{{ block.settings.width }} gl_col-md-6 gl_col-xs-12" {{ block.shopify_attributes }}>
+            <div class="gl_column-inner">
+               <div class="spb_wrapper">
+                  {%- if block.settings.img_banner != blank -%}
+                  {%- capture style_block_menu -%}
+                  style="margin-bottom: 60px !important;{%- if block.settings.block_padding_left != blank -%}padding-left: {{block.settings.block_padding_left}} !important;{%- endif -%}background-image: url({%-include 'gl_image_format',src: block.settings.img_banner, size: '2048x' -%}) !important; background-position: 0 0 !important;background-repeat: no-repeat !important"
+                  {%- endcapture -%}
+                  {%- endif -%}
+                  <div class="spb_text_column spb_content_element" {{ style_block_menu }}>
+                     <div class="spb_wrapper">
+                        {%- if block.settings.title != blank or block.settings.menu != blank -%}
+                        <h4 style="margin-bottom: 10px;"><strong>{%- if block.settings.title != blank -%}{{ block.settings.title }}{%-else-%}{{ linklists[block.settings.menu].title }}{%- endif -%}</strong></h4>
+                        {%- endif -%}
+                        <ul>
+                           {%- for link in linklists[block.settings.menu].links -%}
+                           <li{%- if link.active %} class="current-menu-item"{%- endif -%}><a href="{{ link.url }}">{{ link.title | split: '[' | first }}</a></li>
+                         {%- else -%}
+                           {%- capture theme_settings_footer_linklist_path -%}<strong>Categories Menu</strong> > <strong>Add menu</strong>{%- endcapture -%}
+                           {{ 'layout.footer.instructions_for_linklist_html' | t: theme_settings_link: theme_settings_link, theme_settings_footer_linklist_path: theme_settings_footer_linklist_path }}
+                         {%- endfor -%}
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      {%- endfor -%}
+      {%- if section.settings.button_text != blank and section.settings.link != blank -%}
+     <div class="spb_column gl_column_container gl_col-sm-12">
+         <div class="gl_column-inner">
+            <div class="spb_wrapper">
+               <div class="basel-button-wrapper text-center"><a href="{{ section.settings.link }}" class="btn btn-color-primary btn-style-default btn-size-default"><strong>{{section.settings.button_text}}</strong></a></div>
+            </div>
+         </div>
+      </div>
+      {%- endif -%}
+   {%- else -%}
+      {%- include 'no-blocks' -%}
+   {%- endif -%}
+   </div>
+</section>
+{%- unless section.settings.row_stretch == 'default' -%}
+  <div class="gl_row-full-width gl_clearfix"></div>
+{%- endunless -%}
+{%- schema -%}
+  {
+    "name": "Categories Menu",
+    "class": "index-section index-section_category_menu",
+    "settings": [
+      {
+      "type": "header",
+      "content": "== General Settings"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "[All]Categories"
+      },
+      {
+        "type": "richtext",
+        "id": "subtext",
+        "label": "Subtext",
+        "default": "<p>Suspendisse tristique vestibulum scelerisque in uspendisse fusce. Tempor adipiscing nisi taciti habitant scelerisque a dapibus suspendisse himenaeos.</p>"
+      },
+      {
+        "type": "select",
+        "id": "style",
+        "label": "Title style",
+        "options": [
+        {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "style_electronics",
+            "label": "Style Electronics"
+          }
+       ],
+        "default": "default"
+      },
+      {
+        "type": "select",
+        "id": "row_stretch",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "stretch_row",
+            "label": "Stretch row"
+          },
+          {
+            "value": "stretch_row_content",
+            "label": "Stretch row and content"
+          },
+          {
+            "value": "stretch_row_content_no_spaces",
+            "label": "Stretch row and content (no paddings)"
+          }
+        ],
+        "label": "___ Row stretch",
+        "info": "Select stretching options for row and content (Note: stretched may not work properly if parent container has 'overflow: hidden' CSS property).",
+        "default": "default"
+      },
+      {
+        "type": "checkbox",
+        "id": "full_height",
+        "label": "Full height row?",
+        "info": "if checked row will be set to full height.",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "columns_position",
+        "options": [
+         {
+            "value": "middle",
+            "label": "Middle"
+          },
+         {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "stretch",
+            "label": "Stretch"
+          }
+        ],
+        "label": "___ Columns position (only for full height)",
+        "info": "Select columns position within row.",
+        "default": "middle"
+      },
+      {
+        "type": "checkbox",
+        "id": "equal_height",
+        "label": "Equal height?",
+        "info": "If checked columns will be set to equal height.",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "content_position",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "middle",
+            "label": "Middle"
+          },
+         {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "label": "___ Content position",
+        "info": "Select content position within columns.",
+        "default": "default"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text"
+      },
+      {
+         "type": "url",
+         "id": "link",
+         "label": "Link",
+         "info": "Enter URL if you want this box to have a link."
+       },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "color",
+        "id": "section_bg_color",
+        "label": "Background color"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      },
+      {
+        "type": "header",
+        "content": "== Basel Extras"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden_section",
+        "label": "Disable Section?",
+        "info": "If checked the section won't be visible on the public side of your website. You can switch it back any time.",
+        "default": false
+      }
+    ],
+    "blocks": [
+      {
+        "type": "block",
+        "name": "Text Block",
+        "limit": 10,
+        "settings": [
+          {
+             "type": "image_picker",
+             "id": "img_banner",
+             "label": "Image",
+             "info": "950x600 (Width x Height)."
+         },
+         {
+           "type": "text",
+           "id": "block_padding_left",
+           "label": "padding left (integer)",
+           "default": "160px",
+           "info": "160px"
+         },
+         {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Quick links",
+            "info": "Leave empty to use 'menu title' title."
+          },
+          {
+            "type": "link_list",
+            "id": "menu",
+            "label": "Add menu"
+          },
+          {
+            "type": "select",
+            "id": "width",
+            "label": "Select column width.",
+            "default": "4",
+            "options": [
+              {
+                "value": "4",
+                "label": "33%"
+              },
+              {
+                "value": "6",
+                "label": "50%"
+              },
+              {
+                "value": "8",
+                "label": "66%"
+              },
+              {
+                "value": "9",
+                "label": "75%"
+              },
+              {
+                "value": "12",
+                "label": "100%"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "presets": [{
+      "name": "Categories Menu",
+      "category": "categories",
+      "blocks": [
+          {
+            "type": "block"
+          },
+          {
+            "type": "block"
+          },
+          {
+            "type": "block"
+          },
+          {
+            "type": "block"
+          }
+        ]
+    }]
+  }
+{% endschema %}

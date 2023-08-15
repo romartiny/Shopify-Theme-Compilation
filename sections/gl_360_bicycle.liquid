@@ -1,0 +1,409 @@
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{%- capture data_section -%}
+  {%- if section.settings.row_stretch == 'stretch_row' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true'
+  {%- elsif section.settings.row_stretch == 'stretch_row_content' or section.settings.row_stretch == 'stretch_row_content_no_spaces' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true' data-gl-stretch-content='true'
+  {%- else -%}
+  {%- assign class_has_fill = '' -%}
+  {%- endif -%}
+{%- endcapture -%}
+{{ style_block_section }}
+{%- capture check_admin -%}{{ content_for_header  }}{%- endcapture -%}
+{%- if check_admin contains 'design_mode' -%}{%- assign admin_shopify = true -%}{%- endif -%}
+<div {{ data_section }}{%- if section.settings.use_video and section.settings.video_url != blank %} data-gl-video-bg="{{ section.settings.video_url }}"{%- endif %} class="gl_row-fluid gl_row-o-content-middle gl_row-flex gl_custom_{{section.id}} {% if section.settings.row_stretch == 'stretch_row_content_no_spaces' %}gl_row-no-padding{%- endif %}{%- if section.settings.use_parallax -%} basel-parallax{%- endif %} gl_row spb_row gl_row-fluid {{class_has_fill}} {%- if section.settings.use_video and section.settings.video_url != blank %} opacity-video-bg gl_video-bg-container gl_has_youtube{%- endif %}{%- if section.settings.full_height %} gl_row-o-full-height gl_row-o-columns-{{section.settings.columns_position}}{%- endif %}{%- if section.settings.equal_height %} gl_row-o-equal-height{%- endif %}{%- unless section.settings.content_position == 'default' %} gl_row-o-content-{{section.settings.content_position}}{%- endunless %}{%- if section.settings.equal_height or section.settings.content_position != 'default' %} gl_row-flex{%- endif -%}">
+   {%- assign check_img = false -%}
+   {%- capture _array_view_360 -%}
+     {%- for block in section.blocks -%}
+        {%- if block.type == 'item_image' and block.settings.image != blank and check_img == false -%}
+            {%- assign image = block.settings.image -%}
+            {%- assign check_img = true -%}
+        {%- endif -%}
+        {%- if block.type == 'item_image' and block.settings.image != blank -%}
+           {%- assign image = block.settings.image -%}
+           {%- assign image_width = image.width | append:'x' -%}
+           {%-include 'gl_image_format',src: image.src , size: image_width -%}{%- if forloop.last == false -%},{%- endif -%}
+        {%- endif -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+   {%- assign array_view_360 = _array_view_360 | split:',' -%}
+   <div class="spb_column gl_column_container gl_col-sm-6">
+      <div class="gl_column-inner gl_mb_40">
+         <div class="spb_wrapper">
+            <div class="basel-threed-view threed-id-{{section.id}}">
+               {%- if section.settings.title != blank -%}<h3 class="threed-title"><span>{{section.settings.title}}</span></h3>{%- endif -%}
+               <ul class="threed-view-images"></ul>
+               <div class="spinner"><span>0%</span></div>
+            </div>
+            <script type="text/javascript">
+               {%- if admin_shopify -%}
+                 function glMaplace() {
+                      $('.threed-id-{{section.id}}').ThreeSixty({
+                      {%- if check_img -%}
+                          totalFrames: {{array_view_360.size | json }},
+                          endFrame: {{array_view_360.size | json }},
+                          currentFrame: 1,
+                          imgList: '.threed-view-images',
+                          progress: '.spinner',
+                          imgArray: {{array_view_360 | json}},
+                          height: {{ image.height | json }},
+                          width: {{ image.width | json }},
+                          responsive: true,
+                          navigation: true
+                       {%- else -%}
+                          totalFrames: 2,
+                          endFrame: 2,
+                          currentFrame: 1,
+                          imgList: '.threed-view-images',
+                          progress: '.spinner',
+                          imgArray: ['//cdn.shopify.com/s/files/1/2285/2483/files/360view-2.png?8800923914967893704','//cdn.shopify.com/s/files/1/2285/2483/files/360view-2.png?8800923914967893704'],
+                          height: 500,
+                          width: 500,
+                          responsive: true,
+                          navigation: true
+                      {%- endif -%}
+                      });
+                  }
+                 jQuery(document).ready(function() {
+                   glMaplace();
+                 });
+                 $(document)
+                  .on('shopify:section:load', glMaplace)
+                 .on('shopify:section:unload', glMaplace)
+                 .on('shopify:block:select',glMaplace)
+                 .on('shopify:block:deselect', glMaplace);
+               {%- else -%}
+                  jQuery(document).ready(function( $ ) {
+                      $('.threed-id-{{section.id}}').ThreeSixty({
+                      {%- if check_img -%}
+                          totalFrames: {{array_view_360.size | json }},
+                          endFrame: {{array_view_360.size | json }},
+                          currentFrame: 1,
+                          imgList: '.threed-view-images',
+                          progress: '.spinner',
+                          imgArray: {{array_view_360 | json}},
+                          height: {{ image.height | json }},
+                          width: {{ image.width | json }},
+                          responsive: true,
+                          navigation: true
+                       {%- else -%}
+                          totalFrames: 2,
+                          endFrame: 2,
+                          currentFrame: 1,
+                          imgList: '.threed-view-images',
+                          progress: '.spinner',
+                          imgArray: ['//cdn.shopify.com/s/files/1/2285/2483/files/360view-2.png?8800923914967893704','//cdn.shopify.com/s/files/1/2285/2483/files/360view-2.png?8800923914967893704'],
+                          height: 500,
+                          width: 500,
+                          responsive: true,
+                          navigation: true
+                      {%- endif -%}
+                      });
+                  });
+               {%- endif -%}
+            </script>
+         </div>
+      </div>
+   </div>
+   <div class="spb_column gl_column_container gl_col-sm-6">
+      <div class="gl_column-inner gl_mb_30">
+         <div class="spb_wrapper">
+            <div class="title-wrapper  basel-title-color-default basel-title-style-bordered basel-title-size-default text-left gl_mb_30">
+               {%- if section.settings.title_box != blank -%}<span class="title-subtitle font-default">{{section.settings.title_box}}</span>{%- endif -%}
+               {%- if section.settings.sub_title != blank -%}
+               <div class="liner-continer">
+                  <span class="left-line"></span> 
+                  <h4 class="title">{{section.settings.sub_title}}<span class="title-separator"><span></span></span></h4>
+                  <span class="right-line"></span> 
+               </div>
+               {%- endif -%}
+            </div>
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'box' -%}
+                 <div class="basel-info-box2 text-left icon-alignment-left box-style-base color-scheme-dark with-animation{%- if block.settings.link != blank %} cursor-pointer{%- endif -%}"{%- if block.settings.link != blank %} onclick="window.location.href='{{block.settings.link}}'"{%- endif -%}>
+                    {%- if block.settings.image != blank -%}
+                    <div class="box-icon-wrapper">
+                       <div class="info-box-icon">
+                          {%- assign image = block.settings.image -%}
+                          {%- assign image_size = image.width | append:'x' -%}
+                          <img width="64" height="64" src="{%-include 'gl_image_format',src: image , size: image_size -%}" alt="{{image.alt}}" class="info-icon image-1 attachment-full">                                        
+                       </div>
+                    </div>
+                    {%- endif -%}
+                    <div class="info-box-content">
+                       <div class="info-box-inner">
+                          <p></p>
+                          {{ block.settings.text_block }}
+                       </div>
+                    </div>
+                 </div>
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+            <div class="basel-button-wrapper text-left">
+               <a href="{{ section.settings.button_link }}" class="btn btn-color-{{ section.settings.button_color }} btn-style-{{ section.settings.button_style }} btn-size-{{ section.settings.button_size }}">{{ section.settings.button_label }}</a>
+            </div>
+            {%- endif -%}
+         </div>
+      </div>
+   </div>
+</div>
+{%- unless section.settings.row_stretch == 'default' -%}
+<div class="gl_row-full-width gl_clearfix"></div>
+{%- endunless -%}
+{%- schema -%}
+  {
+    "name": "360 Bicycle",
+    "class": "index-section section_360",
+    "max_blocks": 50,
+    "settings": [
+      {
+      "type": "header",
+      "content": "== General"
+      },
+      {
+        "type": "select",
+        "id": "row_stretch",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "stretch_row",
+            "label": "Stretch row"
+          },
+          {
+            "value": "stretch_row_content",
+            "label": "Stretch row and content"
+          },
+          {
+            "value": "stretch_row_content_no_spaces",
+            "label": "Stretch row and content (no paddings)"
+          }
+        ],
+        "label": "___ Row stretch",
+        "info": "Select stretching options for row and content (Note: stretched may not work properly if parent container has 'overflow: hidden' CSS property).",
+        "default": "default"
+      },
+      {
+        "type": "header",
+        "content": "== Heading 360"
+      },
+      {
+        "id": "title",
+        "type": "text",
+        "label": "Heading",
+        "default": "360 DEGREE PRODUCT VIEW"
+      },
+      {
+        "type": "header",
+        "content": "== Information box"
+      },
+      {
+        "id": "title_box",
+        "type": "text",
+        "label": "Title",
+        "default": "WHY WORK WITH US?"
+      },
+      {
+        "id": "sub_title",
+        "type": "text",
+        "label": "Sub title",
+        "default": "HERE ARE SOME TIPS"
+      },
+     {
+        "type": "header",
+        "content": "== Button Settings"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "___ Button label"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "___ Button link"
+      },
+      {
+        "type": "select",
+        "id": "button_color",
+        "label": "___ Button color",
+        "default": "white",
+        "options": [
+          {
+            "label": "Default",
+            "value": "default"
+          },
+          {
+            "label": "Primary color",
+            "value": "primary"
+          },
+          {
+            "label": "Alternative color",
+            "value": "alt"
+          },
+          {
+            "label": "Black",
+            "value": "black"
+          },
+          {
+            "label": "White",
+            "value": "white"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "button_style",
+        "label": "___ Button style",
+        "default": "bordered",
+        "options": [
+          {
+            "label": "Default",
+            "value": "default"
+          },
+          {
+            "label": "Bordered",
+            "value": "bordered"
+          },
+          {
+            "label": "Link button",
+            "value": "link"
+          },
+          {
+            "label": "Rounded",
+            "value": "round"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "button_size",
+        "label": "___ Button size",
+        "default": "default",
+        "options": [
+          {
+            "label": "Default",
+            "value": "default"
+          },
+          {
+            "label": "Extra Small",
+            "value": "extra-small"
+          },
+          {
+            "label": "Small",
+            "value": "small"
+          },
+          {
+            "label": "Large",
+            "value": "large"
+          },
+          {
+            "label": "extra-large",
+            "value": "Extra Large"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      }
+    ],
+     "blocks": [
+       {
+        "type": "item_image",
+        "name": "Add Images",
+        "settings": [
+           {
+              "type": "image_picker",
+              "id": "image",
+              "label": "Images"
+           }
+          ]
+      },
+      {
+        "type": "box",
+        "name": "Information box",
+        "settings": [
+           {
+              "type": "image_picker",
+              "id": "image",
+              "label": "Images"
+           },
+           {
+              "type": "textarea",
+              "id": "text_block",
+              "label": "Brief content"
+           },
+           {
+              "type": "url",
+              "id": "link",
+              "label": "Link",
+              "info":"Enter URL if you want this box to have a link."
+           }
+         ]
+      }
+     ],
+"presets": [{
+      "name": "360 Bicycle",
+        "category": "360 DEGREE",
+      "blocks": [
+          {
+            "type": "item_image"
+          },
+          {
+            "type": "box"
+          }
+        ]
+    }]
+  }
+{% endschema %}

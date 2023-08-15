@@ -1,0 +1,284 @@
+{%- if section.blocks.size > 0 -%}
+   {%- case settings.size_sidebar -%}
+     {% when '1' %}
+       {%- assign size_place_holer = '165x106' -%}
+       {%- assign image_size_banner = '165x' -%}
+       {%- assign image_size = '60x' -%}
+     {% when '2' %}
+       {%- assign size_place_holer = '263x207' -%}
+       {%- assign image_size_banner = '263x' -%}
+       {%- assign image_size = '60x' -%}
+     {% when '3' %}
+      {%- assign size_place_holer = '360x307' -%}
+       {%- assign image_size_banner = '360x' -%}
+       {%- assign image_size = '60x' -%}
+   {%- endcase -%}
+   <div class="gl_row spb_row gl_row-fluid">
+      <div class="spb_column gl_column_container gl_col-sm-12">
+         <div class="gl_column-inner ">
+            <div class="spb_wrapper">
+            {%- for block in section.blocks -%}
+               {%- case block.type -%}
+                  {%- when 'collection' -%}
+                     {%- if block.settings.featured_product_list_collection == blank -%}
+                        {%- assign side_bar_collection = collections["all"] -%}
+                     {%- else -%}
+                        {%- assign side_bar_collection = collections[block.settings.featured_product_list_collection ] -%}
+                     {%- endif -%}
+                     {%- assign limit_num = block.settings.featured_product_limit_all | plus: 0 -%}
+                     <div id="shopify-{{block.id}}" class="sidebar-widget shopify widget_products">
+                        {%- if block.settings.title != blank -%}<h5 class="widget-title">{{block.settings.title}}</h5>{%- endif -%}
+                        {%- if side_bar_collection != blank -%}
+                        <ul class="product_list_widget">
+                           {%- for side_bar_product in side_bar_collection.products limit:limit_num -%}
+                           {%- if porduct.id != side_bar_product.id -%}
+                           <li>
+                              {%- assign current_variant = side_bar_product.selected_or_first_available_variant -%}
+                              {%- assign featured_image = current_variant.featured_image | default: side_bar_product.featured_image -%}
+                              {%- assign product_image_size = '219x' -%}
+                              {%- assign on_sale = false -%}
+                              {%- if current_variant.compare_at_price_min > current_variant.price_min -%}
+                                {%- assign on_sale = true -%}
+                              {%- endif -%}
+                              {%- assign image = featured_image -%}
+                              <a href="{{ side_bar_product.url | within: collection }}">
+                                 {%- if image != blank -%}
+                                 <img width="219" height="280" src="{%-include 'gl_image_format',src: image.src, size: product_image_size -%}" class="attachment-shop_single size-shop_single sp-post-image" alt="{{image.alt}}" title="{{side_bar_product.title}}" 
+                                    srcset="{%-include 'gl_image_format',src: image.src, size: product_image_size %} {{ image.width }}w, 
+                                    {%-include 'gl_image_format',src: image.src, size: '235x300' %} 235w, 
+                                    {%-include 'gl_image_format',src: image.src, size: '768x980' %} 768w, 
+                                    {%-include 'gl_image_format',src: image.src, size: '803x1024' %} 803w, 
+                                    {%-include 'gl_image_format',src: image.src, size: '266x340' %} 266w, 
+                                    {%-include 'gl_image_format',src: image.src, size: '219x280' %} 219w, 
+                                    {%-include 'gl_image_format',src: image.src, size: '263x336' %} 263w, 
+                                    {%-include 'gl_image_format',src: image.src, size: '526x671' %} 526w" sizes="(max-width: 219px) 100vw, 219px">
+                                    {%- endif -%}
+                                    <span class="product-title">{{ side_bar_product.title }}</span>
+                              </a>
+                              <span class="amount">
+                                  {%- if side_bar_product.price_varies -%}
+                                  {{ side_bar_product.price_min | money }} – {{ side_bar_product.price_max | money }}
+                                  {%- elsif on_sale -%}<del>{{ current_variant.compare_at_price  | money }}</del> <ins>{{ current_variant.price | money }}</ins>
+                                  {%- else -%}
+                                  {{ current_variant.price | money }}
+                                  {%- endif -%}
+                               </span>
+                           </li>
+                           {%- endif -%}
+                           {%- endfor -%}
+                        </ul>
+                        {%- endif -%}
+                     </div>
+                  {%- when 'banner' -%}
+                     <div class="promo-banner cursor-pointer text-right vertical-alignment-middle banner- hover- color-scheme-dark"{%- if block.settings.link != blank %} onclick="window.location.href='{{block.settings.link}}'"{%-endif-%}>
+                        <div class="main-wrapp-img">
+                           <div class="banner-image">                              
+                              {%- if block.settings.img_banner == blank -%}
+                              <img class="promo-banner-image image-1" src="https://via.placeholder.com/{{size_place_holer}}" width="600" height="420" alt="market-banner-sport" title="market-banner-sport">                                                     
+                              {%- else -%}
+                              {%- assign image = block.settings.img_banner -%}
+                                 <img width="{{ image.width }}" height="{{ image.height }}" class="promo-banner-image image-1 attachment-full" alt="{{ image.alt }}" 
+                                 src="{%-include 'gl_image_format',src: image , size: image_size_banner -%}" 
+                                 srcset="{%-include 'gl_image_format',src: image , size: image_size_banner %} {{ image.width }}w, 
+                                 {%-include 'gl_image_format',src: image , size: '270x' %} 270w, 
+                                 {%-include 'gl_image_format',src: image , size: '280x' %} 280w, 
+                                 {%-include 'gl_image_format',src: image , size: '263x' %} 263w" sizes="(max-width: {{ image.width }}px) 100vw, {{ image.width }}px">
+                              {%- endif -%}
+                           </div>
+                        </div>
+                     </div>
+                  {%- when 'shipping' -%}
+                     {%- if block.settings.title != blank -%}
+                        {%- assign class_p = '' -%}
+                        {%- if block.settings.style == '1' -%}
+                        {%- assign class_p = 'gl_pl_30' -%}
+                        <div class="title-wrapper  basel-title-color-default basel-title-style-bordered basel-title-size-small text-center gl_mb_20">
+                           <div class="liner-continer">
+                              <span class="left-line"></span> 
+                              <h4 class="title"><strong>{{block.settings.title}}</strong><span class="title-separator"><span></span></span></h4>
+                              <span class="right-line"></span> 
+                           </div>
+                        </div>
+                        {%- else -%}
+                        {%- assign class_p = '' -%}
+                        <h5 class="widget-title">{{block.settings.title}}</h5>
+                        {%- endif -%}
+                     {%- endif -%}
+                     {%- for i in (1..6) -%}
+                        {%- assign shipping = 'shipping_' | append:i -%}
+                        {%- assign shipping_id = block.settings[shipping] -%}
+                        {%- if shipping_id != blank -%}
+                        <div class="spb__text_column spb__content_element {{class_p}} gl_mb_35">
+                           {%- assign shipping = shipping_id | replace: ' ,', ',' | replace: ', ', ',' | split: ',' -%}
+                           <div class="spb__wrapper">
+                              <p>{%- if shipping[0] != blank -%}<i class="fa fa-{{shipping[0]}}" style="font-size: 40px; color: #f1f1f0; float: left; margin: 3px 5px 15px 6px;">&nbsp;</i>{%- endif -%}<strong>{{shipping[1]}}</strong><br>
+                                 {{shipping[2]}}
+                              </p>
+                           </div>
+                        </div>
+                        {%- endif -%}
+                     {%- endfor -%}
+                  {%- when 'html' -%}
+                     <div id="shopify-{{block.id}}" class="sidebar-widget shopify widget_products">
+                        {%- if block.settings.title != blank -%}<h5 class="widget-title">{{block.settings.title}}</h5>{%- endif -%}
+                        {%- if block.settings.code != blank -%}{{block.settings.code}}{%- endif -%}
+                     </div>
+                  {%- when 'text' -%}
+                     <div id="shopify-{{block.id}}" class="sidebar-widget shopify widget_products">
+                        {%- if block.settings.title != blank -%}<h5 class="widget-title">{{block.settings.title}}</h5>{%- endif -%}
+                        {%- if block.settings.text != blank -%}{{block.settings.text}}{%- endif -%}
+                     </div>
+                {%- endcase -%}
+            {%- endfor -%}
+            </div>
+         </div>
+      </div>
+   </div>
+{%- else -%}
+<div class="text-center">{%- include 'no-blocks'-%}</div>   
+{%- endif -%}
+{%- schema -%}
+  {
+    "name": "Product Sidebar",
+    "class": "widget-area",
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Featured Products",
+        "settings": [
+         {
+          "type":"text",
+          "id":"title",
+          "label":"Title",
+          "default":"Sale Products"
+          },
+          {
+           "type": "collection",
+           "id": "featured_product_list_collection",
+           "label": "Collection to use"
+         },
+          {
+           "type": "text",
+           "id": "featured_product_limit_all",
+           "label": "Number of products to show",
+           "default": "3"
+         }
+        ]
+      },
+      {
+        "type": "banner",
+        "name": "Banner",
+        "settings": [
+          {
+           "type": "image_picker",
+           "id": "img_banner",
+           "label":"Image"
+         },
+          {
+           "type": "url",
+           "id": "link",
+           "label": "Choose link"
+         }
+        ]
+      },
+      {
+        "type": "shipping",
+        "name": "SHIPPING DELIVERY",
+        "limit": 1,
+        "settings": [
+         {
+          "type":"text",
+          "id":"title",
+          "label":"Title",
+          "default":"SHIPPING & DELIVERY"
+         },
+         {
+           "type": "select",
+           "id": "style",
+           "label": "Style",
+           "default": "1",
+           "options": [
+             {
+               "value": "1",
+               "label": "Style 1"
+             },
+             {
+               "value": "2",
+               "label": "Style 2"
+             }
+           ]
+         },
+         {
+           "type": "paragraph",
+           "content": "ex:clock-o,Save up to 20%,limited time [Font Awesome](http:\/\/fontawesome.io\/icons\/)"
+         },
+         {
+           "type": "textarea",
+           "id": "shipping_1",
+           "label":"Shipping Block 1"
+         },
+         {
+           "type": "textarea",
+           "id": "shipping_2",
+           "label":"Shipping Block 2"
+         },
+         {
+           "type": "textarea",
+           "id": "shipping_3",
+           "label":"Shipping Block 3"
+         },
+         {
+           "type": "textarea",
+           "id": "shipping_4",
+           "label":"Shipping Block 4"
+         },
+         {
+           "type": "textarea",
+           "id": "shipping_5",
+           "label":"Shipping Block 5"
+         },
+         {
+           "type": "textarea",
+           "id": "shipping_6",
+           "label":"Shipping Block 6"
+         }
+        ]
+      },
+      {
+        "type": "html",
+        "name": "Custom HTML",
+        "settings": [
+         {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Custom HTML"
+          },
+          {
+            "type": "html",
+            "id": "code",
+            "label": "HTML"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "name": "Text",
+        "settings": [
+            {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Talk about your brand"
+            },
+            {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+            }
+         ]
+      }
+    ]
+  }
+{% endschema %}

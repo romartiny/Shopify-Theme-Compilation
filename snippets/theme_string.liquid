@@ -1,0 +1,55 @@
+{%- capture check_admin -%}{{ content_for_header }}{%- endcapture -%}
+{%- if check_admin contains 'productreviews' -%}{%- assign pr_review = true -%}{%- else -%}{%- assign pr_review = false -%}{%- endif -%}
+{%- capture basel_settings_json -%}
+<script>
+   window.theme = window.theme || {};
+    var theme = {
+      strings: {
+        addToCart: {{ 'products.product.add_to_cart' | t | json }},
+        soldOut: {{ 'products.product.sold_out' | t | json }},
+        view_cart: {{ 'products.popup.view_cart' | t | json }},
+        na: {{ 'products.product.na' | t | json }},
+        showMore: {{ 'general.filters.show_more' | t | json }},
+        showLess: {{ 'general.filters.show_less' | t | json }},
+        added_to_cart: {{ 'products.popup.added_to_cart' | t | json }},
+        continue_shopping: {{ 'products.popup.continue_shopping' | t | json }},
+        info_wishlist: {{ 'products.popup.info_wishlist' | t | json }},
+        login: {{ 'products.popup.login' | t | json }},
+        nowishlist: {{ 'products.wishlist.no_products_wishlist' | t | json }},
+        compare: {{ 'sections.basel_tooltip.compare' | t | json }},
+        no_compare: {{ 'products.compare.no_compare' | t | json }},
+        added_label: {{ 'products.compare.added_label' | t | json }}
+      },
+      use_ajax_add_to_cart: {{settings.use_ajax_add_to_cart | json }},
+      gl_productreviews: {{pr_review | json }},
+      add_to_cart_action:{{ settings.basel_options_add_to_cart_action | json }},
+      product_gallery:{images_slider:{%- if product.template_suffix == 'design_images_scroll' or settings.design_products == '3' -%}false{%- else -%}true{%- endif -%},thumbs_slider:{enabled:true,position:"{{settings.thumbnails_position}}",items:{desktop:4,desktop_small:3,tablet:4,mobile:3,vertical_items:3}}},
+      basel_settings: {
+        countdown_days: {{ 'sections.countdown.countdown_days' | t | json }},
+        countdown_hours: {{ 'sections.countdown.countdown_hours' | t | json }},
+        countdown_mins: {{ 'sections.countdown.countdown_mins' | t | json }},
+        countdown_sec: {{ 'sections.countdown.countdown_sec' | t | json }},
+        wishlist:{%- if settings.use_wishlist -%}{{ 'yes' | json }}{%- else -%}{{ 'no' | json }}{%- endif -%},
+        compare:{%- if settings.use_compare -%}{{ 'yes' | json }}{%- else -%}{{ 'no' | json }}{%- endif -%},
+        quickview:{%- if settings.use_quickview -%}{{ 'yes' | json }}{%- else -%}{{ 'no' | json }}{%- endif -%},
+        ajax_search:{%- if settings.ajax_search -%}{{ 'yes' | json }}{%- else -%}{{ 'no' | json }}{%- endif -%},
+        ajax_search_product:{%- if settings.only_search_products -%}{{ 'yes' | json }}{%- else -%}{{ 'no' | json }}{%- endif -%},
+        header_search_category:{%- if settings.header_design contains 'categories' and settings.enable_select_category -%}{{ 'yes' | json }}{%- else -%}{{ 'no' | json }}{%- endif -%},
+        enable_search_category:{%- if settings.enable_search_category -%}{{ 'yes' | json }}{%- else -%}{{ 'no' | json }}{%- endif -%},
+        currency:{%- if settings.show_multiple_currencies -%}{{ 'yes' | json }}{%- else -%}{{ 'no' | json }}{%- endif -%},
+        save_note:{%- if settings.cart_notes_widget_enable -%}{{ 'yes' | json }}{%- else -%}{{ 'no' | json }}{%- endif -%},
+        enable_popup: {%- if settings.enable_popup -%}{{ 'yes' | json }}{%- else -%}{{ 'no' | json }}{%- endif -%},
+        enable_variant_simple: {%- if settings.swatch_design == '3' -%}{{ 'yes' | json }}{%- else -%}{{ 'no' | json }}{%- endif -%},
+        {%- if settings.time_popup_delay != blank -%}popup_delay:{{ settings.time_popup_delay | json }},{%-endif-%}
+        popup_event:{{ settings.show_popup_after | json }},
+        {%- if settings.time_popup_delay != blank -%}popup_scroll:{{ settings.scroll_popup_delay | json }},{%-endif-%}
+        popup_pages:{{ settings.number_pages | json }},
+        promo_popup_hide_mobile: {%- if settings.promo_popup_hide_mobile -%}{{ 'yes' | json }}{%- else -%}{{ 'no' | json }}{%- endif -%}
+      },
+      use_currency: {{ settings.show_multiple_currencies | json }},
+      shop_currency: {{ shop.currency | json }},
+      moneyFormat: {{ shop.money_format | json }}
+    }
+ </script>
+ {%- endcapture -%}
+{{ basel_settings_json | strip_newlines | remove: '  ' }}

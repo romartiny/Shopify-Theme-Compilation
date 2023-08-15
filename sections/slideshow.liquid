@@ -1,0 +1,548 @@
+{%- if section.settings.hidden_section -%}{%- capture check_admin -%}{{ content_for_header  }}{%- endcapture -%}<style> #shopify-section-{{ section.id }} { {%- if check_admin contains 'design_mode' -%}opacity: .5;filter: alpha(opacity=50){%- else -%}display: none !important{%- endif -%}}</style>{%- endif -%}
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{%- capture data_section -%}
+  {%- if section.settings.row_stretch == 'stretch_row' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true'
+  {%- elsif section.settings.row_stretch == 'stretch_row_content' or section.settings.row_stretch == 'stretch_row_content_no_spaces' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true' data-gl-stretch-content='true'
+  {%- else -%}
+  {%- assign class_has_fill = '' -%}
+  {%- endif -%}
+{%- endcapture -%}
+{{ style_block_section }}
+<div {{ data_section }}{%- if section.settings.use_video and section.settings.video_url != blank %} data-gl-video-bg="{{ section.settings.video_url }}"{%- endif %} class="gl_custom_{{section.id}} {% if section.settings.row_stretch == 'stretch_row_content_no_spaces' %}gl_row-no-padding{%- endif %}{%- if section.settings.use_parallax %} basel-parallax{%- endif %} gl_row spb_row gl_row-fluid {{class_has_fill}} {%- if section.settings.use_video and section.settings.video_url != blank %} opacity-video-bg gl_video-bg-container gl_has_youtube{%- endif %}{%- if section.settings.full_height %} gl_row-o-full-height gl_row-o-columns-{{section.settings.columns_position}}{%- endif %}{%- if section.settings.equal_height %} gl_row-o-equal-height{%- endif %}{%- unless section.settings.content_position == 'default' %} gl_row-o-content-{{section.settings.content_position}}{%- endunless %}{%- if section.settings.equal_height or section.settings.content_position != 'default' %} gl_row-flex{%- endif -%}">
+   <div class="spb_column gl_column_container gl_col-sm-12">
+      <div class="gl_column-inner gl_pt_0">
+         <div class="spb_wrapper ins-owl-carousel owl-carousel" data-autoheight='true' data-time='{{ section.settings.silder_speed | plus: 0 }}' data-nav='{%- if section.settings.hide_button -%}false{%- else -%}true{%- endif -%}' data-items='1' data-dots='{%- if section.settings.hide_pagination -%}false{%- else -%}true{%- endif -%}' data-autoplay='{%- if section.settings.autoplay -%}true{%- else -%}false{%- endif -%}' data-loop='{%- if section.settings.slider_loop -%}true{%- else -%}false{%- endif -%}' data-medium='1' data-small='1' data-exsmall='1'>
+         {%- for block in section.blocks-%}
+            <div class="gl_mb_0 promo-banner text-{{ block.settings.banner_alignment }} vertical-alignment-{{ block.settings.banner_vertical_alignment }} banner-{{ block.settings.banner_content_style }} hover-{{ block.settings.banner_effect }} color-scheme-{{ block.settings.banner_color }} {%- if block.settings.enable_increase %} increased-padding{%- endif %}{%- if block.settings.banner_link != blank %} cursor-pointer{%- endif -%}" onclick="window.location.href='{{ block.settings.banner_link }}'">
+               <div class="main-wrapp-img">
+                  <div class="banner-image">
+                     {%- if block.settings.image == blank -%}
+                        <img src="https://placehold.it/1600x600" alt="placehold">
+                     {%- else -%}
+                     {%- assign image = block.settings.image -%}
+                        {%- if section.settings.image_size != blank -%}
+                          {%- assign crop_nt = section.settings.image_size -%}
+                          {%- assign image_width_append = crop_nt -%}
+                           {%- assign image_width_append_arr = image_width_append | replace: ' x', 'x' | replace: 'x ', 'x' | replace: ' x ', 'x' | split: 'x' -%}
+                           {%- assign image_width = image_width_append_arr[0] -%}
+                           {%- assign image_size_first = image_width | plus:0 -%}
+                           {%- assign image_height = image_size_first | divided_by: image.aspect_ratio | round -%}
+                           <img width="{{ image_size_first }}" height="{{ image_height }}" src="{%-include 'gl_image_format_crop',src: image.src , size: crop_nt,position:'top' -%}" class="attachment-shop_catalog size-shop_catalog" alt="{{ image.alt | escape }}" 
+                             srcset="{%-include 'gl_image_format_crop',src: image.src , size: crop_nt,position:'top' %} {{image_size_first}}w 
+                             {%- if image_size_first > 235 -%}{%- assign image_height = 235 | divided_by: image.aspect_ratio | round -%}{%- assign image_size_el = 235 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 235w{%- endif -%} 
+                             {%- if image_size_first > 768 -%}{%- assign image_height = 768 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 768 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 768w{%- endif -%}
+                             {%- if image_size_first > 803 -%}{%- assign image_height = 803 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 803 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 803w{%- endif -%} 
+                             {%- if image_size_first > 266 -%}{%- assign image_height = 266 | divided_by: image.aspect_ratio | round -%}{%- assign image_size_el = 266 | append:'x' | append:image_height -%},{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 266w{%- endif -%} 
+                             {%- if image_size_first > 219 -%}{%- assign image_height = 219 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 219 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 219w{%- endif -%} 
+                             {%- if image_size_first > 526 -%}{%- assign image_height = 526 | divided_by: image.aspect_ratio | round -%},{%- assign image_size_el = 526 | append:'x' | append:image_height -%}{%-include 'gl_image_format_crop',src: image.src , size:image_size_el,position:'top' %} 526w{%- endif -%}" sizes="(max-width: {{ image_size_first }}px) 100vw, {{ image_size_first }}px"> 
+                        {%- else -%}
+                          {%- assign image_width = image.width -%}
+                          {%- assign image_width_append = image_width | append:'x' -%}
+                        <img width="{{image_width}}" height="{{image.height}}" src="{%-include 'gl_image_format',src: image.src , size: image_width_append -%}" class="gl_single_image-img attachment-full" alt="{{image.alt}}" 
+                             srcset="{%-include 'gl_image_format',src: image.src , size: image_width_append %} {{image_width}}w 
+                                  {%- if image_width > 235 -%},{%-include 'gl_image_format',src: image.src , size: '235x',cache:true %} 235w{%- endif -%} 
+                                   {%- if image_width > 768 -%},{%-include 'gl_image_format',src: image.src , size: '768x',cache:true %} 768w{%- endif -%}
+                                   {%- if image_width > 803 -%},{%-include 'gl_image_format',src: image.src , size: '803x',cache:true %} 803w{%- endif -%} 
+                                   {%- if image_width > 266 -%},{%-include 'gl_image_format',src: image.src , size: '266x',cache:true %} 266w{%- endif -%} 
+                                   {%- if image_width > 219 -%},{%-include 'gl_image_format',src: image.src , size: '219x',cache:true %} 219w{%- endif -%}
+                                   {%- if image_width > 263 -%},{%-include 'gl_image_format',src: image.src , size: '219x',cache:true %} 263w{%- endif -%}
+                                   {%- if image_width > 526 -%},{%-include 'gl_image_format',src: image.src , size: '526x',cache:true %} 526w{%- endif -%}" sizes="(max-width: {{ image.width }}px) 100vw, {{ image.width }}px">
+                        {%- endif -%}
+                     {%- endif -%}
+                  </div>
+               </div>
+               <div class="wrapper-content-baner">
+                  <div class="banner-inner">
+                     {%- if block.settings.title != blank -%}
+                     <h2 class="h1 text-uppercase hidden-xs" style="margin-top: 0;margin-bottom: 10px"><strong>{{ block.settings.title }}</strong></h2>
+                     <h2 class="h3 text-uppercase visible-xs" style="margin-top: 0;margin-bottom: 10px"><strong>{{ block.settings.title }}</strong></h2>
+                     {%- endif -%}
+                     {%- if block.settings.subheading != blank -%}
+                     <h6  class="h2 text-capitalize hidden-xs" style="margin-top: 0;margin-bottom: 15px"><span>{{block.settings.subheading}}</span></h6>
+                     <h6  class="h4 text-capitalize visible-xs" style="margin-top: 0;margin-bottom: 15px"><span>{{block.settings.subheading}}</span></h6>
+                     {%- endif -%}
+                    {%- if block.settings.banner_btn_title != blank and block.settings.banner_link != blank -%}             
+  <div class="clear"></div>
+  <div class="basel-button-wrapper text-{{ block.settings.banner_alignment }} gl_mt_20 hidden-xs">
+    <a href="{{ block.settings.banner_link }}" class="btn btn-color-{{ block.settings.button_color }} btn-style-{{ block.settings.button_style }} btn-size-{{ block.settings.button_size }}">{{ block.settings.banner_btn_title }}</a>
+                    </div>
+  <div class="basel-button-wrapper text-{{ block.settings.banner_alignment }} gl_mt_10 visible-xs">
+    <a href="{{ block.settings.banner_link }}" class="visible-xs btn btn-color-{{ block.settings.button_color }} btn-style-{{ block.settings.button_style }} btn-size-extra-small">{{ block.settings.banner_btn_title }}</a>
+                    </div>
+  {%- endif -%}
+                   </div>
+               </div>
+            </div>
+         {%- endfor -%}
+         </div>
+      </div>
+   </div>
+</div>
+{%- unless section.settings.row_stretch == 'default' -%}
+  <div class="gl_row-full-width gl_clearfix"></div>
+{%- endunless -%}
+{%- schema -%}
+ {
+  "name": "Slideshow",
+  "class": "gl_slide_show",
+  "settings":[
+      {
+      "type": "header",
+      "content": "== General Settings"
+      },
+      {
+        "type": "select",
+        "id": "row_stretch",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "stretch_row",
+            "label": "Stretch row"
+          },
+          {
+            "value": "stretch_row_content",
+            "label": "Stretch row and content"
+          },
+          {
+            "value": "stretch_row_content_no_spaces",
+            "label": "Stretch row and content (no paddings)"
+          }
+        ],
+        "label": "___ Row stretch",
+        "info": "Select stretching options for row and content (Note: stretched may not work properly if parent container has 'overflow: hidden' CSS property).",
+        "default": "default"
+      },
+      {
+        "type": "checkbox",
+        "id": "full_height",
+        "label": "Full height row?",
+        "info": "if checked row will be set to full height.",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "columns_position",
+        "options": [
+         {
+            "value": "middle",
+            "label": "Middle"
+          },
+         {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "stretch",
+            "label": "Stretch"
+          }
+        ],
+        "label": "___ Columns position (only for full height)",
+        "info": "Select columns position within row.",
+        "default": "middle"
+      },
+      {
+        "type": "checkbox",
+        "id": "equal_height",
+        "label": "Equal height?",
+        "info": "If checked columns will be set to equal height.",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "content_position",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "middle",
+            "label": "Middle"
+          },
+         {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "label": "___ Content position",
+        "info": "Select content position within columns.",
+        "default": "default"
+      },
+      {
+      "type": "header",
+      "content": "== Slider Settings"
+      },
+      {
+        "type": "text",
+        "id": "image_size",
+        "label": "Image Size (optional)",
+        "info": "slideshow may have different sizes 'width x height'",
+        "placeholder": "300x200"
+      },
+      {
+        "type": "text",
+        "id": "silder_speed",
+        "label": "Slider speed ( integer )",
+        "info": "Duration of animation between slides (in ms).",
+        "default": "5000"
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_pagination",
+        "default": false,
+        "label": "Hide pagination control?",
+        "info": "pagination control will be removed"
+      },
+       {
+        "type": "checkbox",
+        "id": "hide_button",
+        "default": false,
+        "label": "Hide prev/next buttons?",
+        "info": "prev/next control will be removed"
+      },
+       {
+        "type": "checkbox",
+        "id": "slider_loop",
+        "default": false,
+        "label": "Slider loop?",
+        "info": "Enables loop mode."
+      },
+      {
+       "type": "checkbox",
+       "id": "autoplay",
+       "label": "Slider autoplay",
+       "info": "Enables autoplay mode.",
+       "default": false
+     },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      },
+      {
+        "type": "header",
+        "content": "== Basel Extras"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden_section",
+        "label": "Disable Section?",
+        "info": "If checked the section won't be visible on the public side of your website. You can switch it back any time.",
+        "default": false
+      }
+  ],
+   "blocks": [
+      {
+        "type": "item",
+        "name": "Image slide",
+        "settings": [
+         {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Background image"
+         },
+         {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Image slide"
+          },
+          {
+            "type": "text",
+            "id": "subheading",
+            "label": "Subheading",
+            "default": "Tell your brand's story through video and images"
+         },
+         {
+          "type": "text",
+          "id": "banner_btn_title",
+          "label": "Button title",
+          "info": "Add here few words to your title button."
+        },
+        {
+          "type": "url",
+          "id": "banner_link",
+          "label": "Banner link",
+          "info": "Enter URL if you want this banner to have a link."
+        },
+        {
+        "type": "select",
+        "id": "button_color",
+        "label": "___ Button color",
+        "default": "white",
+        "options": [
+          {
+            "label": "Default",
+            "value": "default"
+          },
+          {
+            "label": "Primary color",
+            "value": "primary"
+          },
+          {
+            "label": "Alternative color",
+            "value": "alt"
+          },
+          {
+            "label": "Black",
+            "value": "black"
+          },
+          {
+            "label": "White",
+            "value": "white"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "button_style",
+        "label": "___ Button style",
+        "default": "bordered",
+        "options": [
+          {
+            "label": "Default",
+            "value": "default"
+          },
+          {
+            "label": "Bordered",
+            "value": "bordered"
+          },
+          {
+            "label": "Link button",
+            "value": "link"
+          },
+          {
+            "label": "Rounded",
+            "value": "round"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "button_size",
+        "label": "___ Button size",
+        "default": "default",
+        "options": [
+          {
+            "label": "Default",
+            "value": "default"
+          },
+          {
+            "label": "Extra Small",
+            "value": "extra-small"
+          },
+          {
+            "label": "Small",
+            "value": "small"
+          },
+          {
+            "label": "Large",
+            "value": "large"
+          },
+          {
+            "label": "Extra Large",
+            "value": "extra-large"
+          }
+        ]
+      },
+        {
+          "type": "select",
+          "id": "banner_alignment",
+          "options": [
+           {
+              "value": "left",
+              "label": "Align left"
+            },
+            {
+              "value": "right",
+              "label": "Align right"
+            },
+            {
+              "value": "center",
+              "label": "Align center"
+            }
+          ],
+          "label": "== Text alignment",
+          "info": "Select image alignment.",
+          "default": "center"
+        },
+        {
+          "type": "select",
+          "id": "banner_vertical_alignment",
+          "options": [
+           {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "middle",
+              "label": "Middle"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            }
+          ],
+          "label": "== Content vertical alignment",
+          "default": "top"
+        },
+        {
+          "type": "select",
+          "id": "banner_effect",
+          "options": [
+           {
+              "value": "default",
+              "label": "Default"
+            },
+            {
+              "value": "1",
+              "label": "Zoom image"
+            },
+            {
+              "value": "2",
+              "label": "Bordered"
+            },
+            {
+              "value": "3",
+              "label": "Content animation"
+            },
+            {
+              "value": "4",
+              "label": "Translate and scale"
+            }
+          ],
+          "label": "== Hover effect",
+          "info": "Set beautiful hover effects for your banner.",
+          "default": "default"
+        },
+        {
+          "type": "select",
+          "id": "banner_content_style",
+          "options": [
+           {
+              "value": "default",
+              "label": "Default"
+            },
+            {
+              "value": "2",
+              "label": "Color mask"
+            },
+            {
+              "value": "3",
+              "label": "Mask with border"
+            },
+            {
+              "value": "1",
+              "label": "Content with line background"
+            },
+            {
+              "value": "5",
+              "label": "Content with rectangular background"
+            }
+          ],
+          "label": "== Content style",
+          "info": "You can use some of our predefined styles for your banner content.",
+          "default": "default"
+        },
+        {
+          "type": "select",
+          "id": "banner_color",
+          "options": [
+           {
+              "value": "light",
+              "label": "Light"
+            },
+            {
+              "value": "dark",
+              "label": "Dark"
+            }
+          ],
+          "label": "== Color Scheme",
+          "default": "light"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_increase",
+          "label": "== Enable Increase spaces",
+          "info": "Suggest to use this option if you have large banners. Padding will be set in percentage to your screen width.",
+          "default": false
+        }
+        ]
+      }
+    ],
+  "presets": [
+    {
+      "name": "Slideshow",
+      "category": "Slider",
+      "blocks": [
+          {
+            "type": "item"
+          },
+          {
+            "type": "item"
+          }
+        ]
+    }
+  ]
+}
+{% endschema %}
+ 

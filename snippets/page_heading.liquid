@@ -1,0 +1,21 @@
+{%- assign show_breadcrums = false -%}{%- if settings.page_show_breadcrumbs -%}{%- assign show_breadcrums = true -%}{%- endif -%}
+{%- assign show_title = true -%}{%- if settings.page_title_design == 'disable' -%}{%- assign show_title = false -%}{%- endif -%}
+<div class="gl_page_title page-title page-title-default title-size-{{settings.page_title_size}} color-scheme-{{settings.page_title_color}} title-design-{{settings.page_title_design}}">
+	<div class="container">
+		<header class="entry-header">
+			{%- if template.name != 'article' -%}
+				{%- if show_title -%}<h1 class="entry-title">{%- if template.name != 'blog' -%}{{ page_title }}{%- else -%}{{blog.title}}{%- endif -%}</h1>{%- endif -%}							
+				{%- if show_breadcrums -%}<div class="breadcrumbs" xmlns:v="http://rdf.data-vocabulary.org/#"><a href="/" rel="v:url" property="v:title">{{ 'general.breadcrumbs.home' | t }}</a> » <span class="current">{{ page_title }}</span></div><!-- .breadcrumbs -->{%- endif -%}						
+			{%- elsif blog_portfolio -%}
+				{%- if show_title -%}<h1 class="entry-title">{{blog.title}}</h1>{%- endif -%}							
+				{%- if show_breadcrums -%}<div class="breadcrumbs" xmlns:v="http://rdf.data-vocabulary.org/#"><a href="/" rel="v:url" property="v:title">{{ 'general.breadcrumbs.home' | t }}</a> » <span class="current">{{ 'blogs.portfolio.project' | t }}</span></div><!-- .breadcrumbs -->{%- endif -%}
+			{%- elsif article_portfolio -%}
+				{%- if show_title -%}<h1 class="entry-title">{{blog.title}}</h1>{%- endif -%}
+				{%- if show_breadcrums -%}<div class="breadcrumbs" xmlns:v="http://rdf.data-vocabulary.org/#"><a href="/" rel="v:url" property="v:title">{{ 'general.breadcrumbs.home' | t }}</a> » <span typeof="v:Breadcrumb"><a rel="v:url" property="v:title" href="{{blog.url}}">{{blog.title | capitalize }}</a></span> » <span class="current">{{article.title | capitalize}}</span></div><!-- .breadcrumbs -->{%- endif -%}	
+			{%- else -%}
+				{%- if show_title -%}<h1 class="entry-title">{{ 'blogs.blog.breadcrumbs_article' | t }}</h1>{%- endif -%}	
+				{%- if show_breadcrums -%}<div class="breadcrumbs" xmlns:v="http://rdf.data-vocabulary.org/#"><a href="/" rel="v:url" property="v:title">{{ 'general.breadcrumbs.home' | t }}</a> » <span typeof="v:Breadcrumb"><a rel="v:url" property="v:title" href="{{blog.url}}">{{blog.title | capitalize }}</a></span></div><!-- .breadcrumbs -->{%- endif -%}						
+			{%- endif -%}
+		</header><!-- .entry-header -->
+	</div>
+</div>

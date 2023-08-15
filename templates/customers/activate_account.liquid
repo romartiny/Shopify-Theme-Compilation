@@ -1,0 +1,54 @@
+{%- assign title = 'customer.account.title' | t -%}
+{%- assign error_html = '' -%}
+<div class="main-page-wrapper shopify-account">
+   {%- include 'page_heading', page_title:title -%}
+   <!-- MAIN CONTENT AREA -->
+   <div class="container">
+      <div class="row">
+         <div class="site-content col-sm-12" role="main">
+            <article id="post-9" class="post-9 page type-page status-publish hentry">
+               <div class="entry-content">
+                  <div class="shopify">
+                     <ul id="gl_shopify_error" class="shopify-error" style="display:none;">
+                        <li class="html_li"></li>
+                     </ul>
+                     {%- form 'activate_customer_password', class:'lost_reset_password' -%}
+                     
+                       <p class="text_lost_reset_password gl_first">{{ 'customer.reset_password.subtext' | t: email: email }}</p>
+                       {%- if form.errors -%}
+                           {%- assign gl_shopify_error = true -%}
+                           {%- for field in form.errors -%}
+                              {%- if field == 'form' -%}
+                                 {%- assign error_html = form.errors.messages[field] -%}
+                              {%- else -%}
+                                 {%- assign error_html = form.errors.translated_fields[field] | append:form.errors.messages[field] -%}
+                              {%- endif -%}
+                           {%- endfor -%}
+                        {%- endif -%}
+                       <p class="Shopify-FormRow Shopify-FormRow--first form-row form-row-first">
+                           <label for="CustomerPassword" class="label--hidden">{{ 'customer.activate_account.password' | t }}</label>
+                           <input type="password" value="" name="customer[password]" id="CustomerPassword" placeholder="{{ 'customer.activate_account.password' | t }}">
+                       </p>
+                       <p class="Shopify-FormRow Shopify-FormRow--last form-row form-row-last">
+                           <label for="CustomerPasswordConfirmation" class="label--hidden">{{ 'customer.activate_account.password_confirm' | t }}</label>
+                           <input type="password" value="" name="customer[password_confirmation]" id="CustomerPasswordConfirmation" placeholder="{{ 'customer.activate_account.password_confirm' | t }}">
+                       </p>
+                        <input type="submit" class="button" value="{{ 'customer.activate_account.submit' | t }}">
+                        <input type="submit" class="button" name="decline" value="{{ 'customer.activate_account.cancel' | t }}">
+                     {%- endform -%}
+                  </div>
+               </div>
+            </article>
+         </div>
+      </div>
+   </div><!-- end container -->
+</div><!-- .main-page-wrapper -->
+<script type="text/javascript">
+  {% if gl_shopify_error -%}
+      {%- if error_html != blank -%}
+      var html = {{error_html | json }};
+      $('#gl_shopify_error .html_li').html('{{ 'customer.login.error' | t }} '+html);
+      {%- endif -%}
+      document.getElementById('gl_shopify_error').style.display = 'block';
+  {% endif -%}
+</script>

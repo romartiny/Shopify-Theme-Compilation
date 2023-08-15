@@ -1,0 +1,12 @@
+{%- assign check_vendor = false -%}
+  {%- assign vendor_downcase =  product.vendor | downcase -%}
+  {%- for tag in product.tags -%}
+  {%- assign tag_downcase = tag | downcase -%}
+  {%- if tag_downcase contains vendor_downcase -%}
+    {%- assign check_vendor = true -%}
+    {%- break -%}
+  {%- endif -%}
+  {%- endfor -%}
+  {%- if check_vendor -%}
+  <div class="brand_link"><a href="/collections/{%- if collection.handle != blank-%}{{collection.handle}}{%- else -%}all{%-endif-%}/{{ product.vendor | handleize}}" title="{{product.vendor}}">{{product.vendor}}</a></div>
+  {%- endif -%}

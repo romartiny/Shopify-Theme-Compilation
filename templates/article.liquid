@@ -1,0 +1,263 @@
+{%- assign gl_portfolio = settings.blog_portfolio -%}
+{%- if blog.handle != gl_portfolio -%}
+{%- if settings.enable_title == 'show' -%}
+   {%- assign enable_title = true -%}
+{%- else -%}
+   {%- assign enable_title = false -%}
+{%- endif -%}
+{%- if settings.enable_meta == 'show' -%}
+   {%- assign enable_meta = true -%}
+{%- else -%}
+   {%- assign enable_meta = false -%}
+{%- endif -%}
+{%- if settings.enable_text == 'show' -%}
+   {%- assign enable_text = true -%}
+{%- else -%}
+   {%- assign enable_text = false -%}
+{%- endif -%}
+{%- if settings.enable_button == 'show' -%}
+   {%- assign enable_button = true -%}
+{%- else -%}
+   {%- assign enable_button = false -%}
+{%- endif -%}
+{%- if settings.enable_post_date == 'show' -%}
+   {%- assign enable_post_date = true -%}
+{%- else -%}
+   {%- assign enable_post_date = false -%}
+{%- endif -%}
+{%- if settings.enable_post_categories == 'show' -%}
+   {%- assign enable_post_categories = true -%}
+{%- else -%}
+   {%- assign enable_post_categories = false -%}
+{%- endif -%}
+  {%- if settings.enable_post_categories == 'show' -%}
+    {%- assign enable_post_categories = true -%}
+  {%- else -%}
+    {%- assign enable_post_categories = false -%}
+  {%- endif -%}
+  {%- assign gl_blog_title = 'blogs.blog.blog_title_html' | t:blog_title:blog.title -%}
+  {%- assign number_articles_per_grid_page = settings.articles_per_grid_page | plus:0 -%}
+  {%- assign number_of_comments = article.comments_count -%}
+  {%- case settings.blog_columns -%}
+      {%- when '1' -%}
+        {%- assign gl_colum_width = 'col-xs-12 col-sm-4 col-md-12' -%} 
+        {%- assign image_size = '1140x' -%}
+      {%- when '2' -%}
+        {%- assign gl_colum_width = 'col-xs-12 col-sm-4 col-md-6' -%}
+        {%- assign image_size = '557x' -%}
+      {%- when '3' -%}
+        {%- assign gl_colum_width = 'col-xs-12 col-sm-4 col-md-4' -%}
+        {%- assign image_size = '362x' -%}
+      {%- when '4' -%}
+        {%- assign gl_colum_width = 'col-xs-12 col-sm-4 col-md-3' -%}
+        {%- assign image_size = '265x' -%}
+     {%- when '6' -%}
+        {%- assign gl_colum_width = 'col-xs-12 col-sm-4 col-md-2' -%}
+        {%- assign image_size = '167x' -%}
+  {%- endcase -%}
+  {%- assign enable_title = true -%}
+  {%- assign enable_meta = true -%}
+  {%- assign enable_text = true -%}
+  {%- assign enable_button = true -%}
+  {%- assign _posts_excerpt_length = settings.posts_excerpt_length | plus:0 -%}
+   {%- assign posts_excerpt_length = _posts_excerpt_length | default: 19 -%}
+  {%- if settings.blog_layout == 'left' -%}
+     {%- case settings.blog_size_sidebar -%}
+       {% when '1' %}
+         {%- assign class_gl = 'col-sm-10 col-sm-push-2' -%}
+         {%- assign class_sidebar = 'col-sm-2 col-sm-pull-10' -%}
+       {% when '2' %}
+         {%- assign class_gl = 'col-sm-9 col-sm-push-3' -%}
+         {%- assign class_sidebar = 'col-sm-3 col-sm-pull-9' -%}
+       {% when '3' %}
+         {%- assign class_gl = 'col-sm-8 col-sm-push-4' -%}
+         {%- assign class_sidebar = 'col-sm-4 col-sm-pull-8' -%}
+     {%- endcase -%}
+  {%- elsif settings.blog_layout == 'right' -%}
+     {%- case settings.blog_size_sidebar -%}
+       {% when '1' %}
+         {%- assign class_gl = 'col-sm-10' -%}
+         {%- assign class_sidebar = 'col-sm-2' -%}
+       {% when '2' %}
+         {%- assign class_gl = 'col-sm-9' -%}
+         {%- assign class_sidebar = 'col-sm-3' -%}
+       {% when '3' %}
+         {%- assign class_gl = 'col-sm-8' -%}
+         {%- assign class_sidebar = 'col-sm-4' -%}
+     {%- endcase -%}
+  {%- else -%}
+     {%- assign class_gl = 'col-sm-12' -%}
+  {%- endif -%}
+  {%- case settings.blog_design -%}
+      {%- when '1' -%}
+        {%- assign gl_cl_design = 'blog-design-default' -%}  
+      {%- when '2' -%}
+        {%- assign gl_cl_design = 'blog-design-default-alt' -%} 
+      {%- when '3' -%}
+        {%- assign gl_cl_design = 'blog-design-small-images' -%} 
+     {%- when '4' -%}
+        {%- assign gl_cl_design = 'blog-design-masonry' -%} 
+     {%- when '5' -%}
+        {%- assign gl_cl_design = 'blog-design-mask' -%} 
+  {%- endcase -%}
+  <div class="main-page-wrapper">
+    {%- include 'page_heading', page_title:gl_blog_title -%}
+    <!-- MAIN CONTENT AREA -->
+    {%- paginate blog.articles by number_articles_per_grid_page -%}
+    <div class="container">
+      <div class="row">
+        <div class="site-content {{class_gl}}" role="main">
+            <article id="post-{{article.id}}" class="{{gl_cl_design}} blog-post-loop post-single-page post-{{article.id}} post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized" itemscope itemtype="http://schema.org/Article">
+            {%- case settings.blog_design -%}
+               {%- when '2' -%}
+                  {%- if enable_post_categories == 'true' or enable_post_categories == true -%}<div class="meta-post-categories"><a href="{{ blog.url }}" rel="category tag" >{{ blog.title }}</a></div>{%- endif -%}
+                  <h3 class="entry-title">{{ article.title }}</h3>
+                  <div class="entry-meta">
+                     <ul class="entry-meta-list">
+                        <li class="meta-author">{{ 'blogs.article.posted_by' | t }} <span class="name_author">{{ article.author }}</span></li>
+                        {%- if blog.comments_enabled? -%}<li><span class="meta-reply"> <a href="{{ article.url }}#comments" >{%- if number_of_comments > 0 -%}{{ 'blogs.comments.with_count' | t: count: number_of_comments }}{%- else -%}{{ 'blogs.comments.title_leave' | t }}{%- endif -%}</a></span></li>{%- endif -%}
+                     </ul>
+                  </div><!-- .entry-meta -->
+                  <header class="entry-header">
+                     {%- if article.image -%}
+                        {%- assign image = article.image -%}
+                        {%- assign blog_image_size = image.width | append: 'x' -%}
+                        <figure id="carousel-{{article.id}}" class="entry-thumbnail">
+                           <div class="post-date">
+                              <span class="post-date-day">{{ article.published_at | date: "%d" }}</span><span class="post-date-month">{{ article.published_at | date: "%b" }}</span>
+                           </div>
+                           <img width="{{image.width}}" height="{{image.height}}" src="{%-include 'gl_image_format',cache:true,src: image.src, size: blog_image_size -%}" class="attachment-full size-full sp-post-image" alt="{{image.alt}}">            
+                        </figure>
+                     {%- endif -%}
+                  </header><!-- .entry-header -->
+               {%- else -%}
+                  <header class="entry-header">
+                     {%- if article.image -%}
+                     {%- assign image = article.image -%}
+                     {%- assign blog_image_size = image.width | append: 'x' -%}
+                     <figure id="carousel-{{article.id}}" class="entry-thumbnail">
+                        <img width="{{image.width}}" height="{{image.height}}" src="{%-include 'gl_image_format',cache:true,src: image.src, size: blog_image_size -%}" class="attachment-full size-full sp-post-image" alt="{{image.alt}}">            
+                     </figure>
+                     {%- endif -%}
+                     <div class="post-date">
+                     <span class="post-date-day">{{ article.published_at | date: "%d" }}</span><span class="post-date-month">{{ article.published_at | date: "%b" }}</span>
+                     </div>
+                     <div class="post-mask">
+                        {%- if enable_post_categories == 'true' or enable_post_categories == true -%}<div class="meta-post-categories"><a href="{{ blog.url }}" rel="category tag" >{{ blog.title }}</a></div>{%- endif -%}
+                        <h3 class="entry-title">{{ article.title }}</h3>
+                        <div class="entry-meta">
+                           <ul class="entry-meta-list">
+                              <li class="meta-author">{{ 'blogs.article.posted_by' | t }} <span class="name_author">{{ article.author }}</span></li>
+                              {%- if blog.comments_enabled? -%}<li><span class="meta-reply"> <a href="{{ article.url }}#comments" >{%- if number_of_comments > 0 -%}{{ 'blogs.comments.with_count' | t: count: number_of_comments }}{%- else -%}{{ 'blogs.comments.title_leave' | t }}{%- endif -%}</a></span></li>{%- endif -%}
+                           </ul>
+                        </div>
+                        <!-- .entry-meta -->
+                     </div>
+                  </header><!-- .entry-header -->
+            {%- endcase -%}
+               <div class="entry-content">{%- include 'shortcode' load: article.content -%}</div><!-- .entry-content -->
+            </article><!-- #post -->
+            {%- if settings.post_share_buttons -%}
+            <div class="single-post-social">{%- include 'social-sharing', gl_design:'icons-design-colored', gl_size:'icons-size-default',basel_tooltip:true -%}</div>
+            {%- endif -%}
+            {%- if blog.next_article != blank or blog.previous_article != blank -%}{%- assign blog_has_nav = true -%}{%- else -%}{%- assign blog_has_nav = false -%}{%- endif -%}
+            {%- if settings.post_navigation and blog_has_nav -%}
+            <div class="single-post-navigation">
+               {%- if blog.previous_article != blank -%}<div class="prev-link"><a href="{{ blog.previous_article }}" rel="prev">{{ 'blogs.article.prev_post' | t }}</a></div>{%- endif -%}
+               {%- if blog.next_article != blank -%}<div class="next-link"><a href="{{ blog.next_article }}" rel="next">{{ 'blogs.article.next_post' | t }}</a></div>{%- endif -%} 
+            </div>
+            {%- endif -%}
+            {%- if blog.comments_enabled? -%}
+               <div id="comments" class="comments-area">
+                  {%- if number_of_comments > 0 -%}<h2 class="comments-title">{{ 'blogs.comments.with_count_comments' | t: count: article.comments_count}} {{ 'blogs.comments.comments_title_html' | t:article_title:article.title }}</h2>{%- endif -%}
+                  {%- if comment and comment.created_at -%}
+                     <p class="note form-success comment-awaiting-moderation">
+                        {% if blog.moderated? %}
+                           {{ 'blogs.comments.success_moderated' | t }}
+                        {% else %}
+                           {{ 'blogs.comments.success' | t }}
+                        {% endif %}
+                     </p>
+                  {%- endif -%}
+                  {%- if number_of_comments > 0 -%}
+                  {%- paginate article.comments by 5 -%}
+                  <ol class="comment-list">
+                     {%- for comment in article.comments -%}
+                        <li class="comment" id="{{ comment.id }}">
+                           <div class="comment-body">
+                              <div class="comment-author vcard">
+                                 <img alt="avatar" src="https://www.gravatar.com/avatar/{{ comment.email | remove: ' ' | strip_newlines | downcase | md5 }}?s=80&d=mm&r=g" srcset="https://www.gravatar.com/avatar/{{ comment.email | remove: ' ' | strip_newlines | downcase | md5 }}?s=160&d=mm&r=g 2x" class="avatar avatar-74 photo" height="74" width="74">        
+                                 <cite class="fn">{{ comment.author }}</cite> <span class="says">{{ 'blogs.comments.says' | t }}</span>     
+                              </div>
+                              <div class="comment-meta commentmetadata"><a href="{{ comment.url }}">{{ comment.created_at | date: '%B %e, %Y at %R%P' }}</a></div>
+                              <p>{{ comment.content }}</p>
+                           </div>
+                        </li><!-- #comment-## -->
+                     {%- endfor -%}
+                  </ol><!-- .comment-list -->
+                  {%- if paginate.pages > 1 -%}
+                     {% include 'pagination',blog_ajax:true %}
+                  {%- endif -%}
+                  {%- endpaginate -%}
+                  {%- endif -%}
+                  <div id="respond" class="comment-respond">
+                     <h3 id="reply-title" class="comment-reply-title">{{ 'blogs.comments.title_reply' | t }}</h3>
+                     {%- form 'new_comment', article -%}
+                        <p>{{ form.errors | default_errors }}</p>
+                        {%- if customer and customer.name != blank and customer.email != blank -%}
+                           {%- if customer.name != blank -%}
+                              {%- assign customer_name = customer.name -%}
+                           {%- elsif customer.email != blank -%}
+                              {%- assign customer_name = customer.email -%}
+                           {%- endif -%}
+                        <p class="logged-in-as">
+                           <a href="/account" aria-label="{{ 'blogs.comments.Logged' | t: gl_customer:customer_name }}. Edit your profile.">{{ 'blogs.comments.Logged' | t: gl_customer:customer_name }}</a>. <a href="/account/logout">{{ 'blogs.comments.logout' | t }}</a>
+                        </p>
+                        {%- else -%}
+                        <p class="comment-notes">{{ 'blogs.comments.comments_note' | t }} <span class="required">*</span></p>
+                        {%- endif -%}
+                        <p class="comment-form-comment">
+                           <label for="CommentBody">{{ 'blogs.comments.message' | t }} <span class="required">*</span></label>
+                           <textarea id="CommentBody" {% if form.errors contains 'body' -%}class="input--error" {% endif -%}name="comment[body]" cols="45" rows="8" maxlength="65525" aria-required="true" required="required">{{ form.body }}</textarea>
+                        </p>
+                        {%- if customer and customer.name != blank and customer.email != blank -%}
+                        <p class="comment-form-author hide hidden">
+                           <label for="CommentAuthor">{{ 'blogs.comments.name' | t }} <span class="required">*</span></label>
+                           <input {% if form.errors contains 'author' -%}class="input--error" {% endif -%}type="text" required="required" size="30" value="{{ customer.name }}" name="comment[author]" id="CommentAuthor" maxlength="245" aria-required="true" required="required">
+                        </p>
+                        <p class="comment-form-email hide hidden">
+                           <label for="email">{{ 'blogs.comments.email' | t }} <span class="required">*</span></label>
+                           <input {% if form.errors contains 'email' -%}class="input--error" {% endif -%}type="email" size="30" value="{{ customer.email }}" name="comment[email]" id="CommentEmail" maxlength="100" aria-describedby="email-notes" aria-required="true" required="required">
+                        </p>
+                        {%- else -%}
+                        <p class="comment-form-author">
+                           <label for="CommentAuthor">{{ 'blogs.comments.name' | t }} <span class="required">*</span></label>
+                           <input {% if form.errors contains 'author' -%}class="input--error" {% endif -%}type="text" required="required" size="30" value="{{ form.author }}" name="comment[author]" id="CommentAuthor" maxlength="245" aria-required="true" required="required">
+                        </p>
+                        <p class="comment-form-email">
+                           <label for="email">{{ 'blogs.comments.email' | t }} <span class="required">*</span></label>
+                           <input {% if form.errors contains 'email' -%}class="input--error" {% endif -%}type="email" size="30" value="{{ form.email }}" name="comment[email]" id="CommentEmail" maxlength="100" aria-describedby="email-notes" aria-required="true" required="required">
+                        </p>
+                        {%- endif -%}
+                        <p class="form-submit">
+                           <input name="submit" type="submit" id="submit" class="submit" value="{{ 'blogs.comments.post' | t }}">
+                        </p>
+                     {%- endform -%}
+                  </div>
+               </div>
+            {%- endif -%}
+        </div><!-- .site-content -->
+        {%- if settings.blog_layout != '1' -%}
+        <aside class="sidebar-container {{class_sidebar}} sidebar-{{settings.blog_layout}}" role="complementary">
+           <div class="sidebar-inner">
+              {%- section 'gl_section_sidebar_blog' -%}<!-- .widget-area -->
+           </div><!-- .sidebar-inner -->
+        </aside><!-- .sidebar-container -->
+        {%- endif -%}
+      </div>
+    </div>
+    {%- endpaginate -%}
+  </div>
+{%- else -%}
+   {%- include 'gl_article_portfolio' -%}
+{%- endif -%}

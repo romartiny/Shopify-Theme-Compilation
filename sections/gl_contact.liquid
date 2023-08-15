@@ -1,0 +1,238 @@
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{%- capture data_section -%}
+  {%- if section.settings.row_stretch == 'stretch_row' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true'
+  {%- elsif section.settings.row_stretch == 'stretch_row_content' or section.settings.row_stretch == 'stretch_row_content_no_spaces' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true' data-gl-stretch-content='true'
+  {%- else -%}
+  {%- assign class_has_fill = '' -%}
+  {%- endif -%}
+{%- endcapture -%}
+{{ style_block_section }}
+<div {{ data_section }}{%- if section.settings.use_video and section.settings.video_url != blank %} data-gl-video-bg="{{ section.settings.video_url }}"{%- endif %} class="gl_custom_{{section.id}} {% if section.settings.row_stretch == 'stretch_row_content_no_spaces' %}gl_row-no-padding{%- endif %}{%- if section.settings.use_parallax -%} basel-parallax{%- endif %} gl_row spb_row gl_row-fluid {{class_has_fill}} {%- if section.settings.use_video and section.settings.video_url != blank %} opacity-video-bg gl_video-bg-container gl_has_youtube{%- endif %}{%- if section.settings.full_height %} gl_row-o-full-height gl_row-o-columns-{{section.settings.columns_position}}{%- endif %}{%- if section.settings.equal_height %} gl_row-o-equal-height{%- endif %}{%- unless section.settings.content_position == 'default' %} gl_row-o-content-{{section.settings.content_position}}{%- endunless %}{%- if section.settings.equal_height or section.settings.content_position != 'default' %} gl_row-flex{%- endif -%}">
+  <div class="spb_column gl_column_container gl_col-sm-12 color-scheme-light">
+      <div class="gl_column-inner gl_pt_0">
+         <div class="spb_wrapper">
+            {%- if section.settings.title != blank -%}
+            <div class="spb_text_column spb_content_element ">
+               <div class="spb_wrapper">
+                  <h3 style="text-transform: capitalize; font-size: 46px; text-align: center;">{{section.settings.title}}</h3>
+               </div>
+            </div>
+            {%- endif -%}
+            <div role="form" class="wpcf7" id="wpcf7-f23021-p22999-o1" lang="en-US" dir="ltr">
+               <div class="screen-reader-response"></div>
+               {%- form 'customer', class:'wpcf7-form' -%}
+                  <input type="hidden" name="contact[tags]" value="questions">
+                  <div class="feedback-form">
+                     <p><span class="wpcf7-form-control-wrap your-name">
+                        <input type="text" name="contact[name]" value="{%- if form[name] -%}{{ form[name] }}{%- elsif customer -%}{{ customer.name }}{%- endif -%}" size="40" class="{%- if form.errors contains 'name' -%}input__error{%- else -%}wpcf7-text{%- endif -%}" placeholder="{{section.settings.name}}" aria-required="true" aria-invalid="false">
+                     </span></p>
+                     <p><span class="wpcf7-form-control-wrap your-email">
+                        <input type="email" name="contact[email]" value="{%- if form.email -%}{{ form.email }}{%- elsif customer -%}{{ customer.email }}{%- endif -%}" size="40" class="{%- if form.errors contains 'email' -%}input__error{%- else -%}wpcf7-text{%- endif -%}" placeholder="{{section.settings.email}}" aria-required="true" aria-invalid="false">
+                     </span> </p>
+                     <p><span class="wpcf7-form-control-wrap your-subject">
+                        <input type="tel" class="{%- if form.errors contains 'phone' -%}input__error{%- else -%}wpcf7-text{%- endif -%}" name="contact[phone]" pattern="[0-9\-]*" value="{%- if form[phone] -%}{{ form[phone] }}{%- elsif customer -%}{{ customer.phone }}{%- endif -%}" placeholder="{{section.settings.phone}}" aria-required="true" aria-invalid="false">
+                     </span> </p>
+                     <p><input type="submit" value="{{section.settings.submit}}" class="wpcf7-form-control wpcf7-submit"></p>
+                  </div>
+                  {%- if form.posted_successfully? -%}
+                  <div class="mc4wp-response"><div class="mc4wp-alert mc4wp-success">{{ 'contact.form.post_success' | t }}</div></div>
+                  {%- elsif form.errors -%}
+                  <div class="mc4wp-response"><div class="mc4wp-alert mc4wp-error">{{ form.errors | default_errors }}</div></div>
+                  {%- endif -%}
+               {%- endform -%}
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{%- unless section.settings.row_stretch == 'default' -%}
+<div class="gl_row-full-width gl_clearfix"></div>
+{%- endunless -%}
+{%- schema -%}
+  {
+    "name": "Contact",
+    "class": "index-section section_contact",
+    "settings": [
+      {
+      "type": "header",
+      "content": "== General"
+      },
+      {
+        "type": "select",
+        "id": "row_stretch",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "stretch_row",
+            "label": "Stretch row"
+          },
+          {
+            "value": "stretch_row_content",
+            "label": "Stretch row and content"
+          },
+          {
+            "value": "stretch_row_content_no_spaces",
+            "label": "Stretch row and content (no paddings)"
+          }
+        ],
+        "label": "___ Row stretch",
+        "info": "Select stretching options for row and content (Note: stretched may not work properly if parent container has 'overflow: hidden' CSS property).",
+        "default": "default"
+      },
+      {
+        "id": "title",
+        "type": "text",
+        "label": "Heading",
+        "default": "If You Have Any Questions Please Contact Us."
+      },
+      {
+        "id": "name",
+        "type": "text",
+        "label": "Name",
+        "default": "Your Name"
+      },
+      {
+        "id": "email",
+        "type": "text",
+        "label": "Email",
+        "default": "Your Email"
+      },
+      {
+        "id": "phone",
+        "type": "text",
+        "label": "Phone",
+        "default": "8 600 700 45"
+      },
+      {
+        "id": "submit",
+        "type": "text",
+        "label": "Submit",
+        "default": "Send"
+      },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "image_picker",
+        "id": "section_bg_image",
+        "label": "Background Image"
+      },
+      {
+        "type": "color",
+        "id": "section_bg_color",
+        "label": "Background color",
+        "default":"#28a8af"
+      },
+      {
+        "type": "color",
+        "id": "section_border_color",
+        "label": "Border color"
+      },
+      {
+        "type": "select",
+        "id": "section_border_style",
+        "options": [
+         {
+            "value": "solid",
+            "label": "Solid"
+          },
+         {
+            "value": "dotted",
+            "label": "Dotted"
+          },
+          {
+            "value": "dashed",
+            "label": "Dashed"
+          },
+          {
+            "value": "double",
+            "label": "Double"
+          },
+          {
+            "value": "groove",
+            "label": "Groove"
+          },
+          {
+            "value": "Ridge",
+            "label": "Ridge"
+          },
+          {
+            "value": "inset",
+            "label": "Inset"
+          },
+          {
+            "value": "outset",
+            "label": "Outset"
+          }
+        ],
+        "label": "Border style",
+        "default": "solid"
+      },
+      {
+        "type": "text",
+        "id": "section_border",
+        "label": "Borders Integer px ( top-right-bottom-left )",
+        "info": "0-0-1px-0"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Contact",
+        "category": "Questions"
+      }
+    ]
+  }
+{% endschema %}

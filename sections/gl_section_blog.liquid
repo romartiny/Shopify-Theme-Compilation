@@ -1,0 +1,798 @@
+{%- assign blog = blogs[section.settings.blog] -%}
+{%- assign paginate_index = section.settings.paginate_index | plus: 0 -%}
+
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{%- capture data_section -%}
+  {%- if section.settings.row_stretch == 'stretch_row' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true'
+  {%- elsif section.settings.row_stretch == 'stretch_row_content' or section.settings.row_stretch == 'stretch_row_content_no_spaces' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true' data-gl-stretch-content='true'
+  {%- else -%}
+  {%- assign class_has_fill = '' -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- assign gl_mask = '' -%}
+{%- assign gl_masonry = '' -%}
+{%- case section.settings.style -%}
+    {%- when 'default' -%}
+      {%- assign gl_include = 'section_loop_blog_default' -%} 
+    {%- when 'default_alt' -%}
+      {%- assign gl_include = 'section_loop_blog_default_alt' -%}
+    {%- when 'small_images' -%}
+      {%- assign gl_include = 'section_loop_blog_small_images' -%}
+   {%- when 'masonry' -%}
+      {%- assign gl_include = 'section_loop_blog_masonry' -%}
+      {%- assign gl_masonry = 'blog-design-masonry' -%}
+   {%- when 'mask' -%}
+      {%- assign gl_mask = 'gl-mask' -%}
+      {%- assign gl_masonry = 'blog-design-mask' -%}
+      {%- assign gl_include = 'section_loop_blog_mask' -%}
+{%- endcase -%}
+{%- case section.settings.columns -%}
+    {%- when '1' -%}
+      {%- assign gl_colum_width = 'col-xs-12 col-sm-4 col-md-12' -%} 
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size = '1140x700' -%}
+      {%- else -%}
+         {%- assign image_size = '2048x2048' -%}
+      {%- endif -%} 
+    {%- when '2' -%}
+      {%- assign gl_colum_width = 'col-xs-12 col-sm-4 col-md-6' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size = '557x343' -%}
+      {%- else -%}
+         {%- assign image_size = '1024x1024' -%}
+      {%- endif -%}   
+    {%- when '3' -%}
+      {%- assign gl_colum_width = 'col-xs-12 col-sm-4 col-md-4' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size = '367x268' -%}
+      {%- else -%}
+         {%- assign image_size = 'grande' -%}
+      {%- endif -%} 
+    {%- when '4' -%}
+      {%- assign gl_colum_width = 'col-xs-12 col-sm-4 col-md-3' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size = '265x162' -%}
+      {%- else -%}
+         {%- assign image_size = 'large' -%}
+      {%- endif -%} 
+   {%- when '6' -%}
+      {%- assign gl_colum_width = 'col-xs-12 col-sm-4 col-md-2' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size = '167x103' -%}
+      {%- else -%}
+         {%- assign image_size = 'medium' -%}
+      {%- endif -%} 
+{%- endcase -%}
+{%- assign row_gl_masonry = '' -%}
+{%- if section.settings.style == 'masonry' or section.settings.style == 'mask' %}
+   {%- assign row_gl_masonry = 'masonry-container' -%}
+{%- endif -%}
+{%- if section.settings.enable_title == 'show' -%}
+   {%- assign enable_title = true -%}
+{%- else -%}
+   {%- assign enable_title = false -%}
+{%- endif -%}
+{%- if section.settings.enable_meta == 'show' -%}
+   {%- assign enable_meta = true -%}
+{%- else -%}
+   {%- assign enable_meta = false -%}
+{%- endif -%}
+{%- if section.settings.enable_text == 'show' -%}
+   {%- assign enable_text = true -%}
+{%- else -%}
+   {%- assign enable_text = false -%}
+{%- endif -%}
+{%- if section.settings.enable_button == 'show' -%}
+   {%- assign enable_button = true -%}
+{%- else -%}
+   {%- assign enable_button = false -%}
+{%- endif -%}
+{%- if section.settings.enable_post_date == 'show' -%}
+   {%- assign enable_post_date = true -%}
+{%- else -%}
+   {%- assign enable_post_date = false -%}
+{%- endif -%}
+{%- if section.settings.enable_post_categories == 'show' -%}
+   {%- assign enable_post_categories = true -%}
+{%- else -%}
+   {%- assign enable_post_categories = false -%}
+{%- endif -%}
+{%- if section.settings.use_pagination == 'pagination' -%}
+   {%- assign use_pagination = true -%}
+{%- else -%}
+   {%- assign use_pagination = false -%}
+{%- endif -%}
+{%- unless use_pagination -%}{%- assign current_page = '1' -%}{%- endunless -%}
+{%- paginate blog.articles by paginate_index -%}
+
+{%- if section.settings.use_pagination == 'more_btn' and paginate.next.is_link -%}
+   {%- assign use_more_btn = true -%}
+{%- else -%}
+   {%- assign use_more_btn = false -%}
+{%- endif -%}
+{{ style_block_section }}
+<div {{ data_section }} data-section-id="{{ section.id }}" data-section-type="gird-blog-section" {%- if section.settings.use_video and section.settings.video_url != blank %} data-gl-video-bg="{{ section.settings.video_url }}"{%- endif %} class="gl_custom_{{section.id}} featured-blog{%- if section.settings.row_stretch == 'stretch_row_content_no_spaces' %} gl_row-no-padding{%- endif %}{%- if section.settings.use_parallax %} basel-parallax{%- endif %} gl_row spb_row gl_row-fluid {{class_has_fill}} {%- if section.settings.use_video and section.settings.video_url != blank %} opacity-video-bg gl_video-bg-container gl_has_youtube{%- endif %}{%- if section.settings.full_height %} gl_row-o-full-height gl_row-o-columns-{{section.settings.columns_position}}{%- endif %}{%- if section.settings.equal_height %} gl_row-o-equal-height{%- endif -%}">
+    <div class="spb_column gl_column_container gl_col-sm-12">
+      <div class="gl_column-inner">
+         {%- if section.settings.title_style != 'simple_car' -%}   
+           <div class="title-wrapper basel-title-color-{{ section.settings.title_color }} basel-title-style-{{ section.settings.title_style }} basel-title-size-{{ section.settings.title_size }} text-{{ section.settings.title_align }}">
+              {%- if section.settings.sub_title != blank -%}
+              <span class="title-subtitle font-{{ section.settings.subtitle_font }}">{{ section.settings.sub_title }}</span>
+              {%- endif -%}
+              {%- if section.settings.title != blank -%}
+              {%- assign section_title = section.settings.title -%}
+              <div class="liner-continer"> 
+                <span class="left-line"></span> 
+                <span class="title">{%- if section_title contains ']' -%}{%- assign _section_title = section_title | split:'[' -%}{{_section_title[0]}} <span class="color-primary">{{ _section_title[1] | split:']' | first }}</span>{%- else -%}{{ section_title }}{%- endif -%}<span class="title-separator"><span></span></span></span> 
+                <span class="right-line"></span> 
+              </div>
+              {%- endif -%}
+              {%- if section.settings.text_after_title != blank -%}
+              <span class="title-after_title">{{ section.settings.text_after_title }}</span>
+              {%- endif -%}
+           </div>
+         {%- else -%}
+            {%- if section.settings.title != blank -%}
+            <div class="gl_row spb_row gl_row-fluid gl_mb_20">
+               <div class="spb_column gl_column_container gl_col-sm-3">
+                  <div class="gl_column-inner">
+                     <div class="spb_wrapper"></div>
+                  </div>
+               </div>
+               {%- assign section_title = section.settings.title -%}
+               <div class="spb_column gl_column_container gl_col-sm-6">
+                  <div class="gl_column-inner">
+                     <div class="spb_wrapper">
+                        <div class="spb_text_column spb_content_element gl_mb_15">
+                           <div class="spb_wrapper">
+                              <h4 style="font-size: 42px; text-align: center;">{%- if section_title contains ']' -%}{%- assign _section_title = section_title | split:'[' -%}{{_section_title[0]}} <span class="color-primary">{{ _section_title[1] | split:']' | first }}</span>{%- else -%}{{ section_title }}{%- endif -%}</h4>
+                           </div>
+                        </div>
+                        {%- if section.settings.text_after_title != blank -%}
+                           <div class="gl_separator spb_content_element gl_separator_align_center gl_sep_width_10 gl_sep_border_width_2 gl_sep_pos_align_center gl_separator_no_text gl_sep_color_grey gl_mb_20"><span class="gl_sep_holder gl_sep_holder_l"><span class="gl_sep_line"></span></span><span class="gl_sep_holder gl_sep_holder_r"><span class="gl_sep_line"></span></span></div>
+                           <div class="spb_text_column spb_content_element gl_mb_20">
+                              <div class="spb_wrapper">
+                                 <p style="text-align: center;">{{section.settings.text_after_title}}</p>
+                              </div>
+                           </div>
+                        {%- endif -%}
+                     </div>
+                  </div>
+               </div>
+               <div class="spb_column gl_column_container gl_col-sm-3">
+                  <div class="gl_column-inner">
+                     <div class="spb_wrapper"></div>
+                  </div>
+               </div>
+            </div>
+            {%- endif -%}
+         {%- endif -%}
+        <div class="spb_wrapper">
+            <div class="basel-blog-holder row {{ row_gl_masonry }} {{ gl_mask }}">
+             {%- if use_pagination -%}
+               {%- for article in blog.articles limit:paginate_index offset:paginate.current_offset -%}
+                   {%- include gl_include -%}
+                   {%- cycle '','','<div class="clearfix clearfix visible-sm-block"></div>' -%}
+                   {%- case section.settings.grid_columns -%}
+                       {%- when '2' -%}
+                         {%- cycle '','<div class="clearfix visible-md-block visible-lg-block"></div>' -%}
+                       {%- when '3' -%}
+                         {%- cycle '','','<div class="clearfix visible-md-block visible-lg-block"></div>' -%}
+                       {%- when '4' -%}
+                         {%- cycle '','','','<div class="clearfix visible-md-block visible-lg-block"></div>' -%}
+                      {%- when '6' -%}
+                         {%- cycle '','','','','','<div class="clearfix visible-md-block visible-lg-block"></div>' -%}
+                   {%- endcase -%}
+               {%- else -%}
+                   {%- for i in (1..3) -%}
+                     <article id="post-{{ i }}" class="blog-design-masonry blog-post-loop  col-xs-12 col-sm-4 col-md-4 post-{{ i }} post type-post status-publish format-standard has-post-thumbnail hentry category-lifestyle category-uncategorized">
+                      <header class="entry-header">
+                         <figure id="carousel-{{ i }}" class="entry-thumbnail">
+                            <div class="post-img-wrapp">
+                               <a href="/admin/blogs" target="_blank">
+                               <img width="300" height="183" src="//cdn.shopify.com/s/files/1/1933/6253/files/blog-placeholder.jpg" class="attachment-large wp-post-image attachment-medium" alt="">           
+                               </a>
+                            </div>
+                            <div class="post-image-mask">
+                               <a href="/admin/blogs" target="_blank">{{ 'blogs.article.read_more' | t }}</a>
+                            </div>
+                         </figure>
+                         <div class="post-date">
+                            <span class="post-date-day">{{ 'now' | date: "%d" }}</span>
+                            <span class="post-date-month">{{ 'now' | date: "%B" }}</span>
+                         </div>
+                         <div class="post-mask">
+                            <div class="meta-post-categories"><a href="/admin/blogs" rel="category tag" target="_blank">Lifestyle</a>, <a href="/admin/blogs" rel="category tag" target="_blank">Uncategorized</a></div>
+                            <h3 class="entry-title">
+                               <a href="/admin/blogs" rel="bookmark" target="_blank">{{ 'homepage.onboarding.blog_title' | t }}</a>
+                            </h3>
+                            <div class="entry-meta">
+                               <ul class="entry-meta-list">
+                                  <li class="meta-author">By <a href="/admin/blogs" rel="author" target="_blank">{{ 'homepage.onboarding.blog_author' | t }}</a></li>
+                                  <li><span class="meta-reply"><a href="/admin/blogs" target="_blank">{{ 'blogs.comments.title_leave' | t }}</a></span></li>
+                               </ul>
+                            </div>
+                            <!-- .entry-meta -->
+                         </div>
+                      </header>
+                      <!-- .entry-header -->
+                      <div class="entry-content">
+                         <p>{{ 'homepage.onboarding.blog_excerpt' | t }}</p>
+                         <p class="read-more-section"><a class="btn btn-style-link btn-read-more more-link" href="/admin/blogs" target="_blank">Read more</a></p>
+                      </div>
+                      <!-- .entry-content -->
+                   </article>
+                   {%- endfor -%}
+               {%- endfor -%}
+             {%- else -%}
+               {%- for article in blog.articles limit:paginate_index -%}
+                 {%- include gl_include -%}
+                 {%- unless section.settings.style == 'masonry' or section.settings.style == 'mask' %}
+                     {%- cycle '','','<div class="clearfix clearfix visible-sm-block"></div>' -%}
+                     {%- case section.settings.grid_columns -%}
+                         {%- when '2' -%}
+                           {%- cycle '','<div class="clearfix visible-md-block visible-lg-block"></div>' -%}
+                         {%- when '3' -%}
+                           {%- cycle '','','<div class="clearfix visible-md-block visible-lg-block"></div>' -%}
+                         {%- when '4' -%}
+                           {%- cycle '','','','<div class="clearfix visible-md-block visible-lg-block"></div>' -%}
+                        {%- when '6' -%}
+                           {%- cycle '','','','','','<div class="clearfix visible-md-block visible-lg-block"></div>' -%}
+                     {%- endcase -%}
+                 {%- endunless -%}
+               {%- else -%}
+                   {%- for i in (1..3) -%}
+                     <article id="post-{{ i }}" class="blog-design-masonry blog-post-loop col-xs-12 col-sm-4 col-md-4 post-{{ i }} post type-post status-publish format-standard has-post-thumbnail hentry category-lifestyle category-uncategorized">
+                      <header class="entry-header">
+                         <figure id="carousel-{{ i }}" class="entry-thumbnail">
+                            <div class="post-img-wrapp">
+                               <a href="/admin/blogs" target="_blank">
+                               <img width="300" height="183" src="//cdn.shopify.com/s/files/1/1933/6253/files/blog-placeholder.jpg" class="attachment-large wp-post-image attachment-medium" alt="">           
+                               </a>
+                            </div>
+                            <div class="post-image-mask">
+                               <a href="/admin/blogs" target="_blank">{{ 'blogs.article.read_more' | t }}</a>
+                            </div>
+                         </figure>
+                         <div class="post-date">
+                            <span class="post-date-day">{{ 'now' | date: "%d" }}</span>
+                            <span class="post-date-month">{{ 'now' | date: "%B" }}</span>
+                         </div>
+                         <div class="post-mask">
+                            <div class="meta-post-categories"><a href="/admin/blogs" rel="category tag" target="_blank">Lifestyle</a>, <a href="/admin/blogs" rel="category tag" target="_blank">Uncategorized</a></div>
+                            <h3 class="entry-title">
+                               <a href="/admin/blogs" rel="bookmark" target="_blank">{{ 'homepage.onboarding.blog_title' | t }}</a>
+                            </h3>
+                            <div class="entry-meta">
+                               <ul class="entry-meta-list">
+                                  <li class="meta-author">By <a href="/admin/blogs" rel="author" target="_blank">{{ 'homepage.onboarding.blog_author' | t }}</a></li>
+                                  <li><span class="meta-reply"><a href="/admin/blogs" target="_blank">{{ 'blogs.comments.title_leave' | t }}</a></span></li>
+                               </ul>
+                            </div>
+                            <!-- .entry-meta -->
+                         </div>
+                      </header>
+                      <!-- .entry-header -->
+                      <div class="entry-content">
+                         <p>{{ 'homepage.onboarding.blog_excerpt' | t }}</p>
+                         <p class="read-more-section"><a class="btn btn-style-link btn-read-more more-link" href="/admin/blogs" target="_blank">Read more</a></p>
+                      </div>
+                      <!-- .entry-content -->
+                   </article>
+                   {%- endfor -%}
+               {%- endfor -%}
+             {%- endif -%}
+             </div>
+             {%- if paginate.pages > 1 -%}
+             <div class="blog-footer">
+                 {%- if use_pagination -%}
+                   <div class="basel-pagination blog_gl_pagination">
+                      {%- include 'pagination',blog_ajax:true -%}
+                  </div>
+                 {%- elsif use_more_btn -%}
+                   <a href="/blogs/{{ blog.handle }}{{ paginate.next.url }}&q=paginate_{{paginate_index}}+pagination_{{use_pagination}}+more_{{use_more_btn}}+style_{{section.settings.style}}+columns_{{section.settings.columns}}+title_{{enable_title}}+meta_{{enable_meta}}+text_{{enable_text}}+read_{{enable_button}}+date_{{enable_post_date}}+glrow_{{section.settings.row_stretch}}+categories_{{enable_post_categories}}&view=ajax" class="btn basel-blog-load-more">{{ 'blogs.section.load_more' | t }}</a>
+                 {%- endif -%}
+             </div>
+             {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+  {%- unless section.settings.row_stretch == 'default' -%}
+  <div class="gl_row-full-width gl_clearfix"></div>
+{%- endunless -%}
+{%- endpaginate -%}
+{%- schema -%}
+  {
+    "name": "Blog posts",
+    "class": "index-section gird-blog-section",
+    "settings": [{
+        "type": "header",
+        "content": "== Row Settings"
+      },
+      {
+        "type": "select",
+        "id": "row_stretch",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "stretch_row",
+            "label": "Stretch row"
+          },
+          {
+            "value": "stretch_row_content",
+            "label": "Stretch row and content"
+          },
+          {
+            "value": "stretch_row_content_no_spaces",
+            "label": "Stretch row and content (no paddings)"
+          }
+        ],
+        "label": "___ Row stretch",
+        "info": "Select stretching options for row and content (Note: stretched may not work properly if parent container has 'overflow: hidden' CSS property).",
+        "default": "default"
+      },
+      {
+        "type": "header",
+        "content": "== Section title Settings"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "FEATURED CATEGORIES"
+      },
+      {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Sub Title",
+        "default": "MADE THE HARD WAY"
+      },
+      {
+        "type": "textarea",
+        "id": "text_after_title",
+        "label": "Text after title"
+      },
+      {
+        "type": "select",
+        "id": "title_style",
+        "label": "Title style",
+        "options": [
+        {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "simple",
+            "label": "Simple"
+          },
+          {
+            "value": "simple_car",
+            "label": "Simple Car"
+          },
+          {
+            "value": "cross",
+            "label": "X sign"
+          },
+          {
+            "value": "bordered",
+            "label": "Bordered"
+          },
+          {
+            "value": "shadow",
+            "label": "Shadow"
+          }
+        ],
+        "default": "default"
+      },
+      {
+        "type": "select",
+        "id": "title_color",
+        "label": "Title color",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "primary",
+            "label": "Primary color"
+          },
+          {
+            "value": "alt",
+            "label": "Alternative color"
+          },
+          {
+            "value": "black",
+            "label": "Black"
+          },
+          {
+            "value": "white",
+            "label": "White"
+          },
+          {
+            "value": "gradient",
+            "label": "Gradient"
+          }
+        ],
+        "default": "default"
+      },
+      {
+        "type": "select",
+        "id": "title_size",
+        "label": "Title size",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "small",
+            "label": "Small"
+          },
+          {
+            "value": "large",
+            "label": "Large"
+          },
+          {
+            "value": "extra-large",
+            "label": "Extra Large"
+          }
+        ],
+        "default": "default"
+      },
+      {
+        "type": "select",
+        "id": "subtitle_font",
+        "label": "Subtitle font",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "alt",
+            "label": "Alternative"
+          }
+        ],
+        "default": "default"
+      },
+      {
+        "type": "select",
+        "id": "title_align",
+        "label": "Title align",
+        "options": [
+         {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "center"
+      },
+      {
+        "type": "header",
+        "content": "== General Settings"
+      },
+      {
+        "id": "blog",
+        "type": "blog",
+        "label": "___ Blog"
+      },
+      {
+        "type": "text",
+        "id": "paginate_index",
+        "label": "___ Items per page ( integer )",
+        "info": "Number of items to show per page.",
+        "default": "3"
+      },
+      {
+        "type": "select",
+        "id": "use_pagination",
+        "label": "___ Pagination",
+        "default": "more_btn",
+        "options": [
+          {
+            "value": "none",
+            "label": "None"
+          },
+          {
+            "value": "more_btn",
+            "label": " Load more button"
+          },
+          {
+            "value": "pagination",
+            "label": "Pagination"
+          }
+        ]
+      },
+     {
+        "type": "header",
+        "content": "== Design settings"
+      },
+      {
+        "type": "text",
+        "id": "image_size",
+        "label": "Image Size (optional)",
+        "info": "Products may have different sizes 'width x height'",
+        "placeholder": "300x200"
+      },
+      {
+        "type": "select",
+        "id": "style",
+        "label": "___ Style",
+        "default": "masonry",
+        "info": "You can use different design for your blog styled for the theme",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "default_alt",
+            "label": "Default alternative"
+          },
+          {
+            "value": "small_images",
+            "label": "Small images"
+          },
+          {
+            "value": "masonry",
+            "label": "Masonry grid"
+          },
+          {
+            "value": "mask",
+            "label": "Mask on image"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "columns",
+        "label": "___ Columns",
+        "default": "3",
+        "info": "Blog items columns",
+        "options": [
+          {
+            "value": "1",
+            "label": "1"
+          },
+          {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          },
+          {
+            "value": "6",
+            "label": "6"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "enable_title",
+        "label": "___ Title for posts",
+        "default": "show",
+        "options": [
+          {
+            "value": "show",
+            "label": "Show"
+          },
+          {
+            "value": "hide",
+            "label": "Hide"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "enable_meta",
+        "label": "___ Meta information",
+        "default": "show",
+        "options": [
+          {
+            "value": "show",
+            "label": "Show"
+          },
+          {
+            "value": "hide",
+            "label": "Hide"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "enable_text",
+        "label": "___ Post text",
+        "default": "show",
+        "info": "not supported style Mask on image",
+        "options": [
+          {
+            "value": "show",
+            "label": "Show"
+          },
+          {
+            "value": "hide",
+            "label": "Hide"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "enable_button",
+        "label": "___ Read more button",
+        "info": "not supported style Mask on image",
+        "default": "show",
+        "options": [
+          {
+            "value": "show",
+            "label": "Show"
+          },
+          {
+            "value": "hide",
+            "label": "Hide"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "enable_post_categories",
+        "label": "___ Post categories",
+        "default": "show",
+        "options": [
+          {
+            "value": "show",
+            "label": "Show"
+          },
+          {
+            "value": "hide",
+            "label": "Hide"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "enable_post_date",
+        "label": "___ Post date",
+        "default": "show",
+        "options": [
+          {
+            "value": "show",
+            "label": "Show"
+          },
+          {
+            "value": "hide",
+            "label": "Hide"
+          }
+        ]
+      },
+      {
+        "type": "color",
+        "id": "section_bg_color",
+        "label": "Background color"
+      },
+      {
+        "type": "color",
+        "id": "section_border_color",
+        "label": "Border color"
+      },
+      {
+        "type": "select",
+        "id": "section_border_style",
+        "options": [
+         {
+            "value": "solid",
+            "label": "Solid"
+          },
+         {
+            "value": "dotted",
+            "label": "Dotted"
+          },
+          {
+            "value": "dashed",
+            "label": "Dashed"
+          },
+          {
+            "value": "double",
+            "label": "Double"
+          },
+          {
+            "value": "groove",
+            "label": "Groove"
+          },
+          {
+            "value": "Ridge",
+            "label": "Ridge"
+          },
+          {
+            "value": "inset",
+            "label": "Inset"
+          },
+          {
+            "value": "outset",
+            "label": "Outset"
+          }
+        ],
+        "label": "Border style",
+        "default": "solid"
+      },
+      {
+        "type": "text",
+        "id": "section_border",
+        "label": "Borders Integer px ( top-right-bottom-left )",
+        "info": "0-0-1px-0"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      }],
+    "presets": [
+      {
+        "name": "Blog",
+        "category": "Blogs"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,194 @@
+{%- if product.metafields.meta.video contains 'youtube' or product.metafields.meta.video contains 'vimeo' -%}
+   <div class="product-video-button">
+   <a href="{{product.metafields.meta.video}}"><span>{{ 'products.product.video' | t }}</span></a>
+   </div>
+   {%- endif -%}
+{%- for block in section.blocks-%}
+{%- if block.settings.product_id == product.handle -%}
+   <div class="product-360-button">
+      <a href="#product-360-view"><span>{{ 'products.product.view_360'| t }}</span></a>
+   </div>
+   <div id="product-360-view" class="product-360-view-wrapper mfp-hide">
+      <div class="basel-threed-view threed-id-{{product.id}}">
+         <ul class="threed-view-images"></ul>
+         <div class="spinner"><span>0%</span></div>
+      </div>
+      {%- capture _array_view_360 -%}
+         {%- for i in (1..25) -%}
+            {%- assign _image = 'image_' | append:i -%}
+            {%- assign image = block.settings[_image] -%}
+            {%- assign image_width = image.width | append:'x' -%}
+               {%- if image != blank -%}{%-include 'gl_image_format',src: image.src , size: image_width -%}{%- if forloop.last == false -%},{%- endif -%}{%- endif -%}
+         {%- endfor -%}
+      {%- endcapture -%}
+      {%- assign array_view_360 = _array_view_360 | replace: ' ,', ',' | replace: ', ', ',' | split: ',' -%}
+      {%- assign image = array_view_360[0] -%}
+      <script type="text/javascript">
+         jQuery(document).ready(function( $ ) {
+             $('.threed-id-{{product.id}}').ThreeSixty({
+                 totalFrames: {{array_view_360.size | json }},
+                 endFrame: {{array_view_360.size | json }}, 
+                 currentFrame: 1, 
+                 imgList: '.threed-view-images', 
+                 progress: '.spinner',
+                 imgArray: {{array_view_360 | json}},
+                 height: {{ image.height | json }},
+                 width: {{ image.width | json }},
+                 responsive: true,
+                 navigation: true
+             });
+         });
+      </script>
+   </div>
+   {%- break -%}
+{%- endif -%}
+{%- endfor %}
+{%- schema -%}
+  {
+    "name": "Product 360 View Gallery",
+    "class":"product-additional-galleries",
+   "blocks": [
+      {
+        "type": "item_image",
+        "name": "Add Images to Gallery",
+        "settings": [
+         {
+            "type": "text",
+            "id": "title",
+            "label": "Product Title"
+         },
+         {
+            "type": "product",
+            "id": "product_id",
+            "label": "Chose product using Product 360 View Gallery"
+         },
+         {
+            "type": "image_picker",
+            "id": "image_1",
+            "label": "Image 1"
+         },
+         {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image 2"
+         },
+         {
+            "type": "image_picker",
+            "id": "image_3",
+            "label": "Image 3"
+         },
+         {
+            "type": "image_picker",
+            "id": "image_4",
+            "label": "Image 4"
+         },
+         {
+            "type": "image_picker",
+            "id": "image_5",
+            "label": "Image 5"
+         },
+         {
+            "type": "image_picker",
+            "id": "image_6",
+            "label": "Image 6"
+         },
+         {
+            "type": "image_picker",
+            "id": "image_7",
+            "label": "Image 7"
+         },
+         {
+            "type": "image_picker",
+            "id": "image_8",
+            "label": "Image 8"
+         },
+         {
+            "type": "image_picker",
+            "id": "image_9",
+            "label": "Image 9"
+         },
+         {
+            "type": "image_picker",
+            "id": "image_10",
+            "label": "Image 10"
+         },
+         {
+            "type": "image_picker",
+            "id": "image_11",
+            "label": "Image 11"
+         },
+         {
+            "type": "image_picker",
+            "id": "image_12",
+            "label": "Image 12"
+         },
+         {
+            "type": "image_picker",
+            "id": "image_13",
+            "label": "Image 13"
+         },
+         {
+            "type": "image_picker",
+            "id": "image_14",
+            "label": "Image 14"
+         },
+         {
+            "type": "image_picker",
+            "id": "image_15",
+            "label": "Image 15"
+         },
+         {
+            "type": "image_picker",
+            "id": "image_16",
+            "label": "Image 16"
+         },
+         {
+            "type": "image_picker",
+            "id": "image_17",
+            "label": "Image 17"
+         },
+         {
+            "type": "image_picker",
+            "id": "image_18",
+            "label": "Image 18"
+         },
+         {
+            "type": "image_picker",
+            "id": "image_19",
+            "label": "Image 19"
+         },
+         {
+            "type": "image_picker",
+            "id": "image_20",
+            "label": "Image 20"
+         },
+         {
+            "type": "image_picker",
+            "id": "image_21",
+            "label": "Image 21"
+         },
+         {
+            "type": "image_picker",
+            "id": "image_22",
+            "label": "Image 22"
+         },
+         {
+            "type": "image_picker",
+            "id": "image_23",
+            "label": "Image 23"
+         },
+         {
+            "type": "image_picker",
+            "id": "image_24",
+            "label": "Image 24"
+         },
+         {
+            "type": "image_picker",
+            "id": "image_25",
+            "label": "Image 25"
+         }
+        ]
+      }
+    ]
+  }
+{% endschema %}

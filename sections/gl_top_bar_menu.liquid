@@ -1,0 +1,49 @@
+<div class="topbar-menu">
+   <div class="menu-top-bar-container"> 
+		<ul id="menu-top-bar" class="menu">
+      {%- if section.blocks.size > 0 -%}
+			{%- for block in section.blocks -%}
+				{%- if block.settings.button_link != blank and block.settings.title != blank -%}
+		    	<li id="menu-item-{{block.id}}" class="menu-item menu-item-{{block.settings.title | handleize}} menu-item-{{block.id}} menu-item-design-default item-event-hover">
+		         <a href="{{block.settings.button_link}}" target="_self">{%- if block.settings.icon != blank -%}<i class="fa fa-{{block.settings.icon}}"></i>{%- endif -%}{{ block.settings.title | capitalize  }}</a>
+		      </li>
+		      {%- endif -%}
+		  	{%- endfor -%}
+      {%- endif -%}
+      {%- if settings.show_multiple_currencies -%}{%- include 'gl_currency' -%}{%- endif -%}
+      {%- if settings.show_language_currencies and settings.language_link_list != blank -%}{%- include 'gl-lang' -%}{%- endif -%}
+		</ul>
+	</div>
+</div>
+{%- schema -%}
+  {
+    "name": "Top Bar Menu",
+    "class": "top-bar-right",
+    "blocks": [
+      {
+        "type":"menu_item_no_children",
+         "name":"Add Items",
+         "settings": [
+            {
+            "type": "text",
+            "id": "title",
+            "label": "Navigation Title",
+            "default": "My Account",
+            "info": "Ex: My Account"
+            },
+            {
+              "id": "icon",
+              "type": "text",
+              "label": "Icon",
+              "info":"Ex:user [fontawesome icons](http://fontawesome.io/icons/)"
+            },
+            {
+            "type": "url",
+            "id": "button_link",
+            "label": "Navigation link"
+            }
+         ]
+      }
+   ]
+  }
+{% endschema %}

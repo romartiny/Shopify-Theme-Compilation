@@ -1,0 +1,101 @@
+{%- unless id_call -%}
+{%- assign id_call = 'callBackVariant' -%}
+{%- endunless -%}
+{%- if settings.swatch_design == '3' -%}
+  {%- assign display_block = 'block' -%}
+{%-else-%}
+  {%- assign display_block = 'inline-block' -%}
+{%-endif-%}
+{%- if quick_view -%}
+   {%- assign id_call = 'callBackVariant_quick' -%}
+{%-endif-%}
+{%- if quick_shop -%}
+   {%- assign id_call = 'callBackVariant_quick_' | append:product.id -%}
+{%-endif-%}
+{%- if product.has_only_default_variant == false -%}
+      <style type="text/css">
+        {%- if product.variants.size == 1 -%}.single-product-content .variations {    margin-bottom: 20px;}{%- endif -%}
+      {%- capture min_css -%}
+        {%- if product.variants.size > 1 -%}
+           {%- if product.options.size == 2 -%}
+              #product-{{product.id}} #{{id_call}} #gl_select_1 .basel-swatch{
+                  display: none !important;
+              }
+              {%- for variant in product.variants -%}
+                    #product-{{product.id}} #{{id_call}}.bg_{{variant.option1 | handleize }} #gl_select_1 .bg_{{ variant.option2 | handleize }} {
+                     display: {{display_block}} !important;
+                    }
+              {%- endfor -%}
+           {%- elsif product.options.size == 3 -%}
+              #product-{{product.id}} #{{id_call}} #gl_select_1 .basel-swatch, #{{id_call}} #gl_select_2 .basel-swatch{
+                  display: none !important;
+              }
+              {%- for variant in product.variants -%}
+                   #product-{{product.id}} #{{id_call}}.bg_{{variant.option1 | handleize }} #gl_select_1 .bg_{{ variant.option2 | handleize }},
+                    #product-{{product.id}} #{{id_call}}.bg_{{variant.option1 | handleize }}.bg_{{variant.option2 | handleize }} #gl_select_2 .bg_{{ variant.option3 | handleize }} {
+                     display: {{display_block}} !important;
+                    }
+              {%- endfor -%}
+           {%- endif -%}
+        {%- endif -%}
+         {%- unless settings.swatch_style == '1' or settings.swatch_style == '3' -%}
+               {%- if settings.color_name_check != blank -%}{%- assign _gl_color_name = settings.color_name_check | replace: ' ,', ',' | replace: ', ', ',' | split: ',' -%}{%- assign gl_color_name = _gl_color_name | downcase -%}{%-else-%}{%- assign gl_color_name = '\nathan_dt\' -%}{%-endif-%}
+               {%- for option in product.options_with_values -%}
+               {%- assign downcased_option = option.name | downcase -%}
+               {%- assign downcased_option_check = option | downcase | prepend: '"' | append: '"' | strip -%} 
+                  {%- if downcased_option == 'color' or downcased_option == 'colour' or gl_color_name contains downcased_option_check -%}
+                     {% assign gl_option_index = forloop.index %}
+                     {%- assign option_index = forloop.index0 -%}
+                     {%- assign displayed_option_values = '' -%}
+                        {%- for variant in product.variants -%}
+                           {%- case gl_option_index -%}
+                            {%- when 1 -%}
+                            {%- assign gl_variant_color = variant.option1 -%} 
+                            {%- when 2 -%}
+                            {%- assign gl_variant_color = variant.option2 -%} 
+                            {%- when 3 -%}
+                            {%- assign gl_variant_color = variant.option3 -%} 
+                           {%- endcase -%}
+                           {%- if variant.featured_image.src != blank -%}
+                               {%- assign option_value = variant.options[option_index] -%}
+                               {%- unless displayed_option_values contains option_value -%}
+                                 #product-{{product.id}} #{{id_call}} .bg_{{ gl_variant_color | handleize }}
+                                 {%- if quick_shop -%},#{{id_call}} .bg_{{ gl_variant_color | handleize }}{%- endif -%} {
+                                    background-image: url({%-include 'gl_image_format',cache:true,src: variant.featured_image.src , size: '118x' -%});
+                                 }
+                                 {%- assign displayed_option_values = displayed_option_values | join: ',' -%}
+                                 {%- assign displayed_option_values = displayed_option_values | append: ',' | append: option_value -%}
+                                 {%- assign displayed_option_values = displayed_option_values | split: ',' -%}
+                               {%- endunless -%}
+                           {%- endif -%}
+                        {%- endfor -%}
+                  {%- endif -%}
+               {%- endfor -%} 
+               {%- for image in product.images -%}
+                  {% for variant in image.variants -%}
+                     {%- case gl_option_index -%}
+                      {%- when 1 -%}
+                      {%- assign gl_variant_color = variant.option1 -%} 
+                      {%- when 2 -%}
+                      {%- assign gl_variant_color = variant.option2 -%} 
+                      {%- when 3 -%}
+                      {%- assign gl_variant_color = variant.option3 -%} 
+                     {%- endcase -%}
+                     {%- if product.options.size == 3 -%}
+                     #product-{{product.id}} #{{id_call}}.bg_{{variant.option1 | handleize }}.bg_{{variant.option2 | handleize }}.bg_{{variant.option3 | handleize }} .bg_{{ gl_variant_color | handleize }} 
+                     {%- if quick_shop -%},#{{id_call}}.bg_{{variant.option1 | handleize }}.bg_{{variant.option2 | handleize }}.bg_{{variant.option3 | handleize }} .bg_{{ gl_variant_color | handleize }}{%- endif -%}{
+                        background-image: url({%-include 'gl_image_format',cache:true,src: image.src , size: '118x' -%});
+                     }
+                     {%- elsif product.options.size == 2 -%}
+                     #product-{{product.id}} #{{id_call}}.bg_{{variant.option1 | handleize }}.bg_{{variant.option2 | handleize }} .bg_{{ gl_variant_color | handleize }}
+                     {%- if quick_shop -%},#{{id_call}}.bg_{{variant.option1 | handleize }}.bg_{{variant.option2 | handleize }} .bg_{{ gl_variant_color | handleize }}{%- endif -%} {
+                        background-image: url({%-include 'gl_image_format',cache:true,src: image.src , size: '118x' -%});
+                     }
+                     {%- endif -%}
+                  {%- endfor -%}
+               {%- endfor -%}
+            {%- endunless -%}
+      {%- endcapture -%}
+      {{min_css | strip_newlines | remove: "  " }}
+      </style>
+{%- endif -%}

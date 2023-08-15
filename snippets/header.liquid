@@ -1,0 +1,20 @@
+{%- if settings.top_bar_enable and settings.header_design != 'menu-top' -%}
+<div class="topbar-wrapp color-scheme-{{settings.top_bar_color}}">
+   <div class="container">
+      <div class="topbar-content">
+         {%- if settings.top_bar_text != blank -%}
+         <div class="top-bar-left">{%- if settings.top_bar_text contains '[social_buttons' -%}{{settings.top_bar_text | split:'[social_buttons' | first }} {% if settings.top_bar_text contains 'social_buttons_share' -%}{%- assign gl_follow_social = false -%}{%- else -%}{%- assign gl_follow_social = true -%}{%- endif -%}{%- include 'social-sharing', gl_design:'icons-design-colored', gl_size:'icons-size-small', follow_social:gl_follow_social -%}{%-else-%}{{settings.top_bar_text}}{%- endif -%}</div>
+         {%- endif -%}
+         {%- section 'gl_top_bar_menu' -%}
+      </div>
+   </div>
+</div>
+<!--END TOP HEADER-->
+{%- endif -%}
+<!-- HEADER -->
+<header class="main-header header-has-no-bg header-{{settings.header_design}} icons-design-{{settings.header_icon_style}} color-scheme-{{settings.header_color_scheme}}">
+   {%- assign name_el_header = 'header_' | append:settings.header_design -%}
+   {%- include name_el_header -%}
+</header>
+<!--END MAIN HEADER-->
+<div class="clear"></div>

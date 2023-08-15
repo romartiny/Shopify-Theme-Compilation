@@ -1,0 +1,234 @@
+{%- if settings.show_share_btn_contact_us and settings.share_type_contact_us == '1' -%}
+   {%- assign gl_follow_social = false -%}
+{%- elsif settings.show_share_btn_contact_us and settings.share_type_contact_us == '2' -%}
+   {%- assign gl_follow_social = true -%}
+{%- endif -%}
+<div class="main-page-wrapper">
+	<!-- MAIN CONTENT AREA -->
+	<div class="container">
+		<div class="row">
+			<div class="site-content col-sm-12" role="main">
+				<article id="post-{{page.id}}" class="post-{{page.id}} page type-page status-publish hentry">
+					<div class="entry-content">
+						{%- if settings.lat_contact_us != blank and settings.lon_contact_us != blank -%}
+						<div data-gl-full-width="true" data-gl-full-width-init="true" data-gl-stretch-content="{%- if settings.general_layout == 'boxed' %}false{%- else -%}true{%- endif -%}" class="gl_row spb_row gl_row-fluid gl_row-no-padding" style="margin-bottom: 40px">
+						   <div class="spb_column gl_column_container gl_col-sm-12">
+						      <div class="gl_column-inner ">
+						         <div class="spb_wrapper">
+						            <div class="google-map-container google-map-container-with-content" style="height: {{settings.height_contact_us}}px;">
+						               <div class="basel-google-map-wrapper">
+						                  <div class="basel-google-map with-content google-map-{{page.id}}" style="height: {{settings.height_contact_us}}px; position: relative; overflow: hidden;">
+						                     
+						                  </div>
+						               </div>
+						               {%- if settings.title_map_contact_us != blank or settings.text_map_html_contact_us != blank -%}
+						               <div class="gl_row spb_row gl_inner gl_row-fluid" style="margin-right: 10%;margin-bottom: 0px;margin-left: 10%;padding-top: 150px">
+						                  <div class="spb_column gl_column_container gl_col-sm-6 gl_col-lg-4 gl_col-md-5 gl_col-xs-12">
+						                     <div class="gl_column-inner" style="margin-bottom: 150px">
+						                        <div class="spb_wrapper">
+						                           <div class="spb_text_column spb_content_element color-scheme-light" style="padding-top: 50px;padding-right: 40px;padding-bottom: 50px;padding-left: 55px;background-color: #161616">
+						                              <div class="spb_wrapper">
+						                                 {%- if settings.title_map_contact_us != blank -%}<h3 class="font-title">{{settings.title_map_contact_us}}</h3>{%- endif -%}
+						                                 {%- if settings.text_map_html_contact_us != blank -%}
+						                                 <p>{%- if settings.icon_contact_us != blank -%}<span class="gl_icon_element-icon fa fa-{{settings.icon_contact_us}}" style="color: #fff!important; float: left; font-size: 38px; margin: 0 10px 0;">&nbsp;</span>{%- endif -%}
+						                                 {{settings.text_map_html_contact_us}}
+						                                 </p>
+						                                 {%- endif -%}
+						                                 {%- if settings.contact_us_btn_title != blank and settings.contact_us_btn_url != blank -%}
+						                                 <p><a class="btn btn-style-link btn-color-white" href="{{settings.contact_us_btn_url}}">{{settings.contact_us_btn_title}}</a></p>
+						                                 {%- endif -%}
+						                              </div>
+						                           </div>
+						                        </div>
+						                     </div>
+						                  </div>
+						                  <div class="spb_column gl_column_container gl_col-sm-7">
+						                     <div class="gl_column-inner ">
+						                        <div class="spb_wrapper"></div>
+						                     </div>
+						                  </div>
+						               </div>
+						               {%- endif -%}
+						            </div>
+						            <script type="text/javascript">
+						               jQuery(document).ready(function() {
+					               	new Maplace({
+					               		locations: [
+					               		    {
+					               				lat: {{settings.lat_contact_us }},
+					               				lon: {{settings.lon_contact_us }},
+					               				title: '',
+					               		      animation: google.maps.Animation.DROP
+					               		    }
+					               		],
+					               		controls_on_map: false,
+					               		title: '',
+					               	    map_div: '.google-map-{{page.id}}',
+					               	    start: 1,
+					               	    map_options: {
+					               	        zoom: 15,
+					               	        scrollwheel: false					    
+					               	     }
+					               	     {%- if settings.style_json_contact_us != blank -%},
+				                          styles: {
+				                                'Custom style': {{ settings.style_json_contact_us }}}
+				                           {%- endif %}
+					               	    }).Load();
+						               });
+						            </script>
+						         </div>
+						      </div>
+						   </div>
+						</div>
+						<div class="gl_row-full-width gl_clearfix"></div>
+						{%- endif -%}
+						<div data-gl-full-width="true" data-gl-full-width-init="true" class="gl_row spb_row gl_row-fluid gl_row-has-fill" style="margin-bottom: -20px;border-bottom-width: 0px;border-bottom-color: #f4f4f4;border-bottom-style: solid">
+						   {%- if settings.show_form_contact_us -%}
+						   <div class="spb_column gl_column_container{%- if settings.show_info_contact_us %} gl_col-sm-6{%- else %} gl_col-sm-12{%- endif -%}">
+						      <div class="gl_column-inner" style="margin-bottom: 50px;padding-right: 50px">
+						         <div class="spb_wrapper">
+						         	{%- if settings.heading_form_contact_us != blank -%}
+						            <div class="title-wrapper  basel-title-color-default basel-title-style-bordered basel-title-size-default text-left gl_mb_35">
+						               <div class="liner-continer">
+						                  <span class="left-line"></span> 
+						                  <h4 class="title"><strong>{{settings.heading_form_contact_us}}</strong><span class="title-separator"><span></span></span></h4>
+						                  <span class="right-line"></span> 
+						               </div>
+						            </div>
+						            {%- endif -%}
+						            <div role="form" class="wpcf7" lang="{{ shop.locale }}" dir="ltr">
+					                  <div class="screen-reader-response"></div>
+					                   {%- form 'contact' -%}
+					                     {%- if form.posted_successfully? -%}
+					                        <div class="wpcf7-response-output wpcf7-mail-sent-ok" role="alert">{{ 'contact.form.post_success' | t }}</div>
+					                     {%- elsif form.errors -%}
+					                        <div class="wpcf7-response-output wpcf7-validation-errors" role="alert">{{ form.errors | default_errors }}</div>
+					                     {%- endif -%}
+					                     <div class="row">
+					                        <div class="col-md-6">
+					                           <p>
+					                              <label>{{ 'contact.form.name' | t }}</label> 
+					                              <span class="wpcf7-form-control-wrap your-name">
+					                              <input type="text" name="contact[name]" value="{%- if form[name] -%}{{ form[name] }}{%- elsif customer -%}{{ customer.name }}{%- endif -%}" size="40" class="{%- if form.errors contains 'name' -%}input__error{%- else -%}input__ok{%- endif -%}" aria-required="true" aria-invalid="false">
+					                              </span> 
+					                           </p>
+					                        </div>
+					                        <div class="col-md-6">
+					                           <p>
+					                              <label>{{ 'contact.form.email' | t }}</label> 
+					                              <span class="wpcf7-form-control-wrap your-email">
+					                                 <input type="email" name="contact[email]" value="{%- if form.email -%}{{ form.email }}{%- elsif customer -%}{{ customer.email }}{%- endif -%}" size="40" class="{%- if form.errors contains 'email' -%}input__error{%- else -%}input__ok{%- endif -%}" aria-required="true" aria-invalid="false">
+					                              </span> 
+					                           </p>
+					                        </div>
+					                     </div>
+					                     <p>
+					                        <label>{{ 'contact.form.phone' | t }}</label>
+					                        <span class="wpcf7-form-control-wrap your-subject">
+					                           <input type="tel" class="{%- if form.errors contains 'phone' -%}input__error{%- else -%}input__ok{%- endif -%}" name="contact[phone]" pattern="[0-9\-]*" value="{%- if form[phone] -%}{{ form[phone] }}{%- elsif customer -%}{{ customer.phone }}{%- endif -%}" aria-required="true" aria-invalid="false">
+					                        </span> 
+					                     </p>
+					                     <p>
+					                        <label>{{ 'contact.form.message' | t }}</label> 
+					                        <span class="wpcf7-form-control-wrap your-message">
+					                           <textarea name="contact[body]" cols="40" rows="10" class="{%- if form.errors contains 'body' -%}input__error{%- else -%}input__ok{%- endif -%}" aria-required="true" aria-invalid="false">{%- if form.body -%}{{ form.body }}{%- endif -%}</textarea>
+					                        </span> 
+					                     </p>
+					                     <p><input type="submit" value="{{ 'contact.form.submit' | t }}" class="wpcf7-form-control wpcf7-submit btn btn-color-primary"></p>
+					                  {%- endform -%}
+					               </div>
+						         </div>
+						      </div>
+						   </div>
+						   {%- endif -%}
+						   {%- if settings.show_info_contact_us -%}
+						   <div class="spb_column gl_column_container{%- if settings.show_form_contact_us %} gl_col-sm-6{%- else %} gl_col-sm-12{%- endif -%}">
+						      <div class="gl_column-inner" style="margin-bottom: 50px;padding-right: 100px">
+						         <div class="spb_wrapper">
+						            {%- if settings.heading_info_contact_us != blank -%}
+						            <div class="title-wrapper basel-title-color-default basel-title-style-bordered basel-title-size-default text-left gl_mb_30">
+						               <div class="liner-continer">
+						                  <span class="left-line"></span> 
+						                  <h4 class="title"><strong>{{settings.heading_info_contact_us}}</strong><span class="title-separator"><span></span></span></h4>
+						                  <span class="right-line"></span> 
+						               </div>
+						            </div>
+						            {%- endif -%}
+						            {%- if settings.text_info_contact_us != blank -%}
+						            <div class="spb_text_column spb_content_element gl_mb_40">
+						               <div class="spb_wrapper">{{settings.text_info_contact_us}}</div>
+						            </div>
+						            {%- endif -%}
+						            {%- if settings.heading_cont_contact_us != blank -%}
+						            <div class="title-wrapper basel-title-color-default basel-title-style-bordered basel-title-size-default text-left gl_mb_25">
+						               <div class="liner-continer">
+						                  <span class="left-line"></span> 
+						                  <h4 class="title"><strong>{{settings.heading_cont_contact_us}}</strong><span class="title-separator"><span></span></span></h4>
+						                  <span class="right-line"></span> 
+						               </div>
+						            </div>
+						            {%- endif -%}
+						            <div class="gl_row spb_row gl_inner gl_row-fluid gl_mb_5">
+						               <div class="spb_column gl_column_container gl_col-sm-6">
+						                  <div class="gl_column-inner">
+						                     <div class="spb_wrapper">
+						                     	{%- if settings.html_one_contact_us != blank -%}
+						                     	{%- assign title_one = settings.html_one_contact_us | split: ']' -%}
+						                        <div class="spb_text_column spb_content_element">
+						                           <div class="spb_wrapper">
+						                              <p>{%- if settings.html_one_contact_us contains '[' -%}<span class="gl_icon_element-icon icon-{{title_one[0] | split: '[' | last}} icons" style="float: left; font-size: 38px;">&nbsp;</span>{{title_one[1]}}{%- else -%}{{settings.html_one_contact_us}}{%- endif -%}</p>
+						                           </div>
+						                        </div>
+						                        {%- endif -%}
+						                        {%- if settings.html_three_contact_us != blank -%}
+						                        {%- assign title_three = settings.html_three_contact_us | split: ']' -%}
+						                        <div class="spb_text_column spb_content_element">
+						                           <div class="spb_wrapper">
+						                              <p>{%- if settings.html_three_contact_us contains '[' -%}<span class="gl_icon_element-icon icon-{{title_three[0] | split: '[' | last}} icons" style="float: left; font-size: 38px;">&nbsp;</span>{{title_three[1]}}{%- else -%}{{settings.html_three_contact_us}}{%- endif -%}</p>
+						                           </div>
+						                        </div>
+						                        {%- endif -%}
+						                     </div>
+						                  </div>
+						               </div>
+						               <div class="spb_column gl_column_container gl_col-sm-6">
+						                  <div class="gl_column-inner ">
+						                     <div class="spb_wrapper">
+						                     	{%- if settings.html_two_contact_us != blank -%}
+						                     	{%- assign title_two = settings.html_two_contact_us | split: ']' -%}
+						                        <div class="spb_text_column spb_content_element">
+						                           <div class="spb_wrapper">
+						                              <p>{%- if settings.html_two_contact_us contains '[' -%}<span class="gl_icon_element-icon icon-{{title_two[0] | split: '[' | last}} icons" style="float: left; font-size: 38px;">&nbsp;</span>{{title_two[1]}}{%- else -%}{{settings.html_two_contact_us}}{%- endif -%}</p>
+						                           </div>
+						                        </div>
+						                        {%- endif -%}
+						                        {%- if settings.html_four_contact_us != blank -%}
+						                        {%- assign title_four = settings.html_four_contact_us | split: ']' -%}
+						                        <div class="spb_text_column spb_content_element">
+						                           <div class="spb_wrapper">
+						                              <p>{%- if settings.html_four_contact_us contains '[' -%}<span class="gl_icon_element-icon icon-{{title_four[0] | split: '[' | last}} icons" style="float: left; font-size: 38px;">&nbsp;</span>{{title_four[1]}}{%- else -%}{{settings.html_four_contact_us}}{%- endif -%}</p>
+						                           </div>
+						                        </div>
+						                        {%- endif -%}
+						                     </div>
+						                  </div>
+						               </div>
+						            </div>
+						            {%- if settings.show_share_btn_contact_us -%}{%- include 'social-sharing', gl_design:'icons-design-colored', gl_size:'icons-size-default',gl_text_align:'left', follow_social:gl_follow_social -%}{%- endif -%}
+						         </div>
+						      </div>
+						   </div>
+						   {%- endif -%}
+						</div>
+						<div class="gl_row-full-width gl_clearfix"></div>
+					</div>
+				</article>
+			</div><!-- .site-content -->
+		</div><!-- end row -->
+	</div><!-- end container -->
+</div><!-- .main-page-wrapper -->
+<!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'js_cp_gl.min.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+<!--[if lte IE 9]><script src="{{ 'js_cp_gl.min.js' | asset_url }}"></script><![endif]-->
+{%- if settings.api_key != blank -%}
+<script src="https://maps.google.com/maps/api/js?key={{settings.api_key}}&ver=4.7.5"></script>
+{%- endif -%}

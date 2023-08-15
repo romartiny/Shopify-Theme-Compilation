@@ -1,0 +1,498 @@
+{%- if section.settings.hidden_section -%}{%- capture check_admin -%}{{ content_for_header  }}{%- endcapture -%}<style> #shopify-section-{{ section.id }} { {%- if check_admin contains 'design_mode' -%}opacity: .5;filter: alpha(opacity=50){%- else -%}display: none !important{%- endif -%}}</style>{%- endif -%}
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{%- capture data_section -%}
+  {%- if section.settings.row_stretch == 'stretch_row' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true'
+  {%- elsif section.settings.row_stretch == 'stretch_row_content' or section.settings.row_stretch == 'stretch_row_content_no_spaces' -%}
+   {%- assign class_has_fill = 'gl_row-has-fill' -%}
+   data-gl='has_section_gl_js' data-gl-full-width='true' data-gl-full-width-init='true' data-gl-stretch-content='true'
+  {%- else -%}
+  {%- assign class_has_fill = '' -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- unless image_size != blank -%}
+  {%- assign image_size = '2048x' -%}
+{%- endunless -%}
+
+{%- capture check_admin -%}{{ content_for_header  }}{%- endcapture -%}
+{%- capture style_block_text -%}
+   {%- if section.settings.section_information_color != blank or section.settings.section_information_image != blank -%}
+   style="{%- if section.settings.section_information_color != blank -%}background-color: {{ section.settings.section_information_color }} !important;{%- endif -%}{%- if section.settings.section_information_image != blank -%} background-image: url({%-include 'gl_image_format',src: section.settings.section_information_image , size: '2048x' -%}) !important{%- endif -%}"
+   {%- endif -%}
+{%- endcapture -%}
+{%- if check_admin contains 'design_mode' -%}{%- assign admin_shopify = true -%}{%- endif -%}
+{{ style_block_section }}
+<div {{ data_section }}{%- if section.settings.use_video and section.settings.video_url != blank %} data-gl-video-bg="{{ section.settings.video_url }}"{%- endif %} class="gl_custom_{{section.id}} {% if section.settings.row_stretch == 'stretch_row_content_no_spaces' %}gl_row-no-padding{%- endif %}{%- if section.settings.use_parallax %} basel-parallax{%- endif %} gl_row spb_row gl_row-fluid {{class_has_fill}} {%- if section.settings.use_video and section.settings.video_url != blank %} opacity-video-bg gl_video-bg-container gl_has_youtube{%- endif %}{%- if section.settings.full_height %} gl_row-o-full-height gl_row-o-columns-{{section.settings.columns_position}}{%- endif %}">
+   {%- if section.blocks.size > 0 -%}
+   {%- for block in section.blocks -%}
+   {%- case block.type -%}
+      {%- when 'form' -%}
+      <div class="spb_column gl_column_container {% if section.blocks.size == 1 -%}gl_col-sm-12{% elsif section.blocks.size == 2 -%}gl_col-sm-6{%- endif -%}">
+         <div class="gl_column-inner gl_pl_40 gl_pr_40">
+            <div class="spb_wrapper">
+               {%- if block.settings.title_form != blank or block.settings.richtext_form_html != blank -%}
+               <div class="spb_text_column spb_content_element">
+                  <div class="spb_wrapper">
+                     {%- if block.settings.title_form != blank -%}<h4><strong>{{ block.settings.title_form }}</strong></h4>{%- endif -%}
+                      <div class="rte-setting">{{ block.settings.richtext_form_html }}</div>
+                  </div>
+               </div>
+               {%- endif -%}
+               <div role="form" class="wpcf7" lang="{{ shop.locale }}" dir="ltr">
+                  <div class="screen-reader-response"></div>
+                   {%- form 'contact' -%}
+                     {%- if form.posted_successfully? -%}
+                        <div class="wpcf7-response-output wpcf7-mail-sent-ok" role="alert">{{ 'contact.form.post_success' | t }}</div>
+                     {%- elsif form.errors -%}
+                        <div class="wpcf7-response-output wpcf7-validation-errors" role="alert">{{ form.errors | default_errors }}</div>
+                     {%- endif -%}
+                     <div class="row">
+                        <div class="col-md-6">
+                           <p>
+                              <label>{{ 'contact.form.name' | t }}</label> 
+                              <span class="wpcf7-form-control-wrap your-name">
+                              <input type="text" name="contact[name]" value="{%- if form[name] -%}{{ form[name] }}{%- elsif customer -%}{{ customer.name }}{%- endif -%}" size="40" class="{%- if form.errors contains 'name' -%}input__error{%- else -%}input__ok{%- endif -%}" aria-required="true" aria-invalid="false">
+                              </span> 
+                           </p>
+                        </div>
+                        <div class="col-md-6">
+                           <p>
+                              <label>{{ 'contact.form.email' | t }}</label> 
+                              <span class="wpcf7-form-control-wrap your-email">
+                                 <input type="email" name="contact[email]" value="{%- if form.email -%}{{ form.email }}{%- elsif customer -%}{{ customer.email }}{%- endif -%}" size="40" class="{%- if form.errors contains 'email' -%}input__error{%- else -%}input__ok{%- endif -%}" aria-required="true" aria-invalid="false">
+                              </span> 
+                           </p>
+                        </div>
+                     </div>
+                     <p>
+                        <label>{{ 'contact.form.phone' | t }}</label>
+                        <span class="wpcf7-form-control-wrap your-subject">
+                           <input type="tel" class="{%- if form.errors contains 'phone' -%}input__error{%- else -%}input__ok{%- endif -%}" name="contact[phone]" pattern="[0-9\-]*" value="{%- if form[phone] -%}{{ form[phone] }}{%- elsif customer -%}{{ customer.phone }}{%- endif -%}" aria-required="true" aria-invalid="false">
+                        </span> 
+                     </p>
+                     <p>
+                        <label>{{ 'contact.form.message' | t }}</label> 
+                        <span class="wpcf7-form-control-wrap your-message">
+                           <textarea name="contact[body]" cols="40" rows="10" class="{%- if form.errors contains 'body' -%}input__error{%- else -%}input__ok{%- endif -%}" aria-required="true" aria-invalid="false">{%- if form.body -%}{{ form.body }}{%- endif -%}</textarea>
+                        </span> 
+                     </p>
+                     <p><input type="submit" value="{{ 'contact.form.submit' | t }}" class="wpcf7-form-control wpcf7-submit btn btn-color-primary"></p>
+                  {%- endform -%}
+               </div>
+            </div>
+         </div>
+      </div>
+      {%- when 'map' -%}
+      <div class="gl_has_google_map spb_column gl_column_container {% if section.blocks.size == 1 -%}gl_col-sm-12{% elsif section.blocks.size == 2 -%}gl_col-sm-6{%- endif -%}">
+         <div class="gl_column-inner gl_pl_40 gl_pr_40">
+            <div class="spb_wrapper">
+               {%- if block.settings.title_map != blank or block.settings.richtext_map_html != blank -%}
+               <div class="spb_text_column spb_content_element">
+                  <div class="spb_wrapper">
+                     {%- if block.settings.title_map != blank -%}<h4><strong>{{ block.settings.title_map }}</strong></h4>{%- endif -%}
+                     <div class="rte-setting">{{ block.settings.richtext_map_html }}</div>
+                  </div>
+               </div>
+               {%- endif -%}
+               <div class="google-map-container">
+                  <div class="basel-google-map-wrapper">
+                     <div class="basel-google-map without-content google-map-{{ section.id }}" style="height:{{block.settings.height}}px;position: relative; overflow: hidden"></div>
+                  </div>
+               </div>
+               {%- if block.settings.lat != blank and block.settings.lon != blank -%}
+               {%- if admin_shopify -%}
+                  <script type="text/javascript">
+                     function glMaplace() {
+                        new Maplace({
+                           locations: [
+                               {
+                                 lat: {{ block.settings.lat }},
+                                 lon: {{ block.settings.lon }},
+                                 title: '',
+                                 animation: google.maps.Animation.DROP
+                               }
+                           ],
+                           controls_on_map: false,
+                           title: '',
+                          map_div: '.google-map-{{section.id}}',
+                          start: 1,
+                          map_options: {
+                           zoom: 15,
+                           scrollwheel: false                   
+                           }
+                           {%- if block.settings.style_json != blank -%},
+                          styles: {
+                                'Custom style': {{ block.settings.style_json }}}
+                           {%- endif %}
+                        }).Load();
+                     }
+                     jQuery(document).ready(function() {
+                        glMaplace();
+                  });
+                     $(document)
+                        .on('shopify:section:load', glMaplace)
+                       .on('shopify:section:unload', glMaplace)
+                       .on('shopify:section:select',glMaplace)
+                       .on('shopify:section:deselect', glMaplace)
+                       .on('shopify:block:select',glMaplace)
+                       .on('shopify:block:deselect', glMaplace);
+                  </script>
+               {%- else -%}
+                  <script type="text/javascript">
+                     jQuery(document).ready(function() {
+                        new Maplace({
+                           locations: [
+                               {
+                                 lat: {{ block.settings.lat }},
+                                 lon: {{ block.settings.lon }},
+                                 title: '',
+                                 animation: google.maps.Animation.DROP
+                               }
+                           ],
+                           controls_on_map: false,
+                           title: '',
+                          map_div: '.google-map-{{section.id}}',
+                          start: 1,
+                          map_options: {
+                           zoom: 15,
+                           scrollwheel: false                   
+                           }
+                           {%- if block.settings.style_json != blank -%},
+                          styles: {
+                                'Custom style': {{ block.settings.style_json }}}
+                           {%- endif %}
+                        }).Load();
+                  });
+                  </script>
+               {%- endif -%}
+               {%- endif -%}
+               <div class="gl_row spb_row gl_inner gl_row-fluid gl_mt_35">
+                  <div class="spb_column gl_column_container gl_col-sm-12 gl_col-lg-6 gl_col-md-6">
+                     <div class="gl_column-inner ">
+                        <div class="spb_wrapper">
+                           {%- if block.settings.html_one != blank -%}
+                           {%- assign title_one = block.settings.html_one | split: ']' -%}
+                           <div class="spb_text_column spb_content_element">
+                              <div class="spb_wrapper">
+                                 <p>{%- if block.settings.html_one contains '[' -%}<span class="gl_icon_element-icon icon-{{title_one[0] | split: '[' | last}} icons" style="float: left; color: #dadada; font-size: 38px; margin: 0 10px 0;">&nbsp;</span>{{title_one[1]}}{%- else -%}{{block.settings.html_one}}{%- endif -%}</p>
+                              </div>
+                           </div>
+                           {%- endif -%}
+                           {%- if block.settings.html_three != blank -%}
+                           {%- assign title_three = block.settings.html_three | split: ']' -%}
+                           <div class="spb_text_column spb_content_element">
+                              <div class="spb_wrapper">
+                                 <p>{%- if block.settings.html_three contains '[' -%}<span class="gl_icon_element-icon icon-{{title_three[0] | split: '[' | last}} icons" style="float: left; color: #dadada; font-size: 38px; margin: 0 10px 0;">&nbsp;</span>{{title_three[1]}}{%- else -%}{{block.settings.html_three}}{%- endif -%}</p>
+                              </div>
+                           </div>
+                           {%- endif -%}
+                        </div>
+                     </div>
+                  </div>
+                  <div class="spb_column gl_column_container gl_col-sm-12 gl_col-lg-6 gl_col-md-6">
+                     <div class="gl_column-inner ">
+                        <div class="spb_wrapper">
+                           {%- if block.settings.html_two != blank -%}
+                           {%- assign title_two = block.settings.html_two | split: ']' -%}
+                           <div class="spb_text_column spb_content_element">
+                              <div class="spb_wrapper">
+                                 <p>{%- if block.settings.html_two contains '[' -%}<span class="gl_icon_element-icon icon-{{title_two[0] | split: '[' | last}} icons" style="float: left; color: #dadada; font-size: 38px; margin: 0 10px 0;">&nbsp;</span>{{title_two[1]}}{%- else -%}{{block.settings.html_two}}{%- endif -%}</p>
+                              </div>
+                           </div>
+                           {%- endif -%}
+                           {%- if block.settings.html_four != blank -%}
+                           {%- assign title_four = block.settings.html_four | split: ']' -%}
+                           <div class="spb_text_column spb_content_element">
+                              <div class="spb_wrapper">
+                                 <p>{%- if block.settings.html_four contains '[' -%}<span class="gl_icon_element-icon icon-{{title_four[0] | split: '[' | last}} icons" style="float: left; color: #dadada; font-size: 38px; margin: 0 10px 0;">&nbsp;</span>{{title_four[1]}}{%- else -%}{{block.settings.html_four}}{%- endif -%}</p>
+                              </div>
+                           </div>
+                           {%- endif -%}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   {%- endcase -%}
+   {%- endfor -%}
+   {%- endif -%}
+   {%- if section.blocks.size == 0 -%}
+    {%- include 'no-blocks' -%}
+  {%- endif -%}
+</div>
+{%- unless section.settings.row_stretch == 'default' -%}
+  <div class="gl_row-full-width gl_clearfix"></div>
+  {%- endunless -%}
+{%- schema -%}
+  {
+    "name": "Map with form contact",
+    "class": "index-section",
+    "settings": [
+      {
+      "type": "header",
+      "content": "== General"
+      },
+      {
+        "type": "select",
+        "id": "row_stretch",
+        "options": [
+         {
+            "value": "default",
+            "label": "Default"
+          },
+         {
+            "value": "stretch_row",
+            "label": "Stretch row"
+          },
+          {
+            "value": "stretch_row_content",
+            "label": "Stretch row and content"
+          },
+          {
+            "value": "stretch_row_content_no_spaces",
+            "label": "Stretch row and content (no paddings)"
+          }
+        ],
+        "label": "___ Row stretch",
+        "info": "Select stretching options for row and content (Note: stretched may not work properly if parent container has 'overflow: hidden' CSS property).",
+        "default": "default"
+      },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "color",
+        "id": "section_border_color",
+        "label": "Border color"
+      },
+      {
+        "type": "select",
+        "id": "section_border_style",
+        "options": [
+         {
+            "value": "solid",
+            "label": "Solid"
+          },
+         {
+            "value": "dotted",
+            "label": "Dotted"
+          },
+          {
+            "value": "dashed",
+            "label": "Dashed"
+          },
+          {
+            "value": "double",
+            "label": "Double"
+          },
+          {
+            "value": "groove",
+            "label": "Groove"
+          },
+          {
+            "value": "Ridge",
+            "label": "Ridge"
+          },
+          {
+            "value": "inset",
+            "label": "Inset"
+          },
+          {
+            "value": "outset",
+            "label": "Outset"
+          }
+        ],
+        "label": "Border style",
+        "default": "solid"
+      },
+      {
+        "type": "text",
+        "id": "section_border",
+        "label": "Borders Integer px ( top-right-bottom-left )",
+        "info": "0-0-1px-0"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      },
+      {
+        "type": "header",
+        "content": "== Basel Extras"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden_section",
+        "label": "Hidden Section?",
+        "info": "if checked section will be set to hidden.",
+        "default": false
+      }
+    ],
+    "blocks": [
+      {
+        "type": "form",
+        "name": "Contact Form",
+        "limit": 1,
+        "settings": [
+            {
+              "id": "title_form",
+              "type": "text",
+              "label": "Heading",
+              "default": "CONTACT FORM"
+            },
+            {
+              "id": "richtext_form_html",
+              "type": "richtext",
+              "label": "Text",
+              "default": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+            }
+        ]
+      },
+      {
+        "type": "map",
+        "name": "Google Map",
+        "limit": 1,
+        "settings": [
+            {
+              "id": "title_map",
+              "type": "text",
+              "label": "Heading",
+              "default": "ABOUT OUR SHOP"
+            },
+            {
+              "id": "richtext_map_html",
+              "type": "richtext",
+              "label": "Text",
+              "default": "<p>Home to hundreds of products that can make life easier after a loss of sight, Shop CNIB is a retail enterprise created by the charity Canadian National Institute for the Blind (CNIB).</p>"
+            },
+            {
+              "type": "text",
+              "id": "lat",
+              "label": "Latitude (required)",
+              "default": "39.950557"
+            },
+            {
+              "type": "text",
+              "id": "lon",
+              "label": "Longitude (required)",
+              "default": "-75.140658"
+            },
+            {
+              "type": "paragraph",
+              "content": "You can use [this service](https:\/\/mycurrentlocation.net) to get coordinates of your location."
+            },
+            {
+              "type": "text",
+              "id": "height",
+              "label": "Height (Integer)",
+              "default": "300",
+              "info": "Default: 400"
+            },
+            {
+              "type": "html",
+              "id": "style_json",
+              "label": "Styles (JSON)"
+            },
+            {
+              "type": "paragraph",
+              "content": "Styled maps allow you to customize the presentation of the standard Google base maps, changing the visual display of such elements as roads, parks, and built-up areas.You can find more Google Maps styles on the website: [Snazzy Maps](https:\/\/snazzymaps.com\/explore) Just copy JSON code and paste it here"
+            },
+            {
+              "type": "header",
+              "content": "== Text Bottom Settings"
+            },
+            {
+              "id": "html_one",
+              "type": "html",
+              "label": "Text One",
+              "default": "[envelope]Tel: 877-45-44-33<br>E-Mail: shop@store.uk"
+            },
+            {
+              "id": "html_two",
+              "type": "html",
+              "label": "Text Two",
+              "default": "[clock]Support forum<br>for over 24h"
+            },
+            {
+              "id": "html_three",
+              "type": "html",
+              "label": "Text Three",
+              "default": "[cursor]20 Margaret St, London<br>Great Britain, 3NM98-LK"
+            },
+            {
+              "id": "html_four",
+              "type": "html",
+              "label": "Text Four",
+              "default": "[rocket ]Free standard shipping<br>on all orders."
+            },
+            {
+              "type": "paragraph",
+              "content": "[icon_name]text_content Ex: [clock]Support forum for over 24h"
+            },
+            {
+              "type": "paragraph",
+              "content": "[Simple line icons](http:\/\/simplelineicons.com)"
+            }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Map with form contact",
+        "category": "Store information",
+        "blocks": [
+          {
+            "type": "form"
+          },
+          {
+            "type": "map"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

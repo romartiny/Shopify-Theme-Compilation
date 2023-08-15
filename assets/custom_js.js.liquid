@@ -1,0 +1,7 @@
+{%- if settings.custom_js contains '.ready' -%}
+{{settings.custom_js | html }}
+{%- else -%}
+jQuery( document ).ready(function( $ ) {
+  {{settings.custom_js | html }}
+});
+{%- endif -%}

@@ -1,0 +1,138 @@
+{%- if section.settings.hidden_section -%}{%- capture check_admin -%}{{ content_for_header  }}{%- endcapture -%}<style> #shopify-section-{{ section.id }} { {%- if check_admin contains 'design_mode' -%}opacity: .5;filter: alpha(opacity=50){%- else -%}display: none !important{%- endif -%}}</style>{%- endif -%}
+{%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_border != blank -%}
+{%- assign s_margin_top = section.settings.section_margin_top | remove: ' ' | join: ' ' -%}
+{%- assign s_margin_bottom = section.settings.section_margin_bottom | remove: ' ' | join: ' ' -%}
+{%- assign s_border = section.settings.section_border | remove: ' ' | split: '-' | join: ' ' -%}
+{%- endif -%}
+{%- capture style_block_section -%}
+   {%- if section.settings.section_margin_top != blank or section.settings.section_margin_bottom != blank or section.settings.section_padding_top != blank or section.settings.section_padding_right != blank or section.settings.section_padding_left != blank or section.settings.section_padding_bottom != blank or section.settings.section_bg_color != blank or section.settings.section_bg_image != blank or section.settings.section_border != blank -%}
+   <style type="text/css">.gl_custom_{{section.id}}{ {%- if section.settings.section_margin_top != blank -%} margin-top: {{s_margin_top}} !important;{%- endif -%}{%- if section.settings.section_margin_bottom != blank -%} margin-bottom: {{s_margin_bottom}} !important;{%- endif -%}{%- if section.settings.section_padding_top != blank -%}padding-top: {{section.settings.section_padding_top}} !important;{%- endif-%}{%- if section.settings.section_padding_right != blank -%}padding-right: {{section.settings.section_padding_right}} !important;{%- endif-%}{%- if section.settings.section_padding_bottom != blank -%}padding-bottom: {{section.settings.section_padding_bottom}} !important;{%- endif-%}{%- if section.settings.section_padding_left != blank -%}padding-left: {{section.settings.section_padding_left}} !important; {%- endif -%}{%- if section.settings.section_bg_color != blank -%}background-color: {{ section.settings.section_bg_color }} !important;{%- endif -%}{%- if section.settings.section_bg_image != blank -%}{%- assign image = section.settings.section_bg_image -%}{%- assign image_size = image.width | append:'x' -%} background-image: url({%-include 'gl_image_format',src: image , size: image_size -%}) !important; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important;{%- endif -%}{%- if section.settings.section_border != blank and section.settings.section_border_color != blank -%}border-width: {{ s_border }} !important; border-color: {{section.settings.section_border_color}} !important; border-style: {{section.settings.section_border_style}} !important{%- endif -%} }</style>
+   {%- endif -%}
+{%- endcapture -%}
+{{style_block_section}}
+<div data-gl-full-width="true" data-gl-full-width-init="true" class="gl_custom_{{section.id}} gl_row spb_row gl_row-fluid gl_row-has-fill">
+   {%- for block in section.blocks -%}
+   <div class="spb_column gl_column_container gl_col-sm-3 color-scheme-light">
+      <div class="gl_column-inner gl_mb_60">
+         <div class="spb_wrapper">
+            {%- if block.settings.icon != blank -%}
+            <div class="gl_icon_element gl_icon_element-outer gl_mb_20 gl_icon_element-align-center gl_icon_element-have-style">
+               <div class="gl_icon_element-inner gl_icon_element-color-white gl_icon_element-have-style-inner gl_icon_element-size-lg gl_icon_element-style-rounded-outline gl_icon_element-outline gl_icon_element-background-color-white">
+                  <span class="gl_icon_element-icon gl_li gl_li-{{block.settings.icon}}"></span>
+               </div>
+            </div>
+            {%- endif -%}
+            {%- if block.settings.value != blank or block.settings.label != blank -%}
+            <div class="basel-counter counter-default">
+               {%- if block.settings.value != blank -%}<span class="counter-value" data-state='new' data-final='{{ block.settings.value | plus:0 }}'>{{block.settings.value | plus:0 }}</span>{%- endif -%}
+               {%- if block.settings.label != blank -%}<span class="counter-label">{{block.settings.label}}</span>{%- endif -%}
+            </div>
+            {%- endif -%}
+         </div>
+      </div>
+   </div>
+   {%- endfor -%}
+</div>
+<div class="gl_row-full-width gl_clearfix"></div>
+{%- schema -%}
+  {
+    "name": "FaQs Basel Counter",
+    "class": "index-section gl_counter",
+    "settings": [
+      {
+      "type": "header",
+      "content": "== General"
+      },
+	   {
+         "type": "image_picker",
+         "id": "section_bg_image",
+         "label": "Background Image",
+         "info": "1900x700 (Width x Height)."
+      },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "color",
+        "id": "section_bg_color",
+        "label": "Background color",
+         "default":"#f9f9f9"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "60px"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Padding top",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_right",
+        "label": "Padding right",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Padding bottom",
+        "info": "60px"
+      },
+{
+        "type": "text",
+        "id": "section_padding_left",
+        "label": "Padding left",
+        "info": "60px"
+      },
+      {
+        "type": "header",
+        "content": "== Basel Extras"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden_section",
+        "label": "Hidden Section?",
+        "info": "if checked section will be set to hidden.",
+        "default": false
+      }
+    ],
+    "blocks": [
+      {
+        "type": "basel-counter",
+        "name": "Basel Counter",
+        "settings": [
+        	{
+              "id": "icon",
+              "type": "text",
+              "label": "Icon",
+              "default": "clip",
+              "info":"ex:clip [Basel line icons](/pages/basel-icon)"
+            },
+            {
+              "id": "value",
+              "type": "text",
+              "label": "Counter Value",
+              "default": "3200"
+            },
+            {
+              "id": "label",
+              "type": "text",
+              "label": "Counter Label",
+              "default": "TOPICS CREATED"
+            }
+        ]
+      }
+    ]
+  }
+{% endschema %}

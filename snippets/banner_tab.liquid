@@ -1,0 +1,64 @@
+<div class="spb_column gl_column_container gl_col-sm-4 gl_hidden-sm gl_hidden-xs">
+   <div class="gl_column-inner ">
+      <div class="spb_wrapper">
+         <div class="promo-banner cursor-pointer text-center vertical-alignment-top banner- hover-4 color-scheme-dark " onclick="window.location.href='{{ section.settings.banner_link }}'">
+            <div class="main-wrapp-img">
+               <div class="banner-image">
+                  {%- if section.settings.image == blank -%}
+                     <img src="https://placehold.it/360x400" alt ="placehold">
+                  {%- else -%}
+                  {%- assign image = section.settings.image -%}
+                  {%- assign image_width = image.width -%}
+                  {%- assign image_width_append = image_width | append:'x' -%}
+                  <img width="{{image_width}}" height="{{image.height}}" src="{%-include 'gl_image_format',src: image.src , size: image_width_append -%}" class="gl_single_image-img attachment-full" alt="{{image.alt}}" 
+                       srcset="{%-include 'gl_image_format',src: image.src , size: image_width_append %} {{image_width}}w 
+                               {%- if image_width > 285 -%},{%-include 'gl_image_format',src: image.src , size: '285x' %} 285w{%- endif -%} 
+                               {%- if image_width > 270 -%},{%-include 'gl_image_format',src: image.src , size: '270x' %} 270w{%- endif -%}
+                               {%- if image_width > 266 -%},{%-include 'gl_image_format',src: image.src , size: '266x' %} 266w{%- endif -%}
+                               {%- if image_width > 263 -%},{%-include 'gl_image_format',src: image.src , size: '263x' %} 263w{%- endif -%}
+                               {%- if image_width > 526 -%},{%-include 'gl_image_format',src: image.src , size: '526x' %} 526w{%- endif -%}" sizes="(max-width: {{image_width}}px) 100vw, {{image_width}}px">
+                  {%- endif -%}
+               </div>
+            </div>
+            <div class="wrapper-content-baner">
+               <div class="banner-inner">
+                  <p></p>
+                  {{ section.settings.content }}
+                  {%- if section.settings.banner_link != blank and section.settings.banner_btn_title != blank  -%}
+                  <p><a class="btn btn-color-primary btn-style-default btn-size-small" href="{{ section.settings.banner_link }}">{{ section.settings.banner_btn_title }}</a></p>
+                  {%- endif -%}
+               </div>
+            </div>
+         </div>
+         <div class="promo-banner cursor-pointer text-center vertical-alignment-top banner- hover-4 color-scheme-dark " onclick="window.location.href='{{ section.settings.banner_link_2}}'">
+            <div class="main-wrapp-img">
+               <div class="banner-image">
+                  {%- if section.settings.image_2 == blank -%}
+                     <img src="https://placehold.it/360x400" alt ="placehold">
+                  {%- else -%}
+                  {%- assign image = section.settings.image_2 -%}
+                  {%- assign image_width = image.width -%}
+                  {%- assign image_width_append = image_width | append:'x' -%}
+                  <img width="{{image_width}}" height="{{image.height}}" src="{%-include 'gl_image_format',src: image.src , size: image_width_append -%}" class="gl_single_image-img attachment-full" alt="{{image.alt}}" 
+                       srcset="{%-include 'gl_image_format',src: image.src , size: image_width_append %} {{image_width}}w 
+                               {%- if image_width > 285 -%},{%-include 'gl_image_format',src: image.src , size: '285x' %} 285w{%- endif -%} 
+                               {%- if image_width > 270 -%},{%-include 'gl_image_format',src: image.src , size: '270x' %} 270w{%- endif -%}
+                               {%- if image_width > 266 -%},{%-include 'gl_image_format',src: image.src , size: '266x' %} 266w{%- endif -%}
+                               {%- if image_width > 263 -%},{%-include 'gl_image_format',src: image.src , size: '263x' %} 263w{%- endif -%}
+                               {%- if image_width > 526 -%},{%-include 'gl_image_format',src: image.src , size: '526x' %} 526w{%- endif -%}" sizes="(max-width: {{image_width}}px) 100vw, {{image_width}}px">
+                  {%- endif -%}
+               </div>
+            </div>
+            <div class="wrapper-content-baner">
+               <div class="banner-inner">
+                  <p></p>
+                  {{ section.settings.content_2 }}
+                  {%- if section.settings.banner_link_2 != blank and section.settings.banner_btn_title_2 != blank  -%}
+                  <p><a class="btn btn-color-primary btn-style-default btn-size-small" href="{{ section.settings.banner_link_2 }}">{{ section.settings.banner_btn_title_2 }}</a></p>
+                  {%- endif -%}
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,170 @@
+{%- capture limit -%}{%- include 'shortcode-render' render:'limit' default: 8 %}{%- endcapture -%}
+{%- capture cols -%}{%- include 'shortcode-render' render:'cols' default: 4 %}{%- endcapture -%}
+{%- capture block_title -%}{%- include 'shortcode-render' render:'title' %}{%- endcapture -%}
+{%- capture align_title -%}{%- include 'shortcode-render' render:'align' %}{%- endcapture -%}
+{%- capture btn_title -%}{%- include 'shortcode-render' render:'btn_title' %}{%- endcapture -%}
+{%- capture block_hover -%}{%- include 'shortcode-render' render:'hover' %}{%- endcapture -%}
+{%- capture countdown_style -%}{%- include 'shortcode-render' render:'collection_countdown_style' %}{%- endcapture -%}
+{%- capture handle_collection -%}{%- include 'shortcode-render' render:'handle_collection' %}{% endcapture %}
+{%- capture sale_countdown -%}{%- include 'shortcode-render' render:'use_countdown' %}{%- endcapture -%}
+{%- capture hide_pagination -%}{%- include 'shortcode-render' render:'hide_pagination' %}{%- endcapture -%}
+{%- capture hide_buttons -%}{%- include 'shortcode-render' render:'hide_buttons' %}{%- endcapture -%}
+{%- capture section_loop_countdown -%}{%- include 'shortcode-render' render:'loop_countdown' %}{%- endcapture -%}
+{%- assign limit = limit | plus: 0  -%}
+{%- assign _cols = cols | plus: 0  -%}
+{%- if settings.use_wishlist -%}{%- include 'nitro-wishlist' -%}{%- endif -%}
+{%- assign paginate_index = limit | plus: 0 -%}
+{%- assign gl_colum_width = 'col-galaxy' -%}
+{%- assign collection = collections[handle_collection] -%}
+{%- case cols -%}
+    {%- when '1' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size = '1140x' -%}
+      {%- else -%}
+         {%- assign image_size = '2048x' -%}
+      {%- endif -%} 
+    {%- when '2' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size = '557x' -%}
+      {%- else -%}
+         {%- assign image_size = '1000x' -%}
+      {%- endif -%}
+    {%- when '3' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size = '370x' -%}
+      {%- else -%}
+         {%- assign image_size = '620x' -%}
+      {%- endif -%}
+    {%- when '4' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size = '263x' -%}
+      {%- else -%}
+         {%- assign image_size = '500x' -%}
+      {%- endif -%}
+    {%- when '5' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size = '236x' -%}
+      {%- else -%}
+         {%- assign image_size = '370x' -%}
+      {%- endif -%}
+   {%- when '6' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size = '165x' -%}
+      {%- else -%}
+         {%- assign image_size = '300x' -%}
+      {%- endif -%}
+    {%- when '7' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size = '136x' -%}
+      {%- else -%}
+         {%- assign image_size = '252x' -%}
+      {%- endif -%}
+    {%- when '8' -%}
+      {%- if section.settings.row_stretch == 'default' or section.settings.row_stretch == 'stretch_row' -%}
+         {%- assign image_size = '127x' -%}
+      {%- else -%}
+         {%- assign image_size = '230x' -%}
+      {%- endif -%}   
+{%- endcase -%}
+{%- case block_hover -%}
+    {%- when 'base' -%}
+      {%- assign gl_include = 'section_loop_product_base' -%} 
+    {%- when 'alt' -%}
+      {%- assign gl_include = 'section_loop_product_alt' -%}
+    {%- when 'button' -%}
+      {%- assign gl_include = 'section_loop_product_button' -%}
+   {%- when 'info' -%}
+      {%- assign gl_include = 'section_loop_product_info' -%}
+   {%- when 'link' -%}
+      {%- assign gl_include = 'section_loop_product_link' -%}
+   {%- when 'standard' -%}
+      {%- assign gl_include = 'section_loop_product_standard' -%}
+   {%- when 'excerpt' -%}
+      {%- assign gl_include = 'section_loop_product_excerpt' -%}
+   {%- when 'quick' -%}
+      {%- assign gl_include = 'section_loop_product_quick' -%}
+{%- endcase -%}
+{%- case countdown_style -%}
+    {%- when 'light' -%}
+      {%- assign countdown_style = 'color-scheme-dark timer-size-small timer-style-standard' -%} 
+    {%- when 'dark' -%}
+      {%- assign countdown_style = 'color-scheme-light timer-size-small timer-style-standard' -%}
+    {%- when 'transparent_1' -%}
+      {%- assign countdown_style = 'color-scheme-light timer-size-small timer-style-transparent' -%}
+   {%- when 'transparent_2' -%}
+      {%- assign countdown_style = 'color-scheme-dark timer-size-small timer-style-transparent' -%}
+{%- endcase -%}
+{%- if sale_countdown == 'true' -%}
+   {%- assign section_settings_countdown = true -%}
+{%- else -%}
+   {%- assign section_settings_countdown = false -%}
+{%- endif -%}
+{%- if section_loop_countdown == 'true' -%}
+   {%- assign loop_countdown = true -%}
+{%- else -%}
+   {%- assign loop_countdown = false -%}
+{%- endif -%}
+{%- if block_title != blank -%}
+<div class="title-wrapper basel-title-color-default basel-title-style-default basel-title-size-small text-{{align_title}}">
+   <div class="liner-continer">
+      <span class="left-line"></span> 
+      <h4 class="title"><strong>{{block_title}}</strong><span class="title-separator"><span></span></span></h4>
+      <span class="right-line"></span> 
+   </div>
+</div>
+{%- endif -%}
+{%- paginate collection.products by paginate_index -%}
+   <div id="carousel-{{collection.id}}" class="gl_carousel_container">
+      <div class="owl-carousel product-items">
+         {%- for product in collection.products -%}
+             <div class="product-item owl-carousel-item">
+                <div class="owl-carousel-item-inner">
+                 {%- include gl_include -%}
+                </div>
+             </div>
+         {%- endfor -%}
+      </div>
+   </div>
+   {%- if paginate.pages > 1 and btn_title != blank -%}
+   <div class="gl_empty_space" style="height: 15px"><span class="gl_empty_space_inner"></span></div>
+   <div class="basel-button-wrapper text-center"><a href="{{collection.url}}" class="btn btn-color-black btn-style-bordered btn-size-small">{{btn_title}}</a></div>
+   <div class="gl_empty_space" style="height: 25px"><span class="gl_empty_space_inner"></span></div>
+   {%- endif -%}
+{%- endpaginate -%}
+<script type="text/javascript">
+   jQuery( document ).ready(function( $ ) {
+
+          var owl = $("#carousel-{{collection.id}} .owl-carousel");
+
+      $( window ).bind( "gl_js", function() {
+         owl.trigger('refresh.owl.carousel');
+      } );
+
+      var options = {
+            rtl: $('body').hasClass('rtl'),
+            items: {{_cols}}, 
+            responsive: {
+               979: {
+                  items: {{_cols}}                      },
+               768: {
+                  items: {%- if _cols > 2 -%}{{ _cols | minus: 1 }}{%- else -%}2{%- endif -%}                      },
+               479: {
+                  items: {%- if _cols > 2 -%}{{ _cols | minus: 1 }}{%- else -%}2{%- endif -%}                      },
+               0: {
+                  items: 1                      }
+            },
+            autoplay: false,
+            autoplayTimeout: 5000,
+            dots: {%- if hide_pagination == 'true' -%}false{%- else -%}true{%- endif -%},
+            nav: {%- if hide_buttons == 'true' -%}false{%- else -%}true{%- endif -%},
+            autoheight: true,
+            slideBy:  'page',
+            navText:false,
+            loop: false,
+            onRefreshed: function() {
+               $(window).resize();
+            }
+      };
+      owl.owlCarousel(options);
+   });
+</script>

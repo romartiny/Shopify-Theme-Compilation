@@ -1,0 +1,409 @@
+{%- if section.blocks.size > 0 -%}
+{%- if collection.all_tags.size > 1 -%}
+  
+  <!-- A recursive loop to catch and filter out the different tag categories -->
+  {%- assign c = 0 -%}
+{%- assign cat_nt = '' -%} 
+  {%- for t in collection.all_tags -%}
+      {%- assign t_split = t | split: '_' | first -%}
+     {%- if t contains '_' -%}{%- assign cat_nt = cat_nt | append:',' | append:t_split -%}{%- endif -%}
+{%- endfor -%}
+  {%- assign cat = cat_nt | remove_first: ',' -%}
+  {%- assign cat_array = cat | split: ',' | uniq -%}
+
+  {%- comment -%}
+  <!-- create array of tag categories -->
+  
+  <!-- loop through tag categories -->  
+  {% for i in cat_array %}
+  <!-- ignore if tag category is empty --> 
+  {% unless i == '' %}
+  <h5>Filter by {{ i }}</h5>
+  <ul class="nav">
+    <!-- loop through collection tags -->  
+	  {% for t in collection.all_tags %}
+	  <!-- if tag contains the category title -->
+	  {% if t contains i %}
+	  <!-- strip out tag category prefix and add/remove link for tag filtering -->
+	  {% if current_tags contains t %}
+	  <li>{{ t | remove: i | remove: '_' | append: '&nbsp;x' | link_to_remove_tag: t }}</li>
+	  {% else %}
+	  <li>{{ t | remove: i | remove: '_' | link_to_add_tag: t  }}</li>
+	  {% endif %}
+	  {% endif %}
+	  {% endfor %}
+  </ul>
+  {% endunless %}
+  {% endfor %}
+  {%- endcomment -%}
+
+
+  {%- endif -%}
+
+{%- assign blocks_size = section.blocks.size -%}
+{%- case blocks_size -%}
+   {%- when 1 -%}
+      {%- assign gl_colum_width = 'col-sm-12 col-md-12' -%}
+    {%- when 2 -%}
+      {%- assign gl_colum_width = 'col-sm-6 col-md-6' -%}
+    {%- when 3 -%}
+      {%- assign gl_colum_width = 'col-sm-6 col-md-4' -%}
+    {%- when 4 -%}
+      {%- assign gl_colum_width = 'col-sm-6 col-md-3' -%}
+   {%- when 5 -%}
+      {%- assign gl_colum_width = 'col-sm-6 col-md-15' -%}
+   {%- when 6 -%}
+      {%- assign gl_colum_width = 'col-sm-6 col-md-2' -%}
+{%- endcase -%}
+{%- assign limit = settings.products_per_page | plus:0 -%}
+{%- assign has_current_tags = false -%}
+{%- if current_tags != blank -%}
+  {%- assign has_current_tags = true -%}
+  {%- assign list_current_tag = '' -%}
+  {%- for current_tag in current_tags -%}
+      {%- assign current_tag_downcase = current_tag | downcase | handleize -%}
+      {%- assign list_current_tag = list_current_tag | append:current_tag_downcase | append:',' -%}
+   {%- endfor -%}
+   {%- assign current_tags = list_current_tag | split:',' -%}
+{%- endif -%}
+{%- if template.suffix != blank -%}
+   {%- assign template_suffix = template.suffix -%}
+   {%- assign check_template_list = true -%} 
+{%- else -%}
+   {%- assign check_template_list = false -%} 
+{%- endif -%}
+{%- if collection.products_count > 1000 -%}
+   {%- assign tag_arr = collection.all_tags -%}
+{%- else -%}
+   {%- assign tag_arr = collection.tags -%}
+{%- endif -%}
+{%- assign _current_tags = current_tags | json | downcase  -%}
+{%- assign collection_handle = collection.handle -%}
+{%- assign secure_url = '/collections' -%}
+{%- if canonical_url contains '?page' -%}
+   {%- assign _canonical_url_remove = canonical_url | split:secure_url | last | prepend: '/collections' -%}
+   {%- assign canonical_url_remove = _canonical_url_remove | split:'?page' | first -%}
+{%- else -%}
+   {%- assign canonical_url_remove = canonical_url | split:secure_url | last | prepend: '/collections' -%}
+{%- endif -%}
+<div class="filters-inner-area row">
+{%- for block in section.blocks -%}
+   {%- case block.type -%}
+      {%- when 'sortby' -%}
+      <div id="BASEL_Widget_Sorting" class="filter-widget widget-count-4 col-xs-12 {{gl_colum_width}}" {{ block.shopify_attributes }}>
+         <h5 class="widget-title">{{ 'collections.sorting.title' | t }}</h5>
+         <form class="shopify-ordering with-list" method="get">
+            {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+            <input name="SortBy" type="hidden" value="{{ sort_by }}" />
+            <ul>
+               <li><a href="{{canonical_url_remove}}?sort_by=manual{%- if check_template_list -%}&view={{template_suffix}}{%- endif-%}"{%- if sort_by == "manual" %} class="selected-order"{%- endif -%}>{{ 'collections.sorting.featured' | t }}</a></li>
+               <li><a href="{{canonical_url_remove}}?sort_by=best-selling{%- if check_template_list -%}&view={{template_suffix}}{%- endif-%}"{%- if sort_by == "best-selling" %} class="selected-order"{%- endif -%}>{{ 'collections.sorting.best_selling' | t }}</a></li>
+               <li><a href="{{canonical_url_remove}}?sort_by=title-ascending{%- if check_template_list -%}&view={{template_suffix}}{%- endif-%}"{%- if sort_by == "title-ascending" %} class="selected-order"{%- endif -%}>{{ 'collections.sorting.az' | t }}</a></li>
+               <li><a href="{{canonical_url_remove}}?sort_by=title-descending{%- if check_template_list -%}&view={{template_suffix}}{%- endif-%}"{%- if sort_by == "title-descending" %} class="selected-order"{%- endif -%}>{{ 'collections.sorting.za' | t }}</a></li>
+               <li><a href="{{canonical_url_remove}}?sort_by=price-ascending{%- if check_template_list -%}&view={{template_suffix}}{%- endif-%}"{%- if sort_by == "price-ascending" %} class="selected-order"{%- endif -%}>{{ 'collections.sorting.price_ascending' | t }}</a></li>
+               <li><a href="{{canonical_url_remove}}?sort_by=price-descending{%- if check_template_list -%}&view={{template_suffix}}{%- endif-%}"{%- if sort_by == "price-descending" %} class="selected-order"{%- endif -%}>{{ 'collections.sorting.price_descending' | t }}</a></li>
+               <li><a href="{{canonical_url_remove}}?sort_by=created-descending{%- if check_template_list -%}&view={{template_suffix}}{%- endif-%}"{%- if sort_by == "created-descending" %} class="selected-order"{%- endif -%}>{{ 'collections.sorting.date_descending' | t }}</a></li>
+               <li><a href="{{canonical_url_remove}}?sort_by=created-ascending{%- if check_template_list -%}&view={{template_suffix}}{%- endif-%}"{%- if sort_by == "created-ascending" %} class="selected-order"{%- endif -%}>{{ 'collections.sorting.date_ascending' | t }}</a></li>
+            </ul>
+         </form>
+      </div>
+      {%- when 'color' -%}
+      <div id="basel-shopify-layered-nav-16" class="filter-widget widget-count-4 col-xs-12 {{gl_colum_width}} basel-shopify-layered-nav" {{ block.shopify_attributes }}>
+         {%- if block.settings.title != blank -%}<h5 class="widget-title">{{ block.settings.title }}</h5>{%- endif -%}
+         {%- assign tags = block.settings.shop_by_tags_color  | replace: ' ,', ',' | replace: ', ', ',' | split: ',' | uniq -%}
+         {%- if tags.size > 0 or cat_array.size > 0 -%}{%- include 'filter_color' -%}{%- endif -%}
+         {%- if check_tag_hide -%}<style type="text/css">#basel-shopify-layered-nav-16{display: none}</style>{%- endif -%}
+      </div>
+      {%- when 'size' -%}
+      <div id="basel-shopify-layered-nav-17" class="filter-widget widget-count-4 col-xs-12 {{gl_colum_width}} basel-shopify-layered-nav" {{ block.shopify_attributes }}>
+         {%- if block.settings.title != blank -%}<h5 class="widget-title">{{ block.settings.title }}</h5>{%- endif -%}
+         {%- assign tags = block.settings.shop_by_tags_size  | replace: ' ,', ',' | replace: ', ', ',' | split: ',' | uniq -%}
+         {%- if tags.size > 0 or cat_array.size > 0 -%}{%- include 'filter_size' -%}{%- endif -%}
+         {%- if check_tag_hide -%}<style type="text/css">#basel-shopify-layered-nav-17{display: none}</style>{%- endif -%}
+      </div>
+      {%- when 'price' -%}
+      <div id="BASEL_Widget_Price_Filter" class="filter-widget widget-count-4 col-xs-12 {{gl_colum_width}}" {{ block.shopify_attributes }}>
+         {%- if block.settings.title != blank -%}<h5 class="widget-title">{{ block.settings.title }}</h5>{%- endif -%}
+         {%- assign tags = block.settings.shop_by_tags_price  | replace: ' ,', ',' | replace: ', ', ',' | split: ',' | uniq -%}
+         {%- if tags.size > 0 or cat_array.size > 0 -%}{%- include 'filter_price' -%}{%- endif -%}
+         {%- if check_tag_hide -%}<style type="text/css">#BASEL_Widget_Price_Filter{display: none}</style>{%- endif -%}
+      </div>
+      {%- when 'brand' -%}
+         <div id="BASEL_Widget_Brand_Filter" class="basel-shopify-layered-nav filter-widget widget-count-4 col-xs-12 {{gl_colum_width}}" {{ block.shopify_attributes }}>
+            {%- if block.settings.title != blank -%}<h5 class="widget-title">{{ block.settings.title }}</h5>{%- endif -%}
+            {%- assign tags = block.settings.shop_by_tags_brand  | replace: ' ,', ',' | replace: ', ', ',' | split: ',' | uniq -%}
+            {%- if tags.size > 0 or collection.all_vendors.size > 0 or cat_array.size > 0 -%}{%- include 'filter_brand' -%}{%- endif -%}
+            {%- if check_tag_hide -%}<style type="text/css">#BASEL_Widget_Brand_Filter{display: none}</style>{%- endif -%}
+         </div>
+      {%- else -%}
+      <div id="BASEL_Widget_Filter-{{block.id}}" class="basel-shopify-layered-nav filter-widget widget-count-4 col-xs-12 {{gl_colum_width}}" {{ block.shopify_attributes }}>
+         {%- if block.settings.title != blank -%}<h5 class="widget-title">{{ block.settings.title }}</h5>{%- endif -%}
+         {%- assign tags = block.settings.shop_by_tags  | replace: ' ,', ',' | replace: ', ', ',' | split: ',' | uniq -%}
+         {%- if tags.size > 0 or cat_array.size > 0 -%}{%- include 'filter_other' -%}{%- endif -%}
+         {%- if check_tag_hide -%}<style type="text/css">#BASEL_Widget_Filter-{{block.id}}{display: none}</style>{%- endif -%}
+      </div>
+   {%- endcase -%}
+{%- endfor -%}
+</div>
+{%- else -%}
+{%- include 'no-blocks' -%}
+{%- endif -%}
+<!-- .filters-inner-area -->
+{%- schema -%}
+  {
+    "name": "Filters Area",
+    "class": "filters-area",
+    "max_blocks": 6,
+    "blocks": [
+      {
+        "type": "color",
+        "name": "By Color",
+        "limit": 1,
+        "settings": [
+         { 
+          "type":"text",
+          "id":"title",
+          "label":"Filter Title",
+          "default":"Filter by color"
+          },
+          {
+           "type": "textarea",
+           "id": "shop_by_tags_color",
+           "label": "Shop by tags list",
+           "default":"Blue, White, Red, Black, Brown",
+           "info": "Separate by a comma, Ex: Tag1, Tag2, Tag3"
+         },
+         {
+          "type": "checkbox",
+          "id": "use_tag_countdown",
+          "label": "Use tag countdown?",
+          "default": false
+         },
+         {
+          "type": "checkbox",
+          "id": "use_auto_filter_tag",
+          "label": "Use auto filter groups?",
+          "default": false
+         },
+         { 
+          "type":"text",
+          "id":"key_2",
+          "label":"Filter key word",
+          "placeholder": "color",
+          "default":"color"
+          },
+          { 
+          "type":"text",
+          "id":"key",
+          "label":"Filter key word 2",
+          "placeholder": "colors"
+          },
+         {
+          "type": "paragraph",
+          "content": "Create tag filter groups in Shopify. This snippet is designed to group and separate out collection tags. It requires the tags to share a common value prepended to the tag with an underscore. E.g. to create a separate tag filter group for 'brands', each product will need to be tagged with 'brand_Nike' or 'brand_Reebok'."
+          }
+        ]
+      },
+      {
+        "type": "sortby",
+        "name": "Sort by",
+        "limit": 1,
+        "settings": [
+         { 
+          "type":"text",
+          "id":"title",
+          "label":"Filter Title",
+          "default":"Sort by"
+          }
+        ]
+      },
+      {
+        "type": "size",
+        "name": "By size",
+        "limit": 1,
+        "settings": [
+         { 
+          "type":"text",
+          "id":"title",
+          "label":"Filter Title",
+          "default":"Filter by size"
+          },
+          {
+           "type": "textarea",
+           "id": "shop_by_tags_size",
+           "label": "Shop by tags list",
+           "default":"L, M, XL, S, XS",
+           "info": "Separate by a comma, Ex: Tag1, Tag2, Tag3"
+         },
+         {
+          "type": "checkbox",
+          "id": "use_tag_countdown",
+          "label": "Use tag countdown?",
+          "default": false
+         },
+         {
+          "type": "checkbox",
+          "id": "use_auto_filter_tag",
+          "label": "Use auto filter groups?",
+          "default": false
+         },
+         { 
+          "type":"text",
+          "id":"key_2",
+          "label":"Filter key word",
+          "placeholder": "size",
+          "default":"size"
+          },
+          { 
+          "type":"text",
+          "id":"key",
+          "label":"Filter key word 2",
+          "placeholder": "sizes"
+          },
+         {
+          "type": "paragraph",
+          "content": "Create tag filter groups in Shopify. This snippet is designed to group and separate out collection tags. It requires the tags to share a common value prepended to the tag with an underscore. E.g. to create a separate tag filter group for 'brands', each product will need to be tagged with 'brand_Nike' or 'brand_Reebok'."
+          }
+        ]
+      },
+      {
+        "type": "price",
+        "name": "By price",
+        "limit": 1,
+        "settings": [
+         { 
+          "type":"text",
+          "id":"title",
+          "label":"Filter Title",
+          "default":"Price filter"
+          },
+          {
+           "type": "textarea",
+           "id": "shop_by_tags_price",
+           "label": "Shop by tags list",
+           "default":"£0.00 - £140.00, £140.00 - £280.00, £280.00 - £420.00, £420.00 - £560.00, £560.00 +",
+           "info": "Separate by a comma, Ex: Tag1, Tag2, Tag3"
+         },
+         {
+          "type": "checkbox",
+          "id": "use_auto_filter_tag",
+          "label": "Use auto filter groups?",
+          "default": false
+         },
+         { 
+          "type":"text",
+          "id":"key_2",
+          "label":"Filter key word",
+          "placeholder": "price",
+          "default":"price"
+          },
+          { 
+          "type":"text",
+          "id":"key",
+          "label":"Filter key word 2",
+          "placeholder": "prices"
+          },
+         {
+          "type": "paragraph",
+          "content": "Create tag filter groups in Shopify. This snippet is designed to group and separate out collection tags. It requires the tags to share a common value prepended to the tag with an underscore. E.g. to create a separate tag filter group for 'brands', each product will need to be tagged with 'brand_Nike' or 'brand_Reebok'."
+          }
+        ]
+      },
+      {
+        "type": "brand",
+        "name": "By Brand",
+        "limit": 1,
+        "settings": [
+         { 
+          "type":"text",
+          "id":"title",
+          "label":"Filter Title",
+          "default":"Brand filter"
+          },
+          {
+           "type": "textarea",
+           "id": "shop_by_tags_brand",
+           "label": "Shop by tags list",
+           "info": "Separate by a comma, Ex: Tag1, Tag2, Tag3"
+         },
+         {
+          "type": "checkbox",
+          "id": "use_tag_countdown",
+          "label": "Use tag countdown?",
+          "default": false
+         },
+         {
+          "type": "checkbox",
+          "id": "use_auto_filter_tag",
+          "label": "Use auto filter groups?",
+          "default": false
+         },
+         { 
+          "type":"text",
+          "id":"key_2",
+          "label":"Filter key word",
+          "placeholder": "brand",
+          "default":"brand"
+          },
+          { 
+          "type":"text",
+          "id":"key",
+          "label":"Filter key word 2",
+          "placeholder": "brands"
+          },
+         {
+          "type": "paragraph",
+          "content": "Create tag filter groups in Shopify. This snippet is designed to group and separate out collection tags. It requires the tags to share a common value prepended to the tag with an underscore. E.g. to create a separate tag filter group for 'brands', each product will need to be tagged with 'brand_Nike' or 'brand_Reebok'."
+          }
+        ]
+      },
+      {
+        "type": "others",
+        "name": "Filter By Others",
+        "settings": [
+         { 
+          "type":"text",
+          "id":"title",
+          "label":"Filter Title",
+          "default":"Filter by other"
+          },
+          {
+           "type": "textarea",
+           "id": "shop_by_tags",
+           "label": "Shop by tags list",
+           "info": "Separate by a comma, Ex: Tag1, Tag2, Tag3"
+         },
+{
+          "type": "checkbox",
+          "id": "use_tag_countdown",
+          "label": "Use tag countdown?",
+          "default": false
+         },
+         {
+          "type": "checkbox",
+          "id": "use_auto_filter_tag",
+          "label": "Use auto filter groups?",
+          "default": false
+         },
+         { 
+          "type":"text",
+          "id":"key_2",
+          "label":"Filter key word",
+          "placeholder": "other",
+          "default":"other"
+          },
+          { 
+          "type":"text",
+          "id":"key",
+          "label":"Filter key word 2",
+          "placeholder": "others"
+          },
+         {
+          "type": "paragraph",
+          "content": "Create tag filter groups in Shopify. This snippet is designed to group and separate out collection tags. It requires the tags to share a common value prepended to the tag with an underscore. E.g. to create a separate tag filter group for 'brands', each product will need to be tagged with 'brand_Nike' or 'brand_Reebok'."
+          }
+        ]
+      }
+   ]
+  }
+{% endschema %}

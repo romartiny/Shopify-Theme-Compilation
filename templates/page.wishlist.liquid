@@ -1,0 +1,288 @@
+{%-if settings.use_wishlist -%}
+{%- assign NITRO_WISHLIST_ID = '' | split:' '-%}
+{%- assign NITRO_WISHLIST_HANDLE = '' | split:' '-%}
+{%- assign NITRO_WISHLIST_COUNT = 0 -%}
+{%- assign NITRO_WISHLIST = '' -%}
+{%- if customer-%}
+	{%- if customer.metafields.nitro_wishlist.products and customer.metafields.nitro_wishlist.products != blank -%}
+		{%- assign NITRO_WISHLIST_HANDLE = customer.metafields.nitro_wishlist.products | strip | split: '|' | last | split: ' ' -%}
+				{%- assign NITRO_WISHLIST_COUNT = NITRO_WISHLIST_HANDLE.size  -%}
+				{%- assign NITRO_WISHLIST = customer.metafields.nitro_wishlist.products | strip | split: '|' | first -%}
+	{%- endif -%}
+{%- endif -%}
+
+{%- endif -%}
+{%- assign stt_limit = 20 -%}
+{%- assign cart_title = page.title | capitalize -%}
+<div class="main-page-wrapper">
+   {%- include 'page_heading', page_title:cart_title -%}
+   <!-- MAIN CONTENT AREA -->
+   <div class="container">
+      <div class="row">
+         <div class="site-content col-sm-12" role="main">
+            <article id="post-{{page.id}}" class="gl_handle_{{page.handle }} post-{{page.id}} page type-page status-publish hentry">
+               <div class="entry-content">
+                  <div id="yith-wcwl-messages"></div>
+                     <!-- TITLE -->
+                     <div class="wishlist-title ">
+                        <h2>{{ 'products.product.wishlist-title' | t }}</h2>
+                     </div>
+                     <!-- WISHLIST TABLE -->
+                     <div class="responsive-table">
+                        <div class="responsive-table">
+                           {%- if customer -%}
+                           <table class="shop_table cart wishlist_table gl_respon_table">
+                              <thead>
+                                 <tr>
+                                   <th class="product-remove"></th>
+                                   <th class="product-thumbnail"></th>
+                                   <th class="product-name"><span class="nobr">{{ 'products.product.product-name' | t }}</span></th>
+                                   <th class="product-price"> <span class="nobr">{{ 'products.product.unit-price' | t }}</span></th>
+                                   <th class="product-stock-stauts"> <span class="nobr">{{ 'products.product.stock-status' | t }}</span> </th>
+                                   {%- if settings.catalog_mode == false -%}<th class="product-add-to-cart"></th>{%- endif -%}
+                                 </tr>
+                               </thead>
+                              <tbody>
+                                 {%- if NITRO_WISHLIST_COUNT > 0 -%}
+                                    {%- assign index = NITRO_WISHLIST_HANDLE.size -%}
+                                    {%- if index <= stt_limit -%}
+                                        {%- for wishlist in NITRO_WISHLIST_HANDLE -%}
+                                         {%- assign product = all_products[wishlist]-%}
+                                         {%- if product == blank -%} {%- continue -%}{%- endif-%}
+                                         {%- assign index = index | plus:1 -%}
+                                         {%- assign current_variant = product.selected_or_first_available_variant -%}
+                                         {%- assign image = current_variant.featured_image | default: product.featured_image -%}
+                                         {%- assign product_image_size = image.width | append: 'x' -%}
+                                         {%- assign image_size = '219x' -%}
+                                         {%- assign on_sale = false -%}
+                                         {%- if current_variant.compare_at_price > current_variant.price -%}
+                                            {%- unless product.tags contains 'notsale'-%}
+                                            {%- assign on_sale = true -%}
+                                            {%-endunless-%}
+                                         {%- endif -%}
+                                         {%- assign sold_out = true -%}
+                                            {%- if current_variant.available  -%}
+                                            {%- assign sold_out = false -%}
+                                         {%- endif -%}
+                                         {%- if product.metafields.external and settings.catalog_mode == false -%}
+                                              {%- assign check = product.metafields.external | first | last -%}
+                                              {%- if check contains 'https:' or check  contains 'http:' -%}{%- assign check_external = true -%}{%-else-%}{%- assign check_external = false -%}{%-endif-%}
+                                         {%-endif-%}
+                                         <tr id="yith-wcwl-row-{{product.id}}" data-row-id="{{product.id}}">
+                                            <td class="product-remove">
+                                               <div>
+                                                  <a href="javascript:void(0);" class="remove remove_from_wishlist" title="Remove this product" data-action="remove" data-id="{{product.id}}" data-email="{{customer.email}}" data-customer_id="{{customer.id}}" data-handle="{{product.handle}}">×</a>
+                                               </div>
+                                            </td>
+                                            <td class="product-thumbnail">
+                                               <a href="{{ product.url | within: product.collections.last }}">
+                                                  <img width="219" height="280" src="{%-include 'gl_image_format',src: image , size: image_size %}" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="{{image.alt}}"  
+                                                     srcset="{%-include 'gl_image_format',src: image , size: image_size %} 219w, 
+                                                      {%-include 'gl_image_format',src: image , size: '235x300' %} 235w, 
+                                                      {%-include 'gl_image_format',src: image , size: '768x980' %} 768w, 
+                                                      {%-include 'gl_image_format',src: image , size: '803x1024' %} 803w, 
+                                                      {%-include 'gl_image_format',src: image , size: '266x340' %} 266w, 
+                                                      {%-include 'gl_image_format',src: image , size: '219x280' %} 219w, 
+                                                      {%-include 'gl_image_format',src: image , size: '526x671' %} 526w, 
+                                                      {%-include 'gl_image_format',src: image , size: product_image_size %} {{image.width}}w" sizes="(max-width: 219px) 100vw, 219px">                            
+                                               </a>
+                                            </td>
+                                            <td class="product-name">
+                                               <a href="{{ product.url | within: product.collections.last }}">{{ product.title }}</a>
+                                            </td>
+                                            <td class="product-price">
+                                               {%- if linklists[product.handle] == empty or linklists[product.handle] == "" -%}
+                                                  {%- if product.price_varies -%}
+                                                     <span class="shopify-Price-amount amount">{{ product.price_min | money }}</span> – <span class="shopify-Price-amount amount">{{ product.price_max | money }}</span>
+                                                  {%- elsif on_sale -%}<del id="old-product-price"><span class="shopify-Price-amount amount">{{current_variant.compare_at_price | money }}</span></del> <ins id="product-price"><span class="shopify-Price-amount amount">{{ current_variant.price | money }}</span></ins>
+                                                  {%- else -%}
+                                                     <span class="shopify-Price-amount amount">{{ current_variant.price | money }}</span> 
+                                                  {%- endif -%}
+                                              {%- else -%}
+                                                {%- if on_sale -%}
+                                                <span class="shopify-Price-amount amount">{{ current_variant.price | money }}</span> – <span class="shopify-Price-amount amount">{{ current_variant.compare_at_price | money }}</span>
+                                                {%- else -%}
+                                                <span class="shopify-Price-amount amount">{{ current_variant.price | money }}</span>
+                                                {%- endif -%}
+                                               {%- endif -%}                           
+                                            </td>
+                                            <td class="product-stock-status">
+                                               {%- if sold_out == false -%}
+                                               <span class="wishlist-in-stock">{{ 'products.product.in_stock' | t }}</span> 
+                                               {%- else -%}
+                                               <span class="wishlist-out-of-stock">{{ 'products.product.outofstock' | t }}</span> 
+                                               {%- endif -%}                           
+                                            </td>
+                                            {%- if settings.catalog_mode == false -%}
+                                            <td class="product-add-to-cart">
+                                               {%- if linklists[product.handle] == empty or linklists[product.handle] == "" -%}
+                                                  {%- if product.variants.size > 1-%}
+                                                     <a href="{{ product.url | within: product.collections.last }}" rel="nofollow" class="button add_to_cart button alt">{{'products.product.select_option'|t}}</a>                            
+                                                  {%- elsif check_external == true -%}
+                                                     <a href="{{ check }}" rel="nofollow" class="button add_to_cart button alt">{{ product.metafields.external | first | first }}</a>
+                                                  {%- else -%}
+                                                     {%- if sold_out -%}
+                                                        <a href="{{ product.url | within: product.collections.last }}" rel="nofollow" class="button add_to_cart button alt">{{'products.product.read_more'|t}}</a>
+                                                     {%- else -%}
+                                                        <a href="{{ product.url | within: product.collections.last }}" rel="nofollow" data-pid="{{ product.variants.first.id}}" class="button add_to_cart_button add_to_cart button alt ajax_add_to_cart">{{'products.product.add_to_cart'|t}}</a>
+                                                     {%- endif -%}
+                                                  {%- endif -%}
+                                               {%- else -%}
+                                                  <a href="{{ product.url | within: product.collections.last }}" rel="nofollow" class="button add_to_cart button alt">{{'products.product.view'|t}}</a>
+                                               {%- endif -%}
+                                            </td>
+                                            {%- endif -%} 
+                                         </tr>
+                                      {%- endfor-%}
+                                    {%- else -%}
+                                        {%- if canonical_url contains '?q=1' -%}
+                                            {%- assign limit_offset = 0 -%}
+                                            {%- assign number_text = 1 -%}
+                                        {%- elsif canonical_url contains '?q=' -%}
+                                            {%- assign number_text = canonical_url | split:'?q=' | last | plus:0 -%}
+                                            {%- assign limit_offset = stt_limit | times:number_text | minus:stt_limit -%}
+                                        {%- else -%}
+                                            {%- assign number_text = 1 -%}
+                                            {%- assign limit_offset = 0 -%}
+                                        {%- endif -%}
+                                        {%- assign ck_index = 0 -%}
+                                
+                                        {%- for wishlist in NITRO_WISHLIST_HANDLE offset:limit_offset -%}
+                                         {%- assign product = all_products[wishlist]-%}
+                                         {%- if product != blank -%} 
+                                         {%- assign current_variant = product.selected_or_first_available_variant -%}
+                                         {%- assign image = current_variant.featured_image | default: product.featured_image -%}
+                                         {%- assign product_image_size = image.width | append: 'x' -%}
+                                         {%- assign image_size = '219x' -%}
+                                         {%- assign on_sale = false -%}
+                                         {%- if current_variant.compare_at_price > current_variant.price -%}
+                                            {%- unless product.tags contains 'notsale'-%}
+                                            {%- assign on_sale = true -%}
+                                            {%-endunless-%}
+                                         {%- endif -%}
+                                         {%- assign sold_out = true -%}
+                                            {%- if current_variant.available  -%}
+                                            {%- assign sold_out = false -%}
+                                         {%- endif -%}
+                                         {%- if product.metafields.external and settings.catalog_mode == false -%}
+                                              {%- assign check = product.metafields.external | first | last -%}
+                                              {%- if check contains 'https:' or check  contains 'http:' -%}{%- assign check_external = true -%}{%-else-%}{%- assign check_external = false -%}{%-endif-%}
+                                         {%-endif-%}
+                                         <tr id="yith-wcwl-row-{{product.id}}" data-row-id="{{product.id}}">
+                                            <td class="product-remove">
+                                               <div>
+                                                  <a href="javascript:void(0);" class="remove remove_from_wishlist" title="Remove this product" data-action="remove" data-id="{{product.id}}" data-email="{{customer.email}}" data-customer_id="{{customer.id}}" data-handle="{{product.handle}}">×</a>
+                                               </div>
+                                            </td>
+                                            <td class="product-thumbnail">
+                                               <a href="{{ product.url | within: product.collections.last }}">
+                                                  <img width="219" height="280" src="{%-include 'gl_image_format',src: image , size: image_size %}" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="{{image.alt}}"  
+                                                     srcset="{%-include 'gl_image_format',src: image , size: image_size %} 219w, 
+                                                      {%-include 'gl_image_format',src: image , size: '235x300' %} 235w, 
+                                                      {%-include 'gl_image_format',src: image , size: '768x980' %} 768w, 
+                                                      {%-include 'gl_image_format',src: image , size: '803x1024' %} 803w, 
+                                                      {%-include 'gl_image_format',src: image , size: '266x340' %} 266w, 
+                                                      {%-include 'gl_image_format',src: image , size: '219x280' %} 219w, 
+                                                      {%-include 'gl_image_format',src: image , size: '526x671' %} 526w, 
+                                                      {%-include 'gl_image_format',src: image , size: product_image_size %} {{image.width}}w" sizes="(max-width: 219px) 100vw, 219px">                            
+                                               </a>
+                                            </td>
+                                            <td class="product-name">
+                                               <a href="{{ product.url | within: product.collections.last }}">{{ product.title }}</a>
+                                            </td>
+                                            <td class="product-price">
+                                               {%- if linklists[product.handle] == empty or linklists[product.handle] == "" -%}
+                                                  {%- if product.price_varies -%}
+                                                     <span class="shopify-Price-amount amount">{{ product.price_min | money }}</span> – <span class="shopify-Price-amount amount">{{ product.price_max | money }}</span>
+                                                  {%- elsif on_sale -%}<del id="old-product-price"><span class="shopify-Price-amount amount">{{current_variant.compare_at_price | money }}</span></del> <ins id="product-price"><span class="shopify-Price-amount amount">{{ current_variant.price | money }}</span></ins>
+                                                  {%- else -%}
+                                                     <span class="shopify-Price-amount amount">{{ current_variant.price | money }}</span> 
+                                                  {%- endif -%}
+                                              {%- else -%}
+                                                {%- if on_sale -%}
+                                                <span class="shopify-Price-amount amount">{{ current_variant.price | money }}</span> – <span class="shopify-Price-amount amount">{{ current_variant.compare_at_price | money }}</span>
+                                                {%- else -%}
+                                                <span class="shopify-Price-amount amount">{{ current_variant.price | money }}</span>
+                                                {%- endif -%}
+                                               {%- endif -%}                           
+                                            </td>
+                                            <td class="product-stock-status">
+                                               {%- if sold_out == false -%}
+                                               <span class="wishlist-in-stock">{{ 'products.product.in_stock' | t }}</span> 
+                                               {%- else -%}
+                                               <span class="wishlist-out-of-stock">{{ 'products.product.outofstock' | t }}</span> 
+                                               {%- endif -%}                           
+                                            </td>
+                                            {%- if settings.catalog_mode == false -%}
+                                            <td class="product-add-to-cart">
+                                               {%- if linklists[product.handle] == empty or linklists[product.handle] == "" -%}
+                                                  {%- if product.variants.size > 1-%}
+                                                     <a href="{{ product.url | within: product.collections.last }}" rel="nofollow" class="button add_to_cart button alt">{{'products.product.select_option'|t}}</a>                            
+                                                  {%- elsif check_external == true -%}
+                                                     <a href="{{ check }}" rel="nofollow" class="button add_to_cart button alt">{{ product.metafields.external | first | first }}</a>
+                                                  {%- else -%}
+                                                     {%- if sold_out -%}
+                                                        <a href="{{ product.url | within: product.collections.last }}" rel="nofollow" class="button add_to_cart button alt">{{'products.product.read_more'|t}}</a>
+                                                     {%- else -%}
+                                                        <a href="{{ product.url | within: product.collections.last }}" rel="nofollow" data-pid="{{ product.variants.first.id}}" class="button add_to_cart_button add_to_cart button alt ajax_add_to_cart">{{'products.product.add_to_cart'|t}}</a>
+                                                     {%- endif -%}
+                                                  {%- endif -%}
+                                               {%- else -%}
+                                                  <a href="{{ product.url | within: product.collections.last }}" rel="nofollow" class="button add_to_cart button alt">{{'products.product.view'|t}}</a>
+                                               {%- endif -%}
+                                            </td>
+                                            {%- endif -%} 
+                                         </tr>
+                                         {%- endif-%}
+                                      {%- assign ck_index = ck_index | plus:1 -%}
+                                      {%- if ck_index >= stt_limit -%}{%- break -%}{%- endif -%}
+                                      {%- endfor-%}
+                                
+                                    {%- endif -%} 
+                                 {%- else -%}
+                                    <tr>
+                                       <td colspan="6" class="wishlist-empty">{{ 'products.wishlist.no_products_wishlist' | t }}</td>
+                                    </tr>
+                                 {%- endif -%}
+                              </tbody>
+                              <tfoot>
+                                 <tr>
+                                    <td colspan="6">
+                                    </td>
+                                 </tr>
+                              </tfoot>
+                           </table>
+                           {%- else -%}
+                              {%- comment-%} don't have product in wishlist {%- endcomment-%}
+                                 <p class="text-center">{{ 'products.wishlist.info_wishlist' | t }}</p>
+                           {%- endif -%}
+                        </div>
+                     </div>
+                 {%- if index > stt_limit -%}
+                             {%- assign num_di = index | times: 1.0 | divided_by:stt_limit -%}
+                             {%- assign num_ceil = num_di | ceil -%}
+                             <div class="products-footer"><nav class="shopify-pagination">
+                               <ul class="page-numbers">
+                                 {% for i in (1..num_ceil) %}
+                                 {% if number_text != i %}
+                                 <li>
+                                   <a class="page-numbers" href="{{page.url}}?q={{i}}">{{ i }}</a>
+                                 </li>
+                                 {% else %}
+                                 <li><span class="page-numbers current">{{ i }}</span></li>
+                                 {% endif %}
+                                 {% endfor %}
+                               </ul>
+                               </nav>
+                             </div>
+                          {%- endif -%}
+               </div>
+            </article>
+            <!-- #post -->
+         </div>
+         <!-- .site-content -->
+      </div>
+      <!-- end row -->
+   </div>
+   <!-- end container -->
+</div>
