@@ -1,0 +1,293 @@
+{
+  "sections": {
+    "1620813069167db316": {
+      "type": "slider",
+      "blocks": {
+        "1620813069167db316-0": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center middle",
+            "content_in_container": true,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "black",
+            "subheading": "",
+            "title": "Fall in love<br> with linen!",
+            "description": "<p>Linen is good because it looks trendy and at the <br\/>same time it's very comfotable<\/p>",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        },
+        "27403af4-f4e3-4833-9189-9868705845f7": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center middle",
+            "content_in_container": true,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "black",
+            "subheading": "",
+            "title": "Be your own label.",
+            "description": "<p>Linen is good because it looks trendy and at the<br\/> same time it's very comfotable<\/p>",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        },
+        "c0ce169f-1329-47fc-9e42-915e4961aa32": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center middle",
+            "content_in_container": true,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "black",
+            "subheading": "",
+            "title": "Classy since birth.",
+            "description": "<p>Linen is good because it looks trendy and at the<br\/> same time it's very comfotable<\/p>",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "1620813069167db316-0",
+        "27403af4-f4e3-4833-9189-9868705845f7",
+        "c0ce169f-1329-47fc-9e42-915e4961aa32"
+      ],
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "large",
+        "show_overlay": false,
+        "dots_position": "bottom",
+        "dots_color": "dark",
+        "show_dots": true,
+        "show_arrows": false,
+        "autorotate": false,
+        "autorotate_speed": 5,
+        "custom_class": "sf__index-slideshow"
+      }
+    },
+    "162243112070c9a4c8": {
+      "type": "instagram",
+      "settings": {
+        "heading": "<span class=\"sf__line-height-heading\">Give us your best shot!<\/span>",
+        "subheading": "",
+        "description": "<span class=\"text-black text-xl\">@comodo_linen<\/span>",
+        "header_alignment": "center",
+        "container": "w-full",
+        "background_color": "rgba(0,0,0,0)",
+        "layout": "grid",
+        "images_count": 5,
+        "grid_columns": 5,
+        "gap": 20,
+        "mobile_gap": 16,
+        "profile": "https:\/\/www.instagram.com\/minimog.trendy\/",
+        "button_label": "",
+        "custom_class": "sf__index-instagram"
+      }
+    },
+    "16226042061e17a881": {
+      "type": "icon-box",
+      "blocks": {
+        "16226042061e17a881-0": {
+          "type": "iconbox",
+          "settings": {
+            "title": "Tablecloths",
+            "description": "<p>Given that this bowl is perfect for cereal at the start of the day and tapas at the end of the day...<\/p>",
+            "link": "",
+            "button_label": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "16226042061e17a881-1": {
+          "type": "iconbox",
+          "settings": {
+            "title": "Bedding",
+            "description": "<p>The anchor of the collection that will see you through the day, from breakfast to dinner<\/p>",
+            "link": "",
+            "button_label": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "16226042061e17a881-2": {
+          "type": "iconbox",
+          "settings": {
+            "title": "Linen Curtains",
+            "description": "<p>Given that this bowl is perfect for cereal at the start of the day and tapas at the end of the day...<\/p>",
+            "link": "",
+            "button_label": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        }
+      },
+      "block_order": [
+        "16226042061e17a881-0",
+        "16226042061e17a881-1",
+        "16226042061e17a881-2"
+      ],
+      "settings": {
+        "heading": "<span class=\"sf__line-height-heading\">It looks trendy and at the same<br> time it's very comfotable<\/span>",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "item_per_row": 3,
+        "item_gap": 50,
+        "item_gap_mobile": 10,
+        "card_style": "vertical",
+        "image_max_width": "",
+        "content_alignment": "start",
+        "hover_effect": "zoom-in",
+        "enable_slider": false,
+        "show_pagination": true,
+        "show_navigation": false,
+        "use_scroll_mobile": false,
+        "use_grid_column_mb": false,
+        "custom_class": "sf__index-icon-box"
+      }
+    },
+    "1622605965e06fbba0": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "<span class=\"sf__line-height-heading\">Soothing colors for any<br> room in the house.<\/span>",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "living",
+        "product_to_show": 8,
+        "items_per_row": 4,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "button_type": "link",
+        "button_text": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 16,
+        "custom_class": ""
+      }
+    },
+    "1622606182ea7f231f": {
+      "type": "image-with-text-2",
+      "settings": {
+        "container": "container",
+        "hero_size": "medium",
+        "show_overlay": false,
+        "bg_position": "center",
+        "parallax": false,
+        "content_in_container": false,
+        "content_position": "left middle",
+        "text_alignment": "center",
+        "text_size": "medium",
+        "text_color": "dark",
+        "title": "<p class=\"sf__line-height-heading\">Look out on <br>a summer's day<\/p>",
+        "subtitle": "",
+        "text": "<p>Linen is good because it looks trendy and at the<br\/> same time it's very comfotable<\/p>",
+        "button_label": "Find your color",
+        "button_link": "",
+        "button_style": "sf__btn-secondary",
+        "button_size": "",
+        "custom_class": "sf__index-hero"
+      }
+    },
+    "16226214448ca9ca75": {
+      "type": "featured-product-slider",
+      "blocks": {
+        "16226214448ca9ca75-0": {
+          "type": "product",
+          "settings": {
+            "heading": "New Collection",
+            "description": "",
+            "product": "modern-checked-tablecloth"
+          }
+        },
+        "16226214448ca9ca75-1": {
+          "type": "product",
+          "settings": {
+            "heading": "New Collection",
+            "description": "",
+            "product": "big-striped-linen-tablecloth"
+          }
+        },
+        "16226214448ca9ca75-2": {
+          "type": "product",
+          "settings": {
+            "heading": "New Collection",
+            "description": "",
+            "product": "basic-cotton-tablecloth"
+          }
+        }
+      },
+      "block_order": [
+        "16226214448ca9ca75-0",
+        "16226214448ca9ca75-1",
+        "16226214448ca9ca75-2"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "w-full",
+        "background_color": "#f8f3eb",
+        "image_placement": "right",
+        "slide_autoplay": false,
+        "show_navigation": true,
+        "show_pagination": false,
+        "autorotate_speed": 5,
+        "pcard_alignment": "center",
+        "pcard_image_ratio": "1\/1",
+        "show_vendor": false,
+        "custom_class": ""
+      }
+    }
+  },
+  "order": [
+    "1620813069167db316",
+    "16226042061e17a881",
+    "16226214448ca9ca75",
+    "1622605965e06fbba0",
+    "1622606182ea7f231f",
+    "162243112070c9a4c8"
+  ]
+}

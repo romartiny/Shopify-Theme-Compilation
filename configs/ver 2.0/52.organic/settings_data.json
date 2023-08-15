@@ -1,0 +1,222 @@
+{
+  "current": {
+    "favicon": "shopify:\/\/shop_images\/fav_icon_dark_1.png",
+    "container_width": 1280,
+    "container_fluid_width": 1620,
+    "container_fluid_offset": 65,
+    "color_primary": "#0f4226",
+    "color_body_text": "#000000",
+    "color_heading_text": "#0f4226",
+    "color_sub_text": "#666666",
+    "color_btn_bg": "#0f4226",
+    "color_btn_bg_hover": "#0f4226",
+    "prod_sale_price_color": "#666666",
+    "prod_type_color": "#666666",
+    "color_field_bg": "#ffffff",
+    "color_annoucement_bg": "#da3f3f",
+    "color_topbar_bg": "#ffffff",
+    "color_topbar_text": "#000000",
+    "color_header_bg": "#ffffff",
+    "color_header_link": "#000000",
+    "color_header_transparent": "#000000",
+    "color_cart_wishlist_count": "#0f4226",
+    "bg_cart_wishlist_count": "#ffdd86",
+    "color_menu_bar_bg": "#000000",
+    "color_menu_bar_text": "#f8f8f8",
+    "color_footer_bg": "#ffffff",
+    "color_footer_text": "#000000",
+    "color_footer_subtext": "#666666",
+    "color_footer_link": "#666666",
+    "color_footer_link_hover": "#0f4226",
+    "color_footer_bg_mb": "#ffffff",
+    "color_footer_bottom_bg": "#ffffff",
+    "color_footer_bottom_text": "#666666",
+    "color_footer_bottom_bg_mb": "#ffffff",
+    "color_border": "#dedede",
+    "img_overlay_opacity": 20,
+    "tooltip_background_color": "#0f4226",
+    "type_base_font": "roboto_condensed_n4",
+    "use_custom_font_body": true,
+    "custom_body_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0595\/7291\/2305\/files\/Raleway-Medium.ttf?v=1630680028@500\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0595\/7291\/2305\/files\/Raleway-Bold.ttf?v=1630680028@700\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0595\/7291\/2305\/files\/Raleway-SemiBold.ttf?v=1630680548@600",
+    "custom_body_weight": "500",
+    "type_header_font": "roboto_condensed_n7",
+    "use_custom_font_heading": true,
+    "custom_heading_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0595\/7291\/2305\/files\/Raleway-Medium.ttf?v=1630680028@500\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0595\/7291\/2305\/files\/Raleway-Bold.ttf?v=1630680028@700\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0595\/7291\/2305\/files\/Raleway-SemiBold.ttf?v=1630680548@600",
+    "custom_heading_weight": "700",
+    "type_header_base_size": 35,
+    "btn_border_radius": 80,
+    "btn_line_height": 20,
+    "btn_weight": "700",
+    "pcard_layout": "2",
+    "pcard_alignment": "center",
+    "pcard_image_ratio": "1\/1",
+    "show_vendor": false,
+    "variant_option_design1": "button",
+    "variant_option_design2": "color",
+    "variant_option_design3": "color",
+    "show_variant_swatch_image": true,
+    "product_colors": "red: #FF6961,\nyellow: #FDDA76,\nblack: #000000,\nblack band: #000000,\nblue: #8DB4D2,\ngreen: #C1E1C1,\npurple: #B19CD9,\nsilver: #EEEEEF,\nwhite: #FFFFFF,\nbrown: #836953,\nlight brown: #B5651D,\ndark turquoise: #23cddc,\norange: #FFB347,\ntan: #E9D1BF,\nviolet: #B490B0,\npink: #FFD1DC,\ngrey: #E0E0E0,\nsky: #96BDC6,\npale leaf: #CCD4BF,\nlight blue: #b1c5d4,\ndark grey: #aca69f,\nbeige: #EBE6DB,\nbeige band: #EED9C4,\ndark blue: #063e66,\ncream: #FFFFCC,\nlight pink: #FBCFCD,\nmint: #bedce3,\ndark gray: #3A3B3C,\nrosy brown: #c4a287,\nlight grey:#D3D3D3,\ncopper: #B87333,\nrose gold: #ECC5C0,\nnight blue: #151B54,\ncoral: #FF7F50,\nlight purple: #C6AEC7",
+    "filter_color1": "Gingham",
+    "filter_color2": "flannel",
+    "article_show_date": false,
+    "article_show_excerpt": true,
+    "article_show_button": true,
+    "share_facebook": true,
+    "share_pinterest": true,
+    "social_twitter_link": "",
+    "social_twitter_label": "",
+    "social_facebook_link": "https:\/\/facebook.com\/",
+    "social_facebook_label": "300k Followers",
+    "social_pinterest_link": "",
+    "social_pinterest_label": "",
+    "social_instagram_link": "https:\/\/instagram.com\/",
+    "social_instagram_label": "100k Followers",
+    "wishlist_page": "wishlist",
+    "product_compare_page": "product-compare",
+    "gm_api": "AIzaSyAsk6G0BtpuiujLMuRJH0eTxbLUs02a3c8",
+    "instagram_token": "IGQVJYZAE4zSUp5QVhXRldhQlBpakoxeGxzQmJ5TGtfQkI5OFhnbzQxNFExaHNLRXl0X2tHZAmhOSEY1Vl9Oa2lNOXdCdUcta2Y0TnlfWGtZAT3VueWsxUzdQSG5uM1ZANYThpWlhtamlXWFBrVWFSbkx3RQZDZD",
+    "custom_css": "\/* Custom css *\/\n.top_bar-label {\n  font-size: 15px;\n  line-height: 1.2;\n  font-weight: 700;\n  padding: 3px 15px;\n  border-radius: 20px;\n  background: #E94D38;\n  margin-right: 10px;\n  color: #fff;\n}\n.sf-cart-count, .sf-wishlist-count,\n.sf-nav li.sf-menu-item-parent a.sf__parent-item {\n  font-weight: 700;\n}\n.sf__btn.sf__btn-white, a.sf__btn.sf__btn-white,\n.sf__btn.sf__btn-link, a.sf__btn.sf__btn-link {\n  color: var(--color-primary);\n}\n.sf__btn.sf__btn-link:before, a.sf__btn.sf__btn-link:before,\n.sf__btn.sf__btn-link:after, a.sf__btn.sf__btn-link:after {\n  height: 1px;\n}\n.section__header {\n  margin-bottom: 40px;\n}\n.home-banner__slideshow[id$=\"1621243260e1af0c20\"] .sf__slide-content .slide__block-title {\n  line-height: 1.14;\n  margin-bottom: 17px;\n}\n.home-banner__slideshow[id$=\"1621243260e1af0c20\"] .sf__slide-content .slide__block-description {\n  line-height: 2;\n  font-size: 18px;\n  margin-bottom: 28px;\n}\n.collection-list[id$=\"16225316461d1cff80\"] .collection-card--inside .collection-card__info {\n  top: 0;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.collection-list[id$=\"16225316461d1cff80\"] .collection-card--inside .collection-card__info h3 a {\n  font-size: 22px;\n  font-weight: 700;\n  line-height: 1.14;\n  margin-bottom: 7px;\n}\n.collection-list[id$=\"16225316461d1cff80\"] .collection-card--inside .collection-card__image {\n  border-radius: 5px;\n}\n.collection-list[id$=\"16225316461d1cff80\"] .collection-card--inside .collection-card__info .sf__btn-icon {\n  display: none;\n}\n.sf__pcard .sf__pcard-name,\n.sf__pcard .sf__pcard-price.price--on-sale .prod__price {\n  font-weight: 700;\n}\n.sf__pcard .sf__pcard-price.price--on-sale .prod__price {\n  color: #E94D38;\n}\n.image__with-text .content__heading {\n  line-height: 1.28;\n  font-size: 50px;\n  margin-bottom: 25px;\n}\n.image__with-text .prose {\n  margin-bottom: 25px;\n}\n.sf-icon-box[id$=\"16306855824867f977\"] .sf-icon-box__text h3 {\n  line-height: 1.14;\n  color: #000;\n  font-size: 22px;\n  margin-bottom: 16px;\n} \n.sf__footer-block-title {\n  font-weight: 700 !important;\n  font-size: 18px;\n}\n.sf-footer form.sf__footer-form-newsletter.form__style-minimal .sf__newletter__form-input {\n  border-color: #3D6642;\n}\n.sf-footer form.sf__footer-form-newsletter.form__style-minimal .sf__newletter__form-input::placeholder {\n  color: var(--color-primary);\n}\n.sf-footer form.sf__footer-form-newsletter.form__style-minimal svg path {\n  fill: #3D6642;\n}\n\n\n@media(min-width: 1024px) {\n  .sf__footer-block-newsletter {\n  \tpadding-right: 50px;\n  }\n  .sf__footer-block-newsletter .sf__footer-block-title {\n    font-size: 36px;\n    line-height: 1.5;\n    margin-bottom: 12px;\n    color: var(--color-primary);\n      }\n  .sf__footer-block-newsletter .sf__newsletter-block-desc {\n    padding: 0;\n    margin-bottom: 30px;\n  }\n}\n\n@media(min-width: 1280px) {\n  .collection-list[id$=\"16225316461d1cff80\"] .collection-list__inner--overflow {\n    padding-right: calc((100vw - 1280px)\/ 2 + 5px);\n    padding-left: calc((100vw - 1280px) \/ 2 + 5px);\n  }\n}\n\n@media(min-width: 1536px) {\n  .sf__footer-block-newsletter {\n  \tpadding-right: 195px;\n  }\n}\n\n@media(min-width: 1680px) {\n  .home-banner__slideshow[id$=\"1621243260e1af0c20\"] .sf__slide-content .slide__block-title {\n    font-size: 70px;\n  }\n}\n\n@media(max-width: 767px) {\n  .home-banner__slideshow[id$=\"1621243260e1af0c20\"] .sf__slide-content .sf__mobile-button {\n    width: 100%;\n    color: var(--color-btn-text);\n    background: var(--color-btn-bg);\n  }\n  .image__with-text .content__heading {\n    font-size: 34px;\n  }\n  .collection-list[id$=\"16225316461d1cff80\"] .collection-card--inside .collection-card__info {\n    padding: 12px;\n    position: absolute;\n  }\n  .collection-list[id$=\"16225316461d1cff80\"] .collection-card--inside .collection-card__info h3 a {\n    font-size: 16px !important;\n    margin-bottom: 0;\n  }\n}",
+    "use_theme_currencies": true,
+    "theme_currencies": "USD | EUR | GBP | VND",
+    "bg_cart_count": "#da3f3f",
+    "sections": {
+      "annoucement": {
+        "type": "annoucement",
+        "settings": {
+          "show_announcement": false,
+          "homepage_only": true,
+          "show_close": true,
+          "message": "Free shipping for all orders from $60+",
+          "message_link": "",
+          "show_divider": false
+        }
+      },
+      "header": {
+        "type": "header",
+        "blocks": {
+          "ea9b6fb7-1851-4d8c-97b4-34ced6444026": {
+            "type": "topbar",
+            "settings": {
+              "show_divider": true,
+              "show_phone_numb": false,
+              "show_email": false,
+              "show_social_links": true,
+              "show_stores_page": false,
+              "show_currency_switcher": true,
+              "show_language_switcher": true,
+              "alert_message": "<p><span class=\"top_bar-label\">HOT<\/span> <span style=\"font-weight: 600; font-size: 15px;\"> 25% off everything (yes, everything!) 🔥<\/span><\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "ea9b6fb7-1851-4d8c-97b4-34ced6444026"
+        ],
+        "settings": {
+          "header_design": "logo-left-menu-center",
+          "container": "container",
+          "header_sticky": true,
+          "transparent_on_top": false,
+          "logo_text": "MINIMOG",
+          "logo": "shopify:\/\/shop_images\/logo_29a7e3f7-72cb-4230-abdb-246f0dcadcf6.png",
+          "logo_max_width": 150,
+          "sticky_logo_max_width": 150,
+          "mobile_logo_max_width": 135,
+          "main_menu": "main-menu",
+          "secondary_menu": "",
+          "uppercase_parent_level": false,
+          "search": "show_icon",
+          "show_account_icon": true,
+          "show_cart_icon": true,
+          "show_wishlist_icon": true,
+          "show_compare_icon": false,
+          "show_currency_switcher": false,
+          "show_language_switcher": false
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "d51911b5-b141-4b15-b376-644f3bb3353d": {
+            "type": "newsletter",
+            "settings": {
+              "title": "Subscribe",
+              "description": "Our conversation is just getting started",
+              "email_placeholder": "Enter your email",
+              "form_style": "minimal",
+              "show_social": false,
+              "width": "66%"
+            }
+          },
+          "e433dce4-0637-4a41-88f2-cb6ca93bef0f": {
+            "type": "menu",
+            "settings": {
+              "menu": "quick-links",
+              "title": "Quick links",
+              "width": "25%"
+            }
+          },
+          "99012f78-3bc9-40bc-baf5-52a4c7646361": {
+            "type": "menu",
+            "settings": {
+              "menu": "our-store",
+              "title": "Company",
+              "width": "25%"
+            }
+          },
+          "33e03855-a019-4cbb-842c-590bba9bbb4d": {
+            "type": "menu",
+            "settings": {
+              "menu": "facebook",
+              "title": "Follow Us",
+              "width": "25%"
+            }
+          },
+          "7da4c726-68c7-4ace-9afb-59a0a88b591a": {
+            "type": "menu",
+            "settings": {
+              "menu": "services",
+              "title": "Information",
+              "width": "25%"
+            }
+          }
+        },
+        "block_order": [
+          "d51911b5-b141-4b15-b376-644f3bb3353d",
+          "e433dce4-0637-4a41-88f2-cb6ca93bef0f",
+          "99012f78-3bc9-40bc-baf5-52a4c7646361",
+          "33e03855-a019-4cbb-842c-590bba9bbb4d",
+          "7da4c726-68c7-4ace-9afb-59a0a88b591a"
+        ],
+        "settings": {
+          "design": "footer-1",
+          "container": "container",
+          "bordered": false,
+          "copyright": "<span style=\"font-size: 16px;\">© 2021, Minimog. All Rights Reserved.<\/span>",
+          "show_currency_selector": false,
+          "show_language_selector": false,
+          "show_social_links": false,
+          "show_payment_icons": true
+        }
+      },
+      "mobile-sticky-bar": {
+        "type": "mobile-sticky-bar",
+        "settings": {
+          "show_mobile_sticky": true,
+          "show_home_icon": true,
+          "show_collection_icon": true,
+          "show_cart_icon": true,
+          "show_search_icon": true,
+          "show_account_icon": false,
+          "show_wishlist_icon": false
+        }
+      }
+    },
+    "content_for_index": [
+
+    ]
+  },
+  "presets": {
+    "Default": {
+    }
+  }
+}

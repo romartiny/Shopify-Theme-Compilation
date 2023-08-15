@@ -1,0 +1,223 @@
+{
+  "current": {
+    "favicon": "shopify:\/\/shop_images\/fav_icon_dark_1.png",
+    "container_width": 1410,
+    "container_fluid_offset": 100,
+    "color_primary": "#000000",
+    "color_sub_text": "#696969",
+    "color_btn_bg_hover": "#000000",
+    "prod_sale_price_color": "#666666",
+    "prod_type_color": "#666666",
+    "prod_desc_color": "#666666",
+    "color_annoucement_bg": "#c8d8ce",
+    "color_annoucement_text": "#000000",
+    "color_topbar_bg": "#c8d8ce",
+    "color_topbar_text": "#000000",
+    "color_header_bg": "#ffffff",
+    "color_header_link": "#000000",
+    "color_header_transparent": "#000000",
+    "color_menu_bar_bg": "#000000",
+    "color_menu_bar_text": "#f8f8f8",
+    "color_footer_bg": "#ffffff",
+    "color_footer_text": "#000000",
+    "color_footer_subtext": "#9b9b9b",
+    "color_footer_link_hover": "#000000",
+    "color_footer_bottom_bg": "#000000",
+    "color_footer_bottom_text": "#ffffff",
+    "img_overlay_opacity": 20,
+    "tooltip_background_color": "#000000",
+    "type_base_font": "roboto_condensed_n4",
+    "use_custom_font_body": true,
+    "custom_body_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/Gilroy-Medium1.otf?v=1622684383@500\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/Gilroy-Semibold1.otf?v=1622684383@600\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/Gilroy-Bold1.otf?v=1622685072@700",
+    "custom_body_weight": "500",
+    "type_base_size": 16,
+    "type_header_font": "roboto_condensed_n7",
+    "use_custom_font_heading": true,
+    "custom_heading_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/Gilroy-Medium1.otf?v=1622684383@500\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/Gilroy-Semibold1.otf?v=1622684383@600\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/Gilroy-Bold1.otf?v=1622685072@700",
+    "custom_heading_weight": "400",
+    "type_header_base_size": 35,
+    "btn_base_size": 15,
+    "btn_weight": "600",
+    "pcard_layout": "1",
+    "pcard_alignment": "center",
+    "pcard_image_ratio": "1\/1",
+    "show_vendor": false,
+    "variant_option_design3": "color",
+    "show_variant_swatch_image": true,
+    "product_colors": "red: #FF6961,\nyellow: #FDDA76,\nblack: #000000,\nblue: #8DB4D2,\ngreen: #C1E1C1,\npurple: #B19CD9,\nsilver: #EEEEEF,\nwhite: #FFFFFF,\nbrown: #836953,\nlight-brown: #feb035,\ndark-turquoise: #23cddc,\norange: #FFB347,\ntan: #E9D1BF,\nviolet: #B490B0,\npink: #FFD1DC,\ngrey: #E0E0E0,\nsky: #96BDC6,\npale-leaf: #CCD4BF,\nmint: #c5cdc8,",
+    "filter_color1": "",
+    "share_facebook": true,
+    "social_twitter_link": "https:\/\/twitter.com\/home",
+    "social_facebook_link": "https:\/\/facebook.com\/",
+    "social_pinterest_link": "https:\/\/pinterest.com\/",
+    "social_instagram_link": "https:\/\/instagram.com\/",
+    "wishlist_page": "",
+    "product_compare_page": "",
+    "gm_api": "",
+    "instagram_token": "",
+    "custom_css": ".sf-instagram .sf-instagram__wrapper {\n  margin: 0 30px;\n}\n\n.sf-instagram .section-my {\n  margin-bottom: 50px;\n}\n\n.sf__footer-block-newsletter input.form-control {\n  border-radius: 52px;\n  border-color: #ccc;\n  border-width: 2px;\n  background-color: #fff;\n}\n.sf__footer-block-menu .sf__footer-block-title {\n  font-size: 24px;\n  line-height: 32px;\n}\n.sf__footer-block-menu ul li {\n  line-height: 36px;\n}\n.sf__index-custom-content-1 .sf-custom__block-inner h3 {\n  font-size: 34px;\n  line-height: 48px;\n}\n\n.sf__index-custom-content-1 .sf-custom__block-inner .rte p,\n.sf__index-custom-content-2 .sf-custom__block-inner .rte p {\n  color: var(--color-sub-text);\n}\n\n.sf__pcard-name {\n  font-weight: 600;\n  font-size: 18px;\n}\n\n.sf__pcard-price .prod__price {\n  font-size: 20px;\n  font-weight: 700;\n}\n\n.sf__pcard-price.price--on-sale .prod__price {\n  color: #e56137;\n}\n\n.sf__index-custom-content-2 .sf-custom__block-inner h3 {\n  font-size: 40px;\n}\n\n.sf-header__desktop .sf-nav .sf-menu-item-parent a.block {\n  font-weight: 600;\n}\n@media (min-width: 1024px) {\n  .sf__index-featured-collection .section__heading {\n    font-size: 2.5rem !important;\n  }\n  .sf__index-icon-box .section__heading {\n    font-size: 2.5rem !important;\n  }\n}\n\n@media (max-width: 767px) {\n  .sf__index-featured-collection .section-my {\n    margin-top: 0;\n  }\n  .sf__index-custom-content-1 .sf-custom__block {\n    width: 100%;\n  }\n  .sf__index-custom-content-1 .sf-custom__block--text .sf-custom__text-cta {\n    margin-top: 5px;\n  }\n  .sf__newletter__form-input {\n    background: #fff;\n  }\n}",
+    "use_theme_currencies": true,
+    "theme_currencies": "USD | EUR | GBP | VND",
+    "sections": {
+      "header": {
+        "type": "header",
+        "blocks": {
+          "129652ab-604a-4486-9b7a-43773bbb65c2": {
+            "type": "banner",
+            "settings": {
+              "heading": "Shop",
+              "container": "inherit",
+              "banner_style": "outside",
+              "banner_link": "",
+              "banner_title": "New collection",
+              "banner_desc": "",
+              "banner_button_text": "Shop now"
+            }
+          },
+          "d6fadbc5-210d-4539-b151-aa0fb2c5af01": {
+            "type": "product-list",
+            "settings": {
+              "heading": "Product",
+              "container": "inherit",
+              "stretch_width": false,
+              "collection": "juice",
+              "limit": 6,
+              "columns": 2
+            }
+          },
+          "e4456076-e431-41f8-adc3-34a55d629e35": {
+            "type": "custom_html",
+            "settings": {
+              "heading": "Features",
+              "container": "inherit",
+              "html": ""
+            }
+          }
+        },
+        "block_order": [
+          "129652ab-604a-4486-9b7a-43773bbb65c2",
+          "d6fadbc5-210d-4539-b151-aa0fb2c5af01",
+          "e4456076-e431-41f8-adc3-34a55d629e35"
+        ],
+        "settings": {
+          "header_design": "logo-center-menu-left",
+          "container": "container-fluid",
+          "header_sticky": true,
+          "transparent_on_top": true,
+          "logo_text": "MINIMOG",
+          "logo_max_width": 120,
+          "sticky_logo_max_width": 105,
+          "mobile_logo_max_width": 75,
+          "main_menu": "main-menu",
+          "secondary_menu": "",
+          "uppercase_parent_level": true,
+          "search": "show_icon",
+          "show_account_icon": true,
+          "show_cart_icon": true,
+          "show_wishlist_icon": true,
+          "show_compare_icon": false,
+          "show_currency_switcher": false,
+          "show_language_switcher": false
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "2132ec47-f7a6-4d86-80b5-85e950a6ae2c": {
+            "type": "newsletter",
+            "settings": {
+              "title": "<span class=\"leading-tight\">Pure, Squeezed,<br> Sunshine.<\/span>",
+              "description": "<span class=\"text-black  mb-2.5 block\">Sign up for our newsletter.<\/span>",
+              "email_placeholder": "Enter your email",
+              "form_style": "bordered",
+              "show_social": false,
+              "width": "50%"
+            }
+          },
+          "5201fa23-26c8-4c1b-a263-060101a7e575": {
+            "type": "spacing",
+            "settings": {
+              "width": "25%"
+            }
+          },
+          "c85629c7-7aae-4666-b5f0-150990439c91": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "About",
+              "width": "33%"
+            }
+          },
+          "527ccf44-18d9-45d0-a2a0-c992da866024": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "Information",
+              "width": "33%"
+            }
+          }
+        },
+        "block_order": [
+          "2132ec47-f7a6-4d86-80b5-85e950a6ae2c",
+          "5201fa23-26c8-4c1b-a263-060101a7e575",
+          "c85629c7-7aae-4666-b5f0-150990439c91",
+          "527ccf44-18d9-45d0-a2a0-c992da866024"
+        ],
+        "settings": {
+          "design": "footer-1",
+          "container": "container-fluid",
+          "bordered": false,
+          "copyright": "<span style=\"color: var(--color-footer-subtext);\">© Freshly 2021<\/span>",
+          "show_currency_selector": false,
+          "show_language_selector": false,
+          "show_social_links": true,
+          "show_payment_icons": true
+        }
+      },
+      "annoucement": {
+        "type": "annoucement",
+        "settings": {
+          "show_announcement": false,
+          "homepage_only": true,
+          "show_close": true,
+          "message": "<p>🔥 Free shipping on all U.S. orders $50+ 📦<\/p>",
+          "message_link": "",
+          "show_divider": false
+        }
+      },
+      "mobile-sticky-bar": {
+        "type": "mobile-sticky-bar",
+        "settings": {
+          "show_mobile_sticky": true,
+          "show_home_icon": true,
+          "show_collection_icon": true,
+          "show_cart_icon": true,
+          "show_search_icon": true,
+          "show_account_icon": false,
+          "show_wishlist_icon": false
+        }
+      }
+    }
+  },
+  "presets": {
+    "Default": {
+      "sections": {
+        "featured-collection": {
+          "type": "featured-collection",
+          "settings": {
+            "collection": "frontpage"
+          }
+        },
+        "featured-product": {
+          "type": "featured-product",
+          "settings": {
+          }
+        }
+      },
+      "content_for_index": [
+        "featured-collection",
+        "featured-product"
+      ]
+    }
+  }
+}

@@ -1,0 +1,362 @@
+{
+  "sections": {
+    "1621243260e1af0c20": {
+      "type": "slider",
+      "blocks": {
+        "1621243260e1af0c20-0": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "white",
+            "subheading": "",
+            "title": "It’s Time To<br> be Bold",
+            "description": "<p>Enter for a chance to win a complete<br\/> bathroom makeover<\/p>",
+            "button_text": "<p class=\"flex items-center\">Shop now <span class=\"ml-2\"><img class=\"w-4 h-4\" src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/ArrowRight.png?v=1623634915\"><\/span><\/p>",
+            "button_link": "",
+            "button_style": "sf__btn-white",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections"
+          }
+        },
+        "1621243260e1af0c20-1": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "white",
+            "subheading": "",
+            "title": "Shop vesel and<br> wall mount sinks",
+            "description": "<p>Save up to 20% with code MYSTYLE<\/p>",
+            "button_text": "<p class=\"flex items-center\">Shop now <span class=\"ml-2\"><img class=\"w-4 h-4\" src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/ArrowRight.png?v=1623634915\"><\/span><\/p>",
+            "button_link": "",
+            "button_style": "sf__btn-white",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections"
+          }
+        },
+        "1621243260e1af0c20-2": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "white",
+            "subheading": "",
+            "title": "Choose well<br>Be well",
+            "description": "<p>Save up to 20% with code MYSTYLE<\/p>",
+            "button_text": "<p class=\"flex items-center\">Shop now <span class=\"ml-2\"><img class=\"w-4 h-4\" src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/ArrowRight.png?v=1623634915\"><\/span><\/p>",
+            "button_link": "",
+            "button_style": "sf__btn-white",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections"
+          }
+        }
+      },
+      "block_order": [
+        "1621243260e1af0c20-0",
+        "1621243260e1af0c20-1",
+        "1621243260e1af0c20-2"
+      ],
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "medium",
+        "show_overlay": false,
+        "dots_position": "bottom",
+        "dots_color": "#000",
+        "show_dots": true,
+        "show_arrows": false,
+        "autorotate": true,
+        "autorotate_speed": 5,
+        "custom_class": "sf__index-slideshow"
+      }
+    },
+    "1623403822b813a780": {
+      "type": "instagram",
+      "settings": {
+        "heading": "Build your dream bathroom",
+        "subheading": "",
+        "description": "Find inspiration for your bathroom remodel in our gallery and share your own<br> photos on Instagram with hashtag <a>#MyDreamBath.<\/a>",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "layout": "grid",
+        "images_count": 4,
+        "grid_columns": 4,
+        "gap": 31,
+        "mobile_gap": 10,
+        "profile": "https:\/\/www.instagram.com\/minimog.trendy\/",
+        "button_label": "",
+        "custom_class": ""
+      }
+    },
+    "1623638614e9451cfe": {
+      "type": "collection-list",
+      "blocks": {
+        "1623638614e9451cfe-0": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "accessories-bathroom",
+            "title": "Accessories"
+          }
+        },
+        "1623638614e9451cfe-1": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "bathroom-sinks",
+            "title": "Bathroom Sinks"
+          }
+        },
+        "1623638614e9451cfe-2": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "showers-bathroom",
+            "title": "Showers"
+          }
+        },
+        "f23f7f5a-c65d-482e-a2a1-7e6aa33bd37d": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "toilets-bathroom",
+            "title": "Toilets"
+          }
+        },
+        "952c4ff2-b328-4563-8e8a-6f41026b7ffd": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "bathtubs-bathroom",
+            "title": "Bathtubs"
+          }
+        }
+      },
+      "block_order": [
+        "1623638614e9451cfe-0",
+        "1623638614e9451cfe-1",
+        "1623638614e9451cfe-2",
+        "f23f7f5a-c65d-482e-a2a1-7e6aa33bd37d",
+        "952c4ff2-b328-4563-8e8a-6f41026b7ffd"
+      ],
+      "settings": {
+        "heading": "We’ll make your bathroom<br> dreams a reality",
+        "subheading": "SHOP BY DEPARTMENT",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "",
+        "layout": "grid",
+        "card_style": "standard",
+        "text_alignment": "center",
+        "hover_effect": "scaling-up",
+        "show_product_count": true,
+        "count_inline_title": false,
+        "image_rounded": true,
+        "items_per_row": 5,
+        "item_gap": 50,
+        "enable_slider": false,
+        "show_pagination": true,
+        "show_navigation": true,
+        "autorotate": false,
+        "autorotate_speed": 5,
+        "use_scroll_mobile": true,
+        "mobile_gap": 10,
+        "hidden_slide_control_mobile": false,
+        "custom_class": "sf__index-collection-list"
+      }
+    },
+    "1623639061b28c3d0b": {
+      "type": "custom-content",
+      "blocks": {
+        "b319c7e5-153a-4995-a9cc-439f80582bb2": {
+          "type": "lookbook",
+          "settings": {
+            "width": "50%",
+            "top_1": 9,
+            "left_1": 63,
+            "product_1": "",
+            "top_2": 26,
+            "left_2": 50,
+            "product_2": "",
+            "top_3": 61,
+            "left_3": 48,
+            "product_3": "",
+            "top_4": 0,
+            "left_4": 0,
+            "product_4": "",
+            "top_5": 20,
+            "left_5": 0,
+            "product_5": "",
+            "block_custom_class": ""
+          }
+        },
+        "22a3330f-fd29-4043-9a5c-e4fba7a5cc41": {
+          "type": "product_bundles",
+          "settings": {
+            "width": "50%",
+            "alignment": "center",
+            "title": "We’ll make your bathroom<br> dreams a reality",
+            "subheading": "BUNDLE & SAVE",
+            "product_1": "antique-white-traditional-vanity",
+            "product_2": "ceramic-single-vanity-set",
+            "product_3": "led-bathroom-mirror",
+            "product_4": "",
+            "product_5": "",
+            "block_custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "b319c7e5-153a-4995-a9cc-439f80582bb2",
+        "22a3330f-fd29-4043-9a5c-e4fba7a5cc41"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "",
+        "gap": 170,
+        "use_scroll_mobile": false,
+        "gap_mobile": 16,
+        "custom_class": ""
+      }
+    },
+    "16236393649f870ece": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Inspired by you.<br> Designed by Relaxar.",
+        "subheading": "",
+        "description": "Shop online for high-end bath accessories, bathroom sinks, vanities,<br> shower faucets, & more fixtures",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "bathroom",
+        "product_to_show": 8,
+        "items_per_row": 3,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": true,
+        "enable_slider": true,
+        "show_pagination": false,
+        "show_navigation": true,
+        "button_type": "link",
+        "button_text": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 10,
+        "custom_class": ""
+      }
+    },
+    "16236402224193166d": {
+      "type": "icon-box",
+      "blocks": {
+        "16236402224193166d-0": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/10.jpg",
+            "title": "Bathroom renovations, made easy.",
+            "description": "",
+            "link": "",
+            "button_label": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "16236402224193166d-1": {
+          "type": "iconbox",
+          "settings": {
+            "title": "Bathroom tips & guides",
+            "description": "",
+            "link": "",
+            "button_label": "Check Out Our Tips",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        }
+      },
+      "block_order": [
+        "16236402224193166d-0",
+        "16236402224193166d-1"
+      ],
+      "settings": {
+        "heading": "We make it easy to transform your<br> bathroom into a relaxing and<br> stylish sanctuary",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "item_per_row": 2,
+        "item_gap": 30,
+        "item_gap_mobile": 10,
+        "card_style": "vertical",
+        "image_max_width": "",
+        "content_alignment": "center",
+        "hover_effect": "none",
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "use_scroll_mobile": true,
+        "use_grid_column_mb": false,
+        "custom_class": "sf__index-icon-box"
+      }
+    },
+    "162364044812cfecc9": {
+      "type": "image-with-text-2",
+      "settings": {
+        "container": "w-full",
+        "hero_size": "medium",
+        "show_overlay": true,
+        "bg_position": "center",
+        "parallax": false,
+        "content_in_container": false,
+        "content_position": "left middle",
+        "text_alignment": "left",
+        "text_size": "medium",
+        "text_color": "white",
+        "title": "Modern<br> bathroom sinks",
+        "subtitle": "",
+        "text": "<p>Built to last - shop our from our selection<\/p>",
+        "button_label": "<p class=\"flex items-center\">view collection <span class=\"ml-2\"><img class=\"w-4 h-4\" src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/ArrowRight.png?v=1623634915\"><\/span><\/p>",
+        "button_link": "",
+        "button_style": "sf__btn-white",
+        "button_size": "",
+        "custom_class": "sf__index-hero"
+      }
+    }
+  },
+  "order": [
+    "1621243260e1af0c20",
+    "1623638614e9451cfe",
+    "1623639061b28c3d0b",
+    "16236393649f870ece",
+    "16236402224193166d",
+    "162364044812cfecc9",
+    "1623403822b813a780"
+  ]
+}

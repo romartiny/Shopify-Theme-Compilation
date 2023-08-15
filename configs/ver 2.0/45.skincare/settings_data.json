@@ -1,0 +1,242 @@
+{
+  "current": {
+    "favicon": "shopify:\/\/shop_images\/fav_icon_dark_1.png",
+    "container_width": 1170,
+    "container_fluid_width": 1620,
+    "container_fluid_offset": 100,
+    "color_primary": "#332d55",
+    "color_body_text": "#332d55",
+    "color_heading_text": "#332d55",
+    "color_sub_text": "#696969",
+    "color_btn_bg": "#332d55",
+    "color_btn_bg_hover": "#332d55",
+    "prod_sale_price_color": "#696969",
+    "prod_type_color": "#696969",
+    "prod_desc_color": "#696969",
+    "color_main_bg": "#ffffff",
+    "color_field_bg": "#ffffff",
+    "color_annoucement_bg": "#e4efe8",
+    "color_annoucement_text": "#332d55",
+    "color_topbar_bg": "#ffffff",
+    "color_topbar_text": "#696969",
+    "color_header_bg": "#ffffff",
+    "color_header_link": "#000000",
+    "color_header_transparent": "#000000",
+    "color_menu_bar_bg": "#ffffff",
+    "color_menu_bar_text": "#000000",
+    "color_footer_bg": "#ffffff",
+    "color_footer_text": "#332d55",
+    "color_footer_subtext": "#696969",
+    "color_footer_link_hover": "#000000",
+    "color_footer_bottom_bg": "#332d55",
+    "color_footer_bottom_text": "#ffffff",
+    "color_border": "#dedede",
+    "img_overlay_opacity": 20,
+    "tooltip_background_color": "#000000",
+    "type_base_font": "roboto_condensed_n4",
+    "use_custom_font_body": true,
+    "custom_body_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/Sofia_Pro_Medium_Az.otf?v=1623401715@500\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/Sofia_Pro_Regular_Az.otf?v=1623401716@400\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/Sofia_Pro_Bold_Az.otf?v=1623401715@700",
+    "custom_body_weight": "400",
+    "type_base_size": 16,
+    "type_base_line_height": 28,
+    "type_header_font": "roboto_condensed_n7",
+    "use_custom_font_heading": true,
+    "custom_heading_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/Butler_Medium.otf?v=1623645011@500",
+    "custom_heading_weight": "500",
+    "type_header_base_size": 38,
+    "btn_base_size": 16,
+    "btn_weight": "500",
+    "pcard_layout": "1",
+    "pcard_alignment": "center",
+    "pcard_image_ratio": "3\/4",
+    "show_vendor": true,
+    "variant_option_design1": "image",
+    "variant_option_design3": "color",
+    "show_variant_swatch_image": true,
+    "product_colors": "red: #FF6961,\nyellow: #FDDA76,\nblack: #000000,\nblue: #8DB4D2,\ngreen: #C1E1C1,\npurple: #B19CD9,\nsilver: #EEEEEF,\nwhite: #FFFFFF,\nbrown: #836953,\nlight-brown: #feb035,\ndark-turquoise: #23cddc,\norange: #FFB347,\ntan: #E9D1BF,\nviolet: #B490B0,\npink: #FFD1DC,\ngrey: #E0E0E0,\nsky: #96BDC6,\npale-leaf: #CCD4BF",
+    "filter_color1": "",
+    "share_facebook": true,
+    "share_pinterest": true,
+    "social_twitter_link": "https:\/\/twitter.com\/home",
+    "social_facebook_link": "https:\/\/facebook.com\/",
+    "social_pinterest_link": "https:\/\/pinterest.com\/",
+    "social_instagram_link": "https:\/\/instagram.com\/",
+    "wishlist_page": "whishlist",
+    "product_compare_page": "",
+    "gm_api": "",
+    "instagram_token": "",
+    "custom_css": ".sf-search__form:not(.mobile).full-width {\n  background-color: #f5f5f5;\n}\n.sf__custom-heading,\n.sf__footer-block-newsletter .sf__footer-block-title {\n  font-size: 40px;\n  line-height: 52px;\n}\n[data-section-type=\"hero\"] .sf-hero__content {\n  padding: 45px 40px;\n  background: #fff;\n  border-radius: 10px;\n}\n[data-section-type=\"hero\"] .sf-hero__title {\n  background-image: url(https:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/9.png?v=1623653737);\n  background-repeat: no-repeat;\n  background-size: 40px;\n  background-position: bottom;\n  padding-bottom: 15px;\n}\n[data-section-type=\"hero\"] .sf-hero__text {\n  color: var(--color-sub-text);\n  margin-bottom: 45px;\n}\n[data-section-type=\"hero\"] .sf-hero__btn,\n[data-section-type=\"hero\"] .sf-hero__btn .sf__btn {\n  width: 100%;\n}\n.content__box-162365417352ffafa1 {\n  padding-left: 0;\n}\n.content__box-16236466169462824c {\n  padding-right: 0;\n}\n.brands-list[data-section-type=\"brand-list\"] .sf-image img {\n  opacity: 0.3;\n  transition: opacity 0.3s ease-in-out;\n}\n\n.brands-list[data-section-type=\"brand-list\"] .sf-image:hover img {\n  opacity: 1;\n  cursor: pointer;\n}\n.content__subheading,\n.section__subheading,\n.sf-testimonials .rte,\n.slide__block-subtitle {\n  font-size: 20px;\n  line-height: 32px;\n}\n.content__subheading,\n.section__subheading,\n.sf-testimonials .rte {\n  color: var(--color-primary);\n}\n.sf__pcard-name {\n  color: var(--color-primary);\n}\n.sf__pcard-price .prod__price {\n  color: var(--color-primary);\n  font-weight: 700;\n}\n.sf__pcard-price.price--on-sale .prod__price {\n  color: #f86a55;\n}\n.sf__footer-block-title {\n  font-size: 24px;\n  line-height: 36px;\n}\n.sf-footer\n  .sf-footer__block.sf__footer-block-newsletter\n  form.sf__footer-form-newsletter\n  .sf__newletter__form-input {\n  background-color: #f5f5f5;\n  border-color: transparent;\n  border-radius: 10px;\n}\n.sf__footer-block-menu ul li {\n  line-height: 36px;\n}\n.sf-instagram .section-my {\n  margin-bottom: 30px;\n}\n.sf-footer .sf__footer-form-newsletter-icon {\n  display: none;\n}\n.sf-footer form.sf__footer-form-newsletter .sf__newletter__form-input {\n  padding-left: 1rem;\n}\n\n.sf-header__desktop .sf-search-form button {\n  order: 1;\n  padding-right: 0;\n}\n.sf-header__desktop .sf-search-form span {\n  order: 2;\n}\n.sf-header__desktop .sf-search-form {\n  min-width: 290px;\n  background-color: #f5f5f5;\n  border: none;\n}\n@media (max-width: 767px) {\n  [data-section-type=\"slider\"] .sf__slide-content--mobile .sf__mobile-button {\n    background-color: var(--color-btn-bg, var(--color-primary));\n    color: #fff;\n  }\n  .sf-custom__block.content__box-162365417352ffafa1 {\n    padding: calc(var(--column-gap-mobile, var(--column-gap)) \/ 2);\n  }\n}",
+    "use_theme_currencies": true,
+    "theme_currencies": "USD | EUR | GBP | VND",
+    "sections": {
+      "header": {
+        "type": "header",
+        "blocks": {
+          "59224d28-d657-4624-8d17-55b1c4ce8d9c": {
+            "type": "product-list",
+            "settings": {
+              "heading": "Product",
+              "container": "container-fluid",
+              "stretch_width": false,
+              "collection": "skincare",
+              "limit": 6,
+              "columns": 2
+            }
+          },
+          "5b9aec5f-b955-4765-9a87-1962d613e909": {
+            "type": "custom_html",
+            "settings": {
+              "heading": "Home",
+              "container": "inherit",
+              "html": ""
+            }
+          },
+          "455bd616-faa9-4d06-a0bd-fe911520ed5c": {
+            "type": "banner",
+            "settings": {
+              "heading": "Shop",
+              "container": "inherit",
+              "banner_style": "outside",
+              "banner_link": "",
+              "banner_title": "The new - season shoes edit",
+              "banner_desc": "",
+              "banner_button_text": "Shop now"
+            }
+          },
+          "61b30526-4bb7-4b76-89f7-1ad9c955e462": {
+            "type": "custom_html",
+            "settings": {
+              "heading": "Features",
+              "container": "inherit",
+              "html": ""
+            }
+          }
+        },
+        "block_order": [
+          "59224d28-d657-4624-8d17-55b1c4ce8d9c",
+          "5b9aec5f-b955-4765-9a87-1962d613e909",
+          "455bd616-faa9-4d06-a0bd-fe911520ed5c",
+          "61b30526-4bb7-4b76-89f7-1ad9c955e462"
+        ],
+        "settings": {
+          "header_design": "logo-center-menu-left",
+          "container": "container-fluid",
+          "header_sticky": true,
+          "transparent_on_top": false,
+          "logo_text": "MINIMOG",
+          "logo_max_width": 130,
+          "sticky_logo_max_width": 105,
+          "mobile_logo_max_width": 105,
+          "main_menu": "main-menu",
+          "secondary_menu": "",
+          "uppercase_parent_level": false,
+          "search": "show_full",
+          "show_account_icon": true,
+          "show_cart_icon": true,
+          "show_wishlist_icon": true,
+          "show_compare_icon": false,
+          "show_currency_switcher": false,
+          "show_language_switcher": false
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "e1687d03-ffcb-4524-9eff-e17d55a38e34": {
+            "type": "newsletter",
+            "settings": {
+              "title": "Good emails.",
+              "description": "Give your inbox some love with new products, tips, & more.",
+              "email_placeholder": "Email address",
+              "form_style": "bordered",
+              "show_social": false,
+              "width": "66%"
+            }
+          },
+          "81b95927-e099-4a4a-9806-87a08383619b": {
+            "type": "spacing",
+            "settings": {
+              "width": "25%"
+            }
+          },
+          "bad8900e-c7b0-49a4-a135-6e23c797db37": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "Useful Links",
+              "width": "33%"
+            }
+          },
+          "7bd61b9c-0a3d-4497-8f62-bebad77ac32c": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "Infomation",
+              "width": "33%"
+            }
+          }
+        },
+        "block_order": [
+          "e1687d03-ffcb-4524-9eff-e17d55a38e34",
+          "81b95927-e099-4a4a-9806-87a08383619b",
+          "bad8900e-c7b0-49a4-a135-6e23c797db37",
+          "7bd61b9c-0a3d-4497-8f62-bebad77ac32c"
+        ],
+        "settings": {
+          "design": "footer-1",
+          "container": "container",
+          "bordered": false,
+          "copyright": "©Brillare 2021",
+          "show_currency_selector": false,
+          "show_language_selector": false,
+          "show_social_links": false,
+          "show_payment_icons": true
+        }
+      },
+      "annoucement": {
+        "type": "annoucement",
+        "settings": {
+          "show_announcement": true,
+          "homepage_only": true,
+          "show_close": false,
+          "message": "<span class=\"font-bold tracking-widest\" style=\"font-size: 15px;\">FREE SHIPPING ON ALL U.S. ORDERS $50+<\/span>",
+          "message_link": "",
+          "show_divider": false
+        }
+      },
+      "mobile-sticky-bar": {
+        "type": "mobile-sticky-bar",
+        "settings": {
+          "show_mobile_sticky": true,
+          "show_home_icon": true,
+          "show_collection_icon": true,
+          "show_cart_icon": true,
+          "show_search_icon": true,
+          "show_account_icon": false,
+          "show_wishlist_icon": false
+        }
+      }
+    }
+  },
+  "presets": {
+    "Default": {
+      "sections": {
+        "featured-collection": {
+          "type": "featured-collection",
+          "settings": {
+            "collection": "frontpage"
+          }
+        },
+        "featured-product": {
+          "type": "featured-product",
+          "settings": {
+          }
+        }
+      },
+      "content_for_index": [
+        "featured-collection",
+        "featured-product"
+      ]
+    }
+  }
+}

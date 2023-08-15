@@ -1,0 +1,256 @@
+{
+  "sections": {
+    "1621243260e1af0c20": {
+      "type": "slider",
+      "blocks": {
+        "1621243260e1af0c20-0": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left bottom",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "white",
+            "subheading": "MAKE WAVES",
+            "title": "A STYLE FOR <br>EVERY STORY",
+            "description": "",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-primary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections"
+          }
+        },
+        "1621243260e1af0c20-1": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left bottom",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "white",
+            "subheading": "NEW COLLECTION",
+            "title": "FOR TOMORROW'S<br>PEOPLE",
+            "description": "",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-primary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections"
+          }
+        },
+        "1621243260e1af0c20-2": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left bottom",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "white",
+            "subheading": "SIMPLY ELEGANT",
+            "title": "CHOOSE WELL<br> BE WELL",
+            "description": "",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-primary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections"
+          }
+        }
+      },
+      "block_order": [
+        "1621243260e1af0c20-0",
+        "1621243260e1af0c20-1",
+        "1621243260e1af0c20-2"
+      ],
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "fullscreen",
+        "show_overlay": false,
+        "dots_position": "bottom",
+        "dots_color": "light",
+        "show_dots": true,
+        "show_arrows": false,
+        "autorotate": true,
+        "autorotate_speed": 5,
+        "custom_class": ""
+      }
+    },
+    "162366334970e94c99": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "HOT OF THE WEEK",
+        "subheading": "<img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/icon.png?v=1623812217\" style=\"width:140px; margin:0 auto;\">",
+        "description": "Super crushable with a low ABV. Tastes juicy and tart, making it one of our all<br> time favorites to drink in the backyard on a sunny day.",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "drink",
+        "product_to_show": 8,
+        "items_per_row": 4,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "original",
+        "show_vendor": false,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "button_type": "link",
+        "button_text": "MORE BEERS",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 10,
+        "custom_class": ""
+      }
+    },
+    "16238148835cfb02ad": {
+      "type": "image-with-text-2",
+      "settings": {
+        "container": "container-fluid",
+        "hero_size": "small",
+        "show_overlay": false,
+        "bg_position": "center",
+        "parallax": false,
+        "content_in_container": false,
+        "content_position": "left middle",
+        "text_alignment": "left",
+        "text_size": "medium",
+        "text_color": "dark",
+        "title": "<div class=\"font-extrabold \">DELIVERY IN 60S<br><span class=\"text-xl\">WHEN BUYING FROM 1 PACK<\/span>\n<\/div>",
+        "subtitle": "",
+        "text": "",
+        "button_label": "Shop now",
+        "button_link": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "custom_class": ""
+      }
+    },
+    "16238173698144de83": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "FOOD PAIRING",
+        "subheading": "<img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/icon2.png?v=1623812217\" style=\"width:140px; margin:0 auto;\">",
+        "description": "Super crushable with a low ABV. Tastes juicy and tart, making it one of our all<br> time favorites to drink in the backyard on a sunny day.",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "food-pairing",
+        "product_to_show": 3,
+        "items_per_row": 3,
+        "item_gap": 30,
+        "pcard_layout": "1",
+        "pcard_image_ratio": "original",
+        "show_vendor": false,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "button_type": "link",
+        "button_text": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 10,
+        "custom_class": ""
+      }
+    },
+    "1623817655d6810394": {
+      "type": "image-with-text-2",
+      "settings": {
+        "container": "w-full",
+        "hero_size": "medium",
+        "show_overlay": true,
+        "bg_position": "center",
+        "parallax": false,
+        "content_in_container": false,
+        "content_position": "center middle",
+        "text_alignment": "center",
+        "text_size": "medium",
+        "text_color": "white",
+        "title": "<div class=\"font-extrabold mb-10 leading-snug\">HOW DO YOU DEFINE<br> CRAFT BEER?<\/div>",
+        "subtitle": "<div class=\"mb-8 font-extrabold text-xl\">ALWAYS FRESH, ALWAYS GENEROUS<\/div>",
+        "text": "",
+        "button_label": "Shop now",
+        "button_link": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "custom_class": ""
+      }
+    },
+    "16238187834aee4c54": {
+      "type": "custom-content",
+      "blocks": {
+        "16238187834aee4c54-1": {
+          "type": "image",
+          "settings": {
+            "width": "50%",
+            "alignment": "center",
+            "block_custom_class": ""
+          }
+        },
+        "16238187834aee4c54-0": {
+          "type": "text",
+          "settings": {
+            "title": "<span class=\"leading-snug\">WE LOVES TO MAKE DELICIOUS BEER<\/span>",
+            "subheading": "",
+            "text": "<p>There are almost as many beer styles as there are stars in the sky.<br\/> For example, have you ever enjoyed an ale during a party with<br\/> friends? If so, you're likely familiar with this beer style's.<\/p>",
+            "width": "50%",
+            "alignment": "center",
+            "align_text": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "button_label": "ABOUT US",
+            "button_link": "",
+            "button_style": "sf__btn-primary",
+            "button_size": "",
+            "block_custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "16238187834aee4c54-1",
+        "16238187834aee4c54-0"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "",
+        "gap": 100,
+        "use_scroll_mobile": false,
+        "gap_mobile": 16,
+        "custom_class": ""
+      }
+    }
+  },
+  "order": [
+    "1621243260e1af0c20",
+    "162366334970e94c99",
+    "16238148835cfb02ad",
+    "16238173698144de83",
+    "1623817655d6810394",
+    "16238187834aee4c54"
+  ]
+}

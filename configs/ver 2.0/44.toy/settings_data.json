@@ -1,0 +1,257 @@
+{
+  "current": {
+    "favicon": "shopify:\/\/shop_images\/fav_icon_dark_1.png",
+    "container_width": 1280,
+    "container_fluid_width": 1620,
+    "container_fluid_offset": 100,
+    "color_primary": "#f08177",
+    "color_body_text": "#000000",
+    "color_heading_text": "#000000",
+    "color_sub_text": "#666666",
+    "color_btn_bg": "#f08177",
+    "color_btn_bg_hover": "#000000",
+    "prod_sale_price_color": "#666666",
+    "prod_type_color": "#666666",
+    "prod_desc_color": "#666666",
+    "color_main_bg": "#ffffff",
+    "color_field_bg": "#ffffff",
+    "color_annoucement_bg": "#d6f1f4",
+    "color_annoucement_text": "#5fa6b1",
+    "color_topbar_bg": "#ffffff",
+    "color_topbar_text": "#666666",
+    "color_header_bg": "#ffffff",
+    "color_header_link": "#000000",
+    "color_header_transparent": "#000000",
+    "color_menu_bar_bg": "#ffffff",
+    "color_menu_bar_text": "#000000",
+    "color_footer_bg": "#ffffff",
+    "color_footer_text": "#000000",
+    "color_footer_subtext": "#666666",
+    "color_footer_link_hover": "#000000",
+    "color_footer_bg_mb": "#ffffff",
+    "color_footer_bottom_bg": "#ffffff",
+    "color_footer_bottom_text": "#666666",
+    "color_border": "#eeeeee",
+    "img_overlay_opacity": 20,
+    "tooltip_background_color": "#000000",
+    "type_base_font": "roboto_condensed_n4",
+    "use_custom_font_body": true,
+    "custom_body_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/Quicksand-Medium.ttf?v=1623660144@500\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/Quicksand-Bold.ttf?v=1623660144@700",
+    "custom_body_weight": "500",
+    "type_base_size": 16,
+    "type_base_line_height": 28,
+    "type_header_font": "roboto_condensed_n7",
+    "use_custom_font_heading": true,
+    "custom_heading_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/Quicksand-Medium.ttf?v=1623660144@500\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/Quicksand-Bold.ttf?v=1623660144@700",
+    "custom_heading_weight": "500",
+    "type_header_base_size": 37,
+    "type_header_spacing": 0,
+    "btn_base_size": 16,
+    "btn_border_radius": 40,
+    "btn_weight": "700",
+    "pcard_layout": "1",
+    "pcard_alignment": "center",
+    "pcard_image_ratio": "3\/4",
+    "show_vendor": true,
+    "variant_option_design1": "image",
+    "variant_option_design3": "color",
+    "show_variant_swatch_image": true,
+    "product_colors": "red: #FF6961,\nyellow: #FDDA76,\nblack: #000000,\nblue: #8DB4D2,\ngreen: #C1E1C1,\npurple: #B19CD9,\nsilver: #EEEEEF,\nwhite: #FFFFFF,\nbrown: #836953,\nlight-brown: #feb035,\ndark-turquoise: #23cddc,\norange: #FFB347,\ntan: #E9D1BF,\nviolet: #B490B0,\npink: #FFD1DC,\ngrey: #E0E0E0,\nsky: #96BDC6,\npale-leaf: #CCD4BF",
+    "filter_color1": "",
+    "share_facebook": true,
+    "share_pinterest": true,
+    "social_twitter_link": "https:\/\/twitter.com\/home",
+    "social_facebook_link": "https:\/\/facebook.com\/",
+    "social_pinterest_link": "https:\/\/pinterest.com\/",
+    "social_instagram_link": "https:\/\/instagram.com\/",
+    "wishlist_page": "whishlist",
+    "product_compare_page": "",
+    "gm_api": "",
+    "instagram_token": "",
+    "custom_css": "[data-section-type=\"slider\"]\n  .sf__slide-block.slide__block-desktop.flex.sf__slide-block--middle-left.container.w-full.h-full.py-24.relative.z-10 {\n  width: calc(100vw \/ 2 - 10px);\n  display: flex;\n  justify-content: center;\n  margin: 0;\n}\n[data-section-type=\"slider\"] .text-color-subtext {\n  color: #ffffff;\n}\n.sf-nav li a.sf__parent-item,\n.slide__block-title,\n.slide__block-description,\n.collection-list .collection-card__info h3 a {\n  font-weight: 700;\n}\n.collection-list .sf-column {\n  padding-bottom: 0;\n}\n.subheading__label {\n  line-height: 20px;\n  color: #5fa6b1;\n  padding: 5px 15px;\n  background-color: #d6f1f4;\n  border-radius: 50px;\n}\n#sf-custom__block--1623664609f235a30c-0 {\n  padding-left: 100px;\n}\n#sf-custom__block--1623664609f235a30c-0 .sf-custom__block-inner h3 {\n  font-size: 36px;\n  line-height: 50px;\n}\n.sf__newsletter-section .sf__newsletter-form-group {\n  background-color: #fff;\n  border-radius: 30px;\n  border-color: transparent;\n}\n.sf__footer-block-title {\n  font-weight: 700;\n}\n.sf__footer-bottom {\n  border-top: 1px solid #eee;\n}\n.sf__pcard-name {\n  font-weight: 700;\n}\n.sf__pcard-price .prod__price {\n  color: #666;\n}\n\n.sf__newsletter-section .newsletter__form-heading h3 {\n  font-size: 36px;\n  line-height: 50px;\n}\n.sf__newsletter-section .newsletter__agreement-text label p {\n  font-size: 14px;\n}\n[data-section-type=\"collection-list\"] .sf-image:hover {\n  transform: scale(1.06);\n}\n[data-section-type=\"collection-list\"] .collection-card__info h3 a {\n  font-size: 18px;\n}\n[data-section-type=\"custom-content\"]:first-child .image__card-heading {\n  font-size: 30px;\n}\n[data-section-type=\"slider\"] .sf__slide-content .slide__block-link:hover {\n  background: var(--color-btn-bg-hover);\n  border-color: var(--color-btn-bg-hover);\n}\n@media (max-width: 767px) {\n  [data-section-type=\"slider\"] .sf__slide-block .sf__mobile-button {\n    background-color: var(--color-btn-bg, var(--color-primary));\n    color: #fff;\n  }\n  [data-section-type=\"slider\"] .sf__slide-block .sf__mobile-button:hover {\n    background-color: var(--color-btn-bg-hover);\n  }\n  [data-section-type=\"slider\"] .text-color-subtext {\n    color: var(--color-sub-text);\n  }\n  [data-section-type=\"collection-list\"] .sf-column {\n    width: 38vw !important;\n  }\n  [data-section-type=\"collection-list\"] .section-my {\n    --row-gap-mobile: 5px !important;\n  }\n  [data-section-type=\"featured-slider\"] .section-my {\n    max-width: calc(var(--container-width, 1280) * 1px);\n    margin-left: auto;\n    margin-right: auto;\n    width: 100%;\n    padding-left: 1rem;\n    padding-right: 1rem;\n  }\n  [data-section-type=\"featured-slider\"]\n    .section-my\n    .featured-slider__container\n    div.w-full:first-child {\n    padding-bottom: 0;\n  }\n  .hidden-mobile {\n    display: none;\n  }\n  #sf-custom__block--1623664609f235a30c-0 {\n    padding-left: 10px;\n  }\n  .sf__newsletter-section .newsletter__form-heading h3 {\n    font-size: 1.75rem;\n  }\n}",
+    "use_theme_currencies": true,
+    "theme_currencies": "USD | EUR | GBP | VND",
+    "sections": {
+      "header": {
+        "type": "header",
+        "blocks": {
+          "59224d28-d657-4624-8d17-55b1c4ce8d9c": {
+            "type": "product-list",
+            "settings": {
+              "heading": "Product",
+              "container": "container-fluid",
+              "stretch_width": false,
+              "collection": "toy",
+              "limit": 6,
+              "columns": 2
+            }
+          },
+          "5b9aec5f-b955-4765-9a87-1962d613e909": {
+            "type": "custom_html",
+            "settings": {
+              "heading": "Home",
+              "container": "inherit",
+              "html": ""
+            }
+          },
+          "40b8eb75-90d0-4775-bb5c-0716885147d7": {
+            "type": "banner",
+            "settings": {
+              "heading": "Shop",
+              "container": "inherit",
+              "banner_style": "outside",
+              "banner_link": "",
+              "banner_title": "Embroidered cotton blouse",
+              "banner_desc": "",
+              "banner_button_text": "Shop now"
+            }
+          },
+          "2e54fd6c-5402-44fa-b416-cc84cc4122a9": {
+            "type": "custom_html",
+            "settings": {
+              "heading": "Features",
+              "container": "inherit",
+              "html": ""
+            }
+          }
+        },
+        "block_order": [
+          "59224d28-d657-4624-8d17-55b1c4ce8d9c",
+          "5b9aec5f-b955-4765-9a87-1962d613e909",
+          "40b8eb75-90d0-4775-bb5c-0716885147d7",
+          "2e54fd6c-5402-44fa-b416-cc84cc4122a9"
+        ],
+        "settings": {
+          "header_design": "logo-left-menu-center",
+          "container": "container-fluid",
+          "header_sticky": true,
+          "transparent_on_top": false,
+          "logo_text": "MINIMOG",
+          "logo_max_width": 160,
+          "sticky_logo_max_width": 105,
+          "mobile_logo_max_width": 105,
+          "main_menu": "main-menu",
+          "secondary_menu": "",
+          "uppercase_parent_level": false,
+          "search": "hide",
+          "show_account_icon": true,
+          "show_cart_icon": true,
+          "show_wishlist_icon": true,
+          "show_compare_icon": false,
+          "show_currency_switcher": false,
+          "show_language_switcher": false
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "e9dfcc22-6bf0-4e88-8c82-b29ac2905b0e": {
+            "type": "custom_text",
+            "settings": {
+              "title": "",
+              "image_max": "200px",
+              "description": "<p>Super class, cute, comfortable. You can wear them with just about.<\/p>",
+              "width": "33%"
+            }
+          },
+          "d7a64a0d-ed95-4de2-9b5b-9bb85ced7118": {
+            "type": "our_store",
+            "settings": {
+              "title": "Company",
+              "description": "<p>184 Main Rd E, St Albans<br\/>VIC 3021, Australia<\/p>",
+              "show_email": true,
+              "show_phone": true,
+              "show_socials_link": false,
+              "width": "25%"
+            }
+          },
+          "bad8900e-c7b0-49a4-a135-6e23c797db37": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "Information",
+              "width": "25%"
+            }
+          },
+          "7bd61b9c-0a3d-4497-8f62-bebad77ac32c": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "Contact",
+              "width": "25%"
+            }
+          },
+          "53917a4a-b294-4f99-8266-61a4576a58eb": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "Services",
+              "width": "25%"
+            }
+          }
+        },
+        "block_order": [
+          "e9dfcc22-6bf0-4e88-8c82-b29ac2905b0e",
+          "d7a64a0d-ed95-4de2-9b5b-9bb85ced7118",
+          "bad8900e-c7b0-49a4-a135-6e23c797db37",
+          "7bd61b9c-0a3d-4497-8f62-bebad77ac32c",
+          "53917a4a-b294-4f99-8266-61a4576a58eb"
+        ],
+        "settings": {
+          "design": "footer-1",
+          "container": "container-fluid",
+          "bordered": false,
+          "copyright": "<span style=\"font-size: 1rem;\">© Minimog 2020<\/span>",
+          "show_currency_selector": false,
+          "show_language_selector": false,
+          "show_social_links": false,
+          "show_payment_icons": true
+        }
+      },
+      "annoucement": {
+        "type": "annoucement",
+        "settings": {
+          "show_announcement": true,
+          "homepage_only": true,
+          "show_close": false,
+          "message": "<span class=\"font-bold\">Join our newsletter to know when we launch!<\/span>",
+          "message_link": "",
+          "show_divider": false
+        }
+      },
+      "mobile-sticky-bar": {
+        "type": "mobile-sticky-bar",
+        "settings": {
+          "show_mobile_sticky": true,
+          "show_home_icon": true,
+          "show_collection_icon": true,
+          "show_cart_icon": true,
+          "show_search_icon": true,
+          "show_account_icon": false,
+          "show_wishlist_icon": false
+        }
+      }
+    }
+  },
+  "presets": {
+    "Default": {
+      "sections": {
+        "featured-collection": {
+          "type": "featured-collection",
+          "settings": {
+            "collection": "frontpage"
+          }
+        },
+        "featured-product": {
+          "type": "featured-product",
+          "settings": {
+          }
+        }
+      },
+      "content_for_index": [
+        "featured-collection",
+        "featured-product"
+      ]
+    }
+  }
+}

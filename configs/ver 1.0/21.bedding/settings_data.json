@@ -1,0 +1,1317 @@
+{
+  "current": {
+    "favicon": "shopify:\/\/shop_images\/favicon.png",
+    "color_primary": "#000",
+    "color_btn_bg": "#000000",
+    "color_btn_bg_hover": "#000000",
+    "color_btn_text_hover": "#ffffff",
+    "prod_sale_price_color": "#666666",
+    "prod_type_color": "#666666",
+    "color_field_bg": "#ffffff",
+    "color_annoucement_bg": "#e0e7e4",
+    "color_annoucement_text": "#000000",
+    "color_topbar_bg": "#e0e7e4",
+    "color_topbar_text": "#000000",
+    "color_header_bg": "#ffffff",
+    "color_header_link": "#000000",
+    "color_header_transparent": "#ffffff",
+    "bg_cart_wishlist_count": "#000000",
+    "color_menu_bar_bg": "#000000",
+    "color_menu_bar_text": "#f8f8f8",
+    "color_footer_bg": "#ffffff",
+    "color_footer_text": "#000000",
+    "color_footer_subtext": "#696969",
+    "color_footer_link_hover": "#000000",
+    "color_footer_bottom_bg": "#ffffff",
+    "color_footer_bottom_text": "#696969",
+    "img_overlay_opacity": 20,
+    "tooltip_background_color": "#000000",
+    "type_base_font": "roboto_condensed_n4",
+    "use_custom_font_body": true,
+    "custom_body_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/Jost-Regular.ttf?v=1622447664@400\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/Jost-Medium.ttf?v=1622443602@500",
+    "custom_body_weight": "400",
+    "type_header_font": "roboto_condensed_n7",
+    "use_custom_font_heading": true,
+    "custom_heading_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/Butler_Regular.otf?v=1622447581@400\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/Butler_Light.otf?v=1622447581@300",
+    "custom_heading_weight": "300",
+    "btn_base_size": 15,
+    "btn_letter_spacing": 0,
+    "pcard_layout": "1",
+    "pcard_alignment": "center",
+    "pcard_image_ratio": "1\/1",
+    "show_vendor": false,
+    "variant_option_design3": "color",
+    "show_variant_swatch_image": true,
+    "product_colors": "red: #FF6961,\nyellow: #FDDA76,\nblack: #000000,\nblue: #8DB4D2,\ngreen: #C1E1C1,\npurple: #B19CD9,\nsilver: #EEEEEF,\nwhite: #FFFFFF,\nbrown: #836953,\nlight-brown: #feb035,\ndark-turquoise: #23cddc,\norange: #FFB347,\ntan: #E9D1BF,\nviolet: #B490B0,\npink: #FFD1DC,\ngrey: #E0E0E0,\nsky: #96BDC6,\npale-leaf: #CCD4BF",
+    "filter_color1": "",
+    "share_facebook": true,
+    "social_twitter_link": "",
+    "social_facebook_link": "https:\/\/facebook.com\/",
+    "social_facebook_label": "300k Followers",
+    "social_pinterest_link": "",
+    "social_instagram_link": "https:\/\/instagram.com\/",
+    "social_instagram_label": "100k Followers",
+    "wishlist_page": "",
+    "product_compare_page": "",
+    "gm_api": "",
+    "instagram_token": "",
+    "custom_css": ".sf__index-img-with-text .section-my {\n  margin-top: 0;\n}\n\n.sf__index-product-tab .sf-tab-header {\n  font-family: \"SF-Heading-font\";\n  font-size: 40px;\n  line-height: 1.3;\n}\n.sf__index-product-tab .sf-tab-header.active:after {\n  width: 0;\n}\n.sf__index-icon-box .sf-icon-box__text h3 {\n  font-family: \"SF-Body-font\";\n}\n.sf__index-custom-content .section-my {\n  margin-top: 0;\n  margin-bottom: 40px;\n}\n.sf__index-icon-box .section-my {\n  margin-top: 0;\n}\n.sf__index-instagram .section-my {\n  margin-bottom: 0;\n}\n.sf__footer-block-newsletter .sf__footer-block-title {\n  font-family: \"SF-Body-font\";\n  font-size: 36px;\n  line-height: 1.4;\n  margin-bottom: 12px;\n  font-weight: 400;\n}\n.sf__footer-block-title {\n  font-size: 24px;\n  line-height: 1.33;\n}\n\n.sf__pcard-name {\n  font-weight: 400;\n}\n.sf__pcard-price .prod__price {\n  font-weight: 600;\n}\n.sf__pcard-price.price--on-sale .prod__price {\n  color: #b22234;\n}\n.section__subheading {\n  letter-spacing: 0.2em;\n  font-weight: 400;\n}\n\n.sf__index-img-with-text .sf__btn.sf__btn-link,\n.sf__index-icon-box .sf__btn.sf__btn-link {\n  padding-left: 10px !important;\n  padding-right: 10px !important;\n  letter-spacing: 0.1em;\n}\n.section__header .section__heading,\n.sf__index-img-with-text .content__box .content__heading {\n  line-height: 1.3;\n}\n.sf__btn.sf__btn-link::after,\n.sf__btn.sf__btn-link::before {\n  height: 1px !important;\n}\n\n.sf-footer form.sf__footer-form-newsletter .sf__newletter__form-input {\n  border-color: #d4d4d4;\n}\n@media screen and (min-width: 768px) {\n  .section-my {\n    margin-top: 100px;\n    margin-bottom: 100px;\n  }\n  .section-py {\n    padding-top: 100px;\n    padding-bottom: 100px;\n  }\n}\n@media screen and (min-width: 1280px) {\n  .sf__index-collection-list .collection-card--hover-scaling-up:hover .collection-card__image {\n    transform: scale(1.2) translateZ(0);\n  }\n  .sf__index-collection-list .collection-card__image {\n    width: 150px;\n    height: 150px;\n    margin: 0 auto;\n  }\n}\n\n@media (max-width: 767px) {\n  .sf__index-img-with-text [class*=\"content__box-\"] {\n    padding-left: 30px;\n    padding-right: 30px;\n  }\n  .sf__index-img-with-text .content__heading {\n    font-size: 30px;\n  }\n  .section__subheading {\n    font-size: 12px;\n    margin-bottom: 10px;\n  }\n  .sf__index-icon-box .sf__btn.sf__btn-link {\n    margin-top: 0;\n  }\n  .sf__index-product-tab .sf__custom-select {\n    font-family: \"SF-Heading-font\";\n  }\n  .sf__index-collection-list .sf__ms-wrapper:not(.swiper-container-initialized) .sf-column {\n    width: 42vw !important;\n  }\n  .sf__footer-block-title {\n    font-size: 18px;\n  }\n}",
+    "use_theme_currencies": true,
+    "theme_currencies": "USD | EUR | GBP | VND",
+    "sections": {
+      "page-faqs": {
+        "type": "page-faqs",
+        "blocks": {
+          "2802736b-f08f-4510-a4f7-4ad7d748992d": {
+            "type": "content",
+            "settings": {
+              "content": "<div class=\"mb-10\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/faqs.jpg?v=1620784288\"><\/div>\n<h3 class=\"font-medium text-xl mb-4\">Awkwardness gives me great comfort. I’ve never been cool, but I’ve felt cool. I’ve been in the cool place, but I wasn’t really cool – I was trying to pass for hip or cool.<\/h3>\n<p>A girl should be two things: classy and fabulous. I am convinced that there can be luxury in simplicity. I wanted to dress the woman who lives and works, not the woman in a painting. It’s hard to balance everything. It’s always challenging. My relationships with producers or photographers – these are relationships that took years. I can’t get sucked into that celebrity thing, because I think it’s just crass. My aim is to make the poor look rich.<\/p>"
+            }
+          },
+          "4e151238-4480-4122-b893-7f4a19886e4c": {
+            "type": "accordion",
+            "settings": {
+              "title": "What shipping methods are availbale?",
+              "content": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.<br\/><br\/>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.<\/p>",
+              "open": true
+            }
+          },
+          "c5d4d04d-f6c1-4d1e-99f0-3c221393a3cf": {
+            "type": "accordion",
+            "settings": {
+              "title": "How long will it take to get my package?",
+              "content": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.<\/p>",
+              "open": false
+            }
+          },
+          "0131747b-8b40-432f-b634-b1289ec41911": {
+            "type": "accordion",
+            "settings": {
+              "title": "Do you ship internationally?",
+              "content": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.<\/p>",
+              "open": false
+            }
+          },
+          "5d7206e9-5375-4da6-9a1f-24e1c46230b0": {
+            "type": "accordion",
+            "settings": {
+              "title": "What payment methods are accepted?",
+              "content": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.<\/p>",
+              "open": false
+            }
+          },
+          "4008f61e-055e-42ba-8969-cb3715c0aece": {
+            "type": "accordion",
+            "settings": {
+              "title": "Is buying on-line safe?",
+              "content": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.<\/p>",
+              "open": false
+            }
+          }
+        },
+        "block_order": [
+          "2802736b-f08f-4510-a4f7-4ad7d748992d",
+          "4e151238-4480-4122-b893-7f4a19886e4c",
+          "c5d4d04d-f6c1-4d1e-99f0-3c221393a3cf",
+          "0131747b-8b40-432f-b634-b1289ec41911",
+          "5d7206e9-5375-4da6-9a1f-24e1c46230b0",
+          "4008f61e-055e-42ba-8969-cb3715c0aece"
+        ],
+        "settings": {
+          "container": "container",
+          "menu": "faqs-menu"
+        }
+      },
+      "collection-list": {
+        "type": "collection-list",
+        "settings": {
+        }
+      },
+      "featured-collection": {
+        "type": "featured-collection",
+        "settings": {
+          "collection": "frontpage"
+        }
+      },
+      "featured-product": {
+        "type": "featured-product",
+        "settings": {
+        }
+      },
+      "slider": {
+        "type": "slider",
+        "settings": {
+        }
+      },
+      "header": {
+        "type": "header",
+        "blocks": {
+          "b5df64ca-b8f9-44aa-9d7a-cf21e1e4682f": {
+            "type": "banner",
+            "settings": {
+              "heading": "Shop",
+              "container": "inherit",
+              "banner_style": "outside",
+              "banner_link": "",
+              "banner_title": "New collection",
+              "banner_desc": "",
+              "banner_button_text": "Shop now"
+            }
+          },
+          "782e9fab-c77f-4ab5-8b6f-7e130d447eed": {
+            "type": "product-list",
+            "settings": {
+              "heading": "Product",
+              "container": "inherit",
+              "stretch_width": false,
+              "collection": "bedroom-furniture",
+              "limit": 6,
+              "columns": 2
+            }
+          },
+          "e0b1ddfc-b772-4680-b007-f438c18f8218": {
+            "type": "custom_html",
+            "settings": {
+              "heading": "Features",
+              "container": "inherit",
+              "html": ""
+            }
+          }
+        },
+        "block_order": [
+          "b5df64ca-b8f9-44aa-9d7a-cf21e1e4682f",
+          "782e9fab-c77f-4ab5-8b6f-7e130d447eed",
+          "e0b1ddfc-b772-4680-b007-f438c18f8218"
+        ],
+        "settings": {
+          "header_design": "logo-center-menu-left",
+          "container": "container-fluid",
+          "header_sticky": true,
+          "transparent_on_top": false,
+          "logo_text": "MINIMOG",
+          "logo_max_width": 170,
+          "sticky_logo_max_width": 105,
+          "mobile_logo_max_width": 105,
+          "main_menu": "main-menu",
+          "secondary_menu": "",
+          "uppercase_parent_level": false,
+          "search": "show_icon",
+          "show_account_icon": true,
+          "show_cart_icon": true,
+          "show_wishlist_icon": true,
+          "show_compare_icon": false,
+          "show_currency_switcher": false,
+          "show_language_switcher": false
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "7527ffa4-1a31-4e5c-b642-96aa834daf84": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "About",
+              "width": "33%"
+            }
+          },
+          "c85629c7-7aae-4666-b5f0-150990439c91": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "Information",
+              "width": "33%"
+            }
+          },
+          "2bd3b7d0-e898-4720-82ab-227b7e3815b4": {
+            "type": "spacing",
+            "settings": {
+              "width": "16%"
+            }
+          },
+          "494c911f-7281-40a1-85fa-a596a6431858": {
+            "type": "newsletter",
+            "settings": {
+              "title": "Don’t miss a thing",
+              "description": "Enter your email below to be the first to know about new collections and product launches.",
+              "email_placeholder": "Enter your email",
+              "form_style": "bordered",
+              "show_social": false,
+              "width": "50%"
+            }
+          }
+        },
+        "block_order": [
+          "7527ffa4-1a31-4e5c-b642-96aa834daf84",
+          "c85629c7-7aae-4666-b5f0-150990439c91",
+          "2bd3b7d0-e898-4720-82ab-227b7e3815b4",
+          "494c911f-7281-40a1-85fa-a596a6431858"
+        ],
+        "settings": {
+          "design": "footer-1",
+          "container": "container",
+          "bordered": false,
+          "copyright": "<span class=\"text-base\">© LITERIE 2021<\/span>",
+          "show_currency_selector": false,
+          "show_language_selector": false,
+          "show_social_links": false,
+          "show_payment_icons": true
+        }
+      },
+      "collection-page-header": {
+        "type": "collection-page-header",
+        "settings": {
+          "layout": "inside",
+          "header_height": "small",
+          "text_alignment": "center",
+          "vertical_alignment": "center",
+          "bg_color": "#ffffff",
+          "enable_parallax": true,
+          "show_breadcrumb": true,
+          "upper_title": false
+        }
+      },
+      "product-template": {
+        "type": "product-template",
+        "settings": {
+          "container": "container",
+          "layout": "layout-6",
+          "show_tags": false,
+          "show_vendor": false,
+          "show_sku": false,
+          "show_categories": false,
+          "show_reviews_count": true,
+          "show_quantity_selector": true,
+          "enable_dynamic_checkout": true,
+          "hide_atc_button": false,
+          "show_atwl": true,
+          "show_atcp": true,
+          "show_ask_a_question": true,
+          "show_social": true,
+          "show_live_views": true,
+          "live_views_text": "<p><strong>{{count_number}}<\/strong> <strong>people<\/strong> are viewing this right now<\/p>",
+          "live_views_range": "20-30",
+          "live_view_duration": "10",
+          "live_view_icon_blinks": true,
+          "show_delivery_times": true,
+          "deliver_text": "<p><strong>Estimated Delivery:<\/strong><\/p>",
+          "deliver_days": "3",
+          "show_shipping_text": true,
+          "shipping_text": "<p><strong>Free Shipping & Returns: <\/strong>On all orders over $75<\/p>",
+          "show_trust_badges": true,
+          "trust_badges_text": "<p>Guarantee safe & secure checkout<\/p>",
+          "trust_badges_image": "shopify:\/\/shop_images\/trustbag.png",
+          "trust_badges_image_width": "320px",
+          "use_sticky_atc": true,
+          "sticky_atc_wishtlist": false,
+          "sticky_atc_compare": false
+        }
+      },
+      "product-details-tabs": {
+        "type": "product-details-tabs",
+        "blocks": {
+          "4db8ad16-886f-47f7-9b57-fc68b39fb2d4": {
+            "type": "description",
+            "settings": {
+              "header": "Product description"
+            }
+          },
+          "0452a9f6-8866-4d65-b24e-7e2942fe3931": {
+            "type": "tab",
+            "settings": {
+              "header": "Shipping & Return",
+              "content": "<p>So beautiful you’ll want to show it off, so comfortable you’ll forget it’s there. Our 24\/7™ Lace Contour Plunge Bra combines gorgeous floral lace with sheer overlay straps that hold you in and eliminates gaping. Removable pads let you customize you<\/p>"
+            }
+          },
+          "64865a0f-d041-463e-b61e-8a2757268844": {
+            "type": "reviews",
+            "settings": {
+              "header": "Product reviews"
+            }
+          }
+        },
+        "block_order": [
+          "4db8ad16-886f-47f7-9b57-fc68b39fb2d4",
+          "0452a9f6-8866-4d65-b24e-7e2942fe3931",
+          "64865a0f-d041-463e-b61e-8a2757268844"
+        ],
+        "settings": {
+          "show_product_tabs": true,
+          "container": "container",
+          "bg_color": ""
+        }
+      },
+      "product-reviews": {
+        "type": "product-reviews",
+        "settings": {
+          "show_product_reviews": false,
+          "container": "container-narrow",
+          "heading": "Ratings and Reviews"
+        }
+      },
+      "product-recommendations": {
+        "type": "product-recommendations",
+        "settings": {
+          "show_product_recommendations": true,
+          "container": "container",
+          "heading": "You Might Also Like",
+          "limit": 8,
+          "columns": 4,
+          "column_gap": 30,
+          "enable_slider": true
+        }
+      },
+      "brand-page-header": {
+        "type": "brand-page-header",
+        "blocks": {
+          "09dfe2e1-10c2-4cee-a033-a90b143c85f3": {
+            "type": "information",
+            "settings": {
+              "collection": "retrolie",
+              "logo": "shopify:\/\/shop_images\/1.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/1_8e8151b6-3555-4abf-8dd6-5347182bbcd0.jpg",
+              "image_2": "shopify:\/\/shop_images\/2_9a1b3099-775a-4093-9ece-6cfaa04a06fe.jpg",
+              "image_3": "shopify:\/\/shop_images\/3_7b9fc65c-8202-4449-a828-d03ac03c6d38.jpg"
+            }
+          },
+          "c8ee188c-a84f-4cf2-a8af-aacb9bf78785": {
+            "type": "information",
+            "settings": {
+              "collection": "abby",
+              "logo": "shopify:\/\/shop_images\/2.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/4.jpg",
+              "image_2": "shopify:\/\/shop_images\/5.jpg",
+              "image_3": "shopify:\/\/shop_images\/6.jpg"
+            }
+          },
+          "e56a3991-3115-47d4-b7e6-43e962712fc6": {
+            "type": "information",
+            "settings": {
+              "collection": "minimog",
+              "logo": "shopify:\/\/shop_images\/3.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/7.jpg",
+              "image_2": "shopify:\/\/shop_images\/8.jpg",
+              "image_3": "shopify:\/\/shop_images\/9.jpg"
+            }
+          },
+          "98bac8d0-393b-4f50-91b8-052a49e29dd0": {
+            "type": "information",
+            "settings": {
+              "collection": "brook",
+              "logo": "shopify:\/\/shop_images\/4.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/10.jpg",
+              "image_2": "shopify:\/\/shop_images\/11.jpg",
+              "image_3": "shopify:\/\/shop_images\/12.jpg"
+            }
+          },
+          "2b4a1841-6d7a-468b-ba3b-a5fd307cf9aa": {
+            "type": "information",
+            "settings": {
+              "collection": "learts",
+              "logo": "shopify:\/\/shop_images\/5.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/13.jpg",
+              "image_2": "shopify:\/\/shop_images\/14.jpg",
+              "image_3": "shopify:\/\/shop_images\/15.jpg"
+            }
+          },
+          "b54aa75a-c232-474e-9d92-2027e31cd066": {
+            "type": "information",
+            "settings": {
+              "collection": "vagabond",
+              "logo": "shopify:\/\/shop_images\/6.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/16.jpg",
+              "image_2": "shopify:\/\/shop_images\/17.jpg",
+              "image_3": "shopify:\/\/shop_images\/18.jpg"
+            }
+          }
+        },
+        "block_order": [
+          "09dfe2e1-10c2-4cee-a033-a90b143c85f3",
+          "c8ee188c-a84f-4cf2-a8af-aacb9bf78785",
+          "e56a3991-3115-47d4-b7e6-43e962712fc6",
+          "98bac8d0-393b-4f50-91b8-052a49e29dd0",
+          "2b4a1841-6d7a-468b-ba3b-a5fd307cf9aa",
+          "b54aa75a-c232-474e-9d92-2027e31cd066"
+        ],
+        "settings": {
+        }
+      },
+      "collection-brand": {
+        "type": "collection-brand",
+        "settings": {
+          "grid_layout": "grid",
+          "pagination_limit": "12",
+          "grid_columns": "3",
+          "collection_paginate": "paginate",
+          "show_filter": true,
+          "sidebar": "leftColumn"
+        }
+      },
+      "contact-information": {
+        "type": "contact-information",
+        "settings": {
+          "container": "container"
+        }
+      },
+      "maps": {
+        "type": "maps",
+        "settings": {
+          "container": "container",
+          "map_height": "large",
+          "textx": "40.6700",
+          "texty": "-73.9400",
+          "zoom": "11",
+          "text2": "New York"
+        }
+      },
+      "contact-template": {
+        "type": "contact-template",
+        "blocks": {
+          "458d6546-c5d0-4128-8fa6-162080bdf85f": {
+            "type": "textblock",
+            "settings": {
+              "title": "Address",
+              "content": "<p>7895 Piermont Dr NE Albuquerque, NM 198866, <a href=\"#\">See Our Stores<\/a><\/p>"
+            }
+          },
+          "d2fd611c-a50a-4871-b401-b51dff320d34": {
+            "type": "textblock",
+            "settings": {
+              "title": "Information",
+              "content": "<p>+391 (0)35 2568 4593<\/p><p>hello@domain.com<\/p>"
+            }
+          },
+          "159b3b43-a6d9-4cb9-b78d-04f5a5bae350": {
+            "type": "socialmedia",
+            "settings": {
+              "title": "Social Media"
+            }
+          },
+          "5c486a84-9bdd-4d24-8ac7-5c428593cf33": {
+            "type": "textblock",
+            "settings": {
+              "title": "We're Open",
+              "content": "<p>Our store has re-opened for shopping, exchanges<\/p><p>Every day 11am to 7pm<\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "458d6546-c5d0-4128-8fa6-162080bdf85f",
+          "d2fd611c-a50a-4871-b401-b51dff320d34",
+          "159b3b43-a6d9-4cb9-b78d-04f5a5bae350",
+          "5c486a84-9bdd-4d24-8ac7-5c428593cf33"
+        ],
+        "settings": {
+          "container": "container",
+          "title": "We would love to hear from you.",
+          "description": "<p>If you’ve got great products your making or looking to work with us then drop us a line.<\/p>"
+        }
+      },
+      "1620889733b8bebef8": {
+        "type": "custom-content",
+        "blocks": {
+          "302f4255-280e-48a3-9f00-b9e6fd50230a": {
+            "type": "image_card",
+            "settings": {
+              "width": "50%",
+              "content_position": "bottom_left",
+              "content_alignment": "left",
+              "text_size": "medium",
+              "text_color": "black",
+              "link": "",
+              "title": "We know what’s<br> look great in bed",
+              "subtitle": "",
+              "button_label": "Discover now",
+              "button_style": "sf__btn-link",
+              "button_size": "sf__btn-small",
+              "block_custom_class": ""
+            }
+          },
+          "190cefb9-e7ca-4316-8e55-b3b82656701b": {
+            "type": "image_card",
+            "settings": {
+              "width": "50%",
+              "content_position": "bottom_left",
+              "content_alignment": "left",
+              "text_size": "medium",
+              "text_color": "black",
+              "link": "",
+              "title": "Come to bed, enjoy<br> your sleep",
+              "subtitle": "",
+              "button_label": "Discover now",
+              "button_style": "sf__btn-link",
+              "button_size": "sf__btn-small",
+              "block_custom_class": ""
+            }
+          }
+        },
+        "block_order": [
+          "302f4255-280e-48a3-9f00-b9e6fd50230a",
+          "190cefb9-e7ca-4316-8e55-b3b82656701b"
+        ],
+        "settings": {
+          "heading": "",
+          "subheading": "",
+          "description": "",
+          "header_alignment": "left",
+          "container": "container",
+          "background_color": "",
+          "gap": 20,
+          "use_scroll_mobile": false,
+          "gap_mobile": 16,
+          "custom_class": ""
+        }
+      },
+      "content-before-products": {
+        "type": "content-before-products",
+        "settings": {
+          "container": "container-fluid",
+          "background_color": "",
+          "gap": 30,
+          "gap_mobile": 16
+        }
+      },
+      "collection-template": {
+        "type": "collection-template",
+        "settings": {
+          "container": "container",
+          "grid_layout": "grid",
+          "grid_columns": "4",
+          "pagination_limit": "12",
+          "collection_paginate": "paginate",
+          "show_filter": true,
+          "sidebar": "leftColumn"
+        }
+      },
+      "content-after-products": {
+        "type": "content-after-products",
+        "settings": {
+          "container": "container-fluid",
+          "background_color": "",
+          "gap": 30,
+          "gap_mobile": 16
+        }
+      },
+      "recent-viewed-products": {
+        "type": "recent-viewed-products",
+        "settings": {
+          "heading": "Recently Viewed Products",
+          "container": "container",
+          "columns": 4,
+          "column_gap": 30,
+          "enable_slider": true,
+          "show_product_page": true,
+          "show_cart_page": true,
+          "show_collection_page": false
+        }
+      },
+      "162243112070c9a4c8": {
+        "type": "instagram",
+        "settings": {
+          "heading": "On the Gram",
+          "subheading": "",
+          "description": "",
+          "header_alignment": "left",
+          "container": "container",
+          "background_color": "rgba(0,0,0,0)",
+          "layout": "grid",
+          "images_count": 5,
+          "grid_columns": 5,
+          "gap": 20,
+          "mobile_gap": 10,
+          "profile": "https:\/\/www.instagram.com\/minimog.trendy\/",
+          "button_label": "",
+          "custom_class": "sf__index-instagram"
+        }
+      },
+      "1622448086a90b8c2f": {
+        "type": "image-with-text",
+        "settings": {
+          "heading": "",
+          "subheading": "",
+          "container": "w-full",
+          "background_color": "rgba(0,0,0,0)",
+          "item_gap": 80,
+          "item_gap_mobile": 30,
+          "layout": "left",
+          "image_column_size": "7",
+          "title": "Enjoy your bed time<br> like never before!",
+          "sub_title": "",
+          "text": "<p>Lush, rare, unique and always fresh. Stop into our store to<br\/> find the perfect plant for your home or office.<\/p>",
+          "text_size": "medium",
+          "content_alignment": "left",
+          "button_label": "SHOP THE LOOK",
+          "button_link": "",
+          "button_style": "sf__btn-link",
+          "button_size": "sf__btn-small",
+          "custom_class": "sf__index-img-with-text"
+        }
+      },
+      "1622448572670ce860": {
+        "type": "collection-list",
+        "blocks": {
+          "1622448572670ce860-0": {
+            "type": "collection_block",
+            "settings": {
+              "collection": "bedroom-furniture",
+              "title": "Duvet Covers"
+            }
+          },
+          "2da6bc5b-19d8-4ffa-bee4-4908555b8473": {
+            "type": "collection_block",
+            "settings": {
+              "collection": "bedroom-furniture",
+              "title": "Cushion Cover"
+            }
+          },
+          "08e94e51-92f0-4f6e-a62e-3865ae293f76": {
+            "type": "collection_block",
+            "settings": {
+              "collection": "bedroom-furniture",
+              "title": "Pillowcases"
+            }
+          },
+          "31443591-b06f-4573-9b1a-78269b48789c": {
+            "type": "collection_block",
+            "settings": {
+              "collection": "bedroom-furniture",
+              "title": "Blankets"
+            }
+          },
+          "9cfe0e1a-7e9e-4cf1-a9f4-555575165581": {
+            "type": "collection_block",
+            "settings": {
+              "collection": "bedroom-furniture",
+              "title": "Curtains"
+            }
+          }
+        },
+        "block_order": [
+          "1622448572670ce860-0",
+          "2da6bc5b-19d8-4ffa-bee4-4908555b8473",
+          "08e94e51-92f0-4f6e-a62e-3865ae293f76",
+          "31443591-b06f-4573-9b1a-78269b48789c",
+          "9cfe0e1a-7e9e-4cf1-a9f4-555575165581"
+        ],
+        "settings": {
+          "heading": "Bedsheets you are going to enjoy!",
+          "subheading": "SHOP BY CATEGORIES",
+          "description": "",
+          "header_alignment": "center",
+          "container": "container",
+          "background_color": "",
+          "layout": "grid",
+          "card_style": "standard",
+          "text_alignment": "center",
+          "hover_effect": "scaling-up",
+          "show_product_count": true,
+          "count_inline_title": true,
+          "image_rounded": true,
+          "items_per_row": 5,
+          "item_gap": 30,
+          "enable_slider": false,
+          "show_pagination": false,
+          "show_navigation": false,
+          "autorotate": false,
+          "autorotate_speed": 5,
+          "use_scroll_mobile": true,
+          "mobile_gap": 30,
+          "hidden_slide_control_mobile": false,
+          "custom_class": "sf__index-collection-list"
+        }
+      },
+      "162244938595ae3801": {
+        "type": "product-tabs",
+        "blocks": {
+          "162244938595ae3801-0": {
+            "type": "tab",
+            "settings": {
+              "title": "Best sellers",
+              "collection": "best-sellers"
+            }
+          },
+          "162244938595ae3801-1": {
+            "type": "tab",
+            "settings": {
+              "title": "New arrivals",
+              "collection": "new-arrivals"
+            }
+          },
+          "c077f0d8-db31-4cbd-be04-30a7eadb376b": {
+            "type": "tab",
+            "settings": {
+              "title": "Sale items",
+              "collection": "sale-items"
+            }
+          }
+        },
+        "block_order": [
+          "162244938595ae3801-0",
+          "162244938595ae3801-1",
+          "c077f0d8-db31-4cbd-be04-30a7eadb376b"
+        ],
+        "settings": {
+          "heading": "",
+          "subheading": "",
+          "description": "",
+          "header_alignment": "center",
+          "container": "container",
+          "background_color": "rgba(0,0,0,0)",
+          "tab_header": "horizontal",
+          "limit": 6,
+          "show_button": false,
+          "button_type": "link",
+          "button_label": "View All",
+          "button_style": "sf__btn-primary",
+          "button_size": "",
+          "pcard_layout": "",
+          "pcard_image_ratio": "",
+          "show_vendor": false,
+          "items_per_row": 3,
+          "item_gap": 30,
+          "item_gap_mobile": 10,
+          "enable_slider": false,
+          "show_pagination": false,
+          "show_navigation": false,
+          "custom_class": "sf__index-product-tab"
+        }
+      },
+      "1622451137d356c514": {
+        "type": "icon-box",
+        "blocks": {
+          "1622451137d356c514-0": {
+            "type": "iconbox",
+            "settings": {
+              "title": "Summer collection",
+              "description": "",
+              "link": "",
+              "button_label": "SHOP THE LOOK",
+              "button_link": "",
+              "button_style": "sf__btn-link",
+              "button_size": ""
+            }
+          },
+          "1622451137d356c514-1": {
+            "type": "iconbox",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/6.jpg",
+              "title": "Staff Picks",
+              "description": "",
+              "link": "",
+              "button_label": "SHOP NOW",
+              "button_link": "",
+              "button_style": "sf__btn-link",
+              "button_size": ""
+            }
+          }
+        },
+        "block_order": [
+          "1622451137d356c514-0",
+          "1622451137d356c514-1"
+        ],
+        "settings": {
+          "heading": "The piece of comfort you can always enjoy.<br> Sleep well, walk up with a lot of energy",
+          "subheading": "",
+          "description": "",
+          "header_alignment": "center",
+          "container": "container",
+          "background_color": "rgba(0,0,0,0)",
+          "item_per_row": 2,
+          "item_gap": 30,
+          "item_gap_mobile": 10,
+          "card_style": "vertical",
+          "image_max_width": "",
+          "content_alignment": "center",
+          "hover_effect": "scaling-up",
+          "enable_slider": false,
+          "show_pagination": false,
+          "show_navigation": false,
+          "use_scroll_mobile": true,
+          "use_grid_column_mb": false,
+          "custom_class": "sf__index-icon-box"
+        }
+      },
+      "1622452409f76b7918": {
+        "type": "custom-content",
+        "blocks": {
+          "f229ecde-b293-42d8-bfcb-10f65945a852": {
+            "type": "html",
+            "settings": {
+              "code": "<img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/7_61672fe6-35c1-42fb-87f5-2033393d5949.jpg?v=1622452991\" class=\"mx-auto\" style=\"max-width: 55px;\">",
+              "width": "100%",
+              "block_custom_class": ""
+            }
+          }
+        },
+        "block_order": [
+          "f229ecde-b293-42d8-bfcb-10f65945a852"
+        ],
+        "settings": {
+          "heading": "",
+          "subheading": "",
+          "description": "",
+          "header_alignment": "center",
+          "container": "container",
+          "background_color": "",
+          "gap": 30,
+          "use_scroll_mobile": false,
+          "gap_mobile": 16,
+          "custom_class": "sf__index-custom-content"
+        }
+      },
+      "annoucement": {
+        "type": "annoucement",
+        "settings": {
+          "show_announcement": true,
+          "homepage_only": true,
+          "show_close": true,
+          "message": "<p>Free shipping for all orders from $60+<\/p>",
+          "message_link": "",
+          "show_divider": false
+        }
+      },
+      "product-details-accordion": {
+        "type": "product-details-accordion",
+        "settings": {
+          "show_accordion": true,
+          "use_container": false,
+          "position": "bottom_info"
+        }
+      },
+      "product-features": {
+        "type": "product-features",
+        "blocks": {
+          "a87f256c-a7c1-4199-8c88-5c090c1a17ab": {
+            "type": "feature",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Frame_1.png",
+              "title": "Free Shipping",
+              "description": "<p>Get complimentary ground shipping on every <br\/>order.Don’t love it? Send it back, on us.<\/p>",
+              "link": ""
+            }
+          },
+          "17194289-661b-4911-94fa-a521f27826f6": {
+            "type": "feature",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Frame_2.png",
+              "title": "Earn Points",
+              "description": "<p>Join Minimog Rewards to earn gift cards<br\/>and enjoy exclusive member benefits.<\/p>",
+              "link": ""
+            }
+          },
+          "6c54b46e-75c9-457d-bc90-df5223c2a7a6": {
+            "type": "feature",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Frame_3.png",
+              "title": "Money Back Gurantee",
+              "description": "<p>We believe getting dressed should be the <br\/>easiest part of your day.<\/p>",
+              "link": ""
+            }
+          }
+        },
+        "block_order": [
+          "a87f256c-a7c1-4199-8c88-5c090c1a17ab",
+          "17194289-661b-4911-94fa-a521f27826f6",
+          "6c54b46e-75c9-457d-bc90-df5223c2a7a6"
+        ],
+        "settings": {
+          "show_featured": true,
+          "container": "container",
+          "heading": "Why Minimog ?",
+          "item_per_row": 3,
+          "card_style": "vertical",
+          "image_max_width": "70px",
+          "content_alignment": "center"
+        }
+      },
+      "page-delivery": {
+        "type": "page-delivery",
+        "settings": {
+          "container": "container-fluid",
+          "menu": "faqs-menu"
+        }
+      },
+      "page-careers": {
+        "type": "page-careers",
+        "settings": {
+          "container": "container-fluid",
+          "menu": "faqs-menu"
+        }
+      },
+      "page-policy": {
+        "type": "page-policy",
+        "settings": {
+          "container": "container-fluid",
+          "menu": "faqs-menu"
+        }
+      },
+      "page-term-conditions": {
+        "type": "page-term-conditions",
+        "settings": {
+          "container": "container-fluid",
+          "menu": "faqs-menu"
+        }
+      },
+      "custom-content": {
+        "type": "custom-content",
+        "blocks": {
+          "2974af7f-37f7-46d5-a66e-7c6f95ee4de8": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/img1.jpg",
+              "width": "100%",
+              "alignment": "center",
+              "block_custom_class": ""
+            }
+          },
+          "6a884503-09f5-40d7-9eae-8a63f15763ad": {
+            "type": "text",
+            "settings": {
+              "title": "<h4 class=\"about__block-heading\">It pains me physically to see woman victimized,<br> rendered pathetic by fashion.<\/h4>\n<p class=\"about__block-subheading\">Awkwardness gives me great comfort. I’ve never been cool, but I’ve felt cool. I’ve been in the<br> cool place, but I wasn’t really cool – I was trying to pass for hip or cool.<\/p>",
+              "subheading": "",
+              "text": "<p>A girl should be two things: classy and fabulous. I am convinced that there can be luxury in simplicity. I wanted to dress the woman who lives and works, not the woman in a painting. It’s hard to balance everything. It’s always challenging. My relationships with producers or photographers – these are relationships that took years. I can’t get sucked into that celebrity thing, because I think it’s just crass. My aim is to make the poor look rich and the rich look poor. Vanity is the healthiest thing in life. I believe that my clothes can give people a better image of themselves – that it can increase their feelings of confidence and happiness. You can hide so much behind theatrics, and I don’t need to do that any more. I don’t really know how to do casual clothes.<\/p>",
+              "width": "100%",
+              "alignment": "center",
+              "align_text": "center",
+              "text_size": "medium",
+              "text_color": "black",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "sf__btn-primary",
+              "button_size": "",
+              "block_custom_class": "sf__about-block sf__about-block-text sf__about-block-text-1"
+            }
+          },
+          "0af8aa76-bafc-4a4e-9a4c-d4b08dbe6971": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/img2.jpg",
+              "width": "50%",
+              "alignment": "center",
+              "block_custom_class": ""
+            }
+          },
+          "0fee5089-23db-4978-a9b7-206507f307fa": {
+            "type": "html",
+            "settings": {
+              "code": "<div class=\"sf__about-custom-list\">\n  <h3>We are proudly<br> Australian.<\/h3>\n  <ul>\n    <li>\n      <span><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/icon1.svg?v=1627616411\"><\/span>\n      <div class=\"rte\">\n          <h4>Soft Fabric<\/h4>\n          <p class=\"text-color-subtext\">Get complimentary ground shipping on every<br> order.Don’t love it? Send it back, on us.<\/p>\n      <\/div>\n    <\/li>\n    <li>\n      <span><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/icon2_daf1b6c2-ef2e-416c-ae6a-a7ddd145b6c5.svg?v=1627616411\"><\/span>\n      <div class=\"rte\">\n          <h4>Lightweight<\/h4>\n          <p class=\"text-color-subtext\">Join Minimog Rewards to earn gift cards<br>\nand enjoy exclusive member benefits.<\/p>\n      <\/div>\n    <\/li>\n    <li>\n      <span><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/icon3.svg?v=1627616411\"><\/span>\n      <div class=\"rte\">\n          <h4>All Day Comfort<\/h4>\n          <p class=\"text-color-subtext\">We believe getting dressed should be the<br> easiest part of your day.<\/p>\n      <\/div>\n    <\/li>\n  <\/ul>\n<\/div>",
+              "width": "50%",
+              "block_custom_class": "sf__about-custom-html"
+            }
+          },
+          "c73b3d19-6747-423f-a358-42ff70ff43e6": {
+            "type": "text",
+            "settings": {
+              "title": "<h4 class=\"about__block-heading\">The world needs to move fast to make a meaningful<br> difference in the fight against climate change.<\/h4>",
+              "subheading": "",
+              "text": "<p>A girl should be two things: classy and fabulous. I am convinced that there can be luxury in simplicity. I wanted to dress the woman who lives and works, not the woman in a painting. It’s hard to balance everything. It’s always challenging. My relationships with producers or photographers – these are relationships that took years. I can’t get sucked into that celebrity thing, because I think it’s just crass. My aim is to make the poor look rich and the rich look poor. Vanity is the healthiest thing in life. I believe that my clothes can give people a better image of themselves – that it can increase their feelings of confidence and happiness. You can hide so much behind theatrics, and I don’t need to do that any more. I don’t really know how to do casual clothes.<\/p>",
+              "width": "100%",
+              "alignment": "center",
+              "align_text": "center",
+              "text_size": "medium",
+              "text_color": "black",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "sf__btn-primary",
+              "button_size": "",
+              "block_custom_class": "sf__about-block sf__about-block-text sf__about-block-text-2"
+            }
+          },
+          "25c4303f-7e71-403c-8c24-80f6f4b3f568": {
+            "type": "text",
+            "settings": {
+              "title": "Our Team",
+              "subheading": "",
+              "text": "",
+              "width": "100%",
+              "alignment": "center",
+              "align_text": "center",
+              "text_size": "medium",
+              "text_color": "black",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "sf__btn-primary",
+              "button_size": "",
+              "block_custom_class": "sf__about-custom-heading"
+            }
+          },
+          "10854820-5593-4dd4-9302-0540cb4460ff": {
+            "type": "image_card",
+            "settings": {
+              "width": "33%",
+              "content_position": "bottom_left",
+              "content_alignment": "left",
+              "text_size": "medium",
+              "text_color": "black",
+              "image": "shopify:\/\/shop_images\/img3.png",
+              "link": "",
+              "title": "Edward Lindgren",
+              "subtitle": "<span class=\"text-color-subtext\">CHIEF OPERATING OFFICER<\/span>",
+              "button_label": "",
+              "button_style": "sf__btn-primary",
+              "button_size": "",
+              "block_custom_class": "sf__about-card-custom"
+            }
+          },
+          "fc3a7981-df22-46a4-87c5-9d4719abfe56": {
+            "type": "image_card",
+            "settings": {
+              "width": "33%",
+              "content_position": "bottom_left",
+              "content_alignment": "left",
+              "text_size": "medium",
+              "text_color": "black",
+              "image": "shopify:\/\/shop_images\/img4.jpg",
+              "link": "",
+              "title": "Nado Husa",
+              "subtitle": "<span class=\"text-color-subtext\">CO-FOUNDER<\/span>",
+              "button_label": "",
+              "button_style": "sf__btn-primary",
+              "button_size": "",
+              "block_custom_class": "sf__about-card-custom"
+            }
+          },
+          "cd41d4b0-fcb8-40d4-b51f-cd8d364be130": {
+            "type": "image_card",
+            "settings": {
+              "width": "33%",
+              "content_position": "bottom_left",
+              "content_alignment": "left",
+              "text_size": "medium",
+              "text_color": "black",
+              "image": "shopify:\/\/shop_images\/img5.jpg",
+              "link": "",
+              "title": "Chineze Afamefuna",
+              "subtitle": "<span class=\"text-color-subtext\">MARKETING<\/span>",
+              "button_label": "",
+              "button_style": "sf__btn-primary",
+              "button_size": "",
+              "block_custom_class": "sf__about-card-custom"
+            }
+          }
+        },
+        "block_order": [
+          "2974af7f-37f7-46d5-a66e-7c6f95ee4de8",
+          "6a884503-09f5-40d7-9eae-8a63f15763ad",
+          "0af8aa76-bafc-4a4e-9a4c-d4b08dbe6971",
+          "0fee5089-23db-4978-a9b7-206507f307fa",
+          "c73b3d19-6747-423f-a358-42ff70ff43e6",
+          "25c4303f-7e71-403c-8c24-80f6f4b3f568",
+          "10854820-5593-4dd4-9302-0540cb4460ff",
+          "fc3a7981-df22-46a4-87c5-9d4719abfe56",
+          "cd41d4b0-fcb8-40d4-b51f-cd8d364be130"
+        ],
+        "settings": {
+          "heading": "",
+          "subheading": "",
+          "description": "",
+          "header_alignment": "center",
+          "container": "container",
+          "background_color": "",
+          "gap": 30,
+          "use_scroll_mobile": false,
+          "gap_mobile": 16
+        }
+      },
+      "icon-box": {
+        "type": "icon-box",
+        "blocks": {
+          "d2184992-6884-4224-a769-ff62a0191b12": {
+            "type": "iconbox",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/freeship.png",
+              "title": "Free Shipping",
+              "description": "<p>Free Shipping for orders over £130<\/p>",
+              "link": "",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "sf__btn-link",
+              "button_size": ""
+            }
+          },
+          "99c66e28-cdec-4f1b-b598-4158753b2a9a": {
+            "type": "iconbox",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/promo2.png",
+              "title": "Money Guarantee",
+              "description": "<p>Within 30 days for an exchange.<\/p>",
+              "link": "",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "sf__btn-link",
+              "button_size": ""
+            }
+          },
+          "5381479b-6706-4ca2-aa46-9e86f7dd85ff": {
+            "type": "iconbox",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/promo3.png",
+              "title": "Online Support",
+              "description": "<p>24 hours a day, 7 days a week<\/p>",
+              "link": "",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "sf__btn-link",
+              "button_size": ""
+            }
+          },
+          "5f484b77-20e1-4f4b-ae28-d60aeac67e65": {
+            "type": "iconbox",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/promo4.png",
+              "title": "Flexible Payment",
+              "description": "<p>Pay with Multiple Credit Cards<\/p>",
+              "link": "",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "sf__btn-link",
+              "button_size": ""
+            }
+          }
+        },
+        "block_order": [
+          "d2184992-6884-4224-a769-ff62a0191b12",
+          "99c66e28-cdec-4f1b-b598-4158753b2a9a",
+          "5381479b-6706-4ca2-aa46-9e86f7dd85ff",
+          "5f484b77-20e1-4f4b-ae28-d60aeac67e65"
+        ],
+        "settings": {
+          "heading": "",
+          "subheading": "",
+          "description": "",
+          "header_alignment": "center",
+          "container": "container-fluid",
+          "background_color": "rgba(0,0,0,0)",
+          "item_per_row": 4,
+          "item_gap": 30,
+          "item_gap_mobile": 10,
+          "card_style": "horizontal",
+          "image_max_width": "30px",
+          "content_alignment": "start",
+          "hover_effect": "none",
+          "enable_slider": false,
+          "show_pagination": false,
+          "show_navigation": false,
+          "use_scroll_mobile": false,
+          "use_grid_column_mb": false
+        }
+      },
+      "find-a-store": {
+        "type": "find-a-store",
+        "blocks": {
+          "83a03233-d800-4c0c-94fd-080323d9963c": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/findstore1.jpg",
+              "width": "66%"
+            }
+          },
+          "db28887c-a128-4f4f-a9bc-bce17a20ad71": {
+            "type": "content",
+            "settings": {
+              "heading": "Valencia Street Shop",
+              "content": "<div class=\"sf__store-info\">\n  <div class=\"rte sf__store-item\">\n      <h4>Address<\/h4>\n      <p class=\"text-color-subtext\">461 Valencia Street San<br> Francisco, CA 94103<\/p>\n      <a href=\"#\">Get Direction<\/a>\n  <\/div>\n  <div class=\"rte sf__store-item\">\n      <h4>We're Open<\/h4>\n      <p class=\"text-color-subtext\">Our store has re-opened for<br> shopping, exchanges<br>\nEvery day 11am to 7pm<\/p>\n  <\/div>\n  <div class=\"rte sf__store-item\">\n      <h4>Message<\/h4>\n      <p class=\"text-color-subtext\">Send us a text &amp; an<br> ambassador will respond<br> when available.<\/p>\n      <p>1-814-251-9966<\/p>\n  <\/div>\n  <div class=\"sf__store-item\">\n      <h4>Social Media<\/h4>\n      <ul>\n        <li><a href=\"#\"><svg class=\"w-[20px] h-[20px]\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 384 512\"><path fill=\"currentColor\" d=\"M204 6.5C101.4 6.5 0 74.9 0 185.6 0 256 39.6 296 63.6 296c9.9 0 15.6-27.6 15.6-35.4 0-9.3-23.7-29.1-23.7-67.8 0-80.4 61.2-137.4 140.4-137.4 68.1 0 118.5 38.7 118.5 109.8 0 53.1-21.3 152.7-90.3 152.7-24.9 0-46.2-18-46.2-43.8 0-37.8 26.4-74.4 26.4-113.4 0-66.2-93.9-54.2-93.9 25.8 0 16.8 2.1 35.4 9.6 50.7-13.8 59.4-42 147.9-42 209.1 0 18.9 2.7 37.5 4.5 56.4 3.4 3.8 1.7 3.4 6.9 1.5 50.4-69 48.6-82.5 71.4-172.8 12.3 23.4 44.1 36 69.3 36 106.2 0 153.9-103.5 153.9-196.8C384 71.3 298.2 6.5 204 6.5z\"><\/path><\/svg><\/a><\/li>\n        <li><a href=\"#\"><svg class=\"w-[20px] h-[20px]\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 320 512\"><path fill=\"currentColor\" d=\"M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z\"><\/path><\/svg><\/a><\/li>\n        <li><a href=\"#\"><svg class=\"w-[20px] h-[20px]\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 448 512\"><path fill=\"currentColor\" d=\"M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z\"><\/path><\/svg><\/a><\/li>\n        <li><a href=\"#\"><svg class=\"w-[20px] h-[20px]\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 512 512\"><path fill=\"currentColor\" d=\"M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z\"><\/path><\/svg><\/a><\/li>\n      <\/ul>\n  <\/div>\n<\/div>",
+              "width": "33%"
+            }
+          },
+          "5f971098-2ff1-441a-bc7a-9141ea4259ae": {
+            "type": "content",
+            "settings": {
+              "heading": "Williamsburg",
+              "content": "<div class=\"sf__store-info\">\n  <div class=\"rte sf__store-item\">\n      <h4>Address<\/h4>\n      <p class=\"text-color-subtext\">461 Valencia Street San<br> Francisco, CA 94103<\/p>\n      <a href=\"#\">Get Direction<\/a>\n  <\/div>\n  <div class=\"rte sf__store-item\">\n      <h4>We're Open<\/h4>\n      <p class=\"text-color-subtext\">Our store has re-opened for<br> shopping, exchanges<br>\nEvery day 11am to 7pm<\/p>\n  <\/div>\n  <div class=\"rte sf__store-item\">\n      <h4>Message<\/h4>\n      <p class=\"text-color-subtext\">Send us a text &amp; an<br> ambassador will respond<br> when available.<\/p>\n      <p>1-814-251-9966<\/p>\n  <\/div>\n  <div class=\"sf__store-item\">\n      <h4>Social Media<\/h4>\n      <ul>\n        <li><a href=\"#\"><svg class=\"w-[20px] h-[20px]\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 384 512\"><path fill=\"currentColor\" d=\"M204 6.5C101.4 6.5 0 74.9 0 185.6 0 256 39.6 296 63.6 296c9.9 0 15.6-27.6 15.6-35.4 0-9.3-23.7-29.1-23.7-67.8 0-80.4 61.2-137.4 140.4-137.4 68.1 0 118.5 38.7 118.5 109.8 0 53.1-21.3 152.7-90.3 152.7-24.9 0-46.2-18-46.2-43.8 0-37.8 26.4-74.4 26.4-113.4 0-66.2-93.9-54.2-93.9 25.8 0 16.8 2.1 35.4 9.6 50.7-13.8 59.4-42 147.9-42 209.1 0 18.9 2.7 37.5 4.5 56.4 3.4 3.8 1.7 3.4 6.9 1.5 50.4-69 48.6-82.5 71.4-172.8 12.3 23.4 44.1 36 69.3 36 106.2 0 153.9-103.5 153.9-196.8C384 71.3 298.2 6.5 204 6.5z\"><\/path><\/svg><\/a><\/li>\n        <li><a href=\"#\"><svg class=\"w-[20px] h-[20px]\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 320 512\"><path fill=\"currentColor\" d=\"M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z\"><\/path><\/svg><\/a><\/li>\n        <li><a href=\"#\"><svg class=\"w-[20px] h-[20px]\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 448 512\"><path fill=\"currentColor\" d=\"M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z\"><\/path><\/svg><\/a><\/li>\n        <li><a href=\"#\"><svg class=\"w-[20px] h-[20px]\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 512 512\"><path fill=\"currentColor\" d=\"M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z\"><\/path><\/svg><\/a><\/li>\n      <\/ul>\n  <\/div>\n<\/div>",
+              "width": "33%"
+            }
+          },
+          "e20acd08-159e-4498-aa74-e3a74b8908b4": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/findstore2.jpg",
+              "width": "66%"
+            }
+          },
+          "c7d2bc9e-f366-43bf-aabe-23052726cce2": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/findstore3.jpg",
+              "width": "66%"
+            }
+          },
+          "75ff880c-304b-4ccd-9e75-1ae08f6655b5": {
+            "type": "content",
+            "settings": {
+              "heading": "Stanford Center",
+              "content": "<div class=\"sf__store-info\">\n  <div class=\"rte sf__store-item\">\n      <h4>Address<\/h4>\n      <p class=\"text-color-subtext\">461 Valencia Street San<br> Francisco, CA 94103<\/p>\n      <a href=\"#\">Get Direction<\/a>\n  <\/div>\n  <div class=\"rte sf__store-item\">\n      <h4>We're Open<\/h4>\n      <p class=\"text-color-subtext\">Our store has re-opened for<br> shopping, exchanges<br>\nEvery day 11am to 7pm<\/p>\n  <\/div>\n  <div class=\"rte sf__store-item\">\n      <h4>Message<\/h4>\n      <p class=\"text-color-subtext\">Send us a text &amp; an<br> ambassador will respond<br> when available.<\/p>\n      <p>1-814-251-9966<\/p>\n  <\/div>\n  <div class=\"sf__store-item\">\n      <h4>Social Media<\/h4>\n      <ul>\n        <li><a href=\"#\"><svg class=\"w-[20px] h-[20px]\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 384 512\"><path fill=\"currentColor\" d=\"M204 6.5C101.4 6.5 0 74.9 0 185.6 0 256 39.6 296 63.6 296c9.9 0 15.6-27.6 15.6-35.4 0-9.3-23.7-29.1-23.7-67.8 0-80.4 61.2-137.4 140.4-137.4 68.1 0 118.5 38.7 118.5 109.8 0 53.1-21.3 152.7-90.3 152.7-24.9 0-46.2-18-46.2-43.8 0-37.8 26.4-74.4 26.4-113.4 0-66.2-93.9-54.2-93.9 25.8 0 16.8 2.1 35.4 9.6 50.7-13.8 59.4-42 147.9-42 209.1 0 18.9 2.7 37.5 4.5 56.4 3.4 3.8 1.7 3.4 6.9 1.5 50.4-69 48.6-82.5 71.4-172.8 12.3 23.4 44.1 36 69.3 36 106.2 0 153.9-103.5 153.9-196.8C384 71.3 298.2 6.5 204 6.5z\"><\/path><\/svg><\/a><\/li>\n        <li><a href=\"#\"><svg class=\"w-[20px] h-[20px]\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 320 512\"><path fill=\"currentColor\" d=\"M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z\"><\/path><\/svg><\/a><\/li>\n        <li><a href=\"#\"><svg class=\"w-[20px] h-[20px]\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 448 512\"><path fill=\"currentColor\" d=\"M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z\"><\/path><\/svg><\/a><\/li>\n        <li><a href=\"#\"><svg class=\"w-[20px] h-[20px]\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 512 512\"><path fill=\"currentColor\" d=\"M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z\"><\/path><\/svg><\/a><\/li>\n      <\/ul>\n  <\/div>\n<\/div>",
+              "width": "33%"
+            }
+          }
+        },
+        "block_order": [
+          "83a03233-d800-4c0c-94fd-080323d9963c",
+          "db28887c-a128-4f4f-a9bc-bce17a20ad71",
+          "5f971098-2ff1-441a-bc7a-9141ea4259ae",
+          "e20acd08-159e-4498-aa74-e3a74b8908b4",
+          "c7d2bc9e-f366-43bf-aabe-23052726cce2",
+          "75ff880c-304b-4ccd-9e75-1ae08f6655b5"
+        ],
+        "settings": {
+          "container": "container-fluid",
+          "gap": 100,
+          "gap_mobile": 16
+        }
+      },
+      "page-reviews": {
+        "type": "page-reviews",
+        "settings": {
+        }
+      },
+      "mobile-sticky-bar": {
+        "type": "mobile-sticky-bar",
+        "settings": {
+          "show_mobile_sticky": true,
+          "show_home_icon": true,
+          "show_collection_icon": true,
+          "show_cart_icon": true,
+          "show_search_icon": true,
+          "show_account_icon": false,
+          "show_wishlist_icon": false
+        }
+      }
+    },
+    "content_for_index": [
+      "1622448086a90b8c2f",
+      "1622448572670ce860",
+      "1620889733b8bebef8",
+      "162244938595ae3801",
+      "1622452409f76b7918",
+      "1622451137d356c514",
+      "162243112070c9a4c8"
+    ]
+  },
+  "presets": {
+    "Default": {
+      "sections": {
+        "featured-collection": {
+          "type": "featured-collection",
+          "settings": {
+            "collection": "frontpage"
+          }
+        },
+        "featured-product": {
+          "type": "featured-product",
+          "settings": {
+          }
+        }
+      },
+      "content_for_index": [
+        "featured-collection",
+        "featured-product"
+      ]
+    }
+  }
+}

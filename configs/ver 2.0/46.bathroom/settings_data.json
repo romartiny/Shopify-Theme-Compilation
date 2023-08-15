@@ -1,0 +1,260 @@
+{
+  "current": {
+    "favicon": "shopify:\/\/shop_images\/fav_icon_dark_1.png",
+    "container_width": 1410,
+    "container_fluid_width": 1620,
+    "container_fluid_offset": 100,
+    "color_primary": "#000000",
+    "color_body_text": "#000000",
+    "color_heading_text": "#000000",
+    "color_sub_text": "#696969",
+    "color_btn_bg_hover": "#000000",
+    "prod_sale_price_color": "#666666",
+    "prod_type_color": "#666666",
+    "prod_desc_color": "#696969",
+    "color_main_bg": "#ffffff",
+    "color_field_bg": "#ffffff",
+    "color_annoucement_bg": "#f8f9bd",
+    "color_annoucement_text": "#000000",
+    "color_topbar_bg": "#ffffff",
+    "color_topbar_text": "#696969",
+    "color_header_bg": "#ffffff",
+    "color_header_link": "#000000",
+    "color_header_transparent": "#000000",
+    "color_menu_bar_bg": "#ffffff",
+    "color_menu_bar_text": "#000000",
+    "color_footer_bg": "#ffffff",
+    "color_footer_text": "#000000",
+    "color_footer_subtext": "#666666",
+    "color_footer_link_hover": "#000000",
+    "color_footer_bottom_bg": "#ffffff",
+    "color_footer_bottom_text": "#666666",
+    "color_border": "#dedede",
+    "img_overlay_opacity": 20,
+    "tooltip_background_color": "#000000",
+    "type_base_font": "roboto_condensed_n4",
+    "use_custom_font_body": true,
+    "custom_body_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/Gordita-Medium.ttf?v=1623637349@500\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/Gordita-Regular.ttf?v=1623637349@400\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/Gordita-Bold.ttf?v=1623637349@700",
+    "custom_body_weight": "500",
+    "type_base_size": 14,
+    "type_base_line_height": 26,
+    "type_header_font": "roboto_condensed_n7",
+    "use_custom_font_heading": true,
+    "custom_heading_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/Gordita-Medium.ttf?v=1623637349@500\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/Gordita-Regular.ttf?v=1623637349@400\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/Gordita-Bold.ttf?v=1623637349@700",
+    "custom_heading_weight": "500",
+    "type_header_base_size": 38,
+    "btn_base_size": 14,
+    "btn_weight": "500",
+    "pcard_layout": "1",
+    "pcard_alignment": "center",
+    "pcard_image_ratio": "3\/4",
+    "show_vendor": true,
+    "variant_option_design1": "image",
+    "variant_option_design3": "color",
+    "show_variant_swatch_image": true,
+    "product_colors": "red: #FF6961,\nyellow: #FDDA76,\nblack: #000000,\nblue: #8DB4D2,\ngreen: #C1E1C1,\npurple: #B19CD9,\nsilver: #EEEEEF,\nwhite: #FFFFFF,\nbrown: #836953,\nlight-brown: #feb035,\ndark-turquoise: #23cddc,\norange: #FFB347,\ntan: #E9D1BF,\nviolet: #B490B0,\npink: #FFD1DC,\ngrey: #E0E0E0,\nsky: #96BDC6,\npale-leaf: #CCD4BF",
+    "filter_color1": "",
+    "share_facebook": true,
+    "share_pinterest": true,
+    "social_twitter_link": "https:\/\/twitter.com\/home",
+    "social_facebook_link": "https:\/\/facebook.com\/",
+    "social_pinterest_link": "https:\/\/pinterest.com\/",
+    "social_instagram_link": "https:\/\/instagram.com\/",
+    "wishlist_page": "whishlist",
+    "product_compare_page": "",
+    "gm_api": "",
+    "instagram_token": "",
+    "custom_css": ".sf__index-slideshow .slide__block-description p {\n  color: #ffffff;\n}\n.sf__btn,\n.section__subheading {\n  text-transform: uppercase;\n  letter-spacing: 0.025em;\n}\n.collection-list a.collection-card__image {\n  max-width: 190px;\n  margin: 0 auto;\n}\n.section__description {\n  font-weight: 400;\n}\na.sf__btn.sf__btn-link {\n  border-bottom-width: 1px;\n}\n.sf-search__form:not(.mobile).full-width {\n  background-color: #f5f5f5;\n}\n.sf__footer-block-title {\n  font-size: 18px;\n}\n.sf__footer-block-newsletter .sf__footer-block-title {\n  font-size: 34px;\n  line-height: 44px;\n}\n.sf__footer-block-newsletter .sf__newsletter-block-desc {\n  font-weight: 400;\n}\n.sf__footer-block-menu ul li {\n  line-height: 36px;\n}\n.sf-instagram .section-my {\n  margin-bottom: 10px;\n}\n.sf__index-collection-list .sf-column {\n  padding-bottom: 0;\n}\n.sf-topbar {\n  font-weight: 400;\n}\n\n.sf-header__desktop a.sf__btn.sf__btn-link::before {\n  height: 1px;\n  color: #cccccc;\n}\n.sf-header__desktop a.sf__btn.sf__btn-link::after {\n  height: 1px;\n  color: #cccccc;\n}\n.sf__index-icon-box a.sf__btn.sf__btn-link::before {\n  height: 1px;\n}\n.sf__index-icon-box a.sf__btn.sf__btn-link::after {\n  height: 1px;\n}\n.sf__index-icon-box a.sf__btn.sf__btn-link {\n  border-bottom-width: 0px;\n}\n.sf__index-hero .text-color-subtext p {\n  color: #ffffff;\n}\n.sf__footer-form-newsletter .sf__footer-form-newsletter-icon {\n  color: #000000;\n}\n.sf__footer-form-newsletter .sf__form-submit {\n  color: #000000;\n}\n.sf-header__desktop .sf-search-form button {\n  order: 1;\n  padding-right: 0;\n}\n.sf-header__desktop .sf-search-form span {\n  order: 2;\n}\n.sf-header__desktop .sf-search-form {\n  min-width: 450px;\n  background-color: #f5f5f5;\n  border: none;\n}\n.sf-header .sf__topbar-inner {\n    font-size: 14px;\n}\n.sf-footer form.sf__footer-form-newsletter .sf__newletter__form-input {\n    border: 2px solid #EBEBEB;\n}\n.sf__index-slideshow .sf__slide-content--mobile .sf__mobile-button {\n    background: #000;\n    color: #FFF;\n}\n.sf__index-slideshow .sf__slide-content--mobile .sf__mobile-button p span { \n    display: none; \n}\n@media(max-width: 767px) {\n  .sf__index-collection-list .sf-column {\n        max-width: 38.66vw !important;\n    }\n    .sf__index-collection-list .section-my {\n        --row-gap-mobile: 5px !important;\n    }\n      .sf__index-icon-box .sf-icon-box__text h3 {\n        font-size: 1.25rem;\n    }\n      .sf__index-icon-box .sf-icon-box__text .sf__btn-link {\n        font-size: 0.85rem;\n    }\n      .sf__index-icon-box .sf__ms {\n        padding-left: 0;\n    }\n      .sf__index-icon-box .sf-grid.sf__ms-wrapper {\n        flex-direction: column;\n    }\n      .sf__index-icon-box .sf-grid.sf__ms-wrapper .sf-column {\n        width: 100% !important;\n    }\n}",
+    "use_theme_currencies": true,
+    "theme_currencies": "USD | EUR | GBP | VND",
+    "sections": {
+      "header": {
+        "type": "header",
+        "blocks": {
+          "59224d28-d657-4624-8d17-55b1c4ce8d9c": {
+            "type": "product-list",
+            "settings": {
+              "heading": "Product",
+              "container": "container-fluid",
+              "stretch_width": false,
+              "collection": "bathroom",
+              "limit": 6,
+              "columns": 2
+            }
+          },
+          "5b9aec5f-b955-4765-9a87-1962d613e909": {
+            "type": "custom_html",
+            "settings": {
+              "heading": "Home",
+              "container": "inherit",
+              "html": ""
+            }
+          },
+          "05dc728c-4420-4597-818c-e4551c8328b8": {
+            "type": "topbar",
+            "settings": {
+              "show_divider": true,
+              "show_phone_numb": true,
+              "show_email": true,
+              "show_social_links": false,
+              "show_stores_page": true,
+              "show_currency_switcher": true,
+              "show_language_switcher": false,
+              "alert_message": ""
+            }
+          },
+          "a8743f93-7c1d-4e9b-8c93-7af3c4f4c5df": {
+            "type": "banner",
+            "settings": {
+              "heading": "Shop",
+              "container": "inherit",
+              "banner_style": "outside",
+              "banner_link": "",
+              "banner_title": "The new bathroom",
+              "banner_desc": "",
+              "banner_button_text": "Shop now"
+            }
+          },
+          "dbeaced1-1416-4f80-82d1-ce92b6fc232e": {
+            "type": "custom_html",
+            "settings": {
+              "heading": "Features",
+              "container": "inherit",
+              "html": ""
+            }
+          }
+        },
+        "block_order": [
+          "59224d28-d657-4624-8d17-55b1c4ce8d9c",
+          "5b9aec5f-b955-4765-9a87-1962d613e909",
+          "05dc728c-4420-4597-818c-e4551c8328b8",
+          "a8743f93-7c1d-4e9b-8c93-7af3c4f4c5df",
+          "dbeaced1-1416-4f80-82d1-ce92b6fc232e"
+        ],
+        "settings": {
+          "header_design": "logo-center-menu-left",
+          "container": "container-fluid",
+          "header_sticky": true,
+          "transparent_on_top": false,
+          "logo_text": "MINIMOG",
+          "logo_max_width": 180,
+          "sticky_logo_max_width": 105,
+          "mobile_logo_max_width": 105,
+          "main_menu": "main-menu",
+          "secondary_menu": "",
+          "uppercase_parent_level": true,
+          "search": "show_full",
+          "show_account_icon": false,
+          "show_cart_icon": true,
+          "show_wishlist_icon": false,
+          "show_compare_icon": false,
+          "show_currency_switcher": false,
+          "show_language_switcher": false
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "c76367c4-57ce-4b11-8732-181be9699bcf": {
+            "type": "our_store",
+            "settings": {
+              "title": "Company",
+              "description": "<p>Find a location nearest<br\/>you. <a href=\"#\" title=\"#\"><span style=\"text-decoration:underline\">See Our Stores<\/span><\/a><\/p>",
+              "show_email": true,
+              "show_phone": true,
+              "show_socials_link": false,
+              "width": "33%"
+            }
+          },
+          "bad8900e-c7b0-49a4-a135-6e23c797db37": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "Useful Links",
+              "width": "33%"
+            }
+          },
+          "7bd61b9c-0a3d-4497-8f62-bebad77ac32c": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "Infomation",
+              "width": "33%"
+            }
+          },
+          "e1687d03-ffcb-4524-9eff-e17d55a38e34": {
+            "type": "newsletter",
+            "settings": {
+              "title": "Good emails.",
+              "description": "Enter your email below to be the first to know about new collections and product launches.",
+              "email_placeholder": "Your email",
+              "form_style": "bordered",
+              "show_social": false,
+              "width": "50%"
+            }
+          }
+        },
+        "block_order": [
+          "c76367c4-57ce-4b11-8732-181be9699bcf",
+          "bad8900e-c7b0-49a4-a135-6e23c797db37",
+          "7bd61b9c-0a3d-4497-8f62-bebad77ac32c",
+          "e1687d03-ffcb-4524-9eff-e17d55a38e34"
+        ],
+        "settings": {
+          "design": "footer-3",
+          "container": "container-fluid",
+          "bordered": false,
+          "copyright": "<img class=\"w-36 mx-auto\" src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/logo_49665e76-0070-4451-978d-276471c408f9.png?v=1623637702\">",
+          "show_currency_selector": false,
+          "show_language_selector": false,
+          "show_social_links": true,
+          "show_payment_icons": true
+        }
+      },
+      "annoucement": {
+        "type": "annoucement",
+        "settings": {
+          "show_announcement": false,
+          "homepage_only": true,
+          "show_close": true,
+          "message": "<span class=\"font-bold tracking-widest\">FREE SHIPPING ON ALL U.S. ORDERS $50+<\/span>",
+          "message_link": "",
+          "show_divider": false
+        }
+      },
+      "mobile-sticky-bar": {
+        "type": "mobile-sticky-bar",
+        "settings": {
+          "show_mobile_sticky": true,
+          "show_home_icon": true,
+          "show_collection_icon": true,
+          "show_cart_icon": true,
+          "show_search_icon": true,
+          "show_account_icon": false,
+          "show_wishlist_icon": false
+        }
+      }
+    }
+  },
+  "presets": {
+    "Default": {
+      "sections": {
+        "featured-collection": {
+          "type": "featured-collection",
+          "settings": {
+            "collection": "frontpage"
+          }
+        },
+        "featured-product": {
+          "type": "featured-product",
+          "settings": {
+          }
+        }
+      },
+      "content_for_index": [
+        "featured-collection",
+        "featured-product"
+      ]
+    }
+  }
+}

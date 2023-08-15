@@ -1,0 +1,310 @@
+{
+  "sections": {
+    "16184552193b4706ec": {
+      "type": "slider",
+      "blocks": {
+        "16184552193b4706ec-2": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "black",
+            "subheading": "<span class=\"font-semibold\">New Arrivals<\/span>",
+            "title": "Spring\/Summer <br>Essential Collection",
+            "description": "",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "Accessories",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections\/accessories"
+          }
+        },
+        "16184552193b4706ec-0": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "black",
+            "subheading": "<span class=\"font-semibold\">New Arrivals<\/span>",
+            "title": "Exquisite Tailored<br>Boxy Cut",
+            "description": "",
+            "button_text": "Shop Now",
+            "button_link": "shopify:\/\/collections\/braided-sandals",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "Show Now",
+            "footer_link": "shopify:\/\/collections\/braided-sandals"
+          }
+        },
+        "16184552193b4706ec-1": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify:\/\/shop_images\/2_1.jpg",
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "black",
+            "subheading": "<span class=\"font-semibold\">New Arrivals<\/span>",
+            "title": "Clean Vibe<br>This Summer",
+            "description": "",
+            "button_text": "Shop Now",
+            "button_link": "shopify:\/\/collections\/leather-boots",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "Leather Boots",
+            "footer_button": "Show Now",
+            "footer_link": "shopify:\/\/collections\/leather-boots"
+          }
+        }
+      },
+      "block_order": [
+        "16184552193b4706ec-2",
+        "16184552193b4706ec-0",
+        "16184552193b4706ec-1"
+      ],
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "large",
+        "show_overlay": false,
+        "dots_position": "right",
+        "dots_color": "dark",
+        "show_dots": true,
+        "show_arrows": false,
+        "autorotate": false,
+        "autorotate_speed": 5,
+        "custom_class": "sf__index-slideshow"
+      }
+    },
+    "1622537600b0650cb6": {
+      "type": "collection-list",
+      "blocks": {
+        "1622537600b0650cb6-0": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "dresses",
+            "title": "Dresses"
+          }
+        },
+        "1622537600b0650cb6-1": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "accessories",
+            "title": "Accessories"
+          }
+        },
+        "1622537600b0650cb6-2": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "blazer",
+            "title": "Blazers"
+          }
+        },
+        "7afe6cb7-64a3-4533-8b59-49997818eae0": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "jeans",
+            "title": "Jeans"
+          }
+        },
+        "65f39f9c-b9e2-4e8c-9cc0-4a9eab332498": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "leather-bag",
+            "title": "Leather Bags"
+          }
+        },
+        "031aa297-28ec-4770-bc8f-2c6b9bffa9d4": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "boots",
+            "title": "Boots"
+          }
+        }
+      },
+      "block_order": [
+        "1622537600b0650cb6-0",
+        "1622537600b0650cb6-1",
+        "1622537600b0650cb6-2",
+        "7afe6cb7-64a3-4533-8b59-49997818eae0",
+        "65f39f9c-b9e2-4e8c-9cc0-4a9eab332498",
+        "031aa297-28ec-4770-bc8f-2c6b9bffa9d4"
+      ],
+      "settings": {
+        "heading": "Season <br>Collection",
+        "subheading": "",
+        "description": "Must-have pieces selected<br> \nevery month",
+        "header_alignment": "left",
+        "container": "container-fluid",
+        "background_color": "",
+        "layout": "left-side",
+        "card_style": "standard",
+        "text_alignment": "center",
+        "hover_effect": "scaling-up",
+        "show_product_count": true,
+        "count_inline_title": true,
+        "image_rounded": true,
+        "items_per_row": 6,
+        "item_gap": 50,
+        "enable_slider": false,
+        "show_pagination": true,
+        "show_navigation": true,
+        "autorotate": false,
+        "autorotate_speed": 5,
+        "use_scroll_mobile": true,
+        "mobile_gap": 20,
+        "hidden_slide_control_mobile": false,
+        "custom_class": "sf__index-collection-list"
+      }
+    },
+    "1622538197cf29d6df": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "This week’s highlights",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "fashion",
+        "product_to_show": 10,
+        "items_per_row": 5,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "button_type": "link",
+        "button_text": "Shop Now",
+        "button_style": "sf__btn-secondary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 16,
+        "custom_class": "sf__index-featured-collection"
+      }
+    },
+    "1622538272627ebe95": {
+      "type": "instagram",
+      "settings": {
+        "heading": "#Minimog",
+        "subheading": "",
+        "description": "Tag <span class=\"text-black font-medium\">@minimog<\/span> in your Instagram photos for a chance to be featured here.<br>\nFind more inspiration <span class=\"text-black font-medium underline\">on our Instagram.<\/span>",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "layout": "grid",
+        "images_count": 5,
+        "grid_columns": 5,
+        "gap": 10,
+        "mobile_gap": 16,
+        "profile": "https:\/\/www.instagram.com\/minimog.trendy\/",
+        "button_label": "",
+        "custom_class": "sf__index-instagram"
+      }
+    },
+    "1622596498bb20e61d": {
+      "type": "testimonials",
+      "blocks": {
+        "1622596498bb20e61d-0": {
+          "type": "testimonial",
+          "settings": {
+            "title": "",
+            "description": "<p>Was I in Hawaii?! No. Did I feel like I was in Hawaii?! No, because it’s snowing outside. But, would I wear this in Hawaii ❤️<\/p>",
+            "footer": "<p>Jared S.<\/p>",
+            "image_text": "",
+            "product": "denim-jacket"
+          }
+        },
+        "1622596498bb20e61d-1": {
+          "type": "testimonial",
+          "settings": {
+            "title": "",
+            "description": "<p>Always getting compliments from family, friends, and strangers. 🤗 🙌<\/p>",
+            "footer": "<p>Dean D. US<\/p>",
+            "image_text": "",
+            "product": "boxy-denim-jacket"
+          }
+        },
+        "1622596498bb20e61d-2": {
+          "type": "testimonial",
+          "settings": {
+            "title": "",
+            "description": "<p>Hands down one of the best shirts I’ve ever owned.  Fits great, feels amazing, seems to stay cool and is somewhat water resistant.<\/p>",
+            "footer": "<p>Jesicca  A.<\/p>",
+            "image_text": "",
+            "product": "relaxed-fit-high-jeans"
+          }
+        },
+        "1622596498bb20e61d-3": {
+          "type": "testimonial",
+          "settings": {
+            "title": "",
+            "description": "<p>Absolutely my favourite shop! The clothes are beautiful, I can always find something. Love it.<br\/><br\/><\/p>",
+            "footer": "<p>Elizabeth C.<\/p>",
+            "image_text": "",
+            "product": "drawstring-t-shirt-dress"
+          }
+        },
+        "1622596498bb20e61d-4": {
+          "type": "testimonial",
+          "settings": {
+            "title": "",
+            "description": "<p>\"I could live in your shop, your sixes are suited for normal size women and I can always find something I love.\" <\/p>",
+            "footer": "<p>Katie S.<\/p>",
+            "image_text": "",
+            "product": "denim-jacket"
+          }
+        }
+      },
+      "block_order": [
+        "1622596498bb20e61d-0",
+        "1622596498bb20e61d-1",
+        "1622596498bb20e61d-2",
+        "1622596498bb20e61d-3",
+        "1622596498bb20e61d-4"
+      ],
+      "settings": {
+        "heading": "Happy Customers",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "left",
+        "container": "container-fluid",
+        "background_color": "#f5f5f5",
+        "design": "testimonials-6",
+        "show_stars": true,
+        "autorotate": false,
+        "show_navigation": true,
+        "show_pagination": false,
+        "star_color": "#000000",
+        "custom_class": "sf__index-testimonial"
+      }
+    }
+  },
+  "order": [
+    "16184552193b4706ec",
+    "1622537600b0650cb6",
+    "1622538197cf29d6df",
+    "1622596498bb20e61d",
+    "1622538272627ebe95"
+  ]
+}

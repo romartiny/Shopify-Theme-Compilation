@@ -1,0 +1,395 @@
+{
+  "sections": {
+    "1621243260e1af0c20": {
+      "type": "slider",
+      "blocks": {
+        "1621243260e1af0c20-0": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify:\/\/shop_images\/2.jpg",
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "black",
+            "subheading": "",
+            "title": "<span class=\"sf__font-normal\">Print on Pillow<\/span>",
+            "description": "<p>From millions of things designed and sold by artists.<\/p>",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections"
+          }
+        },
+        "1621243260e1af0c20-1": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify:\/\/shop_images\/1.jpg",
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "black",
+            "subheading": "",
+            "title": "<span class=\"sf__font-normal\">Shine from head to toe<\/span>",
+            "description": "<p>From millions of things designed and sold by artists.<\/p>",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections"
+          }
+        },
+        "1621243260e1af0c20-2": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify:\/\/shop_images\/3.jpg",
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "black",
+            "subheading": "",
+            "title": "<span class=\"sf__font-normal\">Name on Bottle<\/span>",
+            "description": "<p>From millions of things designed and sold by artists.<\/p>",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections"
+          }
+        }
+      },
+      "block_order": [
+        "1621243260e1af0c20-0",
+        "1621243260e1af0c20-1",
+        "1621243260e1af0c20-2"
+      ],
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "fullscreen",
+        "show_overlay": false,
+        "dots_position": "right",
+        "dots_color": "dark",
+        "show_dots": true,
+        "show_arrows": false,
+        "autorotate": true,
+        "autorotate_speed": 5,
+        "custom_class": "sf__index-slideshow"
+      }
+    },
+    "16233844755a3e2b6e": {
+      "type": "image-with-text-1",
+      "blocks": {
+        "16233844755a3e2b6e-0": {
+          "type": "item",
+          "settings": {
+            "content_position": "bottom_center",
+            "content_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "image": "shopify:\/\/shop_images\/4.jpg",
+            "link": "",
+            "title": "",
+            "subtitle": "",
+            "button_label": "Shop Gifts",
+            "button_style": "sf__btn-white",
+            "button_size": ""
+          }
+        },
+        "16233844755a3e2b6e-1": {
+          "type": "item",
+          "settings": {
+            "content_position": "bottom_center",
+            "content_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "link": "",
+            "title": "",
+            "subtitle": "",
+            "button_label": "Shop T-shirts",
+            "button_style": "sf__btn-white",
+            "button_size": ""
+          }
+        },
+        "16233844755a3e2b6e-2": {
+          "type": "item",
+          "settings": {
+            "content_position": "bottom_center",
+            "content_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "image": "shopify:\/\/shop_images\/6.jpg",
+            "link": "",
+            "title": "",
+            "subtitle": "",
+            "button_label": "Shop Masks",
+            "button_style": "sf__btn-white",
+            "button_size": ""
+          }
+        },
+        "16233844755a3e2b6e-3": {
+          "type": "item",
+          "settings": {
+            "content_position": "bottom_center",
+            "content_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "image": "shopify:\/\/shop_images\/9.jpg",
+            "link": "",
+            "title": "",
+            "subtitle": "",
+            "button_label": "Shop Home",
+            "button_style": "sf__btn-white",
+            "button_size": ""
+          }
+        }
+      },
+      "block_order": [
+        "16233844755a3e2b6e-0",
+        "16233844755a3e2b6e-1",
+        "16233844755a3e2b6e-2",
+        "16233844755a3e2b6e-3"
+      ],
+      "settings": {
+        "heading": "Shop by Categories",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "layout": "layout_5",
+        "gap": 30,
+        "use_scroll_mobile": true,
+        "mobile_gap": 10,
+        "custom_class": ""
+      }
+    },
+    "1623385764229402af": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Featured Products",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "featured-product-print",
+        "product_to_show": 12,
+        "items_per_row": 5,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "enable_slider": true,
+        "show_pagination": true,
+        "show_navigation": true,
+        "button_type": "link",
+        "button_text": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 10,
+        "custom_class": ""
+      }
+    },
+    "1623386507ac36f85a": {
+      "type": "icon-box",
+      "blocks": {
+        "162338650728d30d45-0": {
+          "type": "iconbox",
+          "settings": {
+            "title": "Free Shipping",
+            "description": "<p>Get complimentary ground shipping on every<br\/> order.Don’t love it? Send it back, on us.<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "162338650728d30d45-1": {
+          "type": "iconbox",
+          "settings": {
+            "title": "Earn Points",
+            "description": "<p>Join Minimog Rewards to earn gift cards<br\/>and enjoy exclusive member benefits.<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "162338650728d30d45-2": {
+          "type": "iconbox",
+          "settings": {
+            "title": "Money Back Gurantee",
+            "description": "<p>We believe getting dressed should be the<br\/> easiest part of your day.<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        }
+      },
+      "block_order": [
+        "162338650728d30d45-0",
+        "162338650728d30d45-1",
+        "162338650728d30d45-2"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "#f5f5f5",
+        "item_per_row": 3,
+        "item_gap": 30,
+        "item_gap_mobile": 10,
+        "card_style": "vertical",
+        "image_max_width": "50px",
+        "content_alignment": "center",
+        "hover_effect": "none",
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "use_scroll_mobile": true,
+        "use_grid_column_mb": false,
+        "custom_class": "sf__index-icon-box-1"
+      }
+    },
+    "1623387047db34459c": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Explore designs picked for you",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "pick-for-you-print",
+        "product_to_show": 12,
+        "items_per_row": 5,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "enable_slider": true,
+        "show_pagination": true,
+        "show_navigation": true,
+        "button_type": "link",
+        "button_text": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 10,
+        "custom_class": ""
+      }
+    },
+    "1623387123640eb119": {
+      "type": "icon-box",
+      "blocks": {
+        "1623387123640eb119-0": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/7.jpg",
+            "title": "Bloom Your Own Way Pillow collection",
+            "description": "",
+            "link": "",
+            "button_label": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "1623387123640eb119-1": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/8.jpg",
+            "title": "Commune Pottery Among The Rainbow Mug",
+            "description": "",
+            "link": "",
+            "button_label": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        }
+      },
+      "block_order": [
+        "1623387123640eb119-0",
+        "1623387123640eb119-1"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "item_per_row": 2,
+        "item_gap": 30,
+        "item_gap_mobile": 10,
+        "card_style": "vertical",
+        "image_max_width": "",
+        "content_alignment": "start",
+        "hover_effect": "none",
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "use_scroll_mobile": true,
+        "use_grid_column_mb": false,
+        "custom_class": "sf__index-icon-box-2"
+      }
+    },
+    "1623387287fec9c78a": {
+      "type": "newsletter",
+      "settings": {
+        "container": "w-full",
+        "background_color": "#ffffff",
+        "form_layout": "vertical",
+        "form_design": "1",
+        "heading": "10% Off & The Best Indie Art Ever!",
+        "description": "",
+        "email_placeholder": "Enter your email",
+        "submit_button": "Subscribe",
+        "text_color": "black",
+        "show_icon": false,
+        "icon_img_width": "30",
+        "show_agreement": true,
+        "term_condition_text": "<p>I agree to the Terms and Conditions.<\/p>"
+      }
+    }
+  },
+  "order": [
+    "1621243260e1af0c20",
+    "16233844755a3e2b6e",
+    "1623385764229402af",
+    "1623386507ac36f85a",
+    "1623387047db34459c",
+    "1623387123640eb119",
+    "1623387287fec9c78a"
+  ]
+}

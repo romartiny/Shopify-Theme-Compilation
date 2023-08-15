@@ -1,0 +1,1025 @@
+{
+  "current": {
+    "favicon": "shopify:\/\/shop_images\/fav_icon_dark_1.png",
+    "container_width": 1410,
+    "container_fluid_offset": 100,
+    "color_primary": "#000000",
+    "color_sub_text": "#696969",
+    "color_btn_bg_hover": "#000000",
+    "prod_sale_price_color": "#666666",
+    "prod_type_color": "#666666",
+    "prod_desc_color": "#666666",
+    "color_annoucement_bg": "#c8d8ce",
+    "color_annoucement_text": "#000000",
+    "color_topbar_bg": "#c8d8ce",
+    "color_topbar_text": "#000000",
+    "color_header_bg": "#ffffff",
+    "color_header_link": "#000000",
+    "color_header_transparent": "#000000",
+    "color_menu_bar_bg": "#000000",
+    "color_menu_bar_text": "#f8f8f8",
+    "color_footer_bg": "#ffffff",
+    "color_footer_text": "#000000",
+    "color_footer_subtext": "#9b9b9b",
+    "color_footer_link_hover": "#000000",
+    "color_footer_bottom_bg": "#000000",
+    "color_footer_bottom_text": "#ffffff",
+    "img_overlay_opacity": 20,
+    "tooltip_background_color": "#000000",
+    "type_base_font": "roboto_condensed_n4",
+    "use_custom_font_body": true,
+    "custom_body_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/Gilroy-Medium1.otf?v=1622684383@500\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/Gilroy-Semibold1.otf?v=1622684383@600\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/Gilroy-Bold1.otf?v=1622685072@700",
+    "custom_body_weight": "500",
+    "type_base_size": 16,
+    "type_header_font": "roboto_condensed_n7",
+    "use_custom_font_heading": true,
+    "custom_heading_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/Gilroy-Medium1.otf?v=1622684383@500\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/Gilroy-Semibold1.otf?v=1622684383@600\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/Gilroy-Bold1.otf?v=1622685072@700",
+    "custom_heading_weight": "400",
+    "type_header_base_size": 35,
+    "btn_base_size": 15,
+    "btn_weight": "600",
+    "pcard_layout": "1",
+    "pcard_alignment": "center",
+    "pcard_image_ratio": "1\/1",
+    "show_vendor": false,
+    "variant_option_design3": "color",
+    "show_variant_swatch_image": true,
+    "product_colors": "red: #FF6961,\nyellow: #FDDA76,\nblack: #000000,\nblue: #8DB4D2,\ngreen: #C1E1C1,\npurple: #B19CD9,\nsilver: #EEEEEF,\nwhite: #FFFFFF,\nbrown: #836953,\nlight-brown: #feb035,\ndark-turquoise: #23cddc,\norange: #FFB347,\ntan: #E9D1BF,\nviolet: #B490B0,\npink: #FFD1DC,\ngrey: #E0E0E0,\nsky: #96BDC6,\npale-leaf: #CCD4BF,\nmint: #c5cdc8,",
+    "filter_color1": "",
+    "share_facebook": true,
+    "social_twitter_link": "https:\/\/twitter.com\/home",
+    "social_facebook_link": "https:\/\/facebook.com\/",
+    "social_pinterest_link": "https:\/\/pinterest.com\/",
+    "social_instagram_link": "https:\/\/instagram.com\/",
+    "wishlist_page": "",
+    "product_compare_page": "",
+    "gm_api": "",
+    "instagram_token": "",
+    "custom_css": ".sf-instagram .sf-instagram__wrapper {\n  margin: 0 30px;\n}\n\n.sf-instagram .section-my {\n  margin-bottom: 50px;\n}\n\n.sf__footer-block-newsletter input.form-control {\n  border-radius: 52px;\n  border-color: #ccc;\n  border-width: 2px;\n  background-color: #fff;\n}\n.sf__footer-block-menu .sf__footer-block-title {\n  font-size: 24px;\n  line-height: 32px;\n}\n.sf__footer-block-menu ul li {\n  line-height: 36px;\n}\n.sf__index-custom-content-1 .sf-custom__block-inner h3 {\n  font-size: 34px;\n  line-height: 48px;\n}\n\n.sf__index-custom-content-1 .sf-custom__block-inner .rte p,\n.sf__index-custom-content-2 .sf-custom__block-inner .rte p {\n  color: var(--color-sub-text);\n}\n\n.sf__pcard-name {\n  font-weight: 600;\n  font-size: 18px;\n}\n\n.sf__pcard-price .prod__price {\n  font-size: 20px;\n  font-weight: 700;\n}\n\n.sf__pcard-price.price--on-sale .prod__price {\n  color: #e56137;\n}\n\n.sf__index-custom-content-2 .sf-custom__block-inner h3 {\n  font-size: 40px;\n}\n\n.sf-header__desktop .sf-nav .sf-menu-item-parent a.block {\n  font-weight: 600;\n}\n@media (min-width: 1024px) {\n  .sf__index-featured-collection .section__heading {\n    font-size: 2.5rem !important;\n  }\n  .sf__index-icon-box .section__heading {\n    font-size: 2.5rem !important;\n  }\n}\n\n@media (max-width: 767px) {\n  .sf__index-featured-collection .section-my {\n    margin-top: 0;\n  }\n  .sf__index-custom-content-1 .sf-custom__block {\n    width: 100%;\n  }\n  .sf__index-custom-content-1 .sf-custom__block--text .sf-custom__text-cta {\n    margin-top: 5px;\n  }\n  .sf__newletter__form-input {\n    background: #fff;\n  }\n}",
+    "use_theme_currencies": true,
+    "theme_currencies": "USD | EUR | GBP | VND",
+    "sections": {
+      "page-faqs": {
+        "type": "page-faqs",
+        "blocks": {
+          "2802736b-f08f-4510-a4f7-4ad7d748992d": {
+            "type": "content",
+            "settings": {
+              "content": "<div class=\"mb-10\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/faqs.jpg?v=1620784288\"><\/div>\n<h3 class=\"font-medium text-xl mb-4\">Awkwardness gives me great comfort. I’ve never been cool, but I’ve felt cool. I’ve been in the cool place, but I wasn’t really cool – I was trying to pass for hip or cool.<\/h3>\n<p>A girl should be two things: classy and fabulous. I am convinced that there can be luxury in simplicity. I wanted to dress the woman who lives and works, not the woman in a painting. It’s hard to balance everything. It’s always challenging. My relationships with producers or photographers – these are relationships that took years. I can’t get sucked into that celebrity thing, because I think it’s just crass. My aim is to make the poor look rich.<\/p>"
+            }
+          },
+          "4e151238-4480-4122-b893-7f4a19886e4c": {
+            "type": "accordion",
+            "settings": {
+              "title": "What shipping methods are availbale?",
+              "content": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.<br\/><br\/>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.<\/p>",
+              "open": true
+            }
+          },
+          "c5d4d04d-f6c1-4d1e-99f0-3c221393a3cf": {
+            "type": "accordion",
+            "settings": {
+              "title": "How long will it take to get my package?",
+              "content": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.<\/p>",
+              "open": false
+            }
+          },
+          "0131747b-8b40-432f-b634-b1289ec41911": {
+            "type": "accordion",
+            "settings": {
+              "title": "Do you ship internationally?",
+              "content": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.<\/p>",
+              "open": false
+            }
+          },
+          "5d7206e9-5375-4da6-9a1f-24e1c46230b0": {
+            "type": "accordion",
+            "settings": {
+              "title": "What payment methods are accepted?",
+              "content": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.<\/p>",
+              "open": false
+            }
+          },
+          "4008f61e-055e-42ba-8969-cb3715c0aece": {
+            "type": "accordion",
+            "settings": {
+              "title": "Is buying on-line safe?",
+              "content": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.<\/p>",
+              "open": false
+            }
+          }
+        },
+        "block_order": [
+          "2802736b-f08f-4510-a4f7-4ad7d748992d",
+          "4e151238-4480-4122-b893-7f4a19886e4c",
+          "c5d4d04d-f6c1-4d1e-99f0-3c221393a3cf",
+          "0131747b-8b40-432f-b634-b1289ec41911",
+          "5d7206e9-5375-4da6-9a1f-24e1c46230b0",
+          "4008f61e-055e-42ba-8969-cb3715c0aece"
+        ],
+        "settings": {
+          "menu": "faqs-menu"
+        }
+      },
+      "collection-list": {
+        "type": "collection-list",
+        "settings": {
+        }
+      },
+      "featured-collection": {
+        "type": "featured-collection",
+        "settings": {
+          "collection": "frontpage"
+        }
+      },
+      "featured-product": {
+        "type": "featured-product",
+        "settings": {
+        }
+      },
+      "slider": {
+        "type": "slider",
+        "settings": {
+        }
+      },
+      "header": {
+        "type": "header",
+        "blocks": {
+          "129652ab-604a-4486-9b7a-43773bbb65c2": {
+            "type": "banner",
+            "settings": {
+              "heading": "Shop",
+              "container": "inherit",
+              "banner_style": "outside",
+              "banner_link": "",
+              "banner_title": "New collection",
+              "banner_desc": "",
+              "banner_button_text": "Shop now"
+            }
+          },
+          "d6fadbc5-210d-4539-b151-aa0fb2c5af01": {
+            "type": "product-list",
+            "settings": {
+              "heading": "Product",
+              "container": "inherit",
+              "stretch_width": false,
+              "collection": "juice",
+              "limit": 6,
+              "columns": 2
+            }
+          },
+          "e4456076-e431-41f8-adc3-34a55d629e35": {
+            "type": "custom_html",
+            "settings": {
+              "heading": "Features",
+              "container": "inherit",
+              "html": ""
+            }
+          }
+        },
+        "block_order": [
+          "129652ab-604a-4486-9b7a-43773bbb65c2",
+          "d6fadbc5-210d-4539-b151-aa0fb2c5af01",
+          "e4456076-e431-41f8-adc3-34a55d629e35"
+        ],
+        "settings": {
+          "header_design": "logo-center-menu-left",
+          "container": "container-fluid",
+          "header_sticky": true,
+          "transparent_on_top": true,
+          "logo_text": "MINIMOG",
+          "logo_max_width": 120,
+          "sticky_logo_max_width": 105,
+          "mobile_logo_max_width": 75,
+          "main_menu": "main-menu",
+          "secondary_menu": "",
+          "uppercase_parent_level": true,
+          "search": "show_icon",
+          "show_account_icon": true,
+          "show_cart_icon": true,
+          "show_wishlist_icon": true,
+          "show_compare_icon": false,
+          "show_currency_switcher": false,
+          "show_language_switcher": false
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "2132ec47-f7a6-4d86-80b5-85e950a6ae2c": {
+            "type": "newsletter",
+            "settings": {
+              "title": "<span class=\"leading-tight\">Pure, Squeezed,<br> Sunshine.<\/span>",
+              "description": "<span class=\"text-black  mb-2.5 block\">Sign up for our newsletter.<\/span>",
+              "email_placeholder": "Enter your email",
+              "form_style": "bordered",
+              "show_social": false,
+              "width": "50%"
+            }
+          },
+          "5201fa23-26c8-4c1b-a263-060101a7e575": {
+            "type": "spacing",
+            "settings": {
+              "width": "25%"
+            }
+          },
+          "c85629c7-7aae-4666-b5f0-150990439c91": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "About",
+              "width": "33%"
+            }
+          },
+          "527ccf44-18d9-45d0-a2a0-c992da866024": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "Information",
+              "width": "33%"
+            }
+          }
+        },
+        "block_order": [
+          "2132ec47-f7a6-4d86-80b5-85e950a6ae2c",
+          "5201fa23-26c8-4c1b-a263-060101a7e575",
+          "c85629c7-7aae-4666-b5f0-150990439c91",
+          "527ccf44-18d9-45d0-a2a0-c992da866024"
+        ],
+        "settings": {
+          "design": "footer-1",
+          "container": "container-fluid",
+          "bordered": false,
+          "copyright": "<span style=\"color: var(--color-footer-subtext);\">© Freshly 2021<\/span>",
+          "show_currency_selector": false,
+          "show_language_selector": false,
+          "show_social_links": true,
+          "show_payment_icons": true
+        }
+      },
+      "collection-page-header": {
+        "type": "collection-page-header",
+        "settings": {
+          "layout": "inside",
+          "header_height": "small",
+          "text_alignment": "center",
+          "vertical_alignment": "center",
+          "bg_color": "#ffffff",
+          "enable_parallax": true,
+          "show_breadcrumb": true,
+          "upper_title": false
+        }
+      },
+      "product-template": {
+        "type": "product-template",
+        "settings": {
+          "container": "container",
+          "layout": "layout-6",
+          "show_tags": false,
+          "show_vendor": false,
+          "show_sku": false,
+          "show_categories": false,
+          "show_reviews_count": true,
+          "show_quantity_selector": true,
+          "enable_dynamic_checkout": true,
+          "hide_atc_button": false,
+          "show_atwl": true,
+          "show_atcp": true,
+          "show_ask_a_question": true,
+          "show_social": true,
+          "show_live_views": true,
+          "live_views_text": "<p><strong>{{count_number}}<\/strong> <strong>people<\/strong> are viewing this right now<\/p>",
+          "live_views_range": "20-30",
+          "live_view_duration": "10",
+          "live_view_icon_blinks": true,
+          "show_delivery_times": true,
+          "deliver_text": "<p><strong>Estimated Delivery:<\/strong><\/p>",
+          "deliver_days": "3",
+          "show_shipping_text": true,
+          "shipping_text": "<p><strong>Free Shipping & Returns: <\/strong>On all orders over $75<\/p>",
+          "show_trust_badges": true,
+          "trust_badges_text": "<p>Guarantee safe & secure checkout<\/p>",
+          "trust_badges_image": "shopify:\/\/shop_images\/trustbag.png",
+          "trust_badges_image_width": "400px",
+          "use_sticky_atc": true,
+          "sticky_atc_wishtlist": false,
+          "sticky_atc_compare": false
+        }
+      },
+      "product-details-tabs": {
+        "type": "product-details-tabs",
+        "blocks": {
+          "4db8ad16-886f-47f7-9b57-fc68b39fb2d4": {
+            "type": "description",
+            "settings": {
+              "header": "Product description"
+            }
+          },
+          "9d8ee2be-bdd1-40eb-a23e-d9c23929c483": {
+            "type": "tab",
+            "settings": {
+              "header": "Shipping & Return",
+              "content": "<p>So beautiful you’ll want to show it off, so comfortable you’ll forget it’s there. Our 24\/7™ Lace Contour Plunge Bra combines gorgeous floral lace with sheer overlay straps that hold you in and eliminates gaping. Removable pads let you customize you<\/p>"
+            }
+          },
+          "8cf68ec4-6682-4bb4-b126-2ce46af58bae": {
+            "type": "reviews",
+            "settings": {
+              "header": "Product reviews"
+            }
+          }
+        },
+        "block_order": [
+          "4db8ad16-886f-47f7-9b57-fc68b39fb2d4",
+          "9d8ee2be-bdd1-40eb-a23e-d9c23929c483",
+          "8cf68ec4-6682-4bb4-b126-2ce46af58bae"
+        ],
+        "settings": {
+          "show_product_tabs": true,
+          "container": "container",
+          "bg_color": ""
+        }
+      },
+      "product-reviews": {
+        "type": "product-reviews",
+        "settings": {
+          "show_product_reviews": false,
+          "container": "container-narrow",
+          "heading": "Ratings and Reviews"
+        }
+      },
+      "product-recommendations": {
+        "type": "product-recommendations",
+        "settings": {
+          "show_product_recommendations": true,
+          "container": "container",
+          "heading": "You Might Also Like",
+          "limit": 8,
+          "columns": 4,
+          "column_gap": 30,
+          "enable_slider": true
+        }
+      },
+      "brand-page-header": {
+        "type": "brand-page-header",
+        "blocks": {
+          "09dfe2e1-10c2-4cee-a033-a90b143c85f3": {
+            "type": "information",
+            "settings": {
+              "collection": "retrolie",
+              "logo": "shopify:\/\/shop_images\/1.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/1_8e8151b6-3555-4abf-8dd6-5347182bbcd0.jpg",
+              "image_2": "shopify:\/\/shop_images\/2_9a1b3099-775a-4093-9ece-6cfaa04a06fe.jpg",
+              "image_3": "shopify:\/\/shop_images\/3_7b9fc65c-8202-4449-a828-d03ac03c6d38.jpg"
+            }
+          },
+          "c8ee188c-a84f-4cf2-a8af-aacb9bf78785": {
+            "type": "information",
+            "settings": {
+              "collection": "abby",
+              "logo": "shopify:\/\/shop_images\/2.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/4.jpg",
+              "image_2": "shopify:\/\/shop_images\/5.jpg",
+              "image_3": "shopify:\/\/shop_images\/6.jpg"
+            }
+          },
+          "e56a3991-3115-47d4-b7e6-43e962712fc6": {
+            "type": "information",
+            "settings": {
+              "collection": "minimog",
+              "logo": "shopify:\/\/shop_images\/3.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/7.jpg",
+              "image_2": "shopify:\/\/shop_images\/8.jpg",
+              "image_3": "shopify:\/\/shop_images\/9.jpg"
+            }
+          },
+          "98bac8d0-393b-4f50-91b8-052a49e29dd0": {
+            "type": "information",
+            "settings": {
+              "collection": "brook",
+              "logo": "shopify:\/\/shop_images\/4.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/10.jpg",
+              "image_2": "shopify:\/\/shop_images\/11.jpg",
+              "image_3": "shopify:\/\/shop_images\/12.jpg"
+            }
+          },
+          "2b4a1841-6d7a-468b-ba3b-a5fd307cf9aa": {
+            "type": "information",
+            "settings": {
+              "collection": "learts",
+              "logo": "shopify:\/\/shop_images\/5.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/13.jpg",
+              "image_2": "shopify:\/\/shop_images\/14.jpg",
+              "image_3": "shopify:\/\/shop_images\/15.jpg"
+            }
+          },
+          "b54aa75a-c232-474e-9d92-2027e31cd066": {
+            "type": "information",
+            "settings": {
+              "collection": "vagabond",
+              "logo": "shopify:\/\/shop_images\/6.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/16.jpg",
+              "image_2": "shopify:\/\/shop_images\/17.jpg",
+              "image_3": "shopify:\/\/shop_images\/18.jpg"
+            }
+          }
+        },
+        "block_order": [
+          "09dfe2e1-10c2-4cee-a033-a90b143c85f3",
+          "c8ee188c-a84f-4cf2-a8af-aacb9bf78785",
+          "e56a3991-3115-47d4-b7e6-43e962712fc6",
+          "98bac8d0-393b-4f50-91b8-052a49e29dd0",
+          "2b4a1841-6d7a-468b-ba3b-a5fd307cf9aa",
+          "b54aa75a-c232-474e-9d92-2027e31cd066"
+        ],
+        "settings": {
+        }
+      },
+      "collection-brand": {
+        "type": "collection-brand",
+        "settings": {
+          "grid_layout": "grid",
+          "pagination_limit": "12",
+          "grid_columns": "3",
+          "collection_paginate": "paginate",
+          "show_filter": true,
+          "sidebar": "leftColumn"
+        }
+      },
+      "contact-information": {
+        "type": "contact-information",
+        "settings": {
+        }
+      },
+      "maps": {
+        "type": "maps",
+        "settings": {
+          "textx": "40.6700",
+          "texty": "-73.9400",
+          "zoom": "11",
+          "text2": "New York"
+        }
+      },
+      "contact-template": {
+        "type": "contact-template",
+        "blocks": {
+          "458d6546-c5d0-4128-8fa6-162080bdf85f": {
+            "type": "textblock",
+            "settings": {
+              "title": "Address",
+              "content": "<p>7895 Piermont Dr NE Albuquerque, NM 198866, <a href=\"#\">See Our Stores<\/a><\/p>"
+            }
+          },
+          "d2fd611c-a50a-4871-b401-b51dff320d34": {
+            "type": "textblock",
+            "settings": {
+              "title": "Information",
+              "content": "<p>+391 (0)35 2568 4593<\/p><p>hello@domain.com<\/p>"
+            }
+          },
+          "159b3b43-a6d9-4cb9-b78d-04f5a5bae350": {
+            "type": "socialmedia",
+            "settings": {
+              "title": "Social Media"
+            }
+          },
+          "5c486a84-9bdd-4d24-8ac7-5c428593cf33": {
+            "type": "textblock",
+            "settings": {
+              "title": "We're Open",
+              "content": "<p>Our store has re-opened for shopping, exchanges<\/p><p>Every day 11am to 7pm<\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "458d6546-c5d0-4128-8fa6-162080bdf85f",
+          "d2fd611c-a50a-4871-b401-b51dff320d34",
+          "159b3b43-a6d9-4cb9-b78d-04f5a5bae350",
+          "5c486a84-9bdd-4d24-8ac7-5c428593cf33"
+        ],
+        "settings": {
+          "title": "We would love to hear from you.",
+          "description": "<p>If you’ve got great products your making or looking to work with us then drop us a line.<\/p>"
+        }
+      },
+      "content-before-products": {
+        "type": "content-before-products",
+        "settings": {
+          "container": "container-fluid",
+          "background_color": "",
+          "gap": 30,
+          "gap_mobile": 16
+        }
+      },
+      "collection-template": {
+        "type": "collection-template",
+        "settings": {
+          "container": "container",
+          "grid_layout": "grid",
+          "grid_columns": "4",
+          "pagination_limit": "12",
+          "collection_paginate": "paginate",
+          "show_filter": true,
+          "sidebar": "leftColumn"
+        }
+      },
+      "content-after-products": {
+        "type": "content-after-products",
+        "settings": {
+          "container": "container-fluid",
+          "background_color": "",
+          "gap": 30,
+          "gap_mobile": 16
+        }
+      },
+      "recent-viewed-products": {
+        "type": "recent-viewed-products",
+        "settings": {
+          "heading": "Recently Viewed Products",
+          "container": "container",
+          "columns": 4,
+          "column_gap": 30,
+          "enable_slider": true,
+          "show_product_page": true,
+          "show_cart_page": true,
+          "show_collection_page": false
+        }
+      },
+      "product-details-accordion": {
+        "type": "product-details-accordion",
+        "settings": {
+          "show_accordion": true,
+          "use_container": false,
+          "position": "bottom_info"
+        }
+      },
+      "product-features": {
+        "type": "product-features",
+        "blocks": {
+          "749fac5a-4f21-44c3-bb20-7d97c1d9edff": {
+            "type": "feature",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Frame_1.png",
+              "title": "Free Shipping",
+              "description": "<p>Get complimentary ground shipping on every <br\/>order.Don’t love it? Send it back, on us.<\/p>",
+              "link": ""
+            }
+          },
+          "86f47043-3abc-4b8f-af3c-85163ae3b380": {
+            "type": "feature",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Frame_2.png",
+              "title": "Earn Points",
+              "description": "<p>Join Minimog Rewards to earn gift cards<br\/>and enjoy exclusive member benefits.<\/p>",
+              "link": ""
+            }
+          },
+          "6abe01c0-4dac-4d44-85ed-ae13b55553ef": {
+            "type": "feature",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Frame_3.png",
+              "title": "Money Back Gurantee",
+              "description": "<p>We believe getting dressed should be the <br\/>easiest part of your day.<\/p>",
+              "link": ""
+            }
+          }
+        },
+        "block_order": [
+          "749fac5a-4f21-44c3-bb20-7d97c1d9edff",
+          "86f47043-3abc-4b8f-af3c-85163ae3b380",
+          "6abe01c0-4dac-4d44-85ed-ae13b55553ef"
+        ],
+        "settings": {
+          "show_featured": true,
+          "container": "container",
+          "heading": "Why choose us?",
+          "item_per_row": 3,
+          "card_style": "vertical",
+          "image_max_width": "70px",
+          "content_alignment": "center"
+        }
+      },
+      "annoucement": {
+        "type": "annoucement",
+        "settings": {
+          "show_announcement": false,
+          "homepage_only": true,
+          "show_close": true,
+          "message": "<p>🔥 Free shipping on all U.S. orders $50+ 📦<\/p>",
+          "message_link": "",
+          "show_divider": false
+        }
+      },
+      "16231213304c742b47": {
+        "type": "slider",
+        "blocks": {
+          "16231213304c742b47-1": {
+            "type": "slider_item",
+            "settings": {
+              "image_alignment": "center top",
+              "content_in_container": true,
+              "content_position": "left middle",
+              "text_alignment": "left",
+              "text_size": "medium",
+              "text_color": "black",
+              "subheading": "",
+              "title": "Pure and<br> premium juice",
+              "description": "<p>A fruit gives healthy mind but a fruit juice gives<br\/> you healthy body too<\/p>",
+              "button_text": "Shop now",
+              "button_link": "",
+              "button_style": "sf__btn-secondary",
+              "button_size": "",
+              "show_footer": true,
+              "footer_alignment": "start",
+              "footer_text": "",
+              "footer_button": "Shop Now",
+              "footer_link": ""
+            }
+          },
+          "16231213304c742b47-0": {
+            "type": "slider_item",
+            "settings": {
+              "image_alignment": "center top",
+              "content_in_container": true,
+              "content_position": "left middle",
+              "text_alignment": "left",
+              "text_size": "medium",
+              "text_color": "black",
+              "subheading": "",
+              "title": "Feel good,<br> Feel pure",
+              "description": "<p>A fruit gives healthy mind but a fruit juice gives<br\/> you healthy body too<\/p>",
+              "button_text": "Shop now",
+              "button_link": "",
+              "button_style": "sf__btn-secondary",
+              "button_size": "",
+              "show_footer": false,
+              "footer_alignment": "end",
+              "footer_text": "New Collection",
+              "footer_button": "Shop Now",
+              "footer_link": ""
+            }
+          },
+          "16231213304c742b47-2": {
+            "type": "slider_item",
+            "settings": {
+              "image_alignment": "center top",
+              "content_in_container": true,
+              "content_position": "left middle",
+              "text_alignment": "left",
+              "text_size": "medium",
+              "text_color": "black",
+              "subheading": "",
+              "title": "Be natural,<br> Be fresh",
+              "description": "<p>A fruit gives healthy mind but a fruit juice gives<br\/> you healthy body too<\/p>",
+              "button_text": "Shop now",
+              "button_link": "",
+              "button_style": "sf__btn-secondary",
+              "button_size": "",
+              "show_footer": false,
+              "footer_alignment": "end",
+              "footer_text": "New Collection",
+              "footer_button": "Shop Now",
+              "footer_link": ""
+            }
+          }
+        },
+        "block_order": [
+          "16231213304c742b47-1",
+          "16231213304c742b47-0",
+          "16231213304c742b47-2"
+        ],
+        "settings": {
+          "container": "w-full",
+          "slideshow_height": "large",
+          "show_overlay": false,
+          "dots_position": "bottom",
+          "dots_color": "dark",
+          "show_dots": true,
+          "show_arrows": false,
+          "autorotate": false,
+          "autorotate_speed": 5,
+          "custom_class": ""
+        }
+      },
+      "1623122551c20ec9e9": {
+        "type": "featured-collection",
+        "settings": {
+          "heading": "Our Best Sellers",
+          "subheading": "",
+          "description": "",
+          "header_alignment": "left",
+          "container": "container-fluid",
+          "background_color": "rgba(0,0,0,0)",
+          "collection": "juice",
+          "product_to_show": 4,
+          "items_per_row": 4,
+          "item_gap": 30,
+          "pcard_layout": "",
+          "pcard_image_ratio": "",
+          "show_vendor": false,
+          "enable_slider": false,
+          "show_pagination": false,
+          "show_navigation": false,
+          "button_type": "link",
+          "button_text": "",
+          "button_style": "sf__btn-primary",
+          "button_size": "",
+          "infinite_load": false,
+          "max_page_load": 3,
+          "use_scroll_mobile": true,
+          "item_gap_mobile": 10,
+          "custom_class": "sf__index-featured-collection"
+        }
+      },
+      "1623122641c6363d71": {
+        "type": "icon-box",
+        "blocks": {
+          "1623122641c6363d71-0": {
+            "type": "iconbox",
+            "settings": {
+              "title": "<span class=\"font-semibold\">Smoothies<\/span>",
+              "description": "<p>Try our convenient protein-packed<br\/> smoothies!<\/p>",
+              "link": "",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "sf__btn-link",
+              "button_size": ""
+            }
+          },
+          "1623122641c6363d71-1": {
+            "type": "iconbox",
+            "settings": {
+              "title": "<span class=\"font-semibold\">Juices<\/span>",
+              "description": "<p>A fruit gives healthy mind but a fruit juice gives you healthy body too <\/p>",
+              "link": "",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "sf__btn-link",
+              "button_size": ""
+            }
+          },
+          "1623122641c6363d71-2": {
+            "type": "iconbox",
+            "settings": {
+              "title": "<span class=\"font-semibold\">Wellness shots<\/span>",
+              "description": "<p>Try to be rigid with yourself, lenient<br\/> won’t makes your body fit<\/p>",
+              "link": "",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "sf__btn-link",
+              "button_size": ""
+            }
+          },
+          "b82eeb97-242b-49f5-bd87-777c25e11f5f": {
+            "type": "iconbox",
+            "settings": {
+              "title": "<span class=\"font-semibold\">Bundle<\/span>",
+              "description": "<p>Choose your own daily DOSE of wellness<\/p>",
+              "link": "",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "sf__btn-link",
+              "button_size": ""
+            }
+          }
+        },
+        "block_order": [
+          "1623122641c6363d71-0",
+          "1623122641c6363d71-1",
+          "1623122641c6363d71-2",
+          "b82eeb97-242b-49f5-bd87-777c25e11f5f"
+        ],
+        "settings": {
+          "heading": "A day without juice is like a day without sunshine.<br> Feel better with fruit juice 😍",
+          "subheading": "",
+          "description": "",
+          "header_alignment": "left",
+          "container": "container-fluid",
+          "background_color": "rgba(0,0,0,0)",
+          "item_per_row": 4,
+          "item_gap": 30,
+          "item_gap_mobile": 10,
+          "card_style": "vertical",
+          "image_max_width": "",
+          "content_alignment": "start",
+          "hover_effect": "none",
+          "enable_slider": false,
+          "show_pagination": false,
+          "show_navigation": false,
+          "use_scroll_mobile": true,
+          "use_grid_column_mb": false,
+          "custom_class": "sf__index-icon-box"
+        }
+      },
+      "1623124005244843ea": {
+        "type": "custom-content",
+        "blocks": {
+          "1623124005244843ea-1": {
+            "type": "image",
+            "settings": {
+              "width": "25%",
+              "alignment": "center",
+              "block_custom_class": ""
+            }
+          },
+          "1623124005244843ea-0": {
+            "type": "text",
+            "settings": {
+              "title": "Create your pack",
+              "subheading": "",
+              "text": "<p>Get a special offer on your first box.<br\/>FREE SHIPPING all the time.<\/p>",
+              "width": "25%",
+              "alignment": "center",
+              "align_text": "left",
+              "text_size": "medium",
+              "text_color": "black",
+              "button_label": "Shop Now",
+              "button_link": "",
+              "button_style": "sf__btn-link",
+              "button_size": "",
+              "block_custom_class": ""
+            }
+          },
+          "a27a3d3f-1a6e-43d1-ab1b-d17eeac1ccd5": {
+            "type": "image",
+            "settings": {
+              "width": "25%",
+              "alignment": "center",
+              "block_custom_class": ""
+            }
+          },
+          "5627fa48-a27f-426a-9109-40d74a6f3dd4": {
+            "type": "text",
+            "settings": {
+              "title": "100% fruit, <br>\n0% anything else",
+              "subheading": "",
+              "text": "<p>A fruit gives healthy mind but a fruit juice<br\/> gives you healthy body too <\/p>",
+              "width": "25%",
+              "alignment": "center",
+              "align_text": "left",
+              "text_size": "medium",
+              "text_color": "black",
+              "button_label": "What Makes Us Different",
+              "button_link": "",
+              "button_style": "sf__btn-link",
+              "button_size": "",
+              "block_custom_class": ""
+            }
+          }
+        },
+        "block_order": [
+          "1623124005244843ea-1",
+          "1623124005244843ea-0",
+          "a27a3d3f-1a6e-43d1-ab1b-d17eeac1ccd5",
+          "5627fa48-a27f-426a-9109-40d74a6f3dd4"
+        ],
+        "settings": {
+          "heading": "",
+          "subheading": "",
+          "description": "",
+          "header_alignment": "center",
+          "container": "container-fluid",
+          "background_color": "",
+          "gap": 30,
+          "use_scroll_mobile": false,
+          "gap_mobile": 16,
+          "custom_class": "sf__index-custom-content-1"
+        }
+      },
+      "16231243586e68b32a": {
+        "type": "custom-content",
+        "blocks": {
+          "16231243586e68b32a-0": {
+            "type": "text",
+            "settings": {
+              "title": "Shot Bundles",
+              "subheading": "",
+              "text": "<p>Our shot bundles help you make<br\/> wellness a regular part of your routine.<\/p>",
+              "width": "25%",
+              "alignment": "start",
+              "align_text": "left",
+              "text_size": "medium",
+              "text_color": "black",
+              "button_label": "VIEW ALL",
+              "button_link": "",
+              "button_style": "sf__btn-link",
+              "button_size": "",
+              "block_custom_class": ""
+            }
+          },
+          "8b579ad5-2deb-4307-b179-aeb820b81b34": {
+            "type": "product",
+            "settings": {
+              "product": "pineapple-strawberry-mix-bundle",
+              "width": "25%",
+              "alignment": "center",
+              "block_custom_class": ""
+            }
+          },
+          "c6b62773-ba55-4b44-84d3-ff182f860cd3": {
+            "type": "product",
+            "settings": {
+              "product": "fresh-organic-mix-bundle",
+              "width": "25%",
+              "alignment": "center",
+              "block_custom_class": ""
+            }
+          },
+          "f097e831-f100-45fc-bb56-07805c0bc7af": {
+            "type": "product",
+            "settings": {
+              "product": "avocado-mango-mix-bundle",
+              "width": "25%",
+              "alignment": "center",
+              "block_custom_class": ""
+            }
+          }
+        },
+        "block_order": [
+          "16231243586e68b32a-0",
+          "8b579ad5-2deb-4307-b179-aeb820b81b34",
+          "c6b62773-ba55-4b44-84d3-ff182f860cd3",
+          "f097e831-f100-45fc-bb56-07805c0bc7af"
+        ],
+        "settings": {
+          "heading": "",
+          "subheading": "",
+          "description": "",
+          "header_alignment": "center",
+          "container": "container-fluid",
+          "background_color": "#ecf4ef",
+          "gap": 30,
+          "use_scroll_mobile": false,
+          "gap_mobile": 16,
+          "custom_class": "sf__index-custom-content-2"
+        }
+      },
+      "1623125396487d73a5": {
+        "type": "instagram",
+        "settings": {
+          "heading": "Follow us on instagram",
+          "subheading": "",
+          "description": "<span class=\"text-black font-semibold\">@freshly_juice<\/span>",
+          "header_alignment": "center",
+          "container": "w-full",
+          "background_color": "rgba(0,0,0,0)",
+          "layout": "grid",
+          "images_count": 5,
+          "grid_columns": 5,
+          "gap": 30,
+          "mobile_gap": 10,
+          "profile": "https:\/\/www.instagram.com\/minimog.trendy\/",
+          "button_label": "",
+          "custom_class": ""
+        }
+      },
+      "mobile-sticky-bar": {
+        "type": "mobile-sticky-bar",
+        "settings": {
+          "show_mobile_sticky": true,
+          "show_home_icon": true,
+          "show_collection_icon": true,
+          "show_cart_icon": true,
+          "show_search_icon": true,
+          "show_account_icon": false,
+          "show_wishlist_icon": false
+        }
+      }
+    },
+    "content_for_index": [
+      "16231213304c742b47",
+      "1623122551c20ec9e9",
+      "1623122641c6363d71",
+      "1623124005244843ea",
+      "16231243586e68b32a",
+      "1623125396487d73a5"
+    ]
+  },
+  "presets": {
+    "Default": {
+      "sections": {
+        "featured-collection": {
+          "type": "featured-collection",
+          "settings": {
+            "collection": "frontpage"
+          }
+        },
+        "featured-product": {
+          "type": "featured-product",
+          "settings": {
+          }
+        }
+      },
+      "content_for_index": [
+        "featured-collection",
+        "featured-product"
+      ]
+    }
+  }
+}

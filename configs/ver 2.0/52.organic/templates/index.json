@@ -1,0 +1,344 @@
+{
+  "sections": {
+    "1621243260e1af0c20": {
+      "type": "slider",
+      "blocks": {
+        "1621243260e1af0c20-0": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify:\/\/shop_images\/1_054ad631-339b-4b04-a491-e379deecdf25.jpg",
+            "mb_background": "shopify:\/\/shop_images\/Group_1832.jpg",
+            "image_alignment": "center top",
+            "content_in_container": true,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "white",
+            "subheading": "",
+            "title": "Eat clean & green.<br>\nEat Organic.",
+            "description": "<p>What takes us hours to make is yours<br\/> to enjoy in minutes.<\/p>",
+            "button_text": "Shop Product",
+            "button_link": "",
+            "button_style": "sf__btn-white",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections"
+          }
+        },
+        "1621243260e1af0c20-1": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify:\/\/shop_images\/2_dd0e05eb-699a-40d0-aa2f-9cb6d0f659f8.jpg",
+            "mb_background": "shopify:\/\/shop_images\/Group_1833.jpg",
+            "image_alignment": "center top",
+            "content_in_container": true,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "white",
+            "subheading": "",
+            "title": "Eat clean & green.<br>\nEat Organic.",
+            "description": "<p>What takes us hours to make is yours<br\/> to enjoy in minutes.<\/p>",
+            "button_text": "Shop Product",
+            "button_link": "",
+            "button_style": "sf__btn-white",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections"
+          }
+        },
+        "1621243260e1af0c20-2": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify:\/\/shop_images\/3_856c6d71-7807-480f-a46a-98fe1f5f7cc4.jpg",
+            "mb_background": "shopify:\/\/shop_images\/Group_1834.jpg",
+            "image_alignment": "center top",
+            "content_in_container": true,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "white",
+            "subheading": "",
+            "title": "Eat clean & green.<br>\nEat Organic.",
+            "description": "<p>What takes us hours to make is yours<br\/> to enjoy in minutes.<\/p>",
+            "button_text": "Shop Product",
+            "button_link": "",
+            "button_style": "sf__btn-white",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections"
+          }
+        }
+      },
+      "block_order": [
+        "1621243260e1af0c20-0",
+        "1621243260e1af0c20-1",
+        "1621243260e1af0c20-2"
+      ],
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "large",
+        "show_overlay": false,
+        "dots_position": "right",
+        "dots_color": "light",
+        "show_dots": true,
+        "show_arrows": false,
+        "autorotate": true,
+        "autorotate_speed": 4
+      }
+    },
+    "16225316461d1cff80": {
+      "type": "collection-list",
+      "blocks": {
+        "16225316461d1cff80-1": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "fresh-fruits",
+            "title": "Fresh Fruits",
+            "item_image": "shopify:\/\/shop_images\/4_aad9cabe-c4b7-44c1-8afc-5c7f307bfba1.jpg"
+          }
+        },
+        "16225316461d1cff80-2": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "vegetable",
+            "title": "Vegetable",
+            "item_image": "shopify:\/\/shop_images\/5_48bcd017-3de7-4849-aff8-c1baad875054.jpg"
+          }
+        },
+        "7a571158-7686-4e66-a693-4716fc905604": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "the-bakery",
+            "title": "The Barkery",
+            "item_image": "shopify:\/\/shop_images\/6_8603dc38-4cec-478e-8b6c-82da8937c92a.jpg"
+          }
+        },
+        "1f590661-4094-4245-b4df-bcdafbbe75d3": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "nuts",
+            "title": "Nuts",
+            "item_image": "shopify:\/\/shop_images\/14.jpg"
+          }
+        },
+        "28b286fe-d7e0-4806-8ca2-5c96fef7d832": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "herbs",
+            "title": "Herbs",
+            "item_image": "shopify:\/\/shop_images\/15.jpg"
+          }
+        },
+        "5677fad9-acd8-4031-b8c6-ad6364b9c733": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "drinks",
+            "title": "Drinks",
+            "item_image": "shopify:\/\/shop_images\/16.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "16225316461d1cff80-1",
+        "16225316461d1cff80-2",
+        "7a571158-7686-4e66-a693-4716fc905604",
+        "1f590661-4094-4245-b4df-bcdafbbe75d3",
+        "28b286fe-d7e0-4806-8ca2-5c96fef7d832",
+        "5677fad9-acd8-4031-b8c6-ad6364b9c733"
+      ],
+      "settings": {
+        "heading": "Season Collection",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "left",
+        "container": "container",
+        "background_color": "",
+        "layout": "grid",
+        "card_style": "inside",
+        "text_alignment": "left",
+        "hover_effect": "scaling-down",
+        "show_product_count": true,
+        "count_inline_title": true,
+        "image_rounded": false,
+        "items_per_row": 3,
+        "item_gap": 30,
+        "enable_slider": false,
+        "show_pagination": true,
+        "show_navigation": true,
+        "autorotate": false,
+        "autorotate_speed": 4,
+        "use_scroll_mobile": true,
+        "mobile_gap": 16,
+        "hidden_slide_control_mobile": true
+      }
+    },
+    "1630684523c96b1579": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Fresh Fruit & Vegetables",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "left",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "organic",
+        "product_to_show": 5,
+        "items_per_row": 5,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "button_type": "link",
+        "button_text": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 16
+      }
+    },
+    "1630685114e1e4db13": {
+      "type": "image-with-text",
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "item_gap": 100,
+        "item_gap_mobile": 30,
+        "image": "shopify:\/\/shop_images\/10_78cedc40-ea1b-495e-bd19-f6fe49abb94a.jpg",
+        "layout": "left",
+        "image_column_size": "7",
+        "title": "Green from<br>\nOrganic garden",
+        "sub_title": "",
+        "text": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+        "text_size": "medium",
+        "content_alignment": "left",
+        "button_label": "Read More",
+        "button_link": "",
+        "button_style": "sf__btn-link",
+        "button_size": ""
+      }
+    },
+    "1630685537b1964de8": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Store Cupboard",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "left",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "store-cupboard",
+        "product_to_show": 5,
+        "items_per_row": 5,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "button_type": "link",
+        "button_text": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 16
+      }
+    },
+    "16306855824867f977": {
+      "type": "icon-box",
+      "blocks": {
+        "16306855823cc498e0-0": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/11.png",
+            "title": "Natural Product",
+            "description": "<p>Organic foods are the only source which <br\/>we can rely on to take proper<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "16306855823cc498e0-1": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/12.png",
+            "title": "100% Organic",
+            "description": "<p>Organic foods are the only source which <br\/>we can rely on to take proper<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "16306855823cc498e0-2": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/13.png",
+            "title": "Farm Fresh",
+            "description": "<p>Organic foods are the only source which <br\/>we can rely on to take proper<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        }
+      },
+      "block_order": [
+        "16306855823cc498e0-0",
+        "16306855823cc498e0-1",
+        "16306855823cc498e0-2"
+      ],
+      "settings": {
+        "heading": "Why Vegabite?",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "#f7f7f7",
+        "item_per_row": 3,
+        "item_gap": 30,
+        "item_gap_mobile": 10,
+        "card_style": "vertical",
+        "image_max_width": "70px",
+        "content_alignment": "center",
+        "hover_effect": "zoom-in",
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "use_scroll_mobile": false,
+        "use_grid_column_mb": false
+      }
+    }
+  },
+  "order": [
+    "1621243260e1af0c20",
+    "16225316461d1cff80",
+    "1630684523c96b1579",
+    "1630685114e1e4db13",
+    "1630685537b1964de8",
+    "16306855824867f977"
+  ]
+}

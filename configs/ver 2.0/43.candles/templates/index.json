@@ -1,0 +1,337 @@
+{
+  "sections": {
+    "1621243260e1af0c20": {
+      "type": "slider",
+      "blocks": {
+        "1621243260e1af0c20-0": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "New arrivals",
+            "title": "Choose well<br> Be well",
+            "description": "",
+            "button_text": "Check our item",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections"
+          }
+        },
+        "1621243260e1af0c20-1": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "Hot Trend",
+            "title": "Buy less<br>Choose well",
+            "description": "",
+            "button_text": "Check our item",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections"
+          }
+        },
+        "1621243260e1af0c20-2": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "New Collection",
+            "title": "Be your <br>Own label",
+            "description": "",
+            "button_text": "Check our item",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections"
+          }
+        }
+      },
+      "block_order": [
+        "1621243260e1af0c20-0",
+        "1621243260e1af0c20-1",
+        "1621243260e1af0c20-2"
+      ],
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "medium",
+        "show_overlay": false,
+        "dots_position": "bottom",
+        "dots_color": "#000",
+        "show_dots": true,
+        "show_arrows": false,
+        "autorotate": false,
+        "autorotate_speed": 5,
+        "custom_class": ""
+      }
+    },
+    "162366334970e94c99": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "<div class=\"sf__heading-bg\">Be like a candle, give your warmth<br> and light to others<\/div>",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "candles",
+        "product_to_show": 8,
+        "items_per_row": 4,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "button_type": "link",
+        "button_text": "view all products",
+        "button_style": "sf__btn-link",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 10,
+        "custom_class": ""
+      }
+    },
+    "162383223456f37047": {
+      "type": "collection-list",
+      "blocks": {
+        "162383223456f37047-0": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "jar-candle",
+            "title": "Jar Candle"
+          }
+        },
+        "162383223456f37047-2": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "3-wick-candle",
+            "title": "3Wick Candle"
+          }
+        },
+        "162383223456f37047-1": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "candle-set",
+            "title": "Candle set"
+          }
+        }
+      },
+      "block_order": [
+        "162383223456f37047-0",
+        "162383223456f37047-2",
+        "162383223456f37047-1"
+      ],
+      "settings": {
+        "heading": "Shop by categories",
+        "subheading": "",
+        "description": "All our candles are made from the finest wax and lead-free wicks to ensure a long, clean burn.",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "#f3ede8",
+        "layout": "left-side",
+        "card_style": "boxed",
+        "text_alignment": "center",
+        "hover_effect": "moving",
+        "show_product_count": true,
+        "count_inline_title": true,
+        "image_rounded": true,
+        "items_per_row": 3,
+        "item_gap": 30,
+        "enable_slider": true,
+        "show_pagination": true,
+        "show_navigation": true,
+        "autorotate": false,
+        "autorotate_speed": 5,
+        "use_scroll_mobile": true,
+        "mobile_gap": 10,
+        "hidden_slide_control_mobile": false,
+        "custom_class": ""
+      }
+    },
+    "1623833347a34a98ed": {
+      "type": "custom-content",
+      "blocks": {
+        "1623833347a34a98ed-0": {
+          "type": "text",
+          "settings": {
+            "title": "<span class=\"leading-tight sf__heading-style\">Enjoy the fragrance of a<br> scented candle<\/span>",
+            "subheading": "<img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/icon1.png?v=1623831328\" style=\"width: 130px; margin: 0 auto;\">",
+            "text": "<p>Made using clean, non-toxic ingredients, our<br\/> products are designed for everyone.<\/p>",
+            "width": "50%",
+            "alignment": "center",
+            "align_text": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "button_label": "discover now",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": "",
+            "block_custom_class": ""
+          }
+        },
+        "b5f0a6df-e7c4-432e-a298-7c7fefa24c49": {
+          "type": "video",
+          "settings": {
+            "video_link": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+            "ratio": "4:3",
+            "video_title": "",
+            "text_size": "medium",
+            "text_color": "white",
+            "play_style": "solid",
+            "play_size": "medium",
+            "autoplay": false,
+            "loop": false,
+            "width": "50%",
+            "alignment": "start",
+            "block_custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "1623833347a34a98ed-0",
+        "b5f0a6df-e7c4-432e-a298-7c7fefa24c49"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "w-full",
+        "background_color": "rgba(0,0,0,0)",
+        "gap": 0,
+        "use_scroll_mobile": false,
+        "gap_mobile": 16,
+        "custom_class": ""
+      }
+    },
+    "162383422006ee342e": {
+      "type": "instagram",
+      "settings": {
+        "heading": "Give us your best shot!",
+        "subheading": "",
+        "description": "Follow us on Instagram <span class=\"text-black\">@Lucerna<\/span> and make sure to tag<br> us for a chance to be featured.",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "layout": "grid",
+        "images_count": 4,
+        "grid_columns": 4,
+        "gap": 30,
+        "mobile_gap": 10,
+        "profile": "https:\/\/www.instagram.com\/minimog.trendy\/",
+        "button_label": "",
+        "custom_class": ""
+      }
+    },
+    "16238352997962797b": {
+      "type": "image-with-text",
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "item_gap": 30,
+        "item_gap_mobile": 10,
+        "layout": "left",
+        "image_column_size": "7",
+        "title": "<span class=\"leading-tight  sf__heading-style\">Capri Blue Jar Candle<\/span>",
+        "sub_title": "<span class=\"sf__subheading-label\">Special Price<\/span>",
+        "text": "<p>Capri Blue's iconic vessels and fragrances - blended candles and vegan-formulated beauty care.<\/p>",
+        "text_size": "medium",
+        "content_alignment": "center",
+        "button_label": "Add To Cart    |     $47.00",
+        "button_link": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "custom_class": ""
+      }
+    },
+    "16286445898e5570c5": {
+      "type": "custom-content",
+      "blocks": {
+        "16286445898e5570c5-1": {
+          "type": "image",
+          "settings": {
+            "width": "50%",
+            "alignment": "center",
+            "block_custom_class": ""
+          }
+        },
+        "16286445898e5570c5-0": {
+          "type": "text",
+          "settings": {
+            "title": "<span class=\"leading-tight  sf__heading-style\">Capri Blue Jar Candle<\/span>",
+            "subheading": "<span class=\"sf__subheading-label\">Special Price<\/span>",
+            "text": "<p>Capri Blue's iconic vessels and fragrances - blended <br\/>candles and vegan-formulated beauty care.<\/p>",
+            "width": "50%",
+            "alignment": "center",
+            "align_text": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "button_label": "Add To Cart    |     $47.00",
+            "button_link": "",
+            "button_style": "sf__btn-primary",
+            "button_size": "",
+            "block_custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "16286445898e5570c5-1",
+        "16286445898e5570c5-0"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "",
+        "gap": 30,
+        "use_scroll_mobile": false,
+        "gap_mobile": 16,
+        "custom_class": ""
+      }
+    }
+  },
+  "order": [
+    "1621243260e1af0c20",
+    "162366334970e94c99",
+    "162383223456f37047",
+    "16286445898e5570c5",
+    "16238352997962797b",
+    "1623833347a34a98ed",
+    "162383422006ee342e"
+  ]
+}

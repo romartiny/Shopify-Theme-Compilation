@@ -1,0 +1,199 @@
+{
+  "sections": {
+    "1622448086a90b8c2f": {
+      "type": "image-with-text",
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "item_gap": 100,
+        "item_gap_mobile": 30,
+        "layout": "right",
+        "image_column_size": "7",
+        "title": "<span class=\"sf__custom-heading-hero\">Why plants<br>\nmake you happy<\/span>",
+        "sub_title": "<span class=\"sf__custom-subheading\"><span class=\"tag-label\" style=\"margin-right: 10px;\">Hot<\/span>25% off everything (yes, everything!) 🔥<\/span>",
+        "text": "",
+        "text_size": "large",
+        "content_alignment": "left",
+        "button_label": "Shop Collection",
+        "button_link": "",
+        "button_style": "sf__btn-link",
+        "button_size": "sf__btn-large",
+        "custom_class": ""
+      }
+    },
+    "1622709925b4ab6f0c": {
+      "type": "image-with-text",
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "item_gap": 100,
+        "item_gap_mobile": 30,
+        "layout": "left",
+        "image_column_size": "6",
+        "title": "<span class=\"sf_custom-heading-content\">Deck Out Your \nPatio This Summer<\/span>",
+        "sub_title": "<span class=\"sf__custom-subheading text-color-primary font-semibold\">Fresh Finds<\/span>",
+        "text": "<p>With eye-catching annual flowers and foliage you won’t find<br\/>anywhere else, you can mix and match our vibrant container<br\/>gardens to create beautiful gardens of any size.<\/p>",
+        "text_size": "medium",
+        "content_alignment": "left",
+        "button_label": "Shop Indoor",
+        "button_link": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "custom_class": ""
+      }
+    },
+    "1622710586e17c9ecc": {
+      "type": "product-tabs",
+      "blocks": {
+        "1622710586e17c9ecc-0": {
+          "type": "tab",
+          "settings": {
+            "title": "Indoor Plants",
+            "collection": "plants"
+          }
+        },
+        "1622710586e17c9ecc-1": {
+          "type": "tab",
+          "settings": {
+            "title": "Outdoor Plants",
+            "collection": "outdoor-plants"
+          }
+        },
+        "62abc623-1aa9-4668-b2b9-483f79a5b2aa": {
+          "type": "tab",
+          "settings": {
+            "title": "Herbs + Veggies",
+            "collection": "herbs-veggies-plants"
+          }
+        }
+      },
+      "block_order": [
+        "1622710586e17c9ecc-0",
+        "1622710586e17c9ecc-1",
+        "62abc623-1aa9-4668-b2b9-483f79a5b2aa"
+      ],
+      "settings": {
+        "heading": "Perfect Plants",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "tab_header": "horizontal",
+        "limit": 8,
+        "show_button": false,
+        "button_type": "link",
+        "button_label": "Shop Now",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "items_per_row": 4,
+        "item_gap": 30,
+        "item_gap_mobile": 16,
+        "enable_slider": true,
+        "show_pagination": true,
+        "show_navigation": true,
+        "custom_class": ""
+      }
+    },
+    "1622711555416bfb63": {
+      "type": "custom-content",
+      "blocks": {
+        "8e62aec0-c2bb-4e9b-8950-255185a9abd6": {
+          "type": "product_bundles",
+          "settings": {
+            "width": "50%",
+            "alignment": "center",
+            "title": "<span class=\"sf_custom-heading-content\">Build Your Own<br> Basket From $100<\/span>",
+            "subheading": "<span class=\"text-color-primary sf__custom-subheading\">Bundle & Save<\/span>",
+            "product_1": "peperomia-obtusifolia",
+            "product_2": "ficus-tineke",
+            "product_3": "",
+            "product_4": "",
+            "product_5": "",
+            "block_custom_class": ""
+          }
+        },
+        "bb719b44-bf63-4698-86bf-1dcf8f77c148": {
+          "type": "lookbook",
+          "settings": {
+            "width": "50%",
+            "top_1": 25,
+            "left_1": 80,
+            "product_1": "snake-plant-laurenti",
+            "top_2": 77,
+            "left_2": 68,
+            "product_2": "sleep-plant",
+            "top_3": 61,
+            "left_3": 48,
+            "product_3": "",
+            "top_4": 0,
+            "left_4": 0,
+            "product_4": "",
+            "top_5": 20,
+            "left_5": 0,
+            "product_5": "",
+            "block_custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "8e62aec0-c2bb-4e9b-8950-255185a9abd6",
+        "bb719b44-bf63-4698-86bf-1dcf8f77c148"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "",
+        "gap": 30,
+        "use_scroll_mobile": false,
+        "gap_mobile": 16,
+        "custom_class": ""
+      }
+    },
+    "1622712658d5b3e674": {
+      "type": "custom-content",
+      "blocks": {
+        "1622712658d5b3e674-1": {
+          "type": "image",
+          "settings": {
+            "width": "100%",
+            "alignment": "center",
+            "block_custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "1622712658d5b3e674-1"
+      ],
+      "settings": {
+        "heading": "The Pruning Scissors",
+        "subheading": "",
+        "description": "<a class=\"sf__btn sf__btn-link\" style=\"text-decoration: none;\"><span class=\"flex\">Shop Collection <\/span><\/a>",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "",
+        "gap": 0,
+        "use_scroll_mobile": false,
+        "gap_mobile": 16,
+        "custom_class": ""
+      }
+    }
+  },
+  "order": [
+    "1622448086a90b8c2f",
+    "1622709925b4ab6f0c",
+    "1622710586e17c9ecc",
+    "1622711555416bfb63",
+    "1622712658d5b3e674"
+  ]
+}

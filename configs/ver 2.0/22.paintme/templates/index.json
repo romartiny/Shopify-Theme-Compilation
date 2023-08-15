@@ -1,0 +1,398 @@
+{
+  "sections": {
+    "162277697059c0b376": {
+      "type": "slider",
+      "blocks": {
+        "162277697059c0b376-0": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center middle",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "black",
+            "subheading": "",
+            "title": "<span class=\"font-normal\">Youth On <br>The Move<\/span>",
+            "description": "<p>The best thing since plasic flowers<\/p>",
+            "button_text": "Explore All Things",
+            "button_link": "",
+            "button_style": "sf__btn-primary",
+            "button_size": "",
+            "show_footer": true,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections\/artwork"
+          }
+        },
+        "162277697059c0b376-1": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center middle",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "black",
+            "subheading": "",
+            "title": "<span class=\"font-normal\">New Bold<br>\nArt Photos<\/span>",
+            "description": "<p>Tell your campaign through images<\/p>",
+            "button_text": "Explore All Things",
+            "button_link": "",
+            "button_style": "sf__btn-primary",
+            "button_size": "",
+            "show_footer": true,
+            "footer_alignment": "start",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections\/artwork"
+          }
+        },
+        "162277697059c0b376-2": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center middle",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "black",
+            "subheading": "",
+            "title": "<span class=\"font-normal\">Choose well<br>Be well<\/span>",
+            "description": "<p>Tell your campaign through images<\/p>",
+            "button_text": "Explore All Things",
+            "button_link": "",
+            "button_style": "sf__btn-primary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections\/artwork"
+          }
+        }
+      },
+      "block_order": [
+        "162277697059c0b376-0",
+        "162277697059c0b376-1",
+        "162277697059c0b376-2"
+      ],
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "fullscreen",
+        "show_overlay": false,
+        "dots_position": "bottom",
+        "dots_color": "dark",
+        "show_dots": true,
+        "show_arrows": false,
+        "autorotate": false,
+        "autorotate_speed": 5,
+        "custom_class": ""
+      }
+    },
+    "162277782224cea7b7": {
+      "type": "icon-box",
+      "blocks": {
+        "162277782224cea7b7-0": {
+          "type": "iconbox",
+          "settings": {
+            "title": "<span class=\"text-lg\">Unique Art<\/span>",
+            "description": "<p>Free Shipping for orders over £130<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "162277782224cea7b7-1": {
+          "type": "iconbox",
+          "settings": {
+            "title": "<span class=\"text-lg\">Support Artists<\/span>",
+            "description": "<p>Free Shipping for orders over £130<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "162277782224cea7b7-2": {
+          "type": "iconbox",
+          "settings": {
+            "title": "<span class=\"text-lg\">Secure Shopping<\/span>",
+            "description": "<p>Free Shipping for orders over £130<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "a9ecac8b-7be2-4a1d-bc49-03ad8b546439": {
+          "type": "iconbox",
+          "settings": {
+            "title": "<span class=\"text-lg\">Free Shipping<\/span>",
+            "description": "<p>Free Shipping for orders over £130<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        }
+      },
+      "block_order": [
+        "162277782224cea7b7-0",
+        "162277782224cea7b7-1",
+        "162277782224cea7b7-2",
+        "a9ecac8b-7be2-4a1d-bc49-03ad8b546439"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "#ffffff",
+        "item_per_row": 4,
+        "item_gap": 30,
+        "item_gap_mobile": 30,
+        "card_style": "horizontal",
+        "image_max_width": "30px",
+        "content_alignment": "start",
+        "hover_effect": "none",
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "use_scroll_mobile": false,
+        "use_grid_column_mb": false,
+        "custom_class": "sf__index-icon-box"
+      }
+    },
+    "1622778400a7f7a017": {
+      "type": "custom-content",
+      "blocks": {
+        "631a17f1-074a-43c0-bb41-bee010c4c8db": {
+          "type": "image_card",
+          "settings": {
+            "width": "50%",
+            "content_position": "center_center",
+            "content_alignment": "center",
+            "text_size": "large",
+            "text_color": "white",
+            "link": "",
+            "title": "Paintings",
+            "subtitle": "",
+            "button_label": "SHOP NOW",
+            "button_style": "sf__btn-link",
+            "button_size": "",
+            "block_custom_class": ""
+          }
+        },
+        "820fed6e-6f85-471d-b079-a5fdc2d902f1": {
+          "type": "image_card",
+          "settings": {
+            "width": "50%",
+            "content_position": "center_center",
+            "content_alignment": "center",
+            "text_size": "large",
+            "text_color": "white",
+            "link": "",
+            "title": "Prints",
+            "subtitle": "",
+            "button_label": "SHOP NOW",
+            "button_style": "sf__btn-link",
+            "button_size": "",
+            "block_custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "631a17f1-074a-43c0-bb41-bee010c4c8db",
+        "820fed6e-6f85-471d-b079-a5fdc2d902f1"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "",
+        "gap": 30,
+        "use_scroll_mobile": false,
+        "gap_mobile": 16,
+        "custom_class": ""
+      }
+    },
+    "1622778541b17bb253": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Featured Artworks",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "artwork",
+        "product_to_show": 8,
+        "items_per_row": 4,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "button_type": "load",
+        "button_text": "Shop more",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 10,
+        "custom_class": ""
+      }
+    },
+    "162277930244741544": {
+      "type": "image-with-text",
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "container": "w-full",
+        "background_color": "rgba(0,0,0,0)",
+        "item_gap": 100,
+        "item_gap_mobile": 30,
+        "layout": "left",
+        "image_column_size": "6",
+        "title": "Our passion is your<br> inspiration",
+        "sub_title": "",
+        "text": "<p>With each Livary Wall we send you our passion for beautiful<br\/> things for your home. The content of each wall is personally<br\/> and individually agreed with the Creators.<\/p>",
+        "text_size": "medium",
+        "content_alignment": "left",
+        "button_label": "Shop Now",
+        "button_link": "",
+        "button_style": "sf__btn-link",
+        "button_size": "",
+        "custom_class": "sf__index-img-with-text"
+      }
+    },
+    "162277947727e01fbd": {
+      "type": "testimonials",
+      "blocks": {
+        "162277947727e01fbd-0": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Love my new purchase",
+            "description": "<p>\"I was recently at your store, what a delight to find you!\"<\/p>",
+            "footer": "<p>Nancy W<\/p>",
+            "image_text": "",
+            "product": ""
+          }
+        },
+        "162277947727e01fbd-1": {
+          "type": "testimonial",
+          "settings": {
+            "title": "What a delight to find you",
+            "description": "<p>\"Thanks for being so fabulous...and continuing to provide such a wonderful service\"<\/p>",
+            "footer": "<p>Jayce M<\/p>",
+            "image_text": "",
+            "product": ""
+          }
+        },
+        "162277947727e01fbd-2": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Thanks for being so fabulous!",
+            "description": "<p>\"Thank you so much for your help in finding some new clothes that I needed desperately.\"<\/p>",
+            "footer": "<p>Marco C<\/p>",
+            "image_text": "",
+            "product": ""
+          }
+        },
+        "162277947727e01fbd-3": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Thank you for your help!",
+            "description": "<p>\"Thanks for the lovely time shopping and all the good work you do.\"<\/p>",
+            "footer": "<p>Denzil A<\/p>",
+            "image_text": "",
+            "product": ""
+          }
+        },
+        "162277947727e01fbd-4": {
+          "type": "testimonial",
+          "settings": {
+            "title": "A great store you can find.",
+            "description": "<p>\"I had a wonderful experience shopping in your store today. Thank you for your help and for the story that your shop has to tell\"<\/p>",
+            "footer": "<p>Gloria T<\/p>",
+            "image_text": "",
+            "product": ""
+          }
+        },
+        "162277947727e01fbd-5": {
+          "type": "testimonial",
+          "settings": {
+            "title": "I will certainly recommend to others",
+            "description": "<p>\"If we ever have an opportunity to recommend you, we definitely would do so as we felt your service was excellent.\"<\/p>",
+            "footer": "<p>Shane T<\/p>",
+            "image_text": "",
+            "product": ""
+          }
+        }
+      },
+      "block_order": [
+        "162277947727e01fbd-0",
+        "162277947727e01fbd-1",
+        "162277947727e01fbd-2",
+        "162277947727e01fbd-3",
+        "162277947727e01fbd-4",
+        "162277947727e01fbd-5"
+      ],
+      "settings": {
+        "heading": "What People Are Saying",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "",
+        "design": "testimonials-2",
+        "show_stars": true,
+        "autorotate": false,
+        "show_navigation": true,
+        "show_pagination": true,
+        "star_color": "#f4c829",
+        "custom_class": "sf__index-testimonial"
+      }
+    },
+    "1622780058e256d5fb": {
+      "type": "newsletter",
+      "settings": {
+        "container": "w-full",
+        "background_color": "#ffffff",
+        "form_layout": "vertical",
+        "form_design": "1",
+        "heading": "Fall in love with new art",
+        "description": "",
+        "email_placeholder": "Enter your email",
+        "submit_button": "Subscribe",
+        "text_color": "black",
+        "show_icon": false,
+        "icon_img_width": "30",
+        "show_agreement": true,
+        "term_condition_text": "<p>I agree to the Terms and Conditions.<\/p>"
+      }
+    }
+  },
+  "order": [
+    "162277697059c0b376",
+    "162277782224cea7b7",
+    "1622778400a7f7a017",
+    "1622778541b17bb253",
+    "162277930244741544",
+    "162277947727e01fbd",
+    "1622780058e256d5fb"
+  ]
+}

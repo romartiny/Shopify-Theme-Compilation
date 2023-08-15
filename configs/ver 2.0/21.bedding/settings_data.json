@@ -1,0 +1,223 @@
+{
+  "current": {
+    "favicon": "shopify:\/\/shop_images\/favicon.png",
+    "color_primary": "#000",
+    "color_btn_bg": "#000000",
+    "color_btn_bg_hover": "#000000",
+    "color_btn_text_hover": "#ffffff",
+    "prod_sale_price_color": "#666666",
+    "prod_type_color": "#666666",
+    "color_field_bg": "#ffffff",
+    "color_annoucement_bg": "#e0e7e4",
+    "color_annoucement_text": "#000000",
+    "color_topbar_bg": "#e0e7e4",
+    "color_topbar_text": "#000000",
+    "color_header_bg": "#ffffff",
+    "color_header_link": "#000000",
+    "color_header_transparent": "#ffffff",
+    "bg_cart_wishlist_count": "#000000",
+    "color_menu_bar_bg": "#000000",
+    "color_menu_bar_text": "#f8f8f8",
+    "color_footer_bg": "#ffffff",
+    "color_footer_text": "#000000",
+    "color_footer_subtext": "#696969",
+    "color_footer_link_hover": "#000000",
+    "color_footer_bottom_bg": "#ffffff",
+    "color_footer_bottom_text": "#696969",
+    "img_overlay_opacity": 20,
+    "tooltip_background_color": "#000000",
+    "type_base_font": "roboto_condensed_n4",
+    "use_custom_font_body": true,
+    "custom_body_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/Jost-Regular.ttf?v=1622447664@400\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/Jost-Medium.ttf?v=1622443602@500",
+    "custom_body_weight": "400",
+    "type_header_font": "roboto_condensed_n7",
+    "use_custom_font_heading": true,
+    "custom_heading_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/Butler_Regular.otf?v=1622447581@400\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/Butler_Light.otf?v=1622447581@300",
+    "custom_heading_weight": "300",
+    "btn_base_size": 15,
+    "btn_letter_spacing": 0,
+    "pcard_layout": "1",
+    "pcard_alignment": "center",
+    "pcard_image_ratio": "1\/1",
+    "show_vendor": false,
+    "variant_option_design3": "color",
+    "show_variant_swatch_image": true,
+    "product_colors": "red: #FF6961,\nyellow: #FDDA76,\nblack: #000000,\nblue: #8DB4D2,\ngreen: #C1E1C1,\npurple: #B19CD9,\nsilver: #EEEEEF,\nwhite: #FFFFFF,\nbrown: #836953,\nlight-brown: #feb035,\ndark-turquoise: #23cddc,\norange: #FFB347,\ntan: #E9D1BF,\nviolet: #B490B0,\npink: #FFD1DC,\ngrey: #E0E0E0,\nsky: #96BDC6,\npale-leaf: #CCD4BF",
+    "filter_color1": "",
+    "share_facebook": true,
+    "social_twitter_link": "",
+    "social_facebook_link": "https:\/\/facebook.com\/",
+    "social_facebook_label": "300k Followers",
+    "social_pinterest_link": "",
+    "social_instagram_link": "https:\/\/instagram.com\/",
+    "social_instagram_label": "100k Followers",
+    "wishlist_page": "",
+    "product_compare_page": "",
+    "gm_api": "",
+    "instagram_token": "",
+    "custom_css": ".sf__index-img-with-text .section-my {\n  margin-top: 0;\n}\n\n.sf__index-product-tab .sf-tab-header {\n  font-family: \"SF-Heading-font\";\n  font-size: 40px;\n  line-height: 1.3;\n}\n.sf__index-product-tab .sf-tab-header.active:after {\n  width: 0;\n}\n.sf__index-icon-box .sf-icon-box__text h3 {\n  font-family: \"SF-Body-font\";\n}\n.sf__index-custom-content .section-my {\n  margin-top: 0;\n  margin-bottom: 40px;\n}\n.sf__index-icon-box .section-my {\n  margin-top: 0;\n}\n.sf__index-instagram .section-my {\n  margin-bottom: 0;\n}\n.sf__footer-block-newsletter .sf__footer-block-title {\n  font-family: \"SF-Body-font\";\n  font-size: 36px;\n  line-height: 1.4;\n  margin-bottom: 12px;\n  font-weight: 400;\n}\n.sf__footer-block-title {\n  font-size: 24px;\n  line-height: 1.33;\n}\n\n.sf__pcard-name {\n  font-weight: 400;\n}\n.sf__pcard-price .prod__price {\n  font-weight: 600;\n}\n.sf__pcard-price.price--on-sale .prod__price {\n  color: #b22234;\n}\n.section__subheading {\n  letter-spacing: 0.2em;\n  font-weight: 400;\n}\n\n.sf__index-img-with-text .sf__btn.sf__btn-link,\n.sf__index-icon-box .sf__btn.sf__btn-link {\n  padding-left: 10px !important;\n  padding-right: 10px !important;\n  letter-spacing: 0.1em;\n}\n.section__header .section__heading,\n.sf__index-img-with-text .content__box .content__heading {\n  line-height: 1.3;\n}\n.sf__btn.sf__btn-link::after,\n.sf__btn.sf__btn-link::before {\n  height: 1px !important;\n}\n\n.sf-footer form.sf__footer-form-newsletter .sf__newletter__form-input {\n  border-color: #d4d4d4;\n}\n@media screen and (min-width: 768px) {\n  .section-my {\n    margin-top: 100px;\n    margin-bottom: 100px;\n  }\n  .section-py {\n    padding-top: 100px;\n    padding-bottom: 100px;\n  }\n}\n@media screen and (min-width: 1280px) {\n  .sf__index-collection-list .collection-card--hover-scaling-up:hover .collection-card__image {\n    transform: scale(1.2) translateZ(0);\n  }\n  .sf__index-collection-list .collection-card__image {\n    width: 150px;\n    height: 150px;\n    margin: 0 auto;\n  }\n}\n\n@media (max-width: 767px) {\n  .sf__index-img-with-text [class*=\"content__box-\"] {\n    padding-left: 30px;\n    padding-right: 30px;\n  }\n  .sf__index-img-with-text .content__heading {\n    font-size: 30px;\n  }\n  .section__subheading {\n    font-size: 12px;\n    margin-bottom: 10px;\n  }\n  .sf__index-icon-box .sf__btn.sf__btn-link {\n    margin-top: 0;\n  }\n  .sf__index-product-tab .sf__custom-select {\n    font-family: \"SF-Heading-font\";\n  }\n  .sf__index-collection-list .sf__ms-wrapper:not(.swiper-container-initialized) .sf-column {\n    width: 42vw !important;\n  }\n  .sf__footer-block-title {\n    font-size: 18px;\n  }\n}",
+    "use_theme_currencies": true,
+    "theme_currencies": "USD | EUR | GBP | VND",
+    "sections": {
+      "header": {
+        "type": "header",
+        "blocks": {
+          "b5df64ca-b8f9-44aa-9d7a-cf21e1e4682f": {
+            "type": "banner",
+            "settings": {
+              "heading": "Shop",
+              "container": "inherit",
+              "banner_style": "outside",
+              "banner_link": "",
+              "banner_title": "New collection",
+              "banner_desc": "",
+              "banner_button_text": "Shop now"
+            }
+          },
+          "782e9fab-c77f-4ab5-8b6f-7e130d447eed": {
+            "type": "product-list",
+            "settings": {
+              "heading": "Product",
+              "container": "inherit",
+              "stretch_width": false,
+              "collection": "bedroom-furniture",
+              "limit": 6,
+              "columns": 2
+            }
+          },
+          "e0b1ddfc-b772-4680-b007-f438c18f8218": {
+            "type": "custom_html",
+            "settings": {
+              "heading": "Features",
+              "container": "inherit",
+              "html": ""
+            }
+          }
+        },
+        "block_order": [
+          "b5df64ca-b8f9-44aa-9d7a-cf21e1e4682f",
+          "782e9fab-c77f-4ab5-8b6f-7e130d447eed",
+          "e0b1ddfc-b772-4680-b007-f438c18f8218"
+        ],
+        "settings": {
+          "header_design": "logo-center-menu-left",
+          "container": "container-fluid",
+          "header_sticky": true,
+          "transparent_on_top": false,
+          "logo_text": "MINIMOG",
+          "logo_max_width": 170,
+          "sticky_logo_max_width": 105,
+          "mobile_logo_max_width": 105,
+          "main_menu": "main-menu",
+          "secondary_menu": "",
+          "uppercase_parent_level": false,
+          "search": "show_icon",
+          "show_account_icon": true,
+          "show_cart_icon": true,
+          "show_wishlist_icon": true,
+          "show_compare_icon": false,
+          "show_currency_switcher": false,
+          "show_language_switcher": false
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "7527ffa4-1a31-4e5c-b642-96aa834daf84": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "About",
+              "width": "33%"
+            }
+          },
+          "c85629c7-7aae-4666-b5f0-150990439c91": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "Information",
+              "width": "33%"
+            }
+          },
+          "2bd3b7d0-e898-4720-82ab-227b7e3815b4": {
+            "type": "spacing",
+            "settings": {
+              "width": "16%"
+            }
+          },
+          "494c911f-7281-40a1-85fa-a596a6431858": {
+            "type": "newsletter",
+            "settings": {
+              "title": "Don’t miss a thing",
+              "description": "Enter your email below to be the first to know about new collections and product launches.",
+              "email_placeholder": "Enter your email",
+              "form_style": "bordered",
+              "show_social": false,
+              "width": "50%"
+            }
+          }
+        },
+        "block_order": [
+          "7527ffa4-1a31-4e5c-b642-96aa834daf84",
+          "c85629c7-7aae-4666-b5f0-150990439c91",
+          "2bd3b7d0-e898-4720-82ab-227b7e3815b4",
+          "494c911f-7281-40a1-85fa-a596a6431858"
+        ],
+        "settings": {
+          "design": "footer-1",
+          "container": "container",
+          "bordered": false,
+          "copyright": "<span class=\"text-base\">© LITERIE 2021<\/span>",
+          "show_currency_selector": false,
+          "show_language_selector": false,
+          "show_social_links": false,
+          "show_payment_icons": true
+        }
+      },
+      "annoucement": {
+        "type": "annoucement",
+        "settings": {
+          "show_announcement": true,
+          "homepage_only": true,
+          "show_close": true,
+          "message": "<p>Free shipping for all orders from $60+<\/p>",
+          "message_link": "",
+          "show_divider": false
+        }
+      },
+      "mobile-sticky-bar": {
+        "type": "mobile-sticky-bar",
+        "settings": {
+          "show_mobile_sticky": true,
+          "show_home_icon": true,
+          "show_collection_icon": true,
+          "show_cart_icon": true,
+          "show_search_icon": true,
+          "show_account_icon": false,
+          "show_wishlist_icon": false
+        }
+      }
+    }
+  },
+  "presets": {
+    "Default": {
+      "sections": {
+        "featured-collection": {
+          "type": "featured-collection",
+          "settings": {
+            "collection": "frontpage"
+          }
+        },
+        "featured-product": {
+          "type": "featured-product",
+          "settings": {
+          }
+        }
+      },
+      "content_for_index": [
+        "featured-collection",
+        "featured-product"
+      ]
+    }
+  }
+}

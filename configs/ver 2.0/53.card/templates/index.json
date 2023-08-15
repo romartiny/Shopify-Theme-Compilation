@@ -1,0 +1,316 @@
+{
+  "sections": {
+    "1631841290755fde40": {
+      "type": "image-with-text-2",
+      "settings": {
+        "container": "w-full",
+        "hero_size": "fullscreen",
+        "show_overlay": false,
+        "image": "shopify:\/\/shop_images\/1_66267021-b970-4dad-ae46-34f3eb8dd2f7.png",
+        "bg_position": "right",
+        "parallax": false,
+        "content_in_container": false,
+        "content_position": "left middle",
+        "text_alignment": "left",
+        "text_size": "medium",
+        "text_color": "dark",
+        "title": "Give the best wishes<br> to your loved ones",
+        "subtitle": "<img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0595\/7291\/2305\/files\/icon-1.svg?v=1632061764\">",
+        "text": "<p>Deliver a smile to yourself or someone special<\/p>",
+        "button_label": "save 20% off",
+        "button_link": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "mb_image": "shopify:\/\/shop_images\/1_66267021-b970-4dad-ae46-34f3eb8dd2f7.png",
+        "custom_class": "sf__index-hero"
+      }
+    },
+    "1632060681ed6277b4": {
+      "type": "custom-content",
+      "blocks": {
+        "1632060681ed6277b4-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/2_211a21e9-28ca-4107-b2e3-9bb05d4ac43f.jpg",
+            "width": "50%",
+            "alignment": "center",
+            "block_custom_class": ""
+          }
+        },
+        "d58d90b1-a098-4835-b1fe-9f7ecb7f48e6": {
+          "type": "html",
+          "settings": {
+            "code": "<div class=\"rte\">\n<div class=\"block__content-header\">\n<h2 class=\"section__heading\">Greetings from the<br> heart for the beloved<\/h2>\n<p class=\"text-color-subtext\">Get skincare made to fit—with some of the top acne-busting<br> ingredients prescribed by dermatologists nationwide.<\/p>\n<\/div>\n<div class=\"block__content-body\">\n<h3>Our misstion<\/h3>\n<p class=\"text-color-subtext\">Complexion-perfecting natural foundation enriched with antioxidant-packed<br> superfruits, vitamins, and other skin-nourishing nutrients. <\/p>\n<\/div>\n<div class=\"block__content-body\">\n<h3>Producing the highest quality products<\/h3>\n<p class=\"text-color-subtext\">Complexion-perfecting natural foundation enriched with antioxidant-packed<br> superfruits, vitamins, and other skin-nourishing nutrients. <\/p>\n<\/div>\n<div class=\"block__content-footer grid grid-cols-2\">\n<div class=\"block__item\">\n<h4>1,7k<\/h4>\n<p>Happy clients<\/p>\n<\/div>\n<div class=\"block__item\">\n<h4>92%<\/h4>\n<p>5 Star Reviews<\/p>\n<\/div>\n<\/div>\n<\/div>",
+            "width": "50%",
+            "block_custom_class": "sf__index-custom-html"
+          }
+        }
+      },
+      "block_order": [
+        "1632060681ed6277b4-1",
+        "d58d90b1-a098-4835-b1fe-9f7ecb7f48e6"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "",
+        "gap": 100,
+        "use_scroll_mobile": false,
+        "gap_mobile": 16,
+        "custom_class": "sf__index-custom-content"
+      }
+    },
+    "1632062020b6198a4c": {
+      "type": "image-with-text-2",
+      "settings": {
+        "container": "w-full",
+        "hero_size": "large",
+        "show_overlay": false,
+        "image": "shopify:\/\/shop_images\/bg-1_d22d0806-1afd-48ac-a81e-279491a155c0.jpg",
+        "bg_position": "center",
+        "parallax": false,
+        "content_in_container": false,
+        "content_position": "center middle",
+        "text_alignment": "center",
+        "text_size": "medium",
+        "text_color": "dark",
+        "title": "We do good to the planet while <br>delivering smiles to your loved ones.",
+        "subtitle": "<img class=\"mx-auto\" src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0595\/7291\/2305\/files\/icon-2.svg?v=1632067410\">",
+        "text": "<p>We believe even the smallest choices we make can have a significant impact over time. That’s<br\/> why it’s our goal to make eco-friendly alternatives more accessible than ever.<\/p>",
+        "button_label": "shop now and get 20% off",
+        "button_link": "",
+        "button_style": "sf__btn-secondary",
+        "button_size": "",
+        "custom_class": "sf__index-hero-1"
+      }
+    },
+    "163206780429b81da3": {
+      "type": "icon-box",
+      "blocks": {
+        "163206780429b81da3-0": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/ic-1.png",
+            "title": "Free shipping",
+            "description": "<p>Deliver a smile to yourself or someone special with one of our sustainable favorites.<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "163206780429b81da3-1": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/ic-2.png",
+            "title": "Plastic free",
+            "description": "<p>From sourcing recycled paper, to printing with eco-friendly inks and shipping orders in post-consumer-waste mailers.<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "163206780429b81da3-2": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/ic-3.png",
+            "title": "100% recycable",
+            "description": "<p>Orders are secured in our sturdy, 100% PCW packaging, which is fully recyclable biodegradable, and compostable<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "ea99f435-93ad-466c-a248-2e8093bd32fc": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/ic-4.png",
+            "title": "High-quality materials.",
+            "description": "<p>Orders are secured in our sturdy, 100% PCW packaging, which is fully recyclable biodegradable, and compostable<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        }
+      },
+      "block_order": [
+        "163206780429b81da3-0",
+        "163206780429b81da3-1",
+        "163206780429b81da3-2",
+        "ea99f435-93ad-466c-a248-2e8093bd32fc"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "#fbf7f6",
+        "item_per_row": 4,
+        "item_gap": 30,
+        "item_gap_mobile": 10,
+        "card_style": "vertical",
+        "image_max_width": "60px",
+        "content_alignment": "start",
+        "hover_effect": "zoom-in",
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "use_scroll_mobile": true,
+        "use_grid_column_mb": false,
+        "custom_class": "sf__index-icon-box"
+      }
+    },
+    "163210219724dfc9f8": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Deliver a smile to yourself or<br> someone special",
+        "subheading": "shop now and get 20% off",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "postcard",
+        "product_to_show": 8,
+        "items_per_row": 3,
+        "item_gap": 50,
+        "pcard_layout": "",
+        "pcard_image_ratio": "3\/4",
+        "show_vendor": false,
+        "enable_slider": true,
+        "show_pagination": false,
+        "show_navigation": true,
+        "button_type": "link",
+        "button_text": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 16,
+        "custom_class": ""
+      }
+    },
+    "16321084925e8e5c73": {
+      "type": "press",
+      "blocks": {
+        "16321084925e8e5c73-0": {
+          "type": "news",
+          "settings": {
+            "title": "<p>“ Millions of combinations, meaning you get a totally unique<br\/> piece of furniture exactly the way you want it.”<\/p>",
+            "image": "shopify:\/\/shop_images\/1_08676702-82e0-451d-b04b-ab094cc133ab.png",
+            "image_width": "150px",
+            "url": ""
+          }
+        },
+        "16321084925e8e5c73-1": {
+          "type": "news",
+          "settings": {
+            "title": "<p>“ Millions of combinations, meaning you get a totally unique<br\/> piece of furniture exactly the way you want it.”<\/p>",
+            "image": "shopify:\/\/shop_images\/5.png",
+            "image_width": "150px",
+            "url": ""
+          }
+        },
+        "16321084925e8e5c73-2": {
+          "type": "news",
+          "settings": {
+            "title": "<p>“ Millions of combinations, meaning you get a totally unique<br\/> piece of furniture exactly the way you want it.”<\/p>",
+            "image": "shopify:\/\/shop_images\/4_1da2f084-9efe-42a2-ab42-e82600db594c.png",
+            "image_width": "150px",
+            "url": ""
+          }
+        },
+        "16321084925e8e5c73-3": {
+          "type": "news",
+          "settings": {
+            "title": "<p>“ Millions of combinations, meaning you get a totally unique<br\/> piece of furniture exactly the way you want it.”<\/p>",
+            "image": "shopify:\/\/shop_images\/2_33d90197-6fb0-4b93-b3f8-e4ddfc7a4d48.png",
+            "image_width": "150px",
+            "url": ""
+          }
+        },
+        "16321084925e8e5c73-4": {
+          "type": "news",
+          "settings": {
+            "title": "<p>“ Millions of combinations, meaning you get a totally unique<br\/> piece of furniture exactly the way you want it.”<\/p>",
+            "image": "shopify:\/\/shop_images\/3_a22a73bf-e52e-489d-bc59-09c8a1351a93.png",
+            "image_width": "150px",
+            "url": ""
+          }
+        },
+        "16321084925e8e5c73-5": {
+          "type": "news",
+          "settings": {
+            "title": "<p>“ Millions of combinations, meaning you get a totally unique<br\/> piece of furniture exactly the way you want it.”<\/p>",
+            "image": "shopify:\/\/shop_images\/6.png",
+            "image_width": "150px",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "16321084925e8e5c73-0",
+        "16321084925e8e5c73-1",
+        "16321084925e8e5c73-2",
+        "16321084925e8e5c73-3",
+        "16321084925e8e5c73-4",
+        "16321084925e8e5c73-5"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "#e1e7e0",
+        "show_divider": false,
+        "autoplay": false,
+        "custom_class": "sf__index-press"
+      }
+    },
+    "163211160588de600c": {
+      "type": "image-with-text-2",
+      "settings": {
+        "container": "w-full",
+        "hero_size": "large",
+        "show_overlay": false,
+        "image": "shopify:\/\/shop_images\/bg-4_8e26c9b4-bb2d-4a0b-af15-1316be644464.jpg",
+        "bg_position": "center",
+        "parallax": false,
+        "content_in_container": false,
+        "content_position": "center middle",
+        "text_alignment": "center",
+        "text_size": "medium",
+        "text_color": "dark",
+        "title": "Say hi and follow along <br>for updates",
+        "subtitle": "Follow us on instagram",
+        "text": "",
+        "button_label": "@amissa_giftcard",
+        "button_link": "",
+        "button_style": "sf__btn-secondary",
+        "button_size": "",
+        "custom_class": "sf__index-hero-2"
+      }
+    }
+  },
+  "order": [
+    "1631841290755fde40",
+    "1632060681ed6277b4",
+    "1632062020b6198a4c",
+    "163206780429b81da3",
+    "163210219724dfc9f8",
+    "16321084925e8e5c73",
+    "163211160588de600c"
+  ]
+}

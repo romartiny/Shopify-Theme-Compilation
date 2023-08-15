@@ -1,0 +1,1121 @@
+{
+  "current": {
+    "favicon": "shopify:\/\/shop_images\/fav_icon_dark_1.png",
+    "color_primary": "#000000",
+    "color_body_text": "#000000",
+    "color_heading_text": "#000000",
+    "color_btn_bg_hover": "#000000",
+    "prod_sale_price_color": "#666666",
+    "prod_type_color": "#666666",
+    "color_main_bg": "#ffffff",
+    "color_field_bg": "#ffffff",
+    "color_topbar_bg": "#35302e",
+    "color_topbar_text": "#ffffff",
+    "color_header_bg": "#ffffff",
+    "color_header_link": "#000000",
+    "color_header_transparent": "#000000",
+    "color_menu_bar_bg": "#000000",
+    "color_menu_bar_text": "#f8f8f8",
+    "color_footer_bg": "#ffffff",
+    "color_footer_text": "#000000",
+    "color_footer_subtext": "#000000",
+    "color_footer_link_hover": "#000000",
+    "color_footer_bg_mb": "#ffffff",
+    "color_footer_bottom_bg": "#ffffff",
+    "color_footer_bottom_bg_mb": "#ffffff",
+    "img_overlay_opacity": 20,
+    "tooltip_background_color": "#000000",
+    "type_base_font": "roboto_condensed_n4",
+    "use_custom_font_body": true,
+    "custom_body_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Regular.ttf?v=1618297125@400\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Medium.ttf?v=1618297125@500\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-SemiBold.ttf?v=1618297125@600",
+    "custom_body_weight": "400",
+    "type_header_font": "roboto_condensed_n7",
+    "use_custom_font_heading": true,
+    "custom_heading_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Butler_Regular.otf?v=1622170679@400\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Butler_Medium.otf?v=1622170679@500",
+    "custom_heading_weight": "400",
+    "type_header_base_size": 34,
+    "pcard_layout": "1",
+    "pcard_alignment": "left",
+    "pcard_image_ratio": "3\/4",
+    "show_vendor": false,
+    "variant_option_design3": "color",
+    "show_variant_swatch_image": true,
+    "product_colors": "red: #FF6961,\nyellow: #FDDA76,\nblack: #000000,\nblue: #8DB4D2,\ngreen: #C1E1C1,\npurple: #B19CD9,\nsilver: #EEEEEF,\nwhite: #FFFFFF,\nbrown: #836953,\nlight-brown: #feb035,\ndark-turquoise: #23cddc,\norange: #FFB347,\ntan: #E9D1BF,\nviolet: #B490B0,\npink: #FFD1DC,\ngrey: #E0E0E0,\nsky: #96BDC6,\npale-leaf: #CCD4BF",
+    "filter_color1": "",
+    "share_facebook": true,
+    "social_twitter_link": "https:\/\/twitter.com\/home",
+    "social_facebook_link": "https:\/\/facebook.com\/",
+    "social_pinterest_link": "https:\/\/pinterest.com\/",
+    "social_instagram_link": "https:\/\/instagram.com\/",
+    "wishlist_page": "whishlist",
+    "product_compare_page": "",
+    "gm_api": "",
+    "instagram_token": "",
+    "custom_css": ".font__weight-medium {\n  font-weight: 500;\n}\n.font-body {\n  font-family: Jost, sans-serif;\n}\n.font-size-34 {\n  font-size: 34px;\n  line-height: 44px;\n}\n.sf__pcard-image .sf__image-box {\n  border-radius: 10px;\n}\n.sf__pcard-name {\n  font-family: SF-Heading-font;\n  font-size: 18px;\n  font-weight: 400;\n}\n.sf__pcard-price {\n  font-weight: 500;\n}\n.sf__pcard-price .prod__price {\n  font-weight: 600;\n}\n.sf__pcard-price.price--on-sale .prod__price {\n  color: #b22234;\n}\n.sf__newsletter-block-desc {\n  margin-bottom: 30px;\n  color: #696969;\n}\n.sf__footer-block-menu .sf__footer-block-title {\n  font-size: 24px;\n  line-height: 32px;\n}\n.sf-search__form,\n.sf__footer-form-newsletter input.form-control {\n  background-color: #f5f5f5;\n}\n.collection-card__image {\n  border-radius: 10px;\n}\n.custom__html-block2 {\n  padding: 70px 80px;\n  background-image: url(https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/bg.jpg?v=1622194012);\n  background-size: no-repeat;\n  background-size: cover;\n  background-position: center;\n  border-radius: 8px;\n}\n.custom__html-block2 .block__content {\n  text-align: center;\n  display: inline-block;\n}\n.custom__html-block2 .block__content h3 {\n  color: #fff;\n  font-size: 48px;\n  line-height: 56px;\n  margin-bottom: 6px;\n}\n.custom__html-block2 .block__content p {\n  color: rgba(255, 255, 255, 0.7);\n}\n.custom__html-block2 .block__social {\n  margin-top: 50px;\n  text-align: center;\n}\n.custom__html-block2 .block__social ul {\n  margin: 0 -20px;\n}\n.custom__html-block2 .block__social ul li {\n  display: inline-block;\n  padding: 0 20px;\n}\n.custom__html-block2 .block__social ul li a {\n  display: flex;\n  align-items: center;\n  color: #fff;\n}\n.custom__html-block2 .block__social ul li a img {\n  height: 15px;\n  margin-right: 10px;\n}\n.custom__html-block1 {\n  padding: 0 70px;\n  position: relative;\n}\n.custom__html-block1::after {\n  position: absolute;\n  content: \"\";\n  top: 22px;\n  left: 0;\n  width: 100%;\n  height: calc(100% - 56px);\n  border-radius: 8px;\n  background: #e3ebec;\n  z-index: -1;\n}\n.custom__html-block1 img {\n  max-width: 300px;\n  margin-right: 70px;\n}\n.custom__html-block1 .block__content {\n  position: relative;\n  z-index: 1;\n}\n.custom__html-block1 .block__content-text {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: 100%;\n}\n.custom__html-block1 .block__content-text .block__heading h3 {\n  font-size: 40px;\n  line-height: 56px;\n  margin-bottom: 4px;\n}\n.custom__html-block1 .block__content-text .block__heading p {\n  color: #696969;\n}\n@media (min-width: 768px) {\n  .section-my {\n    margin-top: 100px !important;\n    margin-bottom: 100px !important;\n  }\n  .section-py {\n    padding-top: 100px !important;\n    padding-bottom: 100px !important;\n  }\n  .sf__footer-form-newsletter {\n    max-width: 80%;\n  }\n}\n@media (max-width: 767px) {\n  .custom__html-block1 {\n    padding: 0 20px 20px;\n  }\n  .custom__html-block1 .block__content,\n  .custom__html-block1 .block__content-text {\n    flex-direction: column;\n    text-align: center;\n  }\n  .custom__html-block1 img {\n    margin-right: 0;\n  }\n  .custom__html-block1 .block__content-text .block__heading h3 {\n    font-size: 24px;\n    line-height: 30px;\n    margin-top: 20px;\n  }\n  .custom__html-block1 .block__content-text .block__heading p {\n    margin-bottom: 20px;\n  }\n  .custom__html-block1::after {\n    height: 100%;\n  }\n  .custom__html-block2 {\n    padding: 50px 20px;\n    background-position: left;\n  }\n  .custom__html-block2 .block__content h3 {\n    font-size: 24px;\n    line-height: 30px;\n  }\n  .custom__html-block2 .block__social ul li {\n    margin-bottom: 15px;\n  }\n}\n\n.sf__index-custom-content-1 .sf__btn::before {\n  height: 1px;\n}\n.sf__index-custom-content-1 .sf__btn::after {\n  height: 1px;\n}\n\n.sf-header__desktop .sf-menu__banner .sf__btn::before {\n  height: 1px;\n}\n.sf-header__desktop .sf-menu__banner .sf__btn::after {\n  height: 1px;\n}\n\n.sf-header__desktop .sf-search-form button {\n  order: 1;\n  padding-right: 0;\n}\n.sf-header__desktop .sf-search-form span {\n  order: 2;\n}\n.sf-header__desktop .sf-search-form {\n  min-width: 487px;\n  background-color: #f5f5f5;\n}\n@media (max-width: 1560px) {\n  .sf-header__desktop .sf-search-form {\n    min-width: 287px;\n  }\n}\n@media(max-width: 767px) {\n    .sf-footer .sf__accordion-button.sf__footer-block-title {\n        font-size: calc(var(--font-base-size, 16)*1px);\n    }\n}",
+    "use_theme_currencies": true,
+    "theme_currencies": "USD | EUR | GBP | VND",
+    "sections": {
+      "page-faqs": {
+        "type": "page-faqs",
+        "blocks": {
+          "2802736b-f08f-4510-a4f7-4ad7d748992d": {
+            "type": "content",
+            "settings": {
+              "content": "<div class=\"mb-10\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/faqs.jpg?v=1620784288\"><\/div>\n<h3 class=\"font-medium text-xl mb-4\">Awkwardness gives me great comfort. I’ve never been cool, but I’ve felt cool. I’ve been in the cool place, but I wasn’t really cool – I was trying to pass for hip or cool.<\/h3>\n<p>A girl should be two things: classy and fabulous. I am convinced that there can be luxury in simplicity. I wanted to dress the woman who lives and works, not the woman in a painting. It’s hard to balance everything. It’s always challenging. My relationships with producers or photographers – these are relationships that took years. I can’t get sucked into that celebrity thing, because I think it’s just crass. My aim is to make the poor look rich.<\/p>"
+            }
+          },
+          "4e151238-4480-4122-b893-7f4a19886e4c": {
+            "type": "accordion",
+            "settings": {
+              "title": "What shipping methods are availbale?",
+              "content": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.<br\/><br\/>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.<\/p>",
+              "open": true
+            }
+          },
+          "c5d4d04d-f6c1-4d1e-99f0-3c221393a3cf": {
+            "type": "accordion",
+            "settings": {
+              "title": "How long will it take to get my package?",
+              "content": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.<\/p>",
+              "open": false
+            }
+          },
+          "0131747b-8b40-432f-b634-b1289ec41911": {
+            "type": "accordion",
+            "settings": {
+              "title": "Do you ship internationally?",
+              "content": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.<\/p>",
+              "open": false
+            }
+          },
+          "5d7206e9-5375-4da6-9a1f-24e1c46230b0": {
+            "type": "accordion",
+            "settings": {
+              "title": "What payment methods are accepted?",
+              "content": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.<\/p>",
+              "open": false
+            }
+          },
+          "4008f61e-055e-42ba-8969-cb3715c0aece": {
+            "type": "accordion",
+            "settings": {
+              "title": "Is buying on-line safe?",
+              "content": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.<\/p>",
+              "open": false
+            }
+          }
+        },
+        "block_order": [
+          "2802736b-f08f-4510-a4f7-4ad7d748992d",
+          "4e151238-4480-4122-b893-7f4a19886e4c",
+          "c5d4d04d-f6c1-4d1e-99f0-3c221393a3cf",
+          "0131747b-8b40-432f-b634-b1289ec41911",
+          "5d7206e9-5375-4da6-9a1f-24e1c46230b0",
+          "4008f61e-055e-42ba-8969-cb3715c0aece"
+        ],
+        "settings": {
+          "menu": "faqs-menu"
+        }
+      },
+      "collection-list": {
+        "type": "collection-list",
+        "settings": {
+        }
+      },
+      "featured-collection": {
+        "type": "featured-collection",
+        "settings": {
+          "collection": "frontpage"
+        }
+      },
+      "featured-product": {
+        "type": "featured-product",
+        "settings": {
+        }
+      },
+      "slider": {
+        "type": "slider",
+        "settings": {
+        }
+      },
+      "header": {
+        "type": "header",
+        "blocks": {
+          "5e153016-a9d7-46c9-a10e-30d16446793d": {
+            "type": "topbar",
+            "disabled": true,
+            "settings": {
+              "show_divider": true,
+              "show_phone_numb": true,
+              "show_email": true,
+              "show_social_links": false,
+              "show_stores_page": true,
+              "show_currency_switcher": true,
+              "show_language_switcher": true,
+              "alert_message": ""
+            }
+          },
+          "59224d28-d657-4624-8d17-55b1c4ce8d9c": {
+            "type": "product-list",
+            "settings": {
+              "heading": "Product",
+              "container": "container-fluid",
+              "stretch_width": false,
+              "collection": "books",
+              "limit": 6,
+              "columns": 2
+            }
+          },
+          "5b9aec5f-b955-4765-9a87-1962d613e909": {
+            "type": "custom_html",
+            "settings": {
+              "heading": "Home",
+              "container": "inherit",
+              "html": ""
+            }
+          },
+          "795ac8fe-10ba-410f-a1d8-c92082707175": {
+            "type": "banner",
+            "settings": {
+              "heading": "Shop",
+              "container": "inherit",
+              "banner_style": "outside",
+              "banner_link": "",
+              "banner_title": "Create aunique style with us",
+              "banner_desc": "",
+              "banner_button_text": "Shop now"
+            }
+          },
+          "0c009b8c-374c-4dfe-a226-d92fd6fbf5b0": {
+            "type": "custom_html",
+            "settings": {
+              "heading": "Features",
+              "container": "inherit",
+              "html": ""
+            }
+          }
+        },
+        "block_order": [
+          "5e153016-a9d7-46c9-a10e-30d16446793d",
+          "59224d28-d657-4624-8d17-55b1c4ce8d9c",
+          "5b9aec5f-b955-4765-9a87-1962d613e909",
+          "795ac8fe-10ba-410f-a1d8-c92082707175",
+          "0c009b8c-374c-4dfe-a226-d92fd6fbf5b0"
+        ],
+        "settings": {
+          "header_design": "logo-center-menu-left",
+          "container": "container-fluid",
+          "header_sticky": true,
+          "transparent_on_top": false,
+          "logo_text": "MINIMOG",
+          "logo_max_width": 155,
+          "sticky_logo_max_width": 105,
+          "mobile_logo_max_width": 105,
+          "main_menu": "main-menu",
+          "secondary_menu": "",
+          "uppercase_parent_level": false,
+          "search": "show_full",
+          "show_account_icon": true,
+          "show_cart_icon": true,
+          "show_wishlist_icon": true,
+          "show_compare_icon": false,
+          "show_currency_switcher": false,
+          "show_language_switcher": false
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "f9f68495-d8c9-4920-baf5-fb7aaa818b27": {
+            "type": "newsletter",
+            "settings": {
+              "title": "<span>Spend less - Read more.<br>  Real bookshop with real book people.<\/span>",
+              "description": "Give your inbox some love with new products, tips, & more.",
+              "email_placeholder": "Enter your email",
+              "form_style": "bordered",
+              "show_social": false,
+              "width": "66%"
+            }
+          },
+          "7be8d43e-ecc5-411e-90cd-e21b5dee4cfc": {
+            "type": "spacing",
+            "settings": {
+              "width": "16%"
+            }
+          },
+          "49e72833-c68f-4a7b-ab64-3ef0cae99bcb": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "About",
+              "width": "25%"
+            }
+          },
+          "b58e37df-7e6d-4803-948b-1fe15535bedf": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "Support",
+              "width": "25%"
+            }
+          }
+        },
+        "block_order": [
+          "f9f68495-d8c9-4920-baf5-fb7aaa818b27",
+          "7be8d43e-ecc5-411e-90cd-e21b5dee4cfc",
+          "49e72833-c68f-4a7b-ab64-3ef0cae99bcb",
+          "b58e37df-7e6d-4803-948b-1fe15535bedf"
+        ],
+        "settings": {
+          "design": "footer-3",
+          "container": "container",
+          "bordered": false,
+          "copyright": "© MINIMOG 2021",
+          "show_currency_selector": false,
+          "show_language_selector": false,
+          "show_social_links": true,
+          "show_payment_icons": true
+        }
+      },
+      "collection-page-header": {
+        "type": "collection-page-header",
+        "blocks": {
+          "63b52546-ccd0-4c50-84ff-57d203edba75": {
+            "type": "banner",
+            "settings": {
+              "collection": ""
+            }
+          }
+        },
+        "block_order": [
+          "63b52546-ccd0-4c50-84ff-57d203edba75"
+        ],
+        "settings": {
+          "layout": "inside",
+          "header_height": "small",
+          "text_alignment": "center",
+          "vertical_alignment": "center",
+          "bg_color": "#ffffff",
+          "enable_parallax": true,
+          "show_breadcrumb": true,
+          "upper_title": false
+        }
+      },
+      "product-template": {
+        "type": "product-template",
+        "settings": {
+          "container": "container",
+          "layout": "layout-6",
+          "show_tags": false,
+          "show_vendor": false,
+          "show_sku": false,
+          "show_categories": false,
+          "show_reviews_count": true,
+          "show_quantity_selector": true,
+          "enable_dynamic_checkout": true,
+          "hide_atc_button": false,
+          "show_atwl": true,
+          "show_atcp": true,
+          "show_ask_a_question": true,
+          "show_social": true,
+          "show_live_views": false,
+          "live_views_text": "<p><strong>{{count_number}}<\/strong> <strong>people<\/strong> are viewing this right now<\/p>",
+          "live_views_range": "20-30",
+          "live_view_duration": "10",
+          "live_view_icon_blinks": true,
+          "show_delivery_times": true,
+          "deliver_text": "<p><strong>Estimated Delivery:<\/strong><\/p>",
+          "deliver_days": "3",
+          "show_shipping_text": true,
+          "shipping_text": "<p><strong>Free Shipping & Returns: <\/strong>On all orders over $75<\/p>",
+          "show_trust_badges": true,
+          "trust_badges_text": "<p>Guarantee safe & secure checkout<\/p>",
+          "trust_badges_image": "shopify:\/\/shop_images\/trustbag_256x256_54bce3ff-a3d8-45ea-a570-24ce661296b8.png",
+          "trust_badges_image_width": "320px",
+          "use_sticky_atc": true,
+          "sticky_atc_wishtlist": false,
+          "sticky_atc_compare": false
+        }
+      },
+      "product-details-tabs": {
+        "type": "product-details-tabs",
+        "blocks": {
+          "4db8ad16-886f-47f7-9b57-fc68b39fb2d4": {
+            "type": "description",
+            "settings": {
+              "header": "Product description"
+            }
+          },
+          "47fdf05f-3a63-419f-bbed-77a61b9f68e7": {
+            "type": "tab",
+            "settings": {
+              "header": "Shipping & Return",
+              "content": "<p>Shipping cost is based on weight. Just add products to your cart and use the Shipping Calculator to see the shipping price.<\/p><p>We want you to be 100% satisfied with your purchase. Items can be returned or exchanged within 30 days of delivery.<\/p>"
+            }
+          },
+          "94087299-5b64-45fc-ad3f-efb8d456b2eb": {
+            "type": "reviews",
+            "settings": {
+              "header": "Product reviews"
+            }
+          }
+        },
+        "block_order": [
+          "4db8ad16-886f-47f7-9b57-fc68b39fb2d4",
+          "47fdf05f-3a63-419f-bbed-77a61b9f68e7",
+          "94087299-5b64-45fc-ad3f-efb8d456b2eb"
+        ],
+        "settings": {
+          "show_product_tabs": true,
+          "container": "container",
+          "bg_color": ""
+        }
+      },
+      "product-reviews": {
+        "type": "product-reviews",
+        "settings": {
+          "show_product_reviews": false,
+          "container": "container-narrow",
+          "heading": "Ratings and Reviews"
+        }
+      },
+      "product-recommendations": {
+        "type": "product-recommendations",
+        "settings": {
+          "show_product_recommendations": true,
+          "container": "container",
+          "heading": "You Might Also Like",
+          "limit": 8,
+          "columns": 4,
+          "column_gap": 30,
+          "enable_slider": true
+        }
+      },
+      "brand-page-header": {
+        "type": "brand-page-header",
+        "blocks": {
+          "09dfe2e1-10c2-4cee-a033-a90b143c85f3": {
+            "type": "information",
+            "settings": {
+              "collection": "retrolie",
+              "logo": "shopify:\/\/shop_images\/1.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/1_8e8151b6-3555-4abf-8dd6-5347182bbcd0.jpg",
+              "image_2": "shopify:\/\/shop_images\/2_9a1b3099-775a-4093-9ece-6cfaa04a06fe.jpg",
+              "image_3": "shopify:\/\/shop_images\/3_7b9fc65c-8202-4449-a828-d03ac03c6d38.jpg"
+            }
+          },
+          "c8ee188c-a84f-4cf2-a8af-aacb9bf78785": {
+            "type": "information",
+            "settings": {
+              "collection": "abby",
+              "logo": "shopify:\/\/shop_images\/2.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/4.jpg",
+              "image_2": "shopify:\/\/shop_images\/5.jpg",
+              "image_3": "shopify:\/\/shop_images\/6.jpg"
+            }
+          },
+          "e56a3991-3115-47d4-b7e6-43e962712fc6": {
+            "type": "information",
+            "settings": {
+              "collection": "minimog",
+              "logo": "shopify:\/\/shop_images\/3.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/7.jpg",
+              "image_2": "shopify:\/\/shop_images\/8.jpg",
+              "image_3": "shopify:\/\/shop_images\/9.jpg"
+            }
+          },
+          "98bac8d0-393b-4f50-91b8-052a49e29dd0": {
+            "type": "information",
+            "settings": {
+              "collection": "brook",
+              "logo": "shopify:\/\/shop_images\/4.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/10.jpg",
+              "image_2": "shopify:\/\/shop_images\/11.jpg",
+              "image_3": "shopify:\/\/shop_images\/12.jpg"
+            }
+          },
+          "2b4a1841-6d7a-468b-ba3b-a5fd307cf9aa": {
+            "type": "information",
+            "settings": {
+              "collection": "learts",
+              "logo": "shopify:\/\/shop_images\/5.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/13.jpg",
+              "image_2": "shopify:\/\/shop_images\/14.jpg",
+              "image_3": "shopify:\/\/shop_images\/15.jpg"
+            }
+          },
+          "b54aa75a-c232-474e-9d92-2027e31cd066": {
+            "type": "information",
+            "settings": {
+              "collection": "vagabond",
+              "logo": "shopify:\/\/shop_images\/6.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/16.jpg",
+              "image_2": "shopify:\/\/shop_images\/17.jpg",
+              "image_3": "shopify:\/\/shop_images\/18.jpg"
+            }
+          }
+        },
+        "block_order": [
+          "09dfe2e1-10c2-4cee-a033-a90b143c85f3",
+          "c8ee188c-a84f-4cf2-a8af-aacb9bf78785",
+          "e56a3991-3115-47d4-b7e6-43e962712fc6",
+          "98bac8d0-393b-4f50-91b8-052a49e29dd0",
+          "2b4a1841-6d7a-468b-ba3b-a5fd307cf9aa",
+          "b54aa75a-c232-474e-9d92-2027e31cd066"
+        ],
+        "settings": {
+        }
+      },
+      "collection-brand": {
+        "type": "collection-brand",
+        "settings": {
+          "grid_layout": "grid",
+          "pagination_limit": "12",
+          "grid_columns": "3",
+          "collection_paginate": "paginate",
+          "show_filter": true,
+          "sidebar": "leftColumn"
+        }
+      },
+      "contact-information": {
+        "type": "contact-information",
+        "settings": {
+        }
+      },
+      "maps": {
+        "type": "maps",
+        "settings": {
+          "textx": "40.6700",
+          "texty": "-73.9400",
+          "zoom": "11",
+          "text2": "New York"
+        }
+      },
+      "contact-template": {
+        "type": "contact-template",
+        "blocks": {
+          "458d6546-c5d0-4128-8fa6-162080bdf85f": {
+            "type": "textblock",
+            "settings": {
+              "title": "Address",
+              "content": "<p>7895 Piermont Dr NE Albuquerque, NM 198866, <a href=\"#\">See Our Stores<\/a><\/p>"
+            }
+          },
+          "d2fd611c-a50a-4871-b401-b51dff320d34": {
+            "type": "textblock",
+            "settings": {
+              "title": "Information",
+              "content": "<p>+391 (0)35 2568 4593<\/p><p>hello@domain.com<\/p>"
+            }
+          },
+          "159b3b43-a6d9-4cb9-b78d-04f5a5bae350": {
+            "type": "socialmedia",
+            "settings": {
+              "title": "Social Media"
+            }
+          },
+          "5c486a84-9bdd-4d24-8ac7-5c428593cf33": {
+            "type": "textblock",
+            "settings": {
+              "title": "We're Open",
+              "content": "<p>Our store has re-opened for shopping, exchanges<\/p><p>Every day 11am to 7pm<\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "458d6546-c5d0-4128-8fa6-162080bdf85f",
+          "d2fd611c-a50a-4871-b401-b51dff320d34",
+          "159b3b43-a6d9-4cb9-b78d-04f5a5bae350",
+          "5c486a84-9bdd-4d24-8ac7-5c428593cf33"
+        ],
+        "settings": {
+          "title": "We would love to hear from you.",
+          "description": "<p>If you’ve got great products your making or looking to work with us then drop us a line.<\/p>"
+        }
+      },
+      "product-details-accordion": {
+        "type": "product-details-accordion",
+        "settings": {
+          "show_accordion": true,
+          "use_container": false,
+          "position": "bottom_info"
+        }
+      },
+      "recent-viewed-products": {
+        "type": "recent-viewed-products",
+        "settings": {
+          "heading": "Recently Viewed Products",
+          "container": "container",
+          "columns": 4,
+          "column_gap": 30,
+          "enable_slider": true,
+          "show_product_page": true,
+          "show_cart_page": true,
+          "show_collection_page": false
+        }
+      },
+      "product-features": {
+        "type": "product-features",
+        "blocks": {
+          "a42958f5-823e-46ed-ae9f-ff60d6eab86e": {
+            "type": "feature",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/promo1.png",
+              "title": "Free Shipping",
+              "description": "<p>Get complimentary ground shipping on every <br\/>order.Don’t love it? Send it back, on us.<\/p>",
+              "link": ""
+            }
+          },
+          "29ce8a74-3874-4549-911c-44f67eee22dd": {
+            "type": "feature",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/promo2.png",
+              "title": "Earn Points",
+              "description": "<p>Join Minimog Rewards to earn gift cards<br\/>and enjoy exclusive member benefits.<\/p>",
+              "link": ""
+            }
+          },
+          "1e4d02aa-69f7-42cc-b4b2-257cca0142c5": {
+            "type": "feature",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/promo3.png",
+              "title": "Money Back Gurantee",
+              "description": "<p>We believe getting dressed should be the <br\/>easiest part of your day.<\/p>",
+              "link": ""
+            }
+          }
+        },
+        "block_order": [
+          "a42958f5-823e-46ed-ae9f-ff60d6eab86e",
+          "29ce8a74-3874-4549-911c-44f67eee22dd",
+          "1e4d02aa-69f7-42cc-b4b2-257cca0142c5"
+        ],
+        "settings": {
+          "show_featured": false,
+          "container": "container",
+          "heading": "Why choose us?",
+          "item_per_row": 4,
+          "card_style": "vertical",
+          "image_max_width": "70px",
+          "content_alignment": "center"
+        }
+      },
+      "1621243260e1af0c20": {
+        "type": "slider",
+        "blocks": {
+          "1621243260e1af0c20-0": {
+            "type": "slider_item",
+            "settings": {
+              "image_alignment": "center middle",
+              "content_in_container": true,
+              "content_position": "left middle",
+              "text_alignment": "center",
+              "text_size": "medium",
+              "text_color": "black",
+              "subheading": "<span class=\"font__weight-medium\">For Booklovers<\/span>",
+              "title": "<span class=\"font__weight-medium\">A World of Books for<br> Young and Old.<\/span>",
+              "description": "",
+              "button_text": "Shop now",
+              "button_link": "",
+              "button_style": "sf__btn-primary",
+              "button_size": "sf__btn-small",
+              "show_footer": false,
+              "footer_alignment": "end",
+              "footer_text": "New Collection",
+              "footer_button": "Shop Now",
+              "footer_link": ""
+            }
+          },
+          "1621243260e1af0c20-1": {
+            "type": "slider_item",
+            "settings": {
+              "image_alignment": "center middle",
+              "content_in_container": true,
+              "content_position": "left middle",
+              "text_alignment": "center",
+              "text_size": "medium",
+              "text_color": "black",
+              "subheading": "<span class=\"font__weight-medium\">For Booklovers.<\/span>",
+              "title": "<span class=\"font__weight-medium\">A World of Books for<br> Young and Old.<\/span>",
+              "description": "",
+              "button_text": "Shop now",
+              "button_link": "",
+              "button_style": "sf__btn-primary",
+              "button_size": "sf__btn-small",
+              "show_footer": false,
+              "footer_alignment": "end",
+              "footer_text": "New Collection",
+              "footer_button": "Shop Now",
+              "footer_link": ""
+            }
+          },
+          "1621243260e1af0c20-2": {
+            "type": "slider_item",
+            "settings": {
+              "image_alignment": "center middle",
+              "content_in_container": true,
+              "content_position": "left middle",
+              "text_alignment": "center",
+              "text_size": "medium",
+              "text_color": "black",
+              "subheading": "<span class=\"font__weight-medium\">For Booklovers.<\/span>",
+              "title": "<span class=\"font__weight-medium\">A World of Books for<br> Young and Old.<\/span>",
+              "description": "",
+              "button_text": "Shop now",
+              "button_link": "",
+              "button_style": "sf__btn-primary",
+              "button_size": "sf__btn-small",
+              "show_footer": false,
+              "footer_alignment": "end",
+              "footer_text": "New Collection",
+              "footer_button": "Shop Now",
+              "footer_link": ""
+            }
+          }
+        },
+        "block_order": [
+          "1621243260e1af0c20-0",
+          "1621243260e1af0c20-1",
+          "1621243260e1af0c20-2"
+        ],
+        "settings": {
+          "container": "w-full",
+          "slideshow_height": "fullscreen",
+          "show_overlay": false,
+          "dots_position": "bottom",
+          "dots_color": "dark",
+          "show_dots": true,
+          "show_arrows": false,
+          "autorotate": true,
+          "autorotate_speed": 5,
+          "custom_class": ""
+        }
+      },
+      "content-before-products": {
+        "type": "content-before-products",
+        "settings": {
+          "container": "container-fluid",
+          "background_color": "",
+          "gap": 30,
+          "gap_mobile": 16
+        }
+      },
+      "collection-template": {
+        "type": "collection-template",
+        "settings": {
+          "container": "container",
+          "grid_layout": "grid",
+          "grid_columns": "4",
+          "pagination_limit": "12",
+          "collection_paginate": "paginate",
+          "show_filter": true,
+          "sidebar": "fixed"
+        }
+      },
+      "content-after-products": {
+        "type": "content-after-products",
+        "settings": {
+          "container": "container-fluid",
+          "background_color": "",
+          "gap": 30,
+          "gap_mobile": 16
+        }
+      },
+      "162209953296371dbc": {
+        "type": "icon-box",
+        "blocks": {
+          "162209953296371dbc-2": {
+            "type": "iconbox",
+            "settings": {
+              "title": "<span class=\"font-body capitalize\">recommended books<\/span>",
+              "description": "<p>Turn organization into decor with a multi-use, three-tier rack that’s beautiful in any room<\/p>",
+              "link": "",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "sf__btn-link",
+              "button_size": ""
+            }
+          },
+          "162209953296371dbc-1": {
+            "type": "iconbox",
+            "settings": {
+              "title": "<span class=\"font-body capitalize\">comming soon<\/span>",
+              "description": "<p>Turn organization into decor with a multi-use, three-tier rack that’s beautiful in any room<\/p>",
+              "link": "",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "sf__btn-link",
+              "button_size": ""
+            }
+          },
+          "162209953296371dbc-0": {
+            "type": "iconbox",
+            "settings": {
+              "title": "<span class=\"font-body capitalize\">Featured people<\/span>",
+              "description": "<p>Turn organization into decor with a multi-use, three-tier rack that’s beautiful in any room<\/p>",
+              "link": "",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "sf__btn-secondary",
+              "button_size": ""
+            }
+          }
+        },
+        "block_order": [
+          "162209953296371dbc-2",
+          "162209953296371dbc-1",
+          "162209953296371dbc-0"
+        ],
+        "settings": {
+          "heading": "Member Favorites",
+          "subheading": "",
+          "description": "",
+          "header_alignment": "left",
+          "container": "container",
+          "background_color": "rgba(0,0,0,0)",
+          "item_per_row": 3,
+          "item_gap": 30,
+          "item_gap_mobile": 10,
+          "card_style": "vertical",
+          "image_max_width": "",
+          "content_alignment": "center",
+          "hover_effect": "none",
+          "enable_slider": true,
+          "show_pagination": true,
+          "show_navigation": false,
+          "use_scroll_mobile": true,
+          "use_grid_column_mb": false,
+          "custom_class": ""
+        }
+      },
+      "1622102101fd8de171": {
+        "type": "featured-collection",
+        "settings": {
+          "heading": "Bestsellers",
+          "subheading": "",
+          "description": "",
+          "header_alignment": "left",
+          "container": "container",
+          "background_color": "rgba(0,0,0,0)",
+          "collection": "books",
+          "product_to_show": 4,
+          "items_per_row": 4,
+          "item_gap": 30,
+          "pcard_layout": "",
+          "pcard_image_ratio": "",
+          "show_vendor": false,
+          "enable_slider": false,
+          "show_pagination": false,
+          "show_navigation": false,
+          "button_type": "link",
+          "button_text": "",
+          "button_style": "sf__btn-primary",
+          "button_size": "",
+          "infinite_load": false,
+          "max_page_load": 3,
+          "use_scroll_mobile": true,
+          "item_gap_mobile": 10,
+          "custom_class": ""
+        }
+      },
+      "1622189076591a7637": {
+        "type": "image-with-text",
+        "settings": {
+          "heading": "",
+          "subheading": "",
+          "container": "container",
+          "background_color": "rgba(0,0,0,0)",
+          "item_gap": 100,
+          "item_gap_mobile": 30,
+          "layout": "left",
+          "image_column_size": "6",
+          "title": "Inspiration for<br> Every Age.",
+          "sub_title": "",
+          "text": "<p>81% of students whom traditionally used bound books to conduct research are now using digital devices.<\/p>",
+          "text_size": "medium",
+          "content_alignment": "left",
+          "button_label": "Shop Now",
+          "button_link": "",
+          "button_style": "sf__btn-primary",
+          "button_size": "",
+          "custom_class": ""
+        }
+      },
+      "16221893455845f8d5": {
+        "type": "featured-collection",
+        "settings": {
+          "heading": "Just Released",
+          "subheading": "",
+          "description": "",
+          "header_alignment": "left",
+          "container": "container",
+          "background_color": "rgba(0,0,0,0)",
+          "collection": "just-realease-book",
+          "product_to_show": 5,
+          "items_per_row": 5,
+          "item_gap": 30,
+          "pcard_layout": "",
+          "pcard_image_ratio": "",
+          "show_vendor": false,
+          "enable_slider": false,
+          "show_pagination": false,
+          "show_navigation": false,
+          "button_type": "link",
+          "button_text": "",
+          "button_style": "sf__btn-primary",
+          "button_size": "",
+          "infinite_load": false,
+          "max_page_load": 3,
+          "use_scroll_mobile": true,
+          "item_gap_mobile": 10,
+          "custom_class": ""
+        }
+      },
+      "1622189507ee6bfe14": {
+        "type": "custom-content",
+        "blocks": {
+          "33849c4b-a883-440c-befb-40afc37629fe": {
+            "type": "image_card",
+            "settings": {
+              "width": "50%",
+              "content_position": "center_left",
+              "content_alignment": "center",
+              "text_size": "medium",
+              "text_color": "black",
+              "link": "",
+              "title": "Feature Book<br> of The Month",
+              "subtitle": "",
+              "button_label": "Discover now",
+              "button_style": "sf__btn-link",
+              "button_size": "sf__btn-small",
+              "block_custom_class": ""
+            }
+          },
+          "2a990eee-7285-4608-88ca-63bc3948ce0a": {
+            "type": "image_card",
+            "settings": {
+              "width": "50%",
+              "content_position": "center_left",
+              "content_alignment": "center",
+              "text_size": "medium",
+              "text_color": "black",
+              "link": "",
+              "title": "Meat your next<br> favorite book",
+              "subtitle": "",
+              "button_label": "Shop now",
+              "button_style": "sf__btn-link",
+              "button_size": "sf__btn-small",
+              "block_custom_class": ""
+            }
+          }
+        },
+        "block_order": [
+          "33849c4b-a883-440c-befb-40afc37629fe",
+          "2a990eee-7285-4608-88ca-63bc3948ce0a"
+        ],
+        "settings": {
+          "heading": "",
+          "subheading": "",
+          "description": "",
+          "header_alignment": "center",
+          "container": "container",
+          "background_color": "",
+          "gap": 30,
+          "use_scroll_mobile": false,
+          "gap_mobile": 16,
+          "custom_class": "sf__index-custom-content-1"
+        }
+      },
+      "16221897825fc7d563": {
+        "type": "collection-list",
+        "blocks": {
+          "16221897825fc7d563-0": {
+            "type": "collection_block",
+            "settings": {
+              "collection": "livings-book",
+              "title": ""
+            }
+          },
+          "16221897825fc7d563-1": {
+            "type": "collection_block",
+            "settings": {
+              "collection": "for-kids-books",
+              "title": ""
+            }
+          },
+          "16221897825fc7d563-2": {
+            "type": "collection_block",
+            "settings": {
+              "collection": "life-style-book",
+              "title": ""
+            }
+          },
+          "9212999b-c293-42d0-99b8-4f2a076e87ad": {
+            "type": "collection_block",
+            "settings": {
+              "collection": "cooking-book",
+              "title": ""
+            }
+          },
+          "df6b1871-a6c9-4f6b-8ff7-b114cf85311f": {
+            "type": "collection_block",
+            "settings": {
+              "collection": "zodiac-book",
+              "title": ""
+            }
+          }
+        },
+        "block_order": [
+          "16221897825fc7d563-0",
+          "16221897825fc7d563-1",
+          "16221897825fc7d563-2",
+          "9212999b-c293-42d0-99b8-4f2a076e87ad",
+          "df6b1871-a6c9-4f6b-8ff7-b114cf85311f"
+        ],
+        "settings": {
+          "heading": "Shop by Categories",
+          "subheading": "",
+          "description": "81% of students whom traditionally used bound books to conduct research<br> are now using digital devices.",
+          "header_alignment": "center",
+          "container": "container",
+          "background_color": "",
+          "layout": "grid",
+          "card_style": "standard",
+          "text_alignment": "center",
+          "hover_effect": "scaling-down",
+          "show_product_count": true,
+          "count_inline_title": true,
+          "image_rounded": false,
+          "items_per_row": 5,
+          "item_gap": 30,
+          "enable_slider": false,
+          "show_pagination": false,
+          "show_navigation": false,
+          "autorotate": false,
+          "autorotate_speed": 5,
+          "use_scroll_mobile": true,
+          "mobile_gap": 10,
+          "hidden_slide_control_mobile": false,
+          "custom_class": ""
+        }
+      },
+      "1622194006727ec921": {
+        "type": "custom-content",
+        "blocks": {
+          "2574140b-157e-4d1e-998f-f40bb18fdb07": {
+            "type": "html",
+            "settings": {
+              "code": "<div class=\"custom__html-block2\">\n<div class=\"block__content rte\">\n<h3>Join the Community<\/h3>\n<p>81% of students whom traditionally used bound books to<br> conduct research are now using digital devices.<\/p>\n<div class=\"block__social\">\n<ul>\n<li><a href=\"#\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/fb.png?v=1622194623\">137k Followers<\/a><\/li>\n<li><a href=\"#\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/ins.png?v=1622194623\">21k Followers<\/a><\/li>\n<li><a href=\"#\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/twt.png?v=1622194623\">21k Followers<\/a><\/li>\n<\/ul>\n<\/div>\n<\/div>\n<\/div>",
+              "width": "100%",
+              "block_custom_class": ""
+            }
+          }
+        },
+        "block_order": [
+          "2574140b-157e-4d1e-998f-f40bb18fdb07"
+        ],
+        "settings": {
+          "heading": "",
+          "subheading": "",
+          "description": "",
+          "header_alignment": "center",
+          "container": "container",
+          "background_color": "",
+          "gap": 30,
+          "use_scroll_mobile": false,
+          "gap_mobile": 16,
+          "custom_class": ""
+        }
+      },
+      "1622195298f9850c12": {
+        "type": "custom-content",
+        "blocks": {
+          "2896ff1d-b246-4d01-bde5-d993aa527afb": {
+            "type": "html",
+            "settings": {
+              "code": "<div class=\"custom__html-block1\">\n<div class=\"block__content flex items-center\">\n<img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/12.png?v=1622195418\">\n<div class=\"block__content-text\">\n<div class=\"block__heading\">\n<h3>Summer’s Most Anticipated Reads<\/h3>\n<p>The biggist books oth the season!<\/p>\n<\/div>\n<div class=\"block__action\">\n<a href=\"#\" class=\"sf__btn sf__btn-primary\">Shop Now<\/a>\n<\/div>\n<\/div>\n<\/div>\n<\/div>",
+              "width": "100%",
+              "block_custom_class": ""
+            }
+          }
+        },
+        "block_order": [
+          "2896ff1d-b246-4d01-bde5-d993aa527afb"
+        ],
+        "settings": {
+          "heading": "",
+          "subheading": "",
+          "description": "",
+          "header_alignment": "center",
+          "container": "container",
+          "background_color": "",
+          "gap": 30,
+          "use_scroll_mobile": false,
+          "gap_mobile": 16,
+          "custom_class": ""
+        }
+      },
+      "annoucement": {
+        "type": "annoucement",
+        "settings": {
+          "show_announcement": true,
+          "homepage_only": true,
+          "show_close": false,
+          "message": "Free shipping on all U.S. orders $500+",
+          "message_link": "",
+          "show_divider": false
+        }
+      },
+      "mobile-sticky-bar": {
+        "type": "mobile-sticky-bar",
+        "settings": {
+          "show_mobile_sticky": true,
+          "show_home_icon": true,
+          "show_collection_icon": true,
+          "show_cart_icon": true,
+          "show_search_icon": true,
+          "show_account_icon": false,
+          "show_wishlist_icon": false
+        }
+      }
+    },
+    "content_for_index": [
+      "1621243260e1af0c20",
+      "162209953296371dbc",
+      "1622195298f9850c12",
+      "1622102101fd8de171",
+      "1622189076591a7637",
+      "16221893455845f8d5",
+      "1622189507ee6bfe14",
+      "16221897825fc7d563",
+      "1622194006727ec921"
+    ]
+  },
+  "presets": {
+    "Default": {
+      "sections": {
+        "featured-collection": {
+          "type": "featured-collection",
+          "settings": {
+            "collection": "frontpage"
+          }
+        },
+        "featured-product": {
+          "type": "featured-product",
+          "settings": {
+          }
+        }
+      },
+      "content_for_index": [
+        "featured-collection",
+        "featured-product"
+      ]
+    }
+  }
+}

@@ -1,0 +1,429 @@
+{
+  "sections": {
+    "1623055262061579c3": {
+      "type": "slider",
+      "blocks": {
+        "1623055262061579c3-2": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center middle",
+            "content_in_container": true,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "🔥  Hot Deal This Week",
+            "title": "Bluetooth Wireless <br>Earbuds Headphone",
+            "description": "",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        },
+        "1623055262061579c3-0": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "left middle",
+            "content_in_container": true,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "🔥  Hot Deal This Week",
+            "title": "Camera AI Human<br> Detection Waterproof",
+            "description": "",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        },
+        "1623055262061579c3-1": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center middle",
+            "content_in_container": true,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "🔥  Hot Deal This Week",
+            "title": "Portable Bluetooth<br> \n4.2 Speaker",
+            "description": "",
+            "button_text": "Shop now",
+            "button_link": "",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "1623055262061579c3-2",
+        "1623055262061579c3-0",
+        "1623055262061579c3-1"
+      ],
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "medium",
+        "show_overlay": false,
+        "dots_position": "bottom",
+        "dots_color": "dark",
+        "show_dots": true,
+        "show_arrows": true,
+        "autorotate": true,
+        "autorotate_speed": 5,
+        "custom_class": "sf__index-slideshow"
+      }
+    },
+    "1623056509cc5f2f37": {
+      "type": "custom-content",
+      "blocks": {
+        "677e8671-7419-4933-810d-c694da920731": {
+          "type": "image_card",
+          "settings": {
+            "width": "33%",
+            "content_position": "top_left",
+            "content_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "link": "",
+            "title": "New Generation<br>  Power Bank",
+            "subtitle": "",
+            "button_label": "Show Now",
+            "button_style": "sf__btn-link",
+            "button_size": "",
+            "block_custom_class": ""
+          }
+        },
+        "a151d252-bb83-45fd-9854-7d10b257a0c1": {
+          "type": "image_card",
+          "settings": {
+            "width": "33%",
+            "content_position": "top_left",
+            "content_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "link": "",
+            "title": "Sonos Radio HD<br>  is here",
+            "subtitle": "",
+            "button_label": "Shop Now",
+            "button_style": "sf__btn-link",
+            "button_size": "",
+            "block_custom_class": ""
+          }
+        },
+        "406a0be3-a072-4c74-8646-36736f2bb14f": {
+          "type": "image_card",
+          "settings": {
+            "width": "33%",
+            "content_position": "top_left",
+            "content_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "link": "",
+            "title": "Modern & Style<br>  Headphones",
+            "subtitle": "",
+            "button_label": "Shop Now",
+            "button_style": "sf__btn-link",
+            "button_size": "",
+            "block_custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "677e8671-7419-4933-810d-c694da920731",
+        "a151d252-bb83-45fd-9854-7d10b257a0c1",
+        "406a0be3-a072-4c74-8646-36736f2bb14f"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "left",
+        "container": "container",
+        "background_color": "",
+        "gap": 30,
+        "use_scroll_mobile": false,
+        "gap_mobile": 16,
+        "custom_class": "sf__index-custom-content-1"
+      }
+    },
+    "16230573097bab1619": {
+      "type": "collection-list",
+      "blocks": {
+        "16230573097bab1619-0": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "electronic",
+            "title": "Headphones"
+          }
+        },
+        "16230573097bab1619-1": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "recommend-for-you-electronic",
+            "title": "Speakers"
+          }
+        },
+        "16230573097bab1619-2": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "this-weeks-highlights-electronic",
+            "title": "Smart Phones"
+          }
+        },
+        "2724c962-617f-4c41-8a30-8834bcef13ae": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "electronic",
+            "title": "Computers"
+          }
+        },
+        "f467e035-a014-44d0-a353-0368afb17bc0": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "electronic",
+            "title": "Cameras"
+          }
+        }
+      },
+      "block_order": [
+        "16230573097bab1619-0",
+        "16230573097bab1619-1",
+        "16230573097bab1619-2",
+        "2724c962-617f-4c41-8a30-8834bcef13ae",
+        "f467e035-a014-44d0-a353-0368afb17bc0"
+      ],
+      "settings": {
+        "heading": "Trending Collection",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "",
+        "layout": "grid",
+        "card_style": "standard",
+        "text_alignment": "center",
+        "hover_effect": "moving",
+        "show_product_count": true,
+        "count_inline_title": true,
+        "image_rounded": true,
+        "items_per_row": 5,
+        "item_gap": 50,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "autorotate": false,
+        "autorotate_speed": 5,
+        "use_scroll_mobile": true,
+        "mobile_gap": 10,
+        "hidden_slide_control_mobile": false,
+        "custom_class": "sf__index-collection-list"
+      }
+    },
+    "1623057547d473c79b": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "This week’s highlights",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "this-weeks-highlights-electronic",
+        "product_to_show": 8,
+        "items_per_row": 4,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": true,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "button_type": "link",
+        "button_text": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 10,
+        "custom_class": ""
+      }
+    },
+    "162305759480740d9f": {
+      "type": "custom-content",
+      "blocks": {
+        "020ebf91-d5c2-4af0-bdd1-dc852a4cd288": {
+          "type": "html",
+          "settings": {
+            "code": "<div class=\"custom__html-block\">\n<div class=\"left__content\">\n<h3>Sony Headphone<br>\nDiscount 20%<\/h3>\n<p>Whether you’re out to play or stepping out to<br> make a fashionable statement.<\/p>\n<\/div>\n<div class=\"right__content\">\n<span>$139.00<\/span><h3>$129.00<\/h3>\n<a href=\"#\" class=\"sf__btn sf__btn-primary\">Shop Now<\/a>\n<\/div>\n<\/div>",
+            "width": "100%",
+            "block_custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "020ebf91-d5c2-4af0-bdd1-dc852a4cd288"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "",
+        "gap": 30,
+        "use_scroll_mobile": false,
+        "gap_mobile": 16,
+        "custom_class": "sf__index-custom-content-2"
+      }
+    },
+    "1623057611ccc6abc2": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Recommend for you",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "recommend-for-you-electronic",
+        "product_to_show": 8,
+        "items_per_row": 4,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "enable_slider": true,
+        "show_pagination": true,
+        "show_navigation": true,
+        "button_type": "link",
+        "button_text": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 10,
+        "custom_class": ""
+      }
+    },
+    "162305793116716ca0": {
+      "type": "image-with-text",
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "item_gap": 100,
+        "item_gap_mobile": 30,
+        "layout": "left",
+        "image_column_size": "6",
+        "title": "Get the Ultimate Desktop<br> Setup for Productivity",
+        "sub_title": "",
+        "text": "<p>Explore our latest and greatest electronics and <br\/>accessories  their new features will be sure to blow <br\/>your mind and your workflow.<\/p>",
+        "text_size": "medium",
+        "content_alignment": "left",
+        "button_label": "Shop Setup",
+        "button_link": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "custom_class": ""
+      }
+    },
+    "16230587832da0d130": {
+      "type": "icon-box",
+      "blocks": {
+        "16230587832da0d130-0": {
+          "type": "iconbox",
+          "settings": {
+            "title": "Free Shipping",
+            "description": "<p>Get complimentary ground shipping on every<br\/> order.Don’t love it? Send it back, on us.<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "16230587832da0d130-1": {
+          "type": "iconbox",
+          "settings": {
+            "title": "Earn Points",
+            "description": "<p>Join Minimog Rewards to earn gift cards<br\/>and enjoy exclusive member benefits.<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "16230587832da0d130-2": {
+          "type": "iconbox",
+          "settings": {
+            "title": "Money Back Gurantee",
+            "description": "<p>We believe getting dressed should be the<br\/> easiest part of your day.<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        }
+      },
+      "block_order": [
+        "16230587832da0d130-0",
+        "16230587832da0d130-1",
+        "16230587832da0d130-2"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "item_per_row": 3,
+        "item_gap": 30,
+        "item_gap_mobile": 10,
+        "card_style": "vertical",
+        "image_max_width": "70px",
+        "content_alignment": "center",
+        "hover_effect": "none",
+        "enable_slider": false,
+        "show_pagination": true,
+        "show_navigation": false,
+        "use_scroll_mobile": false,
+        "use_grid_column_mb": false,
+        "custom_class": "sf__index-icon-box"
+      }
+    }
+  },
+  "order": [
+    "1623055262061579c3",
+    "1623056509cc5f2f37",
+    "16230573097bab1619",
+    "1623057547d473c79b",
+    "162305759480740d9f",
+    "1623057611ccc6abc2",
+    "162305793116716ca0",
+    "16230587832da0d130"
+  ]
+}

@@ -1,0 +1,395 @@
+{
+  "sections": {
+    "16184552193b4706ec": {
+      "type": "slider",
+      "blocks": {
+        "16184552193b4706ec-0": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "black",
+            "subheading": "<span class=\"font-semibold\">New Arrivals<\/span>",
+            "title": "The Perfect<br>\nMatch",
+            "description": "<p>Here is your chance to upgrade your wardrobe <br\/>with a variation of styles and fits that are both<br\/>feminine and relaxed.<\/p>",
+            "button_text": "Shop Collection",
+            "button_link": "shopify:\/\/collections\/braided-sandals",
+            "button_style": "sf__btn-link",
+            "button_size": "",
+            "show_footer": true,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        },
+        "16184552193b4706ec-1": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "black",
+            "subheading": "<span class=\"font-semibold\">New Arrivals<\/span>",
+            "title": "Everyday<br>\nFashion",
+            "description": "<p>Be your own label.<\/p><p>We’re unique no matter how you put it.<br\/><br\/><\/p>",
+            "button_text": "Shop Collection",
+            "button_link": "shopify:\/\/collections\/leather-boots",
+            "button_style": "sf__btn-link",
+            "button_size": "",
+            "show_footer": true,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        },
+        "16184552193b4706ec-2": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "black",
+            "subheading": "<span class=\"font-semibold\">New Arrivals<\/span>",
+            "title": "We Promise<br>\nComfort",
+            "description": "<p>The ultimate clothing to see the world in. <\/p><p>Keep calm & surround yourself with fashion.<\/p>",
+            "button_text": "Shop Collection",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": "",
+            "show_footer": true,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "16184552193b4706ec-0",
+        "16184552193b4706ec-1",
+        "16184552193b4706ec-2"
+      ],
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "fullscreen",
+        "show_overlay": false,
+        "dots_position": "right",
+        "dots_color": "dark",
+        "show_dots": true,
+        "show_arrows": false,
+        "autorotate": true,
+        "autorotate_speed": 5,
+        "custom_class": "sf__index-slideshow"
+      }
+    },
+    "1618459461b6f9a6ca": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "The boutique style guide",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "best-sellers",
+        "product_to_show": 4,
+        "items_per_row": 4,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "button_type": "link",
+        "button_text": "Shop Now",
+        "button_style": "sf__btn-secondary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 16,
+        "custom_class": "sf__index-featured-collection"
+      }
+    },
+    "162649701252644156": {
+      "type": "image-with-text-1",
+      "blocks": {
+        "162649701252644156-0": {
+          "type": "item",
+          "settings": {
+            "content_position": "bottom_center",
+            "content_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "link": "shopify:\/\/collections\/accessories",
+            "title": "",
+            "subtitle": "",
+            "button_label": "Accessories",
+            "button_style": "sf__btn-white",
+            "button_size": ""
+          }
+        },
+        "162649701252644156-1": {
+          "type": "item",
+          "settings": {
+            "content_position": "bottom_center",
+            "content_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "link": "shopify:\/\/collections\/coat-jacket",
+            "title": "",
+            "subtitle": "",
+            "button_label": "Coats & Jackets",
+            "button_style": "sf__btn-white",
+            "button_size": ""
+          }
+        },
+        "162649701252644156-3": {
+          "type": "item",
+          "settings": {
+            "content_position": "bottom_center",
+            "content_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "link": "shopify:\/\/collections\/leather-bag",
+            "title": "",
+            "subtitle": "",
+            "button_label": "Handbags",
+            "button_style": "sf__btn-white",
+            "button_size": ""
+          }
+        },
+        "162649701252644156-2": {
+          "type": "item",
+          "settings": {
+            "content_position": "bottom_center",
+            "content_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "link": "shopify:\/\/collections\/glasses",
+            "title": "",
+            "subtitle": "",
+            "button_label": "Glasses",
+            "button_style": "sf__btn-white",
+            "button_size": ""
+          }
+        },
+        "162649701252644156-4": {
+          "type": "item",
+          "settings": {
+            "content_position": "bottom_center",
+            "content_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "link": "shopify:\/\/collections\/sandals",
+            "title": "",
+            "subtitle": "",
+            "button_label": "Sandals",
+            "button_style": "sf__btn-white",
+            "button_size": ""
+          }
+        }
+      },
+      "block_order": [
+        "162649701252644156-0",
+        "162649701252644156-1",
+        "162649701252644156-3",
+        "162649701252644156-2",
+        "162649701252644156-4"
+      ],
+      "settings": {
+        "heading": "Featured collection",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "layout": "layout_2",
+        "gap": 30,
+        "use_scroll_mobile": true,
+        "mobile_gap": 16,
+        "custom_class": "sf__index-img-card"
+      }
+    },
+    "1626497692ca134a24": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Apparels on air this week",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "this-week-instyle",
+        "product_to_show": 4,
+        "items_per_row": 4,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "button_type": "link",
+        "button_text": "Shop Now",
+        "button_style": "sf__btn-secondary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 16,
+        "custom_class": "sf__index-featured-collection"
+      }
+    },
+    "1626504467903b69a1": {
+      "type": "image-with-text",
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "item_gap": 70,
+        "item_gap_mobile": 16,
+        "layout": "left",
+        "image_column_size": "7",
+        "title": "<span class=\"leading-snug\">Poplin top with <br>ruffle trim<\/span>",
+        "sub_title": "",
+        "text": "<p>We believe in crafting pieces where sustainability and<br\/> style go hand in hand. Made from materials like<br\/> recycled cashmere and sust.<\/p>",
+        "text_size": "medium",
+        "content_alignment": "left",
+        "button_label": "Shop Collection",
+        "button_link": "shopify:\/\/collections\/jeans",
+        "button_style": "sf__btn-link",
+        "button_size": "",
+        "custom_class": ""
+      }
+    },
+    "162650455429881ee3": {
+      "type": "blog-posts",
+      "settings": {
+        "heading": "Mix and Match",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "blog": "mix-and-match-ready-to-wear",
+        "limit": 3,
+        "column": 3,
+        "column_gap": 30,
+        "mobile_gap": 16,
+        "article_image_aspect_ratio": "16\/9",
+        "article_align_content": "text-left",
+        "article_show_tags": true,
+        "article_show_date": false,
+        "article_show_excerpt": false,
+        "article_show_button": false,
+        "button_link": "shopify:\/\/blogs\/mix-and-match",
+        "button_text": "More Posts",
+        "button_style": "sf__btn-secondary",
+        "button_size": "",
+        "use_scroll_mobile": false,
+        "custom_class": "sf__index-blog-posts"
+      }
+    },
+    "162650467894cbb75d": {
+      "type": "icon-box",
+      "blocks": {
+        "162650467894cbb75d-0": {
+          "type": "iconbox",
+          "settings": {
+            "title": "Free Shipping",
+            "description": "<p>Free Shipping for orders over £130<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "162650467894cbb75d-1": {
+          "type": "iconbox",
+          "settings": {
+            "title": "Money Guarantee",
+            "description": "<p>Within 30 days for an exchange.<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "162650467894cbb75d-2": {
+          "type": "iconbox",
+          "settings": {
+            "title": "Online Support",
+            "description": "<p>24 hours a day, 7 days a week<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "f65a24b6-5101-479e-830e-0f7ca5263630": {
+          "type": "iconbox",
+          "settings": {
+            "title": "Flexible Payment",
+            "description": "<p>Pay with Multiple Credit Cards<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        }
+      },
+      "block_order": [
+        "162650467894cbb75d-0",
+        "162650467894cbb75d-1",
+        "162650467894cbb75d-2",
+        "f65a24b6-5101-479e-830e-0f7ca5263630"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "#ffffff",
+        "item_per_row": 4,
+        "item_gap": 30,
+        "item_gap_mobile": 10,
+        "card_style": "horizontal",
+        "image_max_width": "30px",
+        "content_alignment": "start",
+        "hover_effect": "none",
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "use_scroll_mobile": false,
+        "use_grid_column_mb": false,
+        "custom_class": "sf__index-icon-box"
+      }
+    }
+  },
+  "order": [
+    "16184552193b4706ec",
+    "1618459461b6f9a6ca",
+    "162649701252644156",
+    "1626497692ca134a24",
+    "1626504467903b69a1",
+    "162650455429881ee3",
+    "162650467894cbb75d"
+  ]
+}

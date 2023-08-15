@@ -1,0 +1,297 @@
+{
+  "sections": {
+    "1623223002c02c7263": {
+      "type": "slider",
+      "blocks": {
+        "1623223002c02c7263-0": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center middle",
+            "content_in_container": false,
+            "content_position": "left bottom",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "white",
+            "subheading": "<span class=\"uppercase tracking-wide font-bold\">the best quality<\/span>",
+            "title": "<span style=\"font-size: 100px;\">BABER SHOP<\/span>",
+            "description": "",
+            "button_text": "SHOP NOW",
+            "button_link": "",
+            "button_style": "sf__btn-primary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        },
+        "1623223002c02c7263-1": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center middle",
+            "content_in_container": false,
+            "content_position": "left bottom",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "white",
+            "subheading": "<span class=\"uppercase tracking-wide font-bold\">New Collection<\/span>",
+            "title": "<span style=\"font-size: 100px; text-transform: uppercase;\">authentic peace<\/span>",
+            "description": "",
+            "button_text": "SHOP NOW",
+            "button_link": "",
+            "button_style": "sf__btn-primary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        },
+        "1623223002c02c7263-2": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center middle",
+            "content_in_container": false,
+            "content_position": "left bottom",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "white",
+            "subheading": "<span class=\"uppercase tracking-wide font-bold\">Stay Stylish<\/span>",
+            "title": "<span style=\"font-size: 100px; text-transform: uppercase;\">Be our customer<\/span>",
+            "description": "",
+            "button_text": "SHOP NOW",
+            "button_link": "",
+            "button_style": "sf__btn-primary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "1623223002c02c7263-0",
+        "1623223002c02c7263-1",
+        "1623223002c02c7263-2"
+      ],
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "fullscreen",
+        "show_overlay": false,
+        "dots_position": "right",
+        "dots_color": "#fff",
+        "show_dots": true,
+        "show_arrows": false,
+        "autorotate": false,
+        "autorotate_speed": 5,
+        "custom_class": "sf__index-slideshow"
+      }
+    },
+    "162322539058f7ea8a": {
+      "type": "custom-content",
+      "settings": {
+        "heading": "QUALITY, PASSION, PRECISION",
+        "subheading": "ABOUT US",
+        "description": "We work closely with our team of artisan shoemakers in Italy, utilizing sustainable materials and processes to develop a new kind of luxury - a luxury that seeks to slow the fashion cycle, a luxury that focuses on craftsmanship and a luxury that helps to increase",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "",
+        "gap": 30,
+        "use_scroll_mobile": false,
+        "gap_mobile": 16,
+        "custom_class": "sf__index-custom-content-1"
+      }
+    },
+    "1623225671e61658ef": {
+      "type": "custom-content",
+      "blocks": {
+        "e100312a-df35-44a9-a7cd-352896db0433": {
+          "type": "image_card",
+          "settings": {
+            "width": "50%",
+            "content_position": "bottom_left",
+            "content_alignment": "center",
+            "text_size": "large",
+            "text_color": "white",
+            "link": "",
+            "title": "<span class=\"uppercase\">essensitals<\/span>",
+            "subtitle": "",
+            "button_label": "",
+            "button_style": "sf__btn-primary",
+            "button_size": "",
+            "block_custom_class": ""
+          }
+        },
+        "98da5699-651f-4d5a-b9be-28ece4e96404": {
+          "type": "image_card",
+          "settings": {
+            "width": "50%",
+            "content_position": "bottom_left",
+            "content_alignment": "center",
+            "text_size": "large",
+            "text_color": "white",
+            "link": "",
+            "title": "<span class=\"uppercase\">grooming<span><\/span><\/span>",
+            "subtitle": "",
+            "button_label": "",
+            "button_style": "sf__btn-primary",
+            "button_size": "",
+            "block_custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "e100312a-df35-44a9-a7cd-352896db0433",
+        "98da5699-651f-4d5a-b9be-28ece4e96404"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "",
+        "gap": 30,
+        "use_scroll_mobile": false,
+        "gap_mobile": 16,
+        "custom_class": ""
+      }
+    },
+    "1623225908b15e81fb": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "CUSTOMER FAVORITES",
+        "subheading": "HOT THIS WEEK",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "barber",
+        "product_to_show": 10,
+        "items_per_row": 5,
+        "item_gap": 30,
+        "pcard_layout": "2",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "button_type": "link",
+        "button_text": "SHOP NOW",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 10,
+        "custom_class": "sf__index-featured-collection"
+      }
+    },
+    "162322613280170962": {
+      "type": "custom-content",
+      "blocks": {
+        "162322613280170962-1": {
+          "type": "image",
+          "settings": {
+            "width": "50%",
+            "alignment": "center",
+            "block_custom_class": ""
+          }
+        },
+        "162322613280170962-0": {
+          "type": "text",
+          "settings": {
+            "title": "CALIFORNIA’S FAVORITE<br>\nHAIR STYLIST.",
+            "subheading": "MEET JAMES",
+            "text": "<p>We work closely with our team of artisan shoemakers in Italy, utilizing sustainable materials and processes to develop a new kind of luxury - a luxury that seeks to slow the fashion cycle, a luxury that focuses on craftsmanship and a luxury that helps to increase <\/p>",
+            "width": "50%",
+            "alignment": "center",
+            "align_text": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "button_label": "ABOUT US",
+            "button_link": "",
+            "button_style": "sf__btn-primary",
+            "button_size": "",
+            "block_custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "162322613280170962-1",
+        "162322613280170962-0"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "",
+        "gap": 0,
+        "use_scroll_mobile": false,
+        "gap_mobile": 16,
+        "custom_class": "sf__index-custom-content-3"
+      }
+    },
+    "1623226617a345e352": {
+      "type": "blog-posts",
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "blog": "barber",
+        "limit": 4,
+        "column": 4,
+        "column_gap": 30,
+        "mobile_gap": 10,
+        "article_image_aspect_ratio": "16\/9",
+        "article_align_content": "text-left",
+        "article_show_tags": true,
+        "article_show_date": false,
+        "article_show_excerpt": false,
+        "article_show_button": false,
+        "button_link": "",
+        "button_text": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "use_scroll_mobile": true,
+        "custom_class": ""
+      }
+    },
+    "1623230332326b7443": {
+      "type": "newsletter",
+      "settings": {
+        "container": "w-full",
+        "background_color": "",
+        "form_layout": "vertical",
+        "form_design": "1",
+        "heading": "GET THE GIFT CARD",
+        "description": "<p>Sign up to our mailing list and get a 10% discount code for your purchase<\/p>",
+        "email_placeholder": "Enter your email",
+        "submit_button": "Subscribe",
+        "text_color": "black",
+        "show_icon": true,
+        "icon_img_width": "60",
+        "show_agreement": true,
+        "term_condition_text": "<p>I agree to the Terms and Conditions.<\/p>"
+      }
+    }
+  },
+  "order": [
+    "1623223002c02c7263",
+    "162322539058f7ea8a",
+    "1623225671e61658ef",
+    "1623225908b15e81fb",
+    "162322613280170962",
+    "1623230332326b7443",
+    "1623226617a345e352"
+  ]
+}

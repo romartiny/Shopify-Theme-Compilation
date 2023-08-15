@@ -1,0 +1,252 @@
+{
+  "current": {
+    "favicon": "shopify:\/\/shop_images\/fav_icon_dark_1.png",
+    "color_primary": "#000000",
+    "color_btn_bg_hover": "#000000",
+    "prod_sale_price_color": "#666666",
+    "prod_type_color": "#666666",
+    "color_main_bg": "#ffffff",
+    "color_field_bg": "#ffffff",
+    "color_topbar_bg": "#000000",
+    "color_topbar_text": "#ffffff",
+    "color_header_bg": "#ffffff",
+    "color_header_link": "#000000",
+    "color_header_transparent": "#ffffff",
+    "color_menu_bar_bg": "#000000",
+    "color_menu_bar_text": "#f8f8f8",
+    "color_footer_bg": "#ffffff",
+    "color_footer_text": "#000000",
+    "color_footer_subtext": "#666666",
+    "color_footer_link_hover": "#000000",
+    "color_footer_bottom_bg": "#ffffff",
+    "img_overlay_opacity": 20,
+    "tooltip_background_color": "#000000",
+    "type_base_font": "roboto_condensed_n4",
+    "use_custom_font_body": true,
+    "custom_body_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Syne-Medium.ttf?v=1621052852@500\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Syne-Bold.ttf?v=1621052871@700",
+    "custom_body_weight": "500",
+    "type_header_font": "roboto_condensed_n7",
+    "use_custom_font_heading": true,
+    "custom_heading_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Syne-Medium.ttf?v=1621052852@500\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Syne-Bold.ttf?v=1621052871@700",
+    "custom_heading_weight": "700",
+    "type_header_base_size": 34,
+    "btn_weight": "700",
+    "pcard_layout": "2",
+    "pcard_alignment": "center",
+    "pcard_image_ratio": "1\/1",
+    "show_vendor": false,
+    "variant_option_design3": "color",
+    "show_variant_swatch_image": true,
+    "product_colors": "red: #FF6961,\nyellow: #FDDA76,\nblack: #000000,\nblack band: #000000,\nblue: #8DB4D2,\ngreen: #C1E1C1,\npurple: #B19CD9,\nsilver: #EEEEEF,\nwhite: #FFFFFF,\nbrown: #836953,\nlight brown: #B5651D,\ndark turquoise: #23cddc,\norange: #FFB347,\ntan: #E9D1BF,\nviolet: #B490B0,\npink: #FFD1DC,\ngrey: #E0E0E0,\nsky: #96BDC6,\npale leaf: #CCD4BF,\nlight blue: #b1c5d4,\ndark grey: #aca69f,\nbeige: #EBE6DB,\nbeige band: #EED9C4,\ndark blue: #063e66,\ncream: #FFFFCC,\nlight pink: #FBCFCD,\nmint: #bedce3,\ndark gray: #3A3B3C,\nrosy brown: #c4a287,\nlight grey:#D3D3D3,\ncopper: #B87333,\nrose gold: #ECC5C0,\nnight blue: #151B54,\ncoral: #FF7F50,\nlight purple: #C6AEC7",
+    "filter_color1": "",
+    "share_facebook": true,
+    "contact_email": "Hello@domain.com",
+    "social_twitter_link": "https:\/\/twitter.com\/home",
+    "social_facebook_link": "https:\/\/facebook.com\/",
+    "social_pinterest_link": "https:\/\/pinterest.com\/",
+    "social_instagram_link": "https:\/\/instagram.com\/",
+    "wishlist_page": "",
+    "product_compare_page": "",
+    "gm_api": "",
+    "instagram_token": "",
+    "custom_css": ".sf__btn {\n  border-radius: 0;\n}\n.template-index .sf__newsletter-section .newsletter__form-heading svg {\n  display: none;\n}\n.sf-nav li.sf-menu-item-parent {\n  font-size: 14px;\n  font-weight: 700;\n}\n.sf__blog-cardTitle {\n  text-transform: uppercase;\n  font-weight: 700 !important;\n  margin-bottom: 18px !important;\n}\n.sf-footer__block-inner h3 {\n  font-weight: 700;\n}\n.collection-card h3 a {\n  font-weight: 700;\n  text-transform: uppercase;\n}\n.sf__pcard .sf__pcard-content a.sf__pcard-name {\n  text-transform: uppercase;\n  font-weight: 700;\n}\n.sf__btn,\na.sf__btn {\n  border-width: 2px !important;\n}\n.sf__btn.sf__btn-link,\na.sf__btn.sf__btn-link {\n  border-width: 0 !important;\n}\n\n.sf__btn.sf__btn-link::after,\na.sf__btn.sf__btn-link::after,\n.sf__btn.sf__btn-link::before,\na.sf__btn.sf__btn-link::before {\n  height: 1px !important;\n}\n.sf__index-slideshow .slide__block-description,\n.sf__index-hero .sf-hero__content .sf-hero__text {\n  color: #fff;\n}\n.sf-search__form:not(.mobile) {\n  border-width: 0 0 2px;\n  border-radius: 0;\n}\n.sf-search__form:not(.mobile) .sf-search__form-submit {\n  padding-left: 0;\n  margin-left: -5px;\n}\n.sf-search__form:not(.mobile) .sf-search__form-loading {\n  padding-left: 0;\n}\n.sf-search__form:not(.mobile) .sf-search__form-clear {\n  padding-right: 0;\n}\n@media (min-width: 1024px) {\n  .sf__index-slideshow .slide__block-desktop .sf__slide-content {\n    margin-right: 100px;\n  }\n  .sf-footer .sf__footer-bottom .sf__footer-bottom-inner {\n    border-top: 1px solid #eee;\n  }\n}\n@media (max-width: 767px) {\n  .template-index .sf__newsletter-section .sf__newsletter-content {\n    padding: 0 1rem;\n  }\n}\n@media (max-width: 576px) {\n  .sf__index-slideshow .sf__btn-secondary,\n  .sf__index-img-with-text .sf__btn-primary,\n  .sf__index-hero .sf-hero__btn,\n  .sf__index-hero .sf__btn-secondary,\n  .sf__index-blog-posts .sf__btn-primary {\n    width: 100%;\n  }\n}\n.sf__index-collection-list .collection-card__info h3:hover {\n  color: #666666;\n}\n.template-index .sf__newsletter-section .sf__newsletter-form-group input:focus {\n  border-color: #fff !important;\n}\n\n.template-index .sf__newsletter-section .sf__newsletter-form-group:focus {\n  border-color: #fff !important;\n}\n\n.template-index .sf__newsletter-section .sf__newsletter-form-group button:focus {\n  border-color: #fff !important;\n}\n.template-index .sf__newsletter-section .sf__newsletter-form-group:focus-within {\n  border-color: #fff !important;\n}\nsection.sf-header.cart-has-items .sf-cart-count,\n.footer-mobile__common .footer__common-item .sf-cart-count {\n  display: block;\n  line-height: 18px;\n}\n.sf__index-hero .sf-hero__content a.sf__btn:hover {\n  background-color: #fff;\n  box-shadow: 0 0 0 0.2rem #fff;\n  border-color: #fff !important;\n  color: #000 !important;\n}",
+    "use_theme_currencies": true,
+    "theme_currencies": "USD | EUR | GBP | VND",
+    "sections": {
+      "header": {
+        "type": "header",
+        "blocks": {
+          "5e153016-a9d7-46c9-a10e-30d16446793d": {
+            "type": "topbar",
+            "settings": {
+              "show_divider": false,
+              "show_phone_numb": false,
+              "show_email": true,
+              "show_social_links": false,
+              "show_stores_page": true,
+              "show_currency_switcher": true,
+              "show_language_switcher": false,
+              "alert_message": "Open Doors To A World Of Fashion  |  Discover More"
+            }
+          },
+          "b135804f-3206-49ca-9091-538226921152": {
+            "type": "custom_html",
+            "settings": {
+              "heading": "Home",
+              "container": "container",
+              "html": ""
+            }
+          },
+          "1fd64360-82cd-44d8-9e8c-f84fef1d8bb7": {
+            "type": "banner",
+            "settings": {
+              "heading": "Shop",
+              "container": "container",
+              "banner_style": "outside",
+              "banner_link": "",
+              "banner_title": "<span class=\"font-bold\">BEHIND THE DESIGN<\/span>",
+              "banner_desc": "",
+              "banner_button_text": "Read More"
+            }
+          },
+          "6ddb102f-7b55-4270-94c8-85122a5fcce8": {
+            "type": "product-list",
+            "settings": {
+              "heading": "Products",
+              "container": "container-fluid",
+              "stretch_width": false,
+              "collection": "watch-2",
+              "limit": 6,
+              "columns": 2
+            }
+          },
+          "006eeb3d-b2a7-48fc-961f-e1b8d8174628": {
+            "type": "custom_html",
+            "settings": {
+              "heading": "Features",
+              "container": "inherit",
+              "html": ""
+            }
+          }
+        },
+        "block_order": [
+          "5e153016-a9d7-46c9-a10e-30d16446793d",
+          "b135804f-3206-49ca-9091-538226921152",
+          "1fd64360-82cd-44d8-9e8c-f84fef1d8bb7",
+          "6ddb102f-7b55-4270-94c8-85122a5fcce8",
+          "006eeb3d-b2a7-48fc-961f-e1b8d8174628"
+        ],
+        "settings": {
+          "header_design": "logo-center__2l",
+          "container": "container-fluid",
+          "header_sticky": true,
+          "transparent_on_top": false,
+          "logo_text": "MINIMOG",
+          "logo_max_width": 145,
+          "sticky_logo_max_width": 140,
+          "mobile_logo_max_width": 105,
+          "main_menu": "main-menu",
+          "secondary_menu": "",
+          "uppercase_parent_level": true,
+          "search": "show_full",
+          "show_account_icon": true,
+          "show_cart_icon": true,
+          "show_wishlist_icon": true,
+          "show_compare_icon": false,
+          "show_currency_switcher": false,
+          "show_language_switcher": false
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "d8236fc7-5c51-4cfc-83ec-323e039da755": {
+            "type": "custom_text",
+            "settings": {
+              "title": "",
+              "image_max": "150px",
+              "description": "<p>Super class, cute, comfortable. You can wear them with just about anything.<\/p>",
+              "width": "33%"
+            }
+          },
+          "d4a8b403-287a-4d46-959f-869031e55936": {
+            "type": "our_store",
+            "settings": {
+              "title": "COMPANY",
+              "description": "<p>184 Main Rd E, St Albans VIC 3021, Australia.<\/p>",
+              "show_email": true,
+              "show_phone": true,
+              "show_socials_link": false,
+              "width": "25%"
+            }
+          },
+          "49e72833-c68f-4a7b-ab64-3ef0cae99bcb": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "INFORMATION",
+              "width": "25%"
+            }
+          },
+          "c85629c7-7aae-4666-b5f0-150990439c91": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "QUICK LINKS",
+              "width": "25%"
+            }
+          },
+          "b04590a8-1630-49ae-890c-873ef3aa3a94": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "COLLECTIONS",
+              "width": "25%"
+            }
+          }
+        },
+        "block_order": [
+          "d8236fc7-5c51-4cfc-83ec-323e039da755",
+          "d4a8b403-287a-4d46-959f-869031e55936",
+          "49e72833-c68f-4a7b-ab64-3ef0cae99bcb",
+          "c85629c7-7aae-4666-b5f0-150990439c91",
+          "b04590a8-1630-49ae-890c-873ef3aa3a94"
+        ],
+        "settings": {
+          "design": "footer-1",
+          "container": "container-fluid",
+          "bordered": false,
+          "copyright": "<span style=\"color: #777777;\">© MINIMOG 2021<\/span>",
+          "show_currency_selector": false,
+          "show_language_selector": false,
+          "show_social_links": false,
+          "show_payment_icons": true
+        }
+      },
+      "annoucement": {
+        "type": "annoucement",
+        "settings": {
+          "show_announcement": false,
+          "homepage_only": true,
+          "show_close": true,
+          "message": "Free shipping for all orders from $60+",
+          "message_link": "",
+          "show_divider": false
+        }
+      },
+      "mobile-sticky-bar": {
+        "type": "mobile-sticky-bar",
+        "settings": {
+          "show_mobile_sticky": true,
+          "show_home_icon": true,
+          "show_collection_icon": true,
+          "show_cart_icon": true,
+          "show_search_icon": true,
+          "show_account_icon": false,
+          "show_wishlist_icon": false
+        }
+      }
+    }
+  },
+  "presets": {
+    "Default": {
+      "sections": {
+        "featured-collection": {
+          "type": "featured-collection",
+          "settings": {
+            "collection": "frontpage"
+          }
+        },
+        "featured-product": {
+          "type": "featured-product",
+          "settings": {
+          }
+        }
+      },
+      "content_for_index": [
+        "featured-collection",
+        "featured-product"
+      ]
+    }
+  }
+}

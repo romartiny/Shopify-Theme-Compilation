@@ -1,0 +1,339 @@
+{
+  "sections": {
+    "1621243260e1af0c20": {
+      "type": "slider",
+      "blocks": {
+        "1621243260e1af0c20-2": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "TRUE BEAUTY",
+            "description": "<p>Makeup with extended range in colors for every human. Crazy<br\/> long on wear and super sustainable in standards.<\/p>",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections"
+          }
+        },
+        "1621243260e1af0c20-0": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "\bMAKE WAVES",
+            "description": "<p>Your little one will love creating their own tricky<br\/> course with this mini golf set.<\/p>",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections"
+          }
+        },
+        "1621243260e1af0c20-1": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "STAY STYLISH",
+            "description": "<p>Your little one will love creating their own tricky<br\/> course with this mini golf set.<\/p>",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections"
+          }
+        }
+      },
+      "block_order": [
+        "1621243260e1af0c20-2",
+        "1621243260e1af0c20-0",
+        "1621243260e1af0c20-1"
+      ],
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "large",
+        "show_overlay": false,
+        "dots_position": "bottom",
+        "dots_color": "dark",
+        "show_dots": true,
+        "show_arrows": false,
+        "autorotate": true,
+        "autorotate_speed": 5,
+        "custom_class": ""
+      }
+    },
+    "162366334970e94c99": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "<span class=\"sf__heading-style\">BEST ITEMS<\/span>",
+        "subheading": "",
+        "description": "Makeup with extended range in colors for every human. Crazy long on<br> wear and super sustainable in standards.",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "beauty",
+        "product_to_show": 6,
+        "items_per_row": 4,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "enable_slider": true,
+        "show_pagination": true,
+        "show_navigation": true,
+        "button_type": "link",
+        "button_text": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 10,
+        "custom_class": ""
+      }
+    },
+    "1623664609f235a30c": {
+      "type": "custom-content",
+      "blocks": {
+        "50fc1e3c-d439-4982-80eb-8637502fbac7": {
+          "type": "video",
+          "settings": {
+            "video_link": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+            "ratio": "4:3",
+            "video_title": "",
+            "text_size": "medium",
+            "text_color": "white",
+            "play_style": "outline",
+            "play_size": "large",
+            "autoplay": false,
+            "loop": false,
+            "width": "50%",
+            "alignment": "start",
+            "block_custom_class": ""
+          }
+        },
+        "46c1e941-01f0-4143-a966-31a915bb3a18": {
+          "type": "text",
+          "settings": {
+            "title": "<span class=\"sf__heading-style\">DEFINE YOURSELF.<br>\nBE DIFFERENT.<\/span>",
+            "subheading": "",
+            "text": "<p>An independent label created in 2019, LARS KAIZER reinterprets the numerous emblematic theorems of art, science and architecture into wearable statements of non-conformity, enabling the allure of artistic <\/p>",
+            "width": "50%",
+            "alignment": "center",
+            "align_text": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "button_label": "About US",
+            "button_link": "",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "block_custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "50fc1e3c-d439-4982-80eb-8637502fbac7",
+        "46c1e941-01f0-4143-a966-31a915bb3a18"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "",
+        "gap": 95,
+        "use_scroll_mobile": false,
+        "gap_mobile": 16,
+        "custom_class": ""
+      }
+    },
+    "1623739782ad004d16": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "<span class=\"sf__heading-style\">NEW ARRIVALS<\/span>",
+        "subheading": "",
+        "description": "Makeup with extended range in colors for every human. Crazy long\n<br> on wear and super sustainable in standards.",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "new-arrivals-beauty",
+        "product_to_show": 6,
+        "items_per_row": 4,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "enable_slider": true,
+        "show_pagination": true,
+        "show_navigation": true,
+        "button_type": "link",
+        "button_text": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 10,
+        "custom_class": ""
+      }
+    },
+    "1623739887083af1d5": {
+      "type": "countdown-timer",
+      "settings": {
+        "container": "w-full",
+        "section_height": "large",
+        "align": "end",
+        "background_color": "#dacfba",
+        "heading": "<span class=\"sf__heading-style\">BEAUTÉ DOUBLE<\/span>",
+        "time": "2021-08-26 23:00:00",
+        "button_label": "GET ONLY $100",
+        "button_link": "",
+        "button_style": "sf__btn-secondary",
+        "button_size": "",
+        "custom_class": ""
+      }
+    },
+    "1623740078ecd1e0b1": {
+      "type": "press",
+      "blocks": {
+        "1623740078ecd1e0b1-0": {
+          "type": "news",
+          "settings": {
+            "title": "<p>“ Millions of combinations, meaning you get a totally unique piece of furniture exactly the way you want it.”<\/p>",
+            "image": "shopify:\/\/shop_images\/1.png",
+            "image_width": "150px",
+            "url": ""
+          }
+        },
+        "1623740078ecd1e0b1-1": {
+          "type": "news",
+          "settings": {
+            "title": "<p>“ Millions of combinations, meaning you get a totally unique piece of furniture exactly the way you want it.”<\/p>",
+            "image": "shopify:\/\/shop_images\/2.png",
+            "image_width": "150px",
+            "url": ""
+          }
+        },
+        "1623740078ecd1e0b1-2": {
+          "type": "news",
+          "settings": {
+            "title": "<p>“ Millions of combinations, meaning you get a totally unique piece of furniture exactly the way you want it.”<\/p>",
+            "image": "shopify:\/\/shop_images\/3.png",
+            "image_width": "150px",
+            "url": ""
+          }
+        },
+        "1623740078ecd1e0b1-3": {
+          "type": "news",
+          "settings": {
+            "title": "<p>“ Millions of combinations, meaning you get a totally unique piece of furniture exactly the way you want it.”<\/p>",
+            "image_width": "150px",
+            "url": ""
+          }
+        },
+        "1623740078ecd1e0b1-4": {
+          "type": "news",
+          "settings": {
+            "title": "<p>“ Millions of combinations, meaning you get a totally unique piece of furniture exactly the way you want it.”<\/p>",
+            "image_width": "150px",
+            "url": ""
+          }
+        },
+        "1623740078ecd1e0b1-5": {
+          "type": "news",
+          "settings": {
+            "title": "<p>“ Millions of combinations, meaning you get a totally unique piece of furniture exactly the way you want it.”<\/p>",
+            "image_width": "150px",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "1623740078ecd1e0b1-0",
+        "1623740078ecd1e0b1-1",
+        "1623740078ecd1e0b1-2",
+        "1623740078ecd1e0b1-3",
+        "1623740078ecd1e0b1-4",
+        "1623740078ecd1e0b1-5"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "",
+        "show_divider": false,
+        "autoplay": false,
+        "custom_class": ""
+      }
+    },
+    "1623740435ca367129": {
+      "type": "blog-posts",
+      "settings": {
+        "heading": "<span class=\"sf__heading-style\">BEAUTY TIPS<\/span>",
+        "subheading": "",
+        "description": "Makeup with extended range in colors for every human. Crazy long on <br>wear and super sustainable in standards.",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "blog": "beauty-blog",
+        "limit": 4,
+        "column": 4,
+        "column_gap": 30,
+        "mobile_gap": 10,
+        "article_image_aspect_ratio": "16\/9",
+        "article_align_content": "text-center",
+        "article_show_tags": true,
+        "article_show_date": false,
+        "article_show_excerpt": false,
+        "article_show_button": false,
+        "button_link": "",
+        "button_text": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "use_scroll_mobile": true,
+        "custom_class": ""
+      }
+    }
+  },
+  "order": [
+    "1621243260e1af0c20",
+    "162366334970e94c99",
+    "1623664609f235a30c",
+    "1623739782ad004d16",
+    "1623739887083af1d5",
+    "1623740078ecd1e0b1",
+    "1623740435ca367129"
+  ]
+}

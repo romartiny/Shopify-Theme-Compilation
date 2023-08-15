@@ -1,0 +1,394 @@
+{
+  "sections": {
+    "1621243260e1af0c20": {
+      "type": "slider",
+      "blocks": {
+        "1621243260e1af0c20-0": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify:\/\/shop_images\/1_bc213914-3561-4472-8913-aba3b025ad82.jpg",
+            "mb_background": "shopify:\/\/shop_images\/mb1.jpg",
+            "image_alignment": "center top",
+            "content_in_container": true,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "Every dog has<br>\ntheir dish",
+            "description": "<p>Great food starts with natural ingredients.<\/p>",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-primary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections"
+          }
+        },
+        "1621243260e1af0c20-1": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify:\/\/shop_images\/2_ce121867-c57d-4006-8e7c-6d3c21636be7.jpg",
+            "mb_background": "shopify:\/\/shop_images\/mb2.jpg",
+            "image_alignment": "center top",
+            "content_in_container": true,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "Every dog has<br>\ntheir dish",
+            "description": "<p>Great food starts with natural ingredients.<\/p>",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-primary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections"
+          }
+        },
+        "1621243260e1af0c20-2": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify:\/\/shop_images\/3_b82b66f9-43ce-43d9-8af4-9b61d7502ffb.jpg",
+            "mb_background": "shopify:\/\/shop_images\/mb3.jpg",
+            "image_alignment": "center top",
+            "content_in_container": true,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "Every dog has<br>\ntheir dish",
+            "description": "<p>Great food starts with natural ingredients.<\/p>",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-primary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections"
+          }
+        }
+      },
+      "block_order": [
+        "1621243260e1af0c20-0",
+        "1621243260e1af0c20-1",
+        "1621243260e1af0c20-2"
+      ],
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "large",
+        "show_overlay": false,
+        "dots_position": "right",
+        "dots_color": "dark",
+        "show_dots": true,
+        "show_arrows": false,
+        "autorotate": true,
+        "autorotate_speed": 5
+      }
+    },
+    "1626366077b1048cd5": {
+      "type": "image-with-text",
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "item_gap": 100,
+        "item_gap_mobile": 30,
+        "image": "shopify:\/\/shop_images\/4_f74d0f00-c053-4370-aeb8-e316a3685462.jpg",
+        "layout": "left",
+        "image_column_size": "6",
+        "title": "Organic, Plant-Based<br> \nSuperfoods",
+        "sub_title": "",
+        "text": "<p>We’ll make some perfectly personalised recommendations,<br\/> tailored to your pet's needs. Flea protection from £6.50 a <br\/>month and delicious food, delivered free.<\/p>",
+        "text_size": "medium",
+        "content_alignment": "left",
+        "button_label": "Read More",
+        "button_link": "",
+        "button_style": "sf__btn-primary",
+        "button_size": ""
+      }
+    },
+    "1630658749b620aaca": {
+      "type": "icon-box",
+      "blocks": {
+        "1630658749772df696-0": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/5_4b7d074e-8309-4b9c-8ce7-99eca883d3a6.jpg",
+            "title": "Fussy eaters love",
+            "description": "<p>The smell and taste of fresh meat is utterly<br\/> irresistible, so there’ll be no leftovers.<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "1630658749772df696-1": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/6_e4dddc21-e92f-4711-85bf-c74a9985cecf.jpg",
+            "title": "Good food, good looks",
+            "description": "<p>The smell and taste of fresh meat is utterly <br\/>irresistible, so there’ll be no leftovers.<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "1630658749772df696-2": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/7_f009136a-e057-43ba-ac78-16fe41e607cb.jpg",
+            "title": "Easy on the tummy",
+            "description": "<p>The smell and taste of fresh meat is utterly <br\/>irresistible, so there’ll be no leftovers.<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        }
+      },
+      "block_order": [
+        "1630658749772df696-0",
+        "1630658749772df696-1",
+        "1630658749772df696-2"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "item_per_row": 3,
+        "item_gap": 30,
+        "item_gap_mobile": 10,
+        "card_style": "vertical",
+        "image_max_width": "120px",
+        "content_alignment": "center",
+        "hover_effect": "zoom-in",
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "use_scroll_mobile": false,
+        "use_grid_column_mb": false
+      }
+    },
+    "1626365858fd9bd41d": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Our Products",
+        "subheading": "",
+        "description": "We’ll make some perfectly personalised recommendations",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "#f3f8f5",
+        "collection": "pet",
+        "product_to_show": 4,
+        "items_per_row": 4,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "button_type": "link",
+        "button_text": "",
+        "button_style": "sf__btn-secondary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 16
+      }
+    },
+    "1626366206dd6e4f93": {
+      "type": "collection-list",
+      "blocks": {
+        "1626366206dd6e4f93-0": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "for-baby-dogs",
+            "title": "For Baby Dogs",
+            "item_image": "shopify:\/\/shop_images\/8_32d86faa-052a-4408-b3e8-9f4580f70deb.jpg"
+          }
+        },
+        "1626366206dd6e4f93-1": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "for-2-3-years-old",
+            "title": "For 2-3 Years old",
+            "item_image": "shopify:\/\/shop_images\/10.jpg"
+          }
+        },
+        "1626366206dd6e4f93-2": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "for-4-6-years-old",
+            "title": "For 4-6 Years old",
+            "item_image": "shopify:\/\/shop_images\/9.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "1626366206dd6e4f93-0",
+        "1626366206dd6e4f93-1",
+        "1626366206dd6e4f93-2"
+      ],
+      "settings": {
+        "heading": "That's Right For Your Pet",
+        "subheading": "",
+        "description": "We’ll make some perfectly personalised recommendations",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "",
+        "layout": "grid",
+        "card_style": "standard",
+        "text_alignment": "center",
+        "hover_effect": "scaling-up",
+        "show_product_count": true,
+        "count_inline_title": true,
+        "image_rounded": false,
+        "items_per_row": 3,
+        "item_gap": 30,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "autorotate": false,
+        "autorotate_speed": 5,
+        "use_scroll_mobile": true,
+        "mobile_gap": 16,
+        "hidden_slide_control_mobile": false
+      }
+    },
+    "16306608556b47daf7": {
+      "type": "testimonials",
+      "blocks": {
+        "16306608559f021ea5-0": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Love it so much",
+            "description": "<p>“I’m so blown away how he loves to eat all <br\/>his food right away”<\/p>",
+            "footer": "<p>Dean D. US<\/p>",
+            "image_text": "",
+            "product": ""
+          }
+        },
+        "16306608559f021ea5-1": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Love it so much",
+            "description": "<p>“ Super class, cute, comfortable. You can wear them with just about anything.”<\/p>",
+            "footer": "<p>Dean D. US<\/p>",
+            "image_text": "",
+            "product": ""
+          }
+        },
+        "16306608559f021ea5-2": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Love it so much",
+            "description": "<p>“I’m so blown away how he loves to eat all <br\/>his food right away”<\/p>",
+            "footer": "<p>Dean D. US<\/p>",
+            "image_text": "",
+            "product": ""
+          }
+        },
+        "16306608559f021ea5-3": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Love it so much",
+            "description": "<p>“ Super class, cute, comfortable. You can wear them with just about anything.”<\/p>",
+            "footer": "<p>Dean D. US<\/p>",
+            "image_text": "",
+            "product": ""
+          }
+        },
+        "16306608559f021ea5-4": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Love it so much",
+            "description": "<p>“I’m so blown away how he loves to eat all <br\/>his food right away”<\/p>",
+            "footer": "<p>Dean D. US<\/p>",
+            "image_text": "",
+            "product": ""
+          }
+        },
+        "16306608559f021ea5-5": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Love it so much",
+            "description": "<p>“ Super class, cute, comfortable. You can wear them with just about anything.”<\/p>",
+            "footer": "<p>Dean D. US<\/p>",
+            "image_text": "",
+            "product": ""
+          }
+        }
+      },
+      "block_order": [
+        "16306608559f021ea5-0",
+        "16306608559f021ea5-1",
+        "16306608559f021ea5-2",
+        "16306608559f021ea5-3",
+        "16306608559f021ea5-4",
+        "16306608559f021ea5-5"
+      ],
+      "settings": {
+        "heading": "The review are in",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "w-full",
+        "background_color": "#f7f7f7",
+        "design": "testimonials-4",
+        "show_stars": true,
+        "autorotate": false,
+        "show_navigation": true,
+        "show_pagination": false,
+        "star_color": "#feba2c"
+      }
+    },
+    "16306617043627cfe6": {
+      "type": "instagram",
+      "settings": {
+        "heading": "Share Your Story With <span style=\"color: var(--color-primary);)\">#Petbowl<\/span>",
+        "subheading": "",
+        "description": "We’ll make some perfectly personalised recommendations\n<p class=\"sf-instagram-description__button\"><a href=\"#\" class=\"flex sf__btn sf__btn-primary\"><img width=\"16px\" height=\"20px\" src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0595\/7291\/2305\/files\/icon-insta.png?v=1630662402\">Follow @Petbowl<\/a><\/p>",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "layout": "grid",
+        "images_count": 4,
+        "grid_columns": 4,
+        "gap": 30,
+        "mobile_gap": 16,
+        "profile": "https:\/\/www.instagram.com\/minimog.trendy\/",
+        "button_label": ""
+      }
+    }
+  },
+  "order": [
+    "1621243260e1af0c20",
+    "1626366077b1048cd5",
+    "1630658749b620aaca",
+    "1626365858fd9bd41d",
+    "1626366206dd6e4f93",
+    "16306608556b47daf7",
+    "16306617043627cfe6"
+  ]
+}

@@ -1,0 +1,317 @@
+{
+  "sections": {
+    "162251971871273c20": {
+      "type": "image-with-text",
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "item_gap": 100,
+        "item_gap_mobile": 10,
+        "layout": "left",
+        "image_column_size": "6",
+        "title": "The Perfect<br> Match",
+        "sub_title": "<span class=\"font-semibold\">New Arrivals<\/span>",
+        "text": "<p>Here is your chance to upgrade your wardrobe <br\/>with a variation of styles and fits that are both<br\/> feminine and relaxed.<\/p>",
+        "text_size": "large",
+        "content_alignment": "left",
+        "button_label": "Shop Collection",
+        "button_link": "",
+        "button_style": "sf__btn-link",
+        "button_size": "",
+        "custom_class": "sf__index-img-with-text"
+      }
+    },
+    "162252047554676bc9": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "The boutique style guide",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "best-sellers",
+        "product_to_show": 4,
+        "items_per_row": 4,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": true,
+        "enable_slider": true,
+        "show_pagination": false,
+        "show_navigation": false,
+        "button_type": "link",
+        "button_text": "Shop Now",
+        "button_style": "sf__btn-secondary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 16,
+        "custom_class": "sf__index-featured-collection"
+      }
+    },
+    "16225208417f633bd7": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Fall\/Winter 2021 Collection",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "this-weeks-highlights",
+        "product_to_show": 4,
+        "items_per_row": 4,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": true,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "button_type": "link",
+        "button_text": "Shop Now",
+        "button_style": "sf__btn-secondary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 16,
+        "custom_class": "sf__index-featured-collection"
+      }
+    },
+    "16225209780bac15ca": {
+      "type": "icon-box",
+      "blocks": {
+        "16225209780bac15ca-0": {
+          "type": "iconbox",
+          "settings": {
+            "title": "New-season Handbag Haven",
+            "description": "<p>Wear it as a shoulder bag or on the forearm for the perfect match between style and practicality.<\/p>",
+            "link": "",
+            "button_label": "Shop Now",
+            "button_link": "shopify:\/\/collections\/leather-bag",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "16225209780bac15ca-1": {
+          "type": "iconbox",
+          "settings": {
+            "title": "Trending now",
+            "description": "<p>The new creative director went about updating the vibe of the brand with a variety of new denim looks.<\/p>",
+            "link": "",
+            "button_label": "Shop Now",
+            "button_link": "shopify:\/\/collections\/blazer",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        }
+      },
+      "block_order": [
+        "16225209780bac15ca-0",
+        "16225209780bac15ca-1"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "item_per_row": 2,
+        "item_gap": 30,
+        "item_gap_mobile": 16,
+        "card_style": "vertical",
+        "image_max_width": "",
+        "content_alignment": "start",
+        "hover_effect": "scaling-up",
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "use_scroll_mobile": false,
+        "use_grid_column_mb": false,
+        "custom_class": "sf__index-icon-box-1"
+      }
+    },
+    "16225213135c75c05e": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "New arrivals",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "hightlights",
+        "product_to_show": 4,
+        "items_per_row": 4,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": true,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "button_type": "link",
+        "button_text": "Shop Now",
+        "button_style": "sf__btn-secondary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 16,
+        "custom_class": "sf__index-featured-collection"
+      }
+    },
+    "1622521896cc75a02a": {
+      "type": "icon-box",
+      "blocks": {
+        "1622521896cc75a02a-0": {
+          "type": "iconbox",
+          "settings": {
+            "title": "Free Shipping",
+            "description": "<p>Free Shipping for orders over £130<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "1622521896cc75a02a-1": {
+          "type": "iconbox",
+          "settings": {
+            "title": "Money Guarantee",
+            "description": "<p>Within 30 days for an exchange.<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "1622521896cc75a02a-2": {
+          "type": "iconbox",
+          "settings": {
+            "title": "Online Support",
+            "description": "<p>24 hours a day, 7 days a week<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "a92f4695-c66b-47d3-a317-7125f4e8d242": {
+          "type": "iconbox",
+          "settings": {
+            "title": "Flexible Payment",
+            "description": "<p>Pay with Multiple Credit Cards<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        }
+      },
+      "block_order": [
+        "1622521896cc75a02a-0",
+        "1622521896cc75a02a-1",
+        "1622521896cc75a02a-2",
+        "a92f4695-c66b-47d3-a317-7125f4e8d242"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "left",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "item_per_row": 4,
+        "item_gap": 30,
+        "item_gap_mobile": 16,
+        "card_style": "horizontal",
+        "image_max_width": "30px",
+        "content_alignment": "start",
+        "hover_effect": "none",
+        "enable_slider": false,
+        "show_pagination": true,
+        "show_navigation": false,
+        "use_scroll_mobile": false,
+        "use_grid_column_mb": false,
+        "custom_class": "sf__index-icon-box-2"
+      }
+    },
+    "16225302875c09dac4": {
+      "type": "collection-list",
+      "blocks": {
+        "16225302875c09dac4-0": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "blazer",
+            "title": "<span class=\"sf_font-normal\">Blazers<\/span>"
+          }
+        },
+        "16225302875c09dac4-1": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "accessories",
+            "title": "Accessories"
+          }
+        },
+        "16225302875c09dac4-2": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "jeans",
+            "title": "High Jeans"
+          }
+        }
+      },
+      "block_order": [
+        "16225302875c09dac4-0",
+        "16225302875c09dac4-1",
+        "16225302875c09dac4-2"
+      ],
+      "settings": {
+        "heading": "This week’s highlights",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "",
+        "layout": "grid",
+        "card_style": "standard",
+        "text_alignment": "left",
+        "hover_effect": "scaling-up",
+        "show_product_count": true,
+        "count_inline_title": false,
+        "image_rounded": false,
+        "items_per_row": 3,
+        "item_gap": 30,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "autorotate": false,
+        "autorotate_speed": 5,
+        "use_scroll_mobile": true,
+        "mobile_gap": 16,
+        "hidden_slide_control_mobile": false,
+        "custom_class": "sf__index-collection-list"
+      }
+    }
+  },
+  "order": [
+    "162251971871273c20",
+    "162252047554676bc9",
+    "16225302875c09dac4",
+    "16225208417f633bd7",
+    "16225209780bac15ca",
+    "16225213135c75c05e",
+    "1622521896cc75a02a"
+  ]
+}

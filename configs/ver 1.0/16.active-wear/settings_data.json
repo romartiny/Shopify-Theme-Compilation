@@ -1,0 +1,1147 @@
+{
+  "current": {
+    "favicon": "shopify:\/\/shop_images\/fav_icon_dark_1.png",
+    "color_primary": "#000",
+    "color_sub_text": "#666666",
+    "color_btn_bg_hover": "#000000",
+    "prod_sale_price_color": "#666666",
+    "prod_type_color": "#666666",
+    "color_topbar_bg": "#000000",
+    "color_topbar_text": "#ffffff",
+    "color_header_bg": "#ffffff",
+    "color_header_link": "#000000",
+    "color_header_transparent": "#000000",
+    "color_menu_bar_bg": "#000000",
+    "color_menu_bar_text": "#f8f8f8",
+    "color_footer_bg": "#000000",
+    "color_footer_text": "#ffffff",
+    "color_footer_subtext": "#c0c0c0",
+    "color_footer_link": "#c0c0c0",
+    "color_footer_link_hover": "#ffffff",
+    "color_footer_bg_mb": "#000000",
+    "color_footer_bottom_bg": "#000000",
+    "color_footer_bottom_text": "#ffffff",
+    "color_footer_bottom_bg_mb": "#000000",
+    "color_border": "#dddddd",
+    "img_overlay_opacity": 20,
+    "tooltip_background_color": "#000000",
+    "type_base_font": "futura_n4",
+    "use_custom_font_body": true,
+    "custom_body_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Light.ttf?v=1618297125@300\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Regular.ttf?v=1618297125@400\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Medium.ttf?v=1618297125@500\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-SemiBold.ttf?v=1618297125@600\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Bold.ttf?v=1618297125@700",
+    "type_header_font": "futura_n5",
+    "use_custom_font_heading": true,
+    "custom_heading_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Light.ttf?v=1618297125@300\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Regular.ttf?v=1618297125@400\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Medium.ttf?v=1618297125@500\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-SemiBold.ttf?v=1618297125@600\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Bold.ttf?v=1618297125@700",
+    "custom_heading_weight": "700",
+    "type_header_base_size": 35,
+    "btn_uppercase_text": true,
+    "btn_base_size": 14,
+    "btn_letter_spacing": 1,
+    "btn_weight": "700",
+    "pcard_layout": "1",
+    "pcard_alignment": "left",
+    "show_vendor": false,
+    "uppercase_prd_name": true,
+    "variant_option_design3": "color",
+    "show_variant_swatch_image": true,
+    "product_colors": "red: #FF6961,\nyellow: #FDDA76,\nblack: #000000,\nblack band: #000000,\nblue: #8DB4D2,\ngreen: #C1E1C1,\npurple: #B19CD9,\nsilver: #EEEEEF,\nwhite: #FFFFFF,\nbrown: #836953,\nlight brown: #B5651D,\ndark turquoise: #23cddc,\norange: #FFB347,\ntan: #E9D1BF,\nviolet: #B490B0,\npink: #FFD1DC,\ngrey: #E0E0E0,\nsky: #96BDC6,\npale leaf: #CCD4BF,\nlight blue: #b1c5d4,\ndark grey: #aca69f,\nbeige: #EBE6DB,\nbeige band: #EED9C4,\ndark blue: #063e66,\ncream: #FFFFCC,\nlight pink: #FBCFCD,\nmint: #bedce3,\ndark gray: #3A3B3C,\nrosy brown: #c4a287,\nlight grey:#D3D3D3,\ncopper: #B87333,\nrose gold: #ECC5C0,\nnight blue: #151B54,\ncoral: #FF7F50,\nlight purple: #C6AEC7",
+    "filter_color1": "",
+    "share_facebook": true,
+    "social_twitter_link": "",
+    "social_facebook_link": "https:\/\/facebook.com\/",
+    "social_facebook_label": "300k Followers",
+    "social_pinterest_link": "",
+    "social_instagram_link": "https:\/\/instagram.com\/",
+    "social_instagram_label": "100k Followers",
+    "wishlist_page": "",
+    "product_compare_page": "",
+    "gm_api": "",
+    "instagram_token": "",
+    "custom_css": ".sf-header__desktop .sf__header-search-box {\n  margin-right: 20px;\n}\n.sf__pcard-name,\n.sf__index-instagram form button {\n  font-weight: 700;\n  letter-spacing: 0.5px;\n}\n.section__subheading,\n.content__subheading {\n  font-size: 12px;\n  font-weight: 600;\n  margin-bottom: 12px;\n  line-height: 17px;\n  letter-spacing: 1px;\n}\n.content__heading,\n.section__heading,\n.sf__index-instagram .newsletter__form-heading h3 {\n  letter-spacing: 2px;\n}\n.sf__index-brand {\n  border-top: 1px solid #eee;\n}\n.sf__index-brand .section-py {\n  padding-top: 30px;\n  padding-bottom: 30px;\n}\n.sf-search__form:not(.mobile) {\n  border-radius: 18px;\n}\n.sf__index-slideshow .slide__block-subtitle {\n  font-weight: 700;\n  letter-spacing: 1px;\n}\n.sf__index-slideshow .slide__block-title {\n  letter-spacing: 5px;\n}\n.sf__index-blog-post .sf__blog-cardDate {\n  font-weight: 500;\n}\n@media (min-width: 768px) {\n  .sf-footer .sf__footer-block-custom_text h3.sf__footer-block-title {\n    display: none;\n  }\n}\n@media (min-width: 1280px) {\n  .sf__index-custom-content .sf-custom__block--text .content__heading,\n  .sf__index-instagram .newsletter__form-heading h3 {\n    font-size: 36px;\n  }\n  .sf__index-testimonial .swiper-pagination {\n    margin-top: 60px;\n  }\n}\n@media (min-width: 1920px) {\n  .sf__index-slideshow .slide__block-subtitle {\n    font-size: 20px;\n  }\n  .sf__index-slideshow .slide__block-title {\n    font-size: 100px;\n    line-height: 145px;\n  }\n}\n@media (max-width: 767px) {\n  .sf__index-slideshow a.sf__mobile-button {\n    background: #000 !important;\n    color: #fff !important;\n    width: 100%;\n  }\n  #sf-custom__block--16208058842d075672-0 {\n    margin-top: 20px;\n  }\n  .sf__index-featured-collection .section__header {\n    text-align: center;\n  }\n  .sf__index-featured-collection .sf__featured-collection-button a.sf__btn,\n  .sf__index-blog-post .sf__blog-post-button a.sf__btn {\n    width: 100%;\n  }\n  .sf__index-brand {\n    display: none;\n  }\n  .sf-footer .sf__footer-block-title {\n    font-size: 14px;\n  }\n  .sf-footer .sf__accordion-item .sf__accordion-button:after {\n    background-image: url(\"https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/arrow-down-light.svg?v=1627402880\");\n  }\n}\n@media (max-width: 576px) {\n  .sf__index-instagram .sf__btn-primary,\n  .sf__index-instagram .sf__btn-secondary,\n  .sf__index-custom-content .sf__btn-white,\n  .sf__index-custom-content .image-card__content-inner {\n    width: 100%;\n  }\n}\n.sf__index-featured-collection .sf__featured-collection-button .sf__btn {\n  border: 2px solid #000;\n}\n.sf__index-custom-content .sf-custom__block-inner .product-bundles__item-index {\n  font-weight: bold;\n}\n.sf__index-instagram .sf__btn {\n  border: 2px solid #000000;\n}",
+    "use_theme_currencies": true,
+    "theme_currencies": "USD | EUR | GBP | VND",
+    "sections": {
+      "page-faqs": {
+        "type": "page-faqs",
+        "blocks": {
+          "2802736b-f08f-4510-a4f7-4ad7d748992d": {
+            "type": "content",
+            "settings": {
+              "content": "<div class=\"mb-10\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/faqs.jpg?v=1620784288\"><\/div>\n<h3 class=\"font-medium text-xl mb-4\">Awkwardness gives me great comfort. I’ve never been cool, but I’ve felt cool. I’ve been in the cool place, but I wasn’t really cool – I was trying to pass for hip or cool.<\/h3>\n<p>A girl should be two things: classy and fabulous. I am convinced that there can be luxury in simplicity. I wanted to dress the woman who lives and works, not the woman in a painting. It’s hard to balance everything. It’s always challenging. My relationships with producers or photographers – these are relationships that took years. I can’t get sucked into that celebrity thing, because I think it’s just crass. My aim is to make the poor look rich.<\/p>"
+            }
+          },
+          "4e151238-4480-4122-b893-7f4a19886e4c": {
+            "type": "accordion",
+            "settings": {
+              "title": "What shipping methods are availbale?",
+              "content": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.<br\/><br\/>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.<\/p>",
+              "open": true
+            }
+          },
+          "c5d4d04d-f6c1-4d1e-99f0-3c221393a3cf": {
+            "type": "accordion",
+            "settings": {
+              "title": "How long will it take to get my package?",
+              "content": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.<\/p>",
+              "open": false
+            }
+          },
+          "0131747b-8b40-432f-b634-b1289ec41911": {
+            "type": "accordion",
+            "settings": {
+              "title": "Do you ship internationally?",
+              "content": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.<\/p>",
+              "open": false
+            }
+          },
+          "5d7206e9-5375-4da6-9a1f-24e1c46230b0": {
+            "type": "accordion",
+            "settings": {
+              "title": "What payment methods are accepted?",
+              "content": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.<\/p>",
+              "open": false
+            }
+          },
+          "4008f61e-055e-42ba-8969-cb3715c0aece": {
+            "type": "accordion",
+            "settings": {
+              "title": "Is buying on-line safe?",
+              "content": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.<\/p>",
+              "open": false
+            }
+          }
+        },
+        "block_order": [
+          "2802736b-f08f-4510-a4f7-4ad7d748992d",
+          "4e151238-4480-4122-b893-7f4a19886e4c",
+          "c5d4d04d-f6c1-4d1e-99f0-3c221393a3cf",
+          "0131747b-8b40-432f-b634-b1289ec41911",
+          "5d7206e9-5375-4da6-9a1f-24e1c46230b0",
+          "4008f61e-055e-42ba-8969-cb3715c0aece"
+        ],
+        "settings": {
+          "menu": "faqs-menu"
+        }
+      },
+      "collection-list": {
+        "type": "collection-list",
+        "settings": {
+        }
+      },
+      "featured-collection": {
+        "type": "featured-collection",
+        "settings": {
+          "collection": "frontpage"
+        }
+      },
+      "featured-product": {
+        "type": "featured-product",
+        "settings": {
+        }
+      },
+      "slider": {
+        "type": "slider",
+        "settings": {
+        }
+      },
+      "header": {
+        "type": "header",
+        "blocks": {
+          "c6851761-d4bb-47dd-b8aa-1c00ab3d5151": {
+            "type": "topbar",
+            "settings": {
+              "show_divider": false,
+              "show_phone_numb": false,
+              "show_email": false,
+              "show_social_links": true,
+              "show_stores_page": false,
+              "show_currency_switcher": true,
+              "show_language_switcher": true,
+              "alert_message": "<div class=\"font-medium\">\n<span style=\"padding: 0 10px; color:#fff;text-transform:uppercase;font-weight:600;background: #EC5D4C\n;border-radius: 11px;font-size:15px;line-height:22px;display:inline-block;margin-right: 12px;\">Hot<\/span>🔥 Free shipping on all U.S orders $50+ 📦<\/div>"
+            }
+          },
+          "655e2ca6-d0d3-4613-a956-e737a93c9602": {
+            "type": "banner",
+            "settings": {
+              "heading": "Shop",
+              "container": "container",
+              "banner_style": "outside",
+              "banner_link": "",
+              "banner_title": "<span class=\"font-bold\">BEHIND THE DESIGN<\/span>",
+              "banner_desc": "",
+              "banner_button_text": "SHOP NOW"
+            }
+          },
+          "c7c4295a-adfa-4a6b-a9fd-df327c80682b": {
+            "type": "product-list",
+            "settings": {
+              "heading": "Products",
+              "container": "container-fluid",
+              "stretch_width": false,
+              "collection": "active-wear",
+              "limit": 6,
+              "columns": 2
+            }
+          },
+          "8c1bb663-5481-4011-baf8-4974f6b67f0d": {
+            "type": "custom_html",
+            "settings": {
+              "heading": "Home",
+              "container": "container",
+              "html": ""
+            }
+          },
+          "7aa28866-29e3-4137-9aa1-29d638bf816c": {
+            "type": "custom_html",
+            "settings": {
+              "heading": "Features",
+              "container": "inherit",
+              "html": ""
+            }
+          }
+        },
+        "block_order": [
+          "c6851761-d4bb-47dd-b8aa-1c00ab3d5151",
+          "655e2ca6-d0d3-4613-a956-e737a93c9602",
+          "c7c4295a-adfa-4a6b-a9fd-df327c80682b",
+          "8c1bb663-5481-4011-baf8-4974f6b67f0d",
+          "7aa28866-29e3-4137-9aa1-29d638bf816c"
+        ],
+        "settings": {
+          "header_design": "logo-center-menu-left",
+          "container": "container-fluid",
+          "header_sticky": true,
+          "transparent_on_top": false,
+          "logo_text": "MINIMOG",
+          "logo_max_width": 180,
+          "sticky_logo_max_width": 175,
+          "mobile_logo_max_width": 140,
+          "main_menu": "main-menu",
+          "secondary_menu": "",
+          "uppercase_parent_level": true,
+          "search": "show_full",
+          "show_account_icon": true,
+          "show_cart_icon": true,
+          "show_wishlist_icon": true,
+          "show_compare_icon": false,
+          "show_currency_switcher": false,
+          "show_language_switcher": false
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "d8236fc7-5c51-4cfc-83ec-323e039da755": {
+            "type": "custom_text",
+            "settings": {
+              "title": "ABOUT US",
+              "image_max": "180px",
+              "description": "",
+              "width": "33%"
+            }
+          },
+          "8bf591d8-a3ca-4dc1-914b-6a01c18f31c7": {
+            "type": "our_store",
+            "settings": {
+              "title": "GET IN TOUCH",
+              "description": "<p>184 Main Rd E, St Albans<br\/>VIC 3021, Australia<\/p>",
+              "show_email": true,
+              "show_phone": true,
+              "show_socials_link": true,
+              "width": "25%"
+            }
+          },
+          "ad3c3166-8ef1-441a-832a-e4c7b30d78ab": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "INFORMATION",
+              "width": "25%"
+            }
+          },
+          "9191e286-5f7f-4a14-8e7a-3f66ca11cc88": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "SERVICES",
+              "width": "25%"
+            }
+          }
+        },
+        "block_order": [
+          "d8236fc7-5c51-4cfc-83ec-323e039da755",
+          "8bf591d8-a3ca-4dc1-914b-6a01c18f31c7",
+          "ad3c3166-8ef1-441a-832a-e4c7b30d78ab",
+          "9191e286-5f7f-4a14-8e7a-3f66ca11cc88"
+        ],
+        "settings": {
+          "design": "footer-1",
+          "container": "container",
+          "bordered": false,
+          "copyright": "© 2021, Minimog. All Rights Reserved.",
+          "show_currency_selector": false,
+          "show_language_selector": false,
+          "show_social_links": false,
+          "show_payment_icons": true
+        }
+      },
+      "collection-page-header": {
+        "type": "collection-page-header",
+        "settings": {
+          "layout": "inside",
+          "header_height": "medium",
+          "text_alignment": "center",
+          "vertical_alignment": "center",
+          "bg_color": "#f5f5f5",
+          "enable_parallax": true,
+          "show_breadcrumb": true,
+          "upper_title": false
+        }
+      },
+      "product-template": {
+        "type": "product-template",
+        "settings": {
+          "container": "container",
+          "layout": "layout-6",
+          "show_tags": false,
+          "show_vendor": false,
+          "show_sku": false,
+          "show_categories": false,
+          "show_reviews_count": true,
+          "show_quantity_selector": true,
+          "enable_dynamic_checkout": true,
+          "hide_atc_button": false,
+          "show_atwl": true,
+          "show_atcp": true,
+          "show_ask_a_question": true,
+          "show_social": true,
+          "show_live_views": true,
+          "live_views_text": "<p><strong>{{count_number}}<\/strong> <strong>people<\/strong> are viewing this right now<\/p>",
+          "live_views_range": "20-30",
+          "live_view_duration": "10",
+          "live_view_icon_blinks": true,
+          "show_delivery_times": true,
+          "deliver_text": "Estimated Delivery:",
+          "deliver_days": "3",
+          "show_shipping_text": true,
+          "shipping_text": "<p><strong>Free Shipping & Returns: <\/strong>On all orders over $75<\/p>",
+          "show_trust_badges": true,
+          "trust_badges_text": "<p>Guarantee safe & secure checkout<\/p>",
+          "trust_badges_image": "shopify:\/\/shop_images\/trustbag.png",
+          "trust_badges_image_width": "320px",
+          "use_sticky_atc": true,
+          "sticky_atc_wishtlist": false,
+          "sticky_atc_compare": false
+        }
+      },
+      "product-details-tabs": {
+        "type": "product-details-tabs",
+        "blocks": {
+          "4db8ad16-886f-47f7-9b57-fc68b39fb2d4": {
+            "type": "description",
+            "settings": {
+              "header": "Product description"
+            }
+          },
+          "9f976af7-9304-4c96-88d2-8061e6592c8d": {
+            "type": "tab",
+            "settings": {
+              "header": "Custom content",
+              "content": "<p>So beautiful you’ll want to show it off, so comfortable you’ll forget it’s there. Our 24\/7™ Lace Contour Plunge Bra combines gorgeous floral lace with sheer overlay straps that hold you in and eliminates gaping. Removable pads let you customize you<\/p>"
+            }
+          },
+          "0a36946f-601d-43f9-a991-8024777daf07": {
+            "type": "reviews",
+            "settings": {
+              "header": "Product reviews"
+            }
+          }
+        },
+        "block_order": [
+          "4db8ad16-886f-47f7-9b57-fc68b39fb2d4",
+          "9f976af7-9304-4c96-88d2-8061e6592c8d",
+          "0a36946f-601d-43f9-a991-8024777daf07"
+        ],
+        "settings": {
+          "show_product_tabs": true,
+          "container": "container",
+          "bg_color": "rgba(0,0,0,0)"
+        }
+      },
+      "product-reviews": {
+        "type": "product-reviews",
+        "settings": {
+          "show_product_reviews": false,
+          "container": "container-narrow",
+          "heading": "Ratings and Reviews"
+        }
+      },
+      "product-recommendations": {
+        "type": "product-recommendations",
+        "settings": {
+          "show_product_recommendations": true,
+          "container": "container",
+          "heading": "You Might Also Like",
+          "limit": 8,
+          "columns": 4,
+          "column_gap": 30,
+          "enable_slider": true
+        }
+      },
+      "brand-page-header": {
+        "type": "brand-page-header",
+        "blocks": {
+          "09dfe2e1-10c2-4cee-a033-a90b143c85f3": {
+            "type": "information",
+            "settings": {
+              "collection": "retrolie",
+              "logo": "shopify:\/\/shop_images\/1.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/1_8e8151b6-3555-4abf-8dd6-5347182bbcd0.jpg",
+              "image_2": "shopify:\/\/shop_images\/2_9a1b3099-775a-4093-9ece-6cfaa04a06fe.jpg",
+              "image_3": "shopify:\/\/shop_images\/3_7b9fc65c-8202-4449-a828-d03ac03c6d38.jpg"
+            }
+          },
+          "c8ee188c-a84f-4cf2-a8af-aacb9bf78785": {
+            "type": "information",
+            "settings": {
+              "collection": "abby",
+              "logo": "shopify:\/\/shop_images\/2.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/4.jpg",
+              "image_2": "shopify:\/\/shop_images\/5.jpg",
+              "image_3": "shopify:\/\/shop_images\/6.jpg"
+            }
+          },
+          "e56a3991-3115-47d4-b7e6-43e962712fc6": {
+            "type": "information",
+            "settings": {
+              "collection": "minimog",
+              "logo": "shopify:\/\/shop_images\/3.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/7.jpg",
+              "image_2": "shopify:\/\/shop_images\/8.jpg",
+              "image_3": "shopify:\/\/shop_images\/9.jpg"
+            }
+          },
+          "98bac8d0-393b-4f50-91b8-052a49e29dd0": {
+            "type": "information",
+            "settings": {
+              "collection": "brook",
+              "logo": "shopify:\/\/shop_images\/4.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/10.jpg",
+              "image_2": "shopify:\/\/shop_images\/11.jpg",
+              "image_3": "shopify:\/\/shop_images\/12.jpg"
+            }
+          },
+          "2b4a1841-6d7a-468b-ba3b-a5fd307cf9aa": {
+            "type": "information",
+            "settings": {
+              "collection": "learts",
+              "logo": "shopify:\/\/shop_images\/5.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/13.jpg",
+              "image_2": "shopify:\/\/shop_images\/14.jpg",
+              "image_3": "shopify:\/\/shop_images\/15.jpg"
+            }
+          },
+          "b54aa75a-c232-474e-9d92-2027e31cd066": {
+            "type": "information",
+            "settings": {
+              "collection": "vagabond",
+              "logo": "shopify:\/\/shop_images\/6.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/16.jpg",
+              "image_2": "shopify:\/\/shop_images\/17.jpg",
+              "image_3": "shopify:\/\/shop_images\/18.jpg"
+            }
+          }
+        },
+        "block_order": [
+          "09dfe2e1-10c2-4cee-a033-a90b143c85f3",
+          "c8ee188c-a84f-4cf2-a8af-aacb9bf78785",
+          "e56a3991-3115-47d4-b7e6-43e962712fc6",
+          "98bac8d0-393b-4f50-91b8-052a49e29dd0",
+          "2b4a1841-6d7a-468b-ba3b-a5fd307cf9aa",
+          "b54aa75a-c232-474e-9d92-2027e31cd066"
+        ],
+        "settings": {
+        }
+      },
+      "collection-brand": {
+        "type": "collection-brand",
+        "settings": {
+          "grid_layout": "grid",
+          "pagination_limit": "12",
+          "grid_columns": "3",
+          "collection_paginate": "paginate",
+          "show_filter": true,
+          "sidebar": "leftColumn"
+        }
+      },
+      "contact-information": {
+        "type": "contact-information",
+        "settings": {
+        }
+      },
+      "maps": {
+        "type": "maps",
+        "settings": {
+          "textx": "40.6700",
+          "texty": "-73.9400",
+          "zoom": "11",
+          "text2": "New York"
+        }
+      },
+      "contact-template": {
+        "type": "contact-template",
+        "blocks": {
+          "458d6546-c5d0-4128-8fa6-162080bdf85f": {
+            "type": "textblock",
+            "settings": {
+              "title": "Address",
+              "content": "<p>7895 Piermont Dr NE Albuquerque, NM 198866, <a href=\"#\">See Our Stores<\/a><\/p>"
+            }
+          },
+          "d2fd611c-a50a-4871-b401-b51dff320d34": {
+            "type": "textblock",
+            "settings": {
+              "title": "Information",
+              "content": "<p>+391 (0)35 2568 4593<\/p><p>hello@domain.com<\/p>"
+            }
+          },
+          "159b3b43-a6d9-4cb9-b78d-04f5a5bae350": {
+            "type": "socialmedia",
+            "settings": {
+              "title": "Social Media"
+            }
+          },
+          "5c486a84-9bdd-4d24-8ac7-5c428593cf33": {
+            "type": "textblock",
+            "settings": {
+              "title": "We're Open",
+              "content": "<p>Our store has re-opened for shopping, exchanges<\/p><p>Every day 11am to 7pm<\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "458d6546-c5d0-4128-8fa6-162080bdf85f",
+          "d2fd611c-a50a-4871-b401-b51dff320d34",
+          "159b3b43-a6d9-4cb9-b78d-04f5a5bae350",
+          "5c486a84-9bdd-4d24-8ac7-5c428593cf33"
+        ],
+        "settings": {
+          "title": "We would love to hear from you.",
+          "description": "<p>If you’ve got great products your making or looking to work with us then drop us a line.<\/p>"
+        }
+      },
+      "162079482605c70500": {
+        "type": "custom-content",
+        "blocks": {
+          "798c3f4b-3856-4a42-8aea-af90f9d5f0e4": {
+            "type": "product_bundles",
+            "settings": {
+              "width": "50%",
+              "alignment": "center",
+              "title": "BUNDLE & SAVE",
+              "subheading": "SHOP THIS LOOK",
+              "product_1": "the-perform-black-legging",
+              "product_2": "the-workout-bra",
+              "product_3": "the-yoga-block",
+              "product_4": "",
+              "product_5": "",
+              "block_custom_class": ""
+            }
+          },
+          "e9c848bf-9663-4761-86ce-78523afbfcd3": {
+            "type": "lookbook",
+            "settings": {
+              "width": "50%",
+              "top_1": 37,
+              "left_1": 55,
+              "product_1": "the-workout-bra",
+              "top_2": 56,
+              "left_2": 9,
+              "product_2": "the-perform-black-legging",
+              "top_3": 86,
+              "left_3": 73,
+              "product_3": "the-yoga-block",
+              "top_4": 0,
+              "left_4": 0,
+              "product_4": "",
+              "top_5": 20,
+              "left_5": 0,
+              "product_5": "",
+              "block_custom_class": ""
+            }
+          }
+        },
+        "block_order": [
+          "798c3f4b-3856-4a42-8aea-af90f9d5f0e4",
+          "e9c848bf-9663-4761-86ce-78523afbfcd3"
+        ],
+        "settings": {
+          "heading": "",
+          "subheading": "",
+          "description": "",
+          "header_alignment": "center",
+          "container": "container",
+          "background_color": "",
+          "gap": 30,
+          "use_scroll_mobile": false,
+          "gap_mobile": 16,
+          "custom_class": "sf__index-custom-content"
+        }
+      },
+      "16207951391d921d60": {
+        "type": "instagram",
+        "settings": {
+          "heading": "SHARE IN THE<br> LOVE.",
+          "subheading": "#MINIMOG.TRENDY",
+          "description": "",
+          "header_alignment": "center",
+          "container": "w-full",
+          "background_color": "#f3f3f3",
+          "layout": "metro",
+          "images_count": 8,
+          "grid_columns": 4,
+          "gap": 0,
+          "mobile_gap": 16,
+          "profile": "https:\/\/www.instagram.com\/minimog.trendy\/",
+          "button_label": "Follow us on Instagram",
+          "custom_class": "sf__index-instagram"
+        }
+      },
+      "162079537838c4574f": {
+        "type": "brands-list",
+        "blocks": {
+          "162079537838c4574f-0": {
+            "type": "image",
+            "settings": {
+              "image_link": "",
+              "max_width": "100px"
+            }
+          },
+          "fb8b9e24-e778-4de1-8f73-44cf726bdba4": {
+            "type": "image",
+            "settings": {
+              "image_link": "",
+              "max_width": "130px"
+            }
+          },
+          "162079537838c4574f-2": {
+            "type": "image",
+            "settings": {
+              "image_link": "",
+              "max_width": "120px"
+            }
+          },
+          "162079537838c4574f-3": {
+            "type": "image",
+            "settings": {
+              "image_link": "",
+              "max_width": "120px"
+            }
+          },
+          "162079537838c4574f-1": {
+            "type": "image",
+            "settings": {
+              "image_link": "",
+              "max_width": "110px"
+            }
+          },
+          "32e0ff0d-468b-49d4-9cd9-4165a37d7e07": {
+            "type": "image",
+            "settings": {
+              "image_link": "",
+              "max_width": "120px"
+            }
+          }
+        },
+        "block_order": [
+          "162079537838c4574f-0",
+          "fb8b9e24-e778-4de1-8f73-44cf726bdba4",
+          "162079537838c4574f-2",
+          "162079537838c4574f-3",
+          "162079537838c4574f-1",
+          "32e0ff0d-468b-49d4-9cd9-4165a37d7e07"
+        ],
+        "settings": {
+          "heading": "",
+          "subheading": "",
+          "header_alignment": "center",
+          "container": "container-fluid",
+          "background_color": "#ffffff",
+          "item_per_row": 6,
+          "enable_slider": true,
+          "autorotate": true,
+          "autorotate_speed": 3,
+          "custom_class": "sf__index-brand"
+        }
+      },
+      "1620805367beb697d9": {
+        "type": "blog-posts",
+        "settings": {
+          "heading": "LATEST POST",
+          "subheading": "OUR BLOG",
+          "description": "",
+          "header_alignment": "center",
+          "container": "container",
+          "background_color": "rgba(0,0,0,0)",
+          "blog": "mix-and-match",
+          "limit": 3,
+          "column": 3,
+          "column_gap": 30,
+          "mobile_gap": 16,
+          "article_image_aspect_ratio": "16\/9",
+          "article_align_content": "text-center",
+          "article_show_tags": false,
+          "article_show_date": true,
+          "article_show_excerpt": false,
+          "article_show_button": false,
+          "button_link": "",
+          "button_text": "View More",
+          "button_style": "sf__btn-primary",
+          "button_size": "",
+          "use_scroll_mobile": false,
+          "custom_class": "sf__index-blog-post"
+        }
+      },
+      "1620805637438b372e": {
+        "type": "featured-collection",
+        "settings": {
+          "heading": "BEST SELLERS",
+          "subheading": "IN SEASON",
+          "description": "",
+          "header_alignment": "left",
+          "container": "container-fluid",
+          "background_color": "#f3f3f3",
+          "collection": "active-wear",
+          "product_to_show": 12,
+          "items_per_row": 5,
+          "item_gap": 30,
+          "pcard_layout": "",
+          "pcard_image_ratio": "",
+          "show_vendor": false,
+          "enable_slider": true,
+          "show_pagination": false,
+          "show_navigation": true,
+          "button_type": "link",
+          "button_text": "SHOP NOW",
+          "button_style": "sf__btn-secondary",
+          "button_size": "",
+          "infinite_load": false,
+          "max_page_load": 3,
+          "use_scroll_mobile": true,
+          "item_gap_mobile": 16,
+          "custom_class": "sf__index-featured-collection"
+        }
+      },
+      "16208058842d075672": {
+        "type": "custom-content",
+        "blocks": {
+          "ac4d9413-8ad0-48ec-8eb4-03e42983f625": {
+            "type": "image_card",
+            "settings": {
+              "width": "33%",
+              "content_position": "bottom_center",
+              "content_alignment": "center",
+              "text_size": "medium",
+              "text_color": "black",
+              "link": "shopify:\/\/collections\/active-wear",
+              "title": "",
+              "subtitle": "",
+              "button_label": "CROPTOPS",
+              "button_style": "sf__btn-white",
+              "button_size": "",
+              "block_custom_class": ""
+            }
+          },
+          "c7894ae7-1d1d-4f78-aa96-693499f80c68": {
+            "type": "image_card",
+            "settings": {
+              "width": "33%",
+              "content_position": "bottom_center",
+              "content_alignment": "center",
+              "text_size": "medium",
+              "text_color": "black",
+              "link": "shopify:\/\/collections\/active-wear",
+              "title": "",
+              "subtitle": "",
+              "button_label": "LEGGING",
+              "button_style": "sf__btn-white",
+              "button_size": "",
+              "block_custom_class": ""
+            }
+          },
+          "16208058842d075672-0": {
+            "type": "text",
+            "settings": {
+              "title": "HOT THIS WEEK",
+              "subheading": "CATEGORIES",
+              "text": "<p>Luxe, lightweight, and made with the perfect blend<br\/> of cashmere and cotton, our Sonoma Pillows and<br\/> Throws are inspired by the basics.<\/p>",
+              "width": "33%",
+              "alignment": "center",
+              "align_text": "center",
+              "text_size": "medium",
+              "text_color": "black",
+              "button_label": "SHOP ALL ITEMS",
+              "button_link": "shopify:\/\/collections\/active-wear",
+              "button_style": "sf__btn-link",
+              "button_size": "",
+              "block_custom_class": ""
+            }
+          }
+        },
+        "block_order": [
+          "ac4d9413-8ad0-48ec-8eb4-03e42983f625",
+          "c7894ae7-1d1d-4f78-aa96-693499f80c68",
+          "16208058842d075672-0"
+        ],
+        "settings": {
+          "heading": "",
+          "subheading": "",
+          "description": "",
+          "header_alignment": "center",
+          "container": "container-fluid",
+          "background_color": "",
+          "gap": 30,
+          "use_scroll_mobile": false,
+          "gap_mobile": 16,
+          "custom_class": "sf__index-custom-content"
+        }
+      },
+      "162080618174803be6": {
+        "type": "newsletter",
+        "settings": {
+          "container": "container",
+          "background_color": "",
+          "form_layout": "horizontal",
+          "form_design": "2",
+          "heading": "LET'S STAY IN TOUCH",
+          "description": "<p>We’ll shout you $10 off your first order.<\/p>",
+          "email_placeholder": "Enter your email address",
+          "submit_button": "SUBSCRIBE",
+          "text_color": "black",
+          "show_icon": true,
+          "icon_img_width": "30",
+          "show_agreement": false,
+          "term_condition_text": "<p>I agree to the Terms and Conditions.<\/p>"
+        }
+      },
+      "162080663620b95195": {
+        "type": "slider",
+        "blocks": {
+          "162080663620b95195-0": {
+            "type": "slider_item",
+            "settings": {
+              "image_alignment": "center middle",
+              "content_in_container": false,
+              "content_position": "left bottom",
+              "text_alignment": "left",
+              "text_size": "large",
+              "text_color": "white",
+              "subheading": "SUMMER SALE",
+              "title": "PERFORMER",
+              "description": "",
+              "button_text": "SHOP NOW",
+              "button_link": "",
+              "button_style": "sf__btn-white",
+              "button_size": "",
+              "show_footer": false,
+              "footer_alignment": "end",
+              "footer_text": "New Collection",
+              "footer_button": "Shop Now",
+              "footer_link": ""
+            }
+          },
+          "162080663620b95195-1": {
+            "type": "slider_item",
+            "settings": {
+              "image_alignment": "center middle",
+              "content_in_container": false,
+              "content_position": "left bottom",
+              "text_alignment": "left",
+              "text_size": "large",
+              "text_color": "white",
+              "subheading": "NEW ARRIVALS",
+              "title": "DYNAMIC OUTFIT",
+              "description": "",
+              "button_text": "SHOP NOW",
+              "button_link": "",
+              "button_style": "sf__btn-white",
+              "button_size": "",
+              "show_footer": false,
+              "footer_alignment": "end",
+              "footer_text": "New Collection",
+              "footer_button": "Shop Now",
+              "footer_link": ""
+            }
+          },
+          "162080663620b95195-2": {
+            "type": "slider_item",
+            "settings": {
+              "image_alignment": "center middle",
+              "content_in_container": false,
+              "content_position": "left bottom",
+              "text_alignment": "left",
+              "text_size": "large",
+              "text_color": "white",
+              "subheading": "NEW COLLECTION",
+              "title": "ENERGY 2-PIECE",
+              "description": "",
+              "button_text": "SHOP NOW",
+              "button_link": "",
+              "button_style": "sf__btn-white",
+              "button_size": "",
+              "show_footer": false,
+              "footer_alignment": "end",
+              "footer_text": "New Collection",
+              "footer_button": "Shop Now",
+              "footer_link": ""
+            }
+          }
+        },
+        "block_order": [
+          "162080663620b95195-0",
+          "162080663620b95195-1",
+          "162080663620b95195-2"
+        ],
+        "settings": {
+          "container": "w-full",
+          "slideshow_height": "fullscreen",
+          "show_overlay": false,
+          "dots_position": "right",
+          "dots_color": "light",
+          "show_dots": true,
+          "show_arrows": false,
+          "autorotate": true,
+          "autorotate_speed": 5,
+          "custom_class": "sf__index-slideshow"
+        }
+      },
+      "annoucement": {
+        "type": "annoucement",
+        "settings": {
+          "show_announcement": false,
+          "homepage_only": true,
+          "show_close": true,
+          "message": "Free shipping for all orders from $60+",
+          "message_link": "",
+          "show_divider": false
+        }
+      },
+      "162676501106f4b388": {
+        "type": "testimonials",
+        "blocks": {
+          "162676501106f4b388-0": {
+            "type": "testimonial",
+            "settings": {
+              "title": "Love it so much",
+              "description": "<p>\"I've been getting good wear out of the shirt. It's very light and soft, comfortable to wear.\"<\/p>",
+              "footer": "<p>Dean D. US<\/p>",
+              "image_text": "",
+              "product": ""
+            }
+          },
+          "162676501106f4b388-1": {
+            "type": "testimonial",
+            "settings": {
+              "title": "Love my new purchase",
+              "description": "<p>\"Thanks for being so fabulous...and continuing to provide such a wonderful service.\"<\/p>",
+              "footer": "<p>Gloria T. US<\/p>",
+              "image_text": "",
+              "product": ""
+            }
+          },
+          "162676501106f4b388-2": {
+            "type": "testimonial",
+            "settings": {
+              "title": "Great products and services",
+              "description": "<p>\"Thank you so much for your help in finding some new clothes that I needed desperately.\"<\/p>",
+              "footer": "<p>Zeferino G. Canada<\/p>",
+              "image_text": "",
+              "product": ""
+            }
+          }
+        },
+        "block_order": [
+          "162676501106f4b388-0",
+          "162676501106f4b388-1",
+          "162676501106f4b388-2"
+        ],
+        "settings": {
+          "heading": "OVER 10.000 REVIEWS",
+          "subheading": "OUR REVIEWS",
+          "description": "",
+          "header_alignment": "center",
+          "container": "container",
+          "background_color": "#f5f1ed",
+          "design": "testimonials-3",
+          "show_stars": true,
+          "autorotate": false,
+          "show_navigation": true,
+          "show_pagination": true,
+          "star_color": "#000000",
+          "custom_class": "sf__index-testimonial"
+        }
+      },
+      "article": {
+        "type": "article",
+        "settings": {
+          "sidebar_show": true,
+          "sidebar_position": "right_column",
+          "design": "layout1",
+          "blog_show_author": true,
+          "blog_show_date": true,
+          "blog_show_tags": true,
+          "blog_show_social": true,
+          "blog_show_related": true,
+          "blog_show_comment": true,
+          "show_related_articles": true
+        }
+      },
+      "content-before-products": {
+        "type": "content-before-products",
+        "settings": {
+          "container": "container-fluid",
+          "background_color": "",
+          "gap": 30,
+          "gap_mobile": 16
+        }
+      },
+      "collection-template": {
+        "type": "collection-template",
+        "settings": {
+          "container": "container",
+          "grid_layout": "grid",
+          "grid_columns": "4",
+          "pagination_limit": "12",
+          "collection_paginate": "paginate",
+          "show_filter": true,
+          "sidebar": "leftColumn"
+        }
+      },
+      "content-after-products": {
+        "type": "content-after-products",
+        "settings": {
+          "container": "container-fluid",
+          "background_color": "",
+          "gap": 30,
+          "gap_mobile": 16
+        }
+      },
+      "recent-viewed-products": {
+        "type": "recent-viewed-products",
+        "settings": {
+          "heading": "Recently Viewed Products",
+          "container": "container",
+          "columns": 4,
+          "column_gap": 30,
+          "enable_slider": true,
+          "show_product_page": true,
+          "show_cart_page": true,
+          "show_collection_page": false
+        }
+      },
+      "product-details-accordion": {
+        "type": "product-details-accordion",
+        "settings": {
+          "show_accordion": true,
+          "use_container": false,
+          "position": "bottom_info"
+        }
+      },
+      "product-features": {
+        "type": "product-features",
+        "blocks": {
+          "14ba8830-43e7-430a-975a-69e125bead50": {
+            "type": "feature",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Frame_1.png",
+              "title": "Free Shipping",
+              "description": "<p>Get complimentary ground shipping on every <br\/>order.Don’t love it? Send it back, on us.<\/p>",
+              "link": ""
+            }
+          },
+          "a9e6c735-f7e6-48d7-8522-ce52662f90b2": {
+            "type": "feature",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Frame_2.png",
+              "title": "Earn Points",
+              "description": "<p>Join Minimog Rewards to earn gift cards<br\/>and enjoy exclusive member benefits.<\/p>",
+              "link": ""
+            }
+          },
+          "4638cbe3-9fed-4824-97a0-38ad620873ec": {
+            "type": "feature",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Frame_3.png",
+              "title": "Money Back Gurantee",
+              "description": "<p>We believe getting dressed should be the <br\/>easiest part of your day.<\/p>",
+              "link": ""
+            }
+          }
+        },
+        "block_order": [
+          "14ba8830-43e7-430a-975a-69e125bead50",
+          "a9e6c735-f7e6-48d7-8522-ce52662f90b2",
+          "4638cbe3-9fed-4824-97a0-38ad620873ec"
+        ],
+        "settings": {
+          "show_featured": true,
+          "container": "container",
+          "heading": "Why choose us?",
+          "item_per_row": 3,
+          "card_style": "vertical",
+          "image_max_width": "70px",
+          "content_alignment": "center"
+        }
+      },
+      "mobile-sticky-bar": {
+        "type": "mobile-sticky-bar",
+        "settings": {
+          "show_mobile_sticky": true,
+          "show_home_icon": true,
+          "show_collection_icon": true,
+          "show_cart_icon": true,
+          "show_search_icon": true,
+          "show_account_icon": false,
+          "show_wishlist_icon": false
+        }
+      }
+    },
+    "content_for_index": [
+      "162080663620b95195",
+      "16208058842d075672",
+      "1620805637438b372e",
+      "162079482605c70500",
+      "162676501106f4b388",
+      "1620805367beb697d9",
+      "162079537838c4574f",
+      "16207951391d921d60",
+      "162080618174803be6"
+    ]
+  },
+  "presets": {
+    "Default": {
+      "sections": {
+        "featured-collection": {
+          "type": "featured-collection",
+          "settings": {
+            "collection": "frontpage"
+          }
+        },
+        "featured-product": {
+          "type": "featured-product",
+          "settings": {
+          }
+        }
+      },
+      "content_for_index": [
+        "featured-collection",
+        "featured-product"
+      ]
+    }
+  }
+}

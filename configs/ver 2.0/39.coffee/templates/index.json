@@ -1,0 +1,140 @@
+{
+  "sections": {
+    "16230292343186aa09": {
+      "type": "custom-content",
+      "blocks": {
+        "16230292343186aa09-1": {
+          "type": "image",
+          "settings": {
+            "width": "100%",
+            "alignment": "center",
+            "block_custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "16230292343186aa09-1"
+      ],
+      "settings": {
+        "heading": "Coffee can be roasted better, brewed<br>  better and, most importantly.",
+        "subheading": "",
+        "description": "<a href=\"#\" class=\"sf__btn sf__btn-link no-underline\">Discover Now<\/a>",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "",
+        "gap": 30,
+        "use_scroll_mobile": false,
+        "gap_mobile": 16,
+        "custom_class": "sf__index-custom-content-1"
+      }
+    },
+    "1623029917d161b538": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Explore hidden coast coffees",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "coffee",
+        "product_to_show": 9,
+        "items_per_row": 3,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": true,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "button_type": "link",
+        "button_text": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 10,
+        "custom_class": ""
+      }
+    },
+    "1623029987b41ab1d0": {
+      "type": "collection-list",
+      "blocks": {
+        "1623029987b41ab1d0-0": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "single-origin",
+            "title": "Single Origin"
+          }
+        },
+        "1623029987b41ab1d0-1": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "blends-coffee",
+            "title": "Blends Coffee"
+          }
+        },
+        "1623029987b41ab1d0-2": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "espresso",
+            "title": "Espresso Coffee"
+          }
+        }
+      },
+      "block_order": [
+        "1623029987b41ab1d0-0",
+        "1623029987b41ab1d0-1",
+        "1623029987b41ab1d0-2"
+      ],
+      "settings": {
+        "heading": "Which is for you?",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "#f2efe8",
+        "layout": "grid",
+        "card_style": "standard",
+        "text_alignment": "center",
+        "hover_effect": "scaling-up",
+        "show_product_count": true,
+        "count_inline_title": false,
+        "image_rounded": false,
+        "items_per_row": 3,
+        "item_gap": 30,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "autorotate": false,
+        "autorotate_speed": 5,
+        "use_scroll_mobile": true,
+        "mobile_gap": 10,
+        "hidden_slide_control_mobile": false,
+        "custom_class": "sf__index-collection-list"
+      }
+    },
+    "1623031460e96df954": {
+      "type": "custom-content",
+      "settings": {
+        "heading": "“If you can’t get to paradise, I’ll bring it to you”",
+        "subheading": "",
+        "description": "- Don The Beachcomber",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "",
+        "gap": 30,
+        "use_scroll_mobile": false,
+        "gap_mobile": 16,
+        "custom_class": "sf__index-custom-content-2"
+      }
+    }
+  },
+  "order": [
+    "16230292343186aa09",
+    "1623029917d161b538",
+    "1623029987b41ab1d0",
+    "1623031460e96df954"
+  ]
+}

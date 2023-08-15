@@ -1,0 +1,327 @@
+{
+  "sections": {
+    "1620813069167db316": {
+      "type": "slider",
+      "blocks": {
+        "1620813069167db316-0": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify:\/\/shop_images\/1.jpg",
+            "image_alignment": "center middle",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "white",
+            "subheading": "",
+            "title": "A COLOR FOR<br>EVERY BODY",
+            "description": "<p>Open Doors To A World Of Fashion<\/p>",
+            "button_text": "SHOP NOW",
+            "button_link": "",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        },
+        "27403af4-f4e3-4833-9189-9868705845f7": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify:\/\/shop_images\/2.jpg",
+            "image_alignment": "center middle",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "white",
+            "subheading": "",
+            "title": "SHOP YOUR<br> OUTFIT STYLE",
+            "description": "<p>Tell your campaign through images<\/p>",
+            "button_text": "SHOP NOW",
+            "button_link": "",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        },
+        "c0ce169f-1329-47fc-9e42-915e4961aa32": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify:\/\/shop_images\/3.jpg",
+            "image_alignment": "center middle",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "white",
+            "subheading": "",
+            "title": "CHOOSE THE BEST<br>CHOOSE US",
+            "description": "<p>Tell your campaign through images<\/p>",
+            "button_text": "SHOP NOW",
+            "button_link": "",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "1620813069167db316-0",
+        "27403af4-f4e3-4833-9189-9868705845f7",
+        "c0ce169f-1329-47fc-9e42-915e4961aa32"
+      ],
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "fullscreen",
+        "show_overlay": false,
+        "dots_position": "bottom",
+        "dots_color": "light",
+        "show_dots": true,
+        "show_arrows": false,
+        "autorotate": true,
+        "autorotate_speed": 4,
+        "custom_class": "sf__index-slideshow"
+      }
+    },
+    "162081317833a6e943": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "SHOP MEN",
+        "subheading": "FEATURE IN",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "sneaker-shop-men",
+        "product_to_show": 5,
+        "items_per_row": 5,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "enable_slider": false,
+        "show_pagination": true,
+        "show_navigation": false,
+        "button_type": "link",
+        "button_text": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 10,
+        "custom_class": ""
+      }
+    },
+    "1620889733b8bebef8": {
+      "type": "custom-content",
+      "blocks": {
+        "302f4255-280e-48a3-9f00-b9e6fd50230a": {
+          "type": "image_card",
+          "settings": {
+            "width": "33%",
+            "content_position": "top_left",
+            "content_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "link": "",
+            "title": "CLASSIC SPORT<br> OLD SKOOL",
+            "subtitle": "",
+            "button_label": "SHOP NOW",
+            "button_style": "sf__btn-link",
+            "button_size": "sf__btn-small",
+            "block_custom_class": ""
+          }
+        },
+        "190cefb9-e7ca-4316-8e55-b3b82656701b": {
+          "type": "image_card",
+          "settings": {
+            "width": "66%",
+            "content_position": "center_left",
+            "content_alignment": "left",
+            "text_size": "large",
+            "text_color": "black",
+            "link": "",
+            "title": "THE VINTAGE<br> SNEAKERS",
+            "subtitle": "SPRING \/ SUMMER",
+            "button_label": "SHOP NOW",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "block_custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "302f4255-280e-48a3-9f00-b9e6fd50230a",
+        "190cefb9-e7ca-4316-8e55-b3b82656701b"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "",
+        "gap": 20,
+        "use_scroll_mobile": false,
+        "gap_mobile": 40,
+        "custom_class": "sf__index-custom-content"
+      }
+    },
+    "162089604618911426": {
+      "type": "collection-list",
+      "blocks": {
+        "162089604618911426-0": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "sneaker",
+            "title": "Men's Tree Dasher Relay"
+          }
+        },
+        "162089604618911426-1": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "sneaker",
+            "title": "Men's Tree Dasher Relay",
+            "item_image": "shopify:\/\/shop_images\/4.jpg"
+          }
+        },
+        "162089604618911426-2": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "sneaker",
+            "title": "Men's Tree Dasher Relay",
+            "item_image": "shopify:\/\/shop_images\/5.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "162089604618911426-0",
+        "162089604618911426-1",
+        "162089604618911426-2"
+      ],
+      "settings": {
+        "heading": "HAND-PICKED DAILY",
+        "subheading": "FEATURED IN",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "layout": "grid",
+        "card_style": "standard",
+        "text_alignment": "center",
+        "hover_effect": "scaling-down",
+        "show_product_count": false,
+        "count_inline_title": true,
+        "image_rounded": false,
+        "items_per_row": 3,
+        "item_gap": 30,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "autorotate": false,
+        "autorotate_speed": 5,
+        "use_scroll_mobile": true,
+        "mobile_gap": 16,
+        "hidden_slide_control_mobile": false,
+        "custom_class": ""
+      }
+    },
+    "162095835646fd819e": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "SHOP WOMEN",
+        "subheading": "FEATURED IN",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "sneaker-shop-women",
+        "product_to_show": 5,
+        "items_per_row": 5,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "enable_slider": false,
+        "show_pagination": true,
+        "show_navigation": false,
+        "button_type": "link",
+        "button_text": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 10,
+        "custom_class": ""
+      }
+    },
+    "1620980035fb4a935a": {
+      "type": "newsletter",
+      "settings": {
+        "container": "w-full",
+        "background_color": "",
+        "form_layout": "vertical",
+        "form_design": "2",
+        "heading": "SUBSCRIBE TO BE FRIEND",
+        "description": "",
+        "email_placeholder": "Enter your email address",
+        "submit_button": "Subscribe",
+        "text_color": "black",
+        "show_icon": true,
+        "icon_img_width": "40",
+        "show_agreement": false,
+        "term_condition_text": "<p>I agree to the Terms and Conditions.<\/p>"
+      }
+    },
+    "162098050586305bd8": {
+      "type": "custom-content",
+      "blocks": {
+        "e165b9f6-b00e-4698-9310-422404897180": {
+          "type": "html",
+          "settings": {
+            "code": "<div class=\"sf__scrolling-text font_size_11vh\" data-style=\"text-outline\" data-s-speed=\"slowest\" data-outline-thickness=\"thin\" data-s-dir=\"rtl\">\n    <div class=\"sf__scrolling-text-inner\">\n      <h2>\n<a href=\"#\"><em>BEST SNEAKER IN TOWN<\/em><\/a><span class=\"custom\" data-scale=\"small\"><\/span>\n<\/h2>\n      <h2>\n<a href=\"#\"><em>BEST SNEAKER IN TOWN<\/em><\/a><span class=\"custom\" data-scale=\"small\"><\/span>\n<\/h2>\n      <h2>\n<a href=\"#\"><em>BEST SNEAKER IN TOWN<\/em><\/a><span class=\"custom\" data-scale=\"small\"><\/span>\n<\/h2>\n      <h2>\n<a href=\"#\"><em>BEST SNEAKER IN TOWN<\/em><\/a><span class=\"custom\" data-scale=\"small\"><\/span>\n<\/h2>\n      <h2>\n<a href=\"#\"><em>BEST SNEAKER IN TOWN<\/em><\/a><span class=\"custom\" data-scale=\"small\"><\/span>\n<\/h2>\n      <h2>\n<a href=\"#\"><em>BEST SNEAKER IN TOWN<\/em><\/a><span class=\"custom\" data-scale=\"small\"><\/span>\n<\/h2>\n      <h2>\n<a href=\"#\"><em>BEST SNEAKER IN TOWN<\/em><\/a><span class=\"custom\" data-scale=\"small\"><\/span>\n<\/h2>\n    <\/div>\n  <\/div>",
+            "width": "100%",
+            "block_custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "e165b9f6-b00e-4698-9310-422404897180"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "w-full",
+        "background_color": "",
+        "gap": 30,
+        "use_scroll_mobile": false,
+        "gap_mobile": 16,
+        "custom_class": "sf__index-custom-content-1"
+      }
+    }
+  },
+  "order": [
+    "1620813069167db316",
+    "162081317833a6e943",
+    "1620889733b8bebef8",
+    "162095835646fd819e",
+    "162089604618911426",
+    "162098050586305bd8",
+    "1620980035fb4a935a"
+  ]
+}

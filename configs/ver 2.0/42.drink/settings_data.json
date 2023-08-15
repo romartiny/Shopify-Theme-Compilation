@@ -1,0 +1,259 @@
+{
+  "current": {
+    "favicon": "shopify:\/\/shop_images\/fav_icon_dark_1.png",
+    "container_width": 1280,
+    "container_fluid_width": 1620,
+    "container_fluid_offset": 100,
+    "color_primary": "#f1bb2f",
+    "color_body_text": "#000000",
+    "color_heading_text": "#000000",
+    "color_sub_text": "#666666",
+    "color_btn_bg": "#f1bb2f",
+    "color_btn_bg_hover": "#f1bb2f",
+    "prod_sale_price_color": "#666666",
+    "prod_type_color": "#666666",
+    "prod_desc_color": "#666666",
+    "color_main_bg": "#ffffff",
+    "color_field_bg": "#ffffff",
+    "color_annoucement_bg": "#f1bb2f",
+    "color_annoucement_text": "#000000",
+    "color_topbar_bg": "#ffffff",
+    "color_topbar_text": "#666666",
+    "color_header_bg": "#ffffff",
+    "color_header_link": "#000000",
+    "color_header_transparent": "#ffffff",
+    "color_menu_bar_bg": "#ffffff",
+    "color_menu_bar_text": "#000000",
+    "color_footer_bg": "#f3f3f3",
+    "color_footer_text": "#000000",
+    "color_footer_subtext": "#666666",
+    "color_footer_link_hover": "#000000",
+    "color_footer_bottom_bg": "#f3f3f3",
+    "color_footer_bottom_text": "#666666",
+    "color_border": "#eeeeee",
+    "img_overlay_opacity": 20,
+    "tooltip_background_color": "#000000",
+    "type_base_font": "roboto_condensed_n4",
+    "use_custom_font_body": true,
+    "custom_body_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/Montserrat-SemiBold.ttf?v=1623810434@600\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/Montserrat-Medium.ttf?v=1623810434@500\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/Montserrat-ExtraBold.ttf?v=1623810434@800",
+    "custom_body_weight": "500",
+    "type_base_size": 15,
+    "type_base_line_height": 28,
+    "type_header_font": "roboto_condensed_n7",
+    "use_custom_font_heading": true,
+    "custom_heading_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/Montserrat-SemiBold.ttf?v=1623810434@600\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/Montserrat-Medium.ttf?v=1623810434@500\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0147\/0962\/0800\/files\/Montserrat-ExtraBold.ttf?v=1623810434@800",
+    "custom_heading_weight": "800",
+    "type_header_base_size": 40,
+    "type_header_spacing": 1,
+    "btn_uppercase_text": true,
+    "btn_base_size": 14,
+    "btn_border_radius": 0,
+    "btn_weight": "800",
+    "pcard_layout": "1",
+    "pcard_alignment": "center",
+    "pcard_image_ratio": "3\/4",
+    "show_vendor": true,
+    "uppercase_prd_name": true,
+    "variant_option_design1": "image",
+    "variant_option_design3": "color",
+    "show_variant_swatch_image": true,
+    "product_colors": "red: #FF6961,\nyellow: #FDDA76,\nblack: #000000,\nblue: #8DB4D2,\ngreen: #C1E1C1,\npurple: #B19CD9,\nsilver: #EEEEEF,\nwhite: #FFFFFF,\nbrown: #836953,\nlight-brown: #feb035,\ndark-turquoise: #23cddc,\norange: #FFB347,\ntan: #E9D1BF,\nviolet: #B490B0,\npink: #FFD1DC,\ngrey: #E0E0E0,\nsky: #96BDC6,\npale-leaf: #CCD4BF",
+    "filter_color1": "",
+    "share_facebook": true,
+    "share_pinterest": true,
+    "social_twitter_link": "https:\/\/twitter.com\/home",
+    "social_facebook_link": "https:\/\/facebook.com\/",
+    "social_pinterest_link": "https:\/\/pinterest.com\/",
+    "social_instagram_link": "https:\/\/instagram.com\/",
+    "wishlist_page": "whishlist",
+    "product_compare_page": "",
+    "gm_api": "",
+    "instagram_token": "",
+    "custom_css": "ul.sf-nav li a.sf__parent-item {\n  font-size: 14px;\n  font-weight: 800;\n}\n.slide__block-subtitle,\n.sf__pcard-name,\n.font-extrabold,\n.sf__footer-block-title {\n  font-weight: 800;\n}\n[data-section-type=\"featured-collection\"]:last-child .section-my {\n  margin-bottom: 60px;\n}\n[data-section-type=\"custom-content\"] .section-my {\n  margin-top: 50px;\n  margin-bottom: 50px;\n}\n.sf__footer-block-newsletter .sf__footer-block-title {\n  font-size: 36px;\n}\n.sf__footer-block-our_store svg path {\n  fill: #000;\n}\n.sf__footer-block-our_store .social-media-links {\n  margin: 0px -28px;\n  margin-top: 25px;\n}\n.sf__footer-block-our_store .social-media-links a {\n  padding: 0 20px;\n}\n.sf-footer\n  .sf-footer__block.sf__footer-block-newsletter\n  form.sf__footer-form-newsletter\n  .sf__form-submit {\n  background-color: var(--color-primary);\n}\n\n@media (min-width: 1920px) {\n  .slide__block-title {\n    font-size: 100px;\n    line-height: 120px;\n  }\n}\n\n.sf-header__desktop\n  .sf-menu__banner\n  .sf-menu__banner-inner\n  div.flex\n  a.text-black {\n  font-weight: 800;\n  text-transform: uppercase;\n}\n.sf-footer form.sf__footer-form-newsletter .sf__form-submit:hover {\n  color: #ffffff;\n}\n.sf-header__desktop .sf-menu-wrapper__desktop.items-center {\n  justify-content: flex-end;\n}\n[data-section-type=\"hero\"]:first-child .sf__btn-primary {\n  background: #000000;\n  color: #fff;\n  transition: all 0.6s;\n  border-color: #000000;\n}\n[data-section-type=\"hero\"]:first-child .sf__btn-primary:hover {\n  transform: scale(1.06);\n}\n[data-section-type=\"featured-collection\"]:last-child .section__heading {\n  font-size: 36px;\n}\n[data-section-type=\"hero\"]:last-child .sf-hero__subtitle div {\n  font-size: 1.25rem;\n  line-height: 1.5rem;\n}\n[data-section-type=\"hero\"]:last-child .sf-hero__title div {\n  font-size: 3.125rem;\n  line-height: 3.8125rem;\n  font-weight: 800;\n}\n[data-section-type=\"custom-content\"] .content__heading span {\n  font-size: 2.25rem;\n  line-height: 3.375rem;\n}\n.sf-footer .sf__form-submit {\n  color: #000000;\n}\n.sf-footer .sf__footer-form-newsletter-icon {\n  color: #000000;\n}\n@media (max-width: 767px) {\n  [data-section-type=\"hero\"]:last-child .sf-hero__title div {\n    font-size: 2.125rem;\n  }\n}",
+    "use_theme_currencies": true,
+    "theme_currencies": "USD | EUR | GBP | VND",
+    "sections": {
+      "header": {
+        "type": "header",
+        "blocks": {
+          "59224d28-d657-4624-8d17-55b1c4ce8d9c": {
+            "type": "product-list",
+            "settings": {
+              "heading": "Product",
+              "container": "container-fluid",
+              "stretch_width": false,
+              "collection": "drink",
+              "limit": 6,
+              "columns": 2
+            }
+          },
+          "5b9aec5f-b955-4765-9a87-1962d613e909": {
+            "type": "custom_html",
+            "settings": {
+              "heading": "Home",
+              "container": "inherit",
+              "html": ""
+            }
+          },
+          "a14e1cb4-cae8-473e-bd7f-ed46815c5268": {
+            "type": "banner",
+            "settings": {
+              "heading": "Shop",
+              "container": "inherit",
+              "banner_style": "outside",
+              "banner_link": "",
+              "banner_title": "Delicious beer",
+              "banner_desc": "",
+              "banner_button_text": "Shop now"
+            }
+          },
+          "170a9841-3658-456c-9d54-a4b02dc0f6a3": {
+            "type": "custom_html",
+            "settings": {
+              "heading": "Features",
+              "container": "inherit",
+              "html": ""
+            }
+          }
+        },
+        "block_order": [
+          "59224d28-d657-4624-8d17-55b1c4ce8d9c",
+          "5b9aec5f-b955-4765-9a87-1962d613e909",
+          "a14e1cb4-cae8-473e-bd7f-ed46815c5268",
+          "170a9841-3658-456c-9d54-a4b02dc0f6a3"
+        ],
+        "settings": {
+          "header_design": "both-center",
+          "container": "container-fluid",
+          "header_sticky": true,
+          "transparent_on_top": true,
+          "logo_text": "MINIMOG",
+          "logo_max_width": 75,
+          "sticky_logo_max_width": 50,
+          "mobile_logo_max_width": 70,
+          "main_menu": "main-menu",
+          "secondary_menu": "",
+          "uppercase_parent_level": true,
+          "search": "hide",
+          "show_account_icon": false,
+          "show_cart_icon": true,
+          "show_wishlist_icon": true,
+          "show_compare_icon": false,
+          "show_currency_switcher": false,
+          "show_language_switcher": false
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "810293c6-ffbf-43b0-bb32-75d30e1b4c9f": {
+            "type": "newsletter",
+            "settings": {
+              "title": "SUBSCRIBE",
+              "description": "Enter your email below to be the first to know about new collections and product launches.",
+              "email_placeholder": "Your email",
+              "form_style": "bordered",
+              "show_social": false,
+              "width": "50%"
+            }
+          },
+          "4efadff1-63d7-421b-a686-8379120d7bde": {
+            "type": "spacing",
+            "settings": {
+              "width": "16%"
+            }
+          },
+          "53917a4a-b294-4f99-8266-61a4576a58eb": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "SERVICES",
+              "width": "25%"
+            }
+          },
+          "ff499df3-9d4a-4466-9213-e6b8d2368781": {
+            "type": "custom_text",
+            "settings": {
+              "title": "COMPANY",
+              "image_max": "200px",
+              "description": "<p>Find a location nearest<br\/>you. See Our Stores<br\/><br\/>+391 (0)35 2568 4593<br\/>hello@domain.com<\/p>",
+              "width": "25%"
+            }
+          },
+          "d7a64a0d-ed95-4de2-9b5b-9bb85ced7118": {
+            "type": "our_store",
+            "settings": {
+              "title": "SOCIAL MEDIA",
+              "description": "",
+              "show_email": false,
+              "show_phone": false,
+              "show_socials_link": true,
+              "width": "25%"
+            }
+          }
+        },
+        "block_order": [
+          "810293c6-ffbf-43b0-bb32-75d30e1b4c9f",
+          "4efadff1-63d7-421b-a686-8379120d7bde",
+          "53917a4a-b294-4f99-8266-61a4576a58eb",
+          "ff499df3-9d4a-4466-9213-e6b8d2368781",
+          "d7a64a0d-ed95-4de2-9b5b-9bb85ced7118"
+        ],
+        "settings": {
+          "design": "footer-1",
+          "container": "container-fluid",
+          "bordered": false,
+          "copyright": "© Minimog 2020",
+          "show_currency_selector": false,
+          "show_language_selector": false,
+          "show_social_links": true,
+          "show_payment_icons": true
+        }
+      },
+      "annoucement": {
+        "type": "annoucement",
+        "settings": {
+          "show_announcement": true,
+          "homepage_only": true,
+          "show_close": false,
+          "message": "<span class=\"font-semibold\">Next day delivery, 7 days a week, order before 2pm! <\/span>",
+          "message_link": "",
+          "show_divider": false
+        }
+      },
+      "mobile-sticky-bar": {
+        "type": "mobile-sticky-bar",
+        "settings": {
+          "show_mobile_sticky": true,
+          "show_home_icon": true,
+          "show_collection_icon": true,
+          "show_cart_icon": true,
+          "show_search_icon": true,
+          "show_account_icon": false,
+          "show_wishlist_icon": false
+        }
+      }
+    }
+  },
+  "presets": {
+    "Default": {
+      "sections": {
+        "featured-collection": {
+          "type": "featured-collection",
+          "settings": {
+            "collection": "frontpage"
+          }
+        },
+        "featured-product": {
+          "type": "featured-product",
+          "settings": {
+          }
+        }
+      },
+      "content_for_index": [
+        "featured-collection",
+        "featured-product"
+      ]
+    }
+  }
+}

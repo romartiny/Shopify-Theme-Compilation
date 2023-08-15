@@ -1,0 +1,228 @@
+{
+  "current": {
+    "favicon": "shopify:\/\/shop_images\/fav_icon_dark_1.png",
+    "container_width": 1280,
+    "container_fluid_width": 1620,
+    "container_fluid_offset": 65,
+    "color_primary": "#000",
+    "color_sub_text": "#666666",
+    "color_btn_bg_hover": "#000000",
+    "color_annoucement_bg": "#cfe9e1",
+    "color_annoucement_text": "#445b55",
+    "color_topbar_bg": "#cfe9e1",
+    "color_topbar_text": "#445b55",
+    "color_header_bg": "#ffffff",
+    "bg_cart_wishlist_count": "#da3f3f",
+    "color_menu_bar_bg": "#000000",
+    "color_menu_bar_text": "#ffffff",
+    "color_footer_bg": "#ffffff",
+    "color_footer_text": "#000000",
+    "color_footer_link": "#666666",
+    "color_footer_link_hover": "#000000",
+    "color_footer_bottom_bg": "#ffffff",
+    "color_footer_bottom_text": "#666666",
+    "color_border": "#d9d9d9",
+    "img_overlay_opacity": 20,
+    "use_custom_font_body": true,
+    "custom_body_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Light.ttf?v=1618297125@300\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Regular.ttf?v=1618297125@400\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Medium.ttf?v=1618297125@500\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-SemiBold.ttf?v=1618297125@600\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Bold.ttf?v=1618297125@700",
+    "use_custom_font_heading": true,
+    "custom_heading_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Light.ttf?v=1618297125@300\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Regular.ttf?v=1618297125@400\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Medium.ttf?v=1618297125@500\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-SemiBold.ttf?v=1618297125@600\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Bold.ttf?v=1618297125@700",
+    "product_colors": "red: #FF6961,\nyellow: #FDDA76,\nblack: #000000,\nblack band: #000000,\nblue: #8DB4D2,\ngreen: #C1E1C1,\npurple: #B19CD9,\nsilver: #EEEEEF,\nwhite: #FFFFFF,\nbrown: #836953,\nlight brown: #B5651D,\ndark turquoise: #23cddc,\norange: #FFB347,\ntan: #E9D1BF,\nviolet: #B490B0,\npink: #FFD1DC,\ngrey: #E0E0E0,\nsky: #96BDC6,\npale leaf: #CCD4BF,\nlight blue: #b1c5d4,\ndark grey: #aca69f,\nbeige: #EBE6DB,\nbeige band: #EED9C4,\ndark blue: #063e66,\ncream: #FFFFCC,\nlight pink: #FBCFCD,\nmint: #bedce3,\ndark gray: #3A3B3C,\nrosy brown: #c4a287,\nlight grey:#D3D3D3,\ncopper: #B87333,\nrose gold: #ECC5C0,\nnight blue: #151B54,\ncoral: #FF7F50,\nlight purple: #C6AEC7",
+    "filter_color1": "gingham",
+    "filter_color2": "flannel",
+    "social_twitter_link": "https:\/\/twitter.com\/home",
+    "social_facebook_link": "https:\/\/facebook.com\/",
+    "social_pinterest_link": "https:\/\/pinterest.com\/",
+    "social_instagram_link": "https:\/\/instagram.com\/",
+    "wishlist_page": "",
+    "product_compare_page": "",
+    "gm_api": "",
+    "instagram_token": "",
+    "custom_css": ".sf__footer-block-newsletter .sf__footer-block-title {\n  font-size: 36px;\n  line-height: 52px;\n  margin-bottom: 4px;\n  font-weight: 400;\n}\n.sf__index-instagram .section-my {\n  margin-bottom: 0;\n}\n.sf-footer .sf__footer-form-newsletter input.form-control {\n  background: #fff;\n}\n.sf-footer .sf__newsletter-block-desc {\n  margin-bottom: 28px;\n}\n.sf__index-testimonial .testimonial__item .testimonial__author {\n  font-weight: 500;\n  margin-bottom: 20px;\n}\n.sf__footer-block-our_store .social-media-links {\n  margin: 0px -28px;\n  margin-top: 25px;\n}\n.sf__footer-block-our_store .social-media-links a {\n  padding: 0 20px;\n}\n@media (max-width: 1279px) {\n  .sf__index-collection-list .rte br,\n  .sf__index-collection-list .section__description {\n    display: none;\n  }\n  .sf__index-collection-list .section__heading {\n    text-align: center;\n  }\n  .sf__footer-block-newsletter .sf__footer-block-title {\n    font-size: 24px;\n    line-height: 34px;\n  }\n  .sf-footer .sf__newsletter-block-desc {\n    margin-bottom: 0;\n  }\n  .sf__footer-block-our_store .social-media-links a {\n    padding: 0 15px;\n  }\n  .sf__footer-block-our_store .social-media-links {\n    margin: 0px -22px;\n  }\n}\n.sf-footer .sf__footer-form-newsletter input.form-control {\n  border: 1px solid #d4d4d4;\n}\n.sf__index-collection-list .collection-card__info h3 a {\n  transition: all 0.3s;\n}\n.sf__index-collection-list .collection-card__info h3:hover a {\n  color: #999999;\n}\n@media (min-width: 1280px) {\n  .sf__index-collection-list .section__heading {\n    font-size: 42px;\n    line-height: 56px;\n  }\n  .sf__index-collection-list .collection-card--hover-scaling-up:hover .collection-card__image {\n    transform: scale(1.2) translateZ(0);\n  }\n}\n@media (min-width: 1280px) and (max-width: 1535px) {\n  .sf__index-collection-list .sf-column {\n    padding: 0 15px 30px;\n  }\n  .sf__index-collection-list .sf-grid {\n    margin: 0 -15px -30px;\n  }\n}\n@media (max-width: 576px) {\n  .sf__index-slideshow .sf__mobile-button,\n  .sf__index-featured-collection a.sf__btn {\n    width: 100%;\n  }\n  .sf__index-collection-list .sf__ms-wrapper:not(.swiper-container-initialized) .sf-column {\n    width: 42vw !important;\n  }\n  .sf__index-collection-list .collection-card__info h3 a {\n    font-size: 16px;\n  }\n  .sf__index-testimonial .section__heading {\n    text-align: center;\n  }\n}",
+    "sale_popup_collection": "sale",
+    "size_chart": "size-guide",
+    "sections": {
+      "header": {
+        "type": "header",
+        "blocks": {
+          "1a2687e3-0799-4cd4-aa59-57068db33d37": {
+            "type": "banner",
+            "settings": {
+              "heading": "Shop",
+              "container": "container",
+              "banner_style": "outside",
+              "banner_link": "",
+              "banner_title": "The new - Season Shoes Edit",
+              "banner_desc": "",
+              "banner_button_text": "Shop Now"
+            }
+          },
+          "b7c0cc65-a24d-4449-b698-2920f0dd5b98": {
+            "type": "product-list",
+            "settings": {
+              "heading": "Products",
+              "container": "container-fluid",
+              "stretch_width": false,
+              "collection": "this-weeks-highlights",
+              "limit": 6,
+              "columns": 2
+            }
+          },
+          "634e9935-3e14-4b0d-8c83-838a68baaf25": {
+            "type": "custom_html",
+            "settings": {
+              "heading": "Home",
+              "container": "container",
+              "html": ""
+            }
+          },
+          "113b7eaf-dbb5-4637-8d5a-a67eb628c113": {
+            "type": "custom_html",
+            "settings": {
+              "heading": "Features",
+              "container": "inherit",
+              "html": ""
+            }
+          }
+        },
+        "block_order": [
+          "1a2687e3-0799-4cd4-aa59-57068db33d37",
+          "b7c0cc65-a24d-4449-b698-2920f0dd5b98",
+          "634e9935-3e14-4b0d-8c83-838a68baaf25",
+          "113b7eaf-dbb5-4637-8d5a-a67eb628c113"
+        ],
+        "settings": {
+          "header_design": "logo-left-menu-center",
+          "container": "container-fluid",
+          "header_sticky": true,
+          "transparent_on_top": false,
+          "logo_text": "MINIMOG",
+          "logo_max_width": 145,
+          "sticky_logo_max_width": 140,
+          "mobile_logo_max_width": 115,
+          "main_menu": "main-menu",
+          "secondary_menu": "",
+          "uppercase_parent_level": false,
+          "search": "show_icon",
+          "show_account_icon": true,
+          "show_cart_icon": true,
+          "show_wishlist_icon": true,
+          "show_compare_icon": false,
+          "show_currency_switcher": false,
+          "show_language_switcher": false
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "8d6ff29d-e8b7-411b-addc-ed3b7d2f67b3": {
+            "type": "newsletter",
+            "settings": {
+              "title": "Don’t miss a thing",
+              "description": "Enter your email below to be the first to know about new collections and product launches.",
+              "email_placeholder": "Enter your email",
+              "form_style": "bordered",
+              "show_social": false,
+              "width": "33%"
+            }
+          },
+          "37db9837-d62d-4201-b977-1ffe14cce37e": {
+            "type": "spacing",
+            "settings": {
+              "width": "20%"
+            }
+          },
+          "d5978e13-bd48-4f66-bbbe-5b0e5bb800f5": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "Information",
+              "width": "25%"
+            }
+          },
+          "5e2448c1-ce88-4f22-a39d-638b7876c17a": {
+            "type": "custom_text",
+            "settings": {
+              "title": "Company",
+              "image_max": "200px",
+              "description": "<p>Find a location nearest<br\/>you. <a href=\"#\" title=\"#\"><span style=\"text-decoration:underline\">See our stores<\/span><\/a><br\/><br\/>+391 (0)35 2568 4593<br\/>hello@domain.com<\/p>",
+              "width": "25%"
+            }
+          },
+          "c5f5a464-8b3c-4c63-94a1-aef3586482aa": {
+            "type": "our_store",
+            "settings": {
+              "title": "Social Media",
+              "description": "",
+              "show_email": false,
+              "show_phone": false,
+              "show_socials_link": true,
+              "width": "25%"
+            }
+          }
+        },
+        "block_order": [
+          "8d6ff29d-e8b7-411b-addc-ed3b7d2f67b3",
+          "37db9837-d62d-4201-b977-1ffe14cce37e",
+          "d5978e13-bd48-4f66-bbbe-5b0e5bb800f5",
+          "5e2448c1-ce88-4f22-a39d-638b7876c17a",
+          "c5f5a464-8b3c-4c63-94a1-aef3586482aa"
+        ],
+        "settings": {
+          "design": "footer-1",
+          "container": "container-fluid",
+          "bordered": false,
+          "copyright": "© MINIMOG 2021",
+          "show_currency_selector": false,
+          "show_language_selector": false,
+          "show_social_links": false,
+          "show_payment_icons": true
+        }
+      },
+      "annoucement": {
+        "type": "annoucement",
+        "settings": {
+          "show_announcement": true,
+          "homepage_only": true,
+          "show_close": true,
+          "message": "<span class=\"font-medium text-sm\">COOL NEW COLOR: STERLING ☁️ SO WORTH IT<\/span>",
+          "message_link": "",
+          "show_divider": false
+        }
+      },
+      "mobile-sticky-bar": {
+        "type": "mobile-sticky-bar",
+        "settings": {
+          "show_mobile_sticky": true,
+          "show_home_icon": true,
+          "show_collection_icon": true,
+          "show_cart_icon": true,
+          "show_search_icon": true,
+          "show_account_icon": false,
+          "show_wishlist_icon": false
+        }
+      }
+    }
+  },
+  "presets": {
+    "Default": {
+      "sections": {
+        "featured-collection": {
+          "type": "featured-collection",
+          "settings": {
+            "collection": "frontpage"
+          }
+        },
+        "featured-product": {
+          "type": "featured-product",
+          "settings": {
+          }
+        }
+      },
+      "content_for_index": [
+        "featured-collection",
+        "featured-product"
+      ]
+    }
+  }
+}

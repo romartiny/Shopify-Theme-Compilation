@@ -1,0 +1,322 @@
+{
+  "sections": {
+    "1620889733b8bebef8": {
+      "type": "custom-content",
+      "blocks": {
+        "302f4255-280e-48a3-9f00-b9e6fd50230a": {
+          "type": "image_card",
+          "settings": {
+            "width": "50%",
+            "content_position": "bottom_left",
+            "content_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "link": "",
+            "title": "We know what’s<br> look great in bed",
+            "subtitle": "",
+            "button_label": "Discover now",
+            "button_style": "sf__btn-link",
+            "button_size": "sf__btn-small",
+            "block_custom_class": ""
+          }
+        },
+        "190cefb9-e7ca-4316-8e55-b3b82656701b": {
+          "type": "image_card",
+          "settings": {
+            "width": "50%",
+            "content_position": "bottom_left",
+            "content_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "link": "",
+            "title": "Come to bed, enjoy<br> your sleep",
+            "subtitle": "",
+            "button_label": "Discover now",
+            "button_style": "sf__btn-link",
+            "button_size": "sf__btn-small",
+            "block_custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "302f4255-280e-48a3-9f00-b9e6fd50230a",
+        "190cefb9-e7ca-4316-8e55-b3b82656701b"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "left",
+        "container": "container",
+        "background_color": "",
+        "gap": 20,
+        "use_scroll_mobile": false,
+        "gap_mobile": 16,
+        "custom_class": ""
+      }
+    },
+    "162243112070c9a4c8": {
+      "type": "instagram",
+      "settings": {
+        "heading": "On the Gram",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "left",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "layout": "grid",
+        "images_count": 5,
+        "grid_columns": 5,
+        "gap": 20,
+        "mobile_gap": 10,
+        "profile": "https:\/\/www.instagram.com\/minimog.trendy\/",
+        "button_label": "",
+        "custom_class": "sf__index-instagram"
+      }
+    },
+    "1622448086a90b8c2f": {
+      "type": "image-with-text",
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "container": "w-full",
+        "background_color": "rgba(0,0,0,0)",
+        "item_gap": 80,
+        "item_gap_mobile": 30,
+        "layout": "left",
+        "image_column_size": "7",
+        "title": "Enjoy your bed time<br> like never before!",
+        "sub_title": "",
+        "text": "<p>Lush, rare, unique and always fresh. Stop into our store to<br\/> find the perfect plant for your home or office.<\/p>",
+        "text_size": "medium",
+        "content_alignment": "left",
+        "button_label": "SHOP THE LOOK",
+        "button_link": "",
+        "button_style": "sf__btn-link",
+        "button_size": "sf__btn-small",
+        "custom_class": "sf__index-img-with-text"
+      }
+    },
+    "1622448572670ce860": {
+      "type": "collection-list",
+      "blocks": {
+        "1622448572670ce860-0": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "bedroom-furniture",
+            "title": "Duvet Covers"
+          }
+        },
+        "2da6bc5b-19d8-4ffa-bee4-4908555b8473": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "bedroom-furniture",
+            "title": "Cushion Cover"
+          }
+        },
+        "08e94e51-92f0-4f6e-a62e-3865ae293f76": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "bedroom-furniture",
+            "title": "Pillowcases"
+          }
+        },
+        "31443591-b06f-4573-9b1a-78269b48789c": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "bedroom-furniture",
+            "title": "Blankets"
+          }
+        },
+        "9cfe0e1a-7e9e-4cf1-a9f4-555575165581": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "bedroom-furniture",
+            "title": "Curtains"
+          }
+        }
+      },
+      "block_order": [
+        "1622448572670ce860-0",
+        "2da6bc5b-19d8-4ffa-bee4-4908555b8473",
+        "08e94e51-92f0-4f6e-a62e-3865ae293f76",
+        "31443591-b06f-4573-9b1a-78269b48789c",
+        "9cfe0e1a-7e9e-4cf1-a9f4-555575165581"
+      ],
+      "settings": {
+        "heading": "Bedsheets you are going to enjoy!",
+        "subheading": "SHOP BY CATEGORIES",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "",
+        "layout": "grid",
+        "card_style": "standard",
+        "text_alignment": "center",
+        "hover_effect": "scaling-up",
+        "show_product_count": true,
+        "count_inline_title": true,
+        "image_rounded": true,
+        "items_per_row": 5,
+        "item_gap": 30,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "autorotate": false,
+        "autorotate_speed": 5,
+        "use_scroll_mobile": true,
+        "mobile_gap": 30,
+        "hidden_slide_control_mobile": false,
+        "custom_class": "sf__index-collection-list"
+      }
+    },
+    "162244938595ae3801": {
+      "type": "product-tabs",
+      "blocks": {
+        "162244938595ae3801-0": {
+          "type": "tab",
+          "settings": {
+            "title": "Best sellers",
+            "collection": "best-sellers"
+          }
+        },
+        "162244938595ae3801-1": {
+          "type": "tab",
+          "settings": {
+            "title": "New arrivals",
+            "collection": "new-arrivals"
+          }
+        },
+        "c077f0d8-db31-4cbd-be04-30a7eadb376b": {
+          "type": "tab",
+          "settings": {
+            "title": "Sale items",
+            "collection": "sale-items"
+          }
+        }
+      },
+      "block_order": [
+        "162244938595ae3801-0",
+        "162244938595ae3801-1",
+        "c077f0d8-db31-4cbd-be04-30a7eadb376b"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "tab_header": "horizontal",
+        "limit": 6,
+        "show_button": false,
+        "button_type": "link",
+        "button_label": "View All",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "items_per_row": 3,
+        "item_gap": 30,
+        "item_gap_mobile": 10,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "custom_class": "sf__index-product-tab"
+      }
+    },
+    "1622451137d356c514": {
+      "type": "icon-box",
+      "blocks": {
+        "1622451137d356c514-0": {
+          "type": "iconbox",
+          "settings": {
+            "title": "Summer collection",
+            "description": "",
+            "link": "",
+            "button_label": "SHOP THE LOOK",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "1622451137d356c514-1": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/6.jpg",
+            "title": "Staff Picks",
+            "description": "",
+            "link": "",
+            "button_label": "SHOP NOW",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        }
+      },
+      "block_order": [
+        "1622451137d356c514-0",
+        "1622451137d356c514-1"
+      ],
+      "settings": {
+        "heading": "The piece of comfort you can always enjoy.<br> Sleep well, walk up with a lot of energy",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "item_per_row": 2,
+        "item_gap": 30,
+        "item_gap_mobile": 10,
+        "card_style": "vertical",
+        "image_max_width": "",
+        "content_alignment": "center",
+        "hover_effect": "scaling-up",
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "use_scroll_mobile": true,
+        "use_grid_column_mb": false,
+        "custom_class": "sf__index-icon-box"
+      }
+    },
+    "1622452409f76b7918": {
+      "type": "custom-content",
+      "blocks": {
+        "f229ecde-b293-42d8-bfcb-10f65945a852": {
+          "type": "html",
+          "settings": {
+            "code": "<img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/7_61672fe6-35c1-42fb-87f5-2033393d5949.jpg?v=1622452991\" class=\"mx-auto\" style=\"max-width: 55px;\">",
+            "width": "100%",
+            "block_custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "f229ecde-b293-42d8-bfcb-10f65945a852"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "",
+        "gap": 30,
+        "use_scroll_mobile": false,
+        "gap_mobile": 16,
+        "custom_class": "sf__index-custom-content"
+      }
+    }
+  },
+  "order": [
+    "1622448086a90b8c2f",
+    "1622448572670ce860",
+    "1620889733b8bebef8",
+    "162244938595ae3801",
+    "1622452409f76b7918",
+    "1622451137d356c514",
+    "162243112070c9a4c8"
+  ]
+}

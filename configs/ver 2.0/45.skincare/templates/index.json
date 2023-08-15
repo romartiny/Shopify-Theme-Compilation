@@ -1,0 +1,378 @@
+{
+  "sections": {
+    "1621243260e1af0c20": {
+      "type": "slider",
+      "blocks": {
+        "1621243260e1af0c20-0": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center top",
+            "content_in_container": true,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "white",
+            "subheading": "Invincible skin starts here",
+            "title": "The best skin care &<br> acne products",
+            "description": "",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-white",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections"
+          }
+        },
+        "1621243260e1af0c20-1": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center top",
+            "content_in_container": true,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "white",
+            "subheading": "Hot Trend",
+            "title": "Shop vesel and<br> wall mount sinks",
+            "description": "",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-white",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections"
+          }
+        },
+        "1621243260e1af0c20-2": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center top",
+            "content_in_container": true,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "white",
+            "subheading": "Simply Elegant",
+            "title": "Quality never <br>goes out of style.",
+            "description": "",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-white",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify:\/\/collections"
+          }
+        }
+      },
+      "block_order": [
+        "1621243260e1af0c20-0",
+        "1621243260e1af0c20-1",
+        "1621243260e1af0c20-2"
+      ],
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "medium",
+        "show_overlay": false,
+        "dots_position": "right",
+        "dots_color": "dark",
+        "show_dots": true,
+        "show_arrows": false,
+        "autorotate": true,
+        "autorotate_speed": 5,
+        "custom_class": ""
+      }
+    },
+    "1623403822b813a780": {
+      "type": "instagram",
+      "settings": {
+        "heading": "Let’s be friends.",
+        "subheading": "",
+        "description": "Tag <span class=\"text-black\">@brillare<\/span> in your Instagram photos for a chance to be featured here.<br>\nFind more inspiration on<a href=\"\"> our Instagram.<\/a>",
+        "header_alignment": "center",
+        "container": "w-full",
+        "background_color": "rgba(0,0,0,0)",
+        "layout": "grid",
+        "images_count": 5,
+        "grid_columns": 5,
+        "gap": 10,
+        "mobile_gap": 10,
+        "profile": "https:\/\/www.instagram.com\/minimog.trendy\/",
+        "button_label": "",
+        "custom_class": ""
+      }
+    },
+    "16236457435037e9a5": {
+      "type": "testimonials",
+      "blocks": {
+        "16236457435037e9a5-0": {
+          "type": "testimonial",
+          "settings": {
+            "title": "",
+            "description": "<p>“ The arch support is wonderful and helps for long hours on your body. The narrow heel is wonderfully ! “<\/p>",
+            "footer": "<p>Dean D. US<\/p>",
+            "image_text": "",
+            "product": ""
+          }
+        },
+        "16236457435037e9a5-1": {
+          "type": "testimonial",
+          "settings": {
+            "title": "",
+            "description": "<p>“ I was thrilled to be able to visit your store again! Love my new purchase.“<\/p>",
+            "footer": "<p>Nancy W.<\/p>",
+            "image_text": "",
+            "product": ""
+          }
+        },
+        "16236457435037e9a5-2": {
+          "type": "testimonial",
+          "settings": {
+            "title": "",
+            "description": "<p>“ I've been getting good wear out of the shirt. It's very light and soft, comfortable to wear. “<\/p>",
+            "footer": "<p>Fernanda K.<\/p>",
+            "image_text": "",
+            "product": ""
+          }
+        },
+        "16236457435037e9a5-3": {
+          "type": "testimonial",
+          "settings": {
+            "title": "",
+            "description": "<p>“ I just wanted to thank you for the impeccable service from you and your staff...I will always look forward to shopping at your store“<\/p>",
+            "footer": "<p>Gloria T.<\/p>",
+            "image_text": "",
+            "product": ""
+          }
+        },
+        "16236457435037e9a5-4": {
+          "type": "testimonial",
+          "settings": {
+            "title": "",
+            "description": "<p>“ Thanks for being so fabulous...and continuing to provide such a wonderful service “<\/p>",
+            "footer": "<p>Zeferino G.<\/p>",
+            "image_text": "",
+            "product": ""
+          }
+        },
+        "16236457435037e9a5-5": {
+          "type": "testimonial",
+          "settings": {
+            "title": "",
+            "description": "<p>“ You have been a real help and you have a great products and service, which I will certainly recommend to others.“<\/p>",
+            "footer": "<p>Jayce M.<\/p>",
+            "image_text": "",
+            "product": ""
+          }
+        }
+      },
+      "block_order": [
+        "16236457435037e9a5-0",
+        "16236457435037e9a5-1",
+        "16236457435037e9a5-2",
+        "16236457435037e9a5-3",
+        "16236457435037e9a5-4",
+        "16236457435037e9a5-5"
+      ],
+      "settings": {
+        "heading": "Happy Customers",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "#f5f5f5",
+        "design": "testimonials-3",
+        "show_stars": true,
+        "autorotate": false,
+        "show_navigation": true,
+        "show_pagination": true,
+        "star_color": "#f3bb2e",
+        "custom_class": ""
+      }
+    },
+    "16236466169462824c": {
+      "type": "image-with-text",
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "item_gap": 100,
+        "item_gap_mobile": 30,
+        "layout": "left",
+        "image_column_size": "6",
+        "title": "<span class=\"sf__custom-heading\">Custom Solutions for Your<br> Skin’s Unique Needs<\/span>",
+        "sub_title": "Clean beauty essentials",
+        "text": "<p>Shopping for skincare at the drugstore is frustrating. Buy it, try it,<br\/> toss it, repeat. Sound familiar?<br\/>Get skincare made to fit—with some of the top acne-busting<br\/> ingredients prescribed by dermatologists nationwide.<\/p>",
+        "text_size": "medium",
+        "content_alignment": "left",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "custom_class": ""
+      }
+    },
+    "162365322233f2157f": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Explore The Latest clean<br> beauty essentials",
+        "subheading": "Clean beauty made easy",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "skincare",
+        "product_to_show": 3,
+        "items_per_row": 3,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "1\/1",
+        "show_vendor": false,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "button_type": "link",
+        "button_text": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 10,
+        "custom_class": ""
+      }
+    },
+    "1623653344881e89b1": {
+      "type": "image-with-text-2",
+      "settings": {
+        "container": "w-full",
+        "hero_size": "medium",
+        "show_overlay": false,
+        "bg_position": "center",
+        "parallax": false,
+        "content_in_container": true,
+        "content_position": "right middle",
+        "text_alignment": "center",
+        "text_size": "medium",
+        "text_color": "dark",
+        "title": "Clean Beauty<br> Made Easy",
+        "subtitle": "Featured product",
+        "text": "<p>Get a powerful custom cream<br\/> mixed just for you.<\/p>",
+        "button_label": "Buy Now<span class=\"px-3\">| <\/span>$39.00",
+        "button_link": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "custom_class": ""
+      }
+    },
+    "162365417352ffafa1": {
+      "type": "image-with-text",
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "item_gap": 100,
+        "item_gap_mobile": 30,
+        "layout": "right",
+        "image_column_size": "6",
+        "title": "<span class=\"sf__custom-heading\">Everything You Need for<br> Glowing Skin—in One<br> Smart Box.<\/span>",
+        "sub_title": "The best deals",
+        "text": "<p>Shopping for skincare at the drugstore is frustrating. Buy it, try it,<br\/> toss it, repeat. Sound familiar?<br\/>Get skincare made to fit—with some of the top acne-busting<br\/> ingredients prescribed by dermatologists nationwide.<\/p>",
+        "text_size": "medium",
+        "content_alignment": "left",
+        "button_label": "Buy now<span class=\"px-3\">|<\/span>$89.00",
+        "button_link": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "custom_class": ""
+      }
+    },
+    "162365459011662372": {
+      "type": "brands-list",
+      "blocks": {
+        "162365459011662372-0": {
+          "type": "image",
+          "settings": {
+            "image_link": "",
+            "max_width": "150px"
+          }
+        },
+        "162365459011662372-1": {
+          "type": "image",
+          "settings": {
+            "image_link": "",
+            "max_width": "150px"
+          }
+        },
+        "584ae60f-d767-4a4a-a223-fffbb32262a8": {
+          "type": "image",
+          "settings": {
+            "image_link": "",
+            "max_width": "150px"
+          }
+        },
+        "162365459011662372-2": {
+          "type": "image",
+          "settings": {
+            "image_link": "",
+            "max_width": "150px"
+          }
+        },
+        "162365459011662372-3": {
+          "type": "image",
+          "settings": {
+            "image_link": "",
+            "max_width": "150px"
+          }
+        },
+        "ed12f2e5-f664-4f67-aae9-47ded2099ea0": {
+          "type": "image",
+          "settings": {
+            "image_link": "",
+            "max_width": "150px"
+          }
+        }
+      },
+      "block_order": [
+        "162365459011662372-0",
+        "162365459011662372-1",
+        "584ae60f-d767-4a4a-a223-fffbb32262a8",
+        "162365459011662372-2",
+        "162365459011662372-3",
+        "ed12f2e5-f664-4f67-aae9-47ded2099ea0"
+      ],
+      "settings": {
+        "heading": "As featured on:",
+        "subheading": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "#f5f5f5",
+        "item_per_row": 6,
+        "enable_slider": true,
+        "autorotate": true,
+        "autorotate_speed": 3,
+        "custom_class": ""
+      }
+    }
+  },
+  "order": [
+    "1621243260e1af0c20",
+    "16236466169462824c",
+    "162365459011662372",
+    "162365322233f2157f",
+    "1623653344881e89b1",
+    "162365417352ffafa1",
+    "16236457435037e9a5",
+    "1623403822b813a780"
+  ]
+}

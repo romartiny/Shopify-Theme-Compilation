@@ -1,0 +1,228 @@
+{
+  "sections": {
+    "162244938595ae3801": {
+      "type": "product-tabs",
+      "blocks": {
+        "162244938595ae3801-0": {
+          "type": "tab",
+          "settings": {
+            "title": "Best sellers",
+            "collection": "stationery"
+          }
+        },
+        "162244938595ae3801-1": {
+          "type": "tab",
+          "settings": {
+            "title": "New arrivals",
+            "collection": "book-newarrivals"
+          }
+        },
+        "c077f0d8-db31-4cbd-be04-30a7eadb376b": {
+          "type": "tab",
+          "settings": {
+            "title": "Sale items",
+            "collection": "book-saleitems"
+          }
+        }
+      },
+      "block_order": [
+        "162244938595ae3801-0",
+        "162244938595ae3801-1",
+        "c077f0d8-db31-4cbd-be04-30a7eadb376b"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "tab_header": "horizontal",
+        "limit": 8,
+        "show_button": true,
+        "button_type": "load",
+        "button_label": "Shop More",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "pcard_layout": "2",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "items_per_row": 4,
+        "item_gap": 30,
+        "item_gap_mobile": 16,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "custom_class": "sf__index-product-tab"
+      }
+    },
+    "1622790700c4fba996": {
+      "type": "image-with-text-2",
+      "settings": {
+        "container": "w-full",
+        "hero_size": "medium",
+        "show_overlay": false,
+        "bg_position": "center",
+        "parallax": false,
+        "content_in_container": true,
+        "content_position": "right middle",
+        "text_alignment": "left",
+        "text_size": "medium",
+        "text_color": "dark",
+        "title": "By full design Oxford super<br> \nsingle zipper pencil",
+        "subtitle": "<span class=\"hot_label\">Hot Deals<\/span>",
+        "text": "",
+        "button_label": "Shop Collection",
+        "button_link": "",
+        "button_style": "sf__btn-link",
+        "button_size": "",
+        "custom_class": "sf__index-hero"
+      }
+    },
+    "1622792642774044c2": {
+      "type": "slider",
+      "blocks": {
+        "1622792642774044c2-0": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center middle",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "white",
+            "subheading": "<span class=\"slide_subheading_label\">Now Available<\/span>",
+            "title": "Recycled paper<br> \nenvelope file folder",
+            "description": "",
+            "button_text": "Pre - Order Now",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        },
+        "1622792642774044c2-1": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center middle",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "white",
+            "subheading": "<span class=\"slide_subheading_label\">Now Available<\/span>",
+            "title": "A style for every story",
+            "description": "",
+            "button_text": "Pre - Order Now",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        },
+        "1622792642774044c2-2": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center middle",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "white",
+            "subheading": "<span class=\"slide_subheading_label\">Now Available<\/span>",
+            "title": "Buy less, choose well",
+            "description": "",
+            "button_text": "Pre - Order Now",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "1622792642774044c2-0",
+        "1622792642774044c2-1",
+        "1622792642774044c2-2"
+      ],
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "large",
+        "show_overlay": false,
+        "dots_position": "right",
+        "dots_color": "light",
+        "show_dots": true,
+        "show_arrows": false,
+        "autorotate": false,
+        "autorotate_speed": 5,
+        "custom_class": "sf__index-slideshow"
+      }
+    },
+    "1622797467bb3cbc9a": {
+      "type": "custom-content",
+      "blocks": {
+        "5f09ea33-f991-4753-8be4-0af0897462bd": {
+          "type": "html",
+          "settings": {
+            "code": "<div class=\"custom_content_1 row-flex flex -mx-4 mb-14\">\n  <div class=\"content_item sf__hover-zoom-in px-4\">\n    <a href=\"#\" class=\"block sf-image--loaded overflow-hidden\">\n      <img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/2_3e9b82f7-e182-46b8-892e-8034dfd67874.jpg?v=1622796619\">\n    <\/a>\n    <a class=\"sf__btn sf__btn-link mt-4\" href=\"#\">Notebooks<\/a>\n  <\/div>\n  <div class=\"content_item sf__hover-zoom-in px-4\">\n    <a href=\"#\" class=\"block sf-image--loaded overflow-hidden\">\n      <img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/3_bc79d3db-56b4-46a3-ad3a-b6b5a4fbc03f.jpg?v=1622796651\">\n    <\/a>\n    <a class=\"sf__btn sf__btn-link mt-4\" href=\"#\">Diaries &amp; Planners<\/a>\n  <\/div>\n<\/div>\n<div class=\"custom_content_1\">\n  <div class=\"content_item sf__hover-zoom-in w-full\">\n    <a href=\"#\" class=\"block sf-image--loaded overflow-hidden\">\n      <img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/4_ffcf4515-b380-4eef-b2fc-8e9a80d7b686.jpg?v=1622797840\">\n    <\/a>\n    <a class=\"sf__btn sf__btn-link mt-4\" href=\"#\">Pen &amp; Pencil Case<\/a>\n  <\/div>\n<\/div>",
+            "width": "100%",
+            "block_custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "5f09ea33-f991-4753-8be4-0af0897462bd"
+      ],
+      "settings": {
+        "heading": "Our mission is to create simple, beautiful<br> objects that combine form.",
+        "subheading": "<img style=\"max-width:150px; margin:0 auto;margin-bottom: 30px;\" src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/5_117d7c65-325c-4a2e-a482-8ece067a953b.png?v=1622798380\">",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "",
+        "gap": 30,
+        "use_scroll_mobile": false,
+        "gap_mobile": 16,
+        "custom_class": "sf__index-custom-content"
+      }
+    },
+    "1622799837838d778f": {
+      "type": "instagram",
+      "settings": {
+        "heading": "On the Gram",
+        "subheading": "",
+        "description": "@minitool.insta",
+        "header_alignment": "center",
+        "container": "w-full",
+        "background_color": "rgba(0,0,0,0)",
+        "layout": "grid",
+        "images_count": 5,
+        "grid_columns": 5,
+        "gap": 10,
+        "mobile_gap": 10,
+        "profile": "https:\/\/www.instagram.com\/minimog.trendy\/",
+        "button_label": "",
+        "custom_class": "sf__index-instagram"
+      }
+    }
+  },
+  "order": [
+    "1622792642774044c2",
+    "162244938595ae3801",
+    "1622790700c4fba996",
+    "1622797467bb3cbc9a",
+    "1622799837838d778f"
+  ]
+}

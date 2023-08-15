@@ -1,0 +1,412 @@
+{
+  "sections": {
+    "1620813069167db316": {
+      "type": "slider",
+      "blocks": {
+        "1620813069167db316-0": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center middle",
+            "content_in_container": false,
+            "content_position": "left bottom",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "Get ready to go<br> anywhere.",
+            "description": "<p>t’s a magical moving spotlight and – most of <br\/>all. Your feet will feel better.<\/p>",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-primary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        },
+        "27403af4-f4e3-4833-9189-9868705845f7": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center middle",
+            "content_in_container": false,
+            "content_position": "left bottom",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "The possibilities <br>are endless.",
+            "description": "<p>t’s a magical moving spotlight and – most of <br\/>all. Your feet will feel better.<\/p>",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-primary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        },
+        "c0ce169f-1329-47fc-9e42-915e4961aa32": {
+          "type": "slider_item",
+          "settings": {
+            "image_alignment": "center middle",
+            "content_in_container": false,
+            "content_position": "left bottom",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "Quality never <br>goes out of style.",
+            "description": "<p>t’s a magical moving spotlight and – most of <br\/>all. Your feet will feel better.<\/p>",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-primary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "1620813069167db316-0",
+        "27403af4-f4e3-4833-9189-9868705845f7",
+        "c0ce169f-1329-47fc-9e42-915e4961aa32"
+      ],
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "large",
+        "show_overlay": false,
+        "dots_position": "bottom",
+        "dots_color": "dark",
+        "show_dots": true,
+        "show_arrows": false,
+        "autorotate": false,
+        "autorotate_speed": 5,
+        "custom_class": "sf__index-slideshow"
+      }
+    },
+    "162081317833a6e943": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Popular this week",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "socks",
+        "product_to_show": 5,
+        "items_per_row": 5,
+        "item_gap": 30,
+        "pcard_layout": "2",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "button_type": "link",
+        "button_text": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 10,
+        "custom_class": ""
+      }
+    },
+    "1620889733b8bebef8": {
+      "type": "custom-content",
+      "blocks": {
+        "302f4255-280e-48a3-9f00-b9e6fd50230a": {
+          "type": "image_card",
+          "settings": {
+            "width": "50%",
+            "content_position": "bottom_left",
+            "content_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "link": "",
+            "title": "Sneaker <br>Socks",
+            "subtitle": "",
+            "button_label": "Shop Now",
+            "button_style": "sf__btn-link",
+            "button_size": "",
+            "block_custom_class": ""
+          }
+        },
+        "190cefb9-e7ca-4316-8e55-b3b82656701b": {
+          "type": "image_card",
+          "settings": {
+            "width": "50%",
+            "content_position": "bottom_left",
+            "content_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "link": "",
+            "title": "Box<br>  Set 6-pack",
+            "subtitle": "",
+            "button_label": "Shop Now",
+            "button_style": "sf__btn-link",
+            "button_size": "",
+            "block_custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "302f4255-280e-48a3-9f00-b9e6fd50230a",
+        "190cefb9-e7ca-4316-8e55-b3b82656701b"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "",
+        "gap": 20,
+        "use_scroll_mobile": true,
+        "gap_mobile": 16,
+        "custom_class": "sf__index-custom-content-1"
+      }
+    },
+    "162098050586305bd8": {
+      "type": "custom-content",
+      "blocks": {
+        "e165b9f6-b00e-4698-9310-422404897180": {
+          "type": "html",
+          "settings": {
+            "code": "<div class=\"sf__custom-html-block1\">\n<div class=\"m-scroll\">\n  <div class=\"m-scroll__title\">\n    <div>\n      <span class=\"sf__text-scroll px-12\">THE CORE COLLECTION<\/span>\n      <span class=\"sf__text-stroke text-stroke-1 px-12\">Comfort in socks<\/span>\n      <span class=\"sf__text-scroll px-12\">THE CORE COLLECTION<\/span>\n      <span class=\"sf__text-stroke text-stroke-1 px-12\">Comfort in socks<\/span>\n    <\/div>\n  <\/div>\n<\/div>\n<\/div>",
+            "width": "100%",
+            "block_custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "e165b9f6-b00e-4698-9310-422404897180"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "w-full",
+        "background_color": "",
+        "gap": 30,
+        "use_scroll_mobile": false,
+        "gap_mobile": 16,
+        "custom_class": ""
+      }
+    },
+    "1622430211caf90a8a": {
+      "type": "press",
+      "blocks": {
+        "1622430211caf90a8a-0": {
+          "type": "news",
+          "settings": {
+            "title": "<p>“Millions of combinations, meaning you get a totally unique<br\/> piece of furniture exactly the way you want it.”<\/p>",
+            "image": "shopify:\/\/shop_images\/1.png",
+            "image_width": "150px",
+            "url": ""
+          }
+        },
+        "1622430211caf90a8a-1": {
+          "type": "news",
+          "settings": {
+            "title": "<p>“Millions of combinations, meaning you get a totally unique<br\/> piece of furniture exactly the way you want it.”<\/p>",
+            "image": "shopify:\/\/shop_images\/2.png",
+            "image_width": "150px",
+            "url": ""
+          }
+        },
+        "1622430211caf90a8a-2": {
+          "type": "news",
+          "settings": {
+            "title": "<p>“Millions of combinations, meaning you get a totally unique<br\/> piece of furniture exactly the way you want it.”<\/p>",
+            "image": "shopify:\/\/shop_images\/3.png",
+            "image_width": "150px",
+            "url": ""
+          }
+        },
+        "1622430211caf90a8a-3": {
+          "type": "news",
+          "settings": {
+            "title": "<p>“Millions of combinations, meaning you get a totally unique<br\/> piece of furniture exactly the way you want it.”<\/p>",
+            "image": "shopify:\/\/shop_images\/4.png",
+            "image_width": "150px",
+            "url": ""
+          }
+        },
+        "1622430211caf90a8a-4": {
+          "type": "news",
+          "settings": {
+            "title": "<p>“Millions of combinations, meaning you get a totally unique<br\/> piece of furniture exactly the way you want it.”<\/p>",
+            "image_width": "150px",
+            "url": ""
+          }
+        },
+        "1622430211caf90a8a-5": {
+          "type": "news",
+          "settings": {
+            "title": "<p>“Millions of combinations, meaning you get a totally unique<br\/> piece of furniture exactly the way you want it.”<\/p>",
+            "image_width": "150px",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "1622430211caf90a8a-0",
+        "1622430211caf90a8a-1",
+        "1622430211caf90a8a-2",
+        "1622430211caf90a8a-3",
+        "1622430211caf90a8a-4",
+        "1622430211caf90a8a-5"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "",
+        "show_divider": false,
+        "autoplay": true,
+        "custom_class": "sf__index-press"
+      }
+    },
+    "162243112070c9a4c8": {
+      "type": "instagram",
+      "settings": {
+        "heading": "Shop our Instagram",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "left",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "layout": "grid",
+        "images_count": 5,
+        "grid_columns": 5,
+        "gap": 30,
+        "mobile_gap": 16,
+        "profile": "https:\/\/www.instagram.com\/minimog.trendy\/",
+        "button_label": "",
+        "custom_class": ""
+      }
+    },
+    "16224315285b0ef561": {
+      "type": "image-with-text-2",
+      "settings": {
+        "container": "w-full",
+        "hero_size": "medium",
+        "show_overlay": false,
+        "bg_position": "center",
+        "parallax": false,
+        "content_in_container": true,
+        "content_position": "left middle",
+        "text_alignment": "center",
+        "text_size": "medium",
+        "text_color": "dark",
+        "title": "More fun with our fun<br> colourful socks",
+        "subtitle": "Cover Crew Socks",
+        "text": "<p>Making the world a more colourful place with<br\/> our everyday essentials.<\/p>",
+        "button_label": "Shop now",
+        "button_link": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "custom_class": "sf__index-hero"
+      }
+    },
+    "1622432538ce004ae6": {
+      "type": "custom-content",
+      "blocks": {
+        "6de8505c-c179-4a7c-9bf0-b21848dcf25d": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/7.jpg",
+            "width": "25%",
+            "alignment": "center",
+            "block_custom_class": ""
+          }
+        },
+        "1e18a6ad-53a3-4822-99bd-f7829676d363": {
+          "type": "text",
+          "settings": {
+            "title": "Speciality<br> socks",
+            "subheading": "",
+            "text": "<p>Making the world a more colourful place with our everyday essentials.<\/p>",
+            "width": "25%",
+            "alignment": "center",
+            "align_text": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "button_label": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": "",
+            "block_custom_class": ""
+          }
+        },
+        "8d645b93-3db1-4fb0-8565-10bb66125ee5": {
+          "type": "image",
+          "settings": {
+            "width": "25%",
+            "alignment": "center",
+            "block_custom_class": ""
+          }
+        },
+        "8978f103-649b-4677-af35-1b431a703ffd": {
+          "type": "text",
+          "settings": {
+            "title": "Fun, fresh & eye<br> popping designs.",
+            "subheading": "",
+            "text": "<p>Making the world a more colourful place with our everyday essentials.<\/p>",
+            "width": "25%",
+            "alignment": "center",
+            "align_text": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "button_label": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": "",
+            "block_custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "6de8505c-c179-4a7c-9bf0-b21848dcf25d",
+        "1e18a6ad-53a3-4822-99bd-f7829676d363",
+        "8d645b93-3db1-4fb0-8565-10bb66125ee5",
+        "8978f103-649b-4677-af35-1b431a703ffd"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "",
+        "gap": 30,
+        "use_scroll_mobile": false,
+        "gap_mobile": 40,
+        "custom_class": "sf__index-custom-content"
+      }
+    }
+  },
+  "order": [
+    "1620813069167db316",
+    "162081317833a6e943",
+    "162098050586305bd8",
+    "1620889733b8bebef8",
+    "1622430211caf90a8a",
+    "16224315285b0ef561",
+    "1622432538ce004ae6",
+    "162243112070c9a4c8"
+  ]
+}

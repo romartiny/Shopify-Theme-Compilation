@@ -1,0 +1,352 @@
+{
+  "sections": {
+    "1621243260e1af0c20": {
+      "type": "slider",
+      "blocks": {
+        "1621243260e1af0c20-0": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/1_1_fceb7353-78a7-4989-9d30-c518e373fbf9.jpg",
+            "mb_background": "shopify://shop_images/1_d3db61be-6dcd-4bc5-8e6b-4f8f511a7bd7.jpg",
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "black",
+            "subheading": "<span class=\"font-semibold\">New Arrivals</span>",
+            "title": "<span class=\"sf__font-normal\">Double Breasted</span>",
+            "description": "",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "show_footer": true,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify://collections"
+          }
+        },
+        "1621243260e1af0c20-1": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/2_1_4b9cc6c7-5762-4636-8eb4-c6162c34e660.jpg",
+            "mb_background": "shopify://shop_images/2_d3f28e0e-5b14-4351-9488-984195c530fa.jpg",
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "black",
+            "subheading": "<span class=\"font-semibold\">New Arrivals</span>",
+            "title": "<span class=\"sf__font-normal\">Autumn Collection</span>",
+            "description": "",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "show_footer": true,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify://collections"
+          }
+        },
+        "1621243260e1af0c20-2": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/3_1_9f45ab3f-ad44-489b-bda1-f8a0c4ff04a5.jpg",
+            "mb_background": "shopify://shop_images/3_e1ea98ce-5076-442b-8f45-303a83d83039.jpg",
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "black",
+            "subheading": "<span class=\"font-semibold\">Hot Trend</span>",
+            "title": "<span class=\"sf__font-normal\">Venice Haute Couture</span>",
+            "description": "",
+            "button_text": "Discover Now",
+            "button_link": "",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "show_footer": true,
+            "footer_alignment": "end",
+            "footer_text": "The ReCotton Tee",
+            "footer_button": "Shop Now",
+            "footer_link": "shopify://collections"
+          }
+        }
+      },
+      "block_order": [
+        "1621243260e1af0c20-0",
+        "1621243260e1af0c20-1",
+        "1621243260e1af0c20-2"
+      ],
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "fullscreen",
+        "show_overlay": false,
+        "dots_position": "right",
+        "dots_color": "dark",
+        "show_dots": true,
+        "show_arrows": false,
+        "autorotate": true,
+        "autorotate_speed": 4,
+        "custom_class": ""
+      }
+    },
+    "162251092958fcda7c": {
+      "type": "product-tabs",
+      "blocks": {
+        "162251092958fcda7c-0": {
+          "type": "tab",
+          "settings": {
+            "title": "best sellers",
+            "collection": "best-sellers"
+          }
+        },
+        "162251092958fcda7c-1": {
+          "type": "tab",
+          "settings": {
+            "title": "new arrivals",
+            "collection": "new-arrivals"
+          }
+        },
+        "ca2d4551-2c7d-4127-8e24-a66b44e4ece8": {
+          "type": "tab",
+          "settings": {
+            "title": "on trend",
+            "collection": "best-sellers"
+          }
+        }
+      },
+      "block_order": [
+        "162251092958fcda7c-0",
+        "162251092958fcda7c-1",
+        "ca2d4551-2c7d-4127-8e24-a66b44e4ece8"
+      ],
+      "settings": {
+        "heading": "You are in",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "tab_header": "select",
+        "limit": 15,
+        "show_button": true,
+        "button_type": "load",
+        "button_label": "Load More",
+        "button_style": "sf__btn-secondary",
+        "button_size": "",
+        "pcard_layout": "2",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "items_per_row": 5,
+        "item_gap": 30,
+        "item_gap_mobile": 16,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "custom_class": ""
+      }
+    },
+    "16225125199f82d8fe": {
+      "type": "icon-box",
+      "blocks": {
+        "16225125199f82d8fe-0": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify://shop_images/1_292dc3a2-215e-4ce3-afba-7b00845e162f.png",
+            "title": "Free Shipping",
+            "description": "<p>Tell about your service.</p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "16225125199f82d8fe-1": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify://shop_images/2_4ab3f0fa-7ff5-4f0d-ba62-503f7f2fc192.png",
+            "title": "Money Guarantee",
+            "description": "<p>Within 30 days for an exchange.</p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "16225125199f82d8fe-2": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify://shop_images/3_6044e4d8-7c0b-4f31-aac4-89baf1f7a0a9.png",
+            "title": "Online Support",
+            "description": "<p>24 hours a day, 7 days a week</p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "71deafbb-3baf-443a-a087-3f7b8af7b9fa": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify://shop_images/4_2f378f25-cac8-415a-b98b-e491bd3fd4f3.png",
+            "title": "Flexible Payment",
+            "description": "<p>Pay with Multiple Credit Cards</p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        }
+      },
+      "block_order": [
+        "16225125199f82d8fe-0",
+        "16225125199f82d8fe-1",
+        "16225125199f82d8fe-2",
+        "71deafbb-3baf-443a-a087-3f7b8af7b9fa"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "item_per_row": 4,
+        "item_gap": 30,
+        "item_gap_mobile": 10,
+        "card_style": "horizontal",
+        "image_max_width": "30px",
+        "content_alignment": "start",
+        "hover_effect": "none",
+        "enable_slider": false,
+        "show_pagination": true,
+        "show_navigation": true,
+        "use_scroll_mobile": false,
+        "use_grid_column_mb": false,
+        "custom_class": ""
+      }
+    },
+    "16225316461d1cff80": {
+      "type": "collection-list",
+      "blocks": {
+        "16225316461d1cff80-1": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "bags",
+            "title": "Leather Bag",
+            "item_image": "shopify://shop_images/2_1945f7f5-26d9-45aa-a1a5-f2f2f628ae8d.jpg"
+          }
+        },
+        "16225316461d1cff80-2": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "shoes",
+            "title": "Shoes",
+            "item_image": "shopify://shop_images/3_050039b7-f5fd-4b27-b4da-3d0b651b7faf.jpg"
+          }
+        },
+        "7a571158-7686-4e66-a693-4716fc905604": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "tops",
+            "title": "Tops",
+            "item_image": "shopify://shop_images/7_9eb34d4f-ba2c-4935-b755-ff2a7054ec12.jpg"
+          }
+        },
+        "12985deb-0775-45ce-80f6-6be7f3150a91": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "blazer",
+            "title": "Blazers",
+            "item_image": "shopify://shop_images/4_21ce2d70-d5f1-45dd-9226-e6f842ed9bd2.jpg"
+          }
+        },
+        "07ebf095-1da2-4546-87f3-97e73a789e8d": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "basic",
+            "title": "Basic",
+            "item_image": "shopify://shop_images/7_f415264b-8244-46fc-bd83-f55a5d62851a.jpg"
+          }
+        },
+        "694c01c9-a95f-4c09-9cf0-ec75f0131e98": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "glasses",
+            "title": "Glasses",
+            "item_image": "shopify://shop_images/6_37a6a5fc-944e-4249-ac0f-747b11508859.jpg"
+          }
+        },
+        "6d4abb37-5aa2-4499-a2b0-5d85f0d36eec": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "sneakers",
+            "title": "Sneakers",
+            "item_image": "shopify://shop_images/1_99801259-b43a-4a6e-bd8c-b12b261f6d88.jpg"
+          }
+        },
+        "65e38235-f03b-43c9-8590-38c9c656e51c": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "sandals",
+            "title": "Sandals",
+            "item_image": "shopify://shop_images/8_16aacde4-7a2d-4cc7-a7c0-0f96a08f41d7.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "16225316461d1cff80-1",
+        "16225316461d1cff80-2",
+        "7a571158-7686-4e66-a693-4716fc905604",
+        "12985deb-0775-45ce-80f6-6be7f3150a91",
+        "07ebf095-1da2-4546-87f3-97e73a789e8d",
+        "694c01c9-a95f-4c09-9cf0-ec75f0131e98",
+        "6d4abb37-5aa2-4499-a2b0-5d85f0d36eec",
+        "65e38235-f03b-43c9-8590-38c9c656e51c"
+      ],
+      "settings": {
+        "heading": "Season Collection",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "left",
+        "container": "container-fluid",
+        "background_color": "",
+        "layout": "grid",
+        "card_style": "inside",
+        "text_alignment": "left",
+        "hover_effect": "scaling-up",
+        "show_product_count": true,
+        "count_inline_title": true,
+        "image_rounded": false,
+        "items_per_row": 4,
+        "item_gap": 30,
+        "enable_slider": true,
+        "show_pagination": true,
+        "show_navigation": true,
+        "autorotate": false,
+        "autorotate_speed": 4,
+        "use_scroll_mobile": true,
+        "mobile_gap": 16,
+        "hidden_slide_control_mobile": true,
+        "custom_class": ""
+      }
+    }
+  },
+  "order": [
+    "1621243260e1af0c20",
+    "16225316461d1cff80",
+    "162251092958fcda7c",
+    "16225125199f82d8fe"
+  ]
+}

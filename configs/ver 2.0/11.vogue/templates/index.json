@@ -1,0 +1,490 @@
+{
+  "sections": {
+    "16083625557e6e6a59": {
+      "type": "slider",
+      "blocks": {
+        "16083625557e6e6a59-1": {
+          "type": "slider_item",
+          "settings": {
+            "mb_background": "shopify:\/\/shop_images\/mb1.jpg",
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "white",
+            "subheading": "<span class=\"font-semibold\">New Arrivals<\/span>",
+            "title": "Be Stylish,<br> \nbe our customer.",
+            "description": "",
+            "button_text": "Shop Now",
+            "button_link": "shopify:\/\/collections\/tops",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Show Now",
+            "footer_link": ""
+          }
+        },
+        "16083625557e6e6a59-2": {
+          "type": "slider_item",
+          "settings": {
+            "mb_background": "shopify:\/\/shop_images\/mb2.jpg",
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "white",
+            "subheading": "<span class=\"font-semibold\">New Arrivals<\/span>",
+            "title": "Choose the best.<br> \nChoose us.",
+            "description": "",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Show Now",
+            "footer_link": ""
+          }
+        },
+        "16083625557e6e6a59-0": {
+          "type": "slider_item",
+          "settings": {
+            "mb_background": "shopify:\/\/shop_images\/mb3.jpg",
+            "image_alignment": "center top",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "large",
+            "text_color": "white",
+            "subheading": "<span class=\"font-semibold\">Hot Trend<span><\/span><\/span>",
+            "title": "A style <br> \nfor every story.",
+            "description": "",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Show Now",
+            "footer_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "16083625557e6e6a59-1",
+        "16083625557e6e6a59-2",
+        "16083625557e6e6a59-0"
+      ],
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "large",
+        "show_overlay": false,
+        "dots_position": "right",
+        "dots_color": "light",
+        "show_dots": true,
+        "show_arrows": false,
+        "autorotate": true,
+        "autorotate_speed": 5,
+        "custom_class": "sf__index-slideshow"
+      }
+    },
+    "16184586065eceb2e2": {
+      "type": "custom-content",
+      "blocks": {
+        "b69672af-1f56-4513-9d03-61ae1abe81a0": {
+          "type": "image_card",
+          "settings": {
+            "width": "50%",
+            "content_position": "center_left",
+            "content_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "link": "shopify:\/\/collections\/sandals",
+            "title": "Braided Sandals",
+            "subtitle": "New Arrivals",
+            "button_label": "Shop now",
+            "button_style": "sf__btn-link",
+            "button_size": "",
+            "block_custom_class": ""
+          }
+        },
+        "ff2205af-ce86-41ce-a934-398d8b3a99f2": {
+          "type": "image_card",
+          "settings": {
+            "width": "50%",
+            "content_position": "center_left",
+            "content_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "link": "shopify:\/\/collections\/leather-bag",
+            "title": "Shoulder Bags",
+            "subtitle": "New Arrivals",
+            "button_label": "Shop now",
+            "button_style": "sf__btn-link",
+            "button_size": "",
+            "block_custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "b69672af-1f56-4513-9d03-61ae1abe81a0",
+        "ff2205af-ce86-41ce-a934-398d8b3a99f2"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "gap": 30,
+        "use_scroll_mobile": false,
+        "gap_mobile": 16,
+        "custom_class": "sf__index-custom-content"
+      }
+    },
+    "161845980909150899": {
+      "type": "instagram",
+      "settings": {
+        "heading": "#minimog",
+        "subheading": "",
+        "description": "<p>Tag <a href=\"#\" target=\"_blank\" title=\"#\"><strong>@minimog<\/strong><\/a> in your Instagram photos for a chance to be featured here.<\/p><p>Find more inspiration on <a href=\"#\" target=\"_blank\" title=\"#\"><strong>our Instagram.<\/strong><\/a><\/p>",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "layout": "grid",
+        "images_count": 4,
+        "grid_columns": 4,
+        "gap": 30,
+        "mobile_gap": 16,
+        "profile": "https:\/\/www.instagram.com\/minimog.trendy\/",
+        "button_label": "",
+        "custom_class": ""
+      }
+    },
+    "1618461067a22af3dc": {
+      "type": "banner-with-slider",
+      "blocks": {
+        "1618461067a22af3dc-0": {
+          "type": "item_slide",
+          "settings": {
+            "content_text_color": "black",
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "subheading": "",
+            "heading": "New<br>\nCollection",
+            "description": "<p>For all the places you\"ll go.<\/p>",
+            "button_text": "Shop Now",
+            "button_link": "shopify:\/\/collections\/tops",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "1c8defab-2397-46a1-89db-00cff962b425": {
+          "type": "item_slide",
+          "settings": {
+            "content_text_color": "black",
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "subheading": "",
+            "heading": "New<br>\nCollection",
+            "description": "<p>The possibilities are endless.<\/p>",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "cb38f1d7-4467-4a2c-b30c-71e51e920937": {
+          "type": "item_slide",
+          "settings": {
+            "content_text_color": "black",
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "subheading": "",
+            "heading": "New<br>\nCollection",
+            "description": "<p>Feel the authentic peace.<\/p>",
+            "button_text": "Shop Now",
+            "button_link": "shopify:\/\/collections\/tops",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        }
+      },
+      "block_order": [
+        "1618461067a22af3dc-0",
+        "1c8defab-2397-46a1-89db-00cff962b425",
+        "cb38f1d7-4467-4a2c-b30c-71e51e920937"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "header_alignment": "center",
+        "container": "w-full",
+        "background_color": "rgba(0,0,0,0)",
+        "slide_autoplay": false,
+        "autorotate_speed": 5,
+        "button_text_1": "Handbags",
+        "button_link_1": "shopify:\/\/collections\/accessories",
+        "button_style_1": "sf__btn-white",
+        "button_size_1": "",
+        "button_text_2": "Glasses",
+        "button_link_2": "shopify:\/\/collections\/shoes",
+        "button_style_2": "sf__btn-white",
+        "button_size_2": "",
+        "button_text_3": "Sandals",
+        "button_link_3": "shopify:\/\/collections\/hand-bag",
+        "button_style_3": "sf__btn-white",
+        "button_size_3": "",
+        "custom_class": "sf__index-img-with-slider"
+      }
+    },
+    "161855533598f3d13b": {
+      "type": "testimonials",
+      "blocks": {
+        "161855533598f3d13b-0": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Love it so much!",
+            "description": "<p>“ Super class, cute, comfortable. You can wear<br\/> them with just about anything.”<\/p>",
+            "footer": "<p>Dean D. , Australia<\/p>",
+            "image_text": "",
+            "product": ""
+          }
+        },
+        "161855533598f3d13b-1": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Love my new purchase.",
+            "description": "<p>“ I've been getting good wear out of the shirt. It's very light and soft, comfortable to wear.”<\/p>",
+            "footer": "<p>Linnie H. , Australia<\/p>",
+            "image_text": "",
+            "product": ""
+          }
+        },
+        "161855533598f3d13b-2": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Thanks for being so fabulous!",
+            "description": "<p>“ Thanks for the lovely time shopping and all the good work you do.”<\/p>",
+            "footer": "<p>Nancy W. , California<\/p>",
+            "image_text": "",
+            "product": ""
+          }
+        },
+        "161855533598f3d13b-3": {
+          "type": "testimonial",
+          "settings": {
+            "title": "I will certainly recommend to others.",
+            "description": "<p>“ I think your product is fantastic and I really appreciate the time you have given me.”<\/p>",
+            "footer": "<p>Fernanda K. , Frankfurt<\/p>",
+            "image_text": "",
+            "product": ""
+          }
+        },
+        "161855533598f3d13b-4": {
+          "type": "testimonial",
+          "settings": {
+            "title": "A great store you can find.",
+            "description": "<p>“ I've been getting good wear out of the shirt. It's very light and soft, comfortable to wear.”<\/p>",
+            "footer": "<p>Marco C., Italia<\/p>",
+            "image_text": "",
+            "product": ""
+          }
+        },
+        "161855533598f3d13b-5": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Thank you for your help!",
+            "description": "<p>“ Thanks for being so fabulous...and continuing to provide such a wonderful service.”<\/p>",
+            "footer": "<p>Adelia C. , Spain<\/p>",
+            "image_text": "",
+            "product": ""
+          }
+        }
+      },
+      "block_order": [
+        "161855533598f3d13b-0",
+        "161855533598f3d13b-1",
+        "161855533598f3d13b-2",
+        "161855533598f3d13b-3",
+        "161855533598f3d13b-4",
+        "161855533598f3d13b-5"
+      ],
+      "settings": {
+        "heading": "<span class=\"text-xl font-medium\">The review are in<\/span>",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "w-full",
+        "background_color": "#f9f8f7",
+        "design": "testimonials-4",
+        "show_stars": true,
+        "autorotate": false,
+        "show_navigation": true,
+        "show_pagination": false,
+        "star_color": "#000000",
+        "custom_class": "sf__index-testimonial"
+      }
+    },
+    "1620184680dea8419f": {
+      "type": "product-tabs",
+      "blocks": {
+        "1620184680dea8419f-0": {
+          "type": "tab",
+          "settings": {
+            "title": "Hot items",
+            "collection": "this-weeks-highlights"
+          }
+        },
+        "1620184680dea8419f-1": {
+          "type": "tab",
+          "settings": {
+            "title": "Best sellers",
+            "collection": "best-sellers"
+          }
+        },
+        "c65c6aa0-cea0-4626-ae74-5bcab692189b": {
+          "type": "tab",
+          "settings": {
+            "title": "On sale",
+            "collection": "on-sale"
+          }
+        },
+        "9bd01e0c-2599-441f-ae81-f3ae0f41ad2f": {
+          "type": "tab",
+          "settings": {
+            "title": "New arrivals",
+            "collection": "new-arrivals"
+          }
+        }
+      },
+      "block_order": [
+        "1620184680dea8419f-0",
+        "1620184680dea8419f-1",
+        "c65c6aa0-cea0-4626-ae74-5bcab692189b",
+        "9bd01e0c-2599-441f-ae81-f3ae0f41ad2f"
+      ],
+      "settings": {
+        "heading": "This Week's Highlights",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "rgba(0,0,0,0)",
+        "tab_header": "horizontal",
+        "limit": 8,
+        "show_button": true,
+        "button_type": "link",
+        "button_label": "Shop Now",
+        "button_style": "sf__btn-secondary",
+        "button_size": "",
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "items_per_row": 4,
+        "item_gap": 30,
+        "item_gap_mobile": 16,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "custom_class": "sf__index-product-tab"
+      }
+    },
+    "1626311186b5a4390b": {
+      "type": "icon-box",
+      "blocks": {
+        "1626311186b5a4390b-0": {
+          "type": "iconbox",
+          "settings": {
+            "title": "Free Shipping",
+            "description": "<p>Free Shipping for orders over £130<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "1626311186b5a4390b-1": {
+          "type": "iconbox",
+          "settings": {
+            "title": "Money Guarantee",
+            "description": "<p>Within 30 days for an exchange.<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "1626311186b5a4390b-2": {
+          "type": "iconbox",
+          "settings": {
+            "title": "24\/7 online support",
+            "description": "<p>24 hours a day, 7 days a week<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        },
+        "81acbde2-2e58-4ee4-9197-fe8196f9f015": {
+          "type": "iconbox",
+          "settings": {
+            "title": "Flexible Payment",
+            "description": "<p>Pay with Multiple Credit Cards<\/p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-link",
+            "button_size": ""
+          }
+        }
+      },
+      "block_order": [
+        "1626311186b5a4390b-0",
+        "1626311186b5a4390b-1",
+        "1626311186b5a4390b-2",
+        "81acbde2-2e58-4ee4-9197-fe8196f9f015"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "#ffffff",
+        "item_per_row": 4,
+        "item_gap": 30,
+        "item_gap_mobile": 10,
+        "card_style": "horizontal",
+        "image_max_width": "30px",
+        "content_alignment": "start",
+        "hover_effect": "none",
+        "enable_slider": false,
+        "show_pagination": true,
+        "show_navigation": false,
+        "use_scroll_mobile": false,
+        "use_grid_column_mb": false,
+        "custom_class": "sf__index-icon-box"
+      }
+    }
+  },
+  "order": [
+    "16083625557e6e6a59",
+    "1618461067a22af3dc",
+    "1620184680dea8419f",
+    "16184586065eceb2e2",
+    "161855533598f3d13b",
+    "161845980909150899",
+    "1626311186b5a4390b"
+  ]
+}

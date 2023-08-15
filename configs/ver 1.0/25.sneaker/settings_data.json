@@ -1,0 +1,1335 @@
+{
+  "current": {
+    "favicon": "shopify:\/\/shop_images\/favicon.png",
+    "color_primary": "#000",
+    "color_body_text": "#000000",
+    "color_heading_text": "#000000",
+    "color_btn_bg_hover": "#000000",
+    "prod_sale_price_color": "#666666",
+    "prod_type_color": "#666666",
+    "color_annoucement_bg": "#d9f293",
+    "color_annoucement_text": "#000000",
+    "color_topbar_bg": "#d9f293",
+    "color_topbar_text": "#000000",
+    "color_header_bg": "#f8f8f8",
+    "color_header_link": "#000000",
+    "color_header_transparent": "#ffffff",
+    "color_menu_bar_bg": "#000000",
+    "color_menu_bar_text": "#f8f8f8",
+    "color_footer_bg": "#e5e5e5",
+    "color_footer_text": "#000000",
+    "color_footer_subtext": "#666666",
+    "color_footer_link_hover": "#000000",
+    "color_footer_bg_mb": "#e5e5e5",
+    "color_footer_bottom_bg": "#e5e5e5",
+    "color_footer_bottom_text": "#666666",
+    "color_footer_bottom_bg_mb": "#e5e5e5",
+    "img_overlay_opacity": 20,
+    "tooltip_background_color": "#000000",
+    "type_base_font": "roboto_condensed_n4",
+    "use_custom_font_body": false,
+    "custom_body_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Light.ttf?v=1618297125@300\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Regular.ttf?v=1618297125@400\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Medium.ttf?v=1618297125@500\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-SemiBold.ttf?v=1618297125@600\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Bold.ttf?v=1618297125@700",
+    "type_header_font": "roboto_condensed_n7",
+    "use_custom_font_heading": false,
+    "custom_heading_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Light.ttf?v=1618297125@300\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Regular.ttf?v=1618297125@400\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Medium.ttf?v=1618297125@500\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-SemiBold.ttf?v=1618297125@600\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/Jost-Bold.ttf?v=1618297125@700",
+    "custom_heading_weight": "700",
+    "btn_uppercase_text": true,
+    "btn_border_width": 2,
+    "btn_border_radius": 0,
+    "btn_weight": "700",
+    "pcard_layout": "2",
+    "pcard_alignment": "center",
+    "pcard_image_ratio": "1\/1",
+    "show_vendor": false,
+    "variant_option_design3": "color",
+    "show_variant_swatch_image": true,
+    "product_colors": "red: #FF6961,\nyellow: #FDDA76,\nblack: #000000,\nblue: #8DB4D2,\ngreen: #C1E1C1,\npurple: #B19CD9,\nsilver: #EEEEEF,\nwhite: #FFFFFF,\nbrown: #836953,\nlight-brown: #feb035,\ndark-turquoise: #23cddc,\norange: #FFB347,\ntan: #E9D1BF,\nviolet: #B490B0,\npink: #FFD1DC,\ngrey: #E0E0E0,\nsky: #96BDC6,\npale-leaf: #CCD4BF",
+    "filter_color1": "",
+    "share_facebook": true,
+    "social_twitter_link": "https:\/\/tiwtter.com",
+    "social_facebook_link": "https:\/\/facebook.com\/",
+    "social_facebook_label": "300k Followers",
+    "social_pinterest_link": "https:\/\/pinterest.com",
+    "social_instagram_link": "https:\/\/instagram.com\/",
+    "social_instagram_label": "100k Followers",
+    "wishlist_page": "",
+    "product_compare_page": "",
+    "gm_api": "",
+    "instagram_token": "",
+    "custom_css": ".sf-nav li.sf-menu-item .sf__sub-menu-link1 {\n  font-weight: 700;\n}\n\n.sf__index-slideshow .slide__block-desktop .slide__block-title {\n  line-height: 1.175;\n  font-size: 80px;\n  margin-bottom: 18px;\n}\n\n.sf__index-slideshow .slide__block-description p {\n  color: var(--btn-color);\n  font-weight: 700;\n  font-size: 20px;\n  line-height: 23px;\n}\n.sf__index-custom-content #sf-custom__block--302f4255-280e-48a3-9f00-b9e6fd50230a .image__card-heading {\n  font-size: 24px;\n  line-height: 1.3;\n  letter-spacing: 1px;\n}\n.sf__index-custom-content #sf-custom__block--190cefb9-e7ca-4316-8e55-b3b82656701b\n  .image__card-heading {\n  line-height: 1.167;\n  letter-spacing: 3px;\n}\n.sf__index-custom-content-1 .sf__scrolling-text[data-style=\"text-outline\"][data-outline-thickness=\"thin\"] em {\n  -webkit-text-stroke-width: 0.5px;\n  -webkit-text-fill-color: rgba(0, 0, 0, 0);\n  font-style: italic;\n}\n.sf__index-custom-content-1 .sf__scrolling-text[data-style=\"text-outline\"] em {\n  -webkit-text-stroke-color: #dfdfdf;\n}\n.sf__index-custom-content-1 .sf__scrolling-text .sf__scrolling-text-inner span.custom {\n  padding: 0 25px;\n}\n.sf__index-custom-content-1 .sf__scrolling-text.font_size_11vh * {\n  font-size: 110px;\n  letter-spacing: 10px;\n}\n.sf__index-custom-content-1 .section-my {\n  margin-bottom: 20px;\n}\n.sf__newsletter-section .newsletter__form-heading h3 {\n  line-height: 1.15;\n  letter-spacing: 2px;\n}\n\n.sf-footer__block h3.sf__accordion-button {\n  font-size: 14px;\n  font-weight: 700;\n}\n.sf__index-custom-content .image-card {\n  height: 100%;\n}\n.section__heading {\n  letter-spacing: 2px;\n}\n\n.sf__pcard-content a {\n  font-weight: 700 !important;\n  text-transform: uppercase;\n}\n.sf-footer__block-inner h3 {\n  font-weight: 700;\n}\n\n.collection-card h3 a {\n  font-weight: 700 !important;\n  text-transform: uppercase;\n}\n.sf__newsletter-section .section-my {\n  margin-top: -80px;\n  position: relative;\n}\n\n@media (max-width: 767px) {\n  .sf__index-slideshow .sf__mobile-button {\n    width: 100%;\n  }\n  .sf__index-custom-content .image-card__content {\n    position: relative;\n    padding-left: 0;\n    padding-right: 0;\n    padding-bottom: 0;\n  }\n  .sf__index-custom-content .image-card__content .image-card__content-inner {\n    text-align: center;\n    width: 100%;\n  }\n  .sf__index-custom-content .image__card-heading br {\n    display: none;\n  }\n  .sf__index-custom-content #sf-custom__block--302f4255-280e-48a3-9f00-b9e6fd50230a .image__card-heading {\n    margin-bottom: 5px;\n  }\n  p.section__subheading {\n    margin-bottom: 5px;\n  }\n}\n@media (min-width: 768px) {\n  .sf__footer-block-custom_text .sf__footer-block-title {\n    display: none;\n  }\n}\n@media (min-width: 1024px) {\n  .sf__footer-bottom-inner {\n    border-top: 1px solid #d8d8d8;\n  }\n}\n@media (min-width: 1280px) {\n  .sf__index-custom-content #sf-custom__block--190cefb9-e7ca-4316-8e55-b3b82656701b .image__card-heading {\n    font-size: 60px;\n    margin-bottom: 42px;\n  }\n  .sf__newsletter-section .newsletter__form-heading h3 {\n    font-size: 40px;\n  }\n}",
+    "use_theme_currencies": true,
+    "theme_currencies": "USD | EUR | GBP | VND",
+    "sections": {
+      "page-faqs": {
+        "type": "page-faqs",
+        "blocks": {
+          "2802736b-f08f-4510-a4f7-4ad7d748992d": {
+            "type": "content",
+            "settings": {
+              "content": "<div class=\"mb-10\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/faqs.jpg?v=1620784288\"><\/div>\n<h3 class=\"font-medium text-xl mb-4\">Awkwardness gives me great comfort. I’ve never been cool, but I’ve felt cool. I’ve been in the cool place, but I wasn’t really cool – I was trying to pass for hip or cool.<\/h3>\n<p>A girl should be two things: classy and fabulous. I am convinced that there can be luxury in simplicity. I wanted to dress the woman who lives and works, not the woman in a painting. It’s hard to balance everything. It’s always challenging. My relationships with producers or photographers – these are relationships that took years. I can’t get sucked into that celebrity thing, because I think it’s just crass. My aim is to make the poor look rich.<\/p>"
+            }
+          },
+          "4e151238-4480-4122-b893-7f4a19886e4c": {
+            "type": "accordion",
+            "settings": {
+              "title": "What shipping methods are availbale?",
+              "content": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.<br\/><br\/>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.<\/p>",
+              "open": true
+            }
+          },
+          "c5d4d04d-f6c1-4d1e-99f0-3c221393a3cf": {
+            "type": "accordion",
+            "settings": {
+              "title": "How long will it take to get my package?",
+              "content": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.<\/p>",
+              "open": false
+            }
+          },
+          "0131747b-8b40-432f-b634-b1289ec41911": {
+            "type": "accordion",
+            "settings": {
+              "title": "Do you ship internationally?",
+              "content": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.<\/p>",
+              "open": false
+            }
+          },
+          "5d7206e9-5375-4da6-9a1f-24e1c46230b0": {
+            "type": "accordion",
+            "settings": {
+              "title": "What payment methods are accepted?",
+              "content": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.<\/p>",
+              "open": false
+            }
+          },
+          "4008f61e-055e-42ba-8969-cb3715c0aece": {
+            "type": "accordion",
+            "settings": {
+              "title": "Is buying on-line safe?",
+              "content": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.<\/p>",
+              "open": false
+            }
+          }
+        },
+        "block_order": [
+          "2802736b-f08f-4510-a4f7-4ad7d748992d",
+          "4e151238-4480-4122-b893-7f4a19886e4c",
+          "c5d4d04d-f6c1-4d1e-99f0-3c221393a3cf",
+          "0131747b-8b40-432f-b634-b1289ec41911",
+          "5d7206e9-5375-4da6-9a1f-24e1c46230b0",
+          "4008f61e-055e-42ba-8969-cb3715c0aece"
+        ],
+        "settings": {
+          "container": "container-fluid",
+          "menu": "faqs-menu"
+        }
+      },
+      "collection-list": {
+        "type": "collection-list",
+        "settings": {
+        }
+      },
+      "featured-collection": {
+        "type": "featured-collection",
+        "settings": {
+          "collection": "frontpage"
+        }
+      },
+      "featured-product": {
+        "type": "featured-product",
+        "settings": {
+        }
+      },
+      "slider": {
+        "type": "slider",
+        "settings": {
+        }
+      },
+      "header": {
+        "type": "header",
+        "blocks": {
+          "1d75d41a-8c89-42f0-bb7c-0209f8abba4e": {
+            "type": "banner",
+            "settings": {
+              "heading": "Shop",
+              "container": "inherit",
+              "banner_style": "outside",
+              "banner_link": "",
+              "banner_title": "New collection",
+              "banner_desc": "",
+              "banner_button_text": "Shop now"
+            }
+          },
+          "8b5c6b9d-a95b-429f-8779-9180317bae10": {
+            "type": "product-list",
+            "settings": {
+              "heading": "Product",
+              "container": "inherit",
+              "stretch_width": false,
+              "collection": "sneaker",
+              "limit": 6,
+              "columns": 2
+            }
+          },
+          "1031355e-ca69-4459-87c4-f1f9af4facd3": {
+            "type": "custom_html",
+            "settings": {
+              "heading": "Features",
+              "container": "inherit",
+              "html": ""
+            }
+          }
+        },
+        "block_order": [
+          "1d75d41a-8c89-42f0-bb7c-0209f8abba4e",
+          "8b5c6b9d-a95b-429f-8779-9180317bae10",
+          "1031355e-ca69-4459-87c4-f1f9af4facd3"
+        ],
+        "settings": {
+          "header_design": "logo-center-menu-left",
+          "container": "container-fluid",
+          "header_sticky": true,
+          "transparent_on_top": true,
+          "logo_text": "MINIMOG",
+          "logo_max_width": 90,
+          "sticky_logo_max_width": 90,
+          "mobile_logo_max_width": 90,
+          "main_menu": "main-menu",
+          "secondary_menu": "",
+          "uppercase_parent_level": true,
+          "search": "show_icon",
+          "show_account_icon": true,
+          "show_cart_icon": true,
+          "show_wishlist_icon": true,
+          "show_compare_icon": false,
+          "show_currency_switcher": true,
+          "show_language_switcher": false
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "d8236fc7-5c51-4cfc-83ec-323e039da755": {
+            "type": "custom_text",
+            "settings": {
+              "title": "OUR STORE",
+              "image_max": "92px",
+              "description": "<p>Super class, cute, comfortable. You can wear<br\/> them with just about anything.<\/p>",
+              "width": "50%"
+            }
+          },
+          "d4a8b403-287a-4d46-959f-869031e55936": {
+            "type": "our_store",
+            "settings": {
+              "title": "COMPANY",
+              "description": "",
+              "show_email": true,
+              "show_phone": true,
+              "show_socials_link": true,
+              "width": "25%"
+            }
+          },
+          "49e72833-c68f-4a7b-ab64-3ef0cae99bcb": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "INFORMATION",
+              "width": "25%"
+            }
+          },
+          "c85629c7-7aae-4666-b5f0-150990439c91": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "CONTACT",
+              "width": "25%"
+            }
+          },
+          "b04590a8-1630-49ae-890c-873ef3aa3a94": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "FOLLOW",
+              "width": "25%"
+            }
+          }
+        },
+        "block_order": [
+          "d8236fc7-5c51-4cfc-83ec-323e039da755",
+          "d4a8b403-287a-4d46-959f-869031e55936",
+          "49e72833-c68f-4a7b-ab64-3ef0cae99bcb",
+          "c85629c7-7aae-4666-b5f0-150990439c91",
+          "b04590a8-1630-49ae-890c-873ef3aa3a94"
+        ],
+        "settings": {
+          "design": "footer-1",
+          "container": "container-fluid",
+          "bordered": false,
+          "copyright": "© MINIMOG 2021",
+          "show_currency_selector": false,
+          "show_language_selector": false,
+          "show_social_links": false,
+          "show_payment_icons": true
+        }
+      },
+      "collection-page-header": {
+        "type": "collection-page-header",
+        "settings": {
+          "layout": "inside",
+          "header_height": "small",
+          "text_alignment": "center",
+          "vertical_alignment": "center",
+          "bg_color": "#ffffff",
+          "enable_parallax": true,
+          "show_breadcrumb": true,
+          "upper_title": false
+        }
+      },
+      "product-template": {
+        "type": "product-template",
+        "settings": {
+          "container": "container",
+          "layout": "layout-6",
+          "show_tags": false,
+          "show_vendor": false,
+          "show_sku": false,
+          "show_categories": false,
+          "show_reviews_count": true,
+          "show_quantity_selector": true,
+          "enable_dynamic_checkout": true,
+          "hide_atc_button": false,
+          "show_atwl": true,
+          "show_atcp": true,
+          "show_ask_a_question": true,
+          "show_social": true,
+          "show_live_views": true,
+          "live_views_text": "<p><strong>{{count_number}}<\/strong> <strong>people<\/strong> are viewing this right now<\/p>",
+          "live_views_range": "20-30",
+          "live_view_duration": "10",
+          "live_view_icon_blinks": true,
+          "show_delivery_times": true,
+          "deliver_text": "Estimated Delivery:",
+          "deliver_days": "3",
+          "show_shipping_text": true,
+          "shipping_text": "<p><strong>Free Shipping & Returns: <\/strong>On all orders over $75<\/p>",
+          "show_trust_badges": true,
+          "trust_badges_text": "<p>Guarantee safe & secure checkout<\/p>",
+          "trust_badges_image": "shopify:\/\/shop_images\/trustbag.png",
+          "trust_badges_image_width": "320px",
+          "use_sticky_atc": true,
+          "sticky_atc_wishtlist": false,
+          "sticky_atc_compare": false
+        }
+      },
+      "product-details-tabs": {
+        "type": "product-details-tabs",
+        "blocks": {
+          "4db8ad16-886f-47f7-9b57-fc68b39fb2d4": {
+            "type": "description",
+            "settings": {
+              "header": "Product description"
+            }
+          },
+          "cbe42a8e-3b6b-4f7a-acdb-7c4ad01cce3c": {
+            "type": "tab",
+            "settings": {
+              "header": "Shipping & Return",
+              "content": "<p>So beautiful you’ll want to show it off, so comfortable you’ll forget it’s there. Our 24\/7™ Lace Contour Plunge Bra combines gorgeous floral lace with sheer overlay straps that hold you in and eliminates gaping. Removable pads let you customize you<\/p>"
+            }
+          },
+          "a552cf16-529b-446c-b0eb-211437346e80": {
+            "type": "reviews",
+            "settings": {
+              "header": "Product reviews"
+            }
+          }
+        },
+        "block_order": [
+          "4db8ad16-886f-47f7-9b57-fc68b39fb2d4",
+          "cbe42a8e-3b6b-4f7a-acdb-7c4ad01cce3c",
+          "a552cf16-529b-446c-b0eb-211437346e80"
+        ],
+        "settings": {
+          "show_product_tabs": true,
+          "container": "container",
+          "bg_color": ""
+        }
+      },
+      "product-reviews": {
+        "type": "product-reviews",
+        "settings": {
+          "show_product_reviews": false,
+          "container": "container-narrow",
+          "heading": "Ratings and Reviews"
+        }
+      },
+      "product-recommendations": {
+        "type": "product-recommendations",
+        "settings": {
+          "show_product_recommendations": true,
+          "container": "container",
+          "heading": "You Might Also Like",
+          "limit": 8,
+          "columns": 4,
+          "column_gap": 30,
+          "enable_slider": true
+        }
+      },
+      "brand-page-header": {
+        "type": "brand-page-header",
+        "blocks": {
+          "09dfe2e1-10c2-4cee-a033-a90b143c85f3": {
+            "type": "information",
+            "settings": {
+              "collection": "retrolie",
+              "logo": "shopify:\/\/shop_images\/1.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/1_8e8151b6-3555-4abf-8dd6-5347182bbcd0.jpg",
+              "image_2": "shopify:\/\/shop_images\/2_9a1b3099-775a-4093-9ece-6cfaa04a06fe.jpg",
+              "image_3": "shopify:\/\/shop_images\/3_7b9fc65c-8202-4449-a828-d03ac03c6d38.jpg"
+            }
+          },
+          "c8ee188c-a84f-4cf2-a8af-aacb9bf78785": {
+            "type": "information",
+            "settings": {
+              "collection": "abby",
+              "logo": "shopify:\/\/shop_images\/2.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/4.jpg",
+              "image_2": "shopify:\/\/shop_images\/5.jpg",
+              "image_3": "shopify:\/\/shop_images\/6.jpg"
+            }
+          },
+          "e56a3991-3115-47d4-b7e6-43e962712fc6": {
+            "type": "information",
+            "settings": {
+              "collection": "minimog",
+              "logo": "shopify:\/\/shop_images\/3.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/7.jpg",
+              "image_2": "shopify:\/\/shop_images\/8.jpg",
+              "image_3": "shopify:\/\/shop_images\/9.jpg"
+            }
+          },
+          "98bac8d0-393b-4f50-91b8-052a49e29dd0": {
+            "type": "information",
+            "settings": {
+              "collection": "brook",
+              "logo": "shopify:\/\/shop_images\/4.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/10.jpg",
+              "image_2": "shopify:\/\/shop_images\/11.jpg",
+              "image_3": "shopify:\/\/shop_images\/12.jpg"
+            }
+          },
+          "2b4a1841-6d7a-468b-ba3b-a5fd307cf9aa": {
+            "type": "information",
+            "settings": {
+              "collection": "learts",
+              "logo": "shopify:\/\/shop_images\/5.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/13.jpg",
+              "image_2": "shopify:\/\/shop_images\/14.jpg",
+              "image_3": "shopify:\/\/shop_images\/15.jpg"
+            }
+          },
+          "b54aa75a-c232-474e-9d92-2027e31cd066": {
+            "type": "information",
+            "settings": {
+              "collection": "vagabond",
+              "logo": "shopify:\/\/shop_images\/6.png",
+              "content": "<p>Developed by Goop founder, wellness advocate and - academy award-winner, Gwyneth Paltrow, this high performing skincare line is where luxury formulas meet pure organic ingredients and the results are skin-changing. <\/p><p>Goop is passionate about the idea that beauty comes from the inside out. So they use clinically proven and best-in-class ingredients at active levels to create skin care, skin-boosting ingestibles, and body essentials that are luxurious, deliver high-performance results, and enliven the senses with exquisite textures and beautiful scents.<\/p>",
+              "image_1": "shopify:\/\/shop_images\/16.jpg",
+              "image_2": "shopify:\/\/shop_images\/17.jpg",
+              "image_3": "shopify:\/\/shop_images\/18.jpg"
+            }
+          }
+        },
+        "block_order": [
+          "09dfe2e1-10c2-4cee-a033-a90b143c85f3",
+          "c8ee188c-a84f-4cf2-a8af-aacb9bf78785",
+          "e56a3991-3115-47d4-b7e6-43e962712fc6",
+          "98bac8d0-393b-4f50-91b8-052a49e29dd0",
+          "2b4a1841-6d7a-468b-ba3b-a5fd307cf9aa",
+          "b54aa75a-c232-474e-9d92-2027e31cd066"
+        ],
+        "settings": {
+        }
+      },
+      "collection-brand": {
+        "type": "collection-brand",
+        "settings": {
+          "grid_layout": "grid",
+          "pagination_limit": "12",
+          "grid_columns": "3",
+          "collection_paginate": "paginate",
+          "show_filter": true,
+          "sidebar": "leftColumn"
+        }
+      },
+      "contact-information": {
+        "type": "contact-information",
+        "settings": {
+          "container": "container"
+        }
+      },
+      "maps": {
+        "type": "maps",
+        "settings": {
+          "container": "container",
+          "map_height": "large",
+          "textx": "40.6700",
+          "texty": "-73.9400",
+          "zoom": "11",
+          "text2": "New York"
+        }
+      },
+      "contact-template": {
+        "type": "contact-template",
+        "blocks": {
+          "458d6546-c5d0-4128-8fa6-162080bdf85f": {
+            "type": "textblock",
+            "settings": {
+              "title": "Address",
+              "content": "<p>7895 Piermont Dr NE Albuquerque, NM 198866, <a href=\"#\">See Our Stores<\/a><\/p>"
+            }
+          },
+          "d2fd611c-a50a-4871-b401-b51dff320d34": {
+            "type": "textblock",
+            "settings": {
+              "title": "Information",
+              "content": "<p>+391 (0)35 2568 4593<\/p><p>hello@domain.com<\/p>"
+            }
+          },
+          "159b3b43-a6d9-4cb9-b78d-04f5a5bae350": {
+            "type": "socialmedia",
+            "settings": {
+              "title": "Social Media"
+            }
+          },
+          "5c486a84-9bdd-4d24-8ac7-5c428593cf33": {
+            "type": "textblock",
+            "settings": {
+              "title": "We're Open",
+              "content": "<p>Our store has re-opened for shopping, exchanges<\/p><p>Every day 11am to 7pm<\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "458d6546-c5d0-4128-8fa6-162080bdf85f",
+          "d2fd611c-a50a-4871-b401-b51dff320d34",
+          "159b3b43-a6d9-4cb9-b78d-04f5a5bae350",
+          "5c486a84-9bdd-4d24-8ac7-5c428593cf33"
+        ],
+        "settings": {
+          "container": "container",
+          "title": "We would love to hear from you.",
+          "description": "<p>If you’ve got great products your making or looking to work with us then drop us a line.<\/p>"
+        }
+      },
+      "1620813069167db316": {
+        "type": "slider",
+        "blocks": {
+          "1620813069167db316-0": {
+            "type": "slider_item",
+            "settings": {
+              "background": "shopify:\/\/shop_images\/1.jpg",
+              "image_alignment": "center middle",
+              "content_in_container": false,
+              "content_position": "left middle",
+              "text_alignment": "left",
+              "text_size": "medium",
+              "text_color": "white",
+              "subheading": "",
+              "title": "A COLOR FOR<br>EVERY BODY",
+              "description": "<p>Open Doors To A World Of Fashion<\/p>",
+              "button_text": "SHOP NOW",
+              "button_link": "",
+              "button_style": "sf__btn-secondary",
+              "button_size": "",
+              "show_footer": false,
+              "footer_alignment": "end",
+              "footer_text": "New Collection",
+              "footer_button": "Shop Now",
+              "footer_link": ""
+            }
+          },
+          "27403af4-f4e3-4833-9189-9868705845f7": {
+            "type": "slider_item",
+            "settings": {
+              "background": "shopify:\/\/shop_images\/2.jpg",
+              "image_alignment": "center middle",
+              "content_in_container": false,
+              "content_position": "left middle",
+              "text_alignment": "left",
+              "text_size": "medium",
+              "text_color": "white",
+              "subheading": "",
+              "title": "SHOP YOUR<br> OUTFIT STYLE",
+              "description": "<p>Tell your campaign through images<\/p>",
+              "button_text": "SHOP NOW",
+              "button_link": "",
+              "button_style": "sf__btn-secondary",
+              "button_size": "",
+              "show_footer": false,
+              "footer_alignment": "end",
+              "footer_text": "New Collection",
+              "footer_button": "Shop Now",
+              "footer_link": ""
+            }
+          },
+          "c0ce169f-1329-47fc-9e42-915e4961aa32": {
+            "type": "slider_item",
+            "settings": {
+              "background": "shopify:\/\/shop_images\/3.jpg",
+              "image_alignment": "center middle",
+              "content_in_container": false,
+              "content_position": "left middle",
+              "text_alignment": "left",
+              "text_size": "medium",
+              "text_color": "white",
+              "subheading": "",
+              "title": "CHOOSE THE BEST<br>CHOOSE US",
+              "description": "<p>Tell your campaign through images<\/p>",
+              "button_text": "SHOP NOW",
+              "button_link": "",
+              "button_style": "sf__btn-secondary",
+              "button_size": "",
+              "show_footer": false,
+              "footer_alignment": "end",
+              "footer_text": "New Collection",
+              "footer_button": "Shop Now",
+              "footer_link": ""
+            }
+          }
+        },
+        "block_order": [
+          "1620813069167db316-0",
+          "27403af4-f4e3-4833-9189-9868705845f7",
+          "c0ce169f-1329-47fc-9e42-915e4961aa32"
+        ],
+        "settings": {
+          "container": "w-full",
+          "slideshow_height": "fullscreen",
+          "show_overlay": false,
+          "dots_position": "bottom",
+          "dots_color": "light",
+          "show_dots": true,
+          "show_arrows": false,
+          "autorotate": true,
+          "autorotate_speed": 4,
+          "custom_class": "sf__index-slideshow"
+        }
+      },
+      "162081317833a6e943": {
+        "type": "featured-collection",
+        "settings": {
+          "heading": "SHOP MEN",
+          "subheading": "FEATURE IN",
+          "description": "",
+          "header_alignment": "center",
+          "container": "container-fluid",
+          "background_color": "rgba(0,0,0,0)",
+          "collection": "sneaker-shop-men",
+          "product_to_show": 5,
+          "items_per_row": 5,
+          "item_gap": 30,
+          "pcard_layout": "",
+          "pcard_image_ratio": "",
+          "show_vendor": false,
+          "enable_slider": false,
+          "show_pagination": true,
+          "show_navigation": false,
+          "button_type": "link",
+          "button_text": "",
+          "button_style": "sf__btn-primary",
+          "button_size": "",
+          "infinite_load": false,
+          "max_page_load": 3,
+          "use_scroll_mobile": true,
+          "item_gap_mobile": 10,
+          "custom_class": ""
+        }
+      },
+      "1620889733b8bebef8": {
+        "type": "custom-content",
+        "blocks": {
+          "302f4255-280e-48a3-9f00-b9e6fd50230a": {
+            "type": "image_card",
+            "settings": {
+              "width": "33%",
+              "content_position": "top_left",
+              "content_alignment": "left",
+              "text_size": "medium",
+              "text_color": "black",
+              "link": "",
+              "title": "CLASSIC SPORT<br> OLD SKOOL",
+              "subtitle": "",
+              "button_label": "SHOP NOW",
+              "button_style": "sf__btn-link",
+              "button_size": "sf__btn-small",
+              "block_custom_class": ""
+            }
+          },
+          "190cefb9-e7ca-4316-8e55-b3b82656701b": {
+            "type": "image_card",
+            "settings": {
+              "width": "66%",
+              "content_position": "center_left",
+              "content_alignment": "left",
+              "text_size": "large",
+              "text_color": "black",
+              "link": "",
+              "title": "THE VINTAGE<br> SNEAKERS",
+              "subtitle": "SPRING \/ SUMMER",
+              "button_label": "SHOP NOW",
+              "button_style": "sf__btn-secondary",
+              "button_size": "",
+              "block_custom_class": ""
+            }
+          }
+        },
+        "block_order": [
+          "302f4255-280e-48a3-9f00-b9e6fd50230a",
+          "190cefb9-e7ca-4316-8e55-b3b82656701b"
+        ],
+        "settings": {
+          "heading": "",
+          "subheading": "",
+          "description": "",
+          "header_alignment": "center",
+          "container": "container-fluid",
+          "background_color": "",
+          "gap": 20,
+          "use_scroll_mobile": false,
+          "gap_mobile": 40,
+          "custom_class": "sf__index-custom-content"
+        }
+      },
+      "162089604618911426": {
+        "type": "collection-list",
+        "blocks": {
+          "162089604618911426-0": {
+            "type": "collection_block",
+            "settings": {
+              "collection": "sneaker",
+              "title": "Men's Tree Dasher Relay"
+            }
+          },
+          "162089604618911426-1": {
+            "type": "collection_block",
+            "settings": {
+              "collection": "sneaker",
+              "title": "Men's Tree Dasher Relay",
+              "item_image": "shopify:\/\/shop_images\/4.jpg"
+            }
+          },
+          "162089604618911426-2": {
+            "type": "collection_block",
+            "settings": {
+              "collection": "sneaker",
+              "title": "Men's Tree Dasher Relay",
+              "item_image": "shopify:\/\/shop_images\/5.jpg"
+            }
+          }
+        },
+        "block_order": [
+          "162089604618911426-0",
+          "162089604618911426-1",
+          "162089604618911426-2"
+        ],
+        "settings": {
+          "heading": "HAND-PICKED DAILY",
+          "subheading": "FEATURED IN",
+          "description": "",
+          "header_alignment": "center",
+          "container": "container-fluid",
+          "background_color": "rgba(0,0,0,0)",
+          "layout": "grid",
+          "card_style": "standard",
+          "text_alignment": "center",
+          "hover_effect": "scaling-down",
+          "show_product_count": false,
+          "count_inline_title": true,
+          "image_rounded": false,
+          "items_per_row": 3,
+          "item_gap": 30,
+          "enable_slider": false,
+          "show_pagination": false,
+          "show_navigation": false,
+          "autorotate": false,
+          "autorotate_speed": 5,
+          "use_scroll_mobile": true,
+          "mobile_gap": 16,
+          "hidden_slide_control_mobile": false,
+          "custom_class": ""
+        }
+      },
+      "162095835646fd819e": {
+        "type": "featured-collection",
+        "settings": {
+          "heading": "SHOP WOMEN",
+          "subheading": "FEATURED IN",
+          "description": "",
+          "header_alignment": "center",
+          "container": "container-fluid",
+          "background_color": "rgba(0,0,0,0)",
+          "collection": "sneaker-shop-women",
+          "product_to_show": 5,
+          "items_per_row": 5,
+          "item_gap": 30,
+          "pcard_layout": "",
+          "pcard_image_ratio": "",
+          "show_vendor": false,
+          "enable_slider": false,
+          "show_pagination": true,
+          "show_navigation": false,
+          "button_type": "link",
+          "button_text": "",
+          "button_style": "sf__btn-primary",
+          "button_size": "",
+          "infinite_load": false,
+          "max_page_load": 3,
+          "use_scroll_mobile": true,
+          "item_gap_mobile": 10,
+          "custom_class": ""
+        }
+      },
+      "1620980035fb4a935a": {
+        "type": "newsletter",
+        "settings": {
+          "container": "w-full",
+          "background_color": "",
+          "form_layout": "vertical",
+          "form_design": "2",
+          "heading": "SUBSCRIBE TO BE FRIEND",
+          "description": "",
+          "email_placeholder": "Enter your email address",
+          "submit_button": "Subscribe",
+          "text_color": "black",
+          "show_icon": true,
+          "icon_img_width": "40",
+          "show_agreement": false,
+          "term_condition_text": "<p>I agree to the Terms and Conditions.<\/p>"
+        }
+      },
+      "162098050586305bd8": {
+        "type": "custom-content",
+        "blocks": {
+          "e165b9f6-b00e-4698-9310-422404897180": {
+            "type": "html",
+            "settings": {
+              "code": "<div class=\"sf__scrolling-text font_size_11vh\" data-style=\"text-outline\" data-s-speed=\"slowest\" data-outline-thickness=\"thin\" data-s-dir=\"rtl\">\n    <div class=\"sf__scrolling-text-inner\">\n      <h2>\n<a href=\"#\"><em>BEST SNEAKER IN TOWN<\/em><\/a><span class=\"custom\" data-scale=\"small\"><\/span>\n<\/h2>\n      <h2>\n<a href=\"#\"><em>BEST SNEAKER IN TOWN<\/em><\/a><span class=\"custom\" data-scale=\"small\"><\/span>\n<\/h2>\n      <h2>\n<a href=\"#\"><em>BEST SNEAKER IN TOWN<\/em><\/a><span class=\"custom\" data-scale=\"small\"><\/span>\n<\/h2>\n      <h2>\n<a href=\"#\"><em>BEST SNEAKER IN TOWN<\/em><\/a><span class=\"custom\" data-scale=\"small\"><\/span>\n<\/h2>\n      <h2>\n<a href=\"#\"><em>BEST SNEAKER IN TOWN<\/em><\/a><span class=\"custom\" data-scale=\"small\"><\/span>\n<\/h2>\n      <h2>\n<a href=\"#\"><em>BEST SNEAKER IN TOWN<\/em><\/a><span class=\"custom\" data-scale=\"small\"><\/span>\n<\/h2>\n      <h2>\n<a href=\"#\"><em>BEST SNEAKER IN TOWN<\/em><\/a><span class=\"custom\" data-scale=\"small\"><\/span>\n<\/h2>\n    <\/div>\n  <\/div>",
+              "width": "100%",
+              "block_custom_class": ""
+            }
+          }
+        },
+        "block_order": [
+          "e165b9f6-b00e-4698-9310-422404897180"
+        ],
+        "settings": {
+          "heading": "",
+          "subheading": "",
+          "description": "",
+          "header_alignment": "center",
+          "container": "w-full",
+          "background_color": "",
+          "gap": 30,
+          "use_scroll_mobile": false,
+          "gap_mobile": 16,
+          "custom_class": "sf__index-custom-content-1"
+        }
+      },
+      "content-before-products": {
+        "type": "content-before-products",
+        "settings": {
+          "container": "container-fluid",
+          "background_color": "",
+          "gap": 30,
+          "gap_mobile": 16
+        }
+      },
+      "collection-template": {
+        "type": "collection-template",
+        "settings": {
+          "container": "container",
+          "grid_layout": "grid",
+          "grid_columns": "4",
+          "pagination_limit": "12",
+          "collection_paginate": "paginate",
+          "show_filter": true,
+          "sidebar": "leftColumn"
+        }
+      },
+      "content-after-products": {
+        "type": "content-after-products",
+        "settings": {
+          "container": "container-fluid",
+          "background_color": "",
+          "gap": 30,
+          "gap_mobile": 16
+        }
+      },
+      "recent-viewed-products": {
+        "type": "recent-viewed-products",
+        "settings": {
+          "heading": "Recently Viewed Products",
+          "container": "container",
+          "columns": 4,
+          "column_gap": 30,
+          "enable_slider": true,
+          "show_product_page": true,
+          "show_cart_page": true,
+          "show_collection_page": false
+        }
+      },
+      "annoucement": {
+        "type": "annoucement",
+        "settings": {
+          "show_announcement": true,
+          "homepage_only": true,
+          "show_close": true,
+          "message": "<div class=\"sf__scrolling-text text-base\" data-s-speed=\"medium\" data-outline-thickness=\"thin\" data-s-dir=\"ltr\">\n    <div class=\"sf__scrolling-text-inner\">\n      <p><a href=\"#\"><em style=\"display: flex;align-items: center;\"><span style=\"font-weight: 700;\">MINIMOG<\/span><span class=\"custom\" data-scale=\"small\"><\/span>New Collection in Town<span class=\"custom\" data-scale=\"small\"><\/span><svg fill=\"currentColor\" width=\"13\" height=\"14\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 448 512\"><path d=\"M218.101 38.101L198.302 57.9c-4.686 4.686-4.686 12.284 0 16.971L353.432 230H12c-6.627 0-12 5.373-12 12v28c0 6.627 5.373 12 12 12h341.432l-155.13 155.13c-4.686 4.686-4.686 12.284 0 16.971l19.799 19.799c4.686 4.686 12.284 4.686 16.971 0l209.414-209.414c4.686-4.686 4.686-12.284 0-16.971L235.071 38.101c-4.686-4.687-12.284-4.687-16.97 0z\"><\/path><\/svg><span class=\"custom\" data-scale=\"large\"><\/span><\/em><\/a><\/p>\n<p><a href=\"#\"><em style=\"display: flex;align-items: center;\"><span style=\"font-weight: 700;\">MINIMOG<\/span><span class=\"custom\" data-scale=\"small\"><\/span>New Collection in Town<span class=\"custom\" data-scale=\"small\"><\/span><svg fill=\"currentColor\" width=\"13\" height=\"14\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 448 512\"><path d=\"M218.101 38.101L198.302 57.9c-4.686 4.686-4.686 12.284 0 16.971L353.432 230H12c-6.627 0-12 5.373-12 12v28c0 6.627 5.373 12 12 12h341.432l-155.13 155.13c-4.686 4.686-4.686 12.284 0 16.971l19.799 19.799c4.686 4.686 12.284 4.686 16.971 0l209.414-209.414c4.686-4.686 4.686-12.284 0-16.971L235.071 38.101c-4.686-4.687-12.284-4.687-16.97 0z\"><\/path><\/svg><span class=\"custom\" data-scale=\"large\"><\/span><\/em><\/a><\/p>\n<p><a href=\"#\"><em style=\"display: flex;align-items: center;\"><span style=\"font-weight: 700;\">MINIMOG<\/span><span class=\"custom\" data-scale=\"small\"><\/span>New Collection in Town<span class=\"custom\" data-scale=\"small\"><\/span><svg fill=\"currentColor\" width=\"13\" height=\"14\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 448 512\"><path d=\"M218.101 38.101L198.302 57.9c-4.686 4.686-4.686 12.284 0 16.971L353.432 230H12c-6.627 0-12 5.373-12 12v28c0 6.627 5.373 12 12 12h341.432l-155.13 155.13c-4.686 4.686-4.686 12.284 0 16.971l19.799 19.799c4.686 4.686 12.284 4.686 16.971 0l209.414-209.414c4.686-4.686 4.686-12.284 0-16.971L235.071 38.101c-4.686-4.687-12.284-4.687-16.97 0z\"><\/path><\/svg><span class=\"custom\" data-scale=\"large\"><\/span><\/em><\/a><\/p>\n<p><a href=\"#\"><em style=\"display: flex;align-items: center;\"><span style=\"font-weight: 700;\">MINIMOG<\/span><span class=\"custom\" data-scale=\"small\"><\/span>New Collection in Town<span class=\"custom\" data-scale=\"small\"><\/span><svg fill=\"currentColor\" width=\"13\" height=\"14\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 448 512\"><path d=\"M218.101 38.101L198.302 57.9c-4.686 4.686-4.686 12.284 0 16.971L353.432 230H12c-6.627 0-12 5.373-12 12v28c0 6.627 5.373 12 12 12h341.432l-155.13 155.13c-4.686 4.686-4.686 12.284 0 16.971l19.799 19.799c4.686 4.686 12.284 4.686 16.971 0l209.414-209.414c4.686-4.686 4.686-12.284 0-16.971L235.071 38.101c-4.686-4.687-12.284-4.687-16.97 0z\"><\/path><\/svg><span class=\"custom\" data-scale=\"large\"><\/span><\/em><\/a><\/p>\n      <p><a href=\"#\"><em style=\"display: flex;align-items: center;\"><span style=\"font-weight: 700;\">MINIMOG<\/span><span class=\"custom\" data-scale=\"small\"><\/span>New Collection in Town<span class=\"custom\" data-scale=\"small\"><\/span><svg fill=\"currentColor\" width=\"13\" height=\"14\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 448 512\"><path d=\"M218.101 38.101L198.302 57.9c-4.686 4.686-4.686 12.284 0 16.971L353.432 230H12c-6.627 0-12 5.373-12 12v28c0 6.627 5.373 12 12 12h341.432l-155.13 155.13c-4.686 4.686-4.686 12.284 0 16.971l19.799 19.799c4.686 4.686 12.284 4.686 16.971 0l209.414-209.414c4.686-4.686 4.686-12.284 0-16.971L235.071 38.101c-4.686-4.687-12.284-4.687-16.97 0z\"><\/path><\/svg><span class=\"custom\" data-scale=\"large\"><\/span><\/em><\/a><\/p>\n      <p><a href=\"#\"><em style=\"display: flex;align-items: center;\"><span style=\"font-weight: 700;\">MINIMOG<\/span><span class=\"custom\" data-scale=\"small\"><\/span>New Collection in Town<span class=\"custom\" data-scale=\"small\"><\/span><svg fill=\"currentColor\" width=\"13\" height=\"14\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 448 512\"><path d=\"M218.101 38.101L198.302 57.9c-4.686 4.686-4.686 12.284 0 16.971L353.432 230H12c-6.627 0-12 5.373-12 12v28c0 6.627 5.373 12 12 12h341.432l-155.13 155.13c-4.686 4.686-4.686 12.284 0 16.971l19.799 19.799c4.686 4.686 12.284 4.686 16.971 0l209.414-209.414c4.686-4.686 4.686-12.284 0-16.971L235.071 38.101c-4.686-4.687-12.284-4.687-16.97 0z\"><\/path><\/svg><span class=\"custom\" data-scale=\"large\"><\/span><\/em><\/a><\/p>\n      <p><a href=\"#\"><em style=\"display: flex;align-items: center;\"><span style=\"font-weight: 700;\">MINIMOG<\/span><span class=\"custom\" data-scale=\"small\"><\/span>New Collection in Town<span class=\"custom\" data-scale=\"small\"><\/span><svg fill=\"currentColor\" width=\"13\" height=\"14\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 448 512\"><path d=\"M218.101 38.101L198.302 57.9c-4.686 4.686-4.686 12.284 0 16.971L353.432 230H12c-6.627 0-12 5.373-12 12v28c0 6.627 5.373 12 12 12h341.432l-155.13 155.13c-4.686 4.686-4.686 12.284 0 16.971l19.799 19.799c4.686 4.686 12.284 4.686 16.971 0l209.414-209.414c4.686-4.686 4.686-12.284 0-16.971L235.071 38.101c-4.686-4.687-12.284-4.687-16.97 0z\"><\/path><\/svg><span class=\"custom\" data-scale=\"large\"><\/span><\/em><\/a><\/p>\n      <p><a href=\"#\"><em style=\"display: flex;align-items: center;\"><span style=\"font-weight: 700;\">MINIMOG<\/span><span class=\"custom\" data-scale=\"small\"><\/span>New Collection in Town<span class=\"custom\" data-scale=\"small\"><\/span><svg fill=\"currentColor\" width=\"13\" height=\"14\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 448 512\"><path d=\"M218.101 38.101L198.302 57.9c-4.686 4.686-4.686 12.284 0 16.971L353.432 230H12c-6.627 0-12 5.373-12 12v28c0 6.627 5.373 12 12 12h341.432l-155.13 155.13c-4.686 4.686-4.686 12.284 0 16.971l19.799 19.799c4.686 4.686 12.284 4.686 16.971 0l209.414-209.414c4.686-4.686 4.686-12.284 0-16.971L235.071 38.101c-4.686-4.687-12.284-4.687-16.97 0z\"><\/path><\/svg><span class=\"custom\" data-scale=\"large\"><\/span><\/em><\/a><\/p>\n      <p><a href=\"#\"><em style=\"display: flex;align-items: center;\"><span style=\"font-weight: 700;\">MINIMOG<\/span><span class=\"custom\" data-scale=\"small\"><\/span>New Collection in Town<span class=\"custom\" data-scale=\"small\"><\/span><svg fill=\"currentColor\" width=\"13\" height=\"14\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 448 512\"><path d=\"M218.101 38.101L198.302 57.9c-4.686 4.686-4.686 12.284 0 16.971L353.432 230H12c-6.627 0-12 5.373-12 12v28c0 6.627 5.373 12 12 12h341.432l-155.13 155.13c-4.686 4.686-4.686 12.284 0 16.971l19.799 19.799c4.686 4.686 12.284 4.686 16.971 0l209.414-209.414c4.686-4.686 4.686-12.284 0-16.971L235.071 38.101c-4.686-4.687-12.284-4.687-16.97 0z\"><\/path><\/svg><span class=\"custom\" data-scale=\"large\"><\/span><\/em><\/a><\/p>\n      <p><a href=\"#\"><em style=\"display: flex;align-items: center;\"><span style=\"font-weight: 700;\">MINIMOG<\/span><span class=\"custom\" data-scale=\"small\"><\/span>New Collection in Town<span class=\"custom\" data-scale=\"small\"><\/span><svg fill=\"currentColor\" width=\"13\" height=\"14\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 448 512\"><path d=\"M218.101 38.101L198.302 57.9c-4.686 4.686-4.686 12.284 0 16.971L353.432 230H12c-6.627 0-12 5.373-12 12v28c0 6.627 5.373 12 12 12h341.432l-155.13 155.13c-4.686 4.686-4.686 12.284 0 16.971l19.799 19.799c4.686 4.686 12.284 4.686 16.971 0l209.414-209.414c4.686-4.686 4.686-12.284 0-16.971L235.071 38.101c-4.686-4.687-12.284-4.687-16.97 0z\"><\/path><\/svg><span class=\"custom\" data-scale=\"large\"><\/span><\/em><\/a><\/p>\n    <\/div>\n  <\/div>",
+          "message_link": "",
+          "show_divider": false
+        }
+      },
+      "product-details-accordion": {
+        "type": "product-details-accordion",
+        "settings": {
+          "show_accordion": true,
+          "use_container": false,
+          "position": "bottom_info"
+        }
+      },
+      "product-features": {
+        "type": "product-features",
+        "blocks": {
+          "a1e8d665-f69c-432c-a850-8452440ba349": {
+            "type": "feature",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Frame_1.png",
+              "title": "Free Shipping",
+              "description": "<p>Get complimentary ground shipping on every <br\/>order.Don’t love it? Send it back, on us.<\/p>",
+              "link": ""
+            }
+          },
+          "1d77c4e6-b03f-446d-aa85-f8d6c7c364ef": {
+            "type": "feature",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Frame_2.png",
+              "title": "Earn Points",
+              "description": "<p>Join Minimog Rewards to earn gift cards<br\/>and enjoy exclusive member benefits.<\/p>",
+              "link": ""
+            }
+          },
+          "cdcea6cb-dc2c-40ba-a2eb-a92361894805": {
+            "type": "feature",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Frame_3.png",
+              "title": "Money Back Gurantee",
+              "description": "<p>We believe getting dressed should be the <br\/>easiest part of your day.<\/p>",
+              "link": ""
+            }
+          }
+        },
+        "block_order": [
+          "a1e8d665-f69c-432c-a850-8452440ba349",
+          "1d77c4e6-b03f-446d-aa85-f8d6c7c364ef",
+          "cdcea6cb-dc2c-40ba-a2eb-a92361894805"
+        ],
+        "settings": {
+          "show_featured": true,
+          "container": "container",
+          "heading": "Why choose us?",
+          "item_per_row": 3,
+          "card_style": "vertical",
+          "image_max_width": "70px",
+          "content_alignment": "center"
+        }
+      },
+      "page-policy": {
+        "type": "page-policy",
+        "settings": {
+          "container": "container-fluid",
+          "menu": "faqs-menu"
+        }
+      },
+      "page-term-conditions": {
+        "type": "page-term-conditions",
+        "settings": {
+          "container": "container-fluid",
+          "menu": "faqs-menu"
+        }
+      },
+      "page-delivery": {
+        "type": "page-delivery",
+        "settings": {
+          "container": "container-fluid",
+          "menu": "faqs-menu"
+        }
+      },
+      "page-careers": {
+        "type": "page-careers",
+        "settings": {
+          "container": "container-fluid",
+          "menu": "faqs-menu"
+        }
+      },
+      "custom-content": {
+        "type": "custom-content",
+        "blocks": {
+          "eb2ad648-8e29-4a28-90ba-dd295300659d": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/img1.jpg",
+              "width": "100%",
+              "alignment": "center",
+              "block_custom_class": ""
+            }
+          },
+          "8ab35449-e36a-456d-8c97-28f646ecb13e": {
+            "type": "text",
+            "settings": {
+              "title": "<h4 class=\"about__block-heading\">It pains me physically to see woman victimized,<br> rendered pathetic by fashion.<\/h4>\n<p class=\"about__block-subheading\">Awkwardness gives me great comfort. I’ve never been cool, but I’ve felt cool. I’ve been in the<br> cool place, but I wasn’t really cool – I was trying to pass for hip or cool.<\/p>",
+              "subheading": "",
+              "text": "<p>A girl should be two things: classy and fabulous. I am convinced that there can be luxury in simplicity. I wanted to dress the woman who lives and works, not the woman in a painting. It’s hard to balance everything. It’s always challenging. My relationships with producers or photographers – these are relationships that took years. I can’t get sucked into that celebrity thing, because I think it’s just crass. My aim is to make the poor look rich and the rich look poor. Vanity is the healthiest thing in life. I believe that my clothes can give people a better image of themselves – that it can increase their feelings of confidence and happiness. You can hide so much behind theatrics, and I don’t need to do that any more. I don’t really know how to do casual clothes.<\/p>",
+              "width": "100%",
+              "alignment": "center",
+              "align_text": "center",
+              "text_size": "medium",
+              "text_color": "black",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "sf__btn-primary",
+              "button_size": "",
+              "block_custom_class": "sf__about-block sf__about-block-text sf__about-block-text-1"
+            }
+          },
+          "46d50602-cb17-4b15-a365-4bb44ea3ed5d": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/img2.jpg",
+              "width": "50%",
+              "alignment": "center",
+              "block_custom_class": ""
+            }
+          },
+          "4577a0c3-4ac4-4f10-8965-2e6eb188a897": {
+            "type": "html",
+            "settings": {
+              "code": "<div class=\"sf__about-custom-list\">\n  <h3>We are proudly<br> Australian.<\/h3>\n  <ul>\n    <li>\n      <span><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/icon1.svg?v=1627616411\"><\/span>\n      <div class=\"rte\">\n          <h4>Soft Fabric<\/h4>\n          <p class=\"text-color-subtext\">Get complimentary ground shipping on every<br> order.Don’t love it? Send it back, on us.<\/p>\n      <\/div>\n    <\/li>\n    <li>\n      <span><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/icon2_daf1b6c2-ef2e-416c-ae6a-a7ddd145b6c5.svg?v=1627616411\"><\/span>\n      <div class=\"rte\">\n          <h4>Lightweight<\/h4>\n          <p class=\"text-color-subtext\">Join Minimog Rewards to earn gift cards<br>\nand enjoy exclusive member benefits.<\/p>\n      <\/div>\n    <\/li>\n    <li>\n      <span><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2742\/2636\/files\/icon3.svg?v=1627616411\"><\/span>\n      <div class=\"rte\">\n          <h4>All Day Comfort<\/h4>\n          <p class=\"text-color-subtext\">We believe getting dressed should be the<br> easiest part of your day.<\/p>\n      <\/div>\n    <\/li>\n  <\/ul>\n<\/div>",
+              "width": "50%",
+              "block_custom_class": "sf__about-custom-html"
+            }
+          },
+          "2f0f81fc-d1a8-4378-bc7f-d6484346344d": {
+            "type": "text",
+            "settings": {
+              "title": "<h4 class=\"about__block-heading\">The world needs to move fast to make a meaningful<br> difference in the fight against climate change.<\/h4>",
+              "subheading": "",
+              "text": "<p>A girl should be two things: classy and fabulous. I am convinced that there can be luxury in simplicity. I wanted to dress the woman who lives and works, not the woman in a painting. It’s hard to balance everything. It’s always challenging. My relationships with producers or photographers – these are relationships that took years. I can’t get sucked into that celebrity thing, because I think it’s just crass. My aim is to make the poor look rich and the rich look poor. Vanity is the healthiest thing in life. I believe that my clothes can give people a better image of themselves – that it can increase their feelings of confidence and happiness. You can hide so much behind theatrics, and I don’t need to do that any more. I don’t really know how to do casual clothes.<\/p>",
+              "width": "100%",
+              "alignment": "center",
+              "align_text": "center",
+              "text_size": "medium",
+              "text_color": "black",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "sf__btn-primary",
+              "button_size": "",
+              "block_custom_class": "sf__about-block sf__about-block-text sf__about-block-text-2"
+            }
+          },
+          "9918da81-3329-4259-872e-0703d21d796f": {
+            "type": "text",
+            "settings": {
+              "title": "Our Team",
+              "subheading": "",
+              "text": "",
+              "width": "100%",
+              "alignment": "center",
+              "align_text": "center",
+              "text_size": "medium",
+              "text_color": "black",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "sf__btn-primary",
+              "button_size": "",
+              "block_custom_class": "sf__about-custom-heading"
+            }
+          },
+          "72ebf16e-61d7-43da-9865-4cff4486154d": {
+            "type": "image_card",
+            "settings": {
+              "width": "33%",
+              "content_position": "bottom_left",
+              "content_alignment": "left",
+              "text_size": "medium",
+              "text_color": "black",
+              "image": "shopify:\/\/shop_images\/img3.png",
+              "link": "",
+              "title": "Edward Lindgren",
+              "subtitle": "<span class=\"text-color-subtext\">CHIEF OPERATING OFFICER<\/span>",
+              "button_label": "",
+              "button_style": "sf__btn-primary",
+              "button_size": "",
+              "block_custom_class": "sf__about-card-custom"
+            }
+          },
+          "5219a862-b76d-449e-a4dd-32cb7897be73": {
+            "type": "image_card",
+            "settings": {
+              "width": "33%",
+              "content_position": "bottom_left",
+              "content_alignment": "left",
+              "text_size": "medium",
+              "text_color": "black",
+              "image": "shopify:\/\/shop_images\/img4.jpg",
+              "link": "",
+              "title": "Nado Husa",
+              "subtitle": "<span class=\"text-color-subtext\">CO-FOUNDER<\/span>",
+              "button_label": "",
+              "button_style": "sf__btn-primary",
+              "button_size": "",
+              "block_custom_class": "sf__about-card-custom"
+            }
+          },
+          "3b99268a-faf0-48a6-80c0-afaa5dcd8fac": {
+            "type": "image_card",
+            "settings": {
+              "width": "33%",
+              "content_position": "bottom_left",
+              "content_alignment": "left",
+              "text_size": "medium",
+              "text_color": "black",
+              "image": "shopify:\/\/shop_images\/img5.jpg",
+              "link": "",
+              "title": "Chineze Afamefuna",
+              "subtitle": "<span class=\"text-color-subtext\">MARKETING<\/span>",
+              "button_label": "",
+              "button_style": "sf__btn-primary",
+              "button_size": "",
+              "block_custom_class": "sf__about-card-custom"
+            }
+          }
+        },
+        "block_order": [
+          "eb2ad648-8e29-4a28-90ba-dd295300659d",
+          "8ab35449-e36a-456d-8c97-28f646ecb13e",
+          "46d50602-cb17-4b15-a365-4bb44ea3ed5d",
+          "4577a0c3-4ac4-4f10-8965-2e6eb188a897",
+          "2f0f81fc-d1a8-4378-bc7f-d6484346344d",
+          "9918da81-3329-4259-872e-0703d21d796f",
+          "72ebf16e-61d7-43da-9865-4cff4486154d",
+          "5219a862-b76d-449e-a4dd-32cb7897be73",
+          "3b99268a-faf0-48a6-80c0-afaa5dcd8fac"
+        ],
+        "settings": {
+          "heading": "",
+          "subheading": "",
+          "description": "",
+          "header_alignment": "center",
+          "container": "container-fluid",
+          "background_color": "",
+          "gap": 30,
+          "use_scroll_mobile": false,
+          "gap_mobile": 16
+        }
+      },
+      "icon-box": {
+        "type": "icon-box",
+        "blocks": {
+          "23522a55-dfd4-4b52-ab3b-c59c5fbad84f": {
+            "type": "iconbox",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/freeship.png",
+              "title": "Free Shipping",
+              "description": "<p>Free Shipping for orders over £130<\/p>",
+              "link": "",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "sf__btn-link",
+              "button_size": ""
+            }
+          },
+          "7c318272-92d6-489e-b4ec-e5ea33bd276c": {
+            "type": "iconbox",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/promo2.png",
+              "title": "Money Guarantee",
+              "description": "<p>Within 30 days for an exchange.<\/p>",
+              "link": "",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "sf__btn-link",
+              "button_size": ""
+            }
+          },
+          "b989db90-acd5-4022-b61f-dc3c2442b307": {
+            "type": "iconbox",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/promo3.png",
+              "title": "Online Support",
+              "description": "<p>24 hours a day, 7 days a week<\/p>",
+              "link": "",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "sf__btn-link",
+              "button_size": ""
+            }
+          },
+          "e60a678b-0f75-49c1-b3a6-a6cda38cbaa8": {
+            "type": "iconbox",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/promo4.png",
+              "title": "Flexible Payment",
+              "description": "<p>Pay with Multiple Credit Cards<\/p>",
+              "link": "",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "sf__btn-link",
+              "button_size": ""
+            }
+          }
+        },
+        "block_order": [
+          "23522a55-dfd4-4b52-ab3b-c59c5fbad84f",
+          "7c318272-92d6-489e-b4ec-e5ea33bd276c",
+          "b989db90-acd5-4022-b61f-dc3c2442b307",
+          "e60a678b-0f75-49c1-b3a6-a6cda38cbaa8"
+        ],
+        "settings": {
+          "heading": "",
+          "subheading": "",
+          "description": "",
+          "header_alignment": "center",
+          "container": "container-fluid",
+          "background_color": "#ffffff",
+          "item_per_row": 4,
+          "item_gap": 30,
+          "item_gap_mobile": 10,
+          "card_style": "horizontal",
+          "image_max_width": "30px",
+          "content_alignment": "start",
+          "hover_effect": "none",
+          "enable_slider": false,
+          "show_pagination": false,
+          "show_navigation": false,
+          "use_scroll_mobile": false,
+          "use_grid_column_mb": false
+        }
+      },
+      "find-a-store": {
+        "type": "find-a-store",
+        "blocks": {
+          "a409154d-1219-4ef4-8a82-575065e910e8": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/findstore1.jpg",
+              "width": "66%"
+            }
+          },
+          "ff24d902-dede-43db-9dab-7957e50c291b": {
+            "type": "content",
+            "settings": {
+              "heading": "Valencia Street Shop",
+              "content": "<div class=\"sf__store-info\">\n  <div class=\"rte sf__store-item\">\n      <h4>Address<\/h4>\n      <p class=\"text-color-subtext\">461 Valencia Street San<br> Francisco, CA 94103<\/p>\n      <a href=\"#\">Get Direction<\/a>\n  <\/div>\n  <div class=\"rte sf__store-item\">\n      <h4>We're Open<\/h4>\n      <p class=\"text-color-subtext\">Our store has re-opened for<br> shopping, exchanges<br>\nEvery day 11am to 7pm<\/p>\n  <\/div>\n  <div class=\"rte sf__store-item\">\n      <h4>Message<\/h4>\n      <p class=\"text-color-subtext\">Send us a text &amp; an<br> ambassador will respond<br> when available.<\/p>\n      <p>1-814-251-9966<\/p>\n  <\/div>\n  <div class=\"sf__store-item\">\n      <h4>Social Media<\/h4>\n      <ul>\n        <li><a href=\"#\"><svg class=\"w-[20px] h-[20px]\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 384 512\"><path fill=\"currentColor\" d=\"M204 6.5C101.4 6.5 0 74.9 0 185.6 0 256 39.6 296 63.6 296c9.9 0 15.6-27.6 15.6-35.4 0-9.3-23.7-29.1-23.7-67.8 0-80.4 61.2-137.4 140.4-137.4 68.1 0 118.5 38.7 118.5 109.8 0 53.1-21.3 152.7-90.3 152.7-24.9 0-46.2-18-46.2-43.8 0-37.8 26.4-74.4 26.4-113.4 0-66.2-93.9-54.2-93.9 25.8 0 16.8 2.1 35.4 9.6 50.7-13.8 59.4-42 147.9-42 209.1 0 18.9 2.7 37.5 4.5 56.4 3.4 3.8 1.7 3.4 6.9 1.5 50.4-69 48.6-82.5 71.4-172.8 12.3 23.4 44.1 36 69.3 36 106.2 0 153.9-103.5 153.9-196.8C384 71.3 298.2 6.5 204 6.5z\"><\/path><\/svg><\/a><\/li>\n        <li><a href=\"#\"><svg class=\"w-[20px] h-[20px]\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 320 512\"><path fill=\"currentColor\" d=\"M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z\"><\/path><\/svg><\/a><\/li>\n        <li><a href=\"#\"><svg class=\"w-[20px] h-[20px]\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 448 512\"><path fill=\"currentColor\" d=\"M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z\"><\/path><\/svg><\/a><\/li>\n        <li><a href=\"#\"><svg class=\"w-[20px] h-[20px]\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 512 512\"><path fill=\"currentColor\" d=\"M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z\"><\/path><\/svg><\/a><\/li>\n      <\/ul>\n  <\/div>\n<\/div>",
+              "width": "33%"
+            }
+          },
+          "53e35d71-b5ad-4222-8550-5426da57fb1e": {
+            "type": "content",
+            "settings": {
+              "heading": "Williamsburg",
+              "content": "<div class=\"sf__store-info\">\n  <div class=\"rte sf__store-item\">\n      <h4>Address<\/h4>\n      <p class=\"text-color-subtext\">461 Valencia Street San<br> Francisco, CA 94103<\/p>\n      <a href=\"#\">Get Direction<\/a>\n  <\/div>\n  <div class=\"rte sf__store-item\">\n      <h4>We're Open<\/h4>\n      <p class=\"text-color-subtext\">Our store has re-opened for<br> shopping, exchanges<br>\nEvery day 11am to 7pm<\/p>\n  <\/div>\n  <div class=\"rte sf__store-item\">\n      <h4>Message<\/h4>\n      <p class=\"text-color-subtext\">Send us a text &amp; an<br> ambassador will respond<br> when available.<\/p>\n      <p>1-814-251-9966<\/p>\n  <\/div>\n  <div class=\"sf__store-item\">\n      <h4>Social Media<\/h4>\n      <ul>\n        <li><a href=\"#\"><svg class=\"w-[20px] h-[20px]\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 384 512\"><path fill=\"currentColor\" d=\"M204 6.5C101.4 6.5 0 74.9 0 185.6 0 256 39.6 296 63.6 296c9.9 0 15.6-27.6 15.6-35.4 0-9.3-23.7-29.1-23.7-67.8 0-80.4 61.2-137.4 140.4-137.4 68.1 0 118.5 38.7 118.5 109.8 0 53.1-21.3 152.7-90.3 152.7-24.9 0-46.2-18-46.2-43.8 0-37.8 26.4-74.4 26.4-113.4 0-66.2-93.9-54.2-93.9 25.8 0 16.8 2.1 35.4 9.6 50.7-13.8 59.4-42 147.9-42 209.1 0 18.9 2.7 37.5 4.5 56.4 3.4 3.8 1.7 3.4 6.9 1.5 50.4-69 48.6-82.5 71.4-172.8 12.3 23.4 44.1 36 69.3 36 106.2 0 153.9-103.5 153.9-196.8C384 71.3 298.2 6.5 204 6.5z\"><\/path><\/svg><\/a><\/li>\n        <li><a href=\"#\"><svg class=\"w-[20px] h-[20px]\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 320 512\"><path fill=\"currentColor\" d=\"M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z\"><\/path><\/svg><\/a><\/li>\n        <li><a href=\"#\"><svg class=\"w-[20px] h-[20px]\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 448 512\"><path fill=\"currentColor\" d=\"M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z\"><\/path><\/svg><\/a><\/li>\n        <li><a href=\"#\"><svg class=\"w-[20px] h-[20px]\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 512 512\"><path fill=\"currentColor\" d=\"M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z\"><\/path><\/svg><\/a><\/li>\n      <\/ul>\n  <\/div>\n<\/div>",
+              "width": "33%"
+            }
+          },
+          "fce2adee-b444-4cc3-81fb-98ab83261f24": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/findstore2.jpg",
+              "width": "66%"
+            }
+          },
+          "7b30cc41-de1c-4365-8de6-e2f83951647e": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/findstore3.jpg",
+              "width": "66%"
+            }
+          },
+          "beb12cf3-5d6d-49a1-9ccb-330852540c7d": {
+            "type": "content",
+            "settings": {
+              "heading": "Stanford Center",
+              "content": "<div class=\"sf__store-info\">\n  <div class=\"rte sf__store-item\">\n      <h4>Address<\/h4>\n      <p class=\"text-color-subtext\">461 Valencia Street San<br> Francisco, CA 94103<\/p>\n      <a href=\"#\">Get Direction<\/a>\n  <\/div>\n  <div class=\"rte sf__store-item\">\n      <h4>We're Open<\/h4>\n      <p class=\"text-color-subtext\">Our store has re-opened for<br> shopping, exchanges<br>\nEvery day 11am to 7pm<\/p>\n  <\/div>\n  <div class=\"rte sf__store-item\">\n      <h4>Message<\/h4>\n      <p class=\"text-color-subtext\">Send us a text &amp; an<br> ambassador will respond<br> when available.<\/p>\n      <p>1-814-251-9966<\/p>\n  <\/div>\n  <div class=\"sf__store-item\">\n      <h4>Social Media<\/h4>\n      <ul>\n        <li><a href=\"#\"><svg class=\"w-[20px] h-[20px]\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 384 512\"><path fill=\"currentColor\" d=\"M204 6.5C101.4 6.5 0 74.9 0 185.6 0 256 39.6 296 63.6 296c9.9 0 15.6-27.6 15.6-35.4 0-9.3-23.7-29.1-23.7-67.8 0-80.4 61.2-137.4 140.4-137.4 68.1 0 118.5 38.7 118.5 109.8 0 53.1-21.3 152.7-90.3 152.7-24.9 0-46.2-18-46.2-43.8 0-37.8 26.4-74.4 26.4-113.4 0-66.2-93.9-54.2-93.9 25.8 0 16.8 2.1 35.4 9.6 50.7-13.8 59.4-42 147.9-42 209.1 0 18.9 2.7 37.5 4.5 56.4 3.4 3.8 1.7 3.4 6.9 1.5 50.4-69 48.6-82.5 71.4-172.8 12.3 23.4 44.1 36 69.3 36 106.2 0 153.9-103.5 153.9-196.8C384 71.3 298.2 6.5 204 6.5z\"><\/path><\/svg><\/a><\/li>\n        <li><a href=\"#\"><svg class=\"w-[20px] h-[20px]\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 320 512\"><path fill=\"currentColor\" d=\"M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z\"><\/path><\/svg><\/a><\/li>\n        <li><a href=\"#\"><svg class=\"w-[20px] h-[20px]\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 448 512\"><path fill=\"currentColor\" d=\"M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z\"><\/path><\/svg><\/a><\/li>\n        <li><a href=\"#\"><svg class=\"w-[20px] h-[20px]\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewbox=\"0 0 512 512\"><path fill=\"currentColor\" d=\"M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z\"><\/path><\/svg><\/a><\/li>\n      <\/ul>\n  <\/div>\n<\/div>",
+              "width": "33%"
+            }
+          }
+        },
+        "block_order": [
+          "a409154d-1219-4ef4-8a82-575065e910e8",
+          "ff24d902-dede-43db-9dab-7957e50c291b",
+          "53e35d71-b5ad-4222-8550-5426da57fb1e",
+          "fce2adee-b444-4cc3-81fb-98ab83261f24",
+          "7b30cc41-de1c-4365-8de6-e2f83951647e",
+          "beb12cf3-5d6d-49a1-9ccb-330852540c7d"
+        ],
+        "settings": {
+          "container": "container-fluid",
+          "gap": 100,
+          "gap_mobile": 16
+        }
+      },
+      "page-reviews": {
+        "type": "page-reviews",
+        "settings": {
+        }
+      },
+      "mobile-sticky-bar": {
+        "type": "mobile-sticky-bar",
+        "settings": {
+          "show_mobile_sticky": true,
+          "show_home_icon": true,
+          "show_collection_icon": true,
+          "show_cart_icon": true,
+          "show_search_icon": true,
+          "show_account_icon": false,
+          "show_wishlist_icon": false
+        }
+      }
+    },
+    "content_for_index": [
+      "1620813069167db316",
+      "162081317833a6e943",
+      "1620889733b8bebef8",
+      "162095835646fd819e",
+      "162089604618911426",
+      "162098050586305bd8",
+      "1620980035fb4a935a"
+    ]
+  },
+  "presets": {
+    "Default": {
+      "sections": {
+        "featured-collection": {
+          "type": "featured-collection",
+          "settings": {
+            "collection": "frontpage"
+          }
+        },
+        "featured-product": {
+          "type": "featured-product",
+          "settings": {
+          }
+        }
+      },
+      "content_for_index": [
+        "featured-collection",
+        "featured-product"
+      ]
+    }
+  }
+}

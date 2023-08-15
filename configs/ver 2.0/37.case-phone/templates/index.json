@@ -1,0 +1,298 @@
+{
+  "sections": {
+    "1623049438bcd6bb44": {
+      "type": "image-with-text-2",
+      "settings": {
+        "container": "w-full",
+        "hero_size": "fullscreen",
+        "show_overlay": false,
+        "bg_position": "center",
+        "parallax": false,
+        "content_in_container": false,
+        "content_position": "center middle",
+        "text_alignment": "center",
+        "text_size": "large",
+        "text_color": "white",
+        "title": "<span class=\"uppercase font-black\">kaizer lars<\/span>",
+        "subtitle": "",
+        "text": "<p>LIVE UNCONVENTIONAL<\/p>",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "custom_class": "sf__index-hero"
+      }
+    },
+    "1623050580cee8e6ed": {
+      "type": "custom-content",
+      "blocks": {
+        "7ed81cd9-30f2-4cac-ad52-b2e2eff650e6": {
+          "type": "image_card",
+          "settings": {
+            "width": "33%",
+            "content_position": "bottom_center",
+            "content_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "link": "",
+            "title": "",
+            "subtitle": "",
+            "button_label": "ultra touch",
+            "button_style": "sf__btn-primary",
+            "button_size": "",
+            "block_custom_class": ""
+          }
+        },
+        "555a8ee3-3658-4d9c-8d15-c850be0b48f8": {
+          "type": "image_card",
+          "settings": {
+            "width": "33%",
+            "content_position": "bottom_center",
+            "content_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "link": "",
+            "title": "",
+            "subtitle": "",
+            "button_label": "dark side",
+            "button_style": "sf__btn-primary",
+            "button_size": "",
+            "block_custom_class": ""
+          }
+        },
+        "02a90b5b-5cd7-4848-9454-0881214fe9e0": {
+          "type": "image_card",
+          "settings": {
+            "width": "33%",
+            "content_position": "bottom_center",
+            "content_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "link": "",
+            "title": "",
+            "subtitle": "",
+            "button_label": "triangle",
+            "button_style": "sf__btn-primary",
+            "button_size": "",
+            "block_custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "7ed81cd9-30f2-4cac-ad52-b2e2eff650e6",
+        "555a8ee3-3658-4d9c-8d15-c850be0b48f8",
+        "02a90b5b-5cd7-4848-9454-0881214fe9e0"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "",
+        "gap": 30,
+        "use_scroll_mobile": false,
+        "gap_mobile": 16,
+        "custom_class": "sf__index-custom-content"
+      }
+    },
+    "1623050955f523b86c": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "top trending",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "left",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "phone-case",
+        "product_to_show": 5,
+        "items_per_row": 5,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "button_type": "link",
+        "button_text": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 10,
+        "custom_class": ""
+      }
+    },
+    "1623051096a7eef631": {
+      "type": "image-with-text",
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "item_gap": 100,
+        "item_gap_mobile": 30,
+        "layout": "left",
+        "image_column_size": "6",
+        "title": "DEFINE YOURSELF.<br>\nBE DIFFERENT.",
+        "sub_title": "",
+        "text": "<p>An independent label created in 2019, LARS KAIZER reinterprets<br\/> the numerous emblematic theorems of art, science and<br\/> architecture into wearable statements of non-conformity,<br\/> enabling the allure of artistic <\/p>",
+        "text_size": "medium",
+        "content_alignment": "left",
+        "button_label": "About us",
+        "button_link": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "custom_class": ""
+      }
+    },
+    "1623051448d6f5ec20": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "new arrivals",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "left",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "collection": "new-arrivals-phone-case",
+        "product_to_show": 5,
+        "items_per_row": 5,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "button_type": "link",
+        "button_text": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 10,
+        "custom_class": ""
+      }
+    },
+    "1623051506dfc25171": {
+      "type": "testimonials",
+      "blocks": {
+        "1623051506dfc25171-0": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Love it so much",
+            "description": "<p>Was I in Hawaii?! No. Did I feel like I was in Hawaii?! No, because it’s snowing outside. But, would I wear this in Hawaii ❤️<\/p>",
+            "footer": "<p>Nancy W<\/p>",
+            "image_text": "",
+            "product": "a4-notepad"
+          }
+        },
+        "1623051506dfc25171-1": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Love my new purchase",
+            "description": "<p>Always getting compliments from family, friends, and strangers. 🤗 🙌<\/p>",
+            "footer": "<p>Linnie H<\/p>",
+            "image_text": "",
+            "product": "art-color-pencils"
+          }
+        },
+        "1623051506dfc25171-2": {
+          "type": "testimonial",
+          "settings": {
+            "title": "What a delight to find you",
+            "description": "<p>Fits great, feels amazing, seems to stay cool and is somewhat water resistant. <\/p>",
+            "footer": "<p>Jayce M<\/p>",
+            "image_text": "",
+            "product": "blue-specialty-coffee"
+          }
+        },
+        "1623051506dfc25171-3": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Thanks for being so fabulous!",
+            "description": "<p>You have been a real help and you have a great products and service, which I will certainly recommend to others.<\/p>",
+            "footer": "<p>Dorothée F<\/p>",
+            "image_text": "",
+            "product": "boy-with-apple"
+          }
+        },
+        "1623051506dfc25171-4": {
+          "type": "testimonial",
+          "settings": {
+            "title": "I will certainly recommend to others.",
+            "description": "<p>I think your product is fantastic and I really appreciate the time you have given me. 🤗 🙌<\/p>",
+            "footer": "<p>Marco C<\/p>",
+            "image_text": "",
+            "product": "blackout-curtain"
+          }
+        },
+        "1623051506dfc25171-5": {
+          "type": "testimonial",
+          "settings": {
+            "title": "A great store you can find.",
+            "description": "<p>If we ever have an opportunity to recommend you, we definitely would do so as we felt your service was excellent.<\/p>",
+            "footer": "<p>Adelia C<\/p>",
+            "image_text": "",
+            "product": "a4-notepad"
+          }
+        }
+      },
+      "block_order": [
+        "1623051506dfc25171-0",
+        "1623051506dfc25171-1",
+        "1623051506dfc25171-2",
+        "1623051506dfc25171-3",
+        "1623051506dfc25171-4",
+        "1623051506dfc25171-5"
+      ],
+      "settings": {
+        "heading": "Happy Customers",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "left",
+        "container": "container-fluid",
+        "background_color": "#f5f5f5",
+        "design": "testimonials-6",
+        "show_stars": true,
+        "autorotate": false,
+        "show_navigation": true,
+        "show_pagination": false,
+        "star_color": "#000000",
+        "custom_class": ""
+      }
+    },
+    "1623052051434d12da": {
+      "type": "newsletter",
+      "settings": {
+        "container": "w-full",
+        "background_color": "",
+        "form_layout": "vertical",
+        "form_design": "1",
+        "heading": "GET 10% OFF YOUR ORDER",
+        "description": "<p>Sign up to our mailing list and get a 10% discount code for your purchase<\/p>",
+        "email_placeholder": "Enter your email address",
+        "submit_button": "JOIN NOW",
+        "text_color": "black",
+        "show_icon": false,
+        "icon_img_width": "30",
+        "show_agreement": true,
+        "term_condition_text": "<p>I agree to the Terms and Conditions.<\/p>"
+      }
+    }
+  },
+  "order": [
+    "1623049438bcd6bb44",
+    "1623050580cee8e6ed",
+    "1623050955f523b86c",
+    "1623051096a7eef631",
+    "1623051448d6f5ec20",
+    "1623051506dfc25171",
+    "1623052051434d12da"
+  ]
+}

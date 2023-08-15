@@ -1,0 +1,232 @@
+{
+  "current": {
+    "favicon": "shopify:\/\/shop_images\/fav_icon_dark_1.png",
+    "container_width": 1420,
+    "color_primary": "#000",
+    "color_sub_text": "#666666",
+    "color_btn_bg_hover": "#ffffff",
+    "color_btn_text_hover": "#000000",
+    "prod_sale_price_color": "#666666",
+    "prod_type_color": "#666666",
+    "color_annoucement_bg": "#000000",
+    "color_annoucement_text": "#ffffff",
+    "color_topbar_bg": "#e0e7e4",
+    "color_topbar_text": "#000000",
+    "color_header_bg": "#ffffff",
+    "color_header_link": "#000000",
+    "color_header_transparent": "#ffffff",
+    "color_menu_bar_bg": "#000000",
+    "color_menu_bar_text": "#f8f8f8",
+    "color_footer_bg": "#000000",
+    "color_footer_text": "#dfdede",
+    "color_footer_subtext": "#dfdede",
+    "color_footer_link_hover": "#ffffff",
+    "color_footer_bg_mb": "#f8f8f8",
+    "color_footer_bottom_bg": "#000000",
+    "color_footer_bottom_text": "#dfdede",
+    "img_overlay_opacity": 20,
+    "tooltip_background_color": "#000000",
+    "type_base_font": "roboto_condensed_n4",
+    "use_custom_font_body": true,
+    "custom_body_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/Poppins-Regular.ttf?v=1623048538@400\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/Poppins-Bold.ttf?v=1623048538@700",
+    "custom_body_weight": "400",
+    "type_header_font": "roboto_condensed_n7",
+    "use_custom_font_heading": true,
+    "custom_heading_font": "https:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/Poppins-Bold.ttf?v=1623048538@700\nhttps:\/\/cdn.shopify.com\/s\/files\/1\/0042\/0750\/9567\/files\/Poppins-Black.ttf?v=1623048538@900",
+    "custom_heading_weight": "900",
+    "btn_base_size": 15,
+    "pcard_layout": "1",
+    "pcard_alignment": "center",
+    "pcard_image_ratio": "1\/1",
+    "show_vendor": false,
+    "variant_option_design3": "color",
+    "show_variant_swatch_image": true,
+    "product_colors": "red: #FF6961,\nyellow: #FDDA76,\nblack: #000000,\nblue: #8DB4D2,\ngreen: #C1E1C1,\npurple: #B19CD9,\nsilver: #EEEEEF,\nwhite: #FFFFFF,\nbrown: #836953,\nlight-brown: #feb035,\ndark-turquoise: #23cddc,\norange: #FFB347,\ntan: #E9D1BF,\nviolet: #B490B0,\npink: #FFD1DC,\ngrey: #E0E0E0,\nsky: #96BDC6,\npale-leaf: #CCD4BF",
+    "filter_color1": "",
+    "share_facebook": true,
+    "social_twitter_link": "https:\/\/twitter.com\/home",
+    "social_facebook_link": "https:\/\/facebook.com\/",
+    "social_pinterest_link": "https:\/\/pinterest.com\/",
+    "social_instagram_link": "https:\/\/instagram.com\/",
+    "wishlist_page": "",
+    "product_compare_page": "",
+    "gm_api": "",
+    "instagram_token": "",
+    "custom_css": ".font-black {\n  font-weight: 900;\n}\n.sf__index-hero .sf-hero .sf-hero__title {\n  margin-bottom: 0px;\n}\n.sf__index-hero .sf-hero .sf-hero__text {\n  font-weight: 700;\n}\n.sf__btn {\n  font-weight: 700;\n  text-transform: uppercase;\n  border-radius: 0;\n}\n.sf__index-custom-content .section-my {\n  margin-top: 15px;\n}\n.section__heading {\n  text-transform: uppercase;\n}\nbody {\n  line-height: 28px !important;\n}\n.sf__footer-block-title {\n  text-transform: uppercase;\n}\n.sf__footer-bottom {\n  border-top: 1px solid #313131;\n}\n.sf__newsletter-section form .sf__newsletter-form-group input {\n  background: #efefef;\n  border: 0;\n  width: unset !important;\n  flex: 1 1 0%;\n}\n.sf__newsletter-section form button[type=\"submit\"] {\n  background: #000;\n  color: #fff;\n  border: 0;\n}\n.sf-nav li.sf-menu-item-parent a.block {\n  font-weight: 700;\n}\n.sf__label-hot {\n  padding: 5px 15px;\n  border-radius: 20px;\n  font-weight: 700;\n  text-transform: uppercase;\n  color: #fff;\n  background: #ec5d4c;\n}\n[data-section-type=\"featured-collection\"]:first-child .sf__pcard-name {\n  text-transform: uppercase;\n}\n[data-section-type=\"featured-collection\"]:first-child\n  .sf__pcard-price\n  .prod__price {\n  font-weight: bold;\n}\n@media (min-width: 1024px) {\n  .sf-hero__title {\n    font-size: 8.75rem;\n    line-height: 1.5;\n  }\n}\n.sf__newsletter-form-group {\n  border: none;\n}\n.newsletter-button {\n  padding: 0.5rem 1rem;\n  font-weight: bold;\n  font-size: 1rem;\n  line-height: 1.6;\n}\n.sf-footer__block-inner .sf__accordion-content .block-text {\n  color: var(--color-footer-link);\n}\n.sf-footer__block-inner .sf__accordion-content .block-text + p {\n  color: var(--color-footer-link);\n}",
+    "use_theme_currencies": true,
+    "theme_currencies": "USD | EUR | GBP | VND",
+    "sections": {
+      "header": {
+        "type": "header",
+        "blocks": {
+          "f097a3c6-0ae3-462e-bddd-eb539ef5df75": {
+            "type": "banner",
+            "settings": {
+              "heading": "Shop",
+              "container": "inherit",
+              "banner_style": "outside",
+              "banner_link": "",
+              "banner_title": "New collection",
+              "banner_desc": "",
+              "banner_button_text": "Shop now"
+            }
+          },
+          "8bd828a7-986d-492f-93e4-c2eca283053e": {
+            "type": "product-list",
+            "settings": {
+              "heading": "Product",
+              "container": "inherit",
+              "stretch_width": false,
+              "collection": "phone-case",
+              "limit": 6,
+              "columns": 2
+            }
+          },
+          "aae591c6-d50c-4a6f-b6cc-64ea1c5d9406": {
+            "type": "custom_html",
+            "settings": {
+              "heading": "Features",
+              "container": "inherit",
+              "html": ""
+            }
+          }
+        },
+        "block_order": [
+          "f097a3c6-0ae3-462e-bddd-eb539ef5df75",
+          "8bd828a7-986d-492f-93e4-c2eca283053e",
+          "aae591c6-d50c-4a6f-b6cc-64ea1c5d9406"
+        ],
+        "settings": {
+          "header_design": "logo-center-menu-left",
+          "container": "container-fluid",
+          "header_sticky": true,
+          "transparent_on_top": false,
+          "logo_text": "MINIMOG",
+          "logo_max_width": 35,
+          "sticky_logo_max_width": 105,
+          "mobile_logo_max_width": 35,
+          "main_menu": "main-menu",
+          "secondary_menu": "",
+          "uppercase_parent_level": true,
+          "search": "show_full",
+          "show_account_icon": true,
+          "show_cart_icon": true,
+          "show_wishlist_icon": true,
+          "show_compare_icon": false,
+          "show_currency_switcher": false,
+          "show_language_switcher": false
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "bcea1be2-50e8-4f05-b73e-498379df211d": {
+            "type": "custom_text",
+            "settings": {
+              "title": "",
+              "image_max": "30px",
+              "description": "<p>Super class, cute, comfortable. You<br\/> can wear them with just about<br\/> anything.<\/p>",
+              "width": "50%"
+            }
+          },
+          "16a412a9-f0e0-43ee-8393-d08cd1a646ea": {
+            "type": "our_store",
+            "settings": {
+              "title": "Company",
+              "description": "<p>184 Main Rd E, St Albans<br\/>VIC 3021, Australia<\/p>",
+              "show_email": true,
+              "show_phone": true,
+              "show_socials_link": false,
+              "width": "25%"
+            }
+          },
+          "7527ffa4-1a31-4e5c-b642-96aa834daf84": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "Information",
+              "width": "25%"
+            }
+          },
+          "c85629c7-7aae-4666-b5f0-150990439c91": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "Contact",
+              "width": "25%"
+            }
+          },
+          "c9cdcdcd-2bd6-494e-b18c-074d3dad7c8b": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "Services",
+              "width": "25%"
+            }
+          }
+        },
+        "block_order": [
+          "bcea1be2-50e8-4f05-b73e-498379df211d",
+          "16a412a9-f0e0-43ee-8393-d08cd1a646ea",
+          "7527ffa4-1a31-4e5c-b642-96aa834daf84",
+          "c85629c7-7aae-4666-b5f0-150990439c91",
+          "c9cdcdcd-2bd6-494e-b18c-074d3dad7c8b"
+        ],
+        "settings": {
+          "design": "footer-1",
+          "container": "container-fluid",
+          "bordered": false,
+          "copyright": "© Calzini 2021",
+          "show_currency_selector": false,
+          "show_language_selector": false,
+          "show_social_links": false,
+          "show_payment_icons": true
+        }
+      },
+      "annoucement": {
+        "type": "annoucement",
+        "settings": {
+          "show_announcement": true,
+          "homepage_only": true,
+          "show_close": true,
+          "message": "<p>🔥 Free shipping on all U.S orders $50+ 📦<\/p><p><\/p>",
+          "message_link": "",
+          "show_divider": false
+        }
+      },
+      "mobile-sticky-bar": {
+        "type": "mobile-sticky-bar",
+        "settings": {
+          "show_mobile_sticky": true,
+          "show_home_icon": true,
+          "show_collection_icon": true,
+          "show_cart_icon": true,
+          "show_search_icon": true,
+          "show_account_icon": false,
+          "show_wishlist_icon": false
+        }
+      }
+    }
+  },
+  "presets": {
+    "Default": {
+      "sections": {
+        "featured-collection": {
+          "type": "featured-collection",
+          "settings": {
+            "collection": "frontpage"
+          }
+        },
+        "featured-product": {
+          "type": "featured-product",
+          "settings": {
+          }
+        }
+      },
+      "content_for_index": [
+        "featured-collection",
+        "featured-product"
+      ]
+    }
+  }
+}
