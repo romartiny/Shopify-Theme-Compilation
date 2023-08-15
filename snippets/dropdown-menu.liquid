@@ -1,0 +1,34 @@
+<ul class="site-nav-dropdown">
+  {% for link_child_item in linklists[link_child].links %}
+  <li {% if linklists[link_child_item.handle] != empty %}class="dropdown"{% endif %}>
+    <a {% if linklists[link_child_item.handle] != empty %}class="menu__moblie"{% endif %} href="{{ link_child_item.url }}">
+      {% include 'multilang' with link_child_item.title %}
+      {% if linklists[link_child_item.handle] != empty and settings.show_dropdown_arrow %}<span class="icon-dropdown"></span>{% endif %}
+    </a>
+    {% if linklists[link_child_item.handle] != empty %}
+    <ul class="site-nav-dropdown">
+      {% for n in linklists[link_child_item.handle].links %}
+      <li {% if linklists[n.handle] != empty %}class="dropdown"{% endif %}>
+        <a {% if linklists[n.handle] != empty %}class="menu__moblie"{% endif %} href="{{ n.url }}">
+          {% include 'multilang' with n.title %}
+          {% if linklists[n.handle] != empty and settings.show_dropdown_arrow %}<span class="icon-dropdown"></span>{% endif %}
+        </a>
+        {% if linklists[n.handle] != empty %}
+        <ul class="site-nav-dropdown">
+          {% for i in linklists[n.handle].links %}
+          <li {% if linklists[i.handle] != empty %}class="dropdown"{% endif %}>
+            <a {% if linklists[i.handle] != empty %}class="menu__moblie"{% endif %} href="{{ i.url }}">
+              {% include 'multilang' with i.title %}
+              {% if linklists[i.handle] != empty and settings.show_dropdown_arrow %}<span class="icon-dropdown"></span>{% endif %}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+        {% endif%}
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>

@@ -1,0 +1,188 @@
+<header class="page-header">
+  {% if settings.enable_multilang %}
+  <h2 class="lang1">{{ page.title | split: '|' | first }}</h2>
+  <h2 class="lang2">{{ page.title | split: '|' | last }}</h2>
+  {% else %}
+  <h2>{{ page.title | split: '|' | first }}</h2>
+  {% endif %}
+</header>
+<section id="faqs" class="container">
+  <div class="des_faqs">
+    {% include 'multilang' with section.settings.des_faqs %}
+  </div>
+  <div class="panel-group " id="accordion">
+    {% for block in section.blocks %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a class="{% if forloop.first %}{%else%}collapsed{% endif %}" data-toggle="collapse" data-parent="#accordion" href="#faqs-{{block.id}}" >{% include 'multilang' with block.settings.question_faqs %}</a>
+        </h4>    
+      </div>
+      <div id="faqs-{{block.id}}" class="panel-collapse collapse {% if forloop.first %}in{% endif %}">
+        <div class="panel-body">
+          {% include 'multilang' with block.settings.answer_faqs %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "FAQS Page",
+    "settings": [
+  {
+   "type": "textarea",
+   "id" : "des_faqs",
+   "label" : "Description"
+  },
+  {
+    "type": "header",
+    "content": "Question"
+  },
+  {
+   "type" : "text",
+   "id" : "icon_faqs",
+   "label" : "Icon Faqs",
+   "default" : "Question"
+  },
+  {
+   "type" : "color",
+   "id" : "bg_icon_qs",
+   "label" : "Background Icon",
+   "default" : "#f02121"
+  },
+  {
+   "type" : "color",
+   "id" : "color_icon_qs",
+   "label" : "Icon Color",
+   "default" : "#fff"
+  },
+  {
+   "type" : "color",
+   "id" : "bg_question",
+   "label" : "Background Question",
+   "default" : "#eee"
+  },
+  {
+   "type" : "color",
+   "id" : "color_question",
+   "label" : "Color Question",
+   "default" : "#000"
+  },
+  {
+   "type" : "color",
+   "id" : "bg_question_acitve",
+   "label" : "Background Question Active",
+   "default" : "#141414"
+  },
+  {
+   "type" : "color",
+   "id" : "color_question_acitve",
+   "label" : "Color Question Active",
+   "default" : "#fff"
+  },
+  
+ {
+    "type": "header",
+    "content": "Answer"
+  },
+  {
+   "type" : "text",
+   "id" : "icon_answer",
+   "label" : "Icon Answer",
+   "default" : "Answer"
+  },
+  {
+   "type" : "color",
+   "id" : "bg_icon_answer",
+   "label" : "Color Answer",
+   "default" : "#00c4aa"
+  },
+     {
+   "type" : "color",
+   "id" : "color_icon_answer",
+   "label" : "Icon color",
+   "default" : "#fff"
+  },
+  {
+   "type" : "color",
+   "id" : "bg_question_answer",
+   "label" : "Background Answer"
+  },
+  {
+   "type" : "color",
+   "id" : "color_question_answer",
+   "label" : "Color Answer",
+   "default" : "#000"
+  },
+  {
+   "type" : "color",
+   "id" : "color_question_link",
+   "label" : "Color Link",
+   "default" : "#e66f65"
+  }
+  
+ ],
+ "blocks": [
+  {
+   "type" : "text",
+   "name" : "Question",
+   "settings":[
+    {
+     "type" : "textarea",
+     "id" : "question_faqs",
+     "label" : "Question"
+    },
+    {
+     "type" : "textarea",
+     "id" : "answer_faqs",
+     "label" : "Answer"
+    }
+   ]
+  }
+ ]
+  }
+{% endschema %}
+<style>
+ #faqs .panel-group{
+  font-weight: 400;
+  }
+.des_faqs {
+    max-width: 720px;
+    text-align: center;
+    margin: 0 auto;
+    font-weight: 400;
+    color: #000;
+}
+#faqs .panel-group .panel-title{
+      letter-spacing: 0.05em;
+  }
+#faqs .panel-title > a.collapsed{
+   background: {{section.settings.bg_question}};
+   color: {{section.settings.color_question}};
+
+}
+#faqs .panel-title > a{
+  background: {{section.settings.bg_question_acitve}};
+   color: {{section.settings.color_question_acitve}};
+}
+#faqs .panel-title:before{
+    content:"{{section.settings.icon_faqs}}";
+    background: {{section.settings.bg_icon_qs}};
+    color: {{section.settings.color_icon_qs}};
+}
+#faqs .panel-group .panel-body{
+   background: {{section.settings.bg_question_answer}};
+   color: {{section.settings.color_question_answer}};
+   
+}
+#faqs .panel-group .panel-body:before{
+    content:"{{section.settings.icon_answer}}";
+    background: {{section.settings.bg_icon_answer}};
+    color: {{section.settings.color_icon_answer}};
+}
+#faqs  .des_faqs a, #faqs .panel-group .panel-body a{
+    color: {{section.settings.color_question_link}};
+}
+</style>
