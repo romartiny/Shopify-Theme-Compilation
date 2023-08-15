@@ -1,0 +1,46 @@
+{%- liquid
+  case columns
+    when 2
+      assign testimonial_heading_type = 'fs-heading-2-large-l'
+      assign testimonial_content_type = 'fs-body-large-l'
+      assign desktop_max_width = text_max_width | minus: 10
+    when 3
+      assign testimonial_heading_type = 'fs-heading-2-base-l'
+      assign desktop_max_width = text_max_width | minus: 15
+    when 4
+      assign desktop_max_width = text_max_width | minus: 20
+  endcase
+-%}
+
+{% if heading != blank or testimonial != blank or author != blank %}
+  <blockquote class="testimonials__item">
+    {% unless heading == blank %}
+      <div class="testimonials__item-heading-wrapper ff-heading fs-heading-3-base {{ testimonial_heading_type }}">
+        <div class="testimonials__item-icon-wrapper">
+          <span class="testimonials__item-icon">&ensp;{% render 'icon' with icon: 'quote' %}</span>
+        </div>
+        <h4 class="testimonials__item-heading">
+          {{ heading }}
+        </h4>
+      </div>
+    {% endunless %}
+
+    {% unless testimonial == blank %}
+      <div
+        class="testimonials__item-testimonial ff-heading fs-body-small fs-body-base-ns {{ testimonial_content_type }}"
+        style="
+          --text-max-width: {{ text_max_width }}rem;
+          --text-max-width-desktop: {{ desktop_max_width }}rem;
+        "
+      >
+        {{ testimonial }}
+      </div>
+    {% endunless %}
+
+    {% unless author == blank %}
+      <cite class="testimonials__item-author fs-body-small fs-body-base-ns fs-body-italic">
+        &mdash;&ensp;<span>{{ author }}</span>
+      </cite>
+    {% endunless %}
+  </blockquote>
+{% endif %}
