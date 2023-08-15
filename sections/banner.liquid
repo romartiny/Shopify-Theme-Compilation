@@ -1,0 +1,63 @@
+<div class="video__hero page-width" {% if section.settings.image %}style="background-image: url({{ section.settings.image | img_url: '1500x' }})"{% endif %}>
+  <div class="video__hero__content">
+    <h4><span>{{ section.settings.title_upper }}</span> {{ section.settings.title_lower }}</h4>
+    {% if section.settings.button_url != blank %}
+      <a class="video__hero__btn" href="{{ section.settings.button_url }}">{{ section.settings.button_text }}</a>
+    {% endif %}
+  </div>
+  {% if section.settings.overlay %}
+    <div class="video__hero__overlay">
+      
+    </div>
+  {% endif %}
+  {% unless section.settings.image %}
+    <div class="placeholder-bg">
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-img' }}
+    </div>
+  {% endunless %}
+</div>
+
+{% schema %}
+  {
+    "name": "Banner",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "checkbox",
+        "id": "overlay",
+        "label": "Enable Overlay",
+        "info": "Leave this checked to make text more visible on lighter images."
+      },
+      {
+        "type": "text",
+        "id": "title_upper",
+        "label": "Banner Title Upper (optional)"
+      },
+      {
+        "type": "text",
+        "id": "title_lower",
+        "label": "Banner Title Lower (optional)"
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "CTA Button URL"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "CTA Button Text"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Banner",
+        "category": "Image"
+      }
+    ]
+  }
+{% endschema %}

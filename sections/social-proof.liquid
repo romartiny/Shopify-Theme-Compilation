@@ -1,0 +1,135 @@
+{% assign sales_pop_product = all_products[section.settings.product] %}
+{% if section.settings.enable_sales_pop and section.settings.product != blank %}
+  <div class="sales-pop">
+    <div class="sales-pop__box">
+      <a href="{{ sales_pop_product.url }}">
+        <div class="sales-pop__img" style="background-image: url({{ sales_pop_product.featured_image | img_url: '150x' }})">
+          
+        </div>
+      </a>
+      <div class="sales-pop__info">
+        <a href="{{ sales_pop_product.url }}">
+          <h5 class="sales-pop__title">
+            {% assign customer_location_message = section.settings.customer_location_message %}
+            {% if customer_location_message != blank and customer_location_message contains '*name*' and customer_location_message contains '*location*' %}
+              {% capture sales_pop_name %}
+                <span class="sales-pop__name"></span>
+              {% endcapture %}
+              
+              {% capture sales_pop_location %}
+                <span class="sales-pop__location"></span>
+              {% endcapture %}
+              
+              {% assign location_message = customer_location_message | replace: '*name*', sales_pop_name | replace: '*location*', sales_pop_location %}
+              
+              {{ location_message }}
+            {% else %}
+              <span class="sales-pop__name"></span> from <span class="sales-pop__location"></span>
+            {% endif %}
+          </h5>
+          {% assign purchased_message = section.settings.purchased_message %}
+          <p class="sales-pop__subtitle">
+            {%- if purchased_message != blank and purchased_message contains '*product*' -%}
+              {% assign purchased_message = purchased_message | replace: '*product*', sales_pop_product.title %}
+              {{ purchased_message }}
+            {%- else -%}
+              Purchased {{ sales_pop_product.title }}
+            {%- endif -%}
+            
+            {% assign time_message = section.settings.time_stamp_message %}
+            {%- if time_message != blank and time_message contains '*time*' -%}
+              {% capture time %}
+                <span class="sales-pop__timestamp"></span>
+              {% endcapture %}
+              {% assign time_message = time_message | replace: '*time*', time %}
+              
+              <span>{{ time_message }}</span>
+            {%- else -%}
+              <span><span class="sales-pop__timestamp"></span> ago</span>
+            {%- endif -%}
+          </p>
+        </a>
+      </div>
+      <span class="sales-pop__close">&#10005;</span>
+    </div>
+    <div class="sales-pop__data" data-names="{{ section.settings.names | strip }}" data-locations="{{ section.settings.locations | strip }}" data-timestamp="{{ section.settings.timestamp | strip }}" data-selection="{{ section.settings.value_selection }}"></div>
+  </div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Sales Pop",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_sales_pop",
+        "label": "Enable Sales Pop"
+      },
+      {
+        "type": "product",
+        "id": "product",
+        "label": "Product",
+        "info": "The product that will show as sold."
+      },
+      {
+        "type": "textarea",
+        "id": "locations",
+        "label": "Locations",
+        "default": "Miami, New York, Chicago, Los Angeles",
+        "info": "Seperate locations by comma. Example: Miami, New York, Chicago"
+      },
+      {
+        "type": "textarea",
+        "id": "names",
+        "label": "Names",
+        "default": "John, Jessica, Jerry, Jake",
+        "info": "Seperate names by comma. Example: Jerry, Johnny, Jill"
+      },
+      {
+        "type": "textarea",
+        "id": "timestamp",
+        "label": "Time Stamp",
+        "default": "1 hour, 2 hours, 30 minutes, 1 day",
+        "info": "Seperate time stamps by comma. Example: 1 day, 1 hour, 30s"
+      },
+      {
+        "type": "textarea",
+        "id": "customer_location_message",
+        "label": "Customer location message",
+        "default": "*name* from *location*",
+        "info": "*name* and *location* will be replaced with the content from Names and Location fields."
+      },
+      {
+        "type": "textarea",
+        "id": "purchased_message",
+        "label": "Purchased message",
+        "default": "Purchased *product*",
+        "info": "*product* will be replaced with the product title."
+      },
+      {
+        "type": "textarea",
+        "id": "time_stamp_message",
+        "label": "Time stamp message",
+        "default": "*time* ago",
+        "info": "*time* will be replaced with the time stamps from the Time Stamp field."
+      },
+      {
+        "type": "select",
+        "id": "value_selection",
+        "label": "Selection Type",
+        "options": [
+          {
+            "value": "random",
+            "label": "Randomize"
+          },
+          {
+            "value": "sequential",
+            "label": "Sequential"
+          }
+        ],
+        "default": "random",
+        "info": "Choosing 'Sequential' will show names, locations & time stamps in the order that you wrote."
+      }
+    ]
+  }
+{% endschema %}

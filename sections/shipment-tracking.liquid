@@ -1,0 +1,28 @@
+<div class="rte">
+  {{ section.settings.page_content }}
+</div>
+
+{% if section.settings.order_tracking_code != blank %}
+  <div class="track-order">
+    {{ section.settings.order_tracking_code }}
+  </div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Shipment Tracking",
+    "settings": [
+      {
+        "type": "richtext",
+        "id": "page_content",
+        "label": "Page Content"
+      },
+      {
+        "type": "html",
+        "id": "order_tracking_code",
+        "label": "Shipping Tracking Embeddable Code",
+        "info": "Place the embeddable code here for order tracking. Try using a free service such as [Aftership](https://www.aftership.com/apps/track-button)"
+      }
+    ]
+  }
+{% endschema %}

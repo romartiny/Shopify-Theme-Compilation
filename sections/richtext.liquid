@@ -1,0 +1,89 @@
+<div class="richtext{% if section.settings.borders %} richtext--borders{% endif %} rte page-width">
+  {% unless section.settings.pre_header == blank %}
+    <p class="pre-header align-{{ section.settings.title_align }}">{{ section.settings.pre_header }}</p>
+  {% endunless %}
+  {% unless section.settings.title == blank %}
+    <h4 class="align-{{ section.settings.title_align }}">{{ section.settings.title }}</h4>
+  {% endunless %}
+  <div class="rte align-{{ section.settings.text_align }}">
+    {{ section.settings.text | newline_to_br }}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Rich Text",
+    "settings": [
+      {
+        "type": "text",
+        "id": "pre_header",
+        "label": "Pre-title",
+        "default": "Pre-title",
+        "info": "Appears just above the title text"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Rich text title"
+      },
+      {
+        "type": "select",
+        "id": "title_align",
+        "label": "Title alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "center"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ullamcorper quam non felis finibus hendrerit. Pellentesque blandit quam ut metus euismod, ut dictum dolor venenatis. Nulla lacus quam, suscipit nec venenatis et, congue eu urna.</p>"
+      },
+      {
+        "type": "select",
+        "id": "text_align",
+        "label": "Text alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "center"
+      },
+      {
+        "type": "checkbox",
+        "id": "borders",
+        "label": "Show borders"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Rich Text",
+        "category": "Text"
+      }
+    ]
+  }
+{% endschema %}

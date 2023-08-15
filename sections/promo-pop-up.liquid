@@ -1,0 +1,249 @@
+{% if section.settings.enable_floating_promo %}
+  <div class="pop-up-trigger">
+    <button class="pop-up-trigger__trigger" type="button">{{ section.settings.floating_promo_button_text }}</button>
+    <button class="pop-up-trigger__close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <div class="pop-up-float">
+    <div class="page-width">
+
+      <div class="pop-up-float__opt-in">
+        {% form 'customer' %}
+          {% if form.posted_successfully? %}
+            <div class="pop-up-float__text pop-up-float__text--full-width">
+              <h4 class="pop-up-float__text__success">{{ section.settings.newsletter_success }}</h4>
+            </div>
+            <script type="text/javascript">
+              if (document.querySelector('.pop-up-float')) {
+                document.querySelector('.pop-up-float').classList.add('active');
+              }
+              else {
+                window.location.hash = '#footer';
+              }
+            </script>
+          {% else %}
+            <div class="pop-up-float__text">
+              <h4>{{ section.settings.pop_up_window_title | newline_to_br }}</h4>
+              <p>{{ section.settings.pop_up_window_subtitle | newline_to_br }}</p>
+            </div>
+            {{ form.errors | default_errors }}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <div class="newsletter--form">
+              <div class="input-group">
+                <input id="newsletter-input" type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="Email Address" name="contact[email]" id="Email" class="input-group-field newsletter__input" autocorrect="off" autocapitalize="off">
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn--primary newsletter__submit" name="commit" id="Subscribe">
+                  <span class="fas fa-envelope"></span>
+                  </button>
+                </span>
+              </div>
+            </div>
+          {% endif %}
+        {% endform %}
+      </div>
+      <button type="button" class="pop-up-float__close">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+{% endif %}
+
+{% if section.settings.enable_pop_up_window %}
+  <div class="pop-up-modal" data-delay="{{ section.settings.pop_up_window_delay }}">
+    <div class="pop-up-modal__content">
+      {% if section.settings.image %}
+        <img src="{{ section.settings.image | img_url: '600x' }}" alt="{{ section.settings.image.alt }}">
+      {% endif %}
+      <h2>{{ section.settings.pop_up_window_title | newline_to_br }}</h2>
+      <p>{{ section.settings.pop_up_window_subtitle | newline_to_br }}</p>
+      {% form 'customer' %}
+        {{ form.errors | default_errors }}
+        {% if form.posted_successfully? %}
+          <script type="text/javascript">
+            if (document.querySelector('.pop-up-float')) {
+              document.querySelector('.pop-up-float').classList.add('active');
+            }
+            else {
+              window.location.hash = '#footer';
+            }
+          </script>
+          <div class="newsletter--form">
+            <div class="note form-success"><span class="fas fa-envelope"></span> {{ section.settings.newsletter_success }}</div>
+          </div>
+        {% else %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="newsletter--form">
+            <div class="input-group">
+              <input id="newsletter-input" type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="Email Address" name="contact[email]" id="Email" class="input-group-field newsletter__input" autocorrect="off" autocapitalize="off">
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn--primary newsletter__submit" name="commit" id="Subscribe">
+                <span class="fas fa-envelope"></span>
+                </button>
+              </span>
+            </div>
+          </div>
+        {% endif %}
+      {% endform %}
+      <button class="pop-up-modal__close pop-up-modal__close--trigger">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="pop-up-modal__overlay pop-up-modal__close--trigger">
+    </div>
+  </div>
+{% endif %}
+
+{% assign floating_promo_pos = section.settings.floating_promo_pos %}
+
+{% style %}
+  .pop-up-modal__content {
+    background-color: {{ section.settings.pop_up_window_background }};
+    color: {{ section.settings.pop_up_window_text_color }};
+  }
+  
+  .pop-up-modal__close {
+    color: {{ section.settings.pop_up_window_text_color }};
+  }
+  
+  .pop-up-float {
+    background-color: {{ section.settings.floating_promo_background }};
+  }
+  
+  .pop-up-trigger .pop-up-trigger__trigger,
+  .pop-up-trigger__close {
+    background-color: {{ section.settings.floating_promo_background }};
+    color: {{ section.settings.floating_promo_text_color }};
+  }
+  
+  .pop-up-trigger__close,
+  .pop-up-float__text,
+  .pop-up-float__close {
+    color: {{ section.settings.floating_promo_text_color }};
+  }
+  
+  .pop-up-trigger {
+    {% case floating_promo_pos %}
+      {% when 'left' %}
+        left: 20px;
+      {% when 'right' %}
+        right: 20px;
+      {% when 'center' %}
+        right: 0;
+        left: 0;
+        justify-content: center;
+    {% endcase %}
+  }
+  
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "Promo Pop-Up",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_pop_up_window",
+        "label": "Enable Pop-up Window",
+        "info": "This is the main pop-up window that will great your customers upon first arrival to your store."
+      },
+      {
+        "type": "color",
+        "id": "pop_up_window_background",
+        "label": "Background Color",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "pop_up_window_text_color",
+        "label": "Text Color",
+        "default": "#000"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "textarea",
+        "id": "pop_up_window_title",
+        "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "pop_up_window_subtitle",
+        "label": "Subtitle"
+      },
+      {
+        "type": "range",
+        "id": "pop_up_window_delay",
+        "label": "Delay (seconds)",
+        "min": 0,
+        "max": 20,
+        "step": 1,
+        "unit": "s",
+        "default": 5
+      },
+      {
+        "type": "header",
+        "content": "Floating Promo Button"
+      },
+      {
+        "type": "paragraph",
+        "content": "This appears floating at the bottom of each page. Your customers can click on the button to active the floating pop-up. This gives your users a second chance at your promotion after the initial pop-up."
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_floating_promo",
+        "label": "Enable Floating Promo"
+      },
+      {
+        "type": "color",
+        "id": "floating_promo_background",
+        "label": "Background Color",
+        "default": "#000"
+      },
+      {
+        "type": "color",
+        "id": "floating_promo_text_color",
+        "label": "Text Color",
+        "default": "#fff"
+      },
+      {
+        "type": "select",
+        "id": "floating_promo_pos",
+        "label": "Floating Promo Position",
+        "options": [
+          {
+            "value": "left",
+            "label": "Bottom Left"
+          },
+          {
+            "value": "center",
+            "label": "Bottom Center"
+          },
+          {
+            "value": "right",
+            "label": "Bottom Right"
+          }
+        ],
+        "default": "right"
+      },
+      {
+        "type": "text",
+        "id": "floating_promo_button_text",
+        "label": "Button Text",
+        "default": "Get XX% off",
+        "info": "We recommend to keep this very short."
+      },
+      {
+        "type": "textarea",
+        "id": "newsletter_success",
+        "label": "Newsletter Success Message",
+        "default": "Thanks for signing up!"
+      }
+    ]
+  }
+
+{% endschema %}

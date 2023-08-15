@@ -1,0 +1,345 @@
+{% for block in section.blocks %}
+  
+  {% case block.type %}
+    {% when 'image-with-text' %}
+      <div class="side-content{% if block.settings.image_align_left %} side-content--reverse{% endif %}">
+        <div class="page-width">
+          <div class="side-content__text">
+            {% if block.settings.pre_header != blank %}
+              <p class="pre-header">{{ block.settings.pre_header }} <span>{{ block.settings.pre_header_highlight }}</span></p>
+            {% endif %}
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.content | newline_to_br }}</p>
+            {% if block.settings.button_url != blank and block.settings.button_text != blank %}
+              <a href="{{ block.settings.button_url }}" class="btn">{{ block.settings.button_text }}</a>
+            {% endif %}
+          </div>
+          <div class="side-content__media">
+            {% if block.settings.image %}
+              <img src="{{ block.settings.image | img_url: '600x' }}" alt="{{ block.settings.image.alt }}">
+            {% else %}
+              {{ 'product-1' | placeholder_svg_tag: 'placeholder-img' }}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% when 'banner' %}
+      <div class="video__hero page-width" {% if block.settings.image %}style="background-image: url({{ block.settings.image | img_url: '1500x' }})"{% endif %}>
+        <div class="video__hero__content">
+          <h4><span>{{ block.settings.title_upper }}</span> {{ block.settings.title_lower }}</h4>
+          {% if block.settings.button_url != blank %}
+            <a class="video__hero__btn" href="{{ block.settings.button_url }}">{{ block.settings.button_text }}</a>
+          {% endif %}
+        </div>
+        {% if block.settings.overlay %}
+          <div class="video__hero__overlay">
+            
+          </div>
+        {% endif %}
+        {% unless block.settings.image %}
+          <div class="placeholder-bg">
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-img' }}
+          </div>
+        {% endunless %}
+      </div>
+    {% when 'banner-with-video' %}
+      <div class="video__hero page-width" {% if block.settings.image %}style="background-image: url({{ block.settings.image | img_url: '1500x' }})"{% endif %}>
+        <div class="video__hero__content">
+          <h4><span>{{ block.settings.title_upper }}</span> {{ block.settings.title_lower }}</h4>
+          {% if block.settings.youtube_url != blank %}
+            <button class="js-open-video video__hero__btn" type="button" data-video-url="{{ block.settings.youtube_url.id }}"><span class="fas fa-play"></span> {{ block.settings.button_text }}</button>
+          {% endif %}
+        </div>
+        {% if block.settings.overlay %}
+          <div class="video__hero__overlay">
+            
+          </div>
+        {% endif %}
+        {% unless block.settings.image %}
+          <div class="placeholder-bg">
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-img' }}
+          </div>
+        {% endunless %}
+      </div>
+
+      <div class="video__modal">
+        <div class="video__modal__content">
+          <iframe width="560" height="315" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <button type="button" class="video__modal__close js-close-video" aria-label="Close modal"> <span class="fas fa-times"></span> </button>
+        </div>
+      </div>
+    {% when 'icon-bar' %}
+      {% assign num_of_icons = 4 %}
+      <div class="icon-bar">
+        <div class="page-width">
+          {% for i in (1..num_of_icons) %}
+            {% capture icon_key %}icon_{{ i }}{% endcapture %}
+            {% capture label_key %}title_{{ i }}{% endcapture %}
+            
+            {% assign icon = block.settings[icon_key] | downcase %}
+            {% assign label = block.settings[label_key] %}
+            
+            {% if icon != blank %}
+              <div class="icon-bar__column">
+                <p>
+                  <span class="icon-bar__icon fas fa-{{ icon }}"></span>
+                  <span class="icon-bar__text">{{ label }}</span>
+                </p>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% when 'title-with-features' %}
+      {% assign num_of_features = 3 %}
+      <div class="why-us">
+        <h4>{{ block.settings.title }}</h4>
+        <div class="why-us__text page-width">
+          {% for i in (1..num_of_features) %}
+            {% capture title_key %}feature_title_{{ i }}{% endcapture %}
+            {% capture text_key %}feature_text_{{ i }}{% endcapture %}
+            
+            {% assign title = block.settings[title_key] %}
+            {% assign text = block.settings[text_key] %}
+            {% if title != blank or text != blank %}
+              <div class="why-us__text-block">
+                <h5>{{ title }}</h5>
+                <p>{{ text }}</p>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% when 'featured-collection' %}
+      {%- assign collection = collections[block.settings.collection] -%}
+      
+      <div class="featured-collection page-width">
+        {% if block.settings.title != blank %}
+          <h2 class="collection__title">{{ block.settings.title | escape }}</h2>
+        {% endif %}
+        
+        {% if collection != empty %}
+          <div class="collection-grid">
+            {% for product in collection.products limit: 6 %}
+              {% include 'collection-item-block' %}
+            {% endfor %}
+          </div>
+        {% else %}
+          <h4 style="text-align: center; margin: 60px auto;">Select featured collection in customizer.</h4>
+        {% endif %}
+      </div>
+    {% when 'hero' %}
+    
+      {% assign slide_limit = 3 %}
+    
+      {% style %}
+        #hero-{{ block.id }}.hero-slider {
+          height: {{ block.settings.height }};
+        }
+      {% endstyle %}
+
+      <div id="hero-{{ block.id }}" class="hero-slider" data-section-id="{{ block.id }}"
+          data-dots="{{ block.settings.dots }}"
+          data-arrows="{{ block.settings.arrows }}"
+          data-autoplay="{{ block.settings.autoplay }}"
+          data-duration="{{ block.settings.duration | times: 1000 }}">
+        
+        {% for i in (1..slide_limit) %}
+          
+          {% capture title_key %}title_{{ i }}{% endcapture %}
+          {% capture text_key %}text_{{ i }}{% endcapture %}
+          {% capture text_align_mobile_key %}text_align_mobile_{{ i }}{% endcapture %}
+          {% capture text_align_desktop_key %}text_align_desktop_{{ i }}{% endcapture %}
+          {% capture button_url_key %}button_url_{{ i }}{% endcapture %}
+          {% capture button_text_key %}button_text_{{ i }}{% endcapture %}
+          {% capture overlay_key %}overlay_{{ i }}{% endcapture %}
+          {% capture image_key %}image_{{ i }}{% endcapture %}
+          {% capture content_align_mobile_key %}content_align_mobile_{{ i }}{% endcapture %}
+          {% capture content_align_desktop_key %}content_align_desktop_{{ i }}{% endcapture %}
+          {% capture image_mobile_key %}image_mobile_{{ i }}{% endcapture %}
+          {% capture button_color_key %}button_color_{{ i }}{% endcapture %}
+          {% capture text_color_key %}text_color_{{ i }}{% endcapture %}
+          {% capture button_text_color_key %}button_text_color_{{ i }}{% endcapture %}
+          {% capture enable_slide_link_key %}enable_slide_link_{{ i }}{% endcapture %}
+          {% capture slide_link_key %}slide_link_{{ i }}{% endcapture %}
+          
+          {% if block.settings[image_key] %}
+          
+            <div class="hero__slide hero__slide--{{ i }}">
+              <div class="slide__content">
+                <h1>{{ block.settings[title_key] | newline_to_br }}</h1>
+                <p>{{ block.settings[text_key] | newline_to_br }}</p>
+                {% if block.settings[button_url_key] != blank and block.settings[button_text_key] != blank %}
+                  <a class="btn" href="{{ block.settings[button_url_key] }}">{{ block.settings[button_text_key] }}</a>
+                {% endif %}
+              </div>
+              {% if block.settings[overlay_key] %}
+                <div class="slide__overlay">
+                  
+                </div>
+              {% endif %}
+              {% unless block.settings[image_key] %}
+                <div class="placeholder-bg">
+                  {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-img' }}
+                </div>
+              {% endunless %}
+              
+              {% if block.settings[enable_slide_link_key] and block.settings[slide_link_key] != blank %}
+                <a class="hero__slide__url" href="{{ block.settings[slide_link_key] }}" aria-label="{{ block.settings[slide_link_key] }}"></a>
+              {% endif %}
+              
+              {% assign x_position_mobile = '' %}
+              {% assign y_position_mobile = '' %}
+              {% assign x_position_desktop = '' %}
+              {% assign y_position_desktop = '' %}
+              
+              {% case block.settings[content_align_mobile_key] %}
+                {% when 'top' %}
+                  {% assign y_position_mobile = "center" %} 
+                  {% assign x_position_mobile = "flex-start" %} 
+                {% when 'middle' %}
+                  {% assign y_position_mobile = "center" %} 
+                  {% assign x_position_mobile = "center" %} 
+                {% when 'bottom' %}
+                  {% assign y_position_mobile = "center" %}
+                  {% assign x_position_mobile = "flex-end" %} 
+                {% else %}
+                  {% assign y_position_mobile = "center" %} 
+                  {% assign x_position_mobile = "center" %} 
+              {% endcase %}
+              
+              {% case block.settings[content_align_desktop_key] %}
+                {% when 'top-left' %}
+                  {% assign y_position_desktop = "flex-start" %} 
+                  {% assign x_position_desktop = "flex-start" %} 
+                {% when 'center-left' %}
+                  {% assign y_position_desktop = "center" %} 
+                  {% assign x_position_desktop = "flex-start" %} 
+                {% when 'bottom-left' %}
+                  {% assign y_position_desktop = "flex-end" %}
+                  {% assign x_position_desktop = "flex-start" %} 
+                {% when 'top-right' %}
+                  {% assign y_position_desktop = "flex-start" %} 
+                  {% assign x_position_desktop = "flex-end" %}
+                {% when 'center-right' %}
+                  {% assign y_position_desktop = "center" %} 
+                  {% assign x_position_desktop = "flex-end" %} 
+                {% when 'bottom-right' %}
+                  {% assign y_position_desktop = "flex-end" %}
+                  {% assign x_position_desktop = "flex-end" %} 
+                {% when 'center-middle' %}
+                  {% assign y_position_desktop = "center" %}
+                  {% assign x_position_desktop = "center" %} 
+                {% else %}
+                  {% assign y_position_desktop = "center" %} 
+                  {% assign x_position_desktop = "center" %} 
+              {% endcase %}
+              
+              {% style %}
+
+                .hero__slide--{{ i }} {
+                  justify-content: {{ y_position_mobile }};
+                  align-items: {{ x_position_mobile }};
+                  
+                  {% if block.settings[image_mobile_key] %}
+                    background: url({{ block.settings[image_mobile_key] | img_url: '750x' }}) center center no-repeat; background-size: cover;
+                  {% elsif block.settings[image_key] %}
+                    background: url({{ block.settings[image_key] | img_url: '2000x' }}) center center no-repeat; background-size: cover;
+                  {% endif %}
+                }
+                
+                .hero__slide--{{ i }} .slide__content {
+                  text-align: {{ block.settings[text_align_mobile_key] }};
+                }
+                
+                .hero__slide--{{ i }} .slide__content h1,
+                .hero__slide--{{ i }} .slide__content p {
+                  color: {{ block.settings[text_color_key] }};
+                }
+                
+                .hero__slide--{{ i }} .slide__content .btn {
+                  background-color: {{ block.settings[button_color_key] }};
+                  color: {{ block.settings[button_text_color_key] }};
+                }
+                
+                @media screen and (min-width: 900px) {
+                  
+                  .hero__slide--{{ i }} {
+                    justify-content: {{ x_position_desktop }};
+                    align-items: {{ y_position_desktop }};
+                  }
+                  
+                  {% if block.settings[image_key] %}
+                    .hero__slide--{{ i }} {
+                      background: url({{ block.settings[image_key] | img_url: '2000x' }}) center center no-repeat; background-size: cover;
+                    }
+                  {% endif %}
+                  
+                  .hero__slide--{{ i }} .slide__content {
+                    text-align: {{ block.settings[text_align_desktop_key] }};
+                  }
+                }
+
+              {% endstyle %}
+            </div>
+          {% endif %}
+        {% endfor %}
+        
+      </div>
+    
+    {% when 'gradient-cta' %}
+    
+      <style media="screen">
+        #block-{{ block.id }} {
+          background: {{ block.settings.color_right }};
+          background: -webkit-linear-gradient(to right, {{ block.settings.color_left }}, {{ block.settings.color_right }});
+          background: linear-gradient(to right, {{ block.settings.color_left }}, {{ block.settings.color_right }});
+        }
+        
+        #block-{{ block.id }} h3 {
+          color: {{ block.settings.text_color }};
+        }
+        
+        #block-{{ block.id }}.cta-gradient a.btn {
+          color: {{ block.settings.color_right }};
+          background: {{ block.settings.text_color }};
+          border: 2px solid {{ block.settings.text_color }};
+        }
+        
+        #block-{{ block.id }} h3 span {
+          color: transparent;
+          -webkit-text-stroke-color: {{ block.settings.text_color }};
+        }
+      </style>
+
+      <div id="block-{{ block.id }}" class="cta-gradient">
+        <div class="cta-gradient__content page-width">
+          <h3>{{ block.settings.title }} <span>{{ block.settings.title_outline }}</span></h3>
+          {% if block.settings.button_text != blank %}
+            <a href="{{ block.settings.button_url | default: '#' }}" class="btn">{{ block.settings.button_text }}</a>
+          {% endif %}
+        </div>
+      </div>
+    
+    {% when 'richtext' %}
+      <div class="richtext rte page-width {% if block.settings.center_text %}richtext--center{% endif %} {% if block.settings.show_borders == false %}richtext--no-borders{% endif %}">
+        {% unless block.settings.title == blank %}
+          <h4>{{ block.settings.title }}</h4>
+        {% endunless %}
+        <div class="rte">
+          {{ block.settings.text | newline_to_br }}
+        </div>
+      </div>
+
+
+  {% endcase %}
+  
+{% endfor %}
+
+{% if section.settings.page_top_spacing %}
+  <style media="screen">
+    .template-page {
+      padding-top: 50px;
+    }
+  </style>
+{% endif %}

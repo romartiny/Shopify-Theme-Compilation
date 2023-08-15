@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-form"
+    },
+    "product-overview": {
+      "type": "product-overview"
+    }
+  },
+  "order": [
+    "main",
+    "product-overview"
+  ]
+}

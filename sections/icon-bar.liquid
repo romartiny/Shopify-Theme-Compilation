@@ -1,0 +1,85 @@
+<div class="icon-bar">
+  <div class="page-width">
+    {% for block in section.blocks %}
+      {% assign icon = block.settings.icon %}
+      {% assign label = block.settings.title %}
+      
+      {% if icon != blank %}
+        <div class="icon-bar__column">
+          <p>
+            <span class="icon-bar__icon fas fa-{{ icon }}"></span>
+            <span class="icon-bar__text">{{ label }}</span>
+          </p>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Icon Bar",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Use [FontAwesome](https://fontawesome.com/icons?d=gallery&s=solid&m=free) for icon names below."
+      }
+    ],
+    "blocks": [
+      {
+        "type": "icon",
+        "name": "Icon",
+        "limit": 4,
+        "settings": [
+          {
+            "type": "text",
+            "id": "icon",
+            "label": "Icon",
+            "info": "Enter the name of a free solid icon from [FontAwesome](https://fontawesome.com/icons?d=gallery&s=solid&m=free)"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Icon Label"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Icon Bar",
+        "category": "Icon",
+        "blocks": [
+          {
+            "type": "icon",
+            "settings": {
+              "icon": "trophy",
+              "title": "Lorem ipsum."
+            }
+          },
+          {
+            "type": "icon",
+            "settings": {
+              "icon": "truck",
+              "title": "Lorem ipsum."
+            }
+          },
+          {
+            "type": "icon",
+            "settings": {
+              "icon": "leaf",
+              "title": "Lorem ipsum."
+            }
+          },
+          {
+            "type": "icon",
+            "settings": {
+              "icon": "battery-full",
+              "title": "Lorem ipsum."
+            }
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

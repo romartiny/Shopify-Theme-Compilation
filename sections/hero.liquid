@@ -1,0 +1,410 @@
+{% style %}
+  #hero-{{ section.id }}.hero-slider {
+    height: {{ section.settings.height }};
+  }
+{% endstyle %}
+
+<div id="hero-{{ section.id }}" class="hero-slider" data-section-id="{{ section.id }}"
+    data-dots="{{ section.settings.dots }}"
+    data-arrows="{{ section.settings.arrows }}"
+    data-autoplay="{{ section.settings.autoplay }}"
+    data-duration="{{ section.settings.duration | times: 1000 }}">
+  {% for block in section.blocks %}
+    <div class="hero__slide hero__slide--{{ block.id }}">
+      <div class="slide__content">
+        {% if block.settings.pre_header != blank %}
+          <p class="pre-header">{{ block.settings.pre_header }}</p>
+        {% endif %}
+        <h1>{{ block.settings.title | newline_to_br }}</h1>
+        <p>{{ block.settings.text | newline_to_br }}</p>
+        {% if block.settings.button_url != blank and block.settings.button_text != blank %}
+          <a class="btn" href="{{ block.settings.button_url }}">{{ block.settings.button_text }}</a>
+        {% endif %}
+      </div>
+      {% if block.settings.overlay %}
+        <div class="slide__overlay">
+          
+        </div>
+      {% endif %}
+      {% unless block.settings.image %}
+        <div class="placeholder-bg">
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-img' }}
+        </div>
+      {% endunless %}
+      
+      {% if block.settings.enable_slide_link and block.settings.slide_link != blank %}
+        <a class="hero__slide__url" href="{{ block.settings.slide_link }}" aria-label="{{ block.settings.slide_link }}"></a>
+      {% endif %}
+      
+      {% assign x_position_mobile = '' %}
+      {% assign y_position_mobile = '' %}
+      {% assign x_position_desktop = '' %}
+      {% assign y_position_desktop = '' %}
+      
+      {% case block.settings.content_align_mobile %}
+        {% when 'top' %}
+          {% assign y_position_mobile = "center" %} 
+          {% assign x_position_mobile = "flex-start" %} 
+        {% when 'middle' %}
+          {% assign y_position_mobile = "center" %} 
+          {% assign x_position_mobile = "center" %} 
+        {% when 'bottom' %}
+          {% assign y_position_mobile = "center" %}
+          {% assign x_position_mobile = "flex-end" %} 
+        {% else %}
+          {% assign y_position_mobile = "center" %} 
+          {% assign x_position_mobile = "center" %} 
+      {% endcase %}
+      
+      {% case block.settings.content_align_desktop %}
+        {% when 'top-left' %}
+          {% assign y_position_desktop = "flex-start" %} 
+          {% assign x_position_desktop = "flex-start" %} 
+        {% when 'center-left' %}
+          {% assign y_position_desktop = "center" %} 
+          {% assign x_position_desktop = "flex-start" %} 
+        {% when 'bottom-left' %}
+          {% assign y_position_desktop = "flex-end" %}
+          {% assign x_position_desktop = "flex-start" %} 
+        {% when 'top-right' %}
+          {% assign y_position_desktop = "flex-start" %} 
+          {% assign x_position_desktop = "flex-end" %}
+        {% when 'center-right' %}
+          {% assign y_position_desktop = "center" %} 
+          {% assign x_position_desktop = "flex-end" %} 
+        {% when 'bottom-right' %}
+          {% assign y_position_desktop = "flex-end" %}
+          {% assign x_position_desktop = "flex-end" %} 
+        {% when 'center-middle' %}
+          {% assign y_position_desktop = "center" %}
+          {% assign x_position_desktop = "center" %} 
+        {% else %}
+          {% assign y_position_desktop = "center" %} 
+          {% assign x_position_desktop = "center" %} 
+      {% endcase %}
+      
+      {% style %}
+
+        .hero__slide--{{ block.id }} {
+          justify-content: {{ y_position_mobile }};
+          align-items: {{ x_position_mobile }};
+          
+          {% if block.settings.image_mobile %}
+            background: url({{ block.settings.image_mobile | img_url: '750x' }}) center center no-repeat; background-size: cover;
+          {% elsif block.settings.image %}
+            background: url({{ block.settings.image | img_url: '2000x' }}) center center no-repeat; background-size: cover;
+          {% endif %}
+        }
+        
+        .hero__slide--{{ block.id }} .slide__content {
+          text-align: {{ block.settings.text_align_mobile }};
+        }
+        
+        .hero__slide--{{ block.id }} .slide__content h1,
+        .hero__slide--{{ block.id }} .slide__content p {
+          color: {{ block.settings.text_color }};
+        }
+        
+        .hero__slide--{{ block.id }} .slide__content .btn {
+          background-color: {{ block.settings.button_color }};
+          color: {{ block.settings.button_text_color }};
+        }
+        
+        @media screen and (min-width: 900px) {
+          
+          .hero__slide--{{ block.id }} {
+            justify-content: {{ x_position_desktop }};
+            align-items: {{ y_position_desktop }};
+          }
+          
+          {% if block.settings.image %}
+            .hero__slide--{{ block.id }} {
+              background: url({{ block.settings.image | img_url: '2000x' }}) center center no-repeat; background-size: cover;
+            }
+          {% endif %}
+          
+          .hero__slide--{{ block.id }} .slide__content {
+            text-align: {{ block.settings.text_align_desktop }};
+          }
+        }
+
+      {% endstyle %}
+    </div>
+  {% endfor %}
+</div>
+
+{% schema %}
+  {
+    "name": "Hero",
+    "max_blocks": 12,
+    "settings": [
+      {
+        "type": "select",
+        "id": "height",
+        "label": "Hero Height",
+        "default": "70vh",
+        "options": [
+          {
+            "label": "Small",
+            "value": "50vh"
+          },
+          {
+            "label": "Medium",
+            "value": "70vh"
+          },
+          {
+            "label": "Large",
+            "value": "90vh"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Slideshow Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "dots",
+        "label": "Show Navigation Dots",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "arrows",
+        "label": "Show Arrows",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "Enable Autoplay",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "duration",
+        "label": "Slide Duration",
+        "min": 2,
+        "max": 10,
+        "step": 1,
+        "default": 4
+      }
+    ],
+    "blocks": [
+      {
+        "type": "slide",
+        "name": "Slide",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Image Mobile [Optional]"
+          },
+          {
+            "type": "checkbox",
+            "id": "overlay",
+            "label": "Enable Overlay",
+            "default": true,
+            "info": "Leave this checked to make text more visible on lighter images."
+          },
+          {
+            "type": "select",
+            "id": "content_align_desktop",
+            "label": "Content Align [Desktop]",
+            "default": "center-middle",
+            "options": [
+              {
+                "label": "↖ Top Left",
+                "value": "top-left"
+              },
+              {
+                "label": "← Center Left",
+                "value": "center-left"
+              },
+              {
+                "label": "↙ Bottom Left",
+                "value": "bottom-left"
+              },
+              {
+                "label": "↗ Top Right",
+                "value": "top-right"
+              },
+              {
+                "label": "→ Center Right",
+                "value": "center-right"
+              },
+              {
+                "label": "↘ Bottom Right",
+                "value": "bottom-right"
+              },
+              {
+                "value": "center-middle",
+                "label": "Center Middle"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "text_align_desktop",
+            "label": "Text Align [Desktop]",
+            "default": "center",
+            "options": [
+              {
+                "label": "Left",
+                "value": "left"
+              },
+              {
+                "label": "Center",
+                "value": "center"
+              },
+              {
+                "label": "Right",
+                "value": "right"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "content_align_mobile",
+            "label": "Content Align [Mobile]",
+            "default": "middle",
+            "options": [
+              {
+                "label": "↑ Top",
+                "value": "top"
+              },
+              {
+                "label": "Middle",
+                "value": "middle"
+              },
+              {
+                "label": "↓ Bottom",
+                "value": "bottom"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "text_align_mobile",
+            "label": "Text Align [Mobile]",
+            "default": "center",
+            "options": [
+              {
+                "label": "Left",
+                "value": "left"
+              },
+              {
+                "label": "Center",
+                "value": "center"
+              },
+              {
+                "label": "Right",
+                "value": "right"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "id": "pre_header",
+            "label": "Pre-title",
+            "info": "Appears just above the title text"
+          },
+          {
+            "type": "textarea",
+            "id": "title",
+            "label": "Heading",
+            "default": "Why, hello."
+          },
+          {
+            "type": "textarea",
+            "id": "text",
+            "label": "Text",
+            "default": "Use this text area to give a brief yet powerful introduction to your amazing product."
+          },
+          {
+            "type": "url",
+            "id": "button_url",
+            "label": "Button URL"
+          },
+          {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text"
+          },
+          {
+            "type": "header",
+            "content": "Slide Links"
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_slide_link",
+            "label": "Enable slide URL",
+            "info": "This allows the entire slide to be clickable and link to a URL"
+          },
+          {
+            "type": "url",
+            "id": "slide_link",
+            "label": "Slide URL",
+            "info": "Requires slide to be clickable"
+          },
+          {
+            "type": "header",
+            "content": "Slide Colors"
+          },
+          {
+            "type": "color",
+            "id": "text_color",
+            "label": "Text",
+            "default": "#fff"
+          },
+          {
+            "type": "color",
+            "id": "button_color",
+            "label": "Button",
+            "default": "#fff"
+          },
+          {
+            "type": "color",
+            "id": "button_text_color",
+            "label": "Button Text",
+            "default": "#000"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Hero",
+        "category": "Hero",
+        "blocks": [
+          {
+            "type": "slide",
+            "settings": {
+              "overlay": true,
+              "title": "Hero slide."
+            }
+          },
+          {
+            "type": "slide",
+            "settings": {
+              "overlay": true,
+              "title": "Hero slide."
+            }
+          },
+          {
+            "type": "slide",
+            "settings": {
+              "overlay": true,
+              "title": "Hero slide."
+            }
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

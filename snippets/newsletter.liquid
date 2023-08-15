@@ -1,0 +1,38 @@
+{% form 'customer' %}
+  {{ form.errors | default_errors }}
+  {% if form.posted_successfully? %}
+    <script type="text/javascript">
+      if (document.querySelector('.pop-up-float')) {
+        document.querySelector('.pop-up-float').classList.add('active');
+      }
+      else {
+        window.location.hash = '#footer';
+      }
+    </script>
+    <div class="newsletter--form">
+      <div class="note form-success"><span class="fas fa-envelope"></span> {{ section.settings.newsletter_success }}</div>
+    </div>
+  {% else %}
+    <input type="hidden" name="contact[tags]" value="newsletter">
+    <div class="newsletter--form">
+      {% if section.settings.newsletter_title != blank %}
+        <div class="input-group">
+          <h5 class="footer__menu-title">{{ section.settings.newsletter_title }}</h5>
+        </div>
+      {% endif %}
+      <div class="input-group">
+        <input id="newsletter-input" type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter.email_label' | t }}" name="contact[email]" id="Email" class="input-group-field newsletter__input" autocorrect="off" autocapitalize="off">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn--primary newsletter__submit" name="commit" id="Subscribe">
+          <span class="fas fa-envelope"></span>
+          </button>
+        </span>
+      </div>
+      {% if section.settings.newsletter_text != blank %}
+        <div class="input-group">
+          <p>{{ section.settings.newsletter_text }}</p>
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endform %}

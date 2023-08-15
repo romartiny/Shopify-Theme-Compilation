@@ -1,0 +1,65 @@
+{%- assign collection = collections[section.settings.collection] -%}
+
+<div class="featured-collection page-width">
+  {% if section.settings.title != blank %}
+    <h2 class="collection__title">{{ section.settings.title | escape }}</h2>
+  {% endif %}
+  
+  {% if collection != empty %}
+    <div class="collection-grid">
+      {% for product in collection.products limit: 6 %}
+        {% include 'collection-item' %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <h4 style="text-align: center; margin: 60px auto;">Select featured collection in customizer.</h4>
+  {% endif %}
+</div>
+
+{% schema %}
+  {
+    "name": "Featured collection",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Featured Collection"
+      },
+      {
+        "id": "collection",
+        "type": "collection",
+        "label": "Collection"
+      },
+      {
+        "type": "select",
+        "id": "grid_type",
+        "label": "Collection Grid Style",
+        "options": [
+          {
+            "label": "Text On Image (2 per row)",
+            "value": "text_overlay" 
+          },
+          {
+            "label": "Image Above Text",
+            "value": "image_above_text" 
+          }
+        ],
+        "default": "image_above_text"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_prices",
+        "label": "Show product prices",
+        "default": true
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured collection",
+        "category": "Collection"
+      }
+    ]
+  }
+
+{% endschema %}

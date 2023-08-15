@@ -1,0 +1,51 @@
+<aside class="mini-cart{% if template contains 'cart' %} mini-cart--cart-page{% endif %}" data-mini-cart {% if template contains 'cart' %} data-cart-page{% endif %}>
+	<header class="mini-cart__header">
+		<h3 class="mini-cart__header__title">{{ 'cart.general.title' | t }}</h3>
+		<span class="mini-cart__close fas fa-times" data-toggle-bag></span>
+	</header>
+	<div class="cart__body">
+		<div class="cart__items{% if section.settings.cart_notes_enable %} cart__items--small{% endif %}" data-mini-cart-items>
+			{% include 'cart-items' %}
+		</div>
+		{% if section.settings.cart_notes_enable %}
+			<div class="mini-cart__notes">
+				<label for="CartSpecialInstructions" class="cart__section-title">{{ 'cart.general.note' | t }}</label>
+				<textarea name="note" id="CartSpecialInstructions" class="js-cart-note">{{ cart.note }}</textarea>
+			</div>
+		{% endif %}
+	</div>
+	<div class="mini-cart__footer">
+		<div class="mini-cart__actions">
+			<a href="/checkout" class="btn mini-cart__checkout" data-checkout>
+				<span>{{ 'cart.general.checkout' | t }} &#8212; </span>
+				<span class="mini-cart__subtotal__price" data-cart-total><span class="money">{{ cart.total_price | money_without_trailing_zeros }}</span></span>
+			</a>
+		</div>
+	</div>
+</aside>
+{% unless template contains 'cart' %}
+	<div class="mini-cart__backdrop"></div>
+{% endunless %}
+
+
+{% schema %}
+  {
+    "name": "Cart",
+    "settings": [
+			{
+				"type": "checkbox",
+				"id": "cart_notes_enable",
+				"label": "Enable cart notes",
+				"default": false
+			},
+			{
+				"type": "header",
+				"content": "Looking for cart promotions?"
+			},
+			{
+				"type": "paragraph",
+				"content": "You can find cart promotion features by clicking the back arrow and then visiting Theme settings -> Cart Promotions."
+			}
+    ]
+  }
+{% endschema %}

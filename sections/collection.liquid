@@ -1,0 +1,58 @@
+{% paginate collection.products by 12 %}
+  <header class="collection-header{% if collection.image %} collection-header--banner{% endif %}" {% if collection.image %}style="background-image: url({{ collection.image | img_url: '2000x' }}); background-size: cover; background-repeat: no-repeat; background-position: center center;"{% endif %} role="banner">
+    <h1>{{ collection.title }}</h1>
+    {% if collection.image %}
+      <div class="collection-header__overlay">
+        
+      </div>
+    {% endif %}
+  </header>
+  
+  {% if collection.description != blank %}
+    <div class="page-width">
+      <div class="collection__desc rte">
+        {{ collection.description }}
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="collection-grid page-width">
+    {% for product in collection.products %}
+      {% include 'collection-item' %}
+    {% endfor %}
+  </div>
+
+  {% if paginate.pages > 1 %}
+    {% include 'pagination' %}
+  {% endif %}
+{% endpaginate %}
+
+{% schema %}
+  {
+    "name": "Collection Page",
+    "settings": [
+      {
+        "type": "select",
+        "id": "grid_type",
+        "label": "Collection Grid Style",
+        "options": [
+          {
+            "label": "Text On Image (2 per row)",
+            "value": "text_overlay" 
+          },
+          {
+            "label": "Image Above Text",
+            "value": "image_above_text" 
+          }
+        ],
+        "default": "image_above_text"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_prices",
+        "label": "Show product prices",
+        "default": true
+      }
+    ]
+  }
+{% endschema %}

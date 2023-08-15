@@ -1,0 +1,99 @@
+<style media="screen">
+  #section-{{ section.id }} {
+    background: {{ section.settings.color_right }};
+    background: -webkit-linear-gradient(to right, {{ section.settings.color_left }}, {{ section.settings.color_right }});
+    background: linear-gradient(to right, {{ section.settings.color_left }}, {{ section.settings.color_right }});
+  }
+  
+  #section-{{ section.id }} h3 {
+    color: {{ section.settings.text_color }};
+  }
+  
+  #section-{{ section.id }}.cta-gradient a.btn {
+    color: {{ section.settings.color_right }};
+    background: {{ section.settings.text_color }};
+    border: 2px solid {{ section.settings.text_color }};
+  }
+  
+  #section-{{ section.id }} h3 span {
+    color: transparent;
+    -webkit-text-stroke-color: {{ section.settings.text_color }};
+  }
+</style>
+
+<div id="section-{{ section.id }}" class="cta-gradient">
+  <div class="cta-gradient__content page-width">
+    <h3>{{ section.settings.title }} <span>{{ section.settings.title_outline }}</span></h3>
+    {% if section.settings.button_text != blank %}
+      <a href="{{ section.settings.button_url | default: '#' }}" class="btn">{{ section.settings.button_text }}</a>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "CTA Gradient Banner",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Text"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading (Solid)",
+        "default": "Your Text"
+      },
+      {
+        "type": "text",
+        "id": "title_outline",
+        "label": "Heading (Outline)",
+        "default": "Goes Here"
+      },
+      {
+        "type": "header",
+        "content": "Gradient"
+      },
+      {
+        "id": "color_left",
+        "type": "color",
+        "label": "Color (left)",
+        "default": "#fc00ff"
+      },
+      {
+        "id": "color_right",
+        "type": "color",
+        "label": "Color (right)",
+        "default": "#00dbde"
+      },
+      {
+        "id": "text_color",
+        "type": "color",
+        "label": "Text Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "Button"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text",
+        "default": "Shop now"
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button Text"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Gradient Text Banner",
+        "category": "Text"
+      }
+    ]
+  }
+
+{% endschema %}

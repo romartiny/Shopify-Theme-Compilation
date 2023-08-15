@@ -1,0 +1,99 @@
+{% assign upsell_item = all_products[settings.cart_upsell_product] %}
+{% assign upsell_item_in_cart = false %}
+
+{% for item in cart.items %}
+  {% assign item_handle = item.product.handle %}
+  {% if item_handle == settings.cart_upsell_product %}
+    {% assign upsell_item_in_cart = true %}
+  {% endif %}
+{% endfor %}
+
+{% if settings.cart_upsell_product != blank and upsell_item_in_cart == false %}
+  <div class="product-page product-page--upsell" data-section-type="product">
+    <p class="cart__section-title">{{ settings.cart_upsell_message }}</p>
+    <div class="cart__upsell">
+      <div class="cart__upsell__item">
+        <div class="cart__item">
+          <div class="cart__item__image">
+            <img src="{{ upsell_item.featured_image | img_url: '200x200' }}" alt="{{ upsell_item.title }}">
+          </div>
+          <div class="cart__item__body">
+            <form class="product-form product-form--ajax" action="/cart/add" method="post" enctype="multipart/form-data">
+              <div class="upsell__options">
+                {% unless upsell_item.has_only_default_variant %}
+                  {% for option in upsell_item.options_with_values %}
+                    <div class="selector-wrapper js">
+                      <label for="SingleOptionSelector-{{ forloop.index0 }}">
+                        {{ option.name }}
+                      </label>
+
+                      <select
+                        id="SingleOptionSelector-{{ forloop.index0 }}"
+                        class="product__option"
+                        data-single-option-selector
+                        data-index="option{{ option.position }}">
+                        {% for value in option.values %}
+                          <option
+                            value="{{ value | escape }}"
+                            {% if option.selected_value == value %}selected="selected"{% endif %}>
+                              {{ value }}
+                          </option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  {% endfor %}
+                {% endunless %}
+
+                <select name="id" class="no-js" data-product-select>
+                  {% for variant in upsell_item.variants %}
+                    <option
+                      {% if variant == upsell_item.selected_or_first_available_variant %}selected="selected"{% endif %}
+                      {% unless variant.available %}disabled="disabled"{% endunless %}
+                      value="{{ variant.id }}">
+                        {{ variant.title }}
+                    </option>
+                  {% endfor %}
+                </select>
+
+                <div class="product__quantity-wrapper" style="display: none;">
+                  <button class="qty-control qty-up" type="button" name="button" data-control="up">+</button>
+                  <input class="product__quantity" aria-label="Quantity" type="number" id="Quantity" name="quantity" value="1" min="1" hidden>
+                  <button class="qty-control qty-down" type="button" name="button" data-control="down">-</button>
+                </div>
+              
+              </div>
+
+              <button
+                type="submit"
+                name="add"
+                class="add-to-cart btn"
+                data-add-to-cart
+                data-variant="{{ upsell_item.selected_or_first_available_variant.id }}"
+                {% unless upsell_item.selected_or_first_available_variant.available %}disabled="disabled"{% endunless %}>
+                  <span data-add-to-cart-text>
+                    {% if upsell_item.selected_or_first_available_variant.available %}
+                      {{ 'products.product.add_to_cart' | t }}
+                    {% else %}
+                      {{ 'products.product.sold_out' | t }}
+                    {% endif %}
+                  </span>
+              </button>
+              
+              {% if settings.add_to_cart_message != blank %}
+                <span class="product__shipping-message">{{ settings.add_to_cart_message }}</span>
+              {% endif %}
+
+              {{ form | payment_button }}
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% unless upsell_item == empty %}
+      <script type="application/json" data-product-json>
+        {{ upsell_item | json }}
+      </script>
+    {% endunless %}
+  </div>
+{% endif %}

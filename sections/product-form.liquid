@@ -1,0 +1,271 @@
+<div class="product-page" data-section-id="{{ section.id }}" data-section-type="product" data-enable-history-state="true" itemscope itemtype="http://schema.org/Product">
+  <meta itemprop="name" content="{{ product.title }}{% unless product.has_only_default_variant %} - {{ current_variant.title }}{% endunless %}">
+  <meta itemprop="url" content="{{ shop.url }}{{ current_variant.url }}">
+  <meta itemprop="brand" content="{{ product.vendor }}">
+  <meta itemprop="image" content="{{ featured_image | img_url: '600x600' }}">
+  <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
+
+  {% include 'product-form' %}
+  
+  {% unless product == empty %}
+    <script type="application/json" data-product-json>
+      {{ product | json }}
+    </script>
+  {% endunless %}
+</div>
+
+{% schema %}
+  {
+    "name": "Product Details",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "WARNING: Changes made in this section will apply to all products using this template."
+      },
+      {
+        "type": "checkbox",
+        "id": "show_vendor",
+        "label": "Show Product Vendor?",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Social Badges"
+      },
+      {
+        "type": "paragraph",
+        "content": "Display an 'As seen on' social badge on your product images."
+      },
+      {
+        "type": "select",
+        "id": "social_badge",
+        "label": "Social Badge",
+        "options": [
+          {
+            "value": "tiktok",
+            "label": "TikTok"
+          },
+          {
+            "value": "instagram",
+            "label": "Instagram"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ],
+        "default": "none"
+      },
+      {
+        "type": "header",
+        "content": "Color Swatches"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_color_swatches",
+        "label": "Enable color swatches",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "custom_swatch_option_name",
+        "label": "Custom swatch option name",
+        "info": "The name of your product option that should appear as a color swatch. If left blank, the product option that contains the word 'color' will be used."
+      },
+      {
+        "type": "header",
+        "content": "Promotion Message"
+      },
+      {
+        "type": "paragraph",
+        "content": "Appears below product pricing. Use this space to callout special promotions."
+      },
+      {
+        "type": "text",
+        "id": "promo_message",
+        "label": "Promotion Message"
+      },
+      {
+        "type": "color",
+        "id": "promo_message_gradient_1",
+        "label": "Gradient Color 1"
+      },
+      {
+        "type": "color",
+        "id": "promo_message_gradient_2",
+        "label": "Gradient Color 2"
+      },
+      {
+        "type": "color",
+        "id": "promo_message_text_color",
+        "label": "Promotion Message Text Color",
+        "default": "#000"
+      },
+      {
+        "type": "header",
+        "content": "Discount Percentage"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_discount_percentage",
+        "label": "Show Discount Percentage?",
+        "default": true
+      },
+      {
+        "type": "textarea",
+        "id": "percentage_message",
+        "label": "Discount Percentage Message",
+        "default": "*percent* OFF"
+      },
+      {
+        "type": "header",
+        "content": "Quantity Discounts"
+      },
+      {
+        "type": "paragraph",
+        "content": "Be sure to set up an [automatic discount](https://help.shopify.com/en/manual/discounts/automatic-discounts) in Shopify to allow items to be discounted at certain quantity levels."
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_quantity_discounts",
+        "label": "Enable Quantity Discounts"
+      },
+      {
+        "type": "range",
+        "id": "quantity_discount_1",
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "unit": "qty",
+        "label": "Quantity Option #1",
+        "default": 2,
+        "info": "Set 1 to disable this option"
+      },
+      {
+        "type": "text",
+        "id": "quantity_discount_save_1",
+        "label": "Quantity Option Discount #1",
+        "default": "10%",
+        "info": "How much the customer will be saving (% or $)"
+      },
+      {
+        "type": "range",
+        "id": "quantity_discount_2",
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "unit": "qty",
+        "label": "Quantity Option #2",
+        "default": 3,
+        "info": "Set 1 to disable this option"
+      },
+      {
+        "type": "text",
+        "id": "quantity_discount_save_2",
+        "label": "Quantity Option Discount #2",
+        "default": "10%",
+        "info": "How much the customer will be saving (% or $)"
+      },
+      {
+        "type": "range",
+        "id": "quantity_discount_3",
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "unit": "qty",
+        "label": "Quantity Option #3",
+        "default": 1,
+        "info": "Set 1 to disable this option"
+      },
+      {
+        "type": "text",
+        "id": "quantity_discount_save_3",
+        "label": "Quantity Option Discount #3",
+        "info": "How much the customer will be saving (% or $)"
+      },
+      {
+        "type": "header",
+        "content": "Add To Cart"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_dynamic_buttons",
+        "label": "Show dynamic checkout button"
+      },
+      {
+        "type": "text",
+        "id": "add_to_cart_message",
+        "label": "Add To Cart Message",
+        "info": "Appears below add to cart button. Typically used for shipping estimations."
+      },
+      
+      {
+        "type": "header",
+        "content": "Installment Message"
+      },
+      {
+        "type": "paragraph",
+        "content": "Use this area to inform your customers about your installment plan(s). Please ensure you have your store set up to accept payment plans for this product."
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_payment_plan",
+        "label": "Enable Installment Message"
+      },
+      {
+        "type": "text",
+        "id": "plan_heading",
+        "label": "Installment Title",
+        "default": "Pay monthly"
+      },
+      {
+        "type": "text",
+        "id": "plan_message",
+        "label": "Installment Message",
+        "default": "Pay as low as"
+      },
+      {
+        "type": "text",
+        "id": "plan_lowest_payment",
+        "label": "Installment Lowest Payment",
+        "info": "How low can the installment payments be for your product?",
+        "default": "XX"
+      },
+      {
+        "type": "text",
+        "id": "plan_frequency",
+        "label": "Installment Frequency",
+        "default": "MO"
+      },
+      {
+        "type": "textarea",
+        "id": "plan_instructions",
+        "label": "Installment Instructions",
+        "default": "Select ____ as the payment option at checkout."
+      }
+    ],
+    "blocks": [
+      {
+        "type": "details-block",
+        "name": "Details Block",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "textarea",
+            "id": "content",
+            "label": "Content"
+          },
+          {
+            "type": "checkbox",
+            "id": "default_open",
+            "label": "Appear open by default"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

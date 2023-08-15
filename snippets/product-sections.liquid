@@ -1,0 +1,148 @@
+{% for block in section.blocks %}
+  
+  {% case block.type %}
+    {% when 'image-with-text' %}
+      <div class="side-content{% if block.settings.image_align_left %} side-content--reverse{% endif %}">
+        <div class="page-width">
+          <div class="side-content__text">
+            {% if block.settings.pre_header != blank %}
+              <p class="pre-header">{{ block.settings.pre_header }} <span>{{ block.settings.pre_header_highlight }}</span></p>
+            {% endif %}
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.content | newline_to_br }}</p>
+            {% if block.settings.button_url != blank and block.settings.button_text != blank %}
+              <a href="{{ block.settings.button_url }}" class="btn">{{ block.settings.button_text }}</a>
+            {% endif %}
+          </div>
+          <div class="side-content__media">
+            {% if block.settings.image %}
+              <img src="{{ block.settings.image | img_url: '600x' }}" alt="{{ block.settings.image.alt }}">
+            {% else %}
+              {{ 'product-1' | placeholder_svg_tag: 'placeholder-img' }}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% when 'banner' %}
+      <div class="video__hero page-width" {% if block.settings.image %}style="background-image: url({{ block.settings.image | img_url: '1500x' }})"{% endif %}>
+        <div class="video__hero__content">
+          <h4><span>{{ block.settings.title_upper }}</span> {{ block.settings.title_lower }}</h4>
+          {% if block.settings.button_url != blank %}
+            <a class="video__hero__btn" href="{{ block.settings.button_url }}">{{ block.settings.button_text }}</a>
+          {% endif %}
+        </div>
+        {% if block.settings.overlay %}
+          <div class="video__hero__overlay">
+            
+          </div>
+        {% endif %}
+        {% unless block.settings.image %}
+          <div class="placeholder-bg">
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-img' }}
+          </div>
+        {% endunless %}
+      </div>
+    {% when 'banner-with-video' %}
+      <div class="video__hero page-width" {% if block.settings.image %} style="background-image: url({{ block.settings.image | img_url: '1500x' }})" {% endif %}>
+        <div class="video__hero__content">
+          <h4><span>{{ block.settings.title_upper }}</span> {{ block.settings.title_lower }}</h4>
+          {% if block.settings.youtube_url != blank %}
+            <button class="js-open-video video__hero__btn" type="button" data-video-url="{{ block.settings.youtube_url.id }}"><span class="fas fa-play"></span> {{ block.settings.button_text }}</button>
+          {% endif %}
+        </div>
+        {% if block.settings.overlay %}
+          <div class="video__hero__overlay">
+            
+          </div>
+        {% endif %}
+        {% unless block.settings.image %}
+          <div class="placeholder-bg">
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-img' }}
+          </div>
+        {% endunless %}
+      </div>
+
+      <div class="video__modal">
+        <div class="video__modal__content">
+          <iframe width="560" height="315" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <button type="button" class="video__modal__close js-close-video" aria-label="Close modal"> <span class="fas fa-times"></span> </button>
+        </div>
+      </div>
+    {% when 'icon-bar' %}
+      {% assign num_of_icons = 4 %}
+      <div class="icon-bar">
+        <div class="page-width">
+          {% for i in (1..num_of_icons) %}
+            {% capture icon_key %}icon_{{ i }}{% endcapture %}
+            {% capture label_key %}title_{{ i }}{% endcapture %}
+            
+            {% assign icon = block.settings[icon_key] | downcase %}
+            {% assign label = block.settings[label_key] %}
+            
+            {% if icon != blank %}
+              <div class="icon-bar__column">
+                <p>
+                  <span class="icon-bar__icon fas fa-{{ icon }}"></span>
+                  <span class="icon-bar__text">{{ label }}</span>
+                </p>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% when 'title-with-features' %}
+      {% assign num_of_features = 3 %}
+      <div class="why-us">
+        <h4>{{ block.settings.title }}</h4>
+        <div class="why-us__text page-width">
+          {% for i in (1..num_of_features) %}
+            {% capture title_key %}feature_title_{{ i }}{% endcapture %}
+            {% capture text_key %}feature_text_{{ i }}{% endcapture %}
+            
+            {% assign title = block.settings[title_key] %}
+            {% assign text = block.settings[text_key] %}
+            {% if title != blank or text != blank %}
+              <div class="why-us__text-block">
+                <h5>{{ title }}</h5>
+                <p>{{ text }}</p>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% when 'gradient-cta' %}
+    
+      <style media="screen">
+        #block-{{ block.id }} {
+          background: {{ block.settings.color_right }};
+          background: -webkit-linear-gradient(to right, {{ block.settings.color_left }}, {{ block.settings.color_right }});
+          background: linear-gradient(to right, {{ block.settings.color_left }}, {{ block.settings.color_right }});
+        }
+        
+        #block-{{ block.id }} h3 {
+          color: {{ block.settings.text_color }};
+        }
+        
+        #block-{{ block.id }}.cta-gradient a.btn {
+          color: {{ block.settings.color_right }};
+          background: {{ block.settings.text_color }};
+          border: 2px solid {{ block.settings.text_color }};
+        }
+        
+        #block-{{ block.id }} h3 span {
+          color: transparent;
+          -webkit-text-stroke-color: {{ block.settings.text_color }};
+        }
+      </style>
+
+      <div id="block-{{ block.id }}" class="cta-gradient">
+        <div class="cta-gradient__content page-width">
+          <h3>{{ block.settings.title }} <span>{{ block.settings.title_outline }}</span></h3>
+          {% if block.settings.button_text != blank %}
+            <a href="{{ block.settings.button_url | default: '#' }}" class="btn">{{ block.settings.button_text }}</a>
+          {% endif %}
+        </div>
+      </div>
+  {% endcase %}
+  
+{% endfor %}

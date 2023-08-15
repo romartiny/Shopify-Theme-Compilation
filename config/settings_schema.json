@@ -1,0 +1,580 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Solodrop",
+    "theme_version": "2.1.0",
+    "theme_author": "Solodrop",
+    "theme_documentation_url": "https://solodrop.com/apps/help-center",
+    "theme_support_url": "https://solodrop.com/"
+  },
+  {
+    "name": "License Key",
+    "settings": [
+      {
+        "type": "text",
+        "id": "license_key",
+        "label": "License Key",
+        "info": "Paste your license key here. You can find your license key in your order confirmation email or on your order confirmation page."
+      }
+    ]
+  },
+  {
+    "name": "One Product",
+    "settings": [
+      {
+        "type": "product",
+        "id": "one_product",
+        "label": "Your main product",
+        "info": "This will be used universally accross the site for promotions etc."
+      }
+    ]
+  },
+  {
+    "name": "Promo Bar",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_promo",
+        "label": "Enable promo bar"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_only_ony_homepage",
+        "label": "Show only on homepage"
+      },
+      {
+        "type": "text",
+        "id": "banner_text",
+        "label": "Promo Text"
+      },
+      {
+        "type": "url",
+        "id": "banner_text_link",
+        "label": "Promo Link"
+      },
+      {
+        "type": "color",
+        "id": "promo_bar_bg",
+        "label": "Background color",
+        "default": "#000"
+      },
+      {
+        "type": "color",
+        "id": "promo_bar_bg_2",
+        "label": "Background color #2 [Gradient]",
+        "info": "Use this color field for a gradient background effect."
+      },
+      {
+        "type": "color",
+        "id": "promo_bar_color",
+        "label": "Text color",
+        "default": "#fff"
+      },
+      {
+        "type": "checkbox",
+        "id": "promo_bar_animate",
+        "label": "Animate gradient effect",
+        "info": "Display a fading gradient background effect."
+      },
+      {
+        "type": "checkbox",
+        "id": "promo_bar_text_uppercase_spacing",
+        "label": "Uppercase text",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary color",
+        "default": "#000",
+        "info": "Used for text links, and primary buttons"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent",
+        "default": "#EF4435",
+        "info": "Buttons and special ornaments"
+      },
+      {
+        "type": "color",
+        "id": "color_body_text",
+        "label": "Text",
+        "default": "#161d25"
+      },
+      {
+        "type": "color",
+        "id": "color_main_bg",
+        "label": "Background",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary_bg",
+        "label": "Secondary background",
+        "default": "#f9f9f9",
+        "info": "This affects the background for some sections including icon bar, blog header, etc."
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "Borders",
+        "default": "#e8e8e8"
+      },
+      {
+        "type": "color",
+        "id": "color_inputs",
+        "label": "Form fields",
+        "default": "#f4f7fa"
+      },
+      {
+        "type": "header",
+        "content": "Prices"
+      },
+      {
+        "type": "color",
+        "id": "color_price",
+        "label": "Regular Price",
+        "default": "#000"
+      },
+      {
+        "type": "color",
+        "id": "color_compare_price",
+        "label": "Compare Price",
+        "default": "#000"
+      },
+      {
+        "type": "color",
+        "id": "color_sale",
+        "label": "Sale Price",
+        "default": "#fff"
+      },
+      {
+        "type": "header",
+        "content": "Header"
+      },
+      {
+        "type": "color",
+        "id": "header_background",
+        "label": "Header background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "header_links",
+        "label": "Header links",
+        "default": "#282828"
+      },
+      {
+        "type": "color",
+        "id": "header_links_hover",
+        "label": "Header links hover",
+        "default": "#e8e8e8"
+      },
+      {
+        "type": "color",
+        "id": "header_cta_color",
+        "label": "Header CTA",
+        "default": "#282828"
+      },
+      {
+        "type": "color",
+        "id": "header_cta_text_color",
+        "label": "Header CTA Text",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "mega_menu_bg_color",
+        "label": "Mega menu background color",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "mega_menu_links",
+        "label": "Mega menu links",
+        "default": "#282828"
+      },
+      {
+        "type": "color",
+        "id": "mega_menu_links_hover",
+        "label": "Mega menu links hover",
+        "default": "#e8e8e8"
+      },
+      {
+        "type": "header",
+        "content": "Footer"
+      },
+      {
+        "type": "color",
+        "id": "footer_bg",
+        "label": "Footer Background",
+        "default": "#262626"
+      },
+      {
+        "type": "color",
+        "id": "footer_text",
+        "label": "Footer Text",
+        "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "Cart"
+      },
+      {
+        "type": "color",
+        "id": "color_cart_bg",
+        "label": "Background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_cart_text",
+        "label": "Text",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "color_cart_accent",
+        "label": "Accent background",
+        "info": "Used for cart header, footer, upsell backgrounds",
+        "default": "#F4F7FA"
+      },
+      {
+        "type": "color",
+        "id": "color_cart_secondary_text",
+        "label": "Secondary text",
+        "info": "Text that appears on secondary cart backgrounds",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "color_cart_borders",
+        "label": "Borders",
+        "default": "#F5F5F5"
+      },
+      {
+        "type": "color",
+        "id": "color_cart_progress",
+        "label": "Progress bar",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "color_cart_progress_track",
+        "label": "Progress bar track",
+        "default": "#F5F5F5"
+      },
+      {
+        "type": "color",
+        "id": "color_cart_buttons",
+        "label": "Buttons",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "color_cart_buttons_text",
+        "label": "Button text",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_cart_form_elements",
+        "label": "Form Elements",
+        "default": "#ffffff"
+      }
+    ]
+  },
+  {
+    "name": "Sticky Add To Cart",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_sticky_atc",
+        "label": "Enable Sticky Add To Cart",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Colors"
+      },
+      {
+        "type": "paragraph",
+        "content": "If left blank, these will use the settings from Color tab."
+      },
+      {
+        "type": "color",
+        "id": "sticky_atc_bg",
+        "label": "Background color"
+      },
+      {
+        "type": "color",
+        "id": "sticky_atc_border",
+        "label": "Bottom border"
+      },
+      {
+        "type": "color",
+        "id": "sticky_atc_button_bg",
+        "label": "Button color"
+      },
+      {
+        "type": "color",
+        "id": "sticky_atc_button_text",
+        "label": "Button text color"
+      },
+      {
+        "type": "color",
+        "id": "sticky_atc_price_title",
+        "label": "Product title & price"
+      },
+      {
+        "type": "color",
+        "id": "sticky_atc_price_sale",
+        "label": "Product price [Sale]"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "default": "helvetica_n4",
+        "label": "Headings"
+      },
+      {
+        "type": "select",
+        "id": "uppercase_heading",
+        "label": "Uppercase Headings",
+        "options": [
+          {
+            "value": "uppercase",
+            "label": "Yes"
+          },
+          {
+            "value": "none",
+            "label": "No"
+          }
+        ]
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "default": "helvetica_n4",
+        "label": "Body text"
+      },
+      {
+        "type": "select",
+        "id": "type_base_size",
+        "label": "Base size",
+        "default": "16px",
+        "options": [
+          {
+            "value": "14px",
+            "label": "14px"
+          },
+          {
+            "value": "15px",
+            "label": "15px"
+          },
+          {
+            "value": "16px",
+            "label": "16px"
+          },
+          {
+            "value": "17px",
+            "label": "17px"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image",
+        "info": "Will be scaled down to 32 x 32px"
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social sharing options"
+      },
+      {
+        "type": "checkbox",
+        "id": "social_sharing_blog",
+        "label": "Enable sharing for blog articles",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_facebook",
+        "label": "Share on Facebook",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_twitter",
+        "label": "Tweet on Twitter",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_pinterest",
+        "label": "Pin on Pinterest",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Sharing links"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok_link",
+        "label": "TikTok link"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "Twitter link"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook link"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest_link",
+        "label": "Pinterest link"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram link"
+      },
+      {
+        "type": "text",
+        "id": "social_snapchat_link",
+        "label": "Snapchat link"
+      },
+      {
+        "type": "text",
+        "id": "social_tumblr_link",
+        "label": "Tumblr link"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube_link",
+        "label": "Youtube link"
+      },
+      {
+        "type": "text",
+        "id": "social_vimeo_link",
+        "label": "Vimeo link"
+      }
+    ]
+  },
+  {
+    "name": "Skip to Checkout",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_skip_to_checkout",
+        "label": "Enable skip to checkout",
+        "info": "Note: this will bypass the add to cart feature on product pages. Instead, it will skip straight to check out."
+      },
+      {
+        "type": "text",
+        "id": "skip_cart_submit",
+        "label": "Skip to checkout button text",
+        "default": "Buy now"
+      }
+    ]
+  },
+  {
+    "name": "Cart Promotions",
+    "settings": [
+      {
+				"type": "header",
+				"content": "Cart discounts"
+			},
+      {
+				"type": "checkbox",
+				"id": "enable_cart_discounts",
+				"label": "Show cart discount code field",
+        "default": true
+			},
+      {
+				"type": "header",
+				"content": "Cart progress bar"
+			},
+			{
+				"type": "paragraph",
+				"content": "Use the cart progress bar for shipping or other cart promotions. The progress bar will show a success message once the cart subtotal reaches the set goal."
+			},
+			{
+				"type": "checkbox",
+				"id": "enable_cart_progress_bar",
+				"label": "Show cart progress bar"
+			},
+			{
+				"type": "text",
+				"id": "cart_progress_threshold",
+				"label": "Progress bar goal",
+				"info": "This should be the required cart sub-total for the promotion.",
+				"default": "50"
+			},
+			{
+				"type": "text",
+				"id": "cart_progress_message",
+				"label": "Progress bar message",
+				"default": "Spend [amount] more to get FREE shipping.",
+        "info": "Use '[amount]' to signify the amount needed to reach the goal."
+			},
+			{
+				"type": "text",
+				"id": "cart_progress_success_message",
+				"label": "Progress bar success message",
+				"default": "Congrats! You get FREE shipping!"
+			},
+      {
+				"type": "header",
+				"content": "Cart Upsell"
+			},
+			{
+				"type": "paragraph",
+				"content": "Use the cart upsell to offer another product to your customer while in cart, usually at a discounted price."
+			},
+      {
+        "type": "checkbox",
+        "id": "enable_cart_upsell",
+        "label": "Enable Cart Upsell"
+      },
+      {
+        "type": "product",
+        "id": "cart_upsell_product",
+        "label": "Cart Upsell Product",
+        "info": "Upsell product will not show if it is already in cart."
+      },
+      {
+        "type": "text",
+        "id": "cart_upsell_message",
+        "label": "Cart Upsell Message"
+      }
+    ]
+  }
+]

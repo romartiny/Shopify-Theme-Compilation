@@ -1,0 +1,33 @@
+{% assign num_of_blocks = section.blocks.size %}
+
+{% if section.settings.show_product_overview %}
+  <div class="product-overview">
+    <div class="product-overview__container{% if section.settings.use_background_color == false %} product-overview__container--no-bg{% endif %} page-width">
+      {% if section.settings.product_overview_heading != blank %}
+        <h4>{{ section.settings.product_overview_heading }}</h4>
+      {% endif %}
+      <div class="product-overview__content">
+        <div class="product-overview__main{% if num_of_blocks <= 0 %} product-overview__main--full-width{% endif %}">
+          {% if product.description != blank %}
+            {{ product.description }}
+          {% else %}
+            <p>Add a product description or hide this section.</p>
+          {% endif %}
+        </div>
+        {% if num_of_blocks > 0 %}
+          <div class="product-overview__list">
+            <ul>
+              {% for block in section.blocks %}
+                {% assign feature = block.settings.title %}
+                
+                {% if feature != blank %}
+                  <li><span class="fas fa-check"></span>{{ feature }}</li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endif %}

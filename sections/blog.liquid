@@ -1,0 +1,107 @@
+{% paginate blog.articles by 5 %}
+
+  {%- assign blog_title = blog.title -%}
+
+  {% if current_tags %}
+    {% capture blog_title %}{{ blog.title }} &mdash; {{ current_tags.first }}{% endcapture %}
+  {% endif %}
+  
+  <div class="blog__header">
+    <h1>{{ blog_title }}</h1>
+  </div>
+  
+  {% if linklists[section.settings.blog_linklist].links != blank %}
+    <div class="blog__navigation">
+      <div class="page-width">
+        <ul>
+          {% for link in linklists[section.settings.blog_linklist].links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  {% endif %}
+
+
+  {% comment %}
+
+  Article Previews
+  ====================
+  {% endcomment %}
+
+  <div class="page-width blog-content">
+    <div class="article-list">
+      {% for article in blog.articles %}
+        <div class="article-preview">
+          {% if article.image %}
+            <a href="{{ article.url }}">
+              {{ article | img_url: '500x' | img_tag: article.title }}
+            </a>
+          {% endif %}
+          
+          <h3>
+            <a href="{{ article.url }}">{{ article.title }}</a>
+          </h3>
+
+          <div class="rte">
+            {% if article.excerpt.size > 0 %}
+              {{ article.excerpt }}
+            {% else %}
+              <p>
+                {{ article.content | strip_html | truncatewords: 20 }}
+              </p>
+            {% endif %}
+          </div>
+          
+          {% capture date %}{{ article.published_at | time_tag: format: 'month_day_year' }}{% endcapture %}
+
+          <p class="article-preview__date">
+            {{ 'blogs.article.author_on_date_html' | t: author: article.author, date: date }}
+          </p>
+          
+        </div>
+      {% endfor %}
+
+      {% if paginate.pages > 1 %}
+        {% include 'pagination' %}
+      {% endif %}
+    </div>
+    <div class="blog-sidebar">
+      {% if blog.all_tags.size > 0 %}
+        <div class="blog-tags">
+          <h2>{{ 'blogs.general.categories' | t }}</h2>
+
+          <ul>
+            {% for tag in blog.all_tags %}
+
+              {% if current_tags contains tag %}
+                <li class="blog__current-tag">{{ tag }}</li>
+              {% else %}
+                <li>{{ tag | link_to_tag: tag }}</li>
+              {% endif %}
+
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+{% endpaginate %}
+
+{% schema %}
+  {
+    "name": "Blog Page",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Navigation"
+      },
+      {
+        "type": "link_list",
+        "id": "blog_linklist",
+        "label": "Blog Navigation Menu"
+      }
+    ]
+  }
+{% endschema %}

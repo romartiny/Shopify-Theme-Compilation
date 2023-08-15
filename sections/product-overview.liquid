@@ -1,0 +1,46 @@
+{% include 'product-overview' %}
+
+{% schema %}
+  {
+    "name": "Product Overview",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "WARNING: Changes made in this section will apply to all products using this template."
+      },
+      {
+        "type": "checkbox",
+        "id": "show_product_overview",
+        "label": "Show Product Overview",
+        "info": "This section shows the product description and additional features.",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "use_background_color",
+        "label": "Use Background Color",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "product_overview_heading",
+        "label": "Overview Heading",
+        "default": "Overview"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "feature",
+        "name": "Feature Item",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Feature Item",
+            "default": "Curabitur porta ante et ligula molestie, vitae auctor nulla finibus. Mauris vel eros ex."
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,96 @@
+{% if settings.enable_cart_progress_bar %}
+	{% assign free_shipping_threshold = settings.cart_progress_threshold | times: 100.00 %}
+	{% assign free_shipping_diff = free_shipping_threshold | minus: cart.items_subtotal_price | money_without_trailing_zeros %}
+	{% assign free_shipping_progress = cart.items_subtotal_price | divided_by: free_shipping_threshold | times: 100.00 %}
+	{% assign goal_reached = false %}
+
+	{% capture free_shipping_diff_html %}
+		<span>{{ free_shipping_diff }}</span>
+	{% endcapture %}
+	{% assign cart_progress_message = settings.cart_progress_message | replace: '[amount]', free_shipping_diff_html %}
+	{% assign cart_progress_success_message = settings.cart_progress_success_message %}
+
+	{% if free_shipping_progress > 100.00 %}
+		{% assign goal_reached = true %}
+		{% assign free_shipping_progress = 100 %}
+	{% endif %}
+
+	<div class="cart__shipping-threshold">
+		{% if goal_reached == false %}
+			<p>{{ cart_progress_message }}</p>
+		{% else %}
+			<p>{{ cart_progress_success_message }}</p>
+		{% endif %}
+		<span class="cart__shipping-bar">
+			<span class="cart__shipping-bar__progress" style="width: {{ free_shipping_progress }}%;"></span>
+		</span>
+	</div>
+{% endif %}
+
+{% if cart.item_count >= 1 %}
+	{% for item in cart.items %}
+    {% assign item_url = item.url %}
+    {% assign item_title = item.title | downcase %}
+
+    {% if item_title contains "linerless" %}
+      {% assign item_url = item.url | remove: "-linerless" %}
+    {% endif %}
+
+		<div class="cart__item">
+			<div class="cart__item__image">
+				<img src="{{ item.image.src | img_url: '200x200' }}" alt="{{ item.product.title }}">
+			</div>
+			<div class="cart__item__body">
+				<div class="cart__item__info">
+					<p class="cart__item__title">
+						<a href="{{ item_url }}">{{ item.product.title }}</a>
+					</p>
+					{% unless item.product.has_only_default_variant %}
+						<p class="cart__item__line-items">
+							{%- for option in item.options_with_values -%}
+								{{ option.value }}{% unless forloop.last %},{% endunless %}
+							{%- endfor -%}
+						</p>
+					{% endunless %}
+				</div>
+				<div class="cart__item__price-qty">
+					<div class="cart__item__qty">
+						
+						<div class="product__quantity-wrapper product__quantity-wrapper--cart">
+		          <button class="qty-control qty-up" type="button" name="button" data-control="up">+</button>
+		          <input class="product__quantity product__quantity--cart" aria-label="Quantity" type="number" name="updates[]" id="updates_{{ item.key }}" data-variant-id="{{ item.variant.id }}" data-item-quantity value="{{ item.quantity }}">
+		          <button class="qty-control qty-down" type="button" name="button" data-control="down">-</button>
+		        </div>
+						
+					</div>
+					<div class="cart__item__price">
+						{% if item.original_line_price != item.line_price %}
+						  <span class="visually-hidden">{{ 'cart.label.discounted_price' | t }}</span>
+							<span class=cart__item__discount>{{ item.price | money_without_trailing_zeros }}</span>
+						  <span class="visually-hidden">{{ 'cart.label.original_price' | t }}</span>
+						  <s>{{ item.original_price | money_without_trailing_zeros }}</s>
+						{% else %}
+						  {{ item.price | money_without_trailing_zeros }}
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+	
+	{% if settings.enable_cart_discounts %}
+		<div class="cart__discount">
+			<p class="cart__section-title">Discount Code</p>
+			<div class="cart__discount__fields">
+				<input type="text" name="discount" placeholder="Enter discount code" class="js-cart-discount">
+				<button type="button" class="btn js-cart-discount-action">Add</button>
+			</div>
+		</div>
+	{% endif %}
+	
+	{% if settings.enable_cart_upsell %}
+		{% include 'cart-upsell' %}
+	{% endif %}
+{% else %}
+	<p class="cart__empty-msg">{{ 'cart.general.empty' | t }}</p>
+{% endif %}

@@ -1,0 +1,317 @@
+{% include 'product-sections' %}
+
+{% schema %}
+  {
+    "name": "Product Sections",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "WARNING: Changes made in this section will apply to all products using this template."
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image-with-text",
+        "name": "Image with text",
+        "settings": [
+          {
+            "type": "text",
+            "id": "pre_header",
+            "label": "Pre Title",
+            "info": "Appears above the title"
+          },
+          {
+            "type": "text",
+            "id": "pre_header_highlight",
+            "label": "Pre Title Highlight",
+            "info": "The highlighted text in your pre title"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "textarea",
+            "id": "content",
+            "label": "Text Description"
+          },
+          {
+            "type": "url",
+            "id": "button_url",
+            "label": "Button URL"
+          },
+          {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "checkbox",
+            "id": "image_align_left",
+            "label": "Show image on left?"
+          }
+        ]
+      },
+      {
+        "type": "banner",
+        "name": "Banner",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "checkbox",
+            "id": "overlay",
+            "label": "Enable Overlay",
+            "info": "Leave this checked to make text more visible on lighter images."
+          },
+          {
+            "type": "text",
+            "id": "title_upper",
+            "label": "Banner Title Upper (optional)"
+          },
+          {
+            "type": "text",
+            "id": "title_lower",
+            "label": "Banner Title Lower (optional)"
+          },
+          {
+            "type": "url",
+            "id": "button_url",
+            "label": "CTA Button URL"
+          },
+          {
+            "type": "text",
+            "id": "button_text",
+            "label": "CTA Button Text"
+          }
+        ]
+      },
+      {
+        "type": "banner-with-video",
+        "name": "Banner with video",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "checkbox",
+            "id": "overlay",
+            "label": "Enable Overlay",
+            "info": "Leave this checked to make text more visible on lighter images."
+          },
+          {
+            "type": "text",
+            "id": "title_upper",
+            "label": "Banner Title Upper (optional)"
+          },
+          {
+            "type": "text",
+            "id": "title_lower",
+            "label": "Banner Title Lower (optional)"
+          },
+          {
+            "type": "video_url",
+            "id": "youtube_url",
+            "label": "Youtube URL",
+            "accept": ["youtube"]
+          },
+          {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button text",
+            "default": "Play video"
+          }
+        ]
+      },
+      {
+        "type": "icon-bar",
+        "name": "Icon bar",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Icon #1"
+          },
+          {
+            "type": "text",
+            "id": "icon_1",
+            "label": "Icon",
+            "info": "Enter the name of a free solid icon from [FontAwesome](https://fontawesome.com/icons?d=gallery&s=solid&m=free)"
+          },
+          {
+            "type": "text",
+            "id": "title_1",
+            "label": "Icon Label"
+          },
+          {
+            "type": "header",
+            "content": "Icon #2"
+          },
+          {
+            "type": "text",
+            "id": "icon_2",
+            "label": "Icon",
+            "info": "Enter the name of a free solid icon from [FontAwesome](https://fontawesome.com/icons?d=gallery&s=solid&m=free)"
+          },
+          {
+            "type": "text",
+            "id": "title_2",
+            "label": "Icon Label"
+          },
+          {
+            "type": "header",
+            "content": "Icon #3"
+          },
+          {
+            "type": "text",
+            "id": "icon_3",
+            "label": "Icon",
+            "info": "Enter the name of a free solid icon from [FontAwesome](https://fontawesome.com/icons?d=gallery&s=solid&m=free)"
+          },
+          {
+            "type": "text",
+            "id": "title_3",
+            "label": "Icon Label"
+          },
+          {
+            "type": "header",
+            "content": "Icon #4"
+          },
+          {
+            "type": "text",
+            "id": "icon_4",
+            "label": "Icon",
+            "info": "Enter the name of a free solid icon from [FontAwesome](https://fontawesome.com/icons?d=gallery&s=solid&m=free)"
+          },
+          {
+            "type": "text",
+            "id": "title_4",
+            "label": "Icon Label"
+          }
+        ]
+      },
+      {
+        "type": "title-with-features",
+        "name": "Title with features",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "header",
+            "content": "Feature #1"
+          },
+          {
+            "type": "text",
+            "id": "feature_title_1",
+            "label": "Feature Title"
+          },
+          {
+            "type": "textarea",
+            "id": "feature_text_1",
+            "label": "Feature Text"
+          },
+          {
+            "type": "header",
+            "content": "Feature #2"
+          },
+          {
+            "type": "text",
+            "id": "feature_title_2",
+            "label": "Feature Title"
+          },
+          {
+            "type": "textarea",
+            "id": "feature_text_2",
+            "label": "Feature Text"
+          },
+          {
+            "type": "header",
+            "content": "Feature #3"
+          },
+          {
+            "type": "text",
+            "id": "feature_title_3",
+            "label": "Feature Title"
+          },
+          {
+            "type": "textarea",
+            "id": "feature_text_3",
+            "label": "Feature Text"
+          }
+        ]
+      },
+      {
+        "type": "gradient-cta",
+        "name": "Gradient Text Banner",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Text"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading (Solid)",
+            "default": "Your Text"
+          },
+          {
+            "type": "text",
+            "id": "title_outline",
+            "label": "Heading (Outline)",
+            "default": "Goes Here"
+          },
+          {
+            "type": "header",
+            "content": "Gradient"
+          },
+          {
+            "id": "color_left",
+            "type": "color",
+            "label": "Color (left)",
+            "default": "#fc00ff"
+          },
+          {
+            "id": "color_right",
+            "type": "color",
+            "label": "Color (right)",
+            "default": "#00dbde"
+          },
+          {
+            "id": "text_color",
+            "type": "color",
+            "label": "Text Color",
+            "default": "#ffffff"
+          },
+          {
+            "type": "header",
+            "content": "Button"
+          },
+          {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text",
+            "default": "Shop now"
+          },
+          {
+            "type": "url",
+            "id": "button_url",
+            "label": "Button Text"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

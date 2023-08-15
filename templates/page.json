@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "page-content": {
+      "type": "page-content"
+    }
+  },
+  "order": [
+    "page-content"
+  ]
+}

@@ -1,0 +1,98 @@
+<div class="why-us" style="background-color: {{ section.settings.background }};">
+  <h4>{{ section.settings.title }}</h4>
+  <div class="why-us__text page-width">
+    {% for block in section.blocks %}
+      {% if block.settings.feature_title != blank or block.settings.feature_text != blank %}
+        <div class="why-us__text-block">
+          {% if block.settings.image %}
+            <img src="{{ block.settings.image | img_url: '400x' }}" alt="{{ block.settings.image }}">
+          {% endif %}
+          <h5>{{ block.settings.feature_title }}</h5>
+          <p>{{ block.settings.feature_text | newline_to_br }}</p>
+          {% if block.settings.button_url != blank and block.settings.button_text != blank %}
+            <a class="btn" href="{{ block.settings.button_url }}">{{ block.settings.button_text }}</a>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Title with Text",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Main Title",
+        "default": "Title with text."
+      }
+    ],
+    "blocks": [
+      {
+        "type": "title-with-text",
+        "name": "Title with Text",
+        "limit": 4,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "feature_title",
+            "label": "Title",
+            "default": "Text block"
+          },
+          {
+            "type": "textarea",
+            "id": "feature_text",
+            "label": "Text",
+            "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          },
+          {
+            "type": "url",
+            "id": "button_url",
+            "label": "Button URL"
+          },
+          {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Title with Text",
+        "category": "Text",
+        "blocks": [
+          {
+            "type": "title-with-text",
+            "settings": {
+              "feature_title": "Text block #1",
+              "feature_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            }
+          },
+          {
+            "type": "title-with-text",
+            "settings": {
+              "feature_title": "Text block #2",
+              "feature_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            }
+          },
+          {
+            "type": "title-with-text",
+            "settings": {
+              "feature_title": "Text block #3",
+              "feature_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            }
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

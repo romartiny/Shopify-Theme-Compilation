@@ -1,0 +1,133 @@
+<footer id="footer" class="footer">
+  <div class="footer__container page-width">
+
+    {%- assign footer_linklist = section.settings.footer_linklist -%}
+    {% if linklists[footer_linklist].links.size > 0 %}
+      <ul>
+        {% if section.settings.footer_linklist_title != blank %}
+          <li class="footer__menu-title">
+            {{ section.settings.footer_linklist_title }}
+          </li>
+        {% endif %}
+        {% for link in linklists[footer_linklist].links %}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {%- assign social_accounts = 'TikTok, Facebook, Twitter, Pinterest, Instagram, Snapchat, Tumblr, YouTube, Vimeo,' | split: ', ' -%}
+    <ul class="social-links">
+      {% if section.settings.social_links_title != blank %}
+        <li class="footer__menu-title">
+          {{ section.settings.social_links_title }}
+        </li>
+      {% endif %}
+
+      {% for social in social_accounts %}
+        {%- assign social_handle = social | handleize -%}
+        {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
+        {% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
+
+        {% if settings[social_link] != blank %}
+          <li>
+            <a href="{{ settings[social_link] }}" target="_blank" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}">
+              {% include social_icon %}
+              <span>{{ social }}</span>
+            </a>
+          </li>
+        {% endif %}
+
+      {% endfor %}
+    </ul>
+    <div class="footer__newsletter">
+      {% include 'newsletter' %}
+    </div>
+  </div>
+  <div class="footer__payment-icons page-width">
+    {% if section.settings.show_payment_icons %}
+      {% unless shop.enabled_payment_types == empty %}
+        {%- assign payment_icons_available = 'amazon_payments,american_express,apple_pay,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,litecoin,maestro,master,paypal,visa' | split: ',' -%}
+
+        <span class="visually-hidden">{{ 'layout.footer.payment_methods' | t }}</span>
+        <ul class="payment-icons">
+          {% for type in shop.enabled_payment_types %}
+            {% if payment_icons_available contains type %}
+              <li>
+                {%- assign icon_name = type | prepend: 'icon-' -%}
+                {% include icon_name %}
+                <span class="visually-hidden">{{ type | capitalize | replace: '_', ' ' }}</span>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% endunless %}
+    {% endif %}
+  </div>
+  <div class="footer__copyright">
+    <div class="page-width">
+      <small>{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: '/' }}.</small>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "footer_linklist",
+        "label": "Footer nav",
+        "default": "footer"
+      },
+      {
+        "type": "text",
+        "id": "footer_linklist_title",
+        "label": "Footer nav title",
+        "default": "Quick links"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_payment_icons",
+        "label": "Show payment icons",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_footer_social",
+        "label": "Show social links",
+        "default": true,
+        "info": "Edit your social links under general theme settings."
+      },
+      {
+        "type": "text",
+        "id": "social_links_title",
+        "label": "Footer social links title",
+        "default": "Follow us"
+      },
+      {
+        "type": "header",
+        "content": "Newsletter Form"
+      },
+      {
+        "type": "text",
+        "id": "newsletter_title",
+        "label": "Newsletter Title",
+        "default": "Sign up for our newsletter"
+      },
+      {
+        "type": "textarea",
+        "id": "newsletter_text",
+        "label": "Newsletter Text",
+        "default": "Say something here about your newsletter or promotional offer."
+      },
+      {
+        "type": "textarea",
+        "id": "newsletter_success",
+        "label": "Newsletter Success Message",
+        "default": "Thanks for signing up!"
+      }
+    ]
+  }
+
+{% endschema %}

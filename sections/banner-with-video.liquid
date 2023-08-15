@@ -1,0 +1,72 @@
+<div class="video__hero page-width" {% if section.settings.image %}style="background-image: url({{ section.settings.image | img_url: '1500x' }})"{% endif %}>
+  <div class="video__hero__content">
+    <h4><span>{{ section.settings.title_upper }}</span> {{ section.settings.title_lower }}</h4>
+    {% if section.settings.youtube_url != blank %}
+      <button class="js-open-video video__hero__btn" type="button" data-video-url="{{ section.settings.youtube_url.id }}"><span class="fas fa-play"></span> {{ section.settings.button_text }}</button>
+    {% endif %}
+  </div>
+  {% if section.settings.overlay %}
+    <div class="video__hero__overlay">
+      
+    </div>
+  {% endif %}
+  {% unless section.settings.image %}
+    <div class="placeholder-bg">
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-img' }}
+    </div>
+  {% endunless %}
+</div>
+
+<div class="video__modal">
+  <div class="video__modal__content">
+    <iframe width="560" height="315" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <button type="button" class="video__modal__close js-close-video" aria-label="Close modal"> <span>&#10005;</span> </button>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Banner with Video",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "checkbox",
+        "id": "overlay",
+        "label": "Enable Overlay",
+        "info": "Leave this checked to make text more visible on lighter images."
+      },
+      {
+        "type": "text",
+        "id": "title_upper",
+        "label": "Banner Title Upper (optional)"
+      },
+      {
+        "type": "text",
+        "id": "title_lower",
+        "label": "Banner Title Lower (optional)"
+      },
+      {
+        "type": "video_url",
+        "id": "youtube_url",
+        "label": "Youtube URL",
+        "accept": ["youtube"]
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text",
+        "default": "Play video"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Banner with Video",
+        "category": "Video"
+      }
+    ]
+  }
+{% endschema %}

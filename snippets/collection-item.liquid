@@ -1,0 +1,56 @@
+{% case section.settings.grid_type %}
+  {% when 'text_overlay' %}
+    <a href="{{ product.url | within: collection }}" class="collection__grid-item collection__grid-item--text-overlay" style="
+    {% if product.featured_image %}
+    background-image: url({{ product.featured_image.src | img_url: '600x600' }});
+    {% endif %}
+    ">
+      
+      <h2 class="product__title">{{ product.title }}</h2>
+      
+      {% if section.settings.enable_prices %}
+        <div class="collection__grid-item__price">
+          {% assign on_sale = false %}
+          {% if product.compare_at_price_max > product.price %}
+            {% assign on_sale = true %}
+            <span class="compare-price" data-compare-price>
+              {% if product.compare_at_price > product.price %}
+                {{ product.compare_at_price | money }}
+              {% endif %}
+            </span>
+            <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
+          {% endif %}
+          <span {% if on_sale %}class="on-sale"{% endif %} data-product-price>
+            {{ product.price | money_without_trailing_zeros }}
+          </span>
+        </div>
+      {% endif %}
+      
+      <div class="grid-item__overlay">
+        
+      </div>
+      {% unless product.featured_image %}
+        <div class="placeholder-bg">
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-img' }}
+        </div>
+      {% endunless %}
+    </a>
+  {% when 'image_above_text' %}
+    <a href="{{ product.url | within: collection }}" class="collection__grid-item collection__grid-item--text-under">
+      {% if product.featured_image %}
+        <img src="{{ product.featured_image.src | img_url: '600x600' }}" alt="{{ product.featured_image.alt }}">
+      {% else %}
+        <div class="placeholder-bg">
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-img' }}
+        </div>
+      {% endif %}
+      <div class="collection__grid-item__details">
+        <h2 class="product__title">{{ product.title }}</h2>
+        {% if section.settings.enable_prices %}
+          <span class="collection__grid-item__price" data-product-price>
+            {{ product.price | money_without_trailing_zeros }}
+          </span>
+        {% endif %}
+      </div>
+    </a>
+{% endcase %}

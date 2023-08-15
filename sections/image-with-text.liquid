@@ -1,0 +1,79 @@
+<div class="side-content{% if section.settings.image_align_left %} side-content--reverse{% endif %}">
+  <div class="page-width">
+    <div class="side-content__text">
+      {% if section.settings.pre_header != blank %}
+        <p class="pre-header">{{ section.settings.pre_header }} <span>{{ section.settings.pre_header_highlight }}</span></p>
+      {% endif %}
+      <h3>{{ section.settings.title }}</h3>
+      <p>{{ section.settings.content | newline_to_br }}</p>
+      {% if section.settings.button_url != blank and section.settings.button_text != blank %}
+        <a href="{{ section.settings.button_url }}" class="btn">{{ section.settings.button_text }}</a>
+      {% endif %}
+    </div>
+    <div class="side-content__media">
+      {% if section.settings.image %}
+        <img src="{{ section.settings.image | img_url: '600x' }}" alt="{{ section.settings.image.alt }}">
+      {% else %}
+        {{ 'product-1' | placeholder_svg_tag: 'placeholder-img' }}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Image with text",
+    "settings": [
+      {
+        "type": "text",
+        "id": "pre_header",
+        "label": "Pre Title",
+        "info": "Appears above the title"
+      },
+      {
+        "type": "text",
+        "id": "pre_header_highlight",
+        "label": "Pre Title Highlight",
+        "info": "The highlighted text in your pre title"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Image with text"
+      },
+      {
+        "type": "textarea",
+        "id": "content",
+        "label": "Text Description",
+        "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ullamcorper quam non felis finibus hendrerit."
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button URL"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "checkbox",
+        "id": "image_align_left",
+        "label": "Show image on left?"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Image with Text",
+        "category": "Image"
+      }
+    ]
+  }
+{% endschema %}

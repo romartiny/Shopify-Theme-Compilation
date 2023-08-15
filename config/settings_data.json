@@ -1,0 +1,470 @@
+{
+  "current": {
+    "one_product": "",
+    "enable_promo": true,
+    "promo_bar_bg": "#505252",
+    "promo_bar_color": "#FFFFFF",
+    "banner_text": "Welcome to Solodrop! 🎉",
+    "color_primary": "#323333",
+    "color_accent": "#ff473b",
+    "color_body_text": "#444545",
+    "color_main_bg": "#ffffff",
+    "color_sale": "#ff473b",
+    "header_links": "#000000",
+    "header_links_hover": "#ff473b",
+    "header_cta_color": "#444545",
+    "mega_menu_bg_color": "#ffffff",
+    "mega_menu_links": "#444545",
+    "mega_menu_links_hover": "#ff473b",
+    "footer_bg": "#262626",
+    "footer_text": "#ffffff",
+    "font_heading": "futura_n7",
+    "uppercase_heading": "uppercase",
+    "font_body": "helvetica_n4",
+    "type_base_size": "16px",
+    "social_sharing_blog": true,
+    "share_facebook": true,
+    "share_twitter": true,
+    "share_pinterest": true,
+    "social_tiktok_link": "https://tiktok.com",
+    "social_twitter_link": "https://twitter.com",
+    "social_facebook_link": "https://facebook.com",
+    "social_pinterest_link": "https://pinterest.com",
+    "social_instagram_link": "https://instagram.com",
+    "social_snapchat_link": "",
+    "social_tumblr_link": "",
+    "social_youtube_link": "",
+    "social_vimeo_link": "",
+    "enable_skip_to_checkout": false,
+    "skip_cart_submit": "Buy now",
+    "enable_cart_progress_bar": false,
+    "cart_progress_threshold": "30",
+    "cart_progress_message": "You need to spend [amount] more.",
+    "cart_progress_success_message": "Congrats! You've hit the goal!",
+    "enable_cart_upsell": false,
+    "cart_upsell_product": "",
+    "cart_upsell_message": "",
+    "checkout_logo_position": "left",
+    "checkout_logo_size": "medium",
+    "checkout_body_background_color": "#fff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_color": "#ffffff",
+    "checkout_heading_font": "Lato",
+    "checkout_body_font": "Lato",
+    "checkout_accent_color": "#197bbd",
+    "checkout_button_color": "#197bbd",
+    "checkout_error_color": "#e32c2b",
+    "cart_notes_enable": true,
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo_max_width": 150,
+          "main_linklist": "main-menu",
+          "enable_cta": false,
+          "custom_cta_text": "Buy now",
+          "enable_cta_icon": false,
+          "enable_cta_dropdown": false,
+          "custom_cta_dropdown_headline": ""
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "footer_linklist": "footer",
+          "footer_linklist_title": "Quick links",
+          "show_payment_icons": true,
+          "enable_footer_social": true,
+          "social_links_title": "Follow us",
+          "newsletter_title": "Sign up for our newsletter",
+          "newsletter_text": "Say something here about your newsletter or promotional offer.",
+          "newsletter_success": "Thanks for signing up!"
+        }
+      },
+      "1591922154583": {
+        "type": "hero",
+        "blocks": {
+          "1597558632301": {
+            "type": "slide",
+            "settings": {
+              "overlay": true,
+              "title": "Welcome.",
+              "text": "Use this text area to give a brief yet powerful introduction to your amazing product.",
+              "button_url": "\/",
+              "button_text": "Shop now"
+            }
+          },
+          "1597558210103": {
+            "type": "slide",
+            "settings": {
+              "overlay": true,
+              "title": "Hey there.",
+              "text": "Use this text area to give a brief yet powerful introduction to your amazing product.",
+              "button_text": ""
+            }
+          },
+          "1597642920495": {
+            "type": "slide",
+            "settings": {
+              "overlay": true,
+              "title": "Well, hi!",
+              "text": "Use this text area to give a brief yet powerful introduction to your amazing product.",
+              "button_text": ""
+            }
+          }
+        },
+        "block_order": [
+          "1597558632301",
+          "1597558210103",
+          "1597642920495"
+        ],
+        "settings": {
+          "height": "70vh",
+          "dots": true,
+          "arrows": true,
+          "autoplay": true,
+          "duration": 8
+        }
+      },
+      "minicart": {
+        "type": "minicart",
+        "settings": {
+          "cart_notes_enable": false
+        }
+      },
+      "product-form": {
+        "type": "product-form",
+        "blocks": {
+          "1596000910051": {
+            "type": "details-block",
+            "settings": {
+              "title": "Details",
+              "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in tincidunt ipsum. Vivamus a velit risus. Phasellus in suscipit eros, sit amet rhoncus nulla. Vivamus et posuere turpis. Sed sit amet tellus arcu.",
+              "default_open": true
+            }
+          },
+          "1596000968082": {
+            "type": "details-block",
+            "settings": {
+              "title": "Why this product?",
+              "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+              "default_open": false
+            }
+          },
+          "1596000981190": {
+            "type": "details-block",
+            "settings": {
+              "title": "How long does shipping take?",
+              "content": "Lorem Ipsum.",
+              "default_open": false
+            }
+          }
+        },
+        "block_order": [
+          "1596000910051",
+          "1596000968082",
+          "1596000981190"
+        ],
+        "settings": {
+          "promo_message": "",
+          "add_to_cart_message": "",
+          "enable_payment_plan": false,
+          "plan_heading": "Pay monthly",
+          "plan_message": "Pay as low as",
+          "plan_lowest_payment": "XX",
+          "plan_frequency": "MO",
+          "plan_instructions": "Select ____ as the payment option at checkout."
+        }
+      },
+      "product-overview": {
+        "type": "product-overview",
+        "blocks": {
+          "1597123025760": {
+            "type": "feature",
+            "settings": {
+              "title": "Feature 1"
+            }
+          },
+          "1597123031736": {
+            "type": "feature",
+            "settings": {
+              "title": "Curabitur porta ante et ligula molestie, vitae auctor nulla finibus. Mauris vel eros ex."
+            }
+          },
+          "1597123034136": {
+            "type": "feature",
+            "settings": {
+              "title": "Curabitur porta ante et ligula molestie, vitae auctor nulla finibus."
+            }
+          },
+          "1597123035713": {
+            "type": "feature",
+            "settings": {
+              "title": "Curabitur porta ante et."
+            }
+          }
+        },
+        "block_order": [
+          "1597123025760",
+          "1597123031736",
+          "1597123034136",
+          "1597123035713"
+        ],
+        "settings": {
+          "show_product_overview": true,
+          "product_overview_heading": "Overview"
+        }
+      },
+      "product-sections": {
+        "type": "product-sections",
+        "blocks": {
+          "1596003406665": {
+            "type": "image-with-text",
+            "settings": {
+              "title": "Lorem Ipsum",
+              "content": "Ut nec dignissim ligula. Mauris ligula leo, lacinia eu malesuada sed, lacinia ultricies sapien. Phasellus id felis quis turpis laoreet bibendum. Mauris lorem eros, egestas vel nisl eu, vestibulum malesuada leo.",
+              "image_align_left": false
+            }
+          },
+          "1596088162903": {
+            "type": "icon-bar",
+            "settings": {
+              "icon_1": "trophy",
+              "title_1": "Lorem Ipsum",
+              "icon_2": "truck",
+              "title_2": "Lorem Ipsum",
+              "icon_3": "leaf",
+              "title_3": "Lorem Ipsum",
+              "icon_4": "battery-full",
+              "title_4": "Lorem Ipsum"
+            }
+          },
+          "1596003819853": {
+            "type": "banner-with-video",
+            "settings": {
+              "overlay": true,
+              "title_upper": "Product video",
+              "title_lower": "",
+              "youtube_url": "https:\/\/www.youtube.com\/watch?v=NpEaa2P7qZI",
+              "button_text": "Play video"
+            }
+          },
+          "1596090681319": {
+            "type": "title-with-features",
+            "settings": {
+              "title": "Why people love our product",
+              "feature_title_1": "Nothing else like it",
+              "feature_text_1": "Unique design that can't be beat.",
+              "feature_title_2": "Incredible quality",
+              "feature_text_2": "Solid material that screams quality.",
+              "feature_title_3": "Simple design",
+              "feature_text_3": "Perhaps the best looking product."
+            }
+          },
+          "1596003434737": {
+            "type": "image-with-text",
+            "settings": {
+              "title": "Lorem Ipsum",
+              "content": "Ut nec dignissim ligula. Mauris ligula leo, lacinia eu malesuada sed, lacinia ultricies sapien. Phasellus id felis quis turpis laoreet bibendum. Mauris lorem eros, egestas vel nisl eu, vestibulum malesuada leo.",
+              "image_align_left": true
+            }
+          }
+        },
+        "block_order": [
+          "1596003406665",
+          "1596088162903",
+          "1596003819853",
+          "1596090681319",
+          "1596003434737"
+        ],
+        "settings": {
+        }
+      },
+      "product-form-1": {
+        "type": "product-form-1",
+        "settings": {
+          "promo_message": "",
+          "add_to_cart_message": "",
+          "enable_payment_plan": false,
+          "plan_heading": "Pay monthly",
+          "plan_message": "Pay as low as",
+          "plan_lowest_payment": "5.00",
+          "plan_frequency": "MO",
+          "plan_instructions": "Select Klarna as the payment option at checkout."
+        }
+      },
+      "product-overview-1": {
+        "type": "product-overview-1",
+        "settings": {
+          "show_product_overview": true,
+          "product_overview_heading": "Overview"
+        }
+      },
+      "product-sections-1": {
+        "type": "product-sections-1",
+        "settings": {
+        }
+      },
+      "1597730900195": {
+        "type": "banner",
+        "settings": {
+          "overlay": true,
+          "title_upper": "Use this banner to",
+          "title_lower": "Say something powerful."
+        }
+      },
+      "1597730958070": {
+        "type": "icon-bar",
+        "blocks": {
+          "1597731835038": {
+            "type": "icon",
+            "settings": {
+              "icon": "truck",
+              "title": "Icon"
+            }
+          },
+          "1597731843606": {
+            "type": "icon",
+            "settings": {
+              "icon": "address-card",
+              "title": "Icon"
+            }
+          },
+          "1597731870147": {
+            "type": "icon",
+            "settings": {
+              "icon": "balance-scale",
+              "title": "Icon"
+            }
+          },
+          "1597731881583": {
+            "type": "icon",
+            "settings": {
+              "icon": "battery-full",
+              "title": "Icon"
+            }
+          }
+        },
+        "block_order": [
+          "1597731835038",
+          "1597731843606",
+          "1597731870147",
+          "1597731881583"
+        ],
+        "settings": {
+        }
+      },
+      "1597731163801": {
+        "type": "image-with-text",
+        "settings": {
+          "title": "Image with text.",
+          "content": "Say something interesting here to describe your product,\nfeature or image.",
+          "image_align_left": false
+        }
+      },
+      "1597731243582": {
+        "type": "image-with-text",
+        "settings": {
+          "title": "Image with text",
+          "content": "Say something interesting here.",
+          "image_align_left": true
+        }
+      },
+      "1597732100638": {
+        "type": "title-with-text",
+        "blocks": {
+          "1597732128000": {
+            "type": "title-with-text",
+            "settings": {
+              "feature_title": "Text block",
+              "feature_text": "Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit."
+            }
+          },
+          "1597732159869": {
+            "type": "title-with-text",
+            "settings": {
+              "feature_title": "Text block",
+              "feature_text": "Lorem ipsum dolor sit amet, \nconsectetur adipiscing elit."
+            }
+          },
+          "1597732171103": {
+            "type": "title-with-text",
+            "settings": {
+              "feature_title": "Text block",
+              "feature_text": "Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit."
+            }
+          }
+        },
+        "block_order": [
+          "1597732128000",
+          "1597732159869",
+          "1597732171103"
+        ],
+        "settings": {
+          "title": "Tell your brand story."
+        }
+      },
+      "1597987585618": {
+        "type": "richtext",
+        "settings": {
+          "title": "Real nice text box.",
+          "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin fermentum dapibus metus sit amet malesuada. Duis ligula velit, tristique ac dictum eu, egestas eu lorem. Aenean pellentesque erat eget ornare efficitur. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris condimentum enim leo, eu tincidunt augue accumsan id. In bibendum, velit vitae vulputate tincidunt, orci purus pharetra enim, in tempus nibh neque id nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at consectetur felis. Fusce vehicula erat a elit venenatis, non elementum est dignissim.<\/p>"
+        }
+      },
+      "social-proof": {
+        "type": "social-proof",
+        "settings": {
+          "enable_sales_pop": false,
+          "product": "",
+          "locations": "Miami, New York, Chicago, Los Angeles, Houston, Lake Tahoe, Arizona, Sarasota, Orlando, Las Vegas, San Francisco, Charlotte, Seattle, Milwaukee, St. Louis",
+          "names": "Peter, Jessica, Jerry, Jake, Sarah, Cory, Dustin, Bailey, Alyssa, Ben, Darby, Selena, Kurt, Carlos, Andrew",
+          "timestamp": "1 hour, 2 hours, 30 minutes, 1 day, 20 minutes, 10 minutes, 3 hours, 4 days, 30 seconds, 10 minutes, 1 hour, 47 minutes, 39 seconds, 20 minutes, 9 hours",
+          "value_selection": "random"
+        }
+      },
+      "1603768623c059fedc": {
+        "type": "gradient-cta",
+        "settings": {
+          "title": "Shout",
+          "title_outline": "your brand!",
+          "color_left": "#8a2387",
+          "color_right": "#ff473b",
+          "text_color": "#ffffff",
+          "button_text": "Shop now",
+          "button_url": "\/"
+        }
+      }
+    },
+    "content_for_index": [
+      "1591922154583",
+      "1597987585618",
+      "1597730900195",
+      "1597730958070",
+      "1603768623c059fedc",
+      "1597731163801",
+      "1597731243582",
+      "1597732100638"
+    ]
+  },
+  "presets": {
+    "Default": {
+      "sections": {
+        "featured-collection": {
+          "type": "featured-collection",
+          "settings": {
+            "collection": "frontpage"
+          }
+        },
+        "featured-product": {
+          "type": "featured-product",
+          "settings": {
+          }
+        }
+      },
+      "content_for_index": [
+        "featured-collection",
+        "featured-product"
+      ]
+    }
+  }
+}
