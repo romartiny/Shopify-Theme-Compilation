@@ -1,0 +1,29 @@
+<div class="wrapper">
+  <div class="grid product-single">
+    <div class="grid__item large--two-thirds text-center">
+      <div class="product__slides product-single__photos">
+        <div class="product__photo">
+          {{ 'product-5' | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      </div>
+    </div>
+    <div class="grid__item large--one-third">
+      <div class="text-center">
+        <h5 class="product__price uppercase h5">
+          <span class="money"><span>{{ '1999' | money }}</span></span>
+        </h5>
+        <h1 class="h2">{{ 'home_page.onboarding.product_title' | t }}</h1>
+        <div class="product-description rte" itemprop="description">
+          {{ 'home_page.onboarding.product_description' | t }}
+        </div>
+      </div>
+      <div class="add-to-cart__wrapper">
+        <button class="btn btn--large btn--full btn--clear uppercase addToCart">
+          <span>{{ 'products.product.add_to_cart' | t }}</span>
+          <span class="unicode">&#x2022</span>
+          <span class="add-to-cart__price money"><span>{{ '1999' | money }}</span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

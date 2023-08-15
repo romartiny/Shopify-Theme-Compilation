@@ -1,0 +1,12 @@
+<svg x="0px" y="0px"
+	 width="97px" height="97px" viewBox="0 0 97 97" enable-background="new 0 0 97 97" >
+{%- capture play_color -%}
+	{%- if section.settings.color == 'homepage--white' -%} #ffffff {%- endif -%}
+	{%- if section.settings.color == 'homepage--light' -%} {{ settings.homepage_background_light }} {%- endif -%}
+	{%- if section.settings.color == 'homepage--splash' -%}{{ settings.color_splash }} {%- endif -%}
+	{%- if section.settings.color == 'homepage--dark' -%}  {{ settings.homepage_background_dark }} {%- endif -%}
+{%- endcapture -%}
+<path fill="{{ play_color }}" d="M49.084,1.131C22.804,1.131,1.5,22.435,1.5,48.714c0,26.279,21.304,47.583,47.584,47.583
+	c26.279,0,47.582-21.304,47.582-47.583C96.667,22.435,75.364,1.131,49.084,1.131z M38.118,62.52V34.908l25.93,13.807L38.118,62.52z"
+	/>
+</svg>

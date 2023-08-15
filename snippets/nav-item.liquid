@@ -1,0 +1,55 @@
+{% assign parent=false %}
+{% assign grandparent=false %}
+{% assign child_list_handle = link.title | handleize %}
+{% assign child_count = 0 %}
+
+{% unless level %}
+  {% assign level = 0 %}
+{% endunless %}
+
+{% if level < 2 %}
+  {% if linklists[child_list_handle].links != blank %}
+    {% assign parent=true %}
+    {% for child_link in linklists[child_list_handle].links %}
+      {% if child_count < 10 %}{% assign child_count = child_count | plus: 1 %}{% endif %}
+      {% if level < 1 %}
+      {% unless grandparent %}
+        {% assign grandchild_list_handle = child_link.title | handleize %}
+        {% if linklists[grandchild_list_handle].links != blank %}
+          {% assign grandparent=true %}
+          {% if section.settings.meganav_image != blank %}
+            {% if child_count < 10 %}{% assign child_count = child_count | plus: 1 %}{% endif %}
+            {% assign meganavImage=true %}
+          {% endif %}
+        {% endif %}
+      {% endunless %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endif %}
+
+{% if level < 3 %}
+  <li class="{% if grandparent %}grandparent{% elsif parent %}parent{% else %}child{%endif%} {% if link.active %}main-menu--active{% endif %} kids-{{child_count}}">
+    <a href="{{ link.url }}" class="nav-link">{{ link.title | escape }}</a>
+    {% if parent %}
+    <a href="#" class="nav-carat"><span class="plus">+</span><span class="minus">-</span></a>
+      <div class="main-menu-dropdown">
+        <ul>
+        {% if meganavImage %}
+          <li class="meganav_image_wrapper kids-{{child_count}}">
+            <a href="{{ section.settings.meganav_link }}" class="meganav_image">
+              <img src="{{ section.settings.meganav_image | img_url: '500x' }}" alt="{{ section.settings.meganav_image.alt | default: shop.name }}"/>
+            </a>
+          </li>
+          {% assign meganavImage=false %}
+        {% endif %}
+          {% assign level = level | plus: 1 %}
+          {% for link in linklists[child_list_handle].links %}
+            {% include 'nav-item' %}
+          {% endfor %}
+          {% assign level = level | minus: 1 %}
+        </ul>
+      </div>
+    {% endif %}
+  </li>
+{% endif %}

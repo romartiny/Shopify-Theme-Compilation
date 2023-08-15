@@ -1,0 +1,127 @@
+{% comment %}
+
+  Side navigation for the product types, vendors, and tags.
+  These can be based on the current collection or all products. Details in comments below.
+
+  Note: Clicking on a tag will filter the products within the current collection.
+  Clicking on a type or vendor link will take you out of the current collection
+  to a standalone collection page. E.g. /collections/vendors?q=Pepsi
+
+{% endcomment %}
+
+{% unless section.settings.collection_custom_nav_list == blank or section.settings.collection_custom_nav_list.empty? %}
+  {% assign custom_nav_list = section.settings.collection_custom_nav_list | handleize %}
+  <h5>{{ linklists[custom_nav_list].title }}</h5>
+  <ul class="collection-nav accessibleNav">
+    {% for link in linklists[custom_nav_list].links %}
+      {% assign child_list_handle = link.title | handleize %}
+      {% if linklists[child_list_handle].links != blank %}
+        <li {% if link.active %}class="collection-nav--active"{% endif %} aria-haspopup="true">
+          <a href="{{ link.url }}">{{ link.title }}</a>
+          <ul class="collection-nav--child">
+            {% for childlink in linklists[child_list_handle].links %}
+              <li {% if childlink.active %}class="collection-nav--active"{% endif %}><a href="{{ childlink.url }}">{{ childlink.title | escape }}</a></li>
+            {% endfor %}
+          </ul>
+        </li>
+      {% else %}
+        <li {% if link.active %}class="collection-nav--active"{% endif %}>
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endunless %}
+
+{% if section.settings.collection_standard_nav %}
+  {% if collections.size > 1 %}
+    <h5>{{ 'collections.sidebar.collections' | t }}</h5>
+    <ul class="collection-nav">
+      <li {% unless collection.id %}class="collection-nav--active"{% endunless %}>
+        <a href="/collections/all">{{ 'collections.sidebar.all_collections' | t }}</a>
+      </li>
+      {% for collection_link in collections %}
+        {% unless collection_link.handle == 'frontpage' %}
+          <li {% if collection.handle == collection_link.handle %}class="collection-nav--active"{% endif %}>
+            <a href="/collections/{{ collection_link.handle }}">{{ collection_link.title }}</a>
+          </li>
+        {% endunless %}
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endif %}
+
+{% if section.settings.collection_type_nav %}
+  {% if collection.all_types.size > 0 %}
+    <h5>{{ 'collections.sidebar.types' | t }}</h5>
+    <ul class="collection-nav">
+      <li {% unless collection.current_type %}class="collection-nav--active"{% endunless %}>
+        <a href="/collections/all">{{ 'collections.sidebar.all_types' | t }}</a>
+      </li>
+      {% for type in collection.all_types %}
+        {% capture typeString %}{{ type | link_to_type }}{% endcapture %}
+        {% unless typeString == 'Unknown Type' %}
+          {% if collection.current_type == type %}
+            <li class="collection-nav--active">
+              {{ type | link_to_type }}
+            </li>
+          {% else %}
+            <li>
+              {{ type | link_to_type }}
+            </li>
+          {% endif %}
+        {% endunless %}
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endif %}
+
+{% if section.settings.collection_vendor_nav %}
+  {% if collection.all_vendors.size > 0 %}
+    <h5>{{ 'collections.sidebar.vendors' | t }}</h5>
+    <ul  class="collection-nav">
+      <li {% unless collection.current_vendor %}class="collection-nav--active"{% endunless %}>
+        <a href="/collections/all">{{ 'collections.sidebar.all_vendors' | t }}</a>
+      </li>
+      {% for vendor in collection.all_vendors %}
+        {% if collection.current_vendor == vendor %}
+          <li class="collection-nav--active">
+            {{ vendor | link_to_vendor }}
+          </li>
+        {% else %}
+          <li>
+            {{ vendor | link_to_vendor }}
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endif %}
+
+
+{% if section.settings.collection_tag_nav %}
+  {% if collection.all_tags.size > 0 %}
+    <h5>{{ 'collections.sidebar.tags' | t }}</h5>
+    <ul class="collection-nav">
+      <li {% unless current_tags %}class="collection-nav--active"{% endunless %}>
+        {% capture first_tag %}{{ current_tags | first }}{% endcapture %}
+        {{ 'collections.sidebar.all_tags' | t | link_to_remove_tag: first_tag }}
+      </li>
+      {% for tag in collection.all_tags %}
+        {% if current_tags contains tag %}
+          <li class="collection-nav--active">
+            {{ tag | link_to_remove_tag: tag }}
+          </li>
+        {% else %}
+          <li>
+            {% comment %}
+              Use link_to_add_tag if you want to allow filtering
+              by multiple tags
+            {% endcomment %}
+            {{ tag | link_to_tag: tag }}
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endif %}

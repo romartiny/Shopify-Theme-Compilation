@@ -1,0 +1,171 @@
+<!-- /templates/cart.liquid -->
+{% comment %}
+
+  This is your /cart template. If you are using the Ajaxify Cart plugin,
+  your form (with action="/cart") layout will be used in the drawer/modal.
+
+  For info on test orders:
+    - General http://docs.shopify.com/manual/your-store/orders/test-orders
+    - Shopify Payments - http://docs.shopify.com/manual/more/shopify-payments/testing-shopify-payments
+
+{% endcomment %}
+{% if cart.item_count > 0 %}
+<div class="wrapper page-margin">
+  <form action="/cart" method="post" novalidate class="cart cartForm">
+    <h3>{{ 'cart.general.title' | t }}</h3>
+
+    <div class="cart__body">
+      <div class="cart__row medium-down--hide cart__header-labels">
+        <div class="grid--full">
+          <div class="grid__item large--one-half push--large--one-half">
+            <div class="grid--full">
+              {% if settings.cart_quantity %}
+                <div class="grid__item one-third medium-down--one-third">
+                  {{ 'cart.label.price' | t }}
+                </div>
+                <div class="grid__item one-third medium-down--one-third text-center">
+                  {{ 'cart.label.quantity' | t }}
+                </div>
+              {% else %}
+                <div class="grid__item two-thirds medium-down--two-thirds"></div>
+              {% endif %}
+              <div class="grid__item one-third medium-down--one-third text-right">
+                {{ 'cart.label.total' | t }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% comment %}
+        Loop through products in the cart
+      {% endcomment %}
+      {% for item in cart.items %}
+        <div class="cart__row" data-id="{{ item.id }}">
+          <div class="grid--full cart__row--table-large">
+
+            <div class="grid__item large--one-half">
+              <div class="grid--full cart__row--table-large">
+
+                <div class="grid__item one-third">
+                  <a href="{{ item.url | within: collections.all }}" class="cart__image">
+                    <img src="{{ item | img_url: 'small' }}" alt="{{ item.title | escape }}">
+                  </a>
+                </div>
+
+                <div class="grid__item two-thirds cart__item__title">
+                  <a href="{{ item.url }}" class="h4--body">
+                    {{ item.product.title }}
+                  </a>
+                  {% unless item.variant.title contains 'Default' %}
+                    <p><small>{{ item.variant.title }}</small></p>
+                  {% endunless %}
+
+                  {% if settings.cart_vendor_enable %}
+                    <p>{{ item.vendor }}</p>
+                  {% endif %}
+
+                  {% assign property_size = item.properties | size %}
+                  {% if property_size > 0 %}
+                    {% for p in item.properties %}
+                      {% unless p.last == blank %}
+                        {{ p.first }}:
+
+                        {% comment %}
+                          Check if there was an uploaded file associated
+                        {% endcomment %}
+                        {% if p.last contains '/uploads/' %}
+                          <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+                        {% else %}
+                          {{ p.last }}
+                        {% endif %}
+
+                        <br>
+                      {% endunless %}
+                    {% endfor %}
+                  {% endif %}
+
+                  <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="cart__remove uppercase lighten" data-id="{{ item.id }}">
+                    <small>{{ 'cart.general.remove' | t }}</small>
+                  </a>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="grid__item large--one-half">
+              <div class="grid--full cart__row--table-large">
+                {% if settings.cart_quantity %}
+                  <div class="grid__item one-third text-left">
+                    <span class="cart__mini-labels">{{ 'cart.label.price' | t }}</span>
+                    <span class="h5--body money">{{ item.price | money }}</span>
+                  </div>
+
+                  <div class="grid__item one-third text-center">
+                    <span class="cart__mini-labels">{{ 'cart.label.quantity' | t }}</span>
+                    {% comment %}
+                      Added data-id for the ajax cart implementation only.
+                    {% endcomment %}
+                    <input type="number" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" min="0" data-id="{{ item.id }}" data-submit="true" class="ajaxcart--hide">
+                  </div>
+                {% else %}
+                  <div class="grid__item two-thirds"></div>
+                {% endif %}
+
+                <div class="grid__item one-third text-right">
+                  <span class="cart__mini-labels">{{ 'cart.label.total' | t }}</span>
+                  <span class="h5--body money">{{ item.line_price | money }}</span>
+                </div>
+              </div>
+
+              <div class="ajaxcart__errors hidden errors text-center" id="ajaxcart__item__{{item.id}}__errors">
+                {{ 'cart.general.stockout' | t }}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="cart__row cart__footer">
+      <div class="grid">
+        {% comment %}
+          Optional, add a textarea for special notes
+            - Your theme settings can turn this on or off. Default is on.
+            - Make sure you have name="note" for the message to be submitted properly
+        {% endcomment %}
+        {% if settings.cart_notes_enable %}
+          <div class="grid__item large--one-half cart__instructions">
+            <label class="cart__instructions__label" for="CartSpecialInstructions">{{ 'cart.general.note' | t }}</label>
+            <textarea name="note" class="input-full" id="CartSpecialInstructions">{{ cart.note }}</textarea>
+          </div>
+        {% endif %}
+        <div class="grid__item {% if settings.cart_notes_enable %} large--one-half text-right{% endif %}">
+          <p class="cart__footer__text">
+            <span class="cart__subtotal-title uppercase">{{ 'cart.general.subtotal' | t }}</span>
+            <span class="h3--body cart__subtotal money">{{ cart.total_price | money }}</span>
+          </p>
+          <p class="cart__footer__text"><em>{{ 'cart.general.shipping_at_checkout' | t }}</em></p>
+          <input type="submit" name="update" class="btn--secondary update-cart btn--large uppercase" value="{{ 'cart.general.update' | t }}">
+          <span><input type="submit" name="checkout" class="btn uppercase btn--large checkout__button" value="{{ 'cart.general.checkout' | t }}"></span>
+        </div>
+      </div>
+    </div>
+    {% if additional_checkout_buttons and settings.cart_show_additional_buttons %}
+      <div class="grid__item additional-checkout-buttons">
+        {{ content_for_additional_checkout_buttons }}
+      </div>
+    {% endif %}
+  </form>
+</div>
+{% else %}
+  {% comment %}
+    The cart is empty
+  {% endcomment %}
+  <div class="wrapper page-margin text-center">
+    <h3 class="uppercase h3">{{ 'cart.general.title' | t }}</h3>
+    <p>{{ 'cart.general.empty' | t }}</p>
+    <a href="{{ settings.cart_continue_browsing | default: '/collections/all' }}" class="btn btn--large">{{ 'cart.general.continue_browsing_html' | t }}</a>
+  </div>
+{% endif %}

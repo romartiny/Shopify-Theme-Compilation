@@ -1,0 +1,275 @@
+<footer class="site-footer-wrapper" role="contentinfo" data-section-id="{{ section.id }}" data-section-type="footer" itemscope itemtype="http://schema.org/Organization">
+  {% if section.settings.footer_image %}
+  <a href="/" itemprop="url" class="footer-logo" id="footerLogo" style="opacity:0;">
+    <img src="{{ section.settings.footer_image | img_url: 'x200' }}" alt="{{ section.settings.footer_image.alt | default: shop.name }}" itemprop="logo" id="footerLogoImg-{{ section.id }}"/>
+  </a>
+  {% endif %}
+  <div class="wrapper site-footer">
+    <div class="grid-uniform">
+
+      {% case section.blocks.size %}
+        {% when 0 %}
+        {% when 1 %}
+          {% assign footer_column_width = 'large--one-half push--large--one-quarter' %}
+        {% when 2 %}
+          {% assign footer_column_width = 'large--one-half' %}
+        {% when 3 %}
+          {% assign footer_column_width = 'large--one-third' %}
+        {% when 4 %}
+            {% assign footer_column_width = 'large--one-quarter' %}
+      {% endcase %}
+
+      {% for block in section.blocks %}
+        {% case block.type %}
+
+          {% when 'linklist' %}
+            {% assign linklist = linklists[block.settings.linklist] %}
+            <div class="grid__item {{ footer_column_width }}" {{ block.shopify_attributes }}>
+              <h5 class="uppercase">{{ linklist.title }} </h5>
+              <hr class="hr--underline">
+              <ul class="footer-quicklinks">
+                {% for link in linklist.links %}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+
+          {% when 'page' %}
+            {% assign page = pages[block.settings.page] %}
+            {% if page == blank or page.empty? %}
+              <div class="grid__item {{ footer_column_width }}" {{ block.shopify_attributes }}>
+                <h5 class="uppercase">{{ shop.name }}</h5>
+                <hr class="hr--underline">
+                <div class="rte">{{ 'home_page.onboarding.no_content' | t }}</div>
+            </div>
+            {% else %}
+              <div class="grid__item {{ footer_column_width }}" {{ block.shopify_attributes }}>
+                <h5 class="uppercase">{{ page.title | escape }}</h5>
+                <hr class="hr--underline">
+                <div class="rte">{{ page.content }}</div>
+              </div>
+            {% endif %}
+
+          {% when 'text' %}
+            <div class="grid__item {{ footer_column_width }}" {{ block.shopify_attributes }}>
+              <h5 class="uppercase">{{ block.settings.title | escape }}</h5>
+              <hr class="hr--underline">
+              <div class="rte">{{ block.settings.text }}</div>
+            </div>
+
+          {% when 'newsletter' %}
+            <div class="grid__item {{ footer_column_width }}" {{ block.shopify_attributes }}>
+              <h5 class="uppercase">{{ 'layout.footer.newsletter_title' | t }}</h5>
+              <hr class="hr--underline">
+              <p>{{ block.settings.text }}</p>
+              {% include 'newsletter-form' %}
+            </div>
+
+          {% else %}
+        {% endcase %}
+      {% endfor %}
+    </div>
+
+    <div class="grid footer-secondary-wrapper">
+      <ul class="footer-secondary grid__item inline-list">
+          <li><a href="{{ shop.secure_url }}" itemprop="url">&copy; {{ shop.name }} {{ 'now' | date: "%Y" }}</a></li>
+        {% for link in linklists[section.settings.footer_secondary_linklist].links %}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% endfor %}
+        <!-- Remove the following two lines to delete Shopify and Pipeline credit -->
+          <li>{{ powered_by_link }}</li>
+          <li><a href="http://corknine.com">{{ 'layout.footer.credit' | t }}</a></li>
+        <!-- stop deleting here :) -->
+      </ul>
+
+      {% if section.settings.footer_payment_enable %}
+        {% unless shop.enabled_payment_types == empty %}
+        {%- assign payment_icons_available = 'amazon_payments,american_express,apple_pay,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,litecoin,maestro,master,paypal,shopify_pay,visa' | split: ',' -%}
+        <ul class="footer-payment payment-icons grid__item inline-list">
+          {% for type in shop.enabled_payment_types %}
+            {% if payment_icons_available contains type %}
+            <li>
+              <span class="icon-fallback-text">
+                <span class="icon icon-{{type}}" aria-hidden="true"></span>
+                <span class="fallback-text">{{type | replace: '_',' '}}</span>
+              </span>
+            </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+        {% endunless %}
+      {% endif %}
+
+      {% if section.settings.footer_social_enable %}
+      <ul class="footer-social social-icons grid__item inline-list">
+        {% if settings.social_twitter_link != blank %}
+          <li>
+            <a class="icon-fallback-text" href="{{ settings.social_twitter_link }}" title="{{ shop.name }} on Twitter" target="_blank" itemprop="sameAs">
+              <span class="icon icon-twitter" aria-hidden="true"></span>
+              <span class="fallback-text">Twitter</span>
+            </a>
+          </li>
+        {% endif %}
+        {% if settings.social_facebook_link != blank %}
+          <li>
+            <a class="icon-fallback-text" href="{{ settings.social_facebook_link }}" title="{{ shop.name }} on Facebook" target="_blank" itemprop="sameAs">
+              <span class="icon icon-facebook" aria-hidden="true"></span>
+              <span class="fallback-text">Facebook</span>
+            </a>
+          </li>
+        {% endif %}
+        {% if settings.social_instagram_link != blank %}
+          <li>
+            <a class="icon-fallback-text" href="{{ settings.social_instagram_link }}" title="{{ shop.name }} on Instagram" target="_blank" itemprop="sameAs">
+              <span class="icon icon-instagram" aria-hidden="true"></span>
+              <span class="fallback-text">Instagram</span>
+            </a>
+          </li>
+        {% endif %}
+        {% if settings.social_pinterest_link != blank %}
+          <li>
+            <a class="icon-fallback-text" href="{{ settings.social_pinterest_link }}" title="{{ shop.name }} on Pinterest" target="_blank" itemprop="sameAs">
+              <span class="icon icon-pinterest" aria-hidden="true"></span>
+              <span class="fallback-text">Pinterest</span>
+            </a>
+          </li>
+        {% endif %}
+        {% if settings.social_google_link != blank %}
+          <li>
+            <a class="icon-fallback-text" href="{{ settings.social_google_link }}" title="{{ shop.name }} on Google Plus" target="_blank" itemprop="sameAs">
+              <span class="icon icon-google_plus" aria-hidden="true"></span>
+              <span class="fallback-text">Google Plus</span>
+            </a>
+          </li>
+        {% endif %}
+        {% if settings.social_youtube_link != blank %}
+          <li>
+            <a class="icon-fallback-text" href="{{ settings.social_youtube_link }}" title="{{ shop.name }} on Youtube" target="_blank" itemprop="sameAs">
+              <span class="icon icon-youtube" aria-hidden="true"></span>
+              <span class="fallback-text">Youtube</span>
+            </a>
+          </li>
+        {% endif %}
+        {% if settings.social_vimeo_link != blank %}
+          <li>
+            <a class="icon-fallback-text" href="{{ settings.social_vimeo_link }}" title="{{ shop.name }} on Vimeo" target="_blank" itemprop="sameAs">
+              <span class="icon icon-vimeo" aria-hidden="true"></span>
+              <span class="fallback-text">Vimeo</span>
+            </a>
+          </li>
+        {% endif %}
+        {% if settings.social_tumblr_link != blank %}
+          <li>
+            <a class="icon-fallback-text" href="{{ settings.social_tumblr_link }}" title="{{ shop.name }} on Tumblr" target="_blank" itemprop="sameAs">
+              <span class="icon icon-tumblr" aria-hidden="true"></span>
+              <span class="fallback-text">Tumblr</span>
+            </a>
+          </li>
+        {% endif %}
+        {% if settings.social_fancy_link != blank %}
+          <li>
+            <a class="icon-fallback-text" href="{{ settings.social_fancy_link }}" title="{{ shop.name }} on Fancy" target="_blank" itemprop="sameAs">
+              <span class="icon icon-fancy" aria-hidden="true"></span>
+              <span class="fallback-text">Fancy</span>
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+      {% endif %}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "label": "Footer logo",
+      "type": "image_picker",
+      "id": "footer_image",
+      "info": "400 x 200px .png"
+    },
+    {
+      "type": "header",
+      "content": "Bottom bar"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_secondary_linklist",
+      "label": "Link List"
+    },
+    {
+      "type": "checkbox",
+      "id": "footer_payment_enable",
+      "label": "Show payment types"
+    },
+    {
+      "type": "checkbox",
+      "id": "footer_social_enable",
+      "label": "Show social icons"
+    }
+  ],
+  "blocks" : [
+    {
+      "type": "linklist",
+      "name": "Link list",
+      "settings": [
+        {
+           "type": "link_list",
+           "id": "linklist",
+           "label": "Link list",
+           "default": "main-menu"
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Subscribers are under 'Accepts Marketing' in your [customer admin](/admin/customers).  Sync to Mailchimp with the official [Mailchimp app](https://apps.shopify.com/mailchimp)."
+        },
+        {
+           "type": "textarea",
+           "id": "text",
+           "label": "Newsletter description",
+           "default": "Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Text column"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Share store details, promotions, or brand content with your customers.</p>"
+        }
+      ]
+    },
+    {
+      "type": "page",
+      "name": "Page",
+      "settings": [
+        {
+          "id": "page",
+          "type": "page",
+          "label": "Page"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

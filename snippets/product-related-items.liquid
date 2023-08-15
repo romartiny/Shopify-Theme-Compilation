@@ -1,0 +1,135 @@
+<!-- /snippets/product-related-item.liquid -->
+{% comment %}
+  Based on the related products by Collection
+  solution documented here by Caroline Schnapp:
+  https://docs.shopify.com/support/your-store/products/can-i-recommend-related-products
+{% endcomment %}
+
+{% assign number_of_related_products_per_row = 4 %}
+
+{% comment %}
+  Set either or both to true, if you want
+  to limit yourself to items with same vendor, and/or type.
+{% endcomment %}
+
+{% assign same_vendor = false %}
+{% assign same_type = false %}
+
+{% comment %}
+  Collections to ignore.
+  Never pick related items from those.
+{% endcomment %}
+
+{% assign exclusions = 'frontpage,all' | split: ',' %}
+
+{% comment %}
+  Looking for a relevant collection.
+{% endcomment %}
+
+{% assign found_a_collection = false %}
+{% if collection and collection.all_products_count > 1 %}
+  {% unless exclusions contains collection.handle %}
+    {% assign found_a_collection = true %}
+  {% endunless %}
+{% endif %}
+{% unless found_a_collection %}
+  {% for c in product.collections %}
+    {% unless exclusions contains c.handle or c.all_products_count < 2 %}
+      {% assign found_a_collection = true %}
+      {% assign collection = c %}
+      {% break %}
+    {% endunless %}
+  {% endfor %}
+{% endunless %}
+
+{% comment %}
+  If we have a relevant collection.
+{% endcomment %}
+
+{% if found_a_collection %}
+
+  {% assign counter = 0 %}
+  {% assign current_product = product %}
+  {% assign break_at = 6 %}
+
+  {% comment %}
+    Count related products to set grid width
+  {% endcomment %}
+  {% for product in collection.products %}
+    {% unless product.handle == current_product.handle %}
+       {% unless same_vendor and current_product.vendor != product.vendor %}
+         {% unless same_type and current_product.type != product.type %}
+           {% assign counter = counter | plus: 1 %}
+           {% if counter == break_at %}
+             {% break %}
+           {% endif %}
+         {% endunless %}
+      {% endunless %}
+    {% endunless %}
+  {% endfor %}
+
+  {% comment %}
+    Set grid width
+  {% endcomment %}
+  {% case counter %}
+    {% when 1 %}
+      {% assign grid_width_large = 'large--one-third push--large--one-third' %}
+      {% assign grid_width_medium = 'medium--one-third push--medium--one-third' %}
+    {% when 2 %}
+      {% assign grid_width_large = 'large--one-half' %}
+      {% assign grid_width_medium = 'medium--one-half' %}
+    {% when 3 %}
+      {% assign grid_width_large = 'large--one-third' %}
+      {% assign grid_width_medium = 'medium--one-third' %}
+    {% when 4 %}
+      {% assign grid_width_large = 'large--one-quarter' %}
+      {% assign grid_width_medium = 'medium--one-half' %}
+      {% assign grid_width_small = 'small--one-half' %}
+    {% when 5 %}
+      {% assign grid_width_large = 'large--one-fifth' %}
+      {% assign grid_width_medium = 'medium--one-third' %}
+      {% assign grid_width_small = 'small--one-half' %}
+    {% when 6 %}
+      {% assign grid_width_large = 'large--one-sixth' %}
+      {% assign grid_width_medium = 'medium--one-third' %}
+      {% assign grid_width_small = 'small--one-half' %}
+    {% else %}
+      {% assign grid_width_large = 'large--one-quarter' %}
+      {% assign grid_width_medium = 'medium--one-third' %}
+      {% assign grid_width_small = 'small--one-half' %}
+  {% endcase %}
+
+  {% assign counter = 0 %}
+  
+  {% capture related_items %}
+    {% for product in collection.products %}
+      {% unless product.handle == current_product.handle %}
+         {% unless same_vendor and current_product.vendor != product.vendor %}
+           {% unless same_type and current_product.type != product.type %}
+             {% include 'product-grid-item' %}
+             {% assign counter = counter | plus: 1 %}
+             {% if counter == break_at %}
+               {% break %}
+             {% endif %}
+           {% endunless %}
+        {% endunless %}
+      {% endunless %}
+    {% endfor %}
+  {% endcapture %}
+
+  {% assign related_items = related_items | trim %}
+
+  {% unless related_items == blank %}
+  <div class="wrapper product__related">
+    <aside class="grid page-margin">
+      <div class="grid__item">
+        <h3 class="home__subtitle">{{ 'products.general.related' | t }}</h3>
+        <div class="grid-uniform{% if settings.image_autoheight_enable %} image_autoheight_enable{% endif %}">
+          {{ related_items }}
+        </div>
+      </div>
+    </aside>
+  </div>
+  {% endunless %}
+
+{% endif %}

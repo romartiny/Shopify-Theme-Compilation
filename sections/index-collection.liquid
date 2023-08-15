@@ -1,0 +1,172 @@
+{%- assign collection = collections[section.settings.collection] -%}
+
+{% case section.settings.grid %}
+  {% when '1' %}
+    {% assign grid_width_large = 'large--one-third push--large--one-third clear' %}
+    {% assign grid_width_medium = 'medium--one-half push--medium--one-quarter clear' %}
+    {% assign grid_width_small = 'small--one-whole' %}
+  {% when '2' %}
+    {% assign grid_width_large = 'large--one-half' %}
+    {% assign grid_width_medium = 'medium--one-half' %}
+    {% assign grid_width_small = 'small--one-half' %}
+  {% when '3' %}
+    {% assign grid_width_large = 'large--one-third' %}
+    {% assign grid_width_medium = 'medium--one-third' %}
+    {% assign grid_width_small = 'small--one-whole' %}
+  {% when '4' %}
+    {% assign grid_width_large = 'large--one-quarter' %}
+    {% assign grid_width_medium = 'medium--one-half' %}
+    {% assign grid_width_small = 'small--one-half' %}
+  {% when '5' %}
+    {% assign grid_width_large = 'large--one-fifth' %}
+    {% assign grid_width_medium = 'medium--one-third' %}
+    {% assign grid_width_small = 'small--one-half' %}
+  {% when '6' %}
+    {% assign grid_width_large = 'large--one-sixth' %}
+    {% assign grid_width_medium = 'medium--one-third' %}
+    {% assign grid_width_small = 'small--one-half' %}
+  {% else %}
+    {% assign grid_width_large = 'large--one-quarter' %}
+    {% assign grid_width_medium = 'medium--one-half' %}
+    {% assign grid_width_small = 'small--one-half' %}
+{% endcase %}
+
+{%- assign product_limit = section.settings.grid | times: section.settings.rows -%}
+
+<div class="homepage-collection {{ section.settings.homepage_collection_color }}" data-section-id="{{ section.id }}" data-section-type="index-collection">
+  <div class="wrapper">
+    {% if section.settings.title != blank %}
+      <h4 class="home__subtitle">{{ section.settings.title | escape }}</h4>
+    {% endif %}
+    <div class="grid-uniform{% if settings.image_autoheight_enable %} image_autoheight_enable{% endif %}">
+      {% for product in collection.products  limit: product_limit %}
+        {% include 'product-grid-item' %}
+      {% else %}
+        {{ 'theme-onboarding.css' | asset_url | stylesheet_tag }}
+        {% include 'onboarding-featured-products' %}
+      {% endfor %}
+    </div>
+    {% if section.settings.show_view_all %}
+      <div class="text-center">
+        <a href="{{ collection.url }}" class="btn btn--clear uppercase">
+          {{ 'collections.general.view_all' | t }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Featured Products"
+    },
+    {
+      "id": "collection",
+      "type": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "select",
+      "id": "grid",
+      "label": "Products per row",
+      "default": "3",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        },
+        {
+          "value": "6",
+          "label": "6"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "rows",
+      "label": "Rows",
+      "default": "1",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        },
+        {
+          "value": "6",
+          "label": "6"
+        },
+        {
+          "value": "7",
+          "label": "7"
+        },
+        {
+          "value": "8",
+          "label": "8"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "homepage_collection_color",
+      "label": "Background color",
+      "default": "homepage--white",
+      "options": [
+        { "value": "homepage--white", "label": "White"},
+        { "value": "homepage--light", "label": "Light"},
+        { "value": "homepage--splash", "label": "Accent"},
+        { "value": "homepage--dark", "label": "Dark"}
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'View all' button",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collection",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,29 @@
+<!-- /snippets/fonts.liquid -->
+{% if settings.font_body contains 'google:' or settings.font_accent contains 'google:' or settings.font_title contains 'google:' %}
+{{ 'webfont.js' | asset_url | script_tag }}
+<script type="text/javascript">
+  WebFont.load({
+    google: {
+      families:
+        {% capture requestString %}
+          {% if settings.font_body contains 'google:' %}
+            {{ settings.font_body | remove: 'google:' | remove: 'sansStack:' | remove: 'serifStack:' }},400italic,700,700italic:latin&
+          {% endif %}
+          {% if settings.font_accent contains 'google:' %}
+            {% unless settings.font_accent == settings.font_body %}
+              {{ settings.font_accent | remove: 'google:' | remove: 'sansStack:' | remove: 'serifStack:' }}:latin&
+            {% endunless%}
+          {% endif %}
+          {% if settings.font_title contains 'google:' %}
+            {% unless settings.font_title == settings.font_body or settings.font_title == settings.font_accent %}
+              {{ settings.font_title | remove: 'google:' | remove: 'sansStack:' | remove: 'serifStack:' }}:latin&
+            {% endunless %}
+          {% endif %}
+        {% endcapture %}
+        {% assign requestArray = requestString | remove: ' ' | strip_newlines | split: "&" %}
+        {{requestArray | json}}
+    },
+    timeout: 5000
+  });
+</script>
+{% endif %}

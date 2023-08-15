@@ -1,0 +1,16 @@
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="52px" height="28px" viewBox="0 0 52 28" enable-background="new 0 0 52 28" xml:space="preserve">
+	 {% capture arrowColor %}
+	   {% if section.settings.color == "homepage--light"%}
+	     {{ settings.homepage_background_light }}
+	   {% elsif section.settings.color == "homepage--dark" %}
+	     {{ settings.homepage_background_dark }}
+	   {% elsif section.settings.color == "homepage--splash" %}
+	     {{ settings.color_splash }}
+	   {% else %}
+	     #ffffff
+	   {% endif %}
+	 {% endcapture %}
+<polyline fill="none" stroke="{{ arrowColor }}" stroke-width="4" stroke-miterlimit="10" points="50.038,2.546 25.928,24.541 1.816,2.546
+	"/>
+</svg>

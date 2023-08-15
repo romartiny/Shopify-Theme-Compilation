@@ -1,0 +1,15 @@
+<script>
+  var chargeRabbitOptions = {};
+  {% for variant in product.variants %}
+    chargeRabbitOptions[{{ variant.id }}] = {};
+    {% if variant.metafields.charge_rabbit.amount %}
+      chargeRabbitOptions[{{ variant.id }}]['amount'] = {{ variant.metafields.charge_rabbit.amount }};
+      chargeRabbitOptions[{{ variant.id }}]['interval'] = '/{{ variant.metafields.charge_rabbit.interval }}';
+    {% else %}
+      chargeRabbitOptions[{{ variant.id }}]['amount'] = 0;
+      chargeRabbitOptions[{{ variant.id }}]['interval'] = "/month";
+    {% endif %}
+  {% endfor %}
+
+  $("<script type='application/json' id='MembershipJson-{{ section.id }}'>" + JSON.stringify(chargeRabbitOptions) + "<\/script>").insertAfter('#ProductJson-{{ section.id }}')
+</script>

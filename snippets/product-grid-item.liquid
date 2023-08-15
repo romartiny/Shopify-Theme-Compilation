@@ -1,0 +1,47 @@
+{%- assign product_img_url = product.featured_image.src | img_url: '700x' -%}
+{%- if grid_width_large == 'large--one-whole' -%}
+  {%- assign product_img_url = product.featured_image.src | img_url: '1200x' -%}
+{%- elsif grid_width_large == 'large--one-half' -%}
+  {%- assign product_img_url = product.featured_image.src | img_url: '900x' -%}
+{%- endif -%}
+
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+  {% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if product.available  %}
+  {% assign sold_out = false %}
+{% endif %}
+
+<div class="grid__item {{ grid_offset }} {{ grid_width_small }} {{ grid_width_medium }} {{ grid_width_large }}{% if on_sale %} on-sale{% endif %}  product-grid-item">
+  <a href="{{ product.url | within: collection }}" class="grid__image">
+    <img src="{{ product_img_url }}" alt="{{ product.featured_image.alt | escape }}">
+  </a>
+  <div class="figcaption {{ settings.product_grid_style }} {{ settings.collection_text_alignment | default: 'text-center' }}">
+    <a href="{{ product.url | within: collection | capitalize }}">
+      <p class="h6 name_wrapper">
+        {{ product.title }}
+      </p>
+      <p class="price_wrapper">
+        <span class="price{% if on_sale %} on-sale{% endif %}">
+          {% if product.price_varies %}{{ 'products.general.from' | t }} {% endif %}
+          <span class="money">{{ product.price | money }}</span>
+        </span>
+        {% if sold_out %}
+        <br /><em>{{ 'products.product.sold_out' | t }}</em>
+        {% endif %}
+        {% if on_sale %}
+        <span class="compare-at">
+          <span class="money">{{ product.compare_at_price | money }}</span>
+        </span>
+        {% endif %}
+        {% if product.metafields.spr.reviews %}
+          <br />
+          <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+        {% endif %}
+      </p>
+    </a>
+  </div>
+</div>

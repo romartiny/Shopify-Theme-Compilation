@@ -1,0 +1,192 @@
+<!-- /sections/collection-list.liquid -->
+
+{% paginate collection.products by 50 %}
+
+{%- assign collection_sidebar = false -%}
+{% if section.settings.collection_custom_nav_list != blank or section.settings.collection_standard_nav or section.settings.collection_type_nav or section.settings.collection_vendor_nav or section.settings.collection_tag_nav %}
+  {%- assign collection_sidebar = true -%}
+{%- endif -%}
+
+<div data-section-id="{{ section.id }}" data-section-type="collection">
+
+  {% if collection.image %}
+    <div class="homepage-image preventOverflow {{ section.settings.text_color }} {{ section.settings.image_height }}" id="FeaturedImage-{{ section.id }}" {% if section.settings.parallax %}data-img-src="{{ collection.image | img_url: '1800x' }}"{% endif %}>
+      <div class="content--centered">
+        <div class="text-center preventOverflowContent">
+          <h1 class="title--flex">{{ collection.title }}</h1>
+          {% if collection.description.size > 0 %}<p class="content--flex h4--body">{{ collection.description }}</p>{% endif %}
+        </div>
+      </div>
+      <div class="image-overlay {{ section.settings.image_overlay }}"></div>
+      {% if section.settings.image_height == 'use_image' %}
+        <img src="{{ collection.image | img_url: '1400x' }}" alt="{{ collection.image | default: collection.title }}" class="responsive-wide-image" {% if section.settings.parallax %} style="opacity: 0;"{% endif %}/>
+      {% endif %}
+      {% if section.settings.parallax == false and section.settings.image_height != 'use_image' %}
+        <div class="background-size-cover" style="background-image: url('{{ collection.image | img_url: '1400x' }}');"></div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="collection">
+    {% unless collection.image %}
+      <div class="collection-title text-center">
+        <div class="grid">
+          <h1 class="title grid__item one-whole">{{ collection.title }}</h1>
+          {% if collection.description.size > 0 %}
+            <div class="collection-text--body rte grid__item large--three-fifths push--large--one-fifth">
+              <p class="h4--body">{{ collection.description }}</p>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endunless %}
+    <div class="wrapper">
+
+      {% if section.settings.collection_sorting %}
+      <div class="row text-right collection__sort">
+        {% include 'collection-sorting' %}
+      </div>
+      {% endif %}
+      <div class="page-margin grid--rev">
+        {% if collection_sidebar %}
+        <div class="grid__item large--three-quarters">
+        {% else  %}
+        <div class="grid__item large--one-whole">
+        {% endif %}
+        <div class="grid-uniform">
+          {% for product in collection.products %}
+            {% include 'product-list-item' %}
+          {% else %}
+            <div class="grid__item">
+              <p>{{ 'collections.general.no_matches' | t }}</p>
+            </div>
+          {% endfor %}
+        </div>
+        {% if paginate.pages > 1 %}
+          <hr>
+          <div class="text-center">
+            {% include 'pagination-custom' %}
+          </div>
+        {% endif %}
+      </div>
+      {% if collection_sidebar %}
+      <div class="grid__item large--one-quarter">
+        {% include 'collections-sidebar' %}
+      </div>
+      {% endif %}
+    </div>
+    {% endpaginate %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection page",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Sidebar menu"
+    },
+    {
+      "type": "link_list",
+      "id": "collection_custom_nav_list",
+      "label": "Custom link list"
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_standard_nav",
+      "label": "Show all collections"
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_type_nav",
+      "label": "Show types"
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_vendor_nav",
+      "label": "Show vendors"
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_tag_nav",
+      "label": "Show tags"
+    },
+    {
+      "type": "header",
+      "content": "Collection sorting"
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_sorting",
+      "label": "Show collection sorting"
+    },
+    {
+      "type": "header",
+      "content": "Feature image"
+    },
+    {
+      "type": "select",
+      "id": "image_height",
+      "label": "Image height",
+      "options": [
+        { "value": "use_image", "label": "Image height"},
+        { "value": "use_screen_two_thirds", "label": "Tall"},
+        { "value": "use_screen_one_half", "label": "Medium"},
+        { "value": "use_screen_one_third", "label": "Short"},
+        { "value": "use_screen_one_fifth", "label": "Tiny"}
+      ],
+      "default": "use_screen_one_third"
+    },
+    {
+      "type": "select",
+      "id": "image_overlay",
+      "label": "Image overlay opacity",
+      "info": "Darkens image for legible text.",
+      "default": "image-overlay-20",
+      "options": [
+        { "value": "image-overlay-0", "label": "0%"},
+        { "value": "image-overlay-5", "label": "5%"},
+        { "value": "image-overlay-10", "label": "10%"},
+        { "value": "image-overlay-15", "label": "15%"},
+        { "value": "image-overlay-20", "label": "20%"},
+        { "value": "image-overlay-25", "label": "25%"},
+        { "value": "image-overlay-30", "label": "30%"},
+        { "value": "image-overlay-35", "label": "35%"},
+        { "value": "image-overlay-40", "label": "40%"},
+        { "value": "image-overlay-45", "label": "45%"},
+        { "value": "image-overlay-50", "label": "50%"},
+        { "value": "image-overlay-55", "label": "55%"},
+        { "value": "image-overlay-60", "label": "60%"},
+        { "value": "image-overlay-65", "label": "65%"},
+        { "value": "image-overlay-70", "label": "70%"},
+        { "value": "image-overlay-75", "label": "75%"},
+        { "value": "image-overlay-80", "label": "80%"},
+        { "value": "image-overlay-85", "label": "85%"},
+        { "value": "image-overlay-90", "label": "90%"},
+        { "value": "image-overlay-95", "label": "95%"},
+        { "value": "image-overlay-100","label": "100%"}
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_color",
+      "default": "homepage--white",
+      "label": "Text color",
+      "options": [
+        { "value": "homepage--white", "label": "White"},
+        { "value": "homepage--light", "label": "Light"},
+        { "value": "homepage--splash", "label": "Accent"},
+        { "value": "homepage--dark", "label": "Dark"}
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "parallax",
+      "default": false,
+      "label": "Enable parallax scroll"
+    }
+  ]
+}
+{% endschema %}

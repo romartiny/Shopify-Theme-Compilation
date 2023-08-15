@@ -1,0 +1,110 @@
+<div class="homepage-instagram {{ section.settings.homepage_instagram_color }}" data-section-id="{{ section.id }}" data-section-type="instagram">
+  {% unless section.settings.title == '' %}
+    <h4 class="home__subtitle">{{ section.settings.title | escape }}</h4>
+  {% endunless %}
+  {% if section.settings.token == '' %}
+    <div class="grid-uniform grid--full">
+      {% for i in (1..section.settings.instagram_photo_count) %}
+        <div class="grid__item {{section.settings.instagram_grid_width_large}} {{section.settings.instagram_grid_width_medium}} {{section.settings.instagram_grid_width_small}}">
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div id="Instafeed-{{ section.id }}" class="grid-uniform" data-count="{{ section.settings.instagram_photo_count }}" data-access-token="{{ section.settings.token }}" data-grid="{{section.settings.instagram_grid_width_large}} {{section.settings.instagram_grid_width_medium}} {{section.settings.instagram_grid_width_small}}"></div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Instagram feed",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Instagram"
+    },
+    {
+      "type": "select",
+      "id": "homepage_instagram_color",
+      "label": "Background color",
+      "default": "homepage--white",
+      "options": [
+        { "value": "homepage--white", "label": "White"},
+        { "value": "homepage--light", "label": "Light"},
+        { "value": "homepage--splash", "label": "Accent"},
+        { "value": "homepage--dark", "label": "Dark"}
+      ]
+    },
+    {
+      "type": "text",
+      "id": "token",
+      "label": "Instagram access token",
+      "info": "[Generate Instagram access token](http://corknine.com/pipeline-docs/instagram/)"
+    },
+    {
+      "type": "select",
+      "id": "instagram_photo_count",
+      "options": [
+        { "value": "3", "label": "3 photos"},
+        { "value": "4", "label": "4 photos"},
+        { "value": "5", "label": "5 photos"},
+        { "value": "6", "label": "6 photos"},
+        { "value": "7", "label": "7 photos"},
+        { "value": "8", "label": "8 photos"},
+        { "value": "9", "label": "9 photos"},
+        { "value": "10", "label": "10 photos"},
+        { "value": "11", "label": "11 photos"},
+        { "value": "12", "label": "12 photos"}
+      ],
+      "default": "6",
+      "label": "Number of photos to display"
+    },
+    {
+      "type": "header",
+      "content": "Photo grid"
+    },
+    {
+      "type": "select",
+      "id": "instagram_grid_width_large",
+      "label": "Desktop",
+      "default": "large--one-sixth",
+      "options": [
+        { "value": "large--one-half", "label": "2 per row"},
+        { "value": "large--one-third", "label": "3 per row"},
+        { "value": "large--one-quarter", "label": "4 per row"},
+        { "value": "large--one-fifth", "label": "5 per row"},
+        { "value": "large--one-sixth", "label": "6 per row"}
+      ]
+    },
+    {
+      "type": "select",
+      "id": "instagram_grid_width_medium",
+      "default": "medium--one-third",
+      "label": "Tablet",
+      "options": [
+        { "value": "medium--one-half", "label": "2 per row"},
+        { "value": "medium--one-third", "label": "3 per row"},
+        { "value": "medium--one-quarter", "label": "4 per row"}
+      ]
+    },
+    {
+      "type": "select",
+      "id": "instagram_grid_width_small",
+      "default": "small--one-third",
+      "label": "Mobile",
+      "options": [
+        { "value": "small--one-half", "label": "2 per row"},
+        { "value": "small--one-third", "label": "3 per row"}
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instagram feed",
+      "category": "Social"
+    }
+  ]
+}
+{% endschema %}

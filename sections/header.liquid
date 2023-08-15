@@ -1,0 +1,131 @@
+<div class="header__wrapper" data-section-id="{{ section.id }}" data-section-type="header">
+
+  {% if section.settings.header_enable_account or section.settings.header_enable_search or section.settings.header_message != '' %}
+  <div class="info-bar showMobile">
+    <div class="wrapper text-center">
+
+      {% if shop.customer_accounts_enabled and section.settings.header_enable_account %}
+        <div class="header-account-link">
+          <a href="/account"><img src="{{ 'account.svg' | asset_url }}"></a>
+        </div>
+      {% endif %}
+
+      {% if section.settings.header_message != '' %}
+      <div class="header-message uppercase{% if section.settings.header_enable_account or section.settings.header_enable_search %} header-message--crowded{% endif %}">
+        {% if section.settings.header_message_url != blank %}
+          <a href="{{ section.settings.header_message_url }}">{{ section.settings.header_message | escape }}</a>
+        {% else %}
+          {{ section.settings.header_message | escape }}
+        {% endif %}
+      </div>
+      {% endif %}
+
+      {% if section.settings.header_enable_search %}
+        <div class="header-search__wrapper">
+          <div class="header-search">
+            <form action="/search" method="get" class="input-group search" role="search">
+              {% if section.settings.search_only_products %}<input type="hidden" name="type" value="product">{% endif %}
+              <input class="search-bar" type="search" name="q">
+              <button type="submit" class="btn search-btn"></button>
+            </form>
+          </div>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+  {% endif %}
+
+  <header class="site-header {{ section.settings.height }}" role="banner">
+    <div class="wrapper">
+      <div class="nav--desktop">
+        {% include 'nav-contents' %}
+      </div>
+      <div class="nav--mobile">
+        {% include 'nav-contents' %}
+      </div>
+    </div>
+  </header>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "text",
+      "id": "logo_max_width",
+      "label": "Custom logo width (in pixels)"
+    },
+    {
+      "type": "link_list",
+      "label": "Menu",
+      "id": "main_menu_linklist"
+    },
+    {
+      "type": "select",
+      "label": "Height",
+      "id": "height",
+      "default": "header--medium",
+      "options": [
+        { "value": "header--small", "label": "Small"},
+        { "value": "header--medium", "label": "Medium"},
+        { "value": "header--large", "label": "Large"},
+        { "value": "header--xl", "label": "Extra Large"}
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Meganav image"
+    },
+    {
+      "type": "image_picker",
+      "id": "meganav_image",
+      "label": "Meganav image",
+      "info": "500 x 800px .jpg max"
+    },
+    {
+      "type": "url",
+      "id": "meganav_link",
+      "label": "Meganav Image Link"
+    },
+    {
+      "type": "header",
+      "content": "Top Bar"
+    },
+    {
+      "type": "text",
+      "id": "header_message",
+      "label": "Announcement text",
+      "info": "45 characters or less recommended"
+    },
+    {
+      "type": "url",
+      "id": "header_message_url",
+      "label": "Announcement link"
+    },
+    {
+      "type": "checkbox",
+      "id": "header_enable_account",
+      "default": true,
+      "label": "Show account link in header"
+    },
+    {
+      "type": "checkbox",
+      "id": "header_enable_search",
+      "default": true,
+      "label": "Show search in header"
+    },
+    {
+      "type": "checkbox",
+      "id": "search_only_products",
+      "label": "Only search products"
+    }
+  ]
+}
+{% endschema %}

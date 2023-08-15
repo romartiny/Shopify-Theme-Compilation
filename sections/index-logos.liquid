@@ -1,0 +1,103 @@
+<div class="homepage-logos {{ section.settings.homepage_logos_bg_color }}{% if section.settings.title != blank %} homepage-logos--tall{% endif %}">
+  <div class="wrapper">
+    {% if section.settings.title != blank %}
+      <h4 class="home__subtitle">{{ section.settings.title | escape }}</h4>
+    {% endif %}
+
+
+    {% if section.blocks.size > 0 %}
+      <div class="logo-bar">
+        {% for block in section.blocks %}
+          <div class="logo-bar__item" {{ block.shopify_attributes }}>
+            {% if block.settings.link != blank %}
+              <a href="{{ block.settings.link }}" class="logo-bar__link" target="_blank">
+            {% endif %}
+            {% if block.settings.image != blank %}
+              {{ block.settings.image | img_url: '160x160', scale: 2 | img_tag: block.settings.image.alt, 'logo-bar__image' }}
+            {% else %}
+              {{ 'logo' | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endif %}
+            {% if block.settings.link != blank %}
+              </a>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if section.blocks.size == 0 %}
+      <div class="text-center">{{ 'home_page.onboarding.no_content' | t }}</div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Logo list",
+    "class": "index-section",
+    "max_blocks": 20,
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Logo list"
+      },
+      {
+        "type": "select",
+        "id": "homepage_logos_bg_color",
+        "label": "Background color",
+        "default": "homepage--light",
+        "options": [
+          { "value": "homepage--white", "label": "White"},
+          { "value": "homepage--light", "label": "Light"},
+          { "value": "homepage--splash", "label": "Accent"},
+          { "value": "homepage--dark", "label": "Dark"}
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "type": "logo_image",
+        "name": "Logo",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "640 x 640px .png recommended"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Link",
+            "info": "Optional"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Logo list",
+        "category": "Image",
+        "blocks": [
+          {
+            "type": "logo_image"
+          },
+          {
+            "type": "logo_image"
+          },
+          {
+            "type": "logo_image"
+          },
+          {
+            "type": "logo_image"
+          },
+          {
+            "type": "logo_image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

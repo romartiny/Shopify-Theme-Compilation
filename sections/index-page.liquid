@@ -1,0 +1,126 @@
+<!-- /sections/index-pageliquid -->
+
+<div class="homepage-page {{ section.settings.homepage_page_color }}" data-section-id="{{ section.id }}" data-section-type="index-page">
+  {% for block in section.blocks %}
+    <div class="wrapper">
+      <div class="grid">
+        {% case block.type %}
+          {% when 'page' %}
+            {% if block.settings.home_page_content != blank %}
+              {% assign page = pages[block.settings.home_page_content] %}
+              {% assign page_src = page.content | escape %}
+              {% if page_src contains '&lt;img' %}
+                {% assign homepage_page_grid = 'one-whole' %}
+              {% else %}
+                {% assign homepage_page_grid = 'large--five-sixths push--large--one-twelfth' %}
+              {% endif %}
+              <div class="grid__item {{ homepage_page_grid }}" {{ block.shopify_attributes }}>
+                {% if block.settings.home_page_show_title %}
+                  <h4 class="home__subtitle">{{ page.title | escape }}</h4>
+                {% endif %}
+                <div class="rte homepage-page__content">
+                  {% unless page == blank or page.empty? %}
+                    {{ page.content }}
+                  {% else %}
+                    {{ 'home_page.onboarding.no_content' | t }}
+                  {% endunless %}
+                </div>
+              </div>
+            {% endif %}
+          {% when 'text' %}
+            <div class="grid__item large--five-sixths push--large--one-twelfth" {{ block.shopify_attributes }}>
+              {% if block.settings.title != '' %}
+                <h4 class="home__subtitle">{{ block.settings.title | escape }}</h4>
+              {% endif %}
+              <div class="rte homepage-page__content">
+                {% if block.settings.home_page_richtext != blank %}
+                  {{ block.settings.home_page_richtext }}
+                {% else %}
+                  {{ 'home_page.onboarding.no_content' | t }}
+                {% endif %}
+              </div>
+            </div>
+          {% else %}
+        {% endcase %}
+      </div>
+    </div>
+  {% endfor %}
+  {% if section.blocks.size == 0 %}
+    <div class="wrapper">
+      <div class="grid">
+        <div class="grid__item">
+          <div class="rte homepage-page__content">
+            {{ 'home_page.onboarding.no_content' | t }}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Rich text",
+  "max_blocks": 9,
+  "settings": [
+    {
+      "type": "select",
+      "id": "homepage_page_color",
+      "label": "Background color",
+      "default": "homepage--white",
+      "options": [
+        { "value": "homepage--white", "label": "White"},
+        { "value": "homepage--light", "label": "Light"},
+        { "value": "homepage--splash", "label": "Accent"},
+        { "value": "homepage--dark", "label": "Dark"}
+      ]
+    }
+  ],
+  "blocks" : [
+    {
+      "type": "text",
+      "name": "Rich text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Rich Text"
+        },
+        {
+          "id": "home_page_richtext",
+          "type": "richtext",
+          "label": "Text",
+          "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+        }
+      ]
+    },
+    {
+      "type": "page",
+      "name": "Page",
+      "settings": [
+        {
+          "id": "home_page_content",
+          "type": "page",
+          "label": "Page"
+        },
+        {
+          "type": "checkbox",
+          "id": "home_page_show_title",
+          "label": "Show page title",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Rich text",
+    "category": "Text",
+    "blocks": [
+      {
+        "type": "text"
+      }
+    ]
+  }]
+}
+{% endschema %}

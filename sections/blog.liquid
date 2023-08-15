@@ -1,0 +1,234 @@
+<!-- /sections/blog.liquid -->
+{% assign sidebar_enable = false %}
+{% if blog.all_tags != blank and section.settings.tags %}
+  {% assign sidebar_enable = true %}
+{% endif %}
+
+{% if sidebar_enable %}
+  {% assign blog_grid = 'large--one-half' %}
+{% else %}
+  {% assign blog_grid = 'large--one-third' %}
+{% endif %}
+
+
+{% assign blog_pagination = 20 %}
+{% if section.settings.layout == 'list' %}
+  {% assign blog_pagination = 5 %}
+{% endif %}
+{% paginate blog.articles by blog_pagination %}
+
+{% comment %}
+  This template is also used for listing out articles of a specific tag.
+  You can change layouts or styles by checking if current_tags is true.
+{% endcomment %}
+<div data-section-id="{{ section.id }}" data-section-type="blog">
+
+  {% if section.settings.image %}
+    <div class="homepage-image preventOverflow {{ section.settings.text_color }} {{ section.settings.image_height }}" id="FeaturedImage-{{ section.id }}" {% if section.settings.parallax %}data-img-src="{{ section.settings.image | img_url: '1800x' }}"{% endif %}>
+      <div class="content--centered">
+        <div class="text-center preventOverflowContent">
+
+          {% if current_tags %}
+            <h1 class="title--flex">{{ current_tags.first }}</h1>
+          {% else %}
+            <h1 class="title--flex">{{ blog.title }}</h1>
+          {% endif %}
+        </div>
+      </div>
+      <div class="image-overlay {{ section.settings.image_overlay }}"></div>
+        <img src="{{ section.settings.image | img_url: '1400x' }}" alt="{{ section.settings.image | default: blog.title }}" class="responsive-wide-image" {% if section.settings.parallax %} style="opacity: 0;"{% endif %}/>
+    </div>
+  {% endif %}
+
+  <div class="blog">
+    <div class="wrapper page-margin">
+
+      <div class="grid">
+        {%- assign blog_layout = 'one whole' -%}
+        {%- if sidebar_enable -%}
+          {%- assign blog_layout = 'large--two-thirds' -%}
+        {% elsif section.settings.layout == 'list' %}
+          {%- assign blog_layout = 'large--two-thirds push--large--one-sixth' -%}
+        {%- endif -%}
+        <div class="grid__item {{ blog_layout }}">
+
+          {% if current_tags %}
+            <h4 class="title uppercase h4">{{ current_tags.first }}</h4>
+            <hr class="hr--small">
+          {% endif %}
+
+          {% if section.settings.layout == 'list' %}
+            {% for article in blog.articles %}
+              <div class="blog__article">
+                <header{% if article.image %} class="blog__article-header-image" style="background-image: url('{{ article.image | img_url: '1024x1024' }}');"{% endif %}>
+                  <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
+                  {% if section.settings.blog_show_meta %}
+                    {% capture author %}<strong>{{ article.author }}</strong>{% endcapture %}
+                    {% capture date %}<time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'month_day_year' }}</time>{% endcapture %}
+                    <p class="accent">{{ 'blogs.article.author_on_date_html' | t: author: author, date: date }}</p>
+                  {% endif %}
+                </header>
+                <div class="rte blog__article__content">
+                  {{ article.excerpt_or_content }}
+                </div>
+                <footer>
+                  <ul>
+                    {% if blog.comments_enabled? %}
+                    <li>
+                      <a class="blog__comments" href="{{ article.url }}#Comments">
+                        <strong>{{ article.comments_count }}</strong>
+                        <em>{{ 'blogs.comments.comments_with_count' | t: count: article.comments_count }}</em>
+                      </a>
+                    </li>
+                    {% endif %}
+                  </ul>
+                  {% if settings.blog_show_tags %}
+                    {% include 'tags-article' %}
+                  {% endif %}
+                </footer>
+                <a class="btn btn--large btn--splash btn--full uppercase" href="{{ article.url }}">{{ 'blogs.article.read_more' | t }} &rarr;</a>
+              </div>
+            {% endfor %}
+          {% else %}
+            {% unless section.settings.image or current_tags %}
+              <h4 class="title uppercase h4">{{ blog.title }}</h4>
+              <hr class="hr--small">
+            {% endunless %}
+            <div class="grid-uniform">
+              {% for article in blog.articles %}
+                {% include 'article-grid-item' %}
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          {% if paginate.pages > 1 %}
+            <div class="text-center">
+              {% include 'pagination-custom' %}
+            </div>
+          {% endif %}
+
+        </div>
+
+        {% if sidebar_enable %}
+        <div class="grid__item large--one-third blog__sidebar">
+          <h1 class="uppercase h4">{{ blog.title }}</h1>
+          <a class="icon-fallback-text blog__rss" href="{{ blog.url }}.atom" title="{{ shop.name }} RSS" target="_blank">
+            <span class="icon icon-rss"></span>
+            <span class="fallback-text">RSS</span>
+          </a>
+          <hr class="hr--small">
+          {% if blog.all_tags != blank %}
+          <h5 class="uppercase h5">{{ 'blogs.article.tags' | t }}</h5>
+            {% for tag in blog.all_tags %}
+              <a class="blog__tag" href="/blogs/{{ blog.handle }}/tagged/{{ tag | handleize }}">{{ tag }}</a>
+            {% endfor %}
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endpaginate %}
+
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "default": "list",
+      "options": [
+        {
+          "value": "grid",
+          "label": "Grid"
+        },
+        {
+          "value": "list",
+          "label": "List"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "List layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_meta",
+      "label": "Show date and author",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Feature image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Banner image"
+    },
+    {
+      "type": "select",
+      "id": "image_overlay",
+      "label": "Image overlay opacity",
+      "info": "Darkens image for legible text.",
+      "default": "image-overlay-30",
+      "options": [
+        { "value": "image-overlay-0", "label": "0%"},
+        { "value": "image-overlay-5", "label": "5%"},
+        { "value": "image-overlay-10", "label": "10%"},
+        { "value": "image-overlay-15", "label": "15%"},
+        { "value": "image-overlay-20", "label": "20%"},
+        { "value": "image-overlay-25", "label": "25%"},
+        { "value": "image-overlay-30", "label": "30%"},
+        { "value": "image-overlay-35", "label": "35%"},
+        { "value": "image-overlay-40", "label": "40%"},
+        { "value": "image-overlay-45", "label": "45%"},
+        { "value": "image-overlay-50", "label": "50%"},
+        { "value": "image-overlay-55", "label": "55%"},
+        { "value": "image-overlay-60", "label": "60%"},
+        { "value": "image-overlay-65", "label": "65%"},
+        { "value": "image-overlay-70", "label": "70%"},
+        { "value": "image-overlay-75", "label": "75%"},
+        { "value": "image-overlay-80", "label": "80%"},
+        { "value": "image-overlay-85", "label": "85%"},
+        { "value": "image-overlay-90", "label": "90%"},
+        { "value": "image-overlay-95", "label": "95%"},
+        { "value": "image-overlay-100","label": "100%"}
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_color",
+      "default": "homepage--white",
+      "label": "Text color",
+      "options": [
+        { "value": "homepage--white", "label": "White"},
+        { "value": "homepage--light", "label": "Light"},
+        { "value": "homepage--splash", "label": "Accent"},
+        { "value": "homepage--dark", "label": "Dark"}
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "parallax",
+      "default": true,
+      "label": "Enable parallax scroll"
+    },
+    {
+      "type": "header",
+      "content": "Sidebar"
+    },
+    {
+      "type": "checkbox",
+      "id": "tags",
+      "default": false,
+      "label": "Show tags"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,187 @@
+{%- if section.settings.image -%}
+  {%- assign background_image = section.settings.image | img_url: '1800x' -%}
+{%- else -%}
+  {%- assign background_image = 'blank.svg' | asset_url -%}
+{%- endif -%}
+<div class="homepage-image preventOverflow {{ section.settings.height }} {{ section.settings.color }}" data-section-id="{{ section.id }}" data-section-type="banner" {% if section.settings.parallax %}data-img-src="{{ background_image }}"{% endif %}>
+  {% if section.settings.link_text == '' and section.settings.link and section.settings.button_image == nil %}
+    <a href="{{ section.settings.link }}">
+  {% endif %}
+  <div class="content--centered">
+    <div class="{{ section.settings.text_align }} preventOverflowContent">
+      {% if section.settings.button_image %}
+        <a href="{{ section.settings.link }}">
+          <img src="{{ section.settings.button_image | img_url: '1000x' }}" alt="{{ section.settings.button_image.alt | default: section.settings.link_text }}" class="image--flex" />
+        </a>
+      {% else %}
+        {% unless section.settings.title == '' %}<h1 class="title--flex">{{ section.settings.title | escape }}</h1>{% endunless %}
+        {% unless section.settings.description == '' %}<p class="content--flex h4--body">{{ section.settings.description }}</p>{% endunless %}
+        {% unless section.settings.link_text == '' %}<a class="{{ section.settings.button_style }}" href="{{ section.settings.link }}">{{ section.settings.link_text | escape }}</a>{% endunless %}
+      {% endif %}
+    </div>
+  </div>
+  <div class="image-overlay {{ section.settings.overlay }}"></div>
+  {% if section.settings.height == 'use_image' %}
+    <img src="{{ background_image }}" alt="{{ section.settings.image.alt | default: shop.name }}" class="responsive-wide-image"{% if section.settings.parallax %} style="opacity: 0;"{% endif %}/>
+  {% endif %}
+  {% if section.settings.parallax == false and section.settings.height != 'use_image' %}
+    <div class="background-size-cover" style="background-image: url('{{ background_image }}');"></div>
+  {% endif %}
+  {% if section.settings.link_text == '' and section.settings.link and section.settings.button_image == nil %}
+    </a>
+  {% endif %}
+  {% if section.settings.height == 'use_screen_full' %}
+  <div class="scroll_icon_wrap">
+    <a href="#scroll-{{ section.id }}" class="scroll_link bloop">
+      <span class="scroll_icon">{% include 'svg-down' %}</span>
+    </a>
+  </div>
+  <div class="scroll__link" id="scroll-{{ section.id }}"></div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Section height",
+      "default": "use_screen_two_thirds",
+      "options": [
+        { "value": "use_screen_full", "label": "Full screen height"},
+        { "value": "use_screen_two_thirds", "label": "Tall"},
+        { "value": "use_screen_one_half", "label": "Medium"},
+        { "value": "use_screen_one_third", "label": "Short"},
+        { "value": "use_image", "label": "Image height"}
+      ]
+    },
+    {
+      "type": "select",
+      "id": "overlay",
+      "label": "Image overlay opacity",
+      "info": "Used to darken image for legible text.",
+      "default": "image-overlay-15",
+      "options": [
+        { "value": "image-overlay-0", "label": "0%"},
+        { "value": "image-overlay-5", "label": "5%"},
+        { "value": "image-overlay-10", "label": "10%"},
+        { "value": "image-overlay-15", "label": "15%"},
+        { "value": "image-overlay-20", "label": "20%"},
+        { "value": "image-overlay-25", "label": "25%"},
+        { "value": "image-overlay-30", "label": "30%"},
+        { "value": "image-overlay-35", "label": "35%"},
+        { "value": "image-overlay-40", "label": "40%"},
+        { "value": "image-overlay-45", "label": "45%"},
+        { "value": "image-overlay-50", "label": "50%"},
+        { "value": "image-overlay-55", "label": "55%"},
+        { "value": "image-overlay-60", "label": "60%"},
+        { "value": "image-overlay-65", "label": "65%"},
+        { "value": "image-overlay-70", "label": "70%"},
+        { "value": "image-overlay-75", "label": "75%"},
+        { "value": "image-overlay-80", "label": "80%"},
+        { "value": "image-overlay-85", "label": "85%"},
+        { "value": "image-overlay-90", "label": "90%"},
+        { "value": "image-overlay-95", "label": "95%"},
+        { "value": "image-overlay-100", "label": "100%"}
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "parallax",
+      "default": false,
+      "label": "Enable parallax scroll"
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Headline",
+      "default": "Image with text overlay"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "This area is used to describe your store."
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Alignment",
+      "default": "text-center",
+      "options": [
+        { "value": "text-left", "label": "Align Left"},
+        { "value": "text-center", "label": "Align Center"},
+        { "value": "text-right", "label": "Align Right"}
+      ]
+    },
+    {
+      "type": "select",
+      "id": "color",
+      "label": "Text color",
+      "default": "homepage--white",
+      "options": [
+        { "value": "homepage--white", "label": "White"},
+        { "value": "homepage--light", "label": "Light"},
+        { "value": "homepage--splash", "label": "Accent"},
+        { "value": "homepage--dark", "label": "Dark"}
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Text",
+      "default": "View products",
+      "info": "Leave blank to link entire image"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "default": "btn btn--large btn--clear btn--square uppercase",
+      "options": [
+        { "value": "btn btn--large btn--splash uppercase", "label": "Round"},
+        { "value": "btn btn--large btn--splash btn--square uppercase", "label": "Square"},
+        { "value": "btn btn--large btn--clear uppercase", "label": "Transparent round"},
+        { "value": "btn btn--large btn--clear btn--square uppercase", "label": "Transparent square"},
+        { "value": "btn btn--large btn--outline btn--square uppercase", "label": "Outlined square"}
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Button image (optional)"
+    },
+    {
+      "type": "image_picker",
+      "id": "button_image",
+      "label": "Button image",
+      "info": "1000 x 1000px .png max"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with text overlay",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}

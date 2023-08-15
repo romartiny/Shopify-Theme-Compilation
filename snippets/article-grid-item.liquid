@@ -1,0 +1,19 @@
+<div class="grid__item {{ blog_grid }}">
+  <a class="blog__link" href="{{ article.url }}">
+    <div class="blog__article blog__article--card{% if article.image %} blog__article--image{% endif %}">
+      {% if article.image %}<div class="blog__article__overlay" style="background-image: url('{{ article.image | img_url: 'x630' }}')"></div>{% endif %}
+      <div class="blog__article__content equalHeightColumn">
+        <h3 class="h3 blog__article__title">{{ article.title }}</h3>
+        <div class="rte blog__article__text">
+          {% unless article.image %}
+            {% if article.excerpt == blank %}
+              {{ article.content | strip_html | truncate: 200 }}
+            {% else %}
+              {{ article.excerpt | strip_html | truncate: 200 }}
+            {% endif %}
+          {% endunless %}
+        </div>
+      </div>
+    </div>
+  </a>
+</div>

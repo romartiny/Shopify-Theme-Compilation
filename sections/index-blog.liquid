@@ -1,0 +1,90 @@
+<!-- /sections/index-blog.liquid -->
+{%- assign blog = blogs[section.settings.homepage_blog] -%}
+{%- assign post_count = section.settings.homepage_blog_count -%}
+
+
+{% case post_count %}
+  {% when '0' %}
+  {% when '1' %}
+    {% assign blog_grid = 'large--one-half push--large--one-quarter' %}
+  {% when '2' %}
+    {% assign blog_grid = 'large--one-half' %}
+  {% when '3' %}
+    {% assign blog_grid = 'large--one-third' %}
+{% endcase %}
+
+
+<div class="homepage-blog {{ section.settings.homepage_blog_color }}" data-section-id="{{ section.id }}" data-section-type="index-blog">
+  <div class="wrapper">
+      {% unless section.settings.title == '' %}
+        <h4 class="home__subtitle">{{ section.settings.title | escape }}</h4>
+      {% endunless %}
+      <div class="grid-uniform">
+        {% unless blog == blank or blog.empty? %}
+          {% for article in blog.articles limit:post_count %}
+            {% include 'article-grid-item' %}
+          {% endfor %}
+        {% else %}
+          {% for i in (1..post_count) %}
+            <div class="grid__item {{ blog_grid }}">
+              <div class="blog__link">
+                <div class="blog__article blog__article--card">
+                  <div class="rte blog__article__content equalHeightColumn">
+                    <h3 class="h3 blog__article__title">{{ 'home_page.onboarding.blog_title' | t }}</h3>
+                    <p>{{ 'home_page.onboarding.blog_excerpt' | t }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% endunless %}
+      </div>
+    </div>
+  </div>
+{% schema %}
+{
+  "name": "Featured blog",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "News"
+    },
+    {
+      "type": "blog",
+      "id": "homepage_blog",
+      "label": "Featured blog",
+      "info": "Feature two recent posts from this blog."
+    },
+    {
+      "type": "select",
+      "id": "homepage_blog_color",
+      "label": "Background color",
+      "options": [
+        { "value": "homepage--white", "label": "White"},
+        { "value": "homepage--light", "label": "Light"},
+        { "value": "homepage--splash", "label": "Accent"},
+        { "value": "homepage--dark", "label": "Dark"}
+      ]
+    },
+    {
+      "type": "select",
+      "id": "homepage_blog_count",
+      "default": "2",
+      "label": "Number of posts to display",
+      "options": [
+        { "value": "1", "label": "1 posts"},
+        { "value": "2", "label": "2 posts"},
+        { "value": "3", "label": "3 posts"}
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blog posts",
+      "category": "Blog"
+    }
+  ]
+}
+{% endschema %}

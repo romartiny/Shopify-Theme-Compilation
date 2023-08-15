@@ -1,0 +1,762 @@
+[
+  {
+      "name": "theme_info",
+      "theme_name": "Pipeline",
+      "theme_author": "Corknine",
+      "theme_version": "2.4.1",
+      "theme_documentation_url": "http://corknine.com/pipeline-docs/",
+      "theme_support_email": "themes@corknine.com"
+  },
+  {
+    "name": "Color",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Top bar"
+      },
+      {
+        "type": "color",
+        "id": "color_account_bg",
+        "label": "Background",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_account_text",
+        "label": "Text",
+        "default": "#000000"
+      },
+      {
+        "type": "header",
+        "content": "Header"
+      },
+      {
+        "type": "color",
+        "id": "color_header_bg",
+        "label": "Background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_header_text",
+        "label": "Text",
+        "default": "#333333"
+      },
+      {
+        "type": "header",
+        "content": "General"
+      },
+      {
+        "type": "color",
+        "id": "color_body_bg",
+        "label": "Body background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_body_text",
+        "label": "Body text",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Link color",
+        "info": "For text links and primary buttons.",
+        "default": "#333333"
+      },
+      {
+        "type": "color",
+        "id": "color_splash",
+        "label": "Accent color",
+        "info": "A bright color for highlighting elements.",
+        "default": "#1f9bde"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "Border color",
+        "default": "#cccccc"
+      },
+      {
+        "type": "header",
+        "content": "Home page"
+      },
+      {
+        "type": "color",
+        "id": "homepage_background_light",
+        "label": "Light background",
+        "default": "#f7f7f7"
+      },
+      {
+        "type": "color",
+        "id": "homepage_background_dark",
+        "label": "Dark background",
+        "default": "#2e3438"
+      },
+
+      {
+        "type": "header",
+        "content": "Product page"
+      },
+      {
+        "type": "color",
+        "id": "product_background_color",
+        "label": "Background color",
+        "default": "#FFFFFF",
+        "info": "Choose the background color used in isolated product photos, usually white."
+      },
+      {
+        "type": "color",
+        "id": "product_slideshow_arrows",
+        "label": "Product slideshow arrows",
+        "default": "#cccccc"
+      },
+      {
+        "type": "header",
+        "content": "Footer"
+      },
+      {
+        "type": "color",
+        "id": "color_footer_bg",
+        "label": "Background",
+        "default": "#f2f2f2"
+      },
+      {
+        "type": "color",
+        "id": "color_footer_text",
+        "label": "Text",
+        "default": "#333333"
+      },
+      {
+        "type": "color",
+        "id": "color_footer_social_link",
+        "label": "Icons",
+        "default": "#333333"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Choose the fonts used on your site."
+      },
+      {
+        "type": "header",
+        "content": "Fonts"
+      },
+      {
+        "type": "select",
+        "id": "font_title",
+        "label": "Headings font",
+        "options": [
+          {
+            "value": "'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif",
+            "label": "Century Gothic",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+            "label": "Helvetica / Arial",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Montserrat:400",
+            "label": "Montserrat",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Questrial:400",
+            "label": "Questrial",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Open+Sans:400",
+            "label": "Open Sans",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Lato:400",
+            "label": "Lato",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Oswald:400",
+            "label": "Oswald",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Roboto:400",
+            "label": "Roboto",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Raleway:400",
+            "label": "Raleway",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Megrim:400",
+            "label": "Megrim",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Abel:400",
+            "label": "Abel",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Lobster+Two:400",
+            "label": "Lobster Two",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Source+Sans+Pro:400",
+            "label": "Source Sans Pro",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:PT+Mono:400",
+            "label": "PT Mono",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Josefin+Sans:400",
+            "label": "Josefin Sans",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif",
+            "label": "Garamond",
+            "group": "Serif"
+          },
+          {
+            "value": "'Hoefler Text','Baskerville Old Face',Garamond,'Times New Roman',serif",
+            "label": "Hoefler Text",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Cardo:400",
+            "label": "Cardo",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:PT+Serif:400",
+            "label": "PT Serif",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Lora:400",
+            "label": "Lora",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Arvo:400",
+            "label": "Arvo",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Slabo+13px:400",
+            "label": "Slabo 13px",
+            "group": "Serif"
+          },
+          {
+            "value": "google:sansStack:Josefin+Slab:400",
+            "label": "Josefin Slab",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Glegoo:400",
+            "label": "Glegoo",
+            "group": "Serif"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "font_title_capitalize",
+        "label": "Capitalize headings"
+      },
+      {
+        "type": "select",
+        "id": "font_accent",
+        "label": "Subheading font",
+        "options": [
+          {
+            "value": "'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif",
+            "label": "Century Gothic",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+            "label": "Helvetica / Arial",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Montserrat:400",
+            "label": "Montserrat",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Questrial:400",
+            "label": "Questrial",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Open+Sans:400",
+            "label": "Open Sans",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Lato:400",
+            "label": "Lato",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Oswald:400",
+            "label": "Oswald",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Roboto:400",
+            "label": "Roboto",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Raleway:400",
+            "label": "Raleway",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Megrim:400",
+            "label": "Megrim",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Abel:400",
+            "label": "Abel",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Lobster+Two:400",
+            "label": "Lobster Two",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Source+Sans+Pro:400",
+            "label": "Source Sans Pro",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:PT+Mono:400",
+            "label": "PT Mono",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Josefin+Sans:400",
+            "label": "Josefin Sans",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif",
+            "label": "Garamond",
+            "group": "Serif"
+          },
+          {
+            "value": "'Hoefler Text','Baskerville Old Face',Garamond,'Times New Roman',serif",
+            "label": "Hoefler Text",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Cardo:400",
+            "label": "Cardo",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:PT+Serif:400",
+            "label": "PT Serif",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Lora:400",
+            "label": "Lora",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Arvo:400",
+            "label": "Arvo",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Slabo+13px:400",
+            "label": "Slabo 13px",
+            "group": "Serif"
+          },
+          {
+            "value": "google:sansStack:Josefin+Slab:400",
+            "label": "Josefin Slab",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Glegoo:400",
+            "label": "Glegoo",
+            "group": "Serif"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "font_body",
+        "label": "Body font",
+        "options": [
+          {
+            "value": "'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif",
+            "label": "Century Gothic",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+            "label": "Helvetica / Arial",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Montserrat:400",
+            "label": "Montserrat",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Questrial:400",
+            "label": "Questrial",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Open+Sans:400",
+            "label": "Open Sans",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Lato:400",
+            "label": "Lato",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Oswald:400",
+            "label": "Oswald",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Roboto:400",
+            "label": "Roboto",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Raleway:400",
+            "label": "Raleway",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Megrim:400",
+            "label": "Megrim",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Abel:400",
+            "label": "Abel",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Lobster+Two:400",
+            "label": "Lobster Two",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Source+Sans+Pro:400",
+            "label": "Source Sans Pro",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:PT+Mono:400",
+            "label": "PT Mono",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Josefin+Sans:400",
+            "label": "Josefin Sans",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif",
+            "label": "Garamond",
+            "group": "Serif"
+          },
+          {
+            "value": "'Hoefler Text','Baskerville Old Face',Garamond,'Times New Roman',serif",
+            "label": "Hoefler Text",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Cardo:400",
+            "label": "Cardo",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:PT+Serif:400",
+            "label": "PT Serif",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Lora:400",
+            "label": "Lora",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Arvo:400",
+            "label": "Arvo",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Slabo+13px:400",
+            "label": "Slabo 13px",
+            "group": "Serif"
+          },
+          {
+            "value": "google:sansStack:Josefin+Slab:400",
+            "label": "Josefin Slab",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Glegoo:400",
+            "label": "Glegoo",
+            "group": "Serif"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Size"
+      },
+      {
+        "type": "select",
+        "id": "base_font_size",
+        "label": "Base font size",
+        "info": "14px reccomended",
+        "default": "14px",
+        "options": [
+          { "value": "12px", "label": "12px"},
+          { "value": "13px", "label": "13px"},
+          { "value": "14px", "label": "14px"},
+          { "value": "15px", "label": "15px"},
+          { "value": "16px", "label": "16px"}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart type",
+        "options": [
+          { "value": "modal", "label": "Modal"},
+          { "value": "page", "label": "Page"}
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_on_click",
+        "default": true,
+        "label": "Show modal when item is added"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_vendor_enable",
+        "label": "Show product vendor"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_notes_enable",
+        "label": "Show cart notes"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_quantity",
+        "label": "Show quantity selectors",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_additional_buttons",
+        "label": "Show additional checkout options",
+        "info": "Apple Pay, PayPal express, etc",
+        "default": true
+      },
+      {
+        "type": "url",
+        "id": "cart_continue_browsing",
+        "label": "Empty cart link",
+        "info": "Continue browsing link for the empty cart"
+      }
+    ]
+  },
+  {
+    "name": "Product grid",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Product layout"
+      },
+      {
+        "type": "paragraph",
+        "content": "Control how products look when displayed side-by-side in collections and groups of related products."
+      },
+      {
+        "type": "select",
+        "id": "collection_text_alignment",
+        "label": "Text alignment",
+        "options": [
+          { "value": "text-left", "label": "Left" },
+          { "value": "text-center", "label": "Center" },
+          { "value": "text-right", "label": "Right" }
+        ],
+        "default": "text-center"
+      },
+      {
+        "type": "select",
+        "id": "product_grid_style",
+        "label": "Price hover effect",
+        "options": [
+           { "value": "under", "label": "Always show price"},
+           { "value": "hover", "label": "Show price on hover"}
+        ],
+        "info": "Price will always show on small devices and phones."
+      },
+      {
+        "type": "header",
+        "content": "Image auto-height"
+      },
+      {
+        "type": "paragraph",
+        "content": "Neatly align title and price fields underneath unevenly sized images."
+      },
+      {
+        "type": "checkbox",
+        "label": "Enable image auto-height",
+        "id": "image_autoheight_enable",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Social",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Accounts"
+      },
+      {
+        "type": "text",
+        "id": "twittercard_handle",
+        "label": "Twitter handle",
+        "info": "E.g. @Shopify. Required for Twitter cards."
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "Twitter",
+        "info": "https://twitter.com/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook",
+        "info": "https://facebook.com/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram",
+        "info": "https://instagram.com/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest_link",
+        "label": "Pinterest",
+        "info": "https://pinterest.com/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_google_link",
+        "label": "Google Plus",
+        "info": "https://plus.google.com/+shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube_link",
+        "label": "Youtube",
+        "info": "https://www.youtube.com/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_vimeo_link",
+        "label": "Vimeo",
+        "info": "https://vimeo.com/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_tumblr_link",
+        "label": "Tumblr",
+        "info": "http://shopify.tumblr.com"
+      },
+      {
+        "type": "text",
+        "id": "social_fancy_link",
+        "label": "Fancy",
+        "info": "http://fancy.com/shopify"
+      },
+      {
+        "type": "header",
+        "content": "Sharing"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_social_enable",
+        "label": "Enable product sharing"
+      },
+      {
+        "type": "checkbox",
+        "id": "share_enable_facebook",
+        "label": "Share on Facebook"
+      },
+      {
+        "type": "checkbox",
+        "id": "share_enable_twitter",
+        "label": "Tweet on Twitter"
+      },
+      {
+        "type": "checkbox",
+        "id": "share_enable_pinterest",
+        "label": "Pin on Pinterest"
+      },
+      {
+        "type": "checkbox",
+        "id": "share_enable_google",
+        "label": "+1 on Google Plus"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image",
+        "info": "Will be scaled down to 32 x 32px"
+      }
+    ]
+  }
+]
