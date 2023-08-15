@@ -1,0 +1,18 @@
+<!-- /snippets/newsletter-subscribe.liquid -->
+{% form 'customer' %}
+  {{ form.errors | default_errors }}
+
+  {% if form.posted_successfully? %}
+    <p>{{ 'password.general.thanks_title' | t }}</p>
+  {% else %}
+    <input type="hidden" name="contact[tags]" value="prospect, email subscribe{% if subscribe_source %}, {{ subscribe_source }}{% endif %}">
+    <div class="input-row">
+      <div class="input-wrapper">
+        <input type="email" name="contact[email]" id="email" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" class="input-group-field" required>
+      </div>
+      <div class="button-wrapper">
+        <button type="submit" id="subscribe" class="btn">{{ 'general.newsletter_form.go' | t }}</button>
+      </div>
+    </div>
+  {% endif %}
+{% endform %}
