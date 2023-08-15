@@ -1,0 +1,9 @@
+<!-- // BEGIN // Banana Stand Integration Code - DO NOT MODIFY // -->
+<script type="application/javascript">
+  window.__bsio = window.__bsio || [];
+  window.__bsio.push({ action: "configure", data: { store_pk: "pk_e467d006cd00f435224b2cd1d8ec618ded44e68107056fc79b14f95238299afa"  }} );
+  {% if customer.id %}window.__bsio.push({ action: "setCustomerId", customer_id: "{{ customer.id }}" });{% endif %}
+  {% if product.id %}window.__bsio.push({ action: "setProductId", product_id: "{{ product.id }}" }); window.__bsio.push({ action: "startProductPageViewing" });{% endif %}
+  window.__bsio.push({ action: "loadPlatformAdapter", code: "shopify" });
+</script>
+<!-- // END // Banana Stand Integration Code // -->
