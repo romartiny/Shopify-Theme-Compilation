@@ -1,0 +1,153 @@
+<footer class="footer text-align--{{ section.settings.footer_alignment }}">
+  <div class="container">
+    <div class="sixteen columns">
+
+      {% if linklists[section.settings.footer_linklist_2] != blank %}
+        <div class="three columns alpha footer_menu_vertical">
+          <h6>{{ linklists[section.settings.footer_linklist_2].title }}</h6>
+          <ul>
+            {% for link in linklists[section.settings.footer_linklist_2].links %}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>             
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      <div class="ten columns {% if linklists[section.settings.footer_linklist_2] == blank %}offset-by-three alpha{% endif %} center">
+        {% if section.settings.footer_newsletter %}
+          <h6>{{ 'general.newsletter_form.title' | t }}</h6>
+          <p>{{ 'general.newsletter_form.description' | t }}</p>
+          {% include 'newsletter' %}
+        {% endif %}
+        {% if settings.enable_social_links %}
+          {% include 'social-icons' %}
+        {% endif %}
+      </div>
+
+      <div class="three columns omega footer_content_page">
+        {% if section.settings.title != blank %}
+          <h6>{{ section.settings.title }}</h6>
+        {% endif %}
+
+        {% if section.settings.footer_content_right != blank %}
+          {{ section.settings.footer_content_right }}
+        {% endif %}
+
+        {% if section.settings.footer_content_page != blank %}
+          <h6>{{ pages[section.settings.footer_content_page].title }}</h6>
+          {{ pages[section.settings.footer_content_page].content }}
+        {% endif %}
+      </div>
+
+      <div class="sixteen columns alpha omega center">
+        <div class="section">
+          {% if settings.enable_social_links %}
+            <hr />
+          {% endif %}
+
+          {% if linklists[section.settings.footer_linklist_1] != blank %}
+            <ul class="footer_menu">
+              {% for link in linklists[section.settings.footer_linklist_1].links %}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+
+          <p class="credits">
+            &copy; {{ "now" | date: "%Y" }} {{ shop.name | link_to: '/' }}.
+            {{ section.settings.copyright_text | escape }}
+            {% if section.settings.display_designed_by == true %}
+              {{ 'layout.general.designer_credits_html' | t }}
+            {% endif %}
+            {{ powered_by_link | split: '" ' | join: '?ref=out-of-the-sandbox" ' | split: '">' | join: '?ref=out-of-the-sandbox">' }}
+          </p>
+
+          {% if section.settings.display_payment_methods %}
+            <div class="payment_methods">
+              {% for type in shop.enabled_payment_types %}
+                <img src="{{ type | payment_type_img_url }}" alt="{{ type | replace: "_", " " | capitalize }}" />
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</footer> <!-- end footer -->
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "footer-section",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "footer_linklist_2",
+      "label": "Vertical menu (left column)",
+      "info": "This menu won't show dropdown items",
+      "default": "footer"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_linklist_1",
+      "label": "Horizontal menu (center column)",
+      "info": "This menu won't show dropdown items"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading (right column)",
+      "default": "Title"
+    },    
+    {
+      "type": "richtext",
+      "id": "footer_content_right",
+      "label": "Text (right column)"
+    },
+    {
+      "type": "page",
+      "id": "footer_content_page",
+      "label": "Content page (right column)"
+    },
+    {
+      "type": "select",
+      "id": "footer_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright text"
+    },
+    {
+      "type": "checkbox",
+      "id": "footer_newsletter",
+      "label": "Show newsletter form",
+      "default": true
+    },    
+    {
+      "type": "checkbox",
+      "id": "display_designed_by",
+      "label": "Show theme designer credits",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "display_payment_methods",
+      "label": "Show payment method icons",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

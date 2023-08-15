@@ -1,0 +1,106 @@
+<!-- ============================= SEO Expert Pro ============================= -->
+    <title>{% if template == "index" and shop.metafields.evmSEOMeta.title_homepage!="" %}{{shop.metafields.evmSEOMeta.title_homepage}}{% elsif collection.handle == "all" and shop.metafields.evmSEOMeta.title_collectionsAll!="" %} {{shop.metafields.evmSEOMeta.title_collectionsAll}}{% elsif template == "search"  and shop.metafields.evmSEOMeta.title_search!=""  %}{{shop.metafields.evmSEOMeta.title_search}}{% elsif template == "404" and shop.metafields.evmSEOMeta.title_404!="" %}{{shop.metafields.evmSEOMeta.title_404}}{% else %}{{ page_title }}{% if current_tags %}{% assign meta_tags = current_tags | join: "," %} &ndash; {{ "general.meta.tags" | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ "general.meta.pag" | t: page: current_page }}{% endif %}{% endif %}</title>
+   
+    {% if template == "index"  and shop.metafields.evmSEOMeta.description_homepage!="" %}
+        <meta name="description" content="{{shop.metafields.evmSEOMeta.description_homepage}}" />
+    {% elsif collection.handle == "all"  and shop.metafields.evmSEOMeta.description_collectionsAll!="" %}
+        <meta name="description" content="{{shop.metafields.evmSEOMeta.description_collectionsAll}}" />
+    {% elsif template == "search" and shop.metafields.evmSEOMeta.description_search!=""  %}
+        <meta name="description" content="{{shop.metafields.evmSEOMeta.description_search}}" />
+    {% elsif template == "404" and shop.metafields.evmSEOMeta.description_404!="" %}
+        <meta name="description" content="{{shop.metafields.evmSEOMeta.description_404}}" />
+    {% elsif page_description %}
+        <meta name="description" content="{{ page_description | escape }}" />
+    {% endif %}
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="expires" content="Tue, 01 Jan 2000 1:00:00 GMT" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <script type="application/ld+json">
+    {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": "{{ shop.name }}",
+    "url": "https://{{ shop.domain }}"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "url": "https://{{ shop.domain }}",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://{{ shop.domain }}/search?q={query}",
+            "query-input": "required name=query"
+            }
+    }
+    </script>
+    {% if template contains "product" %}
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Product",
+        "brand": {
+            "@type": "Brand",
+            "name": {{ product.vendor | json }}
+        },
+        "sku": {{ product.selected_or_first_available_variant.sku | json }},
+        "description": {{ product.description | strip_html | json }},
+        "url":{{ canonical_url | json }},
+        "name": {{ product.title | json }},
+        {%- if product.featured_image -%}
+        "image": "{{ product.featured_image | product_img_url: "grande" | prepend : "https:"}}",
+        {%- endif -%}
+        "offers": {
+            "@type": "Offer",
+            "price": {{ product.selected_or_first_available_variant.price | money_without_currency | remove: "," }},
+            "priceCurrency": "{{ shop.currency }}",
+            "availability": "{%- if product.selected_or_first_available_variant.available -%}InStock{%- else -%}OutOfStock{%- endif -%}",
+            "itemCondition": "http://schema.org/NewCondition"
+        }
+        {%- if product.metafields.yotpo.reviews_count and product.metafields.yotpo.reviews_count != "0" -%}
+        ,"aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": {{ product.metafields.yotpo.reviews_average }},
+          "ratingCount": {{ product.metafields.yotpo.reviews_count }}
+        }
+        {%- endif -%}
+        {%- if product.metafields.orankl.review_count and product.metafields.orankl.review_count != "0" -%}
+        ,"aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": {{ product.metafields.orankl.rating }},
+          "ratingCount": {{ product.metafields.orankl.review_count }}
+        }
+        {%- endif -%}
+    }
+        </script>
+        {% endif %} 
+        {% if template contains "collection" %}
+        <script type="application/ld+json">
+        [
+            {
+                "@context" : "http://schema.org",
+                "@type": "CollectionPage",
+                "name": "{{ collection.handle}}",
+                "url": "{{ shop.url | append: collection.url }}",
+                  "image": "{{ collection.image | img_url: "master" }}"
+            }{% if collection.products != empty %},{% endif %}
+            {% for product in collection.products %}
+            {
+                "@context" : "http://schema.org",
+                "@type" : "Product",
+                "name" : "{{ product.title | strip_newlines | strip_html | escape_once | replace: "\", "\\\\\\\\" }}",
+                "image": "{{ product.featured_image.src | img_url: "master" | prepend : "https:" }}",
+                "url" : "{{ shop.url | append: "/products/" | append: product.handle }}",
+                "offers" : {
+                    "@type" : "Offer",
+                    "price" : {{ product.price | money_without_currency | split: "" | reverse | join: "" | remove_first: "00." | split: "" | reverse | join: "" | replace: ",", "" }},
+                    "priceCurrency" : "{{ shop.currency }}"
+                }
+            }{% unless forloop.last %}, {% endunless %}
+            {% endfor %}
+        ]
+</script>
+{% endif %}

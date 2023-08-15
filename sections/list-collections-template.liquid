@@ -1,0 +1,108 @@
+{% paginate collections by section.settings.pagination_limit %}
+  {% assign collections_per_row = section.settings.collections_per_row %}
+
+  <div class="sixteen columns">
+    <div class="section clearfix">
+      <h1>{{ 'collections.general.title' | t }}</h1>
+
+      <div class="breadcrumb eight columns alpha" itemscope itemtype="http://schema.org/BreadcrumbList">
+        {% if section.settings.collection_breadcrumb %}
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="item"><span itemprop="name">{{ 'general.breadcrumbs.home' | t }}</span></a></span>
+          <span class="icon-right-arrow"></span>
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span itemprop="name">{{ 'collections.general.title' | t }}</span></span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  {% capture new_row %}
+      <br class="clear product_clear" />
+  {% endcapture %}
+
+  {% for collection in collections %}
+
+    {% unless collection.handle == 'frontpage' %}
+      {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
+      <div class="{% if collections_per_row == 2 %}eight columns{% elsif collections_per_row == 3 %}one-third column{% else %}four columns{% endif %} thumbnail {% cycle 'even', 'odd' %}">
+        <a href="{{ collection.url }}" title="{{ collection_title }}">
+          {% if collection.image %}
+            <img  src="{{ collection.image.src | collection_img_url: '1200x' }}"
+                  alt="{{ collection.image.alt }}"
+                  class="lazyload transition-in"
+                  data-sizes="auto"
+                  data-src="{{ collection.image.src | collection_img_url: '480x' }}"
+                  data-srcset=" {{ collection.image.src | collection_img_url: '480x' }} 480w,
+                                {{ collection.image.src | collection_img_url: '768x' }} 768w,
+                                {{ collection.image.src | collection_img_url: '1200x' }} 1200w,
+                                {{ collection.image.src | collection_img_url: '2048x2048' }} 2048w"
+                   />
+
+          {% else %}
+            <img  src="{{ collection.products.first.featured_image | product_img_url: '1200x' }}"
+                  alt="{{ collection.title | escape }}"
+                  class="lazyload transition-in"
+                  data-src="{{ collection.products.first.featured_image | product_img_url: '480x' }}"
+                  data-sizes="auto"
+                  data-srcset=" {{ collection.products.first.featured_image | product_img_url: '480x' }} 480w,
+                                {{ collection.products.first.featured_image | product_img_url: '768x' }} 768w,
+                                {{ collection.products.first.featured_image | product_img_url: '1200x' }} 1200w,
+                                {{ collection.products.first.featured_image | product_img_url: '2048x2048' }} 2048w"
+                   />
+          {% endif %}
+
+          <div class="info">
+            <span class="price">
+              {{ 'layout.counts.items_with_count' | t: count: collection.all_products_count }}
+            </span>
+            <span class="title">{{ collection.title }}</span>
+          </div>
+        </a>
+      </div>
+
+      {% if collections_per_row == 2 %}
+        {% cycle '', new_row %}
+      {% elsif collections_per_row == 3 %}
+        {% cycle '', '', new_row %}
+      {% elsif collections_per_row == 4 %}
+        {% cycle '', '', '', new_row %}
+      {% endif %}
+    {% endunless %}
+  {% endfor %}
+
+  {% include 'pagination' %}
+{% endpaginate %}
+
+{% schema %}
+
+{
+  "name": "Collections",
+  "class": "collection-template-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "collection_breadcrumb",
+      "label": "Show breadcrumb links",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "collections_per_row",
+      "label": "Collections per row",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },  
+    {
+      "type": "range",
+      "id": "pagination_limit",
+      "label": "Collections per page",
+      "min": 2,
+      "max": 50,
+      "step": 1,
+      "default": 48
+    }
+  ]
+}
+
+{% endschema %}

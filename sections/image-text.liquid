@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="sixteen columns">
+    <div class="homepage_content section clearfix">
+      {% capture image_layout %}
+        <div class="six columns offset-by-one image_column {% if section.settings.layout == 'left' %}alpha{% else %}omega{% endif %}">
+          {% if section.settings.image != blank %}
+            {{ section.settings.image | img_url: '580x', scale: 2 | img_tag: section.settings.image.alt, 'lazyload transition-in' }}
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+        </div>
+      {% endcapture %}
+
+      {% if section.settings.layout == 'left' %}
+        {{ image_layout }}
+      {% endif %}
+
+      <div class="eight columns content_column {% if section.settings.layout == 'left' %}offset-by-one omega{% else %}alpha{% endif %} align_{{ section.settings.layout }}">
+        {% if section.settings.title != blank %}
+          <h3 class="align_{{ section.settings.layout }}">
+            {{ section.settings.title | escape }}
+          </h3>
+        {% endif %}
+        {% if section.settings.text != blank %}
+          {{ section.settings.text }}
+        {% endif %}
+        {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+          <a href="{{ section.settings.button_link }}" class="action_button">
+            {{ section.settings.button_label | escape }}
+          </a>
+        {% endif %}
+      </div>
+
+      {% if section.settings.layout == 'right' %}
+        {{ image_layout }}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Image with text",
+    "class": "image-with-text-section",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "select",
+        "id": "layout",
+        "label": "Layout",
+        "default": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "Image on left"
+          },
+          {
+            "value": "right",
+            "label": "Image on right"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Image with text"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Pair text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button label"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Image with text",
+        "category": "Image"
+      }
+    ]
+  }
+{% endschema %}

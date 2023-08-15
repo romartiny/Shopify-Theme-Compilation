@@ -1,0 +1,318 @@
+<div class="top_bar top_bar--fixed-{{section.settings.fix_top_bar}}">
+  <div class="container">
+    {% if section.settings.search_box_top_bar %}
+      <div class="four columns top_bar_search">
+        <form class="search" action="/search">
+          {% if settings.search_option != 'everything' %}
+            <input type="hidden" name="type" value="product" />
+          {% endif %}
+          <input type="text" name="q" class="search_box" placeholder="{{ 'general.search.placeholder' | t }}" value="{% if search and search.results.first.price %}{{ search.terms }}{% endif %}" autocapitalize="off" autocomplete="off" autocorrect="off" />
+        </form>
+      </div>
+    {% endif %}
+
+    {% if settings.show_multiple_currencies %}
+      <div class="four columns currencies-switcher mobile_hidden">
+        {% include 'currencies-switcher' %}
+      </div>
+    {% endif %}
+
+    <div class="columns {% if section.settings.search_box_top_bar and settings.show_multiple_currencies %}eight{% elsif section.settings.search_box_top_bar or settings.show_multiple_currencies %}twelve{% else %}sixteen{% endif %}">
+      <ul>
+        {% if section.settings.top_bar_linklist != blank %}
+          {% for link in linklists[section.settings.top_bar_linklist].links %}
+            <li>
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            </li>
+          {% endfor %}
+        {% endif %}
+
+        {% if section.settings.phone_number != blank %}
+          <li>
+            <a href="tel:+{{ section.settings.phone_number | replace: ' ', '' | replace: '+', '' | replace: '-', '' }}">{{ section.settings.phone_number | escape }}</a>
+          </li>
+        {% endif %}
+
+        {% if shop.customer_accounts_enabled %}
+          {% if customer %}
+            <li>
+              {{ 'layout.customer.log_out' | t | customer_logout_link }}
+            </li>
+            {% if customer.name != blank %}
+              <li>
+                <a href="/account">{{ customer.name }}</a>
+              </li>
+            {% endif %}
+          {% else %}
+            <li>
+              {{ 'layout.customer.log_in' | t | customer_login_link }}
+            </li>
+          {% endif %}
+        {% endif %}
+
+        <li>
+          <a href="/cart" class="cart_button"><span class="icon-cart"></span> {{ 'layout.general.cart' | t }} (<span class="cart_count">{{ cart.item_count }}</span>)</a>
+        </li>
+        <li>
+          {% if cart.item_count == 0 %}
+            <a href="/cart" class="checkout">{{ 'layout.general.checkout' | t }}</a>
+          {% else %}
+            <a href="/checkout" class="checkout">{{ 'layout.general.checkout' | t }}</a>
+          {% endif %}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container content">
+  <div class="sixteen columns logo header-logo">
+    {% if settings.header_social_icons %}
+      <div class="header_icons">
+        {% include 'social-icons' %}
+      </div>
+    {% endif %}
+
+    <a href="/" title="{{ shop.name }}" class="logo-align--{{ section.settings.logo_alignment }}">
+      {% if section.settings.logo != nil %}
+        <img src="{{ section.settings.logo | img_url: '720x' }}" alt="{{ shop.name }}" />
+      {% else %}
+        {{ shop.name }}
+      {% endif %}
+    </a>
+  </div>
+
+  <div class="sixteen columns clearfix">
+    <div id="mobile_nav" class="nav-align--{{ section.settings.menu_alignment }} nav-border--{{ section.settings.nav_border }}">
+      {% if settings.show_multiple_currencies %}
+        <div class="mobile_currency">
+          {% include 'currencies-switcher' %}
+        </div>
+      {% endif %}
+    </div>
+    <div id="nav" class=" nav-align--{{section.settings.menu_alignment}}
+                          nav-border--{{ section.settings.nav_border }}
+                          nav-separator--{{ section.settings.nav_separator }}">
+      <ul id="menu" role="navigation">
+        {% for link in linklists[section.settings.main_linklist].links %}
+          {% if linklists[link.handle] == empty %}
+            <li><a href="{{ link.url }}" {% if link.active %}class="active"{% endif %}>{{ link.title }}</a></li>
+          {% else %}
+            <li class="dropdown sub-menu" aria-haspopup="true" aria-expanded="false">
+              <a {% if link.url == 'http://' or link.url == '' or link.url == '/' or link.url == 'https://' or link.url == '#' %}
+                  class="{% if link.active %}active{% endif %} {% for link in linklists[link.handle].links %}{% if link.active %}active{% endif %}{% endfor %} slicknav_item" href
+                {% else %}
+                  href="{{ link.url }}" class="{% if link.active %}active{% endif %} {% for link in linklists[link.handle].links %}{% if link.active %}active{% endif %}{% endfor %}"
+                {% endif %}>
+                {{ link.title }}<span class="icon-down-arrow arrow"></span>
+              </a>
+              <ul class="animated fadeIn">
+                {% for link in linklists[link.handle].links %}
+                  {% if linklists[link.handle] == empty %}
+                    <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                  {% else %}
+                  <li class="sub-menu">
+                    <a {% if link.url == 'http://' or link.url == '' or link.url == '/' or link.url == 'https://' or link.url == '#' %}
+                        class="{% if link.active %}active{% endif %} {% for link in linklists[link.handle].links %}{% if link.active %}active{% endif %}{% endfor %} slicknav_item" href
+                      {% else %}
+                        href="{{ link.url }}" class="{% if link.active %}active{% endif %} {% for link in linklists[link.handle].links %}{% if link.active %}active{% endif %}{% endfor %}"
+                      {% endif %}>
+                      {{ link.title }} <span class="icon-right-arrow arrow"></span>
+                    </a>
+                    <ul class="animated fadeIn">
+                      {% for link in linklists[link.handle].links %}
+                        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% if section.settings.announcement_message != blank %}
+    <div class="sixteen columns">
+      <div class="section clearfix featured_content">
+        {% if section.settings.announcement_link != blank %}
+          <a href="{{ section.settings.announcement_link }}">
+        {% endif %}
+            {{ section.settings.announcement_message }}
+        {% if section.settings.announcement_link != blank %}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+<style>
+  .header-logo.logo a {
+    max-width: {{ section.settings.logo_width }}px;
+  }
+  .featured_content a, .featured_content p {
+    color: {{ section.settings.announcement_color }};
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "header-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image",
+      "info": "720px wide recommended"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo display width",
+      "step": 10,
+      "min": 100,
+      "max": 800,
+      "default": 360,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "logo_alignment",
+      "label": "Logo alignment",
+      "options": [
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "link_list",
+      "id": "main_linklist",
+      "label": "Main menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "select",
+      "id": "menu_alignment",
+      "label": "Main menu alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "nav_border",
+      "label": "Main menu border",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "dashed",
+          "label": "Dashed"
+        },
+        {
+          "value": "dotted",
+          "label": "Dotted"
+        },
+        {
+          "value": "double",
+          "label": "Double"
+        },
+        {
+          "value": "solid",
+          "label": "Solid"
+        }
+      ],
+      "default": "double"
+    },
+    {
+      "type": "select",
+      "id": "nav_separator",
+      "label": "Main menu link separator",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "solid",
+          "label": "Border"
+        }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "header",
+      "content": "Announcement"
+    },
+    {
+      "type": "richtext",
+      "id": "announcement_message",
+      "label": "Announcement message"
+    },
+    {
+      "type": "url",
+      "id": "announcement_link",
+      "label": "Announcement link (optional)"
+    },
+    {
+      "type": "color",
+      "id": "announcement_color",
+      "label": "Announcement color",
+      "default": "#444"
+    },
+    {
+      "type": "header",
+      "content": "Top bar"
+    },
+    {
+     "type": "checkbox",
+     "id": "search_box_top_bar",
+     "label": "Show search form",
+     "default": true
+    },
+    {
+     "type": "checkbox",
+     "id": "fix_top_bar",
+     "label": "Fixed ('sticky') top bar",
+     "default": true
+    },
+    {
+     "type": "link_list",
+     "id": "top_bar_linklist",
+     "label": "Top bar menu",
+     "info": "This menu won't show dropdown items"
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Phone number",
+      "info": "1-800-555-5555"
+    }
+  ]
+}
+{% endschema %}
