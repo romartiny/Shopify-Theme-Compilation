@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "main": {
+      "type": "cart-template",
+      "settings": {}
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "title": "You may also be interested in",
+        "products_per": 6,
+        "products_limit": 6
+      }
+    }
+  },
+  "order": [
+    "main",
+    "featured-collection"
+  ]
+}

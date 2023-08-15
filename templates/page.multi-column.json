@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-multi-column-template",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "newsletter"
+  ]
+}

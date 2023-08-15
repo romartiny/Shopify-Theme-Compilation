@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-banner-template",
+      "settings": {
+        "text_position": "center",
+        "text_align": "center"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "newsletter"
+  ]
+}
