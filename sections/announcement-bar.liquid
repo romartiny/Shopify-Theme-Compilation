@@ -1,0 +1,235 @@
+{%- liquid
+  assign text = section.settings.text
+  assign link = section.settings.link
+  assign show_announcement_bar = false
+  if section.settings.show_announcement_bar
+    if section.settings.home_page_only == false or template.name == 'index'
+      assign show_announcement_bar = true
+    endif
+  endif
+-%}
+
+{%- if show_announcement_bar -%}
+  <style>
+    :root {
+      --ab-height: 3rem;
+    }
+
+    #MainContent > .shopify-section.banner-section:first-child [data-blocks-container].h-screen {
+      height: calc(100vh - var(--ab-height));
+    }
+
+    @media (min-width: 990px) {
+      #MainContent > .shopify-section.banner-section:first-child [data-blocks-container].lg\:h-auto {
+        height: auto;
+      }
+
+      #MainContent > .shopify-section.banner-section:first-child [data-blocks-container].lg\:h-screen {
+        height: calc(100vh - var(--ab-height));
+      }
+    }
+  </style>
+  <section class="relative bg-scheme-background text-scheme-text {% if link != blank %}hover:bg-scheme-accent hover:text-scheme-accent-overlay{% endif %} text-center min-h-12 border-b-section border-border {% if section.settings.use_gradient_background %}bg-scheme-gradient{% endif %}" data-color-scheme="{{ section.settings.color_scheme | default: 'primary' }}" id="AnnouncementBar">
+    {%- if section.settings.display == 'static' -%}
+      {%- if link != blank -%}
+        <a class="block text-sm text-current  py-1 lg:py-2 px-5 lg:px-0 w-full" href="{{ link }}">
+          {{ text | escape }}
+        </a>
+      {%- else -%}
+        <div class="text-sm text-current text-center py-1 lg:py-2" role="complementary">
+          <p class="px-5 lg:px-0">{{ text | escape }}</p>
+        </div>
+      {%- endif -%}
+    {%- else -%}
+      {%- render 'text-marquee', section: section, class: 'py-1 lg:py-2' %}
+      {{ 'section-marquee.css' | asset_url | stylesheet_tag }}
+    {%- endif -%}
+  </section>
+  <script>
+    document.documentElement.style.setProperty(
+      '--ab-height',
+      `${document.getElementById('AnnouncementBar').clientHeight}px`
+    );
+  </script>
+  {%- if request.design_mode %}
+    <script>
+      document.addEventListener(
+        'shopify:section:select',
+        (e) => {
+          if (e.detail.sectionId !== 'announcement-bar') return;
+
+          if (document.getElementById('AnnouncementBar')) {
+            document.documentElement.style.setProperty(
+              '--ab-height',
+              `${document.getElementById('AnnouncementBar').clientHeight}px`
+            );
+          } else {
+            document.documentElement.style.setProperty(
+              '--ab-height',
+              ''
+            );
+          }
+        }
+      );
+    </script>
+  {%- endif -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement_bar",
+      "label": "Show announcement bar",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "home_page_only",
+      "label": "Home page only",
+      "default": true
+    },
+    {
+      "type": "radio",
+      "id": "display",
+      "label": "Display",
+      "options": [
+        {
+          "value": "marquee",
+          "label": "Marquee"
+        },
+        {
+          "value": "static",
+          "label": "Static"
+        }
+      ],
+      "default": "marquee"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Announce something here"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link",
+      "info": "Optional"
+    },
+    {
+      "type": "header",
+      "content": "Color"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Primary"
+        },
+        {
+          "value": "secondary",
+          "label": "Secondary"
+        },
+        {
+          "value": "tertiary",
+          "label": "Tertiary"
+        },
+        {
+          "value": "quaternary",
+          "label": "Quaternary"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "use_gradient_background",
+      "label": "Use gradient for background"
+    },
+    {
+      "type": "header",
+      "content": "Marquee"
+    },
+    {
+      "type": "checkbox",
+      "id": "repeat_text",
+      "default": true,
+      "label": "Repeat text",
+      "info": "Automatically repeat text to create an infinity effect."
+    },
+    {
+      "type": "select",
+      "id": "shape_between_text",
+      "label": "Shape between repeated text",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+        {
+          "value": "diamond",
+          "label": "Diamond"
+        },
+        {
+          "value": "triangle",
+          "label": "Triangle"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "10_point_star",
+          "label": "10 point star"
+        },
+        {
+          "value": "flower",
+          "label": "Flower"
+        }
+      ],
+      "default": "10_point_star"
+    },
+    {
+      "type": "checkbox",
+      "id": "animate_shape_between_text",
+      "default": true,
+      "label": "Animate shape between text"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 10,
+      "max": 400,
+      "step": 10,
+      "unit": "sec",
+      "label": "Speed",
+      "default": 120
+    },
+    {
+      "type": "radio",
+      "id": "direction",
+      "label": "Direction",
+      "options": [
+        {
+          "value": "",
+          "label": "Right to left"
+        },
+        {
+          "value": "reverse",
+          "label": "Left to right"
+        }
+      ],
+      "default": ""
+    }
+  ]
+}
+{% endschema %}

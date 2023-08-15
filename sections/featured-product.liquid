@@ -1,0 +1,3980 @@
+{%- liquid
+  assign product = all_products[section.settings.product]
+  assign current_variant = product.selected_or_first_available_variant
+-%}
+{%- if product != blank -%}
+  {%- render 'product-template', section: section, product: product, is_feature: true -%}
+{%- else -%}
+{%- liquid
+  assign media_desktop_width = section.settings.desktop_media_width | split: '_' | first
+  assign content_desktop_width = section.settings.desktop_media_width | split: '_' | last
+-%}
+<section
+  class="text-scheme-text bg-scheme-background"
+  data-color-scheme="{{ section.settings.color_scheme }}"
+  >
+  <div class="section-content py-section-vertical-spacing lg:px-section max-w-site mx-auto relative z-10">
+
+    {% if section.settings.title != '' %}
+      <h2 class="text-center font-heading heading-effects heading-base heading-style break-words {{ settings.heading_drop_shadow_style }}">{{ section.settings.title }}</h2>
+      {% endif %}
+
+    <div class="lg:grid grid-cols-1 lg:grid-cols-12 {% if section.settings.title != '' %}section-content-top-margin{% endif %}">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 {{ section.settings.section_desktop_width }}">
+        <div class="product-media col-span-full {{ media_desktop_width }} px-section lg:px-0">
+            <div>
+              {%- render 'media-image-placeholder',
+                container_id: section.id,
+                index: 0,
+                shape: section.settings.image_shape,
+                crop: section.settings.crop,
+                is_card: false
+              -%}
+            </div>
+        </div>
+        <div class="product-content col-span-full {{ content_desktop_width }} px-section lg:px-0 lg:flex lg:items-center">
+          <div class="product-block-container w-full max-w-full xl:grid xl:grid-cols-12">
+            <div class="xl:col-span-10 xl:col-start-2 relative">
+              <div class="product-block product-block-title">
+                <h2 class="font-heading heading-template">{{ 'homepage.onboarding.product_title' | t }}</h2>
+              </div>
+              {%- liquid
+                if settings.template_heading_size contains "2x"
+                  assign price_text_size = 'text-base lg:text-lg'
+                else
+                  assign price_text_size = 'text-base'
+                endif
+              -%}
+              <div class="product-block product-block-price">
+                <span
+                  class="text-scheme-text {{ price_text_size }}"
+                >
+                  {{ 1999 | money }}
+                </span>
+              </div>
+              <div class="product-block">
+                <button
+                  class="mb-1 add-to-cart-btn theme-button w-full push-btn"
+                >
+                  <span class="push-btn-surface w-full">{{ 'products.product.add_to_cart' | t }}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {%- liquid
+    for block in section.blocks
+      case block.type
+        when 'background_shape'
+          render 'block-background-shape' with block: block, section: section
+        when 'background_pattern'
+          render 'block-background-pattern' with block: block, section: section, scheme: section.settings.color_scheme
+      endcase
+    endfor
+  -%}
+</section>
+
+{%- liquid
+  assign stickers = section.blocks | where: "type", "sticker"
+  assign shape_dividers = section.blocks | where: "type", "shape_divider"
+  for sticker in stickers
+    render 'block-sticker' with block: sticker, section: section
+  endfor
+  for shape_divider in shape_dividers
+    render 'block-shape-divider' with block: shape_divider, section: section
+  endfor
+-%}
+
+{%- endif -%}
+{% schema %}
+{
+  "name": "Featured product",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Featured product"
+    },
+    {
+      "type": "radio",
+      "id": "section_desktop_width",
+      "label": "Section desktop width",
+      "options": [
+        {
+          "value": "lg:col-span-full",
+          "label": "Full"
+        },
+        {
+          "value": "lg:col-span-10 lg:col-start-2",
+          "label": "Narrow"
+        }
+      ],
+      "default": "lg:col-span-full"
+    },
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "select",
+      "id": "crop",
+      "label": "Crop",
+      "options": [
+        {
+          "value": "",
+          "label": "No crop"
+        },
+        {
+          "value": "aspect-w-4 aspect-h-3",
+          "label": "Landscape"
+        },
+        {
+          "value": "aspect-w-1 aspect-h-1",
+          "label": "Square"
+        },
+        {
+          "value": "aspect-w-3 aspect-h-4",
+          "label": "Portrait"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "select",
+      "id": "image_shape",
+      "label": "Image shape",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default",
+          "group": "Fit to image"
+        },
+        {
+          "value": "default_ellipse",
+          "label": "Ellipse",
+          "group": "Fit to image"
+        },
+        {
+          "value": "default_pill",
+          "label": "Pill",
+          "group": "Fit to image"
+        },
+        {
+          "value": "default_archway",
+          "label": "Archway",
+          "group": "Fit to image"
+        },
+        {
+          "value": "diamond",
+          "label": "Diamond",
+          "group": "Basic"
+        },
+        {
+          "value": "triangle_1",
+          "label": "Triangle 1",
+          "group": "Basic"
+        },
+        {
+          "value": "triangle_2",
+          "label": "Triangle 2",
+          "group": "Basic"
+        },
+        {
+          "value": "pentagon",
+          "label": "Pentagon",
+          "group": "Polygons"
+        },
+        {
+          "value": "hexagon",
+          "label": "Hexagon",
+          "group": "Polygons"
+        },
+        {
+          "value": "heptagon",
+          "label": "Heptagon",
+          "group": "Polygons"
+        },
+        {
+          "value": "octagon",
+          "label": "Octagon",
+          "group": "Polygons"
+        },
+        {
+          "value": "rounded_pentagon",
+          "label": "Rounded pentagon",
+          "group": "Polygons"
+        },
+        {
+          "value": "rounded_hexagon",
+          "label": "Rounded hexagon",
+          "group": "Polygons"
+        },
+        {
+          "value": "rounded_heptagon",
+          "label": "Rounded heptagon",
+          "group": "Polygons"
+        },
+        {
+          "value": "rounded_octagon",
+          "label": "Rounded octagon",
+          "group": "Polygons"
+        },
+        {
+          "value": "star_1",
+          "label": "Star 1",
+          "group": "Circular"
+        },
+        {
+          "value": "star_2",
+          "label": "Star 2",
+          "group": "Circular"
+        },
+        {
+          "value": "star_3",
+          "label": "Star 3",
+          "group": "Circular"
+        },
+        {
+          "value": "star_4",
+          "label": "Star 4",
+          "group": "Circular"
+        },
+        {
+          "value": "scalloped_circle_1",
+          "label": "Scalloped circle 1",
+          "group": "Circular"
+        },
+        {
+          "value": "scalloped_circle_2",
+          "label": "Scalloped circle 2",
+          "group": "Circular"
+        },
+        {
+          "value": "scalloped_circle_3",
+          "label": "Scalloped circle 3",
+          "group": "Circular"
+        },
+        {
+          "value": "scalloped_circle_4",
+          "label": "Scalloped circle 4",
+          "group": "Circular"
+        },
+        {
+          "value": "parallelogram",
+          "label": "Parallelogram",
+          "group": "Square"
+        },
+        {
+          "value": "scalloped_square",
+          "label": "Scalloped",
+          "group": "Square"
+        },
+        {
+          "value": "leaf",
+          "label": "Leaf",
+          "group": "Square"
+        },
+        {
+          "value": "clipped_square",
+          "label": "Clipped",
+          "group": "Square"
+        },
+        {
+          "value": "convex_square",
+          "label": "Convex",
+          "group": "Square"
+        },
+        {
+          "value": "twisted_square",
+          "label": "Twisted",
+          "group": "Square"
+        },
+        {
+          "value": "trapeze",
+          "label": "Trapeze",
+          "group": "Square"
+        },
+        {
+          "value": "blob",
+          "label": "Blob",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "zig_zag",
+          "label": "Zig zag",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "zig_zag_tear",
+          "label": "Zig zag tear",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "wave_tear",
+          "label": "Wave tear",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "flower",
+          "label": "Flower",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "concave",
+          "label": "Concave",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "cross",
+          "label": "Cross",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "quatrefoil",
+          "label": "Quatrefoil",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "wind",
+          "label": "Wind",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "heart",
+          "label": "Heart",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "mirrored_pyramids",
+          "label": "Mirrored pyramids",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "plus",
+          "label": "Plus",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "double_pill",
+          "label": "Double pill",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "triple_pill",
+          "label": "Triple pill",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "crown",
+          "label": "Crown",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "abstract_star",
+          "label": "Abstract star",
+          "group": "Miscellaneous"
+        }
+      ],
+      "info": "Selecting some shapes will crop images. Does not apply to videos or models. [Learn more](https://help.switchthemes.co/shapes/guides/style-images-with-shapes.html)"
+    },
+    {
+      "type": "select",
+      "id": "desktop_media_width",
+      "label": "Desktop media width",
+      "options": [
+        {
+          "value": "lg:col-span-6_lg:col-span-6",
+          "label": "One half"
+        },
+        {
+          "value": "lg:col-span-7_lg:col-span-5",
+          "label": "Three fifths"
+        },
+        {
+          "value": "lg:col-span-8_lg:col-span-4",
+          "label": "Two thirds"
+        }
+      ],
+      "default": "lg:col-span-6_lg:col-span-6"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_video_looping",
+      "label": "Enable video looping",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Color"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Primary"
+        },
+        {
+          "value": "secondary",
+          "label": "Secondary"
+        },
+        {
+          "value": "tertiary",
+          "label": "Tertiary"
+        },
+        {
+          "value": "quaternary",
+          "label": "Quaternary"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "use_gradient_background",
+      "label": "Use gradient for background"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "display_on_card",
+          "label": "Display on card",
+          "default": false,
+          "info": "Adjacent product blocks set to display on card will merge into a single card. [Learn more](https://help.switchthemes.co/shapes/guides/display-product-blocks-on-cards.html)"
+        },
+        {
+          "type": "radio",
+          "id": "text_align",
+          "label": "Text align",
+          "default": "text-left",
+          "options": [
+            {
+              "value": "text-left",
+              "label": "Left"
+            },
+            {
+              "value": "text-center",
+              "label": "Center"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "display_on_card",
+          "label": "Display on card",
+          "default": false,
+          "info": "Adjacent product blocks set to display on card will merge into a single card. [Learn more](https://help.switchthemes.co/shapes/guides/display-product-blocks-on-cards.html)"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_sale_sticker",
+          "label": "Show on sale sticker"
+        },
+        {
+          "type": "radio",
+          "id": "text_align",
+          "label": "Text align",
+          "default": "text-left",
+          "options": [
+            {
+              "value": "text-left",
+              "label": "Left"
+            },
+            {
+              "value": "text-center",
+              "label": "Center"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "quantity_selector",
+      "name": "Quantity selector",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "display_on_card",
+          "label": "Display on card",
+          "default": false,
+          "info": "Adjacent product blocks set to display on card will merge into a single card. [Learn more](https://help.switchthemes.co/shapes/guides/display-product-blocks-on-cards.html)"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_label",
+          "label": "Show label",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "variant_picker",
+      "name": "Variant picker",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "display_on_card",
+          "label": "Display on card",
+          "default": false,
+          "info": "Adjacent product blocks set to display on card will merge into a single card. [Learn more](https://help.switchthemes.co/shapes/guides/display-product-blocks-on-cards.html)"
+        },
+        {
+          "type": "radio",
+          "id": "option_style",
+          "label": "Options style",
+          "options": [
+            {
+              "value": "drop_down",
+              "label": "Drop down"
+            },
+            {
+              "value": "buttons",
+              "label": "Button"
+            }
+          ],
+          "default": "drop_down"
+        },
+        {
+          "type": "checkbox",
+          "id": "hide_option_labels",
+          "label": "Hide option labels",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Color swatches"
+        },
+        {
+          "type": "paragraph",
+          "content": "[Learn how to set up swatches](https://help.switchthemes.co/)"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_color_swatches",
+          "label": "Enable color swatches"
+        }
+      ]
+    },
+    {
+      "type": "buy_buttons",
+      "name": "Buy buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "display_on_card",
+          "label": "Display on card",
+          "default": false,
+          "info": "Adjacent product blocks set to display on card will merge into a single card. [Learn more](https://help.switchthemes.co/shapes/guides/display-product-blocks-on-cards.html)"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_price",
+          "label": "Show price in add to cart button",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_payment_button",
+          "label": "Show dynamic checkout button",
+          "info": "Each customer will see their preferred payment method from those available on your store, such as PayPal or Apple Pay. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Pickup Availability"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_pickup_availability",
+          "label": "Show pickup availability [Learn more](https://help.shopify.com/en/manual/sell-in-person/pos-classic/shopify-pos-from-admin/buy-online-pickup-in-store#show-pickup-availability-to-your-customers)",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "vendor",
+      "name": "Vendor",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "display_on_card",
+          "label": "Display on card",
+          "default": false,
+          "info": "Adjacent product blocks set to display on card will merge into a single card. [Learn more](https://help.switchthemes.co/shapes/guides/display-product-blocks-on-cards.html)"
+        },
+        {
+          "type": "radio",
+          "id": "text_align",
+          "label": "Text align",
+          "default": "text-left",
+          "options": [
+            {
+              "value": "text-left",
+              "label": "Left"
+            },
+            {
+              "value": "text-center",
+              "label": "Center"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "star_rating",
+      "name": "Star rating",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "display_on_card",
+          "label": "Display on card",
+          "default": false,
+          "info": "Adjacent product blocks set to display on card will merge into a single card. [Learn more](https://help.switchthemes.co/shapes/guides/display-product-blocks-on-cards.html)"
+        },
+        {
+          "type": "select",
+          "id": "type",
+          "label": "Star rating type",
+          "default": "native",
+          "options": [
+            {
+              "value": "native",
+              "label": "Theme"
+            },
+            {
+              "value": "spr",
+              "label": "Shopify Product Reviews"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "display_on_card",
+          "label": "Display on card",
+          "default": false,
+          "info": "Adjacent product blocks set to display on card will merge into a single card. [Learn more](https://help.switchthemes.co/shapes/guides/display-product-blocks-on-cards.html)"
+        },
+        {
+          "type": "checkbox",
+          "id": "truncate_description",
+          "label": "Truncate description",
+          "default": false
+        },
+        {
+          "type": "radio",
+          "id": "text_align",
+          "label": "Text align",
+          "default": "text-left",
+          "options": [
+            {
+              "value": "text-left",
+              "label": "Left"
+            },
+            {
+              "value": "text-center",
+              "label": "Center"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "display_on_card",
+          "label": "Display on card",
+          "default": false,
+          "info": "Adjacent product blocks set to display on card will merge into a single card. [Learn more](https://help.switchthemes.co/shapes/guides/display-product-blocks-on-cards.html)"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "default": "Text block",
+          "label": "Text"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "box",
+              "label": "Box"
+            },
+            {
+              "value": "chat-bubble",
+              "label": "Chat bubble"
+            },
+            {
+              "value": "check-mark",
+              "label": "Check mark"
+            },
+            {
+              "value": "coat-hanger",
+              "label": "Coat hanger"
+            },
+            {
+              "value": "dryer",
+              "label": "Dryer"
+            },
+            {
+              "value": "eye",
+              "label": "Eye"
+            },
+            {
+              "value": "globe",
+              "label": "Globe"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "iron",
+              "label": "Iron"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "leather",
+              "label": "Leather"
+            },
+            {
+              "value": "like",
+              "label": "Like"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "map-pin",
+              "label": "Map pin"
+            },
+            {
+              "value": "pants",
+              "label": "Pants"
+            },
+            {
+              "value": "person",
+              "label": "Person"
+            },
+            {
+              "value": "plane",
+              "label": "Plane"
+            },
+            {
+              "value": "price-tag",
+              "label": "Price tag"
+            },
+            {
+              "value": "question-mark",
+              "label": "Question mark"
+            },
+            {
+              "value": "recycle",
+              "label": "Recycle"
+            },
+            {
+              "value": "return",
+              "label": "Return"
+            },
+            {
+              "value": "ruler",
+              "label": "Ruler"
+            },
+            {
+              "value": "shirt",
+              "label": "Shirt"
+            },
+            {
+              "value": "shoe",
+              "label": "Shoe"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "washing",
+              "label": "Washing"
+            },
+            {
+              "value": "gluten_free",
+              "label": "Gluten free",
+              "group": "Food and health"
+            },
+            {
+              "value": "soy_free",
+              "label": "Soy free",
+              "group": "Food and health"
+            },
+            {
+              "value": "sugar_free",
+              "label": "Sugar free",
+              "group": "Food and health"
+            },
+            {
+              "value": "nut_free",
+              "label": "Nut free",
+              "group": "Food and health"
+            },
+            {
+              "value": "corn_free",
+              "label": "Corn free",
+              "group": "Food and health"
+            },
+            {
+              "value": "dairy_free",
+              "label": "Dairy free",
+              "group": "Food and health"
+            },
+            {
+              "value": "no_additives",
+              "label": "No additives",
+              "group": "Food and health"
+            },
+            {
+              "value": "no_artificial_colors",
+              "label": "No artificial colors",
+              "group": "Food and health"
+            },
+            {
+              "value": "non_gmo",
+              "label": "Non GMO",
+              "group": "Food and health"
+            },
+            {
+              "value": "vegan",
+              "label": "Vegan",
+              "group": "Food and health"
+            },
+            {
+              "value": "halal",
+              "label": "Halal",
+              "group": "Food and health"
+            },
+            {
+              "value": "organic",
+              "label": "Organic",
+              "group": "Food and health"
+            },
+            {
+              "value": "kosher",
+              "label": "Kosher",
+              "group": "Food and health"
+            },
+            {
+              "value": "keto",
+              "label": "Keto",
+              "group": "Food and health"
+            },
+            {
+              "value": "paleo",
+              "label": "Paleo",
+              "group": "Food and health"
+            },
+            {
+              "value": "cruelty_free",
+              "label": "Cruelty free",
+              "group": "Food and health"
+            },
+            {
+              "value": "paraben_free",
+              "label": "Paraben free",
+              "group": "Food and health"
+            },
+            {
+              "value": "alcohol_free",
+              "label": "Alcohol free",
+              "group": "Food and health"
+            },
+            {
+              "value": "palm_oil_free",
+              "label": "Palm oil free",
+              "group": "Food and health"
+            },
+            {
+              "value": "anti_bacterial",
+              "label": "Anti bacterial",
+              "group": "Food and health"
+            },
+            {
+              "value": "probiotic",
+              "label": "Probiotic",
+              "group": "Food and health"
+            },
+            {
+              "value": "antioxidants",
+              "label": "Antioxidants",
+              "group": "Food and health"
+            },
+            {
+              "value": "low_salt",
+              "label": "Low salt",
+              "group": "Food and health"
+            },
+            {
+              "value": "low_carb",
+              "label": "Low carb",
+              "group": "Food and health"
+            }
+          ],
+          "default": "none"
+        }
+      ]
+    },
+    {
+      "type": "icon_row",
+      "name": "Icon row",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "display_on_card",
+          "label": "Display on card",
+          "default": false,
+          "info": "Adjacent product blocks set to display on card will merge into a single card. [Learn more](https://help.switchthemes.co/shapes/guides/display-product-blocks-on-cards.html)"
+        },
+        {
+          "type": "header",
+          "content": "Item 1"
+        },
+        {
+          "type": "select",
+          "id": "icon_1",
+          "label": "Icon 1",
+          "options": [
+            {
+              "value": "box",
+              "label": "Box"
+            },
+            {
+              "value": "chat-bubble",
+              "label": "Chat bubble"
+            },
+            {
+              "value": "check-mark",
+              "label": "Check mark"
+            },
+            {
+              "value": "coat-hanger",
+              "label": "Coat hanger"
+            },
+            {
+              "value": "dryer",
+              "label": "Dryer"
+            },
+            {
+              "value": "eye",
+              "label": "Eye"
+            },
+            {
+              "value": "globe",
+              "label": "Globe"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "iron",
+              "label": "Iron"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "leather",
+              "label": "Leather"
+            },
+            {
+              "value": "like",
+              "label": "Like"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "map-pin",
+              "label": "Map pin"
+            },
+            {
+              "value": "pants",
+              "label": "Pants"
+            },
+            {
+              "value": "person",
+              "label": "Person"
+            },
+            {
+              "value": "plane",
+              "label": "Plane"
+            },
+            {
+              "value": "price-tag",
+              "label": "Price tag"
+            },
+            {
+              "value": "question-mark",
+              "label": "Question mark"
+            },
+            {
+              "value": "recycle",
+              "label": "Recycle"
+            },
+            {
+              "value": "return",
+              "label": "Return"
+            },
+            {
+              "value": "ruler",
+              "label": "Ruler"
+            },
+            {
+              "value": "shirt",
+              "label": "Shirt"
+            },
+            {
+              "value": "shoe",
+              "label": "Shoe"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "washing",
+              "label": "Washing"
+            },
+            {
+              "value": "gluten_free",
+              "label": "Gluten free",
+              "group": "Food and health"
+            },
+            {
+              "value": "soy_free",
+              "label": "Soy free",
+              "group": "Food and health"
+            },
+            {
+              "value": "sugar_free",
+              "label": "Sugar free",
+              "group": "Food and health"
+            },
+            {
+              "value": "nut_free",
+              "label": "Nut free",
+              "group": "Food and health"
+            },
+            {
+              "value": "corn_free",
+              "label": "Corn free",
+              "group": "Food and health"
+            },
+            {
+              "value": "dairy_free",
+              "label": "Dairy free",
+              "group": "Food and health"
+            },
+            {
+              "value": "no_additives",
+              "label": "No additives",
+              "group": "Food and health"
+            },
+            {
+              "value": "no_artificial_colors",
+              "label": "No artificial colors",
+              "group": "Food and health"
+            },
+            {
+              "value": "non_gmo",
+              "label": "Non GMO",
+              "group": "Food and health"
+            },
+            {
+              "value": "vegan",
+              "label": "Vegan",
+              "group": "Food and health"
+            },
+            {
+              "value": "halal",
+              "label": "Halal",
+              "group": "Food and health"
+            },
+            {
+              "value": "organic",
+              "label": "Organic",
+              "group": "Food and health"
+            },
+            {
+              "value": "kosher",
+              "label": "Kosher",
+              "group": "Food and health"
+            },
+            {
+              "value": "keto",
+              "label": "Keto",
+              "group": "Food and health"
+            },
+            {
+              "value": "paleo",
+              "label": "Paleo",
+              "group": "Food and health"
+            },
+            {
+              "value": "cruelty_free",
+              "label": "Cruelty free",
+              "group": "Food and health"
+            },
+            {
+              "value": "paraben_free",
+              "label": "Paraben free",
+              "group": "Food and health"
+            },
+            {
+              "value": "alcohol_free",
+              "label": "Alcohol free",
+              "group": "Food and health"
+            },
+            {
+              "value": "palm_oil_free",
+              "label": "Palm oil free",
+              "group": "Food and health"
+            },
+            {
+              "value": "anti_bacterial",
+              "label": "Anti bacterial",
+              "group": "Food and health"
+            },
+            {
+              "value": "probiotic",
+              "label": "Probiotic",
+              "group": "Food and health"
+            },
+            {
+              "value": "antioxidants",
+              "label": "Antioxidants",
+              "group": "Food and health"
+            },
+            {
+              "value": "low_salt",
+              "label": "Low salt",
+              "group": "Food and health"
+            },
+            {
+              "value": "low_carb",
+              "label": "Low carb",
+              "group": "Food and health"
+            }
+          ],
+          "default": "globe"
+        },
+        {
+          "type": "text",
+          "id": "text_1",
+          "label": "Text 1",
+          "default": "Row item"
+        },
+        {
+          "type": "header",
+          "content": "Item 2"
+        },
+        {
+          "type": "select",
+          "id": "icon_2",
+          "label": "Icon 2",
+          "options": [
+            {
+              "value": "box",
+              "label": "Box"
+            },
+            {
+              "value": "chat-bubble",
+              "label": "Chat bubble"
+            },
+            {
+              "value": "check-mark",
+              "label": "Check mark"
+            },
+            {
+              "value": "coat-hanger",
+              "label": "Coat hanger"
+            },
+            {
+              "value": "dryer",
+              "label": "Dryer"
+            },
+            {
+              "value": "eye",
+              "label": "Eye"
+            },
+            {
+              "value": "globe",
+              "label": "Globe"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "iron",
+              "label": "Iron"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "leather",
+              "label": "Leather"
+            },
+            {
+              "value": "like",
+              "label": "Like"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "map-pin",
+              "label": "Map pin"
+            },
+            {
+              "value": "pants",
+              "label": "Pants"
+            },
+            {
+              "value": "person",
+              "label": "Person"
+            },
+            {
+              "value": "plane",
+              "label": "Plane"
+            },
+            {
+              "value": "price-tag",
+              "label": "Price tag"
+            },
+            {
+              "value": "question-mark",
+              "label": "Question mark"
+            },
+            {
+              "value": "recycle",
+              "label": "Recycle"
+            },
+            {
+              "value": "return",
+              "label": "Return"
+            },
+            {
+              "value": "ruler",
+              "label": "Ruler"
+            },
+            {
+              "value": "shirt",
+              "label": "Shirt"
+            },
+            {
+              "value": "shoe",
+              "label": "Shoe"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "washing",
+              "label": "Washing"
+            },
+            {
+              "value": "gluten_free",
+              "label": "Gluten free",
+              "group": "Food and health"
+            },
+            {
+              "value": "soy_free",
+              "label": "Soy free",
+              "group": "Food and health"
+            },
+            {
+              "value": "sugar_free",
+              "label": "Sugar free",
+              "group": "Food and health"
+            },
+            {
+              "value": "nut_free",
+              "label": "Nut free",
+              "group": "Food and health"
+            },
+            {
+              "value": "corn_free",
+              "label": "Corn free",
+              "group": "Food and health"
+            },
+            {
+              "value": "dairy_free",
+              "label": "Dairy free",
+              "group": "Food and health"
+            },
+            {
+              "value": "no_additives",
+              "label": "No additives",
+              "group": "Food and health"
+            },
+            {
+              "value": "no_artificial_colors",
+              "label": "No artificial colors",
+              "group": "Food and health"
+            },
+            {
+              "value": "non_gmo",
+              "label": "Non GMO",
+              "group": "Food and health"
+            },
+            {
+              "value": "vegan",
+              "label": "Vegan",
+              "group": "Food and health"
+            },
+            {
+              "value": "halal",
+              "label": "Halal",
+              "group": "Food and health"
+            },
+            {
+              "value": "organic",
+              "label": "Organic",
+              "group": "Food and health"
+            },
+            {
+              "value": "kosher",
+              "label": "Kosher",
+              "group": "Food and health"
+            },
+            {
+              "value": "keto",
+              "label": "Keto",
+              "group": "Food and health"
+            },
+            {
+              "value": "paleo",
+              "label": "Paleo",
+              "group": "Food and health"
+            },
+            {
+              "value": "cruelty_free",
+              "label": "Cruelty free",
+              "group": "Food and health"
+            },
+            {
+              "value": "paraben_free",
+              "label": "Paraben free",
+              "group": "Food and health"
+            },
+            {
+              "value": "alcohol_free",
+              "label": "Alcohol free",
+              "group": "Food and health"
+            },
+            {
+              "value": "palm_oil_free",
+              "label": "Palm oil free",
+              "group": "Food and health"
+            },
+            {
+              "value": "anti_bacterial",
+              "label": "Anti bacterial",
+              "group": "Food and health"
+            },
+            {
+              "value": "probiotic",
+              "label": "Probiotic",
+              "group": "Food and health"
+            },
+            {
+              "value": "antioxidants",
+              "label": "Antioxidants",
+              "group": "Food and health"
+            },
+            {
+              "value": "low_salt",
+              "label": "Low salt",
+              "group": "Food and health"
+            },
+            {
+              "value": "low_carb",
+              "label": "Low carb",
+              "group": "Food and health"
+            }
+          ],
+          "default": "truck"
+        },
+        {
+          "type": "text",
+          "id": "text_2",
+          "label": "Text 2",
+          "default": "Row item"
+        },
+        {
+          "type": "header",
+          "content": "Item 3"
+        },
+        {
+          "type": "select",
+          "id": "icon_3",
+          "label": "Icon 3",
+          "options": [
+            {
+              "value": "box",
+              "label": "Box"
+            },
+            {
+              "value": "chat-bubble",
+              "label": "Chat bubble"
+            },
+            {
+              "value": "check-mark",
+              "label": "Check mark"
+            },
+            {
+              "value": "coat-hanger",
+              "label": "Coat hanger"
+            },
+            {
+              "value": "dryer",
+              "label": "Dryer"
+            },
+            {
+              "value": "eye",
+              "label": "Eye"
+            },
+            {
+              "value": "globe",
+              "label": "Globe"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "iron",
+              "label": "Iron"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "leather",
+              "label": "Leather"
+            },
+            {
+              "value": "like",
+              "label": "Like"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "map-pin",
+              "label": "Map pin"
+            },
+            {
+              "value": "pants",
+              "label": "Pants"
+            },
+            {
+              "value": "person",
+              "label": "Person"
+            },
+            {
+              "value": "plane",
+              "label": "Plane"
+            },
+            {
+              "value": "price-tag",
+              "label": "Price tag"
+            },
+            {
+              "value": "question-mark",
+              "label": "Question mark"
+            },
+            {
+              "value": "recycle",
+              "label": "Recycle"
+            },
+            {
+              "value": "return",
+              "label": "Return"
+            },
+            {
+              "value": "ruler",
+              "label": "Ruler"
+            },
+            {
+              "value": "shirt",
+              "label": "Shirt"
+            },
+            {
+              "value": "shoe",
+              "label": "Shoe"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "washing",
+              "label": "Washing"
+            },
+            {
+              "value": "gluten_free",
+              "label": "Gluten free",
+              "group": "Food and health"
+            },
+            {
+              "value": "soy_free",
+              "label": "Soy free",
+              "group": "Food and health"
+            },
+            {
+              "value": "sugar_free",
+              "label": "Sugar free",
+              "group": "Food and health"
+            },
+            {
+              "value": "nut_free",
+              "label": "Nut free",
+              "group": "Food and health"
+            },
+            {
+              "value": "corn_free",
+              "label": "Corn free",
+              "group": "Food and health"
+            },
+            {
+              "value": "dairy_free",
+              "label": "Dairy free",
+              "group": "Food and health"
+            },
+            {
+              "value": "no_additives",
+              "label": "No additives",
+              "group": "Food and health"
+            },
+            {
+              "value": "no_artificial_colors",
+              "label": "No artificial colors",
+              "group": "Food and health"
+            },
+            {
+              "value": "non_gmo",
+              "label": "Non GMO",
+              "group": "Food and health"
+            },
+            {
+              "value": "vegan",
+              "label": "Vegan",
+              "group": "Food and health"
+            },
+            {
+              "value": "halal",
+              "label": "Halal",
+              "group": "Food and health"
+            },
+            {
+              "value": "organic",
+              "label": "Organic",
+              "group": "Food and health"
+            },
+            {
+              "value": "kosher",
+              "label": "Kosher",
+              "group": "Food and health"
+            },
+            {
+              "value": "keto",
+              "label": "Keto",
+              "group": "Food and health"
+            },
+            {
+              "value": "paleo",
+              "label": "Paleo",
+              "group": "Food and health"
+            },
+            {
+              "value": "cruelty_free",
+              "label": "Cruelty free",
+              "group": "Food and health"
+            },
+            {
+              "value": "paraben_free",
+              "label": "Paraben free",
+              "group": "Food and health"
+            },
+            {
+              "value": "alcohol_free",
+              "label": "Alcohol free",
+              "group": "Food and health"
+            },
+            {
+              "value": "palm_oil_free",
+              "label": "Palm oil free",
+              "group": "Food and health"
+            },
+            {
+              "value": "anti_bacterial",
+              "label": "Anti bacterial",
+              "group": "Food and health"
+            },
+            {
+              "value": "probiotic",
+              "label": "Probiotic",
+              "group": "Food and health"
+            },
+            {
+              "value": "antioxidants",
+              "label": "Antioxidants",
+              "group": "Food and health"
+            },
+            {
+              "value": "low_salt",
+              "label": "Low salt",
+              "group": "Food and health"
+            },
+            {
+              "value": "low_carb",
+              "label": "Low carb",
+              "group": "Food and health"
+            }
+          ],
+          "default": "washing"
+        },
+        {
+          "type": "text",
+          "id": "text_3",
+          "label": "Text 3",
+          "default": "Row item"
+        },
+        {
+          "type": "header",
+          "content": "Item 4"
+        },
+        {
+          "type": "select",
+          "id": "icon_4",
+          "label": "Icon 4",
+          "options": [
+            {
+              "value": "box",
+              "label": "Box"
+            },
+            {
+              "value": "chat-bubble",
+              "label": "Chat bubble"
+            },
+            {
+              "value": "check-mark",
+              "label": "Check mark"
+            },
+            {
+              "value": "coat-hanger",
+              "label": "Coat hanger"
+            },
+            {
+              "value": "dryer",
+              "label": "Dryer"
+            },
+            {
+              "value": "eye",
+              "label": "Eye"
+            },
+            {
+              "value": "globe",
+              "label": "Globe"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "iron",
+              "label": "Iron"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "leather",
+              "label": "Leather"
+            },
+            {
+              "value": "like",
+              "label": "Like"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "map-pin",
+              "label": "Map pin"
+            },
+            {
+              "value": "pants",
+              "label": "Pants"
+            },
+            {
+              "value": "person",
+              "label": "Person"
+            },
+            {
+              "value": "plane",
+              "label": "Plane"
+            },
+            {
+              "value": "price-tag",
+              "label": "Price tag"
+            },
+            {
+              "value": "question-mark",
+              "label": "Question mark"
+            },
+            {
+              "value": "recycle",
+              "label": "Recycle"
+            },
+            {
+              "value": "return",
+              "label": "Return"
+            },
+            {
+              "value": "ruler",
+              "label": "Ruler"
+            },
+            {
+              "value": "shirt",
+              "label": "Shirt"
+            },
+            {
+              "value": "shoe",
+              "label": "Shoe"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "washing",
+              "label": "Washing"
+            },
+            {
+              "value": "gluten_free",
+              "label": "Gluten free",
+              "group": "Food and health"
+            },
+            {
+              "value": "soy_free",
+              "label": "Soy free",
+              "group": "Food and health"
+            },
+            {
+              "value": "sugar_free",
+              "label": "Sugar free",
+              "group": "Food and health"
+            },
+            {
+              "value": "nut_free",
+              "label": "Nut free",
+              "group": "Food and health"
+            },
+            {
+              "value": "corn_free",
+              "label": "Corn free",
+              "group": "Food and health"
+            },
+            {
+              "value": "dairy_free",
+              "label": "Dairy free",
+              "group": "Food and health"
+            },
+            {
+              "value": "no_additives",
+              "label": "No additives",
+              "group": "Food and health"
+            },
+            {
+              "value": "no_artificial_colors",
+              "label": "No artificial colors",
+              "group": "Food and health"
+            },
+            {
+              "value": "non_gmo",
+              "label": "Non GMO",
+              "group": "Food and health"
+            },
+            {
+              "value": "vegan",
+              "label": "Vegan",
+              "group": "Food and health"
+            },
+            {
+              "value": "halal",
+              "label": "Halal",
+              "group": "Food and health"
+            },
+            {
+              "value": "organic",
+              "label": "Organic",
+              "group": "Food and health"
+            },
+            {
+              "value": "kosher",
+              "label": "Kosher",
+              "group": "Food and health"
+            },
+            {
+              "value": "keto",
+              "label": "Keto",
+              "group": "Food and health"
+            },
+            {
+              "value": "paleo",
+              "label": "Paleo",
+              "group": "Food and health"
+            },
+            {
+              "value": "cruelty_free",
+              "label": "Cruelty free",
+              "group": "Food and health"
+            },
+            {
+              "value": "paraben_free",
+              "label": "Paraben free",
+              "group": "Food and health"
+            },
+            {
+              "value": "alcohol_free",
+              "label": "Alcohol free",
+              "group": "Food and health"
+            },
+            {
+              "value": "palm_oil_free",
+              "label": "Palm oil free",
+              "group": "Food and health"
+            },
+            {
+              "value": "anti_bacterial",
+              "label": "Anti bacterial",
+              "group": "Food and health"
+            },
+            {
+              "value": "probiotic",
+              "label": "Probiotic",
+              "group": "Food and health"
+            },
+            {
+              "value": "antioxidants",
+              "label": "Antioxidants",
+              "group": "Food and health"
+            },
+            {
+              "value": "low_salt",
+              "label": "Low salt",
+              "group": "Food and health"
+            },
+            {
+              "value": "low_carb",
+              "label": "Low carb",
+              "group": "Food and health"
+            }
+          ],
+          "default": "heart"
+        },
+        {
+          "type": "text",
+          "id": "text_4",
+          "label": "Text 4",
+          "default": "Row item"
+        },
+        {
+          "type": "header",
+          "content": "Item 5"
+        },
+        {
+          "type": "select",
+          "id": "icon_5",
+          "label": "Icon 5",
+          "options": [
+            {
+              "value": "box",
+              "label": "Box"
+            },
+            {
+              "value": "chat-bubble",
+              "label": "Chat bubble"
+            },
+            {
+              "value": "check-mark",
+              "label": "Check mark"
+            },
+            {
+              "value": "coat-hanger",
+              "label": "Coat hanger"
+            },
+            {
+              "value": "dryer",
+              "label": "Dryer"
+            },
+            {
+              "value": "eye",
+              "label": "Eye"
+            },
+            {
+              "value": "globe",
+              "label": "Globe"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "iron",
+              "label": "Iron"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "leather",
+              "label": "Leather"
+            },
+            {
+              "value": "like",
+              "label": "Like"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "map-pin",
+              "label": "Map pin"
+            },
+            {
+              "value": "pants",
+              "label": "Pants"
+            },
+            {
+              "value": "person",
+              "label": "Person"
+            },
+            {
+              "value": "plane",
+              "label": "Plane"
+            },
+            {
+              "value": "price-tag",
+              "label": "Price tag"
+            },
+            {
+              "value": "question-mark",
+              "label": "Question mark"
+            },
+            {
+              "value": "recycle",
+              "label": "Recycle"
+            },
+            {
+              "value": "return",
+              "label": "Return"
+            },
+            {
+              "value": "ruler",
+              "label": "Ruler"
+            },
+            {
+              "value": "shirt",
+              "label": "Shirt"
+            },
+            {
+              "value": "shoe",
+              "label": "Shoe"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "washing",
+              "label": "Washing"
+            },
+            {
+              "value": "gluten_free",
+              "label": "Gluten free",
+              "group": "Food and health"
+            },
+            {
+              "value": "soy_free",
+              "label": "Soy free",
+              "group": "Food and health"
+            },
+            {
+              "value": "sugar_free",
+              "label": "Sugar free",
+              "group": "Food and health"
+            },
+            {
+              "value": "nut_free",
+              "label": "Nut free",
+              "group": "Food and health"
+            },
+            {
+              "value": "corn_free",
+              "label": "Corn free",
+              "group": "Food and health"
+            },
+            {
+              "value": "dairy_free",
+              "label": "Dairy free",
+              "group": "Food and health"
+            },
+            {
+              "value": "no_additives",
+              "label": "No additives",
+              "group": "Food and health"
+            },
+            {
+              "value": "no_artificial_colors",
+              "label": "No artificial colors",
+              "group": "Food and health"
+            },
+            {
+              "value": "non_gmo",
+              "label": "Non GMO",
+              "group": "Food and health"
+            },
+            {
+              "value": "vegan",
+              "label": "Vegan",
+              "group": "Food and health"
+            },
+            {
+              "value": "halal",
+              "label": "Halal",
+              "group": "Food and health"
+            },
+            {
+              "value": "organic",
+              "label": "Organic",
+              "group": "Food and health"
+            },
+            {
+              "value": "kosher",
+              "label": "Kosher",
+              "group": "Food and health"
+            },
+            {
+              "value": "keto",
+              "label": "Keto",
+              "group": "Food and health"
+            },
+            {
+              "value": "paleo",
+              "label": "Paleo",
+              "group": "Food and health"
+            },
+            {
+              "value": "cruelty_free",
+              "label": "Cruelty free",
+              "group": "Food and health"
+            },
+            {
+              "value": "paraben_free",
+              "label": "Paraben free",
+              "group": "Food and health"
+            },
+            {
+              "value": "alcohol_free",
+              "label": "Alcohol free",
+              "group": "Food and health"
+            },
+            {
+              "value": "palm_oil_free",
+              "label": "Palm oil free",
+              "group": "Food and health"
+            },
+            {
+              "value": "anti_bacterial",
+              "label": "Anti bacterial",
+              "group": "Food and health"
+            },
+            {
+              "value": "probiotic",
+              "label": "Probiotic",
+              "group": "Food and health"
+            },
+            {
+              "value": "antioxidants",
+              "label": "Antioxidants",
+              "group": "Food and health"
+            },
+            {
+              "value": "low_salt",
+              "label": "Low salt",
+              "group": "Food and health"
+            },
+            {
+              "value": "low_carb",
+              "label": "Low carb",
+              "group": "Food and health"
+            }
+          ],
+          "default": "ruler"
+        },
+        {
+          "type": "text",
+          "id": "text_5",
+          "label": "Text 5",
+          "default": "Row item"
+        }
+      ]
+    },
+    {
+      "type": "popup",
+      "name": "Pop-up",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "display_on_card",
+          "label": "Display on card",
+          "default": false,
+          "info": "Adjacent product blocks set to display on card will merge into a single card. [Learn more](https://help.switchthemes.co/shapes/guides/display-product-blocks-on-cards.html)"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "box",
+              "label": "Box"
+            },
+            {
+              "value": "chat-bubble",
+              "label": "Chat bubble"
+            },
+            {
+              "value": "check-mark",
+              "label": "Check mark"
+            },
+            {
+              "value": "coat-hanger",
+              "label": "Coat hanger"
+            },
+            {
+              "value": "dryer",
+              "label": "Dryer"
+            },
+            {
+              "value": "eye",
+              "label": "Eye"
+            },
+            {
+              "value": "globe",
+              "label": "Globe"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "iron",
+              "label": "Iron"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "leather",
+              "label": "Leather"
+            },
+            {
+              "value": "like",
+              "label": "Like"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "map-pin",
+              "label": "Map pin"
+            },
+            {
+              "value": "pants",
+              "label": "Pants"
+            },
+            {
+              "value": "person",
+              "label": "Person"
+            },
+            {
+              "value": "plane",
+              "label": "Plane"
+            },
+            {
+              "value": "price-tag",
+              "label": "Price tag"
+            },
+            {
+              "value": "question-mark",
+              "label": "Question mark"
+            },
+            {
+              "value": "recycle",
+              "label": "Recycle"
+            },
+            {
+              "value": "return",
+              "label": "Return"
+            },
+            {
+              "value": "ruler",
+              "label": "Ruler"
+            },
+            {
+              "value": "shirt",
+              "label": "Shirt"
+            },
+            {
+              "value": "shoe",
+              "label": "Shoe"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "washing",
+              "label": "Washing"
+            },
+            {
+              "value": "gluten_free",
+              "label": "Gluten free",
+              "group": "Food and health"
+            },
+            {
+              "value": "soy_free",
+              "label": "Soy free",
+              "group": "Food and health"
+            },
+            {
+              "value": "sugar_free",
+              "label": "Sugar free",
+              "group": "Food and health"
+            },
+            {
+              "value": "nut_free",
+              "label": "Nut free",
+              "group": "Food and health"
+            },
+            {
+              "value": "corn_free",
+              "label": "Corn free",
+              "group": "Food and health"
+            },
+            {
+              "value": "dairy_free",
+              "label": "Dairy free",
+              "group": "Food and health"
+            },
+            {
+              "value": "no_additives",
+              "label": "No additives",
+              "group": "Food and health"
+            },
+            {
+              "value": "no_artificial_colors",
+              "label": "No artificial colors",
+              "group": "Food and health"
+            },
+            {
+              "value": "non_gmo",
+              "label": "Non GMO",
+              "group": "Food and health"
+            },
+            {
+              "value": "vegan",
+              "label": "Vegan",
+              "group": "Food and health"
+            },
+            {
+              "value": "halal",
+              "label": "Halal",
+              "group": "Food and health"
+            },
+            {
+              "value": "organic",
+              "label": "Organic",
+              "group": "Food and health"
+            },
+            {
+              "value": "kosher",
+              "label": "Kosher",
+              "group": "Food and health"
+            },
+            {
+              "value": "keto",
+              "label": "Keto",
+              "group": "Food and health"
+            },
+            {
+              "value": "paleo",
+              "label": "Paleo",
+              "group": "Food and health"
+            },
+            {
+              "value": "cruelty_free",
+              "label": "Cruelty free",
+              "group": "Food and health"
+            },
+            {
+              "value": "paraben_free",
+              "label": "Paraben free",
+              "group": "Food and health"
+            },
+            {
+              "value": "alcohol_free",
+              "label": "Alcohol free",
+              "group": "Food and health"
+            },
+            {
+              "value": "palm_oil_free",
+              "label": "Palm oil free",
+              "group": "Food and health"
+            },
+            {
+              "value": "anti_bacterial",
+              "label": "Anti bacterial",
+              "group": "Food and health"
+            },
+            {
+              "value": "probiotic",
+              "label": "Probiotic",
+              "group": "Food and health"
+            },
+            {
+              "value": "antioxidants",
+              "label": "Antioxidants",
+              "group": "Food and health"
+            },
+            {
+              "value": "low_salt",
+              "label": "Low salt",
+              "group": "Food and health"
+            },
+            {
+              "value": "low_carb",
+              "label": "Low carb",
+              "group": "Food and health"
+            }
+          ],
+          "default": "ruler"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "default": "Pop-up link text",
+          "label": "Link label"
+        },
+        {
+          "id": "page",
+          "type": "page",
+          "label": "Page",
+          "info": "Contact form fields will not be displayed in the pop up."
+        }
+      ]
+    },
+    {
+      "type": "liquid",
+      "name": "Liquid",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "display_on_card",
+          "label": "Display on card",
+          "default": false,
+          "info": "Adjacent product blocks set to display on card will merge into a single card. [Learn more](https://help.switchthemes.co/shapes/guides/display-product-blocks-on-cards.html)"
+        },
+        {
+          "type": "liquid",
+          "id": "liquid",
+          "label": "Liquid"
+        }
+      ]
+    },
+    {
+      "type": "collapsible_tab",
+      "name": "Collapsible tab",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "display_on_card",
+          "label": "Display on card",
+          "default": false,
+          "info": "Adjacent product blocks set to display on card will merge into a single card. [Learn more](https://help.switchthemes.co/shapes/guides/display-product-blocks-on-cards.html)"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "box",
+              "label": "Box"
+            },
+            {
+              "value": "chat-bubble",
+              "label": "Chat bubble"
+            },
+            {
+              "value": "check-mark",
+              "label": "Check mark"
+            },
+            {
+              "value": "coat-hanger",
+              "label": "Coat hanger"
+            },
+            {
+              "value": "dryer",
+              "label": "Dryer"
+            },
+            {
+              "value": "eye",
+              "label": "Eye"
+            },
+            {
+              "value": "globe",
+              "label": "Globe"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "iron",
+              "label": "Iron"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "leather",
+              "label": "Leather"
+            },
+            {
+              "value": "like",
+              "label": "Like"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "map-pin",
+              "label": "Map pin"
+            },
+            {
+              "value": "pants",
+              "label": "Pants"
+            },
+            {
+              "value": "person",
+              "label": "Person"
+            },
+            {
+              "value": "plane",
+              "label": "Plane"
+            },
+            {
+              "value": "price-tag",
+              "label": "Price tag"
+            },
+            {
+              "value": "question-mark",
+              "label": "Question mark"
+            },
+            {
+              "value": "recycle",
+              "label": "Recycle"
+            },
+            {
+              "value": "return",
+              "label": "Return"
+            },
+            {
+              "value": "ruler",
+              "label": "Ruler"
+            },
+            {
+              "value": "shirt",
+              "label": "Shirt"
+            },
+            {
+              "value": "shoe",
+              "label": "Shoe"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "washing",
+              "label": "Washing"
+            },
+            {
+              "value": "gluten_free",
+              "label": "Gluten free",
+              "group": "Food and health"
+            },
+            {
+              "value": "soy_free",
+              "label": "Soy free",
+              "group": "Food and health"
+            },
+            {
+              "value": "sugar_free",
+              "label": "Sugar free",
+              "group": "Food and health"
+            },
+            {
+              "value": "nut_free",
+              "label": "Nut free",
+              "group": "Food and health"
+            },
+            {
+              "value": "corn_free",
+              "label": "Corn free",
+              "group": "Food and health"
+            },
+            {
+              "value": "dairy_free",
+              "label": "Dairy free",
+              "group": "Food and health"
+            },
+            {
+              "value": "no_additives",
+              "label": "No additives",
+              "group": "Food and health"
+            },
+            {
+              "value": "no_artificial_colors",
+              "label": "No artificial colors",
+              "group": "Food and health"
+            },
+            {
+              "value": "non_gmo",
+              "label": "Non GMO",
+              "group": "Food and health"
+            },
+            {
+              "value": "vegan",
+              "label": "Vegan",
+              "group": "Food and health"
+            },
+            {
+              "value": "halal",
+              "label": "Halal",
+              "group": "Food and health"
+            },
+            {
+              "value": "organic",
+              "label": "Organic",
+              "group": "Food and health"
+            },
+            {
+              "value": "kosher",
+              "label": "Kosher",
+              "group": "Food and health"
+            },
+            {
+              "value": "keto",
+              "label": "Keto",
+              "group": "Food and health"
+            },
+            {
+              "value": "paleo",
+              "label": "Paleo",
+              "group": "Food and health"
+            },
+            {
+              "value": "cruelty_free",
+              "label": "Cruelty free",
+              "group": "Food and health"
+            },
+            {
+              "value": "paraben_free",
+              "label": "Paraben free",
+              "group": "Food and health"
+            },
+            {
+              "value": "alcohol_free",
+              "label": "Alcohol free",
+              "group": "Food and health"
+            },
+            {
+              "value": "palm_oil_free",
+              "label": "Palm oil free",
+              "group": "Food and health"
+            },
+            {
+              "value": "anti_bacterial",
+              "label": "Anti bacterial",
+              "group": "Food and health"
+            },
+            {
+              "value": "probiotic",
+              "label": "Probiotic",
+              "group": "Food and health"
+            },
+            {
+              "value": "antioxidants",
+              "label": "Antioxidants",
+              "group": "Food and health"
+            },
+            {
+              "value": "low_salt",
+              "label": "Low salt",
+              "group": "Food and health"
+            },
+            {
+              "value": "low_carb",
+              "label": "Low carb",
+              "group": "Food and health"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Collapsible tab",
+          "info": "Include a heading that explains the content.",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Tab content"
+        },
+        {
+          "type": "page",
+          "id": "page",
+          "label": "Tab content from page"
+        }
+      ]
+    },
+    {
+      "type": "share_buttons",
+      "name": "Share buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "display_on_card",
+          "label": "Display on card",
+          "default": false,
+          "info": "Adjacent product blocks set to display on card will merge into a single card. [Learn more](https://help.switchthemes.co/shapes/guides/display-product-blocks-on-cards.html)"
+        }
+      ]
+    },
+    {
+      "type": "nutritional_information",
+      "name": "Nutritional information",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "display_on_card",
+          "label": "Display on card",
+          "default": false,
+          "info": "Adjacent product blocks set to display on card will merge into a single card. [Learn more](https://help.switchthemes.co/shapes/guides/display-product-blocks-on-cards.html)"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Nutritional information",
+          "label": "Heading"
+        },
+        {
+          "type": "text",
+          "id": "right_label",
+          "default": "Per 100g",
+          "label": "Right label"
+        },
+        {
+          "type": "richtext",
+          "id": "information",
+          "label": "Information",
+          "info": "Separate label and value with a comma. Use line breaks to add a new row. Use a hyphen to indent rows. [Learn more](https://help.switchthemes.co/shapes/guides/nutritional-information.html)",
+          "default": "<p>Protein, 13g<br/>Total Carbohydrate, 36g<br/>- Dietary Fiber, 11g<br/>- Sugars, 6g<br/>Total Fat, 1g</p>"
+        }
+      ]
+    },
+    {
+      "type": "horizontal_bar_chart",
+      "name": "Horizontal bar chart",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "display_on_card",
+          "label": "Display on card",
+          "default": false,
+          "info": "Adjacent product blocks set to display on card will merge into a single card. [Learn more](https://help.switchthemes.co/shapes/guides/display-product-blocks-on-cards.html)"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Label"
+        },
+        {
+          "type": "range",
+          "id": "value",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Value",
+          "default": 50
+        },
+        {
+          "type": "text",
+          "id": "value_alt",
+          "label": "Dynamic value",
+          "info": "Override setting above with dynamic sources. [Learn more](https://help.switchthemes.co/shapes/guides/add-bar-charts.html#add-dynamic-sources-to-bar-charts)"
+        }
+      ]
+    },
+    {
+      "type": "comparative_scale",
+      "name": "Comparative scale",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "display_on_card",
+          "label": "Display on card",
+          "default": false,
+          "info": "Adjacent product blocks set to display on card will merge into a single card. [Learn more](https://help.switchthemes.co/shapes/guides/display-product-blocks-on-cards.html)"
+        },
+        {
+          "type": "text",
+          "id": "left_label",
+          "label": "Left label",
+          "default": "Label 1"
+        },
+        {
+          "type": "text",
+          "id": "right_label",
+          "label": "Right label",
+          "default": "Label 2"
+        },
+        {
+          "type": "range",
+          "id": "marker_position",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Marker position",
+          "default": 50
+        },
+        {
+          "type": "text",
+          "id": "marker_position_alt",
+          "label": "Dynamic marker position",
+          "info": "Override setting above with dynamic sources. [Learn more](https://help.switchthemes.co/shapes/guides/add-comparative-scales.html#add-dynamic-sources-to-comparative-scales)"
+        }
+      ]
+    },
+    {
+      "type": "background_pattern",
+      "name": "Background pattern",
+      "settings": [
+        {
+          "type": "select",
+          "id": "type",
+          "label": "Type",
+          "options": [
+            {
+              "value": "diagonal_lines",
+              "label": "Diagonal lines",
+              "group": "Lines"
+            },
+            {
+              "value": "grid",
+              "label": "Grid lines",
+              "group": "Lines"
+            },
+            {
+              "value": "grid_with_diagonal_lines",
+              "label": "Grid with diagonal lines",
+              "group": "Lines"
+            },
+            {
+              "value": "crosshatch",
+              "label": "Crosshatch",
+              "group": "Lines"
+            },
+            {
+              "value": "checkerboard",
+              "label": "Checkerboard",
+              "group": "Lines"
+            },
+            {
+              "value": "zig_zag",
+              "label": "Zig Zag",
+              "group": "Lines"
+            },
+            {
+              "value": "waves",
+              "label": "Waves",
+              "group": "Lines"
+            },
+            {
+              "value": "half_square_triangle",
+              "label": "Half-square triangle",
+              "group": "Shapes"
+            },
+            {
+              "value": "dots",
+              "label": "Dots",
+              "group": "Shapes"
+            },
+            {
+              "value": "triangle",
+              "label": "Triangles",
+              "group": "Shapes"
+            },
+            {
+              "value": "polka_dot",
+              "label": "Polka dot",
+              "group": "Shapes"
+            },
+            {
+              "value": "polka_dot_triangles",
+              "label": "Polka dot triangles",
+              "group": "Shapes"
+            },
+            {
+              "value": "plus",
+              "label": "Plus",
+              "group": "Shapes"
+            },
+            {
+              "value": "cross",
+              "label": "Cross",
+              "group": "Shapes"
+            },
+            {
+              "value": "squares",
+              "label": "Squares",
+              "group": "Shapes"
+            },
+            {
+              "value": "diamonds",
+              "label": "Diamonds",
+              "group": "Shapes"
+            },
+            {
+              "value": "vertical_stripes",
+              "label": "Vertical stripes",
+              "group": "Stripes"
+            },
+            {
+              "value": "horizontal_stripes",
+              "label": "Horizontal stripes",
+              "group": "Stripes"
+            },
+            {
+              "value": "diagonal_stripes",
+              "label": "Diagonal stripes",
+              "group": "Stripes"
+            },
+            {
+              "value": "sprinkles",
+              "label": "Sprinkles",
+              "group": "Miscellaneous"
+            },
+            {
+              "value": "bubbles",
+              "label": "Bubbles",
+              "group": "Miscellaneous"
+            },
+            {
+              "value": "squiggle",
+              "label": "Squiggle",
+              "group": "Miscellaneous"
+            },
+            {
+              "value": "windmill",
+              "label": "Windmill",
+              "group": "Miscellaneous"
+            },
+            {
+              "value": "8bit",
+              "label": "8bit",
+              "group": "Miscellaneous"
+            },
+            {
+              "value": "origami",
+              "label": "Origami",
+              "group": "Miscellaneous"
+            },
+            {
+              "value": "3d_cube",
+              "label": "3D Cube",
+              "group": "Miscellaneous"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "color",
+          "label": "Color",
+          "default": "text",
+          "options": [
+            {
+              "value": "text",
+              "label": "Text"
+            },
+            {
+              "value": "accent",
+              "label": "Accent"
+            },
+            {
+              "value": "card",
+              "label": "Card"
+            },
+            {
+              "value": "background",
+              "label": "Background"
+            },
+            {
+              "value": "gradient",
+              "label": "Gradient"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "size",
+          "min": 6,
+          "max": 600,
+          "unit": "px",
+          "label": "Pattern size",
+          "step": 6,
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "opacity",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Opacity",
+          "default": 100
+        },
+        {
+          "type": "header",
+          "content": "Animation"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_parallax",
+          "label": "Enable parallax",
+          "default": false,
+          "info": "When enabled pattern will scroll slower than the rest of the page."
+        },
+        {
+          "type": "range",
+          "id": "parallax_speed",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "label": "Parallax speed",
+          "default": 3
+        }
+      ]
+    },
+    {
+      "type": "background_shape",
+      "name": "Background shape",
+      "settings": [
+        {
+          "type": "select",
+          "id": "shape",
+          "label": "Shape",
+          "default": "square",
+          "options": [
+            {
+              "value": "square",
+              "label": "Square",
+              "group": "Basic"
+            },
+            {
+              "value": "circle",
+              "label": "Circle",
+              "group": "Basic"
+            },
+            {
+              "value": "oval",
+              "label": "Oval",
+              "group": "Basic"
+            },
+            {
+              "value": "triangle",
+              "label": "Triangle",
+              "group": "Basic"
+            },
+            {
+              "value": "parallelogram",
+              "label": "Parallelogram",
+              "group": "Basic"
+            },
+            {
+              "value": "pentagon",
+              "label": "Pentagon",
+              "group": "Polygons"
+            },
+            {
+              "value": "hexagon",
+              "label": "Hexagon",
+              "group": "Polygons"
+            },
+            {
+              "value": "heptagon",
+              "label": "Heptagon",
+              "group": "Polygons"
+            },
+            {
+              "value": "octagon",
+              "label": "Octagon",
+              "group": "Polygons"
+            },
+            {
+              "value": "star_1",
+              "label": "Star 1",
+              "group": "Circular"
+            },
+            {
+              "value": "star_2",
+              "label": "Star 2",
+              "group": "Circular"
+            },
+            {
+              "value": "star_3",
+              "label": "Star 3",
+              "group": "Circular"
+            },
+            {
+              "value": "star_4",
+              "label": "Star 4",
+              "group": "Circular"
+            },
+            {
+              "value": "scalloped_circle_1",
+              "label": "Scalloped circle 1",
+              "group": "Circular"
+            },
+            {
+              "value": "scalloped_circle_2",
+              "label": "Scalloped circle 2",
+              "group": "Circular"
+            },
+            {
+              "value": "scalloped_circle_3",
+              "label": "Scalloped circle 3",
+              "group": "Circular"
+            },
+            {
+              "value": "scalloped_circle_4",
+              "label": "Scalloped circle 4",
+              "group": "Circular"
+            },
+            {
+              "value": "blob",
+              "label": "Blob",
+              "group": "Miscellaneous"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "blob_type",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "label": "Blob type",
+          "default": 1,
+          "info": "Applies when blob shape is selected above."
+        },
+        {
+          "type": "range",
+          "id": "size",
+          "min": 25,
+          "max": 300,
+          "step": 5,
+          "label": "Size",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "opacity",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Opacity",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "blur",
+          "min": 0,
+          "max": 500,
+          "step": 5,
+          "unit": "px",
+          "label": "Blur",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Position"
+        },
+        {
+          "type": "range",
+          "id": "horizontal_position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Horizontal position",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "vertical_position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Vertical position",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "rotate",
+          "min": -90,
+          "max": 90,
+          "step": 2,
+          "unit": "deg",
+          "label": "Rotate",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Animation"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_parallax",
+          "label": "Enable parallax",
+          "default": false,
+          "info": "When enabled shape will scroll slower than the rest of the page."
+        },
+        {
+          "type": "range",
+          "id": "parallax_speed",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "label": "Parallax speed",
+          "default": 3
+        },
+        {
+          "type": "header",
+          "content": "Color"
+        },
+        {
+          "type": "select",
+          "id": "color",
+          "label": "Color",
+          "default": "accent",
+          "options": [
+            {
+              "value": "text",
+              "label": "Text"
+            },
+            {
+              "value": "accent",
+              "label": "Accent"
+            },
+            {
+              "value": "card",
+              "label": "Card"
+            },
+            {
+              "value": "background",
+              "label": "Background"
+            },
+            {
+              "value": "gradient",
+              "label": "Gradient"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "color_scheme",
+          "label": "Scheme",
+          "default": "same_as_section",
+          "options": [
+            {
+              "value": "same_as_section",
+              "label": "Same as section"
+            },
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "tertiary",
+              "label": "Tertiary"
+            },
+            {
+              "value": "quaternary",
+              "label": "Quaternary"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Sticker",
+      "type": "sticker",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Sticker"
+        },
+        {
+          "type": "select",
+          "id": "shape",
+          "label": "Shape",
+          "options": [
+            {
+              "value": "fit_to_text",
+              "label": "Fit to text"
+            },
+            {
+              "value": "circle",
+              "label": "Circle",
+              "group": "Circular"
+            },
+            {
+              "value": "star_1",
+              "label": "Star 1",
+              "group": "Circular"
+            },
+            {
+              "value": "star_2",
+              "label": "Star 2",
+              "group": "Circular"
+            },
+            {
+              "value": "star_3",
+              "label": "Star 3",
+              "group": "Circular"
+            },
+            {
+              "value": "star_4",
+              "label": "Star 4",
+              "group": "Circular"
+            },
+            {
+              "value": "scalloped_circle_1",
+              "label": "Scalloped circle 1",
+              "group": "Circular"
+            },
+            {
+              "value": "scalloped_circle_2",
+              "label": "Scalloped circle 2",
+              "group": "Circular"
+            },
+            {
+              "value": "scalloped_circle_3",
+              "label": "Scalloped circle 3",
+              "group": "Circular"
+            },
+            {
+              "value": "scalloped_circle_4",
+              "label": "Scalloped circle 4",
+              "group": "Circular"
+            },
+            {
+              "value": "parallelogram",
+              "label": "Parallelogram",
+              "group": "Square"
+            },
+            {
+              "value": "scalloped_square",
+              "label": "Scalloped",
+              "group": "Square"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf",
+              "group": "Square"
+            },
+            {
+              "value": "clipped_square",
+              "label": "Clipped",
+              "group": "Square"
+            },
+            {
+              "value": "convex_square",
+              "label": "Convex",
+              "group": "Square"
+            },
+            {
+              "value": "twisted_square",
+              "label": "Twisted",
+              "group": "Square"
+            },
+            {
+              "value": "trapeze",
+              "label": "Trapeze",
+              "group": "Square"
+            },
+            {
+              "value": "ellipse",
+              "label": "Ellipse",
+              "group": "Wide"
+            },
+            {
+              "value": "diamond_wide",
+              "label": "Diamond",
+              "group": "Wide"
+            },
+            {
+              "value": "rounded_diamond_wide",
+              "label": "Rounded diamond",
+              "group": "Wide"
+            },
+            {
+              "value": "triangle_wide",
+              "label": "Triangle",
+              "group": "Wide"
+            },
+            {
+              "value": "hexagon_wide",
+              "label": "Hexagon",
+              "group": "Wide"
+            },
+            {
+              "value": "rounded_hexagon",
+              "label": "Rounded hexagon",
+              "group": "Wide"
+            },
+            {
+              "value": "uneven_star_wide",
+              "label": "Uneven star",
+              "group": "Wide"
+            },
+            {
+              "value": "star_wide",
+              "label": "Star",
+              "group": "Wide"
+            },
+            {
+              "value": "semicircle",
+              "label": "Semicircle",
+              "group": "Wide"
+            },
+            {
+              "value": "eye",
+              "label": "Eye",
+              "group": "Wide"
+            },
+            {
+              "value": "parallelogram_wide",
+              "label": "Parallelogram",
+              "group": "Wide"
+            },
+            {
+              "value": "ribbon",
+              "label": "Ribbon",
+              "group": "Wide"
+            },
+            {
+              "value": "ticket_stub",
+              "label": "Ticket stub",
+              "group": "Wide"
+            },
+            {
+              "value": "wave_ribbon",
+              "label": "Wave ribbon",
+              "group": "Wide"
+            },
+            {
+              "value": "zig_zag_ribbon",
+              "label": "Zig zag ribbon",
+              "group": "Wide"
+            }
+          ],
+          "default": "star_1"
+        },
+        {
+          "type": "range",
+          "id": "width",
+          "min": 100,
+          "max": 300,
+          "step": 10,
+          "unit": "px",
+          "label": "Sticker width",
+          "default": 150
+        },
+        {
+          "type": "select",
+          "id": "sticker_font_size",
+          "label": "Font size",
+          "options": [
+            {
+              "value": "1rem",
+              "label": "Extra small"
+            },
+            {
+              "value": "1.25rem",
+              "label": "Small"
+            },
+            {
+              "value": "1.563rem",
+              "label": "Medium"
+            },
+            {
+              "value": "1.953rem",
+              "label": "Large"
+            },
+            {
+              "value": "2.441rem",
+              "label": "Extra large"
+            }
+          ],
+          "default": "1.563rem",
+          "info": "Font size is relative to sticker width."
+        },
+        {
+          "type": "header",
+          "content": "Custom image"
+        },
+        {
+          "type": "paragraph",
+          "content": "Using an image will override shape and text settings above."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "checkbox",
+          "id": "half_image_width_on_mobile",
+          "label": "Half image width on mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Position"
+        },
+        {
+          "type": "range",
+          "id": "horizontal_position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Horizontal position",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "vertical_position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Vertical position",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "rotate",
+          "min": -90,
+          "max": 90,
+          "step": 2,
+          "unit": "deg",
+          "label": "Rotate",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_sticker_on_mobile",
+          "label": "Show sticker on mobile",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_sticker_on_desktop",
+          "label": "Show sticker on desktop",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Animation"
+        },
+        {
+          "type": "select",
+          "id": "rotation_animation",
+          "label": "Rotation",
+          "options": [
+            {
+              "value": "none",
+              "label": "No rotation"
+            },
+            {
+              "value": "constantly_rotate",
+              "label": "Constantly rotate"
+            },
+            {
+              "value": "rotate_when_scrolling",
+              "label": "Rotate only when page is scrolling"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_parallax",
+          "label": "Enable parallax",
+          "default": false,
+          "info": "When enabled stickers will scroll faster than the rest of the page."
+        },
+        {
+          "type": "range",
+          "id": "parallax_speed",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "label": "Parallax speed",
+          "default": 3
+        },
+        {
+          "type": "header",
+          "content": "Color"
+        },
+        {
+          "type": "select",
+          "id": "color",
+          "label": "Color",
+          "default": "bg-scheme-accent text-scheme-accent-overlay",
+          "options": [
+            {
+              "value": "bg-scheme-text text-scheme-text-overlay",
+              "label": "Text"
+            },
+            {
+              "value": "bg-scheme-accent text-scheme-accent-overlay",
+              "label": "Accent"
+            },
+            {
+              "value": "bg-scheme-card text-scheme-text",
+              "label": "Card"
+            },
+            {
+              "value": "bg-scheme-background text-scheme-text",
+              "label": "Background"
+            },
+            {
+              "value": "bg-scheme-gradient text-scheme-text",
+              "label": "Gradient"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "color_scheme",
+          "label": "Scheme",
+          "default": "same_as_section",
+          "options": [
+            {
+              "value": "same_as_section",
+              "label": "Same as section"
+            },
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "tertiary",
+              "label": "Tertiary"
+            },
+            {
+              "value": "quaternary",
+              "label": "Quaternary"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Shape divider",
+      "type": "shape_divider",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "radio",
+          "label": "Target section",
+          "id": "target_section",
+          "default": "above",
+          "options": [
+            {
+              "value": "above",
+              "label": "Section above"
+            },
+            {
+              "value": "below",
+              "label": "Section below"
+            }
+          ],
+          "info": "This will be the section that connects to the straight side of the divider. Best to use sections with a solid background color. [Learn more](https://help.switchthemes.co/shapes/style-blocks/shape-divider.html)"
+        },
+        {
+          "type": "select",
+          "label": "Target section color scheme",
+          "id": "target_section_color_scheme",
+          "default": "secondary",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "tertiary",
+              "label": "Tertiary"
+            },
+            {
+              "value": "quaternary",
+              "label": "Quaternary"
+            }
+          ],
+          "info": "Select the color scheme of the target section"
+        },
+        {
+          "type": "select",
+          "label": "Style",
+          "id": "style",
+          "default": "large-waves_1200x84",
+          "options": [
+            {
+              "value": "large-waves_1200x84",
+              "label": "Large waves",
+              "group": "Symmetrical"
+            },
+            {
+              "value": "medium-waves_1200x43",
+              "label": "Medium waves",
+              "group": "Symmetrical"
+            },
+            {
+              "value": "small-waves_1200x20",
+              "label": "Small waves",
+              "group": "Symmetrical"
+            },
+            {
+              "value": "large-zig-zag_1200x65",
+              "label": "Large zig zag",
+              "group": "Symmetrical"
+            },
+            {
+              "value": "medium-zig-zag_1200x37",
+              "label": "Medium zig zag",
+              "group": "Symmetrical"
+            },
+            {
+              "value": "small-zig-zag_1200x21",
+              "label": "Small zig zag",
+              "group": "Symmetrical"
+            },
+            {
+              "value": "waves-1-asymmetrical_1440x261",
+              "label": "Waves 1",
+              "group": "Asymmetrical"
+            },
+            {
+              "value": "waves-2-asymmetrical_1440x330",
+              "label": "Waves 2",
+              "group": "Asymmetrical"
+            },
+            {
+              "value": "tilt-1-asymmetrical_1440x101",
+              "label": "Tilt 1",
+              "group": "Asymmetrical"
+            },
+            {
+              "value": "tilt-2-asymmetrical_1440x293",
+              "label": "Tilt 2",
+              "group": "Asymmetrical"
+            },
+            {
+              "value": "mountains-1-asymmetrical_1440x293",
+              "label": "Mountains 1",
+              "group": "Asymmetrical"
+            },
+            {
+              "value": "mountains-2-asymmetrical_1440x325",
+              "label": "Mountains 2",
+              "group": "Asymmetrical"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "flip_horizontal",
+          "label": "Flip horizontal"
+        },
+        {
+          "type": "header",
+          "content": "Animation"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_animation",
+          "label": "Enable animation",
+          "info": "Asymmetrical shape dividers will sway when animated."
+        },
+        {
+          "type": "radio",
+          "id": "animation_direction",
+          "label": "Direction",
+          "options": [
+            {
+              "value": "",
+              "label": "Right to left"
+            },
+            {
+              "value": "reverse",
+              "label": "Left to right"
+            }
+          ],
+          "default": ""
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured product",
+      "blocks": [
+        {
+          "type": "title"
+        },
+        {
+          "type": "price"
+        },
+        {
+          "type": "variant_picker"
+        },
+        {
+          "type": "buy_buttons"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Product",
+  "name": "{{ product.title | escape }}",
+  "url": "{{ shop.url }}{{ product.url }}",
+  {% if product.featured_image %}
+    {% assign image_size = product.featured_image.width | append: 'x' %}
+    "image": [
+      "https:{{ product.featured_image.src | image_url: image_size }}"
+    ],
+  {% endif %}
+  "description": "{{ product.description | strip_html | escape }}",
+  {% if current_variant.sku != blank %}
+    "sku": "{{ current_variant.sku }}",
+  {% endif %}
+  "brand": {
+    "@type": "Thing",
+    "name": "{{ product.vendor | escape }}"
+  },
+  {% if product.variants %}
+    "offers": [
+      {% for variant in product.variants %}
+        {
+          "@type" : "Offer",
+          "availability" : "http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+          "price" : "{{ variant.price | divided_by: 100.00 }}",
+          "priceCurrency" : "{{ shop.currency }}",
+          "url" : "{{ shop.url }}{{ variant.url }}",
+          "itemOffered" :
+          {
+              "@type" : "Product",
+              {% if variant.image %}
+                {% assign variant_image_size = variant.image.width | append: 'x' %}
+                "image": "http:{{ variant.image.src | image_url: variant_image_size }}",
+              {% endif %}
+              {% if variant.title != blank %}
+                "name" : "{{ variant.title | escape }}",
+              {% endif %}
+              {% if variant.sku != blank %}
+                "sku": "{{ variant.sku }}",
+              {% endif %}
+              {% if variant.weight != blank %}
+                "weight": {
+                  "@type": "QuantitativeValue",
+                  {% if variant.weight_unit != blank %}
+                    "unitCode": "{{ variant.weight_unit }}",
+                  {% endif %}
+                  "value": "{{ variant.weight | weight_with_unit: variant.weight_unit }}"
+                },
+              {% endif %}
+              "url": "{{ shop.url }}{{ variant.url }}"
+          }
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  {% endif %}
+}
+</script>

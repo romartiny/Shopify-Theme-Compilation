@@ -1,0 +1,22 @@
+<div x-ref="photoSwipeComponent">
+  <div x-data="ThemeComponent_Photoswipe()" x-init="mounted()">
+    <div id="PhotoSwipeContainer" data-color-scheme="{{ settings.drawer_color_scheme }}"></div>
+    <script type="application/json" data-photoswipe-images>
+    [
+      {% for image in product.images %}
+        {
+          "src": {{ image | image_url: 'master' | json }},
+          "width": {{ image.width | json }},
+          "height": {{ image.height | json }},
+          "aspectRatio": {{ image.aspect_ratio | json }},
+          "alt": {{ image.alt | json }}
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+    </script>
+    {% unless request.design_mode %}
+    <script src="{{ 'modules-photoswipe.bundle.min.js' | asset_url }}" type="module"></script>
+    {% endunless %}
+    {{ 'modules-photoswipe.bundle.css' | asset_url | stylesheet_tag }}
+  </div>
+</div>

@@ -1,0 +1,1154 @@
+<section class="relative grid text-scheme-text bg-scheme-background overflow-hidden {% if section.settings.use_gradient_background %}bg-scheme-gradient{% endif %} {% if collection.image != blank and section.settings.show_collection_image and section.settings.collection_image_style == 'full' %}full-bleed-section{% endif %}" data-color-scheme="{{ section.settings.color_scheme | default: 'primary' }}" >
+  
+  {%- render 'collection-banner' with
+    show_collection_image: section.settings.show_collection_image,
+    collection_image_style: section.settings.collection_image_style,
+    crop: section.settings.crop,
+    display_on_card: section.settings.display_on_card,
+    show_collection_title: section.settings.show_collection_title,
+    show_collection_description: section.settings.show_collection_description,
+    linklist: section.settings.linklist
+  -%}
+
+  {%- liquid
+    for block in section.blocks
+      case block.type
+        when 'background_shape'
+          render 'block-background-shape' with block: block, section: section
+        when 'background_pattern'
+          render 'block-background-pattern' with block: block, section: section, scheme: section.settings.color_scheme
+        when 'shape_divider'
+          render 'block-shape-divider' with block: block, section: section
+      endcase
+    endfor
+  -%}
+</section>
+
+{%- assign stickers = section.blocks | where: "type", "sticker" -%}
+{%- liquid
+  for sticker in stickers
+    render 'block-sticker' with block: sticker, section: section
+  endfor
+-%}
+
+{% schema %}
+{
+  "name": "Collection banner",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "display_on_card",
+      "label": "Display on card",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_title",
+      "label": "Show collection title",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_description",
+      "label": "Show collection description",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_image",
+      "label": "Show collection image"
+    },
+    {
+      "type": "radio",
+      "id": "collection_image_style",
+      "label": "Collection image style",
+      "default": "full",
+      "options": [
+        {
+          "value": "inset",
+          "label": "Inset"
+        },
+        {
+          "value": "full",
+          "label": "Full width"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "crop",
+      "label": "Crop",
+      "options": [
+        {
+          "value": "",
+          "label": "No crop"
+        },
+        {
+          "value": "aspect-w-1 aspect-h-1",
+          "label": "Square"
+        },
+        {
+          "value": "aspect-w-3 aspect-h-4",
+          "label": "Portrait"
+        },
+        {
+          "value": "aspect-w-4 aspect-h-3",
+          "label": "Landscape"
+        },
+        {
+          "value": "aspect-w-10 aspect-h-4",
+          "label": "Super wide"
+        },
+        {
+          "value": "aspect-w-4 aspect-h-1",
+          "label": "Letterbox"
+        }
+      ],
+      "default": "aspect-w-4 aspect-h-1"
+    },
+    {
+      "type": "link_list",
+      "id": "linklist",
+      "label": "Collection menu",
+      "info": "This menu won't show dropdown items."
+    },
+    {
+      "type": "header",
+      "content": "Color"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Primary"
+        },
+        {
+          "value": "secondary",
+          "label": "Secondary"
+        },
+        {
+          "value": "tertiary",
+          "label": "Tertiary"
+        },
+        {
+          "value": "quaternary",
+          "label": "Quaternary"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "use_gradient_background",
+      "label": "Use gradient for background"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "background_pattern",
+      "name": "Background pattern",
+      "settings": [
+        {
+          "type": "select",
+          "id": "type",
+          "label": "Type",
+          "options": [
+            {
+              "value": "diagonal_lines",
+              "label": "Diagonal lines",
+              "group": "Lines"
+            },
+            {
+              "value": "grid",
+              "label": "Grid lines",
+              "group": "Lines"
+            },
+            {
+              "value": "grid_with_diagonal_lines",
+              "label": "Grid with diagonal lines",
+              "group": "Lines"
+            },
+            {
+              "value": "crosshatch",
+              "label": "Crosshatch",
+              "group": "Lines"
+            },
+            {
+              "value": "checkerboard",
+              "label": "Checkerboard",
+              "group": "Lines"
+            },
+            {
+              "value": "zig_zag",
+              "label": "Zig Zag",
+              "group": "Lines"
+            },
+            {
+              "value": "waves",
+              "label": "Waves",
+              "group": "Lines"
+            },
+            {
+              "value": "half_square_triangle",
+              "label": "Half-square triangle",
+              "group": "Shapes"
+            },
+            {
+              "value": "dots",
+              "label": "Dots",
+              "group": "Shapes"
+            },
+            {
+              "value": "triangle",
+              "label": "Triangles",
+              "group": "Shapes"
+            },
+            {
+              "value": "polka_dot",
+              "label": "Polka dot",
+              "group": "Shapes"
+            },
+            {
+              "value": "polka_dot_triangles",
+              "label": "Polka dot triangles",
+              "group": "Shapes"
+            },
+            {
+              "value": "plus",
+              "label": "Plus",
+              "group": "Shapes"
+            },
+            {
+              "value": "cross",
+              "label": "Cross",
+              "group": "Shapes"
+            },
+            {
+              "value": "squares",
+              "label": "Squares",
+              "group": "Shapes"
+            },
+            {
+              "value": "diamonds",
+              "label": "Diamonds",
+              "group": "Shapes"
+            },
+            {
+              "value": "vertical_stripes",
+              "label": "Vertical stripes",
+              "group": "Stripes"
+            },
+            {
+              "value": "horizontal_stripes",
+              "label": "Horizontal stripes",
+              "group": "Stripes"
+            },
+            {
+              "value": "diagonal_stripes",
+              "label": "Diagonal stripes",
+              "group": "Stripes"
+            },
+            {
+              "value": "sprinkles",
+              "label": "Sprinkles",
+              "group": "Miscellaneous"
+            },
+            {
+              "value": "bubbles",
+              "label": "Bubbles",
+              "group": "Miscellaneous"
+            },
+            {
+              "value": "squiggle",
+              "label": "Squiggle",
+              "group": "Miscellaneous"
+            },
+            {
+              "value": "windmill",
+              "label": "Windmill",
+              "group": "Miscellaneous"
+            },
+            {
+              "value": "8bit",
+              "label": "8bit",
+              "group": "Miscellaneous"
+            },
+            {
+              "value": "origami",
+              "label": "Origami",
+              "group": "Miscellaneous"
+            },
+            {
+              "value": "3d_cube",
+              "label": "3D Cube",
+              "group": "Miscellaneous"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "color",
+          "label": "Color",
+          "default": "text",
+          "options": [
+            {
+              "value": "text",
+              "label": "Text"
+            },
+            {
+              "value": "accent",
+              "label": "Accent"
+            },
+            {
+              "value": "card",
+              "label": "Card"
+            },
+            {
+              "value": "background",
+              "label": "Background"
+            },
+            {
+              "value": "gradient",
+              "label": "Gradient"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "size",
+          "min": 6,
+          "max": 600,
+          "unit": "px",
+          "label": "Pattern size",
+          "step": 6,
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "opacity",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Opacity",
+          "default": 100
+        },
+        {
+          "type": "header",
+          "content": "Animation"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_parallax",
+          "label": "Enable parallax",
+          "default": false,
+          "info": "When enabled pattern will scroll slower than the rest of the page."
+        },
+        {
+          "type": "range",
+          "id": "parallax_speed",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "label": "Parallax speed",
+          "default": 3
+        }
+      ]
+    },
+    {
+      "type": "background_shape",
+      "name": "Background shape",
+      "settings": [
+        {
+          "type": "select",
+          "id": "shape",
+          "label": "Shape",
+          "default": "square",
+          "options": [
+            {
+              "value": "square",
+              "label": "Square",
+              "group": "Basic"
+            },
+            {
+              "value": "circle",
+              "label": "Circle",
+              "group": "Basic"
+            },
+            {
+              "value": "oval",
+              "label": "Oval",
+              "group": "Basic"
+            },
+            {
+              "value": "triangle",
+              "label": "Triangle",
+              "group": "Basic"
+            },
+            {
+              "value": "parallelogram",
+              "label": "Parallelogram",
+              "group": "Basic"
+            },
+            {
+              "value": "pentagon",
+              "label": "Pentagon",
+              "group": "Polygons"
+            },
+            {
+              "value": "hexagon",
+              "label": "Hexagon",
+              "group": "Polygons"
+            },
+            {
+              "value": "heptagon",
+              "label": "Heptagon",
+              "group": "Polygons"
+            },
+            {
+              "value": "octagon",
+              "label": "Octagon",
+              "group": "Polygons"
+            },
+            {
+              "value": "star_1",
+              "label": "Star 1",
+              "group": "Circular"
+            },
+            {
+              "value": "star_2",
+              "label": "Star 2",
+              "group": "Circular"
+            },
+            {
+              "value": "star_3",
+              "label": "Star 3",
+              "group": "Circular"
+            },
+            {
+              "value": "star_4",
+              "label": "Star 4",
+              "group": "Circular"
+            },
+            {
+              "value": "scalloped_circle_1",
+              "label": "Scalloped circle 1",
+              "group": "Circular"
+            },
+            {
+              "value": "scalloped_circle_2",
+              "label": "Scalloped circle 2",
+              "group": "Circular"
+            },
+            {
+              "value": "scalloped_circle_3",
+              "label": "Scalloped circle 3",
+              "group": "Circular"
+            },
+            {
+              "value": "scalloped_circle_4",
+              "label": "Scalloped circle 4",
+              "group": "Circular"
+            },
+            {
+              "value": "blob",
+              "label": "Blob",
+              "group": "Miscellaneous"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "blob_type",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "label": "Blob type",
+          "default": 1,
+          "info": "Applies when blob shape is selected above."
+        },
+        {
+          "type": "range",
+          "id": "size",
+          "min": 25,
+          "max": 300,
+          "step": 5,
+          "label": "Size",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "opacity",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Opacity",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "blur",
+          "min": 0,
+          "max": 500,
+          "step": 5,
+          "unit": "px",
+          "label": "Blur",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Position"
+        },
+        {
+          "type": "range",
+          "id": "horizontal_position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Horizontal position",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "vertical_position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Vertical position",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "rotate",
+          "min": -90,
+          "max": 90,
+          "step": 2,
+          "unit": "deg",
+          "label": "Rotate",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Animation"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_parallax",
+          "label": "Enable parallax",
+          "default": false,
+          "info": "When enabled shape will scroll slower than the rest of the page."
+        },
+        {
+          "type": "range",
+          "id": "parallax_speed",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "label": "Parallax speed",
+          "default": 3
+        },
+        {
+          "type": "header",
+          "content": "Color"
+        },
+        {
+          "type": "select",
+          "id": "color",
+          "label": "Color",
+          "default": "accent",
+          "options": [
+            {
+              "value": "text",
+              "label": "Text"
+            },
+            {
+              "value": "accent",
+              "label": "Accent"
+            },
+            {
+              "value": "card",
+              "label": "Card"
+            },
+            {
+              "value": "background",
+              "label": "Background"
+            },
+            {
+              "value": "gradient",
+              "label": "Gradient"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "color_scheme",
+          "label": "Scheme",
+          "default": "same_as_section",
+          "options": [
+            {
+              "value": "same_as_section",
+              "label": "Same as section"
+            },
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "tertiary",
+              "label": "Tertiary"
+            },
+            {
+              "value": "quaternary",
+              "label": "Quaternary"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Sticker",
+      "type": "sticker",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Sticker"
+        },
+        {
+          "type": "select",
+          "id": "shape",
+          "label": "Shape",
+          "options": [
+            {
+              "value": "fit_to_text",
+              "label": "Fit to text"
+            },
+            {
+              "value": "circle",
+              "label": "Circle",
+              "group": "Circular"
+            },
+            {
+              "value": "star_1",
+              "label": "Star 1",
+              "group": "Circular"
+            },
+            {
+              "value": "star_2",
+              "label": "Star 2",
+              "group": "Circular"
+            },
+            {
+              "value": "star_3",
+              "label": "Star 3",
+              "group": "Circular"
+            },
+            {
+              "value": "star_4",
+              "label": "Star 4",
+              "group": "Circular"
+            },
+            {
+              "value": "scalloped_circle_1",
+              "label": "Scalloped circle 1",
+              "group": "Circular"
+            },
+            {
+              "value": "scalloped_circle_2",
+              "label": "Scalloped circle 2",
+              "group": "Circular"
+            },
+            {
+              "value": "scalloped_circle_3",
+              "label": "Scalloped circle 3",
+              "group": "Circular"
+            },
+            {
+              "value": "scalloped_circle_4",
+              "label": "Scalloped circle 4",
+              "group": "Circular"
+            },
+            {
+              "value": "parallelogram",
+              "label": "Parallelogram",
+              "group": "Square"
+            },
+            {
+              "value": "scalloped_square",
+              "label": "Scalloped",
+              "group": "Square"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf",
+              "group": "Square"
+            },
+            {
+              "value": "clipped_square",
+              "label": "Clipped",
+              "group": "Square"
+            },
+            {
+              "value": "convex_square",
+              "label": "Convex",
+              "group": "Square"
+            },
+            {
+              "value": "twisted_square",
+              "label": "Twisted",
+              "group": "Square"
+            },
+            {
+              "value": "trapeze",
+              "label": "Trapeze",
+              "group": "Square"
+            },
+            {
+              "value": "ellipse",
+              "label": "Ellipse",
+              "group": "Wide"
+            },
+            {
+              "value": "diamond_wide",
+              "label": "Diamond",
+              "group": "Wide"
+            },
+            {
+              "value": "rounded_diamond_wide",
+              "label": "Rounded diamond",
+              "group": "Wide"
+            },
+            {
+              "value": "triangle_wide",
+              "label": "Triangle",
+              "group": "Wide"
+            },
+            {
+              "value": "hexagon_wide",
+              "label": "Hexagon",
+              "group": "Wide"
+            },
+            {
+              "value": "rounded_hexagon",
+              "label": "Rounded hexagon",
+              "group": "Wide"
+            },
+            {
+              "value": "uneven_star_wide",
+              "label": "Uneven star",
+              "group": "Wide"
+            },
+            {
+              "value": "star_wide",
+              "label": "Star",
+              "group": "Wide"
+            },
+            {
+              "value": "semicircle",
+              "label": "Semicircle",
+              "group": "Wide"
+            },
+            {
+              "value": "eye",
+              "label": "Eye",
+              "group": "Wide"
+            },
+            {
+              "value": "parallelogram_wide",
+              "label": "Parallelogram",
+              "group": "Wide"
+            },
+            {
+              "value": "ribbon",
+              "label": "Ribbon",
+              "group": "Wide"
+            },
+            {
+              "value": "ticket_stub",
+              "label": "Ticket stub",
+              "group": "Wide"
+            },
+            {
+              "value": "wave_ribbon",
+              "label": "Wave ribbon",
+              "group": "Wide"
+            },
+            {
+              "value": "zig_zag_ribbon",
+              "label": "Zig zag ribbon",
+              "group": "Wide"
+            }
+          ],
+          "default": "star_1"
+        },
+        {
+          "type": "range",
+          "id": "width",
+          "min": 100,
+          "max": 300,
+          "step": 10,
+          "unit": "px",
+          "label": "Sticker width",
+          "default": 150
+        },
+        {
+          "type": "select",
+          "id": "sticker_font_size",
+          "label": "Font size",
+          "options": [
+            {
+              "value": "1rem",
+              "label": "Extra small"
+            },
+            {
+              "value": "1.25rem",
+              "label": "Small"
+            },
+            {
+              "value": "1.563rem",
+              "label": "Medium"
+            },
+            {
+              "value": "1.953rem",
+              "label": "Large"
+            },
+            {
+              "value": "2.441rem",
+              "label": "Extra large"
+            }
+          ],
+          "default": "1.563rem",
+          "info": "Font size is relative to sticker width."
+        },
+        {
+          "type": "header",
+          "content": "Custom image"
+        },
+        {
+          "type": "paragraph",
+          "content": "Using an image will override shape and text settings above."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "checkbox",
+          "id": "half_image_width_on_mobile",
+          "label": "Half image width on mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Position"
+        },
+        {
+          "type": "range",
+          "id": "horizontal_position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Horizontal position",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "vertical_position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Vertical position",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "rotate",
+          "min": -90,
+          "max": 90,
+          "step": 2,
+          "unit": "deg",
+          "label": "Rotate",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_sticker_on_mobile",
+          "label": "Show sticker on mobile",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_sticker_on_desktop",
+          "label": "Show sticker on desktop",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Animation"
+        },
+        {
+          "type": "select",
+          "id": "rotation_animation",
+          "label": "Rotation",
+          "options": [
+            {
+              "value": "none",
+              "label": "No rotation"
+            },
+            {
+              "value": "constantly_rotate",
+              "label": "Constantly rotate"
+            },
+            {
+              "value": "rotate_when_scrolling",
+              "label": "Rotate only when page is scrolling"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_parallax",
+          "label": "Enable parallax",
+          "default": false,
+          "info": "When enabled stickers will scroll faster than the rest of the page."
+        },
+        {
+          "type": "range",
+          "id": "parallax_speed",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "label": "Parallax speed",
+          "default": 3
+        },
+        {
+          "type": "header",
+          "content": "Color"
+        },
+        {
+          "type": "select",
+          "id": "color",
+          "label": "Color",
+          "default": "bg-scheme-accent text-scheme-accent-overlay",
+          "options": [
+            {
+              "value": "bg-scheme-text text-scheme-text-overlay",
+              "label": "Text"
+            },
+            {
+              "value": "bg-scheme-accent text-scheme-accent-overlay",
+              "label": "Accent"
+            },
+            {
+              "value": "bg-scheme-card text-scheme-text",
+              "label": "Card"
+            },
+            {
+              "value": "bg-scheme-background text-scheme-text",
+              "label": "Background"
+            },
+            {
+              "value": "bg-scheme-gradient text-scheme-text",
+              "label": "Gradient"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "color_scheme",
+          "label": "Scheme",
+          "default": "same_as_section",
+          "options": [
+            {
+              "value": "same_as_section",
+              "label": "Same as section"
+            },
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "tertiary",
+              "label": "Tertiary"
+            },
+            {
+              "value": "quaternary",
+              "label": "Quaternary"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Shape divider",
+      "type": "shape_divider",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "radio",
+          "label": "Target section",
+          "id": "target_section",
+          "default": "above",
+          "options": [
+            {
+              "value": "above",
+              "label": "Section above"
+            },
+            {
+              "value": "below",
+              "label": "Section below"
+            }
+          ],
+          "info": "This will be the section that connects to the straight side of the divider. Best to use sections with a solid background color. [Learn more](https://help.switchthemes.co/shapes/style-blocks/shape-divider.html)"
+        },
+        {
+          "type": "select",
+          "label": "Target section color scheme",
+          "id": "target_section_color_scheme",
+          "default": "secondary",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "tertiary",
+              "label": "Tertiary"
+            },
+            {
+              "value": "quaternary",
+              "label": "Quaternary"
+            }
+          ],
+          "info": "Select the color scheme of the target section"
+        },
+        {
+          "type": "select",
+          "label": "Style",
+          "id": "style",
+          "default": "large-waves_1200x84",
+          "options": [
+            {
+              "value": "large-waves_1200x84",
+              "label": "Large waves",
+              "group": "Symmetrical"
+            },
+            {
+              "value": "medium-waves_1200x43",
+              "label": "Medium waves",
+              "group": "Symmetrical"
+            },
+            {
+              "value": "small-waves_1200x20",
+              "label": "Small waves",
+              "group": "Symmetrical"
+            },
+            {
+              "value": "large-zig-zag_1200x65",
+              "label": "Large zig zag",
+              "group": "Symmetrical"
+            },
+            {
+              "value": "medium-zig-zag_1200x37",
+              "label": "Medium zig zag",
+              "group": "Symmetrical"
+            },
+            {
+              "value": "small-zig-zag_1200x21",
+              "label": "Small zig zag",
+              "group": "Symmetrical"
+            },
+            {
+              "value": "waves-1-asymmetrical_1440x261",
+              "label": "Waves 1",
+              "group": "Asymmetrical"
+            },
+            {
+              "value": "waves-2-asymmetrical_1440x330",
+              "label": "Waves 2",
+              "group": "Asymmetrical"
+            },
+            {
+              "value": "tilt-1-asymmetrical_1440x101",
+              "label": "Tilt 1",
+              "group": "Asymmetrical"
+            },
+            {
+              "value": "tilt-2-asymmetrical_1440x293",
+              "label": "Tilt 2",
+              "group": "Asymmetrical"
+            },
+            {
+              "value": "mountains-1-asymmetrical_1440x293",
+              "label": "Mountains 1",
+              "group": "Asymmetrical"
+            },
+            {
+              "value": "mountains-2-asymmetrical_1440x325",
+              "label": "Mountains 2",
+              "group": "Asymmetrical"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "flip_horizontal",
+          "label": "Flip horizontal"
+        },
+        {
+          "type": "header",
+          "content": "Animation"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_animation",
+          "label": "Enable animation",
+          "info": "Asymmetrical shape dividers will sway when animated."
+        },
+        {
+          "type": "radio",
+          "id": "animation_direction",
+          "label": "Direction",
+          "options": [
+            {
+              "value": "",
+              "label": "Right to left"
+            },
+            {
+              "value": "reverse",
+              "label": "Left to right"
+            }
+          ],
+          "default": ""
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

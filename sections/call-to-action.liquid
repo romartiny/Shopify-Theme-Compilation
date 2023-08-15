@@ -1,0 +1,418 @@
+{%- if section.settings.enable -%}
+
+  {%- render 'static-sticker-defs' with shape: section.settings.shape, id: section.id -%}
+  {% unless request.design_mode %}
+    {%- if section.settings.animate_in -%}
+    <script src="{{ 'call-to-action-sticker.js' | asset_url }}" type="module"></script>
+    {%- endif -%}
+  {% endunless %}
+  
+  <div
+    {% if section.settings.animate_in %}
+    x-data="CallToActionSticker()"
+    x-init="mounted()"
+    x-cloak
+    :class="show ? '' : 'translate-y-full'"
+    {% endif %}
+    class="z-30 origin-top-left transition-transform ease-in-out duration-500 fixed p-5 lg:p-10 {% unless section.settings.show_sticker_on_mobile %}hidden lg:block{% endunless %}" id="sticker-{{ section.id }}" data-color-scheme="{{ section.settings.color_scheme | default: 'primary' }}">
+    {% if section.settings.url != blank %}
+    <a href="{{ section.settings.url }}" class="block transition-transform ease-in-out duration-200 hover:scale-110">
+    {% endif %}
+
+    <div class="sticker-rotate-container">
+    {%- if section.settings.image != blank -%}
+      <div class="sticker-image rotate-anim">
+      {{ section.settings.image | image_url: width: 2000 | image_tag: class: 'max-w-none' }}
+      </div>
+    {%- else -%}
+    {%- if section.settings.shape == 'fit_to_text' -%}
+      <div class="sticker-default {{ section.settings.color }} whitespace-nowrap">
+        {{ section.settings.text }}
+      </div>
+      {%- else -%}
+      <div class="sticker-container relative rotate-anim">
+        <svg class="sticker-svg relative max-w-none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <foreignObject clip-path="url(#clip-{{ section.id }})" width="100%" height="100%">
+            <div id="sticker-foreignObject-{{ section.id }}" class="aspect-w-1 aspect-h-1 p-4 break-words sticker-text top-0 left-0 right-0 bottom-0 w-full h-full flex items-center justify-center text-center leading-none {{ section.settings.color }}">
+              {{ section.settings.text | newline_to_br }}
+            </div>
+          </foreignObject>
+          <use style="fill: none;" href="#outline-{{ section.id }}" />
+        </svg>
+        {%- if settings.sticker_drop_shadow_size > 0 -%}
+        <svg class="sticker-svg sticker-drop-shadow relative max-w-none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <use class="sticker-drop-shadow-path"  href="#outline-{{ section.id }}" />
+        </svg>
+        {%- endif -%}
+      </div>
+      {%- endif -%}
+    {%- endif -%}
+    </div>
+
+    {% if section.settings.url != blank %}
+    </a>
+    {% endif %}
+  </div>
+{%- endif -%}
+
+<style>
+  #sticker-{{ section.id }} {
+    right: 0;
+    bottom: 0;
+  }
+
+  #sticker-{{ section.id }} .sticker-rotate-container {
+    transform: rotate({{ section.settings.rotate }}deg);
+  }
+
+  #sticker-{{ section.id }} img,
+  #sticker-{{ section.id }} svg {
+    width: {{ section.settings.width }}px;
+  }
+
+  #sticker-foreignObject-{{ section.id }},
+  #sticker-{{ section.id }} .sticker-default  {
+    font-size: {{ section.settings.sticker_font_size }};
+  }
+
+  {% if section.settings.animate_rotation %}
+    @media (prefers-reduced-motion: no-preference) {
+      #sticker-{{ section.id }} .rotate-anim {
+        animation-iteration-count:infinite;
+        animation-timing-function:linear;
+        animation-name:rotate;
+        animation-duration:5s;
+      }
+    }
+  {% endif %}
+</style>
+{% schema %}
+{
+  "name": "Call to action sticker",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable",
+      "label": "Enable call to action sticker",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "animate_in",
+      "label": "Animate in after first section",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "Link"
+    },
+    {
+      "type": "select",
+      "id": "shape",
+      "label": "Shape",
+      "options": [
+        {
+          "value": "circle",
+          "label": "Circle",
+          "group": "Circular"
+        },
+        {
+          "value": "star_1",
+          "label": "Star 1",
+          "group": "Circular"
+        },
+        {
+          "value": "star_2",
+          "label": "Star 2",
+          "group": "Circular"
+        },
+        {
+          "value": "star_3",
+          "label": "Star 3",
+          "group": "Circular"
+        },
+        {
+          "value": "star_4",
+          "label": "Star 4",
+          "group": "Circular"
+        },
+        {
+          "value": "scalloped_circle_1",
+          "label": "Scalloped circle 1",
+          "group": "Circular"
+        },
+        {
+          "value": "scalloped_circle_2",
+          "label": "Scalloped circle 2",
+          "group": "Circular"
+        },
+        {
+          "value": "scalloped_circle_3",
+          "label": "Scalloped circle 3",
+          "group": "Circular"
+        },
+        {
+          "value": "scalloped_circle_4",
+          "label": "Scalloped circle 4",
+          "group": "Circular"
+        },
+        {
+          "value": "parallelogram",
+          "label": "Parallelogram",
+          "group": "Square"
+        },
+        {
+          "value": "scalloped_square",
+          "label": "Scalloped",
+          "group": "Square"
+        },
+        {
+          "value": "leaf",
+          "label": "Leaf",
+          "group": "Square"
+        },
+        {
+          "value": "clipped_square",
+          "label": "Clipped",
+          "group": "Square"
+        },
+        {
+          "value": "convex_square",
+          "label": "Convex",
+          "group": "Square"
+        },
+        {
+          "value": "twisted_square",
+          "label": "Twisted",
+          "group": "Square"
+        },
+        {
+          "value": "trapeze",
+          "label": "Trapeze",
+          "group": "Square"
+        },
+        {
+          "value": "ellipse",
+          "label": "Ellipse",
+          "group": "Wide"
+        },
+        {
+          "value": "diamond_wide",
+          "label": "Diamond",
+          "group": "Wide"
+        },
+        {
+          "value": "rounded_diamond_wide",
+          "label": "Rounded diamond",
+          "group": "Wide"
+        },
+        {
+          "value": "triangle_wide",
+          "label": "Triangle",
+          "group": "Wide"
+        },
+        {
+          "value": "hexagon_wide",
+          "label": "Hexagon",
+          "group": "Wide"
+        },
+        {
+          "value": "rounded_hexagon",
+          "label": "Rounded hexagon",
+          "group": "Wide"
+        },
+        {
+          "value": "uneven_star_wide",
+          "label": "Uneven star",
+          "group": "Wide"
+        },
+        {
+          "value": "star_wide",
+          "label": "Star",
+          "group": "Wide"
+        },
+        {
+          "value": "semicircle",
+          "label": "Semicircle",
+          "group": "Wide"
+        },
+        {
+          "value": "eye",
+          "label": "Eye",
+          "group": "Wide"
+        },
+        {
+          "value": "parallelogram_wide",
+          "label": "Parallelogram",
+          "group": "Wide"
+        },
+        {
+          "value": "ribbon",
+          "label": "Ribbon",
+          "group": "Wide"
+        },
+        {
+          "value": "ticket_stub",
+          "label": "Ticket stub",
+          "group": "Wide"
+        },
+        {
+          "value": "wave_ribbon",
+          "label": "Wave ribbon",
+          "group": "Wide"
+        },
+        {
+          "value": "zig_zag_ribbon",
+          "label": "Zig zag ribbon",
+          "group": "Wide"
+        }
+      ],
+      "default": "star_1"
+    },
+    {
+      "type": "range",
+      "id": "width",
+      "min": 100,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Width",
+      "default": 150
+    },
+    {
+      "type": "select",
+      "id": "sticker_font_size",
+      "label": "Font size",
+      "options": [
+        {
+          "value": "1rem",
+          "label": "Extra small"
+        },
+        {
+          "value": "1.25rem",
+          "label": "Small"
+        },
+        {
+          "value": "1.563rem",
+          "label": "Medium"
+        },
+        {
+          "value": "1.953rem",
+          "label": "Large"
+        },
+        {
+          "value": "2.441rem",
+          "label": "Extra large"
+        }
+      ],
+      "default": "1.563rem",
+      "info": "Font size is relative to sticker width."
+    },
+    {
+      "type": "header",
+      "content": "Custom image"
+    },
+    {
+      "type": "paragraph",
+      "content": "Use a custom image."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Position"
+    },
+    {
+      "type": "range",
+      "id": "rotate",
+      "min": -90,
+      "max": 90,
+      "step": 2,
+      "unit": "deg",
+      "label": "Rotate",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "animate_rotation",
+      "label": "Enable rotation animation",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sticker_on_mobile",
+      "label": "Show on mobile",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Color"
+    },
+    {
+      "type": "select",
+      "id": "color",
+      "label": "Color",
+      "default": "bg-scheme-accent text-scheme-accent-overlay",
+      "options": [
+        {
+          "value": "bg-scheme-text text-scheme-text-overlay",
+          "label": "Text"
+        },
+        {
+          "value": "bg-scheme-accent text-scheme-accent-overlay",
+          "label": "Accent"
+        },
+        {
+          "value": "bg-scheme-card text-scheme-text",
+          "label": "Card"
+        },
+        {
+          "value": "bg-scheme-background text-scheme-text",
+          "label": "Background"
+        },
+        {
+          "value": "bg-scheme-gradient text-scheme-text",
+          "label": "Gradient"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Primary"
+        },
+        {
+          "value": "secondary",
+          "label": "Secondary"
+        },
+        {
+          "value": "tertiary",
+          "label": "Tertiary"
+        },
+        {
+          "value": "quaternary",
+          "label": "Quaternary"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

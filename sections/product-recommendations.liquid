@@ -1,0 +1,475 @@
+
+
+{%- if section.settings.show_product_recommendations -%}
+  {%- if recommendations.performed -%}
+    {% if recommendations.products_count > 0 %}
+    {%- liquid
+      case recommendations.products_count
+        when 2
+          assign grid_class = 'lg:grid-cols-2'
+        when 3
+          assign grid_class = 'lg:grid-cols-3'
+        when 4
+          assign grid_class = 'lg:grid-cols-4'
+        when 6
+          assign grid_class = 'lg:grid-cols-3'
+      endcase
+
+      assign shape_id = section.id
+      if section.settings.image_shape != ''
+        assign image_shape = section.settings.image_shape
+      else
+        assign image_shape = settings.product_tile_media_shape
+      endif
+    -%}
+
+
+
+    <div class="product-recommendations">
+      <section class="text-scheme-text bg-scheme-background relative overflow-hidden {% if section.settings.use_gradient_background %}bg-scheme-gradient{% endif %} " data-color-scheme="{{ section.settings.color_scheme | default: 'primary' }}">
+       
+        {%- render 'collection-shape-defs',
+          shape: image_shape,
+          section_id: section.id,
+          item_count: recommendations.products_count
+        -%}
+
+        <div class="section-content py-section-vertical-spacing px-section">
+
+          <h2 class="text-center font-heading heading-effects heading-base heading-style break-words {{ settings.heading_drop_shadow_style }}">{{ section.settings.product_recommendations_heading | escape }}</h2>
+
+          <div class="section-content-top-margin">
+            <ul class="grid {{ grid_class }} gap-theme" role="list">
+              {%- for product in recommendations.products -%}
+                {%- liquid
+                  if image_shape == 'blob'
+                    assign shape_id = section.id | append: '-' | append: forloop.index0
+                  endif
+                -%}
+                <li class="">
+                  {%- liquid
+                    if settings.product_tiles_scatter
+                      capture class
+                        case section.settings.products_per_row_mobile
+                          when '2'
+                          cycle 'max-lg:-translate-y-4 ', 'max-lg:translate-y-4 '
+                        endcase
+                        case section.settings.products_per_row_desktop
+                          when 3
+                            cycle 'lg:translate-y-4 ', 'lg:-translate-y-4 ', 'lg:translate-y-4 '
+                          when 2 or 4
+                            cycle 'lg:-translate-y-4 ', 'lg:translate-y-4 '
+                          when 5
+                            cycle 'lg:translate-y-4 ', 'lg:-translate-y-4 ', 'lg:translate-y-4 ', 'lg:-translate-y-4 ', 'lg:translate-y-4 '
+                        endcase
+                      endcapture
+                    endif
+                    capture odd_even
+                      cycle 'odd', 'even'
+                    endcapture
+                  -%}
+                  {%- render 'product-tile'
+                    product: product,
+                    crop: section.settings.product_tiles_aspect_ratio,
+                    shape_id: shape_id,
+                    shape: image_shape,
+                    display_on_card: section.settings.display_on_card,
+                    class: class,
+                    odd_even: odd_even, 
+                    index: forloop.index0,
+                    enable_quick_buy: section.settings.enable_quick_buy
+                  -%}
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  {%- else -%}
+    {%- capture section_url -%}{{ routes.product_recommendations_url }}?section_id={{ section.id }}&limit={{ section.settings.max_products }}&product_id={{ product.id }}{%- endcapture -%}
+    <div
+      class="product-recommendations"
+      x-data
+      x-html="$fetchedSection(
+        '{{ section_url }}',
+        '.product-recommendations'
+      )"
+    ></div>
+  {%- endif -%}
+{%- endif -%}
+
+{%- if section.settings.enable_quick_buy -%}
+{%- unless request.design_mode -%}
+<script src="{{ 'vendor-product.bundle.min.js' | asset_url }}" type="module"></script>
+<script src="{{ 'product-quick-buy.js' | asset_url }}" type="module"></script>
+{%- endunless -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product recommendations",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_product_recommendations",
+      "label": "Show dynamic recommendations",
+      "info": "Dynamic recommendations change and improve with time. [Learn more](https://help.shopify.com/en/themes/development/recommended-products)",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "display_on_card",
+      "label": "Display product tiles on cards",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_quick_buy",
+      "label": "Enable quick buy",
+      "info": "If a product only has two variants buttons will be shown. [Learn more](https://help.switchthemes.co/shapes/guides/show-quick-buy.html)"
+    },
+    {
+      "type": "text",
+      "id": "product_recommendations_heading",
+      "label": "Title",
+      "default": "You may also like"
+    },
+    {
+      "type": "select",
+      "id": "max_products",
+      "default": "3",
+      "options": [
+        {
+          "value": "3",
+          "label": "3 Products"
+        },
+        {
+          "value": "4",
+          "label": "4 Products"
+        },
+        {
+          "value": "6",
+          "label": "6 Products"
+        }
+      ],
+      "label": "Number of products"
+    },
+    {
+      "type": "header",
+      "content": "Product grid"
+    },
+    {
+      "type": "select",
+      "id": "product_tiles_aspect_ratio",
+      "label": "Image aspect ratio",
+      "options": [
+        {
+          "value": "",
+          "label": "Same as theme settings"
+        },
+        {
+          "value": "natural",
+          "label": "Natural"
+        },
+        {
+          "value": "aspect-w-4 aspect-h-3",
+          "label": "Landscape"
+        },
+        {
+          "value": "aspect-w-1 aspect-h-1",
+          "label": "Square"
+        },
+        {
+          "value": "aspect-w-3 aspect-h-4",
+          "label": "Portrait"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "select",
+      "id": "image_shape",
+      "label": "Image shape",
+      "options": [
+        {
+          "value": "",
+          "label": "Same as theme settings"
+        },
+        {
+          "value": "default",
+          "label": "Default",
+          "group": "Fit to image"
+        },
+        {
+          "value": "default_ellipse",
+          "label": "Ellipse",
+          "group": "Fit to image"
+        },
+        {
+          "value": "default_pill",
+          "label": "Pill",
+          "group": "Fit to image"
+        },
+        {
+          "value": "default_archway",
+          "label": "Archway",
+          "group": "Fit to image"
+        },
+        {
+          "value": "diamond",
+          "label": "Diamond",
+          "group": "Basic"
+        },
+        {
+          "value": "triangle_1",
+          "label": "Triangle 1",
+          "group": "Basic"
+        },
+        {
+          "value": "triangle_2",
+          "label": "Triangle 2",
+          "group": "Basic"
+        },
+        {
+          "value": "pentagon",
+          "label": "Pentagon",
+          "group": "Polygons"
+        },
+        {
+          "value": "hexagon",
+          "label": "Hexagon",
+          "group": "Polygons"
+        },
+        {
+          "value": "heptagon",
+          "label": "Heptagon",
+          "group": "Polygons"
+        },
+        {
+          "value": "octagon",
+          "label": "Octagon",
+          "group": "Polygons"
+        },
+        {
+          "value": "rounded_pentagon",
+          "label": "Rounded pentagon",
+          "group": "Polygons"
+        },
+        {
+          "value": "rounded_hexagon",
+          "label": "Rounded hexagon",
+          "group": "Polygons"
+        },
+        {
+          "value": "rounded_heptagon",
+          "label": "Rounded heptagon",
+          "group": "Polygons"
+        },
+        {
+          "value": "rounded_octagon",
+          "label": "Rounded octagon",
+          "group": "Polygons"
+        },
+        {
+          "value": "star_1",
+          "label": "Star 1",
+          "group": "Circular"
+        },
+        {
+          "value": "star_2",
+          "label": "Star 2",
+          "group": "Circular"
+        },
+        {
+          "value": "star_3",
+          "label": "Star 3",
+          "group": "Circular"
+        },
+        {
+          "value": "star_4",
+          "label": "Star 4",
+          "group": "Circular"
+        },
+        {
+          "value": "scalloped_circle_1",
+          "label": "Scalloped circle 1",
+          "group": "Circular"
+        },
+        {
+          "value": "scalloped_circle_2",
+          "label": "Scalloped circle 2",
+          "group": "Circular"
+        },
+        {
+          "value": "scalloped_circle_3",
+          "label": "Scalloped circle 3",
+          "group": "Circular"
+        },
+        {
+          "value": "scalloped_circle_4",
+          "label": "Scalloped circle 4",
+          "group": "Circular"
+        },
+        {
+          "value": "parallelogram",
+          "label": "Parallelogram",
+          "group": "Square"
+        },
+        {
+          "value": "scalloped_square",
+          "label": "Scalloped",
+          "group": "Square"
+        },
+        {
+          "value": "leaf",
+          "label": "Leaf",
+          "group": "Square"
+        },
+        {
+          "value": "clipped_square",
+          "label": "Clipped",
+          "group": "Square"
+        },
+        {
+          "value": "convex_square",
+          "label": "Convex",
+          "group": "Square"
+        },
+        {
+          "value": "twisted_square",
+          "label": "Twisted",
+          "group": "Square"
+        },
+        {
+          "value": "trapeze",
+          "label": "Trapeze",
+          "group": "Square"
+        },
+        {
+          "value": "blob",
+          "label": "Blob",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "zig_zag",
+          "label": "Zig zag",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "zig_zag_tear",
+          "label": "Zig zag tear",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "wave_tear",
+          "label": "Wave tear",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "flower",
+          "label": "Flower",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "concave",
+          "label": "Concave",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "cross",
+          "label": "Cross",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "quatrefoil",
+          "label": "Quatrefoil",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "wind",
+          "label": "Wind",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "heart",
+          "label": "Heart",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "mirrored_pyramids",
+          "label": "Mirrored pyramids",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "plus",
+          "label": "Plus",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "double_pill",
+          "label": "Double pill",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "triple_pill",
+          "label": "Triple pill",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "crown",
+          "label": "Crown",
+          "group": "Miscellaneous"
+        },
+        {
+          "value": "abstract_star",
+          "label": "Abstract star",
+          "group": "Miscellaneous"
+        }
+      ],
+      "info": "Selecting some shapes will crop the image. [Learn more](https://help.switchthemes.co/shapes/guides/style-images-with-shapes.html)"
+    },
+    {
+      "type": "header",
+      "content": "Color"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Primary"
+        },
+        {
+          "value": "secondary",
+          "label": "Secondary"
+        },
+        {
+          "value": "tertiary",
+          "label": "Tertiary"
+        },
+        {
+          "value": "quaternary",
+          "label": "Quaternary"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "use_gradient_background",
+      "label": "Use gradient for background"
+    }
+  ],
+  "templates": [
+    "product"
+  ],
+  "presets": [
+    {
+      "name": "Product recommendations"
+    }
+  ]
+}
+{% endschema %}

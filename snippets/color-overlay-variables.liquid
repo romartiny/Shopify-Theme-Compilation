@@ -1,0 +1,46 @@
+{%- liquid
+
+  assign background_color = "color_" | append: color_scheme | append: "_background"
+  assign card_color = "color_" | append: color_scheme | append: "_card"
+  assign text_color = "color_" | append: color_scheme | append: "_text"
+  assign accent_color = "color_" | append: color_scheme | append: "_accent"
+
+  assign text_background_contrast = settings[text_color] | color_contrast: settings[background_color]
+  if text_background_contrast > 4.4
+    assign text_overlay = settings[background_color]
+  else
+    assign text_brightness = settings[text_color] | color_brightness 
+    if text_brightness > 127 
+      assign text_overlay = '#000000' 
+    else 
+      assign text_overlay = '#FFFFFF' 
+    endif
+  endif
+
+  assign text_card_contrast = settings[text_color] | color_contrast: settings[card_color]
+  if text_card_contrast > 4.4
+    assign text_card_overlay = settings[card_color]
+  else
+    assign text_card_overlay = text_overlay
+  endif
+
+  assign accent_background_contrast = settings[accent_color] | color_contrast: settings[background_color]
+  assign accent_text_contrast = settings[accent_color] | color_contrast: settings[text_color]
+  if accent_background_contrast > 4.4
+    assign accent_overlay = settings[background_color]
+  elsif accent_text_contrast > 4.4
+    assign accent_overlay = settings[text_color]
+  else
+    assign accent_brightness = settings[accent_color] | color_brightness
+    if accent_brightness > 127 
+      assign accent_overlay = '#000000' 
+    else 
+      assign accent_overlay = '#FFFFFF' 
+    endif
+  endif
+  
+-%}
+
+--color-{{ color_scheme }}-text-overlay: {{ text_overlay | color_to_rgb | split: "(" | last | split: ")" | first }};
+--color-{{ color_scheme }}-card-text-overlay: {{ text_card_overlay | color_to_rgb | split: "(" | last | split: ")" | first }};
+--color-{{ color_scheme }}-accent-overlay: {{ accent_overlay | color_to_rgb | split: "(" | last | split: ")" | first }};
