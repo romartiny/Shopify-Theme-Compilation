@@ -1,0 +1,33 @@
+<div id="popup-discount--image" class="popup popup-discount--image" data-days-for-showing="{{ settings.popup_days }}">
+  <div class="popup-content" style="
+      background-image: url({{ settings.popup_bg | img_url: 'x600', scale: 2 }}); 
+      background-size: {{settings.popup_bg_size}};">
+      
+    <button class="close-btn" type="button"><span class="icon icon--delete"></span></button>
+    {% if settings.popup_heading != blank %}
+      <h2 class="popup-heading">{{ settings.popup_heading }}</h2>
+    {% endif %}
+
+    {% if settings.popup_discount_offer != blank %}
+      <h1 class="popup-discount-offer">{{ settings.popup_discount_offer }}</h1>
+    {% endif %}    
+
+    {% if settings.popup_discount_code != blank %}
+      <p class="popup-discount-code">{{ settings.popup_discount_code }}</p>
+    {% endif %}
+
+    {% if settings.popup_discount_info != blank %}
+      <p class="popup-discount-info">{{ settings.popup_discount_info }}</p>
+    {% endif %}
+
+    <div class="popup-link-container">
+      {% if settings.popup_link_text != blank %}
+        <a class="popup-link" href="{{ settings.popup_link }}">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="60" height="13" viewBox="0 0 60 13"><path d="M59.531,7.366 L51.110,12.366 C51.019,12.420 50.923,12.452 50.826,12.474 C50.665,12.785 50.343,13.000 49.969,13.000 C49.434,13.000 49.000,12.566 49.000,12.031 L49.000,1.969 C49.000,1.799 49.047,1.642 49.124,1.503 C48.948,1.203 48.930,0.823 49.117,0.500 C49.395,0.022 50.011,-0.142 50.492,0.134 L59.211,5.134 C59.454,5.274 59.616,5.499 59.681,5.749 C59.760,5.820 59.832,5.902 59.887,6.000 C60.155,6.478 59.996,7.090 59.531,7.366 ZM50.938,2.699 L50.938,10.159 L57.329,6.364 L50.938,2.699 ZM45.000,8.000 L1.000,8.000 C0.448,8.000 0.000,7.552 0.000,7.000 C0.000,6.448 0.448,6.000 1.000,6.000 L45.000,6.000 C45.552,6.000 46.000,6.448 46.000,7.000 C46.000,7.552 45.552,8.000 45.000,8.000 Z"/></svg>
+          <span>{{ settings.popup_link_text }}</span>
+        </a><br>
+      {% endif %}
+      <a class="close-btn" href="#">No, Thanks</a>
+    </div>
+  </div>
+</div>

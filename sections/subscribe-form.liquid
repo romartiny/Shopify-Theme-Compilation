@@ -1,0 +1,73 @@
+<style>
+  .section--subscribe .section-heading:before {
+  	content: "{{ section.settings.subheading_overlap }}";
+  }
+</style>
+<section class="section section--subscribe clearfix">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item one-whole">
+        <div class="heading-block">
+        {% comment %}
+          Subscribe form headings
+          {% endcomment %}
+          {% if section.settings.heading_html != blank %}
+            <h3 class="section-heading heading--page">{{ section.settings.heading_html | upcase }}</h3>
+          {% endif %}
+        </div>
+
+        <div class="form-wrapper">            
+          {% if section.settings.subheading != blank %}
+            <p class="section__info text-center">{{ section.settings.subheading }}</p>
+          {% endif %}
+        
+          {% if settings.subscribe_form_variant == 'mailchimp' %}
+            {% comment %}
+            Snippet for MailChimp subscribe form
+            For setting go to Admin -> Theme -> Customize Theme -> Homepage
+            {% endcomment %}
+            {% include 'subscribe-form-mailchimp' %}
+          {% elsif settings.subscribe_form_variant == 'standart' %}
+            {% comment %}
+            Snippet for standart (Shopify) subscribe form
+            For setting go to Admin -> Theme -> Customize Theme -> Homepage
+            {% endcomment %}
+            {% include 'subscribe-form-shopify'%}
+          {% endif %}
+        </div> <!-- End form-wrapper -->
+      </div> <!-- End grid__item -->
+    </div> <!-- End grid -->
+  </div> <!-- End wrapper -->
+</section>
+
+{% schema %}
+  {
+    "name": "Subscribe Form",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading_html",
+        "label": "Heading",
+        "default": "Business<br> Values<br> Attitude"
+      },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "Join folks at Foodly family to get the latest news and the best offers"
+      },
+	  {
+        "type": "text",
+        "id": "subheading_overlap",
+        "label": "Overlap subheading",
+        "default": "Family"
+      }
+    ],
+	"presets": [
+      {
+        "name": "Subscribe Form",
+        "category": "Special sections"
+      }
+    ]
+  }
+{% endschema %}

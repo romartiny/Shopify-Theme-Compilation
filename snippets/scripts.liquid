@@ -1,0 +1,1242 @@
+{%-comment-%}
+************************************************************************
+  RequireJS
+  http://requirejs.org/
+
+  It is a core loader for javascript modules into Foodly Theme.
+
+
+************************************************************************
+{%-endcomment-%}
+{{ 'js-third-party.require.js' | asset_url | script_tag }}
+{% include '_js[require-config]' %}
+
+<script>
+  /*
+    ---------------------------------------------------------
+    Module with information about Shop
+    ---------------------------------------------------------
+  */
+  define('shopInfo', [], function(){
+
+    var moneyFormat             = '{{ shop.money_format }}';
+    var moneyWithCurrencyFormat = '{{ shop.money_with_currency_format | strip_html | json }}';
+    var currency                = '{{ shop.currency }}';
+    var secureUrl               = "{{ shop.secure_url }}";
+    var language                = "{{ shop.locale }}";
+    var specialPackagingID      = null;
+    window.shopCurrency         = currency;
+
+    {% if linklists.special-packing.links.size > 0 and linklists.special-packing.links.first.type == 'product_link' %}
+      specialPackagingID = {{ linklists.special-packing.links.first.object.first_available_variant.id }};
+    {% endif %}
+
+    return {
+      moneyWithCurrencyFormat: moneyWithCurrencyFormat,
+      moneyFormat:             moneyFormat,
+      currency:                currency,
+      secureUrl:               secureUrl,
+      language:                language,
+      specialPackagingID:      specialPackagingID
+    }
+  });
+
+  /*
+
+    MODULES FOR HEADER
+    *********************************************************
+  */
+
+  /*
+    ---------------------------------------------------------
+    Drawers initialization
+    ---------------------------------------------------------
+  */
+  if (document.querySelector('.drawer--menu')) {
+    require(['drawers'], function(Drawers){
+      new Drawers ({
+        DOM : {
+          container:  '#main-nav',
+          openBtn :   '#main-nav-open-btn',
+          closeBtn :  '.drawer--menu .drawer__btn-close'
+        }
+      })
+    })//end require
+  }//end if
+
+  if (document.querySelector('.drawer--cart') && document.querySelector("#cart-open-btn")) {
+
+    require(['drawers'], function(Drawers){
+      new Drawers ({
+        DOM : {
+          container:  '.drawer--cart',
+          openBtn :   '#cart-open-btn',
+          closeBtn :  '.drawer--cart .drawer__btn-close'
+        },
+        openScrollToTop : true
+      })
+    })//end require
+  };
+
+  {%- comment -%}
+    /*---------------------------------------------------------
+    Header initialization
+    ---------------------------------------------------------*/
+  {%- endcomment -%}
+
+  if (document.querySelector('header')) {
+    require(['header'], function(header){
+      header.init();
+    });
+  };
+
+  {%- comment -%}
+    /*---------------------------------------------------------
+    Initialization of currency picker
+    ---------------------------------------------------------*/
+  {%- endcomment -%}
+  {%- if settings.show_multiple_currencies -%}
+
+  require(['currencyInit']);
+  {%- endif -%}
+
+
+  {% if settings.search_header_type == 'voice' %}
+  /*
+    ---------------------------------------------------------
+    Search Box with a speech recognition
+    ---------------------------------------------------------
+  */
+  if (document.getElementById('header-search-box')) {
+
+    require(['headerSearchBox'], function(HeaderSearchBox){
+
+      var headerSearchBox = new HeaderSearchBox({
+        DOM: {
+          container:       '.search-container',
+          searchBox:       '#header-search-box',
+          searchOpenBtn:   '.search-open-btn',
+          searchCloseBtn:  '.search-close-btn',
+          searchInput:     'input[name="q"]',
+          searchSubmitBtn: '.search-box__submit-btn',
+          altResults:      '.search-box__alt-results'
+        }
+      });
+
+    });
+  }
+  {% endif %}
+
+
+  /*
+
+    MODULES FOR CART
+    *********************************************************
+  */
+
+  /*
+    ---------------------------------------------------------
+    Ajax Shopping cart
+    ---------------------------------------------------------
+  */
+  if (document.querySelector('form[action*="cart"]') || document.querySelector('.drawer--cart')) {
+
+    require(['ajaxCart'], function(ajaxCart){
+      ajaxCart.updateDropdownCart();
+      ajaxCart.initAddToCard('form[action*="cart/add"]');
+      ajaxCart.initUpdateCartAjax();
+    });
+  }
+
+  {% if linklists.special-packing.links.size > 0 and linklists.special-packing.links.first.type == 'product_link' %}
+  /*
+    ---------------------------------------------------------
+    Special packaging (show into the cart)
+    ---------------------------------------------------------
+  */
+  if (document.querySelector('.special-packing')) {
+    require(['specialPackaging'], function(){
+
+    });
+  }
+  {% endif %}
+
+  {% unless settings.shipping_calculator == 'Disabled' %}
+  /*
+    ---------------------------------------------------------
+    Shipping calculator for cart
+    (Ajax cart and cart page)
+    ---------------------------------------------------------
+  */
+  require(['jquery.cart'], function(){
+    Shopify.Cart.ShippingCalculator.show( {
+      submitButton: {{ settings.shipping_calculator_submit_button_label | default: 'Calculate shipping' | json }},
+      submitButtonDisabled: {{ settings.shipping_calculator_submit_button_label_disabled | default: 'Calculating...' | json }},
+      {% if customer %}customerIsLoggedIn: (document.getElementById('address_zip').value != '' && document.getElementById('address_country').value != '---') ? true : false,{% endif %}
+      moneyFormat: {{ shop.money_with_currency_format | json }}
+    });
+  })
+  {% endunless %}
+
+
+  /*
+
+    MODULES FOR HOMEPAGE
+    *********************************************************
+  */
+
+  /*
+    ---------------------------------------------------------
+    Homepage Slideshow
+    (sections/slideshow.liquid)
+    ---------------------------------------------------------
+  */
+  if (document.querySelector('.flexslider-thumb--homepage')) {
+
+    require(['jquery.flexslider', 'jquery'], function(){
+
+      var $thumbs;
+      var $homepageSliderContainer = jQuery('.flexslider-thumb');
+
+      var autoplay        = $homepageSliderContainer.attr('data-autoplay') == 'true';
+      var autoplaySpeed   = parseInt($homepageSliderContainer.attr('data-autoplay-speed'));
+      var slideshowEffect = $homepageSliderContainer.attr('data-slideshow-effect');
+
+      jQuery('.flexslider-thumb').flexslider({
+        animation: slideshowEffect,
+        controlNav: "thumbnails",
+        pauseOnHover: true,
+        slideshow: autoplay,
+        slideshowSpeed: autoplaySpeed,
+        start: function(slider) {
+          slider[0].classList.remove('loading'); /* fix loading blinking */
+          $thumbs = $homepageSliderContainer.find('.flex-control-thumbs li');
+          $($thumbs[slider.currentSlide]).addClass('active-thumb');
+        },
+        before: function(slider) {
+          $homepageSliderContainer.find('.active-thumb').removeClass('active-thumb');
+          $thumbs = $homepageSliderContainer.find('.flex-control-thumbs li');
+          $($thumbs[slider.animatingTo]).addClass('active-thumb');
+        }
+      });
+    });
+  }
+
+  /*
+    ---------------------------------------------------------
+    Carousel with featured products
+    (sections/featured-carousel.liquid)
+    ---------------------------------------------------------
+  */
+  if (document.querySelector('.carousel--homepage')) {
+    require(['swiper', 'utils'], function(Swiper, utils){
+
+      var DOM = utils.domFinder({
+        activeSlideContainer: '.swiper-active-slide',
+        carouselContainer:    '.carousel--homepage'
+      });
+
+      var autoplaySetting      = parseInt(DOM.carouselContainer.getAttribute('data-autoplay'), 10) || 0;
+
+      // Featured carousel
+      var allowLinksClick = true;
+      new Swiper(DOM.carouselContainer, {
+        nextButton: '.homepage-swiper-btn-next',
+        prevButton: '.homepage-swiper-btn-prev',
+        preventClicks: false,
+        spaceBetween: 3,
+        slidesPerGroup: 4,
+        slidesPerView: 4,
+        loop: false,
+        autoplay: autoplaySetting,
+        onInit: function(carouselHomepage) {
+          var slideNumber = carouselHomepage.slides.length;
+          var bdImage, slideLink;
+          DOM.activeSlideContainer.textContent = carouselHomepage.activeIndex + 1 + "/" + slideNumber;
+
+          for ( var i = 0, max = slideNumber; i < max; i++ ) {
+            bdImage = carouselHomepage.slides[i].getAttribute('data-img-bg');
+            slideLink = carouselHomepage.slides[i].querySelector('.product__link ');
+            slideLink.style.backgroundImage = 'url(' + bdImage + ')';
+          }
+        },
+        onSlideChangeStart: function(carouselHomepage) {
+          var slideNumber = carouselHomepage.slides.length;
+          DOM.activeSlideContainer.textContent = carouselHomepage.activeIndex + 1 + "/" + slideNumber;
+        },
+        preloadImages: false,
+        lazyLoading: true,
+        breakpoints: {
+          1024: {
+            slidesPerView: 3,
+            slidesPerGroup: 3
+          },
+          768: {
+            slidesPerView: 2,
+            slidesPerGroup: 2
+          },
+          480: {
+            slidesPerView: 1,
+            slidesPerGroup: 1
+          }
+        }
+      });
+    });
+  }
+
+  /*
+    ---------------------------------------------------------
+    Product Builder
+    (sections/product-builder.liquid)
+    ---------------------------------------------------------
+  */
+  if (document.querySelector('.js-product-picker')) {
+    require(['productBuilderTab', 'productBuilderProductPicker', 'utils'], function(Tab, ProductPicker) {
+
+      var tabController = new Tab('.js-product-picker', function(){
+
+        // hide/show prev button on the first tab
+        if ( this.activeTab.getAttribute('data-tab') === '#tab-one') {
+          productPicker.DOM.pickerNavPrevBtn.classList.add('disable');
+        } else {
+          productPicker.DOM.pickerNavPrevBtn.classList.remove('disable');
+        }
+
+
+        if ( this.activeTab.getAttribute('data-tab') === '#tab-two' && this.activeTab.nextElementSibling.classList.contains('is-hide')) {
+          productPicker.DOM.pickerNavNextBtn.firstElementChild.textContent = this.activeTab.nextElementSibling.getAttribute('data-next-btn-name');
+        } else {
+          productPicker.DOM.pickerNavNextBtn.firstElementChild.textContent = this.activeTab.getAttribute('data-next-btn-name');
+        }
+
+
+        // if accessorieses don't available go to next tab
+        if ( this.activeTab.getAttribute('data-tab') === '#tab-three' && this.activeTab.classList.contains('is-hide') ){
+          // change text for next button
+
+          this.changeTabManually('#tab-four');
+        }
+
+        // add checkout link into next button on the last tab
+        if ( this.activeTab.getAttribute('data-tab') === '#tab-four') {
+          // if we on summary tab
+          productPicker.changeNavBtnAttr(this.prevTab.getAttribute('data-tab'), false);
+          productPicker.setSummary();
+
+          // resolve bug to fast href changing
+          setTimeout(function(){
+            productPicker.toggleCheckoutLink(true);
+          }, 40);
+
+        } else if ( this.activeTab.getAttribute('data-tab') === '#tab-one') {
+
+          productPicker.changeNavBtnAttr(false, this.activeTab.nextElementSibling.getAttribute('data-tab'));
+          productPicker.toggleCheckoutLink(false);
+        } else {
+
+          productPicker.changeNavBtnAttr(this.activeTab.previousElementSibling.getAttribute('data-tab'), this.activeTab.nextElementSibling.getAttribute('data-tab'));
+          productPicker.toggleCheckoutLink(false);
+        }
+
+        if ( this.activeTab.getAttribute('data-tab') === '#tab-four' && this.activeTab.previousElementSibling.classList.contains('is-hide') ){
+          productPicker.changeNavBtnAttr('#tab-two', false);
+        }
+
+        productPicker.checkStickedPickerNav();
+      });
+
+      var productPicker = new ProductPicker({
+        'productPickerSelector': '.js-product-picker',
+        'navNextButtonAction': function(hash){
+          tabController.changeTabManually(hash);
+          tabController.enableTab(tabController.activeTab);
+        },
+        'navPrevButtonAction': function(hash){
+          tabController.changeTabManually(hash);
+        },
+        'resetPackAction': function(){
+          tabController.disableAllTabs();
+        },
+        'accessoriesAvailable': function(){
+          tabController.showTab("#tab-three");
+        },
+        'accessoriesNoAvailable': function(){
+          tabController.hideTab("#tab-three");
+        }
+      });
+
+
+    });
+  }
+
+  /*
+    ---------------------------------------------------------
+    Slider with advantages (About As slider)
+    (for Homepage and About Us page)
+    ---------------------------------------------------------
+  */
+  if (document.querySelector('.slider-advantages')) {
+    require(['swiper', 'utils'], function(Swiper, utils){
+
+      var DOM = utils.domFinder({
+        advantagesSlider: '.slider-advantages'
+      });
+
+      var advantagesSlider = document.querySelector('.slider-advantages');
+      var aboutUs = new Swiper(DOM.advantagesSlider, {
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        spaceBetween: 0,
+        slidesPerView: 1,
+        loop: false,
+        onInit: function(slider) {
+          DOM.advantagesSlider.setAttribute('data-active-slide', slider.activeIndex + 1);
+        },
+        onSlideChangeStart: function(slider) {
+          var prevSlide = aboutUs.activeIndex - 1;
+          DOM.advantagesSlider.setAttribute('data-active-slide', slider.activeIndex + 1);
+        }
+      });
+    });
+  }
+
+
+  /*
+
+    MODULES FOR PRODUCT PAGE
+    *********************************************************
+  */
+  {% if template contains 'product' %}
+
+  /*
+    ---------------------------------------------------------
+    Slideshow for product page
+    ---------------------------------------------------------
+  */
+  if (document.querySelector('.flexslider-thumb--product')) {
+
+    require(['jquery.flexslider'], function(){
+      var $productSliderContainer = $('.flexslider-thumb');
+      var $thumbs;
+      $('.flexslider-thumb').flexslider({
+        animation: "fade",
+        pauseOnHover: "true",
+        controlNav: "thumbnails",
+        start: function(slider) {
+          if ("createEvent" in document) {
+            var evt = document.createEvent("HTMLEvents");
+            evt.initEvent("resize", false, true);
+            window.dispatchEvent(evt);
+          } else {
+            window.fireEvent("onresize");
+          }
+
+          $thumbs = $productSliderContainer.find('.flex-control-thumbs li');
+          $($thumbs[slider.currentSlide]).addClass('active-thumb');
+        },
+        before: function(slider) {
+          if ("createEvent" in document) {
+            var evt = document.createEvent("HTMLEvents");
+            evt.initEvent("resize", false, true);
+            window.dispatchEvent(evt);
+          } else {
+            window.fireEvent("onresize");
+          }
+
+          $productSliderContainer.find('.active-thumb').removeClass('active-thumb');
+          $thumbs = $productSliderContainer.find('.flex-control-thumbs li');
+          $($thumbs[slider.animatingTo]).addClass('active-thumb');
+        },
+      });
+    });
+  }
+
+  /*
+  ---------------------------------------------------------
+  Slider with similar products
+  ---------------------------------------------------------
+  */
+  if (document.querySelector('.carousel--product')) {
+
+    require(['swiper', 'utils'], function(Swiper, utils){
+
+      var DOM = utils.domFinder({
+        activeSlideContainer: '.swiper-active-slide',
+        carousel: '.carousel--product',
+        slidesALL: '.swiper-slide'
+      });
+
+      if ( DOM.slidesALL.length <= 4 ) {
+        DOM.carousel.classList.add('hide-arrow');
+      }
+
+      new Swiper(DOM.carousel, {
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        spaceBetween: 0,
+        preventClicks: false,
+        slidesPerView: 4,
+        slidesPerGroup: 4,
+        loop: false,
+        autoplay: false,
+        onInit: function(similarProducts) {
+          var slideNumber = similarProducts.slides.length;
+          DOM.activeSlideContainer.textContent = similarProducts.activeIndex + 1 + "/" + slideNumber;
+
+        },
+        onSlideChangeStart: function(similarProducts) {
+          var slideNumber = similarProducts.slides.length;
+          DOM.activeSlideContainer.textContent = similarProducts.activeIndex + 1 + "/" + slideNumber;
+        },
+        breakpoints: {
+          1024: {
+            slidesPerView: 3,
+            slidesPerGroup: 3
+          },
+          768: {
+            slidesPerView: 2,
+            slidesPerGroup: 2
+          },
+          480: {
+            slidesPerView: 1,
+            slidesPerGroup: 1
+          }
+        }
+      });
+
+    });
+  }
+
+  {% if settings.product_reviews_recipe == 'reviews' %}
+  /*
+    ---------------------------------------------------------
+    Reviews modal wimdow (product page)
+    ---------------------------------------------------------
+  */
+  if (document.getElementById('shopify-product-reviews')) {
+    require(['reviewsModal'], function(){});
+  }
+  {% endif %}
+
+  /*
+    ---------------------------------------------------------
+    Slider and Variant Options for product images in
+    "product.boxed.liquid" template
+    ---------------------------------------------------------
+  */
+  if (document.getElementById('productFixWidthCarousel')) {
+
+    require(['swiper', 'productVariantsConverter', 'utils'], function(Swiper, ProductVariantsConverter, utils) {
+
+
+      /*
+        Slider initialization
+      */
+      var DOM = utils.domFinder({
+        carouselContainer: '#productFixWidthCarousel'
+      });
+
+
+      var sliderImages = DOM.carouselContainer.querySelectorAll('.swiper-slide img');
+      var sliderImagesUrl = [];
+      for (var i = 0; i < sliderImages.length; i++) {
+        sliderImagesUrl.push(sliderImages[i].getAttribute('src'));
+      }
+
+      if (sliderImages.length < 2 ) {
+        if (document.getElementById('product-boxed-variants')) { {%- comment -%} Quick fix for not generating radio butoons if there is no more than one image in slider {%- endcomment -%}
+          new ProductVariantsConverter({
+            callbackRadionBtnChange: function(){},
+            DOM : { selectVariants: '#product-boxed-variants'}
+          });
+        }
+        return null;
+      }
+
+
+      var firstLoad = true;
+
+      var carouselGallery = new Swiper(DOM.carouselContainer, {
+          speed: 400,
+          spaceBetween: 0,
+          pagination: '.carousel__navigation',
+          paginationClickable: true,
+          nextButton: '.swiper-button-next',
+          prevButton: '.swiper-button-prev',
+          paginationBulletRender: function (swiper, index, className) {
+            if (firstLoad) {
+              return '<span class="' + className + '">' + '<img src="' + sliderImagesUrl[index] + '">' + '</span>';
+              firstLoad = false;
+            } else {
+              return null;
+            }
+
+          }
+      });
+
+      if (document.getElementById('product-boxed-variants')) {
+        new ProductVariantsConverter({
+          callbackRadionBtnChange: function(radioBtn){
+
+            if (radioBtn.getAttribute('data-variant-img-id')) {
+              for (var i = 0; i < carouselGallery.slides.length; i++) {
+                if (carouselGallery.slides[i].getAttribute('data-image-id') == radioBtn.getAttribute('data-variant-img-id')){
+                  carouselGallery.slideTo(i);
+                  break;
+                }
+              }
+            }
+            changePrices(radioBtn);
+          },
+          DOM : {
+            selectVariants: '#product-boxed-variants'
+          }
+        });
+      }
+
+      function changePrices(radioBtn){
+          var price, name, productWrapper, productMainPriceDOM, productSizeUnitDOM,
+              quantityInputDOM, productQuantityPriceDOM, productQuantitypriceTotalDOM;
+
+          productWrapperDOM = radioBtn.closest('.product');
+
+          productQuantityPriceDOM       = productWrapperDOM.querySelector('.js-price-and-value > .money');
+          productQuantitypriceTotalDOM  = productWrapperDOM.querySelector('.js-total-price');
+          quantityInputDOM              = productWrapperDOM.querySelector('.form__field[name=quantity]');
+
+          variantPrice = radioBtn.getAttribute('data-variant-price');
+          variantName  = radioBtn.getAttribute('data-variant-name');
+
+          {% if settings.show_multiple_currencies %}
+          if (productQuantityPriceDOM.getAttribute('data-currency') !== '') {
+            productQuantityPriceDOM.removeAttribute('data-currency-' + Currency.currentCurrency.toLowerCase());
+            productQuantityPriceDOM.removeAttribute('data-currency');
+          }
+          if (productQuantitypriceTotalDOM.getAttribute('data-currency') !== '') {
+            productQuantitypriceTotalDOM.removeAttribute('data-currency-' + Currency.currentCurrency.toLowerCase());
+            productQuantitypriceTotalDOM.removeAttribute('data-currency');
+          }
+          {% endif %}
+
+          var item_price = Currency.convert(cartItem.price, shopInfo.currency, Currency.currentCurrency);
+          productQuantityPriceDOM.innerHTML      = Shopify.formatMoney(variantPrice, "{{ shop.money_format }}");
+          productQuantitypriceTotalDOM.innerHTML = Shopify.formatMoney(variantPrice, "{{ shop.money_format }}");
+
+          {% if settings.show_multiple_currencies %}
+          if (window.shopCurrency != Currency.currentCurrency) {
+            Currency.convertAll(shopCurrency, document.querySelector('[name=currencies]').value, 'span.money', 'money_format');
+          }
+          {% endif %}
+
+          utils.triggerEvent(quantityInputDOM, 'change');
+      }
+
+
+    });
+  }
+
+  /*
+    ---------------------------------------------------------
+    Variant Options for product "product.liquid" template
+    ---------------------------------------------------------
+  */
+  if (document.getElementById('product-variants')) {
+    require(['productVariantsConverter', 'utils', 'ajaxApiShopify', 'jquery.currencies'], function(ProductVariantsConverter, utils){
+
+      function changePrices(radioBtn){
+          var price, name, productWrapper, productMainPriceDOM, productSizeUnitDOM,
+              quantityInputDOM, productQuantityPriceDOM, productQuantitypriceTotalDOM;
+
+          productWrapperDOM = radioBtn.closest('.product');
+
+          productMainPriceDOM = productWrapperDOM.querySelector('.product__price .money');
+          productSizeUnitDOM  = productWrapperDOM.querySelector('.product__size-unit');
+
+          productQuantityPriceDOM       = productWrapperDOM.querySelector('.js-price-and-value > .money');
+          productQuantitypriceTotalDOM  = productWrapperDOM.querySelector('.js-total-price');
+          quantityInputDOM              = productWrapperDOM.querySelector('.form__field[name=quantity]');
+
+          variantPrice = radioBtn.getAttribute('data-variant-price');
+          variantName  = radioBtn.getAttribute('data-variant-name');
+
+          {% if settings.show_multiple_currencies %}
+          if (productQuantityPriceDOM.getAttribute('data-currency') !== '') {
+            productQuantityPriceDOM.removeAttribute('data-currency-' + Currency.currentCurrency.toLowerCase());
+            productQuantityPriceDOM.removeAttribute('data-currency');
+          }
+          if (productQuantitypriceTotalDOM.getAttribute('data-currency') !== '') {
+            productQuantitypriceTotalDOM.removeAttribute('data-currency-' + Currency.currentCurrency.toLowerCase());
+            productQuantitypriceTotalDOM.removeAttribute('data-currency');
+          }
+          if (productMainPriceDOM.getAttribute('data-currency') !== '') {
+            productMainPriceDOM.removeAttribute('data-currency-' + Currency.currentCurrency.toLowerCase());
+            productMainPriceDOM.removeAttribute('data-currency');
+          }
+          {% endif %}
+
+          productQuantityPriceDOM.innerHTML      = Shopify.formatMoney(variantPrice, "{{ shop.money_format }}");
+          productQuantitypriceTotalDOM.innerHTML = Shopify.formatMoney(variantPrice, "{{ shop.money_format }}");
+          productMainPriceDOM.innerHTML          = Shopify.formatMoney(variantPrice, "{{ shop.money_format }}");
+          productSizeUnitDOM.innerHTML           = '<em>{{ "products.general.per" | t }} ' + variantName + '</em>';
+
+          {% if settings.show_multiple_currencies %}
+          if (window.shopCurrency != Currency.currentCurrency) {
+            Currency.convertAll(shopCurrency, document.querySelector('[name=currencies]').value, 'span.money', 'money_format');
+          }
+          {% endif %}
+
+          utils.triggerEvent(quantityInputDOM, 'change');
+      }
+
+
+      new ProductVariantsConverter({
+        callbackRadionBtnChange: changePrices,
+        DOM : {
+          selectVariants: '#product-variants'
+        }
+      });
+
+    });
+  }
+
+  /*
+    ---------------------------------------------------------
+    Multi Variant Options for product templates
+    ---------------------------------------------------------
+  */
+  if (document.getElementById("product-multi-variants")) {
+    require(['prodOptionShopify', "dropdowns", "jquery.currencies", 'shopInfo', "currencyInit"], function(p, Dropdown, Currency, shopInfo){
+
+      var money_format = Currency.moneyFormats[Currency.currentCurrency].money_format || shopInfo.currency;
+      var productSingleObject = JSON.parse(document.getElementById('ProductJson').innerHTML);
+      new Shopify.OptionSelectors("product-select",
+        {
+          product: productSingleObject,
+          onVariantSelected: function(variant, selector) {
+
+            if (variant) {
+              if (variant.available) {
+                // Selected a valid variant that is available.
+                $('[action="/cart/add"] [type="submit"]').removeClass('btn--disabled').removeAttr('disabled').html('{{ "layout.general.add_to_cart_button" | t }}').fadeTo(200,1);
+              } else {
+                // Variant is sold out.
+                $('[action="/cart/add"] [type="submit"]').html('Sold Out').addClass('btn--disabled').attr('disabled', 'disabled').fadeTo(200,0.5);
+              }
+              //  update the price
+
+              var variant_price = Currency.convert(variant.price, shopInfo.currency, Currency.currentCurrency);
+              $('[action="/cart/add"] .money').html(Shopify.formatMoney(variant_price, money_format));
+            } else {
+              // variant doesn't exist.
+              $('[action="/cart/add"] [type="submit"]').html('Unavailable').addClass('btn--disabled').attr('disabled', 'disabled').fadeTo(200,0.5);
+            }
+
+            selector.selectors.forEach(function(value, key) {
+              value.element.classList.add('js-dropdown');
+            });
+
+            Dropdown.initDropdown('.js-dropdown');
+          }
+        });
+    });
+  }
+
+  {% endif %} {%- comment -%} end if template contains 'product' {%- endcomment -%}
+
+  /*
+
+    MODULES FOR COLLECTION PAGE
+    *********************************************************
+  */
+  {% if template contains 'collection' or template contains 'collection.list'  %}
+  /*
+    ---------------------------------------------------------
+    Collection Sorting
+    ---------------------------------------------------------
+  */
+  if (document.querySelector('.collection__toolbar')) {
+
+    require(['collectionSorting'], function(){});
+  }
+
+
+  {% endif %}
+
+
+  /*
+
+    MODULES FOR CONTACT PAGE
+    *********************************************************
+  */
+  {% if template contains 'page' %}
+    {% if settings.contact_google_api != blank %}
+      /*
+        ---------------------------------------------------------
+        Google maps initialization for Contact page
+        ---------------------------------------------------------
+      */
+      if (document.getElementById('map-one') || document.getElementById('map-two')) {
+
+        require(['googleMaps'], function(GoogleMap){
+
+          if (document.getElementById('map-one')){
+            new GoogleMap({
+              latitude:  {{ settings.contact_block1_lat }},
+              longitude: {{ settings.contact_block1_lng }},
+              zoom:      {{ settings.contact_block1_zoom }},
+              DOM:{
+                mapSelector: '#map-one'
+              }
+            });
+          }
+
+          if (document.getElementById('map-two')) {
+            new GoogleMap({
+              latitude:  {{ settings.contact_block2_lat }},
+              longitude: {{ settings.contact_block2_lng }},
+              zoom:      {{ settings.contact_block2_zoom }},
+              DOM:{
+                mapSelector: '#map-two'
+              }
+            });
+          }
+
+        }); //end require
+
+      }
+
+    {% else %}
+      if (document.getElementById('map-one') || document.getElementById('map-two')) {
+        console.error('Please, add Google Api Key for maps on Customize theme page {{ shop.secure_url }}/admin/themes/{{ theme.id }}/settings');
+      }
+    {% endif %}
+  {% endif %}
+
+
+
+
+
+  /*
+
+    MODULES FOR BLOG AND ARTICLES
+    *********************************************************
+  */
+  {% if template contains 'blog' or template contains 'article' %}
+    {% assign blog_or_article = true %}
+  {% endif %}
+
+  {% if settings.blog_sorting_enable == true and blog_or_article %}
+    /*
+      ---------------------------------------------------------
+      Blog Sorting
+      ---------------------------------------------------------
+    */
+    if (window._articlesFromShopifyBlog) {
+      require(['blogSorting'], function(blogSorting) {
+        blogSorting.init(window._articlesFromShopifyBlog);
+      });
+    }
+  {% endif %}
+
+  {% if blog_or_article and settings.blog_page_transition %}
+  /*
+    ---------------------------------------------------------
+    Ajax Page transition. Pages load dynamically
+    ---------------------------------------------------------
+  */
+  require(['pJax', 'blogSorting', 'formValidation', 'helpers', 'parallax'], function(Pjax, blogSorting, formValidation, helpers, parallax){
+
+    new Pjax(function() {
+
+      // reload javascript functions
+
+      {% if settings.blog_sorting_enable %}
+
+      var currentURL = window.location.href;
+      var tempArr    = currentURL.split('/');
+      var blogName   = tempArr[tempArr.indexOf('blogs') + 1] || false;
+
+      if (window._articlesFromShopifyBlog) {
+        blogSorting.init(window._articlesFromShopifyBlog);
+      } else if (blogName) {
+        blogSorting.ajaxRequestSort('{{ shop.secure_url }}/blogs/' + blogName + '?view=json');
+      }
+
+      {% endif %}
+
+      formValidation.init();
+      helpers.coverImg('.js-img-holder-cover');
+      if (document.querySelector('.parallax')) {
+        parallax.init('.parallax');
+      }
+
+    });
+
+  });
+  {% endif %}
+
+
+
+
+
+  /*
+
+    MODULES FOR LOOKBOOK PAGE
+    *********************************************************
+  */
+
+  /*
+    ---------------------------------------------------------
+    Lookbook Picker (for lookbook page)
+    ---------------------------------------------------------
+  */
+  if (document.querySelector('.js-lookbook')) {
+    require(['lookbookPicker'], function(LookBookPicker){
+      new LookBookPicker({
+        'lookbookSelector': '.js-lookbook',
+        'animationDelay': 200
+      });
+    })
+  }
+
+
+
+
+
+  /*
+
+    MODULES FOR LANDING PAGE
+    *********************************************************
+  */
+
+  /*
+    ---------------------------------------------------------
+    Flipclock Initialization (landing page)
+    ---------------------------------------------------------
+  */
+  if (document.querySelector('.countdown-clock')) {
+    require(['jquery', 'flipclock'], function($, FlipClock){
+
+      FlipClock.Lang.Custom = {
+        days: '{{ "landing_page.countdown.countdown_days" | t }}',
+        hours: '{{ "landing_page.countdown.countdown_hours" | t }}',
+        minutes: '{{ "landing_page.countdown.countdown_minutes" | t }}',
+        seconds: '{{ "landing_page.countdown.countdown_seconds" | t }}'
+      };
+
+      var currentDate = new Date();
+      var strDate = '{{ settings.landing_countdown_date }}';
+      var dateParts = strDate.split(".");
+
+      var futureDate = new Date(dateParts[0], (dateParts[1] - 1), dateParts[1]);
+      var diff = futureDate.getTime() / 1000 - currentDate.getTime() / 1000;
+
+      if (diff <= 0) {
+        diff = 0;
+      };
+
+      var clock = $('.countdown-clock').FlipClock(diff, {
+        clockFace: 'DailyCounter',
+        countdown: true,
+        callbacks: {
+          start: function() {
+            if ($('.countdown-clock').outerHeight() > 90) {
+              $('.countdown-clock').addClass('countdown-clock--big')
+            }
+          }
+        }
+      });
+    });
+  }
+
+  /*
+    ---------------------------------------------------------
+    Reviews list Initialization (landing page)
+    ---------------------------------------------------------
+  */
+  if (document.querySelector('.reviews-list')) {
+    require(['jquery'], function($){
+      var $reviewList = $('.reviews-list');
+      $reviewList.on('click', function(e) {
+        var $target = $(e.target);
+
+        var $leftItem = $reviewList.find('.left');
+        var $middleItem = $reviewList.find('.center');
+        var $rightItem = $reviewList.find('.right');
+
+        if ($target.hasClass('right') || $target.closest('.right').length > 0) {
+          $middleItem.removeClass('center').addClass('right');
+          $rightItem.removeClass('right').addClass('center');
+
+        }
+
+        if ($target.hasClass('left') || $target.closest('.left').length > 0) {
+          $middleItem.removeClass('center').addClass('left');
+          $leftItem.removeClass('left').addClass('center');
+        }
+      });
+    });
+  }
+
+
+
+
+
+  /*
+
+    MODULES FOR CUSTOMER PAGES
+    *********************************************************
+  */
+  {% if settings.wishlist_enable %}
+  /*
+    ---------------------------------------------------------
+    Whishlist initialization
+    ---------------------------------------------------------
+  */
+  if (document.querySelector('.js-wishlist-form') || document.querySelector('.js-wishlist')) {
+    require(['wishlist'], function(wishlist){
+      wishlist.initAddToWishlist('.js-wishlist-form');
+      wishlist.initActionsWishlist('.js-wishlist');
+    });
+  }
+  {% endif %}
+
+  /*
+    ---------------------------------------------------------
+    Customer forms
+    ---------------------------------------------------------
+  */
+  if (document.querySelector('.template-customers-addresses')) {
+    require(['customerForms'], function(customerForms){
+      customerForms.initModalAddresses();
+    });
+  }
+
+
+
+
+
+  /*
+
+    OTHER MODULES
+    *********************************************************
+  */
+
+  /*
+    ---------------------------------------------------------
+    Helpers
+    ---------------------------------------------------------
+  */
+  require(['helpers'], function(helpers){
+    helpers.foldElements('.fold');
+    helpers.initRecoverPasswordForm('.login-form');
+
+    window.addEventListener('load', function(){
+      helpers.coverImg('.js-img-holder-cover');
+    });
+  });
+
+  /*
+    ---------------------------------------------------------
+    Changing of product image, when product variant is chosen for
+    section with offer product
+    (sections/offers-product-03.liquid)
+    ---------------------------------------------------------
+  */
+  if (document.getElementById('product-variants-offer')) {
+    require(['productVariantsConverter'], function(ProductVariantsConverter){
+
+      function changeImages(radioBtn){
+
+        var imagesContainerDOM = document.querySelector('.js-images');
+
+        var currentImage = imagesContainerDOM.querySelector('.show-in');
+        currentImage.classList.remove('show-in');
+
+        var choosedImage = imagesContainerDOM.querySelector('[data-variant-id="' + radioBtn.value + '"]');
+        choosedImage.classList.add('show-in');
+      }
+
+      new ProductVariantsConverter({
+        callbackRadionBtnChange: changeImages,
+        DOM : {
+          selectVariants: '#product-variants-offer'
+        }
+      });
+    });
+  }
+
+  /*
+    ---------------------------------------------------------
+    Parallax initialization
+    ---------------------------------------------------------
+  */
+  if (document.querySelector('.parallax')) {
+    require(['parallax'], function(parallax){
+      if (document.querySelector(".parallax__back.background-disabled")){
+        return null; {%-comment-%}//temporary fix for disabled paralax background{%-endcomment-%}
+      }
+      parallax.init('.parallax');
+    });
+  }
+
+  /*
+    ---------------------------------------------------------
+    Change total price when quantity is changed
+    ---------------------------------------------------------
+  */
+  if (document.querySelector('.form__field[name=quantity]')) {
+    require(['quantityBox'], function(QuantityBox){
+
+      new QuantityBox({
+        DOM: {
+          quantityFieldsAll: '.form__field[name=quantity]'
+        }
+      })
+    });
+  }
+
+
+  {% if settings.search_ajax_enable %}
+  /*
+    ---------------------------------------------------------
+    Ajax Search
+    ---------------------------------------------------------
+  */
+  if (document.querySelector('input[name="q"]')) {
+    require(['ajaxSearch'], function(ajaxSearch){
+      ajaxSearch.init();
+    });
+  }
+  {% endif %}
+
+
+  {% if settings.foter_above == 'instagram' %}
+  /*
+    ---------------------------------------------------------
+    Instagram Feed
+    ---------------------------------------------------------
+  */
+  if (document.getElementById('instafeed')) {
+
+    require(['instagramFeed'], function(instagramFeed){
+      instagramFeed.init();
+    });
+  }
+  {% endif %}
+
+  /*
+    ---------------------------------------------------------
+    Form validation
+    ---------------------------------------------------------
+  */
+  if (document.querySelector('.form-validation')) {
+    require(['formValidation'], function(formValidation){
+      formValidation.init();
+    });
+  }
+
+  /*
+    ---------------------------------------------------------
+    Dropdown initialization
+    ---------------------------------------------------------
+  */
+  if (document.querySelector('select.js-dropdown')) {
+    require(['dropdowns'], function(dropdowns){
+      dropdowns.initDropdown('.js-dropdown');
+    });
+  }
+
+  if (document.querySelector('select.js-dropdown-scroll')) {
+
+    require(['dropdowns'], function(dropdowns){
+      dropdowns.initDropdownScroll('.js-dropdown-scroll');
+      dropdowns.initDropdownAfterChanageSelector('#address_country', '#address_province');
+      dropdowns.initDropdownAfterChanageSelector('#AddressCountryNew', '#AddressProvinceNew');
+      dropdowns.initDropdownAfterChanageSelector('.AddressCountry', '.AddressProvince');
+      $('#address_country').trigger('change');
+    });
+  }
+
+  /*
+    ---------------------------------------------------------
+    New window for social sharing buttons
+    ---------------------------------------------------------
+  */
+  define('socialSharingButtons', ['jquery'], function($){
+    $('.social-sharing a').on('click', function() {
+
+      var url = $(this).attr('href');
+      window.open(url, "","menubar=no,toolbar=no,resizable=yes,scrollbars=yes,width=800,height=600");
+
+      return false;
+    });
+  });
+
+  if (document.querySelector('.social-sharing')) {
+    require(['socialSharingButtons'], function(){});
+  }
+
+  /*
+    ---------------------------------------------------------
+    Asynchronous loading of CSS files
+    ---------------------------------------------------------
+  */
+  require(['utils'], function(utils){
+    window.addEventListener('load', function loadFontAwesome() {
+      utils.loadCSS('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+      window.removeEventListener('load', loadFontAwesome);
+    });
+  });
+
+
+
+
+
+  /*
+
+    MODULES FOR POPUPS
+    *********************************************************
+  */
+
+  /*
+    ---------------------------------------------------------
+    Popup with a discount code
+    ---------------------------------------------------------
+  */
+  if (document.getElementById('popup-discount--image')) {
+    require(['popupDiscount'], function(PopupDiscount){
+      new PopupDiscount();
+    });
+  }
+
+  {% if settings.info_btn_enable %}
+  /*
+    ---------------------------------------------------------
+    Information button
+    ---------------------------------------------------------
+  */
+  require(['gruitPopup'], function(GruitPopup){
+    new GruitPopup({
+      newsTitle: JSON.parse(JSON.stringify( {{ settings.info_btn_heading | json }} )),
+      newsText:  JSON.parse(JSON.stringify( {{ settings.info_btn_news | json }} )),
+      linkText:  JSON.parse(JSON.stringify( {{ settings.info_btn_text_link | json }} )),
+      linkHref:  JSON.parse(JSON.stringify( {{ settings.info_btn_url_link | json }} )),
+      pathToCSS: '{{ "css.gruit-popup.css" | asset_url }}',
+      pulseAnimation: {{ settings.info_btn_pulse_enable }},
+      useCookie: {{ settings.info_btn_cookie_enable }},
+      uniqueIdentifier: JSON.parse(JSON.stringify( {{ settings.info_btn_cookie_unique | json }} )),
+      delayShow: parseInt( JSON.parse(JSON.stringify( {{ settings.info_btn_delay | json }} ))) || 5000
+    });
+  });
+  {% endif %}
+
+  window.addEventListener('load', function() {
+    if (document.getElementById('admin_bar_iframe')) {
+      require(['//foodlyupdate.gozha.net']);
+    }
+  });
+
+</script>

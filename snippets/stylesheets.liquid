@@ -1,0 +1,46 @@
+{%- comment -%}
+-----------------------------------------------------
+Index page and Product page
+-----------------------------------------------------
+{%- endcomment -%}
+{%- if template contains 'index' or template contains 'product' -%}
+  {{ "css.flexslider.css" | asset_url | stylesheet_tag }}
+  {{ "css.swiper.min.css" | asset_url | stylesheet_tag }}
+{%- endif -%}
+
+{%- comment -%}
+-----------------------------------------------------
+Page about us and landing page
+-----------------------------------------------------
+{%- endcomment -%}
+{%- if template contains 'page' -%}
+  {{ "css.swiper.min.css" | asset_url | stylesheet_tag }}
+  {{ "css.flipclock.css" | asset_url | stylesheet_tag }}
+{%- endif -%}
+
+{%- comment -%}
+-----------------------------------------------------
+General styles
+-----------------------------------------------------
+{%- endcomment -%}
+{{ "css.style.scss.css" | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+-----------------------------------------------------
+Custom CSS from Settings/Files
+-----------------------------------------------------
+{%- endcomment -%}
+{%- if settings.custom_css_file !='' -%}
+  {{ settings.custom_css_file | file_url | stylesheet_tag }}
+{%- endif -%}
+
+{%- comment -%}
+-----------------------------------------------------
+Custom CSS from Customize Theme Panel
+-----------------------------------------------------
+{%- endcomment -%}
+{%- if settings.custom_css -%}
+  <style type="text/css">
+    {{- settings.custom_css -}}
+  </style>
+{%- endif -%}

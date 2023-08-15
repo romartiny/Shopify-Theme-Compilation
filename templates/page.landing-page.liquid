@@ -1,0 +1,187 @@
+{% comment %}
+Landing page template
+For more settings please go to Admin -> Theme -> Customize Theme -> Landing page
+{% endcomment %}
+<div class="landing-page">
+  {% comment %}
+  Landing page heading
+  {% endcomment %}
+  <div class="hero-img hero-img--landing">
+    <div class="hero-img__content">
+      {% if settings.landing_heading != blank %}
+        <h1 class="heading--strong">{{ settings.landing_heading | upcase }}</h1>
+      {% endif %}
+
+      {% if settings.landing_subheading != blank %}
+        <h2 class="subheading--page"><em>{{ settings.landing_subheading }}</em></h2>
+      {% endif %}
+
+      <div class="countdown-clock-wrapper">
+        <div class="countdown-clock">
+
+        </div> <!-- End countdown-clock -->
+      </div>
+    </div> <!-- End hero-img__content -->
+  </div> <!-- End hero-img -->
+
+  {% comment %}
+  Product packs
+  {% endcomment %}
+  {% if settings.landing_product_section_enable %}
+    <section class="section section--landing-product">
+      <div class="wrapper">
+        <div class="grid">
+          <div class="grid__item one-whole">
+            <h2 class="section-heading section-heading--landing heading--page-md">{{ settings.landing_product_section_heading }}</h2>
+            <div class="product-pack-wrapper">
+              {% assign min_price = 0 %}
+              {% assign equal_price = 0 %}
+              {% for product in collections[settings.landing_product_collection].products limit:3 %}
+                <div class="product-pack product-pack--{{ forloop.index }}">
+                  <div class="product-pack__header">
+                    <h3 class="product-pack__title">{{ product.title }}!</h3>
+                  </div>
+                  <div class="product-pack__content">
+                    {{ product.content }}
+                  </div>
+
+                  <form class="form form--default js-messages-disable" action="/cart/add" method="post">
+                    <div class="form__row">
+                      <input type="hidden" name="id" value="{{ product.variants[0].id }}">
+                      <button class="btn btn--underlines btn--submit js-add-to-card" type="submit" >
+                        {{ 'landing_page.general.purchase' | t | upcase }}
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="61" height="12" viewBox="0 0 61 12">
+                          <path d="M60.217,1.433 C45.717,2.825 31.217,4.217 16.717,5.609 C13.227,5.944 8.806,6.200 6.390,5.310 C7.803,4.196 11.676,3.654 15.204,3.216 C28.324,1.587 42.033,-0.069 56.184,0.335 C58.234,0.394 60.964,0.830 60.217,1.433 ZM50.155,5.670 C52.205,5.728 54.936,6.165 54.188,6.767 C39.688,8.160 25.188,9.552 10.688,10.943 C7.198,11.278 2.778,11.535 0.362,10.645 C1.774,9.531 5.647,8.988 9.175,8.551 C22.295,6.922 36.005,5.265 50.155,5.670 Z"/>
+                        </svg>
+                      </button>
+                    </div>
+                  </form>
+                </div> <!-- End product-pack -->
+                {% if forloop.first == true %}
+                  {% assign min_price = product.price %}
+                {% endif %}
+
+                {% if min_price == product.price %}
+                  {% assign equal_price = product.price %}
+                {% elsif min_price > product.price %}
+                  {% assign min_price = product.price %}
+                {% endif %}
+
+              {% endfor %}
+            </div> <!-- End product-pack-wrapper -->
+
+            {% capture value_min %}{{ min_price | money | split: '.' | first }}{% endcapture %}
+            {% capture value_equal %}{{ equal_price | money | split: '.' | first }}{% endcapture %}
+
+            <div class="product-pack__cta clearfix">
+              <ul class="product-pack__cta-list">
+                <li class="product-pack__cta-item">{{ 'landing_page.general.product_cta_text_left' | t | upcase }}</li>
+                <li class="product-pack__cta-item product-pack__cta-circle">
+                  {% if min_price == equal_price %}
+                    <span>{{ value_equal }}</span>
+                    <span><em>{{ 'landing_page.general.for_each' | t }}</em></span>
+                  {% else %}
+                    <span>{{ value_min }}</span>
+                    <span><em>{{ 'landing_page.general.from' | t }}</em></span>
+                  {% endif %}
+                </li>
+                <li class="product-pack__cta-item">{{ 'landing_page.general.product_cta_text_right' | t | upcase }}</li>
+              </ul>
+            </div> <!-- End product-pack__cta -->
+          </div> <!-- End grid__item -->
+        </div> <!-- End grid -->
+      </div> <!-- End wrapper -->
+    </section>
+  {% endif %}
+
+  {% comment %}
+  Section with benefits of packs
+  {% endcomment %}
+  {% if settings.landing_benefit_section_enable %}
+    <section class="section section--landing-benefit">
+      <div class="wrapper">
+        <div class="grid">
+          <div class="grid__item one-whole">
+            <h2 class="section-heading section-heading--landing heading--page-md">{{ settings.landing_benefit_section_heading }}</h2>
+            <ol class="benefit-list">
+              {% for article in blogs[settings.landing_benefit_blog].articles %}
+                <li class="benefit-list__item">
+                  <h4 class="benefit-list__title">{{ article.title }}</h4>
+                  <p class="benefit-list__content">{{ article.content }}</p>
+                </li>
+              {% endfor %}
+            </ol>
+          </div> <!-- End grid__item -->
+        </div> <!-- End grid -->
+      </div> <!-- End wrapper -->
+    </section>
+  {% endif %}
+
+  {% comment %}
+  Reviews
+  {% endcomment %}
+  {% if settings.landing_reviews_section_enable %}
+    <hr class="hr--clear-inverse hr--wrapper">
+    <section class="section section--landing-reviews">
+      <h2 class="section-heading section-heading--landing heading--page-md">{{ settings.landing_reviews_section_heading }}</h2>
+
+      <ul class="reviews-list">
+        {% for article in blogs[settings.landing_reviews_blog].articles %}
+          {% assign review_title = article.title | split: ' | ' %}
+            <li class="reviews-list__item reviews-list__item--{{ forloop.index }} {% if forloop.first %}left{% endif %}{% if forloop.last %}right{% endif %}{% unless forloop.first or forloop.last %}center{% endunless %}">
+              <div class="img-holder img-holder--block img-holder--circle">
+                <img src="{{ article.image.src | img_url: 'compact' }}" alt="">
+              </div>
+              <div class="review__body">
+                <div class="review__header">
+                  <h4 class="review__title">{{ review_title.first }}</h4>
+                  <span>{{ review_title.last }}</span>
+                </div>
+                <p class="review__content">{{ article.content }}</p>
+              </div>
+
+              <div class="review__navigation">
+                <span class="review__navigation-btn prev">{{ 'landing_page.general.prev_review' | t | upcase }}</span>
+
+                <span class="review__navigation-btn next">{{ 'landing_page.general.next_review' | t | upcase }}</span>
+              </div>
+
+              <div class="icon icon--underline-big">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 827 235" preserveAspectRatio="xMidYMin slice">
+                  <path d="M825.512,10.341 C624.267,51.769 423.019,93.193 221.774,134.622 C173.337,144.592 111.730,154.836 76.507,145.819 C94.631,127.889 148.130,114.404 196.943,102.917 C378.476,60.192 568.237,16.189 767.288,0.784 C796.132,-1.448 835.081,0.671 825.512,10.341 ZM690.791,85.518 C719.638,83.287 758.587,85.408 749.014,95.075 C547.770,136.503 346.525,177.931 145.279,219.355 C96.841,229.325 35.235,239.574 0.011,230.556 C18.135,212.628 71.633,199.141 120.445,187.650 C301.981,144.929 491.740,100.917 690.791,85.518 Z" class="cls-1"/>
+                </svg>
+              </div>
+            </li>
+        {% endfor %}
+      </ul>
+
+
+    </section>
+
+    <hr class="hr--clear-inverse hr--wrapper">
+  {% endif %}
+
+  {% comment %}
+  Reviews
+  {% endcomment %}
+  {% if settings.landing_cta_section_enable %}
+    <section class="section section--landing-cta">
+      <div class="wrapper">
+        <div class="grid">
+          <div class="grid__item one-whole text-center">
+            <h2 class="heading--strong">{{ settings.landing_cta_section_heading | upcase}}</h2>
+            <h3 class="subheading--page"><em>{{ settings.landing_cta_section_subheading }}</em></h3>
+            <ul class="cta-btn-list">
+              {% for product in collections[settings.landing_product_collection].products limit:3 %}
+                <li class="cta-btn-list__item">
+                  <a class="btn btn--default btn--cta btn--cta-{{ forloop.index }}" href="{{ product.url }}">{{ 'landing_page.general.get_for_button' | t | upcase }} {{ product.title | upcase }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div> <!-- End grid__item -->
+        </div> <!-- End grid -->
+      </div> <!-- End wrapper -->
+    </section>
+  {% endif %}
+
+</div> <!-- End landing-page -->

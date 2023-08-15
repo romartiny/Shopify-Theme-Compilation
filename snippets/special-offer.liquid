@@ -1,0 +1,65 @@
+{% comment %}
+Calculation columns for spesial offer
+{% endcomment %}
+{% assign num_special_offer = 0 %}
+{% if settings.homepage_special_1_enable %}
+  {% assign num_special_offer = num_special_offer | plus: 1 %}
+{% endif%}
+
+{% if settings.homepage_special_2_enable %}
+  {% assign num_special_offer = num_special_offer | plus: 1 %}
+{% endif%}
+
+{% comment %}
+Choose css grid for columns number
+{% endcomment %}
+{% case num_special_offer %}
+  {% when 0 %}
+  {% when 1 %}
+    {% assign special_offer_colunm_width = '' %}
+  {% when 2 %}
+    {% assign special_offer_colunm_width = '' %}
+{% endcase %}
+
+
+{% comment %}
+The first section with special offer
+For settings go to Admin -> Theme -> Customize Theme -> Homepage
+{% endcomment %}
+{% if settings.homepage_special_1_enable %}
+  <div>
+  	<h3 class="section-heading heading--page">{{ settings.homepage_special_1_heading | upcase }}</h3>
+  	<h4><em>{{ settings.homepage_special_1_subheading }}</em></h4>
+
+  	{% comment %}
+    Special offer point 
+    For settings go to Admin -> Theme -> Customize Theme -> Homepage
+  	{% endcomment %}
+  	{% if settings.homepage_special_1_mark_enable %}
+  	  <div>
+  	  	<span><strong>{{ settings.homepage_special_1_mark_price }}</strong></span>
+  		  <span><strong>{{ settings.homepage_special_1_mark_title }}</strong></span>
+  	  </div>
+  	{% endif %}
+  </div>
+  <a class="btn btn--underlines" href="{{ settings.homepage_special_1_btn_url }}" tilte="{{ 'layout.general.check_it_button' | t }}">{{ 'layout.general.check_it_button' | t | upcase }}</a>
+{% endif %}
+
+{% if settings.homepage_special_2_enable %}
+  <div>
+  	<h3 class="section-heading heading--page">{{ settings.homepage_special_2_heading | upcase }}</h3>
+  	<h4><em>{{ settings.homepage_special_2_subheading }}</em></h4>
+
+  	{% comment %}
+    Special offer point 
+    For setting go to Admin -> Theme -> Customize Theme -> Homepage
+  	{% endcomment %}
+  	{% if settings.homepage_special_2_mark_enable %}
+  	  <div>
+  	  	<span><strong>{{ settings.homepage_special_2_mark_price }}</strong></span>
+  		  <span><strong>{{ settings.homepage_special_2_mark_title }}</strong></span>
+  	  </div>
+  	{% endif %}
+  	<a class="btn btn--underlines" href="{{ settings.homepage_special_2_btn_url }}" tilte="{{ 'layout.general.check_it_button' | t }}">{{ 'layout.general.check_it_button' | t | upcase }}</a>
+  </div>
+{% endif %}

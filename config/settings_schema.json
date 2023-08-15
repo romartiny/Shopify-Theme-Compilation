@@ -1,0 +1,2099 @@
+[
+   {
+      "name":"theme_info",
+      "theme_name":"Foodly",
+      "theme_author":"Congruity Hub",
+      "theme_version":"1.8",
+      "theme_support_url":"https:\/\/congruityhub.zendesk.com",
+      "theme_documentation_url":"http:\/\/foodly.gozha.net\/documentation\/"
+   },
+   {
+      "name":"Colors",
+      "settings":[
+         {
+            "type":"header",
+            "content":"Theme colors"
+         },
+         {
+            "type":"color",
+            "id":"color_body_bg",
+            "label":"Body background color",
+            "default":"#ffffff"
+         },
+         {
+            "type":"color",
+            "id":"color_primary",
+            "label":"Primary color",
+            "default":"#5c4b51",
+            "info":"Brand color. Used for hover state of buttons and "
+         },
+         {
+            "type":"color",
+            "id":"color_highlight",
+            "label":"Hightlight color",
+            "default":"#f06060",
+            "info":"Used for buttons, sale badge, text link and error states"
+         },
+         {
+            "type":"color",
+            "id":"color_accent",
+            "label":"Accent color",
+            "default":"#f3b562",
+            "info":"Used for special badge, overlay headings and some notification"
+         },
+         {
+            "type":"color",
+            "id":"color_additional",
+            "label":"Additional color",
+            "default":"#8cbeb2",
+            "info":"Used for succsesful notification"
+         },
+         {
+            "type":"color",
+            "id":"color_inverse",
+            "label":"Inverse color",
+            "default":"#ffffff",
+            "info":"Used for inverse text on darken background, background for social media buttons"
+         },
+         {
+            "type":"header",
+            "content":"Text colors"
+         },
+         {
+            "type":"color",
+            "id":"color_body_text",
+            "label":"Body text",
+            "default":"#5c4b51"
+         },
+         {
+            "type":"color",
+            "id":"color_headers",
+            "label":"Heading color",
+            "default":"#5c4b51"
+         },
+         {
+            "type":"color",
+            "id":"color_add_headers",
+            "label":"Additoinal heading color",
+            "default":"#ada2a4",
+            "info":"Used for subheadings and small headings"
+         },
+         {
+            "type":"header",
+            "content":"Background"
+         },
+         {
+            "type":"radio",
+            "id":"bg_image_choice",
+            "label":"Image",
+            "options":[
+               {
+                  "value":"",
+                  "label":"No background image"
+               },
+               {
+                  "value":"bg_custom",
+                  "label":"Custom image (upload below)"
+               }
+            ]
+         },
+         {
+            "type":"image",
+            "id":"bg_custom.png",
+            "label":"Upload image"
+         },
+         {
+            "type":"radio",
+            "id":"bg_image_display",
+            "label":"Image display",
+            "options":[
+               {
+                  "value":"bg_image_title",
+                  "label":"Title"
+               },
+               {
+                  "value":"bg_image_stretch",
+                  "label":"Stretch"
+               }
+            ]
+         }
+      ]
+   },
+   {
+      "name":"Typography",
+      "settings":[
+         {
+            "type":"header",
+            "content":"Body font"
+         },
+         {
+            "type":"select",
+            "id":"font_body_family",
+            "label":"Font family",
+            "options":[
+               {
+                  "value":"'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif",
+                  "label":"Avant Garde",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"'Gill Sans', 'Gill Sans MT', Calibri, sans-serif",
+                  "label":"Gill Sans",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+                  "label":"Helvetica Neue",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"Arial, 'Helvetica Neue', Helvetica, sans-serif",
+                  "label":"Arial",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"Candara, Calibri, Segoe, 'Segoe UI', Optima, Arial, sans-serif",
+                  "label":"Candara",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"Geneva, Tahoma, Verdana, sans-serif",
+                  "label":"Geneva",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"Google_Raleway_300,400,600,800_sans",
+                  "label":"Raleway",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Droid+Sans_400,700_sans",
+                  "label":"Droid Sans",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Lato_400,700_sans",
+                  "label":"Lato",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Montserrat_400,700_sans",
+                  "label":"Montserrat",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Open+Sans_400,700_sans",
+                  "label":"Open Sans",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_PT+Sans_400,700_sans",
+                  "label":"PT Sans",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Roboto_400,700_sans",
+                  "label":"Roboto",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Source+Sans+Pro_400,700_sans",
+                  "label":"Source Sans Pro",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Ubuntu_400,700_sans",
+                  "label":"Ubuntu",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"'Big Caslon', 'Book Antiqua', 'Palatino Linotype', Georgia, serif",
+                  "label":"Big Calson",
+                  "group":"Serif"
+               },
+               {
+                  "value":"'Calisto MT', 'Bookman Old Style', Bookman, 'Goudy Old Style', Garamond, 'Hoefler Text', 'Bitstream Charter', Georgia, serif",
+                  "label":"Calisto MT",
+                  "group":"Serif"
+               },
+               {
+                  "value":"Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif",
+                  "label":"Baskerville",
+                  "group":"Serif"
+               },
+               {
+                  "value":"Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif",
+                  "label":"Garamond",
+                  "group":"Serif"
+               },
+               {
+                  "value":"Georgia, 'Hoefler Text', 'Times New Roman', serif",
+                  "label":"Georgia",
+                  "group":"Serif"
+               },
+               {
+                  "value":"TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif",
+                  "label":"Times New Roman",
+                  "group":"Serif"
+               },
+               {
+                  "value":"Google_Bitter_400,400italic,700_serif",
+                  "label":"Bitter",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Arvo_400,400_serif",
+                  "label":"Arvo",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Crimson+Text_400,700_serif",
+                  "label":"Crimson Text",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Droid+Serif_400,700_serif",
+                  "label":"Droid Serif",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Lora_400,700_serif",
+                  "label":"Lora",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_PT+Serif_400,700_serif",
+                  "label":"PT Serif",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Vollkorn_400,700_serif",
+                  "label":"Vollkorn",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Alex+Brush",
+                  "label":"Alex Brush",
+                  "group":"Handwriting | Google Web Fonts"
+               }
+            ],
+            "default":"Google_Raleway_300,400,600,800_sans"
+         },
+         {
+            "type":"text",
+            "id":"font_body_size",
+            "label":"Font size",
+            "default":"16px"
+         },
+         {
+            "type":"header",
+            "content":"Page heading font",
+            "info":"Used for slide headings, headings for pages, headings for special sections"
+         },
+         {
+            "type":"select",
+            "id":"font_header_page_family",
+            "label":"Font family",
+            "options":[
+               {
+                  "value":"'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif",
+                  "label":"Avant Garde",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"'Gill Sans', 'Gill Sans MT', Calibri, sans-serif",
+                  "label":"Gill Sans",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+                  "label":"Helvetica Neue",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"Arial, 'Helvetica Neue', Helvetica, sans-serif",
+                  "label":"Arial",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"Candara, Calibri, Segoe, 'Segoe UI', Optima, Arial, sans-serif",
+                  "label":"Candara",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"Geneva, Tahoma, Verdana, sans-serif",
+                  "label":"Geneva",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"Google_Raleway_300,400,600,800_sans",
+                  "label":"Raleway",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Droid+Sans_400,700_sans",
+                  "label":"Droid Sans",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Lato_400,700_sans",
+                  "label":"Lato",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Montserrat_400,700_sans",
+                  "label":"Montserrat",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Open+Sans_400,700_sans",
+                  "label":"Open Sans",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_PT+Sans_400,700_sans",
+                  "label":"PT Sans",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Roboto_400,700_sans",
+                  "label":"Roboto",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Source+Sans+Pro_400,700_sans",
+                  "label":"Source Sans Pro",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Ubuntu_400,700_sans",
+                  "label":"Ubuntu",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"'Big Caslon', 'Book Antiqua', 'Palatino Linotype', Georgia, serif",
+                  "label":"Big Calson",
+                  "group":"Serif"
+               },
+               {
+                  "value":"'Calisto MT', 'Bookman Old Style', Bookman, 'Goudy Old Style', Garamond, 'Hoefler Text', 'Bitstream Charter', Georgia, serif",
+                  "label":"Calisto MT",
+                  "group":"Serif"
+               },
+               {
+                  "value":"Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif",
+                  "label":"Baskerville",
+                  "group":"Serif"
+               },
+               {
+                  "value":"Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif",
+                  "label":"Garamond",
+                  "group":"Serif"
+               },
+               {
+                  "value":"Georgia, 'Hoefler Text', 'Times New Roman', serif",
+                  "label":"Georgia",
+                  "group":"Serif"
+               },
+               {
+                  "value":"TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif",
+                  "label":"Times New Roman",
+                  "group":"Serif"
+               },
+               {
+                  "value":"Google_Bitter_400,400italic,700_serif",
+                  "label":"Bitter",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Arvo_400,400_serif",
+                  "label":"Arvo",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Crimson+Text_400,700_serif",
+                  "label":"Crimson Text",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Droid+Serif_400,700_serif",
+                  "label":"Droid Serif",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Lora_400,700_serif",
+                  "label":"Lora",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_PT+Serif_400,700_serif",
+                  "label":"PT Serif",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Vollkorn_400,700_serif",
+                  "label":"Vollkorn",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Alex+Brush",
+                  "label":"Alex Brush",
+                  "group":"Handwriting | Google Web Fonts"
+               }
+            ],
+            "default":"Google_Raleway_300,400,600,800_sans"
+         },
+         {
+            "type":"text",
+            "id":"font_header_page_size",
+            "label":"H1 font size",
+            "default":"32px"
+         },
+         {
+            "type":"header",
+            "content":"Text heading font",
+            "info":"Used for headings in articles, RTE content"
+         },
+         {
+            "type":"select",
+            "id":"font_header_family",
+            "label":"Font family",
+            "options":[
+               {
+                  "value":"'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif",
+                  "label":"Avant Garde",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"'Gill Sans', 'Gill Sans MT', Calibri, sans-serif",
+                  "label":"Gill Sans",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+                  "label":"Helvetica Neue",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"Arial, 'Helvetica Neue', Helvetica, sans-serif",
+                  "label":"Arial",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"Candara, Calibri, Segoe, 'Segoe UI', Optima, Arial, sans-serif",
+                  "label":"Candara",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"Geneva, Tahoma, Verdana, sans-serif",
+                  "label":"Geneva",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"Google_Raleway_300,400,600,800_sans",
+                  "label":"Raleway",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Droid+Sans_400,700_sans",
+                  "label":"Droid Sans",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Lato_400,700_sans",
+                  "label":"Lato",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Montserrat_400,700_sans",
+                  "label":"Montserrat",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Open+Sans_400,700_sans",
+                  "label":"Open Sans",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_PT+Sans_400,700_sans",
+                  "label":"PT Sans",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Roboto_400,700_sans",
+                  "label":"Roboto",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Source+Sans+Pro_400,700_sans",
+                  "label":"Source Sans Pro",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Ubuntu_400,700_sans",
+                  "label":"Ubuntu",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"'Big Caslon', 'Book Antiqua', 'Palatino Linotype', Georgia, serif",
+                  "label":"Big Calson",
+                  "group":"Serif"
+               },
+               {
+                  "value":"'Calisto MT', 'Bookman Old Style', Bookman, 'Goudy Old Style', Garamond, 'Hoefler Text', 'Bitstream Charter', Georgia, serif",
+                  "label":"Calisto MT",
+                  "group":"Serif"
+               },
+               {
+                  "value":"Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif",
+                  "label":"Baskerville",
+                  "group":"Serif"
+               },
+               {
+                  "value":"Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif",
+                  "label":"Garamond",
+                  "group":"Serif"
+               },
+               {
+                  "value":"Georgia, 'Hoefler Text', 'Times New Roman', serif",
+                  "label":"Georgia",
+                  "group":"Serif"
+               },
+               {
+                  "value":"TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif",
+                  "label":"Times New Roman",
+                  "group":"Serif"
+               },
+               {
+                  "value":"Google_Bitter_400,400italic,700_serif",
+                  "label":"Bitter",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Arvo_400,400_serif",
+                  "label":"Arvo",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Crimson+Text_400,700_serif",
+                  "label":"Crimson Text",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Droid+Serif_400,700_serif",
+                  "label":"Droid Serif",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Lora_400,700_serif",
+                  "label":"Lora",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_PT+Serif_400,700_serif",
+                  "label":"PT Serif",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Vollkorn_400,700_serif",
+                  "label":"Vollkorn",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Alex+Brush",
+                  "label":"Alex Brush",
+                  "group":"Handwriting | Google Web Fonts"
+               }
+            ],
+            "default":"Google_Bitter_400,400italic,700_serif"
+         },
+         {
+            "type":"text",
+            "id":"font_header_size",
+            "label":"H1 font size",
+            "default":"32px"
+         },
+         {
+            "type":"header",
+            "content":"Additional body font",
+            "info":"Used for emphasizing links, text, subheadings"
+         },
+         {
+            "type":"select",
+            "id":"font_additional_family",
+            "label":"Font family",
+            "options":[
+               {
+                  "value":"'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif",
+                  "label":"Avant Garde",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"'Gill Sans', 'Gill Sans MT', Calibri, sans-serif",
+                  "label":"Gill Sans",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+                  "label":"Helvetica Neue",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"Arial, 'Helvetica Neue', Helvetica, sans-serif",
+                  "label":"Arial",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"Candara, Calibri, Segoe, 'Segoe UI', Optima, Arial, sans-serif",
+                  "label":"Candara",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"Geneva, Tahoma, Verdana, sans-serif",
+                  "label":"Geneva",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"Google_Raleway_300,400,600,800_sans",
+                  "label":"Raleway",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Droid+Sans_400,700_sans",
+                  "label":"Droid Sans",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Lato_400,700_sans",
+                  "label":"Lato",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Montserrat_400,700_sans",
+                  "label":"Montserrat",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Open+Sans_400,700_sans",
+                  "label":"Open Sans",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_PT+Sans_400,700_sans",
+                  "label":"PT Sans",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Roboto_400,700_sans",
+                  "label":"Roboto",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Source+Sans+Pro_400,700_sans",
+                  "label":"Source Sans Pro",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Ubuntu_400,700_sans",
+                  "label":"Ubuntu",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"'Big Caslon', 'Book Antiqua', 'Palatino Linotype', Georgia, serif",
+                  "label":"Big Calson",
+                  "group":"Serif"
+               },
+               {
+                  "value":"'Calisto MT', 'Bookman Old Style', Bookman, 'Goudy Old Style', Garamond, 'Hoefler Text', 'Bitstream Charter', Georgia, serif",
+                  "label":"Calisto MT",
+                  "group":"Serif"
+               },
+               {
+                  "value":"Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif",
+                  "label":"Baskerville",
+                  "group":"Serif"
+               },
+               {
+                  "value":"Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif",
+                  "label":"Garamond",
+                  "group":"Serif"
+               },
+               {
+                  "value":"Georgia, 'Hoefler Text', 'Times New Roman', serif",
+                  "label":"Georgia",
+                  "group":"Serif"
+               },
+               {
+                  "value":"TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif",
+                  "label":"Times New Roman",
+                  "group":"Serif"
+               },
+               {
+                  "value":"Google_Bitter_400,400italic,700_serif",
+                  "label":"Bitter",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Arvo_400,400_serif",
+                  "label":"Arvo",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Crimson+Text_400,700_serif",
+                  "label":"Crimson Text",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Droid+Serif_400,700_serif",
+                  "label":"Droid Serif",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Lora_400,700_serif",
+                  "label":"Lora",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_PT+Serif_400,700_serif",
+                  "label":"PT Serif",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Vollkorn_400,700_serif",
+                  "label":"Vollkorn",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Alex+Brush",
+                  "label":"Alex Brush",
+                  "group":"Handwriting | Google Web Fonts"
+               }
+            ],
+            "default":"Google_Bitter_400,400italic,700_serif",
+            "info":"Heading in footer"
+         },
+         {
+            "type":"header",
+            "content":"Accent font"
+         },
+         {
+            "type":"select",
+            "id":"font_accent_family",
+            "label":"Font family",
+            "options":[
+               {
+                  "value":"'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif",
+                  "label":"Avant Garde",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"'Gill Sans', 'Gill Sans MT', Calibri, sans-serif",
+                  "label":"Gill Sans",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+                  "label":"Helvetica Neue",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"Arial, 'Helvetica Neue', Helvetica, sans-serif",
+                  "label":"Arial",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"Candara, Calibri, Segoe, 'Segoe UI', Optima, Arial, sans-serif",
+                  "label":"Candara",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"Geneva, Tahoma, Verdana, sans-serif",
+                  "label":"Geneva",
+                  "group":"Sans-serif"
+               },
+               {
+                  "value":"Google_Raleway_300,400,600,800_sans",
+                  "label":"Raleway",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Droid+Sans_400,700_sans",
+                  "label":"Droid Sans",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Lato_400,700_sans",
+                  "label":"Lato",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Montserrat_400,700_sans",
+                  "label":"Montserrat",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Open+Sans_400,700_sans",
+                  "label":"Open Sans",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_PT+Sans_400,700_sans",
+                  "label":"PT Sans",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Roboto_400,700_sans",
+                  "label":"Roboto",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Source+Sans+Pro_400,700_sans",
+                  "label":"Source Sans Pro",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Ubuntu_400,700_sans",
+                  "label":"Ubuntu",
+                  "group":"Sans-serif | Google Web Fonts"
+               },
+               {
+                  "value":"'Big Caslon', 'Book Antiqua', 'Palatino Linotype', Georgia, serif",
+                  "label":"Big Calson",
+                  "group":"Serif"
+               },
+               {
+                  "value":"'Calisto MT', 'Bookman Old Style', Bookman, 'Goudy Old Style', Garamond, 'Hoefler Text', 'Bitstream Charter', Georgia, serif",
+                  "label":"Calisto MT",
+                  "group":"Serif"
+               },
+               {
+                  "value":"Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif",
+                  "label":"Baskerville",
+                  "group":"Serif"
+               },
+               {
+                  "value":"Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif",
+                  "label":"Garamond",
+                  "group":"Serif"
+               },
+               {
+                  "value":"Georgia, 'Hoefler Text', 'Times New Roman', serif",
+                  "label":"Georgia",
+                  "group":"Serif"
+               },
+               {
+                  "value":"TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif",
+                  "label":"Times New Roman",
+                  "group":"Serif"
+               },
+               {
+                  "value":"Google_Bitter_400,400italic,700_serif",
+                  "label":"Bitter",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Arvo_400,400_serif",
+                  "label":"Arvo",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Crimson+Text_400,700_serif",
+                  "label":"Crimson Text",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Droid+Serif_400,700_serif",
+                  "label":"Droid Serif",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Lora_400,700_serif",
+                  "label":"Lora",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_PT+Serif_400,700_serif",
+                  "label":"PT Serif",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Vollkorn_400,700_serif",
+                  "label":"Vollkorn",
+                  "group":"Serif | Google Web Fonts"
+               },
+               {
+                  "value":"Google_Alex+Brush",
+                  "label":"Alex Brush",
+                  "group":"Handwriting | Google Web Fonts"
+               }
+            ],
+            "default":"Google_Alex+Brush"
+         }
+      ]
+   },
+   {
+      "name":"Brand identity",
+      "settings":[
+         {
+           "type": "header",
+           "content": "Logo"
+         },
+         {
+           "type": "checkbox",
+           "id": "logo_use_image",
+           "label": "Use logo mark instead of shop name"
+         },
+         {
+           "type": "image_picker",
+           "id": "logo",
+           "label": "Custom logo",
+           "info": "Maximum logo dimensions are 128px wide by 96px high. The uploaded file will be resized to fit within those constraints."
+         },
+         {
+           "type": "checkbox",
+           "id": "header_mobile_logo_disable",
+           "label": "Hide logo mark/shop name for the mobile view",
+           "info": "by default, the logo mark/shop name is shown on the top (header) for the mobile view"
+         },
+         {
+           "type": "header",
+           "content": "Store description"
+         },
+         {
+           "type": "text",
+           "id": "header_store_description_left",
+           "label": "Left text",
+           "default": "Organic food by Whytes\'"
+         },
+         {
+           "type": "text",
+           "id": "header_store_description_right",
+           "label": "Right text",
+           "default": "from Manitoba, Canada"
+         },
+         {
+            "type":"header",
+            "content":"Custom favicon"
+         },
+         {
+            "type":"checkbox",
+            "id":"favicon_enable",
+            "label":"Use custom favicon"
+         },
+         {
+            "type":"image_picker",
+            "id":"favicon",
+            "label":"16px x 16px"
+         }
+      ]
+   },
+   {
+      "name":"Popup",
+      "settings":[
+         {
+            "type":"checkbox",
+            "id":"popup_enable",
+            "label": "Show popup",
+            "default": false
+         },
+         {
+            "type": "image_picker",
+            "id": "popup_bg",
+            "label": "Background image",
+            "info": "Recomended image size at least 800x600 px"
+         },
+         {
+            "type":"select",
+            "id":"popup_bg_size",
+            "label":"Background image fill mode",
+            "options":[
+               {
+                  "value":"contain",
+                  "label":"contain"
+               },
+               {
+                  "value":"cover",
+                  "label":"cover"
+               }
+            ],
+            "default":"cover"
+         },
+         {
+            "type":"text",
+            "id":"popup_heading",
+            "label":"Popup heading",
+            "default": "A Spring Preview Surprise"
+         },
+         {
+            "type":"text",
+            "id":"popup_discount_offer",
+            "label":"Discount offer",
+            "default": "40% off"
+         },
+         {
+            "type":"text",
+            "id":"popup_discount_code",
+            "label":"Discount code",
+            "default": "foodlysurprise"
+         },
+         {
+            "type":"text",
+            "id":"popup_discount_info",
+            "label":"Discount info",
+            "default": "use the code above for spring<br>collection purchase"
+         },
+         {
+            "type":"url",
+            "id":"popup_link",
+            "label":"Link to recource"
+         },
+         {
+            "type":"text",
+            "id":"popup_link_text",
+            "label":"Link text"
+         },
+         {
+            "type":"text",
+            "id":"popup_days",
+            "label":"How much days don't show popup?",
+            "default": "30"
+         }
+      ]
+   },
+   {
+      "name":"Product page",
+      "settings":[
+        {
+          "type": "paragraph",
+          "content": "Settings in this area affects only product template. Product boxed template can be configured in Section part of customize theme pannel"
+        },
+         {
+            "type":"header",
+            "content":"Weight label"
+         },
+         {
+            "type":"checkbox",
+            "id":"product_size_unit_enable",
+            "label":"Show the weight unit under the product title",
+            "default": true
+         },
+         {
+            "type":"header",
+            "content":"Page sections"
+         },
+         {
+            "type":"checkbox",
+            "id":"product_description_enable",
+            "label":"Show description of product"
+         },
+         {
+            "type":"checkbox",
+            "id":"product_nutritional_enable",
+            "label":"Show nutritional value of product"
+         },
+         {
+            "type":"text",
+            "id":"product_nutritional_energy",
+            "label":"Nutritional value heading",
+            "default":"Nutritional value",
+            "info":"It uses for splitting product decription on parts"
+         },
+         {
+            "type":"text",
+            "id":"product_nutritional_vitamins",
+            "label":"Vitamins heading",
+            "default":"Vitamins:",
+            "info":"It uses for splitting product decription on parts"
+         },
+         {
+            "type":"text",
+            "id":"product_nutritional_minerals",
+            "label":"Minerals heading",
+            "default":"Minerals:",
+            "info":"It uses for splitting product decription on parts"
+         },
+         {
+            "type":"radio",
+            "id":"product_reviews_recipe",
+            "options":[
+               {
+                  "value":"none",
+                  "label":"None"
+               },
+               {
+                  "value":"reviews",
+                  "label":"Show customer reviews"
+               },
+               {
+                  "value":"recipe",
+                  "label":"Show special recipe"
+               }
+            ],
+            "default":"recipe"
+         },
+         {
+            "type":"blog",
+            "id":"product_recipe_blog",
+            "label":"Blog with recipe"
+         },
+         {
+            "type":"text",
+            "id":"product_recipe_blog_ingredients",
+            "label":"Heading for ingredients",
+            "default":"Ingredients"
+         },
+         {
+            "type":"text",
+            "id":"product_recipe_blog_directions",
+            "label":"Heading for directions",
+            "default":"Directions"
+         },
+         {
+            "type":"checkbox",
+            "id":"product_similar_enable",
+            "label":"Show similar products"
+         },
+         {
+            "type":"text",
+            "id":"product_similar_number",
+            "label":"Number of similar products",
+            "default":"4"
+         },
+         {
+            "type":"radio",
+            "id":"product_similar_type",
+            "label":"Type of similar products",
+            "options":[
+               {
+                  "value":"tags",
+                  "label":"by Tags"
+               },
+               {
+                  "value":"collection",
+                  "label":"by Collection"
+               }
+            ],
+            "default":"collection"
+         },
+         {
+            "type":"header",
+            "content":"Share buttons"
+         },
+         {
+            "type":"text",
+            "id":"product_share_btns_heading",
+            "label":"Heading",
+            "default":"Share"
+         },
+         {
+            "type":"checkbox",
+            "id":"product_share_btns_facebook",
+            "label":"Facebook"
+         },
+         {
+            "type":"checkbox",
+            "id":"product_share_btns_twitter",
+            "label":"Twitter"
+         },
+         {
+            "type":"checkbox",
+            "id":"product_share_btns_pinterest",
+            "label":"Pinterest"
+         },
+         {
+            "type":"checkbox",
+            "id":"product_share_btns_google_p",
+            "label":"Google+"
+         },
+         {
+            "type":"checkbox",
+            "id":"product_share_btns_fancy",
+            "label":"Fancy"
+         }
+      ]
+   },
+   {
+      "name":"Cart",
+      "settings":[
+        {
+          "type":"header",
+          "content":"Special packaging product"
+        },
+        {
+          "type":"text",
+          "id":"cart_special_sku",
+          "label":"SKU number for special package",
+          "default":"0001"
+        }
+      ]
+   },
+   {
+    "name": "About Us page",
+    "settings": [
+      {
+        "type": "header",
+        "content": "About Us Slider"
+      },
+      {
+        "type": "text",
+        "id": "about_us_heading",
+        "label": "About Heading"
+      },
+      {
+        "type": "text",
+        "id": "about_us_subheading_overlap",
+        "label": "Overlap Heading"
+      },
+      {
+        "type": "blog",
+        "id": "about_us_blog",
+        "label": "About Us blog"
+      }
+    ]
+  },
+   {
+      "name":"Social accounts",
+      "settings":[
+         {
+            "type":"header",
+            "content":"Accounts"
+         },
+         {
+            "type":"text",
+            "id":"social_facebook_link",
+            "label":"Facebook link"
+         },
+         {
+            "type":"text",
+            "id":"social_twitter_link",
+            "label":"Twitter link"
+         },
+         {
+            "type":"text",
+            "id":"social_pinterest_link",
+            "label":"Pinterest link"
+         },
+         {
+            "type":"text",
+            "id":"social_instagram_link",
+            "label":"Instagram link"
+         },
+         {
+            "type":"text",
+            "id":"social_youtube_link",
+            "label":"Youtube link"
+         },
+         {
+            "type":"text",
+            "id":"social_tumblr_link",
+            "label":"Tumblr link"
+         },
+         {
+            "type":"header",
+            "content":"Instagram Settings"
+         },
+         {
+            "type":"text",
+            "id":"footer_instagram_user_id",
+            "label":"Instagram User ID",
+            "info":"[How to get user id](https:\/\/smashballoon.com\/instagram-feed\/find-instagram-user-id\/)"
+         },
+         {
+            "type":"text",
+            "id":"footer_instagram_access_token",
+            "label":"Istagram API access token",
+            "info":"[How to get access token](http:\/\/instagram.pixelunion.net)"
+         }
+      ]
+   },
+   {
+      "name":"Collection page",
+      "settings":[
+          {
+             "type":"header",
+             "content":"General"
+          },
+          {
+            "type":"paragraph",
+            "content":"Instructions how to set up collection page is [here ](https://congruityhub.zendesk.com/hc/en-us/articles/115003531365)"
+          },
+          {
+            "type":"text",
+            "id":"collection_grid_product_number",
+            "label":"Products per page (grid view)",
+            "default":"12",
+            "info":"Max 50 products"
+         },
+         {
+            "type":"text",
+            "id":"collection_list_product_number",
+            "label":"Products per page (list view)",
+            "default":"10",
+            "info":"Max 50 products"
+         },
+         {
+            "type":"checkbox",
+            "id":"collection_add_cart_thumb",
+            "label":"Enable 'Add to cart' button on product thumbnail (grid view)",
+            "default":true
+         },
+         {
+            "type":"radio",
+            "id":"collection_product_badge",
+            "label":"Sale badge",
+            "options":[
+               {
+                  "value":"badge",
+                  "label":"Current price"
+               },
+               {
+                  "value":"price",
+                  "label":"Current and compare price"
+               }
+            ]
+         },
+         {
+            "type":"header",
+            "content":"Sorting"
+         },
+         {
+            "type":"checkbox",
+            "id":"collection_sort_default_enable",
+            "label":"Enable default filter option",
+            "info":"This filter contains such choices as default, best selling, alphabetically:A-Z, alphabetically:Z-A, price:low to high, price: high to low, date: new to old, date: old to new"
+         },
+         {
+          "type": "paragraph",
+          "content": "¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯"
+          },
+         {
+            "type":"checkbox",
+            "id":"collection_for_sorting_enable",
+            "label":"Enable collection filter"
+         },
+         {
+            "type":"text",
+            "id":"collection_for_sorting",
+            "label":"Collection for sorting",
+            "default":"Fresh, Frozen, Dried, Liquid",
+            "info":"Type in exact collection names to be included in the filter. All collections are separated by comma"
+         },
+         {
+          "type": "paragraph",
+          "content": "¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯"
+          },
+         {
+            "type":"checkbox",
+            "id":"collection_sort_tags_enable",
+            "label":"Enable tag filter"
+         },
+         {
+            "type":"text",
+            "id":"collection_sort_tags",
+            "label":"Tags for sorting",
+            "default":"Fruit, Vegetables, Herbals, Condiments",
+            "info":"Type in tags to be included in the filter. All tags are separated by comma"
+         }
+      ]
+   },
+   {
+      "name":"Blogs",
+      "settings":[
+         {
+            "type":"header",
+            "content":"Article"
+         },
+         {
+            "type":"checkbox",
+            "id":"article_share_btns_anable",
+            "label":"Show share buttons"
+         },
+         {
+            "type":"text",
+            "id":"article_share_btns_heading",
+            "label":"Heading",
+            "default":"Share"
+         },
+         {
+            "type":"checkbox",
+            "id":"article_share_btns_facebook",
+            "label":"Facebook"
+         },
+         {
+            "type":"checkbox",
+            "id":"article_share_btns_twitter",
+            "label":"Twitter"
+         },
+         {
+            "type":"checkbox",
+            "id":"article_share_btns_pinterest",
+            "label":"Pinterest"
+         },
+         {
+            "type":"checkbox",
+            "id":"article_share_btns_google_p",
+            "label":"Google+"
+         },
+         {
+            "type":"checkbox",
+            "id":"article_share_btns_fancy",
+            "label":"Fancy"
+         },
+         {
+            "type":"image",
+            "id":"img_comments_default_avatar.png",
+            "label":"Avatar for comments"
+         },
+         {
+            "type":"header",
+            "content":"General settings"
+         },
+         {
+            "type":"checkbox",
+            "id":"article_image_license_enable",
+            "label":"Show license mark for images with author URL"
+         },
+         {
+            "type":"blog",
+            "id":"blog_recipes",
+            "label":"Blog with recipes",
+            "info":"Used for special layout for articles with recipe"
+         },
+         {
+            "type":"checkbox",
+            "id":"blog_page_transition",
+            "label":"Enable page transition",
+            "info":"Pages load dynamically (without reload)"
+         },
+         {
+            "type":"header",
+            "content":"Blog sorting"
+         },
+         {
+            "type":"checkbox",
+            "id":"blog_sorting_enable",
+            "label":"Enable Blog sorting",
+            "default":true
+         },
+         {
+            "type":"text",
+            "id":"blog_article_per_page",
+            "label":"Amount of articles per the page with pagination",
+            "default":"5"
+         }
+      ]
+   },
+   {
+      "name":"Contact page",
+      "settings":[
+         {
+            "type":"paragraph",
+            "content":"To use this template, please, [choose 'page.contact' template](https:\/\/docs.shopify.com\/manual\/configuration\/store-customization\/communicating-with-customers\/provide-contact-points\/add-a-contact-form#set-page-to-use-template) for your contact page. "
+         },
+         {
+            "type":"checkbox",
+            "id":"contact_banner_enable",
+            "label":"Show banner image"
+         },
+         {
+            "type":"image",
+            "id":"img_contact_banner.jpg",
+            "label":"Image"
+         },
+         {
+            "type":"text",
+            "id":"contact_heading_em",
+            "label":"Emphasize heading",
+            "default":"Our"
+         },
+         {
+            "type":"text",
+            "id":"contact_heading",
+            "label":"Heading",
+            "default":"doors are always open"
+         },
+         {
+            "type":"header",
+            "content":"Short contact information"
+         },
+         {
+            "type":"checkbox",
+            "id":"contact_short_hours_enable",
+            "label":"Show hours"
+         },
+         {
+            "type":"text",
+            "id":"contact_short_hours",
+            "label":"Hours",
+            "default":"09.00-17.00 (PST) MON - FRI"
+         },
+         {
+            "type":"checkbox",
+            "id":"contact_short_email_enable",
+            "label":"Show email"
+         },
+         {
+            "type":"text",
+            "id":"contact_short_email",
+            "label":"Email",
+            "default":"contact@foodly.com"
+         },
+         {
+            "type":"checkbox",
+            "id":"contact_short_phone_enable",
+            "label":"Show phone"
+         },
+         {
+            "type":"text",
+            "id":"contact_short_phone",
+            "label":"Phone",
+            "default":"912-823-5448"
+         },
+         {
+            "type":"header",
+            "content":"Detailed contact information"
+         },
+         {
+            "type":"text",
+            "id":"contact_google_api",
+            "label":"Google API key",
+            "info":"[Get API key](https:\/\/console.developers.google.com\/apis)"
+         },
+         {
+            "type":"checkbox",
+            "id":"contact_block1_enable",
+            "label":"Show farm facilities"
+         },
+         {
+            "type":"textarea",
+            "id":"contact_block1",
+            "label":"Farm facilities",
+            "info":"HTML tags could be used"
+         },
+         {
+            "type":"text",
+            "id":"contact_block1_lat",
+            "label":"Latitude"
+         },
+         {
+            "type":"text",
+            "id":"contact_block1_lng",
+            "label":"Longitude",
+            "info":"[GPS coordinates of an address](https:\/\/gps-coordinates.net)"
+         },
+         {
+            "type":"text",
+            "id":"contact_block1_zoom",
+            "label":"Map zoom",
+            "default":"16"
+         },
+         {
+            "type":"checkbox",
+            "id":"contact_block2_enable",
+            "label":"Show farm facilities"
+         },
+         {
+            "type":"textarea",
+            "id":"contact_block2",
+            "label":"Grocery store",
+            "info":"HTML tags could be used"
+         },
+         {
+            "type":"text",
+            "id":"contact_block2_lat",
+            "label":"Latitude"
+         },
+         {
+            "type":"text",
+            "id":"contact_block2_lng",
+            "label":"Longitude",
+            "info":"[GPS coordinates of an address](https:\/\/gps-coordinates.net)"
+         },
+         {
+            "type":"text",
+            "id":"contact_block2_zoom",
+            "label":"Map zoom",
+            "default":"16"
+         },
+         {
+            "type":"header",
+            "content":"Contact form"
+         },
+         {
+            "type":"checkbox",
+            "id":"contact_form_enable",
+            "label":"Show contact form"
+         }
+      ]
+   },
+   {
+      "name":"404 page and password page",
+      "settings":[
+         {
+            "type":"header",
+            "content":"404 page"
+         },
+         {
+            "type":"checkbox",
+            "id":"404_link_list_enable",
+            "label":"Show fallback link list"
+         },
+         {
+            "type":"link_list",
+            "id":"404_link_list",
+            "label":"Link list",
+            "default": "main-menu"
+         },
+         {
+           "type": "image_picker",
+           "id": "bg_img_404_page",
+           "label": "Background image",
+           "info":  "Picture has to be at least 1920 px wide"
+         },
+         {
+            "type":"header",
+            "content":"Password page"
+         },
+         {
+            "type":"image_picker",
+            "id":"img_password_page_bg",
+            "label":"Background image",
+            "info":  "Picture has to be at least 1920 px wide"
+         },
+         {
+            "type":"checkbox",
+            "id":"password_page_use_logo",
+            "label":"Show logo"
+         },
+         {
+            "type":"checkbox",
+            "id":"password_page_share_enable",
+            "label":"Show social share buttons"
+         },
+         {
+            "type":"text",
+            "id":"password_page_share_heading",
+            "label":"Heading",
+            "default":"Spread the word"
+         },
+         {
+            "type":"checkbox",
+            "id":"password_page_share_facebook",
+            "label":"Facebook"
+         },
+         {
+            "type":"checkbox",
+            "id":"password_page_share_twitter",
+            "label":"Twitter"
+         },
+         {
+            "type":"checkbox",
+            "id":"password_page_share_google",
+            "label":"Google+"
+         }
+      ]
+   },
+   {
+      "name":"Wishlist",
+      "settings":[
+         {
+            "type":"checkbox",
+            "id":"wishlist_enable",
+            "label":"Wishlist enable"
+         }
+      ]
+   },
+   {
+      "name":"Search",
+      "settings":[
+
+         {
+            "type":"radio",
+            "id":"search_type",
+            "label":"Search results",
+            "options":[
+               {
+                  "value":"all",
+                  "label":"Show all (articles, pages and products)"
+               },
+               {
+                  "value":"products",
+                  "label":"Show only products"
+               }
+            ],
+            "default":"products"
+         },
+         {
+            "type":"text",
+            "id":"search_fallback_link",
+            "label":"URL for fallback button",
+            "default":"\/collections",
+            "info":"Page without result"
+         },
+         {
+            "type":"checkbox",
+            "id":"search_ajax_enable",
+            "label":"Ajax search enable",
+            "default":true
+         },
+         {
+            "type":"text",
+            "id":"search_result_amount",
+            "label":"Amount of search results per the page with pagination",
+            "default":"12"
+         },
+         {
+           "type": "header",
+           "content": "Search box with a speech recognition"
+         },
+         {
+           "type": "text",
+           "id": "search_sr_google_speech_api_key",
+           "label": "The key for Google Speech API"
+         },
+         {
+           "type": "text",
+           "id": "search_sr_captcha_api_key",
+           "label": "The key for Google reCapcha API"
+         }
+      ]
+   },
+   {
+      "name":"Landing page",
+      "settings":[
+         {
+            "type":"image",
+            "id":"img_landing_hero.jpg",
+            "label":"Hero background"
+         },
+         {
+            "type":"text",
+            "id":"landing_heading",
+            "label":"Page heading",
+            "default":"‘Tis the Season to be saving!"
+         },
+         {
+            "type":"text",
+            "id":"landing_subheading",
+            "label":"Page subheading",
+            "default":"Save 25% on a bundle purchase."
+         },
+         {
+            "type":"checkbox",
+            "id":"landing_countdown",
+            "label":"Show countdown"
+         },
+         {
+            "type":"text",
+            "id":"landing_countdown_date",
+            "label":"Countdown date",
+            "default":"2018.12.31",
+            "info":"Date must be in format YYYY.MM.DD"
+         },
+         {
+            "type":"checkbox",
+            "id":"landing_product_section_enable",
+            "label":"Show product section"
+         },
+         {
+            "type":"text",
+            "id":"landing_product_section_heading",
+            "label":"Heading",
+            "default":"Season bundle"
+         },
+         {
+            "type":"text",
+            "id":"landing_product_section_overlap",
+            "label":"Back phrase",
+            "default":"Choose"
+         },
+         {
+            "type":"collection",
+            "id":"landing_product_collection",
+            "label":"Collection with special products",
+            "info":"from 1 to 3 products in collection"
+         },
+         {
+            "type":"checkbox",
+            "id":"landing_benefit_section_enable",
+            "label":"Show benefit section"
+         },
+         {
+            "type":"text",
+            "id":"landing_benefit_section_heading",
+            "label":"Heading",
+            "default":"The benefits you gain"
+         },
+         {
+            "type":"text",
+            "id":"landing_benefit_section_overlap",
+            "label":"Back phrase",
+            "default":"Know"
+         },
+         {
+            "type":"blog",
+            "id":"landing_benefit_blog",
+            "label":"Blog with product packs benefits"
+         },
+         {
+            "type":"checkbox",
+            "id":"landing_reviews_section_enable",
+            "label":"Show reviews section"
+         },
+         {
+            "type":"text",
+            "id":"landing_reviews_section_heading",
+            "label":"Heading",
+            "default":"on chef’s opinion"
+         },
+         {
+            "type":"text",
+            "id":"landing_reviews_section_overlap",
+            "label":"Back phrase",
+            "default":"Rely"
+         },
+         {
+            "type":"blog",
+            "id":"landing_reviews_blog",
+            "label":"Blog with reviews"
+         },
+         {
+            "type":"checkbox",
+            "id":"landing_cta_section_enable",
+            "label":"Show CTA section with buttons"
+         },
+         {
+            "type":"text",
+            "id":"landing_cta_section_heading",
+            "label":"Heading",
+            "default":"Hurry! Sale endes soon"
+         },
+         {
+            "type":"text",
+            "id":"landing_cta_section_subheading",
+            "label":"Subheading",
+            "default":"Limited offer of three popular bundles"
+         }
+      ]
+   },
+   {
+      "name":"Subscribe form and gift card",
+      "settings":[
+         {
+            "type":"header",
+            "content":"Subscribe form"
+         },
+         {
+            "type":"radio",
+            "id":"subscribe_form_variant",
+            "label":"Choose subscribe form",
+            "options":[
+               {
+                  "value":"mailchimp",
+                  "label":"Use MailChimp subscribe form"
+               },
+               {
+                  "value":"standart",
+                  "label":"Use standart(shopify) subscribe form"
+               }
+            ],
+            "default":"mailchimp"
+         },
+         {
+            "type":"text",
+            "id":"subscribe_form_url",
+            "label":"MailChimp form action URL",
+            "default":"\/\/designzway.us10.list-manage.com\/subscribe\/post?u=579323687b7e07d00f80f3245&amp;id=a8c0b445bb"
+         },
+         {
+            "type":"header",
+            "content":"Gift card"
+         },
+         {
+            "type":"text",
+            "id":"gift_card_email",
+            "label":"Email for button on gift card page",
+            "default":"mail@mail.com"
+         }
+      ]
+   },
+   {
+      "name":"Notification button",
+      "settings":[
+         {
+            "type":"checkbox",
+            "id":"info_btn_enable",
+            "label":"Show notification button"
+         },
+         {
+            "type":"text",
+            "id":"info_btn_heading",
+            "label":"Heading",
+            "default":"Don’t miss a chance"
+         },
+         {
+            "type":"textarea",
+            "id":"info_btn_news",
+            "label":"Notification text",
+            "default":"<div class=\"coupon-code\">20fp20fp<\/div>  use the code above to get 20% discount for first purchase at Foodly store",
+            "info":"HTML is allowed"
+         },
+         {
+            "type":"text",
+            "id":"info_btn_text_link",
+            "label":"Link text",
+            "default":"Create your Account"
+         },
+         {
+            "type":"text",
+            "id":"info_btn_url_link",
+            "label":"Link url",
+            "default":"http:\/\/foodly-store.myshopify.com\/account\/register"
+         },
+         {
+            "type":"checkbox",
+            "id":"info_btn_cookie_enable",
+            "label":"Enable using of cookies",
+            "default":true,
+            "info":"If true, after opening of notification button, script makes a record in the cookie and the button won't show to the customer after page refresh."
+         },
+         {
+            "type":"text",
+            "id":"info_btn_cookie_unique",
+            "label":"Unique identifier",
+            "default":"01",
+            "info":"Unique identifier helps to show new messages when option \"using of cookies\" is enabled. Change it when you want to show a new message."
+         },
+         {
+            "type":"checkbox",
+            "id":"info_btn_pulse_enable",
+            "label":"Enable pulse animation",
+            "default":true
+         },
+         {
+            "type":"text",
+            "id":"info_btn_delay",
+            "label":"Delay of showing",
+            "default":"5000",
+            "info":"Time in milliseconds"
+         }
+      ]
+   },
+   {
+      "name":"Shipping Rates Calculator",
+      "settings":[
+         {
+            "type":"select",
+            "id":"shipping_calculator",
+            "label":"Show the shipping calculator",
+            "options":[
+               {
+                  "value":"Disabled",
+                  "label":"No"
+               },
+               {
+                  "value":"Enabled",
+                  "label":"Yes"
+               }
+            ],
+            "default":"Enabled"
+         },
+         {
+            "type":"text",
+            "id":"shipping_calculator_heading",
+            "label":"Heading text",
+            "default":"Delivery estimation"
+         },
+         {
+            "type":"text",
+            "id":"shipping_calculator_default_country",
+            "label":"Default country selection",
+            "default":"United States"
+         },
+         {
+            "type":"paragraph",
+            "content":"If your customer is logged-in, the country in his default shipping address will be selected. If you are not sure about the  spelling to use here, refer to the first checkout page."
+         },
+         {
+            "type":"text",
+            "id":"shipping_calculator_submit_button_label",
+            "label":"Submit button label",
+            "default":"Calculate delivery"
+         },
+         {
+            "type":"text",
+            "id":"shipping_calculator_submit_button_label_disabled",
+            "label":"Submit button label when calculating",
+            "default":"Calculating..."
+         }
+      ]
+   },
+   {
+      "name":"Currency",
+      "settings":[
+         {
+            "type":"checkbox",
+            "id":"show_multiple_currencies",
+            "label":"Enable currency conversion",
+            "default":true,
+            "info":"Even though prices are displayed in different currencies, orders will still be processed in your store's currency."
+         },
+         {
+            "type":"select",
+            "id":"currency_format",
+            "label":"Format",
+            "options":[
+               {
+                  "value":"money_format",
+                  "label":"Without currency ($10.00)"
+               },
+               {
+                  "value":"money_with_currency_format",
+                  "label":"With currency ($10.00 CAD)"
+               }
+            ],
+            "default":"money_with_currency_format"
+         },
+         {
+            "type":"text",
+            "id":"supported_currencies",
+            "label":"Supported currencies",
+            "default":"INR GBP CAD USD AUD EUR JPY",
+            "info":"Use the country's ISO [currency code](http:\/\/www.xe.com\/iso4217.php). Separate your currency codes with a space."
+         },
+         {
+            "type":"text",
+            "id":"default_currency",
+            "label":"Default currency"
+         }
+      ]
+   },
+  {
+    "name": "Custom Styles",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Custom CSS"
+      },
+      {
+        "type": "paragraph",
+        "content": "This area allows you make style changes of the theme beyond the default theme settings. Just insert required CSS rules in the text area below. We encourage you to make CSS customizations here to save them from being overwritten after future updates ⚙️"
+      },
+      {
+        "type": "textarea",
+        "id": "custom_css",
+        "placeholder": "selector {\n  style: value;\n}",
+        "label": "Your CSS styles here 👇",
+        "info": "CSS rules applied in this textarea will overwrite any Foodly CSS rules that have the same property and are applied to the same selectors"
+      },
+      {
+        "type": "text",
+        "id": "custom_css_file",
+        "placeholder": "style.css for instance",
+        "label": "Custom CSS File name here 👇",
+        "info": "Download your custom CSS file from admin panel [Settings/Files](http:\/\/www.shopify.com\/admin\/settings\/files) and type file name above"
+      }
+    ]
+  }
+
+]

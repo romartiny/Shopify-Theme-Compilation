@@ -1,0 +1,21 @@
+{% assign product_name_handl = find-product | strip_html | handleize  %}
+
+{% assign finded_product = nil %}
+
+{% for collect in collections %}
+  {% for product in collect.products %}
+    {% assign temp_prod_titl_handl = product.title | handleize  %}
+    {% if temp_prod_titl_handl contains product_name_handl %}
+      {% assign finded_product = product %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+
+{% unless finded_product %}
+  {% for product in collections.all.products %}
+    {% assign temp_prod_titl_handl = product.title | handleize  %}
+    {% if temp_prod_titl_handl contains product_name_handl %}
+      {% assign finded_product = product %}
+    {% endif %}
+  {% endfor %}
+{% endunless %}

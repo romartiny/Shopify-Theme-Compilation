@@ -1,0 +1,627 @@
+
+
+{%- for block in section.blocks -%}
+
+  {% if block.type == 'boxed_slid_descr' %}
+    <div id="container" class="wrapper product product--lg product--boxed" {{ block.shopify_attributes }}>
+      <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+      <meta itemprop="image" content="{{ product.featured_image.src | product_img_url: 'grande' }}">
+      <div class="product__block" itemscope itemtype="http://schema.org/Product">
+        <div class="product__block-item">
+          <!-- Swiper -->
+          <div id="productFixWidthCarousel" class="swiper-container carousel carousel--product-gallery">
+            <div class="swiper-wrapper">
+              {% for image in product.images %}
+                  <div class="swiper-slide" data-image-id="{{ image.id }}">
+                    <div class="img-holder">
+                      <img src="{{ image.src | product_img_url: '1024x1024' }}">
+                    </div>
+                  </div>
+              {% endfor %}
+            </div>
+
+            <div class="carousel__navigation"></div>
+            <div class="swiper-button-next carousel-button-next">
+              <span class="icon icon--arrow-right"></span>
+            </div>
+            <div class="swiper-button-prev carousel-button-prev">
+              <span class="icon icon--arrow-left"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="product__block-item">
+          <div class="product__content">
+            <h1 itemprop="name" class="product__title">{{ product.title }}</h1>
+            <div class="product__info">
+              <span class="product__spec">
+                {% if product.type != blank %}
+                  {{ product.type }} |
+                {% endif %}
+
+                {% if product.available %}
+                  {{ 'products.general.in_stock' | t }}
+                {% else %}
+                  {{ 'products.general.out_stock' | t }}
+                {% endif %}
+
+                {% if block.settings.product_size_unit_enable %}
+                  |
+                  {% if product.first_available_variant.option1 != 'Default Title' %}
+                    {{ product.first_available_variant.option1 }}
+                  {% else %}
+                    {{ product.first_available_variant.weight_unit }}
+                  {% endif %}
+                {% endif %}
+
+              </span>
+              <div class="product__desc">
+                {% assign content_html = product.description %}
+                {% include 'strip_html_tags' with content_html %}
+
+                {% assign split_nutritional = '[Nutritional value]' %}
+                {% if content contains split_nutritional %}
+                  {% assign description_text = content | split: split_nutritional | first %}
+                  {% assign nutritional_value_text = content | split: split_nutritional | last %}
+                {% endif %}
+
+                {% comment %} Product decription {% endcomment %}
+                {% if block.settings.product_description_enable %}
+                  <div itemprop="description" class="rte product__desc-content">
+                    {% if description_text != blank %}
+                      {{ description_text }}
+                    {% else %}
+                      {{ product.description }}
+                    {% endif %}
+                  </div>
+                {% endif %}
+              </div>
+              {% comment %} Add to cart button {% endcomment %}
+              <div class="form-wrapper">
+                <form class="form form--default" action="/cart/add" method="post">
+                  <div class="form__row">
+
+                    {% if product.variants.size > 1 and product.options.size == 1 %}
+                      <select id="product-boxed-variants" name="id">
+                        {% for variant in product.variants %}
+                          {%- if variant.available -%}
+                            <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %}
+                               value="{{ variant.id }}"
+                               data-variant-price="{{ variant.price }}"
+                               {%- if variant.image.id -%} data-variant-img-id="{{variant.image.id}}" {%- endif -%}>
+                               {{- variant.title -}}
+                             </option>
+                          {%- else -%}
+                            <option value="{{ variant.id }}" data-variant-price="{{ variant.price }}" disabled="disabled"
+                               {%- if variant.image.id -%} data-variant-img-id="{{variant.image.id}}" {%- endif -%}>
+                               {{- variant.title -}} - {{ 'products.product_page.sold_out' | t }}
+                             </option>
+                          {%- endif -%}
+                        {% endfor %}
+                      </select>
+                    {% elsif product.options.size > 1 %}
+
+                      <div id="product-multi-variants">
+                        <div id="price-field"></div>
+                        <select id="product-select" name="id">
+                          {% for variant in product.variants %}
+                            {%- if variant.available -%}
+                              <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+                            {%- else -%}
+                              <option value="{{ variant.id }}" disabled="disabled">
+                                 {{- variant.title -}} - {{ 'products.product_page.sold_out' | t }}
+                               </option>
+                            {%- endif -%}
+                          {% endfor %}
+                        </select>
+                      </div>
+
+                    {% else %} {% comment %} If there is no more than one product variant {% endcomment %}
+                      <input type="hidden" name="id" value="{{ product.variants[0].id }}" />
+                    {% endif %}
+
+                 </div>
+                  <div class="form__row">
+                    <div class="quantity-field">
+                      <span class="icon icon--arrow-right js-up-quantity"></span>
+                      <input class="form__field" type="number" id="quantity" name="quantity" value="1" min="1" >
+                      <span class="icon icon--arrow-left js-down-quantity"></span>
+                    </div>
+                    <span class="js-price-and-value">
+                      x
+                      <span class="money">
+                        {{ product.selected_or_first_available_variant.price | money }}
+                      </span>
+                      =
+                      <span class="js-total-price money">
+                        {{ product.selected_or_first_available_variant.price | money }}
+                      </span>
+                    </span>
+                  </div>
+                  <div class="form__row">
+                    <button {% unless product.available %}disabled{% endunless %} class="btn btn--default btn--full btn--submit {% unless product.available %}btn--disabled{% endunless %} js-add-to-card" type="submit" >{% unless product.available %}{{ 'products.general.out_stock' | t }}{% else %} {{ 'layout.general.add_to_cart_button' | t }}{% endunless %}</button>
+                  </div>
+                </form>
+              </div> <!-- End form-wrapper -->
+
+              {% if settings.wishlist_enable %}
+
+                <div class="form-wrapper form-wrapper--wishlist js-wishlist-form">
+                  {% if customer %}
+                    {% assign value = product.id %}
+                    {% capture productID %}{{ product.id }}{% endcapture %}
+                    {% for tag in customer.tags %}
+                      {% capture tagID %}{{ tag }}{% endcapture %}
+                      {% if tagID contains productID %}
+                        {% capture value %}x{{ tagID }}{% endcapture %}
+                      {% endif %}
+                      {% if value.size == 0 %}{% assign value = productID %}{% endif %}
+                    {% endfor %}
+
+                    {% unless value.size == 0 %}
+                      {% capture check %}{{ value.size | minus:productID.size | money_without_currency | times:100 | divided_by:2 }}{% endcapture %}
+                      {% assign check = check | split:'.' %}
+                      {% if check[1] contains "5" %}{% assign display = false %}{% else %}{% assign display = true %}{% endif %}
+                    {% endunless %}
+
+                    {% if display %}
+                      <form accept-charset="UTF-8" id="add-to-wish-list" action="/contact" method="post">
+                        <input name="form_type" type="hidden" value="customer">
+                        <input name="utf8" type="hidden" value="✓">
+                        <input type="hidden" name="contact[email]" value="{{ customer.email }}"/>
+                        <input id="update-me" type="hidden" name="contact[tags]" value="{{ value }}" />
+                        <button class="text-link--default" type="submit">
+                        <span class="icon icon--plus"></span>
+                        {{ 'layout.wishlist_page.add_to_wishlist' | t }}
+                        </button>
+                      </form>
+                    {% else %}
+                      <p>{{ 'layout.wishlist_page.added_to_wishlist' | t }} <a class="text-link--default" href="/pages/wishlist">{{ 'layout.wishlist_page.wishlist' | t }}</a></p>
+                    {% endif %}
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  {% if block.type == 'nutritional_shortcode' %}
+    <div class="wrapper" {{ block.shopify_attributes }}>
+
+      <div class="product product--lg {% if product.featured_image.size > 0 %}fade-up delay-two{% endif %}">
+          {% comment %}
+          Strip unnecessary html
+          {% endcomment %}
+          {% assign content_html = product.description %}
+          {% include 'strip_html_tags' with content_html %}
+
+          {% assign split_nutritional = '[Nutritional value]' %}
+            {% if content contains split_nutritional %}
+              {% assign description_text = content | split: split_nutritional | first %}
+              {% assign nutritional_value_text = content | split: split_nutritional | last %}
+            {% endif %}
+
+          {% comment %}
+          Product nutritional values
+          {% endcomment %}
+          {% if block.settings.product_nutritional_enable and  nutritional_value_text != blank %}
+
+            {% comment %}
+            Get string with minerals
+            {% endcomment %}
+            {% if block.settings.product_nutritional_minerals != blank and nutritional_value_text contains block.settings.product_nutritional_minerals %}
+              {% assign vitamins_and_energy_text = nutritional_value_text | split: block.settings.product_nutritional_minerals | first %}
+              {% assign minerals_text = nutritional_value_text | split: block.settings.product_nutritional_minerals | last %}
+            {% endif %}
+
+            {% comment %}
+            Get strings with energy value and vitamins
+            {% endcomment %}
+            {% if block.settings.product_nutritional_vitamins != blank and nutritional_value_text contains block.settings.product_nutritional_vitamins %}
+              {% assign energy_text = vitamins_and_energy_text | split: block.settings.product_nutritional_vitamins | first  | strip_html %}
+              {% assign vitamins_text = vitamins_and_energy_text | split: block.settings.product_nutritional_vitamins | last  | strip_html %}
+            {% endif %}
+
+            {% comment %}
+            Get array of energy, vitamins and minerals
+            {% endcomment %}
+            {% assign energy_array = energy_text  | split: ', ' %}
+            {% assign vitamins_array = vitamins_text | split: ',' %}
+            {% assign minerals_array = minerals_text | split: ',' %}
+
+            <div class="product__desc product__desc--components fold">
+              <h3 class="heading--add fold__toggle">{{ 'products.product_page.nutritional_title' | t }}</h3>
+              {% comment %}
+              Show energy values
+              {% endcomment %}
+              <div class="fold__content">
+                <div class="components-container">
+                  <ul class="components-list">
+                    {% for i in (0..energy_array.size) %}
+                      {% if forloop.last %} {% break %} {% endif %}
+                      <li class="components-list__item">
+                        {{ energy_array[i] | split: '|' | first | strip }} <span class="components-list__value" ><strong>{{ energy_array[i] | split: '|' | last | strip }}</strong></span>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+
+                {% comment %}
+                Show vitamins list
+                {% endcomment %}
+                <div class="components-container">
+                  <span class="components__title">{{ block.settings.product_nutritional_vitamins }}</span>
+                  <ul class="components-list components-list--elements">
+                    {% for i in (0..vitamins_array.size) %}
+                      {% if forloop.last %} {% break %} {% endif %}
+                      <li class="components-list__item">
+                        {{ vitamins_array[i] | strip_html | strip }}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div> <!-- End components-container -->
+
+                {% comment %}
+                Show mineral list
+                {% endcomment %}
+                <div class="components-container">
+                  <span class="components__title">{{ block.settings.product_nutritional_minerals }}</span>
+                  <ul class="components-list components-list--elements">
+                    {% for i in (0..minerals_array.size) %}
+                      {% if forloop.last %} {% break %} {% endif %}
+                      <li class="components-list__item">
+                        {{ minerals_array[i] | strip_html | strip }}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div> <!-- End components-container -->
+              </div> <!-- End product__desc-content -->
+            </div> <!-- End product__desc -->
+          {% endif %}
+        </div> <!-- End grid__item -->
+
+    </div> <!-- End wrapper -->
+
+    <hr class="hr--clear-inverse hr--desktop">
+  {% endif %}
+
+  {% if block.type == 'social_block' %}
+
+    <div class="{% if product.featured_image.size > 0 %}fade-up delay-one{% endif %}" {{ block.shopify_attributes }}>
+
+        {% capture permalinkURL %}{{ shop.url }}{{ product.url }}{% endcapture %}
+        {% capture shareTitle %}{{ product.title | url_param_escape }}{% endcapture %}
+
+
+        <div class="social-sharing social-sharing--product" data-permalink="{{ permalinkURL }}">
+
+          {% if block.settings.product_share_btns_heading %}
+            <span class="heading--add-small social-sharing__title">
+              {{ block.settings.product_share_btns_heading }}
+            </span>
+          {% endif %}
+
+          {% if block.settings.product_share_btns_facebook %}
+            <a class="social-sharing__item" href="//www.facebook.com/sharer.php?u={{ permalinkURL }}" target="_blank" >
+              <i class="fa fa-facebook"></i>
+              <span class="fallback-text">Facebook</span>
+            </a>
+          {% endif %}
+
+          {% if block.settings.product_share_btns_twitter %}
+            <a class="social-sharing__item" href="//twitter.com/share?text={{ shareTitle }}&amp;url={{ permalinkURL }}" target="_blank" >
+              <i class="fa fa-twitter"></i>
+              <span class="fallback-text">Twitter</span>
+            </a>
+          {% endif %}
+
+          {% if product.featured_image and block.settings.product_share_btns_pinterest %}
+
+              <a class="social-sharing__item" href="//pinterest.com/pin/create/button/?url={{ permalinkURL }}&amp;media=http:{{ product | img_url: '1024x1024' }}&amp;description={{ shareTitle }}" target="_blank" >
+                <i class="fa fa-pinterest-p"></i>
+                <span class="fallback-text">Pinterest</span>
+              </a>
+
+          {% endif %}
+
+          {% if block.settings.product_share_btns_google_p %}
+            <a class="social-sharing__item" target="_blank" href="//plus.google.com/share?url={{ permalinkURL }}" class="share-google">
+              <!-- Cannot get Google+ share count with JS yet -->
+              <i class="fa fa-google-plus" aria-hidden="true"></i>
+              <span class="fallback-text">Google+</span>
+            </a>
+          {% endif %}
+
+          {% if product.featured_image and block.settings.product_share_btns_fancy%}
+
+              <a class="social-sharing__item" href="//fancy.com/fancyit?ItemURL={{ permalinkURL }}&amp;Title={{ shareTitle }}&amp;Category=Other&amp;ImageURL={% if template contains 'product' %}{{ product | img_url: '1024x1024' }}{% else %}{{ article | img_url: '1024x1024' }}{% endif %}" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="9" height="16" viewBox="0 0 9 16">
+                  <path d="M5.727,11.556 L5.727,16.000 L3.273,16.000 L3.273,11.556 L-0.000,11.556 L-0.000,4.889 C-0.000,2.189 2.015,0.000 4.500,0.000 C6.985,0.000 9.000,2.189 9.000,4.889 L9.000,11.556 L5.727,11.556 Z" class="cls-1"/>
+                </svg>
+                <span class="fallback-text">Fancy</span>
+              </a>
+
+          {% endif %}
+
+        </div>
+
+    </div>
+  {% endif %}
+
+  {% comment %} Add product review widget, must install Product Review App:  https://apps.shopify.com/product-reviews {% endcomment %}
+  {% if block.type == 'reviews' %}
+    <div class="wrapper paste" {{ block.shopify_attributes }}>
+        <div class="fold product-reviews {% if product.featured_image.size > 0 %}fade-up delay-three{% endif %}">
+          <h3 class="heading--add fold__toggle">{{ 'products.product_page.customer_reviews' | t }}</h3>
+          <div class="fold__content">
+            <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+          </div>
+        </div>
+    </div> <!-- End wrapper -->
+    <hr class="hr--clear-inverse hr--desktop">
+  {% endif %}
+
+  {% if block.type == 'recipe' %}
+
+    <div class="wrapper product product--lg product-container {% if product.featured_image.size > 0 %}fade-up delay-four{% endif %}" {{ block.shopify_attributes }}>
+      {% assign current_product_title = product.title | downcase %}
+      {% assign article = articles[block.settings.recipe_article] %}
+
+        {% if article %}
+
+          {% include 'shortcode-recipe' with article.content %}
+
+          <div class="product-recipe fold">
+            <h3 class="heading--add fold__toggle">{{ 'products.product_page.special_recipe_title' | t }}</h3>
+
+            <div class="fold__content">
+              <div class="text-center">
+                <div class="bg-cover">
+                  <div class="img-holder img-holder--block">
+                    {% if block.settings.recipe_ingredients != blank %}
+                      <span class="product-recipe__spec-title left"><strong>{{ block.settings.recipe_ingredients }}</strong></span>
+                    {% endif %}
+
+                    <img src="{{ article.image | img_url: 'large' }}" alt="{{ article.title }}">
+                    <span class="license-mark">{{ license_mark }}</span>
+
+                    {% if block.settings.recipe_directions != blank %}
+                      <span class="product-recipe__spec-title right"><strong>{{ block.settings.recipe_directions }}</strong></span>
+                    {% endif %}
+                  </div> <!-- End img-holder -->
+                </div> <!-- End bg-cover -->
+              </div> <!-- End text-center -->
+
+              <h4 class="product-recipe__title">{{ article.title }}</h4>
+
+              <div class="rte product-recipe__content left">
+                {{ ingredients_part }}
+              </div>
+
+              <div class="rte product-recipe__content right">
+                {{ directions_part }}
+              </div>
+
+            </div> <!-- End fold__content -->
+          </div> <!-- End product-recipe -->
+
+      {% else %}
+        {% include 'fallback-msg' %}
+      {% endif %}
+
+    </div> <!-- End grid__item -->
+
+    <hr class="hr--clear-inverse hr--desktop">
+  {% endif %}
+
+  {% if block.type == 'similar_products' %}
+    <div class="wrapper" {{ block.shopify_attributes }}>
+      <div class="fold similar-product {% if product.featured_image.size > 0 %}fade-up delay-four{% endif %}">
+        <h3 class="heading heading--add fold__toggle">{{ 'products.product_page.similar_products_title' | t }}</h3>
+
+        <div class="fold__content">
+          {% if block.settings.similar_products_type == "tags" %}
+            {% include 'similar-product-carousel-tag', similar_products_quntity: block.settings.similar_products_quntity %}
+          {% elsif block.settings.similar_products_type == "collection" %}
+            {% include 'similar-product-carousel-collection', similar_products_quntity: block.settings.similar_products_quntity %}
+          {% endif %}
+        </div> <!-- End fold__content -->
+      </div> <!-- End fold -->
+    </div> <!-- End wraper -->
+  {% endif %}
+
+{% endfor %}
+
+
+{% schema %}
+  {
+    "name": "Product advanced",
+    "blocks": [
+      {
+        "type": "recipe",
+        "name": "Recipe",
+        "settings": [
+          {
+             "type":"article",
+             "id":"recipe_article",
+             "label":"Article with recipe"
+          },
+          {
+             "type":"text",
+             "id":"recipe_ingredients",
+             "label":"Heading for ingredients",
+             "default":"Ingredients"
+          },
+          {
+             "type":"text",
+             "id":"recipe_directions",
+             "label":"Heading for directions",
+             "default":"Directions"
+          }
+        ]
+      },
+      {
+        "type": "reviews",
+        "name": "Product reviews",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Product reviews"
+          },
+          {
+            "type": "paragraph",
+            "content": "Product reviews require [Shopify Product Review App](https://apps.shopify.com/product-reviews)"
+          }
+        ]
+      },
+      {
+        "type": "similar_products",
+        "name": "Similar Products",
+        "settings": [
+          {
+             "type": "range",
+             "id":"similar_products_quntity",
+             "label":"Number of similar products in carousel",
+             "min": 1,
+             "max": 20,
+             "step": 1,
+             "default": 4
+          },
+          {
+             "type":"radio",
+             "id":"similar_products_type",
+             "label":"Show similar products by type",
+             "options":[
+                {
+                   "value":"tags",
+                   "label":"by Tags"
+                },
+                {
+                   "value":"collection",
+                   "label":"by Collection"
+                }
+             ],
+             "default":"collection"
+          }
+        ]
+      },
+      {
+        "type": "boxed_slid_descr",
+        "name": "Boxed slider description",
+        "settings": [
+          {
+             "type":"header",
+             "content":"Boxed slider and product description"
+          },
+          {
+             "type":"checkbox",
+             "id":"product_size_unit_enable",
+             "label":"Weight label",
+             "info": "Show the weight unit under the product title",
+             "default": true
+          },
+          {
+            "type":"checkbox",
+            "id":"product_description_enable",
+            "label":"Show product description",
+            "default": true
+          }
+        ]
+      },
+      {
+        "type": "nutritional_shortcode",
+        "name": "Nutritional shortcode",
+        "settings": [
+          {
+             "type":"text",
+             "id":"product_nutritional_energy",
+             "label":"Nutritional value heading",
+             "default":"Nutritional value",
+             "info":"It uses for splitting product decription on parts"
+          },
+          {
+             "type":"text",
+             "id":"product_nutritional_vitamins",
+             "label":"Vitamins heading",
+             "default":"Vitamins:",
+             "info":"It uses for splitting product decription on parts"
+          },
+          {
+             "type":"text",
+             "id":"product_nutritional_minerals",
+             "label":"Minerals heading",
+             "default":"Minerals:",
+             "info":"It uses for splitting product decription on parts"
+          }
+        ]
+      },
+      {
+        "type": "social_block",
+        "name": "Share buttons",
+        "settings": [
+          {
+             "type":"text",
+             "id":"product_share_btns_heading",
+             "label":"Heading",
+             "default":"Share"
+          },
+          {
+             "type":"checkbox",
+             "id":"product_share_btns_facebook",
+             "label":"Facebook"
+          },
+          {
+             "type":"checkbox",
+             "id":"product_share_btns_twitter",
+             "label":"Twitter"
+          },
+          {
+             "type":"checkbox",
+             "id":"product_share_btns_pinterest",
+             "label":"Pinterest"
+          },
+          {
+             "type":"checkbox",
+             "id":"product_share_btns_google_p",
+             "label":"Google+"
+          },
+          {
+             "type":"checkbox",
+             "id":"product_share_btns_fancy",
+             "label":"Fancy"
+          }
+        ]
+      }
+    ],
+    "default": {
+      "blocks": [
+        {
+          "type": "boxed_slid_descr"
+        },
+        {
+          "type": "social_block",
+          "settings":
+          {
+              "product_share_btns_twitter": true,
+              "product_share_btns_facebook": true,
+              "product_share_btns_pinterest": true,
+              "product_share_btns_google_p": true,
+              "product_share_btns_fancy": true
+          }
+        },
+        {
+          "type": "nutritional_shortcode"
+        },
+        {
+          "type": "recipe"
+        },
+        {
+          "type": "similar_products"
+        }
+      ]
+    }
+  }
+{% endschema %}

@@ -1,0 +1,21 @@
+{% comment %}
+Featured product carousel
+For settings go to Admin -> Theme -> Customize Theme -> Home page
+{% endcomment %}
+
+<!-- Swiper -->
+<div class="swiper-container featured-carousel">
+  <div class="swiper-wrapper">
+    {% for product in collections[settings.homepage_featured_collection].products %}
+      <div class="swiper-slide">
+        {% include 'product-item-grid' %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Add Pagination -->
+  <div class="swiper-pagination"></div>
+  <!-- Add Arrows -->
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>

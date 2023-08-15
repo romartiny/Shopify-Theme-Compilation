@@ -1,0 +1,173 @@
+{% comment %}
+Special offered product (Used on homepage)
+{% endcomment %}
+<style>
+  .section--special-offer .section-heading:before {
+      content: "{{ section.settings.subheading_overlap }}";
+  }
+  {% unless section.settings.is_unit_show %}
+    .section--special-offer .product__size-unit{
+      display: none;
+    }
+  {% endunless %}
+
+</style>
+<section class="section section--special-offer">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item one-whole">
+        <div class="product product--lg product--lg-alt">
+          {% assign offered_product = section.settings.product %}
+
+          {% if offered_product and collections["all"] %}
+            {% for product in collections["all"].products %}
+              {% if offered_product == product.handle %}
+                {% assign target_product = product %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+
+          {% if section.settings.heading != blank %}
+            <h3 class="section-heading heading--page">{{ section.settings.heading | upcase }}</h3>
+          {% endif %}
+
+          {% if offered_product != blank %}
+
+            <div class="bg-cover product__img">
+              <div class="img-holder img-holder--block">
+                <a href="{{ target_product.url }}" title="{{ target_product.title }}">
+                  {% if section.settings.custom_image_enable %}
+                    <img src="{{ section.settings.img_special_product | img_url: '600x' | format: 'png' }}" alt="{{ target_product.title }}">
+                  {% else %}
+                    <img src="{% if target_product.featured_image.size > 0 %}{{ target_product.featured_image | img_url: 'large'}}{% else %}{{ 'img_no_image.jpg' | asset_url }}{% endif %}" alt="{{ target_product.title }}">
+                  {% endif %}
+                </a>
+              </div>
+            </div>
+
+            <div class="product__info">
+              <h4 class="product__title"><a href="{{ target_product.url }}" title="{{ target_product.title }}">{{ target_product.title }}</a></h4>
+              <span class="product__spec">
+                {% if target_product.type != blank %}
+                  {{ target_product.type | link_to_type }} |
+                {% endif %}
+
+                {% if target_product.variants.first.inventory_quantity > 0 %}
+                  {{ 'products.general.in_stock' | t }}
+                {% else %}
+                  {{ 'products.general.out_stock' | t }}
+                {% endif %}
+
+                {% if settings.product_size_unit_enable %}
+                  |
+                  {% if target_product.first_available_variant.option1 != 'Default Title' %}
+                    {{ target_product.first_available_variant.option1 }}
+                  {% else %}
+                    {{ target_product.first_available_variant.weight_unit }}
+                  {% endif %}
+                {% endif %}
+              </span>
+
+              <div class="product__expense">
+                <span class="product__price money">{{ target_product.price | money }}</span>
+
+                {% if target_product.variants.first.option1 != 'Default Title' %}
+                  {% capture weight_unit %}{{ target_product.variants.first.option1 }}{% endcapture %}
+                {% else %}
+                  {% capture weight_unit %}{{ target_product.variants.first.weight_unit }}{% endcapture %}
+                {% endif %}
+
+                <p class="product__size-unit">
+                  <em>
+                    {{ 'products.general.per' | t }}
+                    {% if weight_unit == "kg" %}
+                      {{ 'products.general.kilogram' | t }}
+                    {% else %}
+                      {{ weight_unit | downcase }}
+                    {% endif %}
+                  </em>
+                </p>
+              </div>
+
+              <div class="form-wrapper">
+                <form class="form form--default" action="/cart/add" method="post">
+                  <div class="form__row">
+                    <div class="quantity-field">
+                      <span class="icon icon--arrow-right js-up-quantity"></span>
+                      <input class="form__field" type="number" id="quantity" name="quantity" value="1" min="1" >
+                      <span class="icon icon--arrow-left js-down-quantity"></span>
+                    </div>
+                    <span class="js-price-and-value">x <span class="money">{{ target_product.price | money }}</span> = <span class="js-total-price money">{{ target_product.price | money }}</span></span>
+                  </div>
+
+                  <div class="form__row">
+                    <input type="hidden" name="id" value="{{ target_product.variants[0].id }}">
+                    <button type="submit" class="btn btn--default btn--full btn--submit js-add-to-card">{{ 'layout.general.add_to_cart_button' | t }}</button>
+                  </div>
+                </form>
+              </div> <!-- End form-wrapper -->
+            </div> <!-- End product__info -->
+          {% else %}
+            {% include 'fallback-msg' %}
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Special Offer Product",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Special offer"
+      },
+      {
+        "type": "text",
+        "id": "subheading_overlap",
+        "label": "Overlap subheading",
+        "default": "Fall"
+      },
+      {
+        "type": "product",
+        "id": "product",
+        "label": "Featured product"
+      },
+      {
+        "type": "checkbox",
+        "id": "is_unit_show",
+        "label": "Show product unit",
+        "info": "product unit is showing by default",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Product image"
+      },
+      {
+        "type": "checkbox",
+        "id": "custom_image_enable",
+        "label": "Use own image for offer product",
+        "info": "by default is using image from product",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "img_special_product",
+        "label": "Image for special product"
+      }
+
+    ],
+	"presets": [
+      {
+        "name": "Special Offer Product",
+        "category": "Offers"
+      }
+    ]
+  }
+{% endschema %}

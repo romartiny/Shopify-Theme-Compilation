@@ -1,0 +1,44 @@
+{% comment %}
+Homepage slideshow 
+For settings go to Admin -> Theme -> Customize Theme -> Home page Slideshow
+{% endcomment %}
+<!-- Flexslider -->
+<div class="flexslider flexslider-thumb flexslider-thumb--homepage">
+  <ul class="slides">
+    {% for slide_num in (1..3) %}
+
+      {% comment %}
+      Capture variables for every slide
+      {% endcomment %}
+      {% capture slide_img %}img_homepage_slide_{{ slide_num }}.png{% endcapture %}
+      {% capture slide_thumb_img %}img_thumb_homepage_slide_{{ slide_num }}.png{% endcapture %}
+
+      {% capture slide_link %}homepage_slide_{{ slide_num }}_link{% endcapture %}
+      {% capture slide_text_enable %}homepage_slide_{{ slide_num }}_text_enable{% endcapture %}
+      {% capture slide_heading %}homepage_slide_{{ slide_num }}_heading{% endcapture %}
+      {% capture slide_subheading %}homepage_slide_{{ slide_num }}_subheading{% endcapture %}
+      {% capture slide_price %}homepage_slide_{{ slide_num }}_price{% endcapture %}
+      {% capture slide_price_desc %}homepage_slide_{{ slide_num }}_price_desc{% endcapture %}
+
+
+	    <li class="slide slide--{{ slide_num }}" data-thumb="{{ slide_thumb_img | asset_url | small }}">
+	      
+	    	  {{ slide_img | asset_url | img_tag: '1024x1024' }}
+	    	  
+	    	  {% if settings[slide_text_enable] %}
+				  	<div class="slide__info-wrapper">
+              <h1 class="heading--page slide__heading"><a class="slide__link" href="{{ settings[slide_link] }}" title="{{ settings[slide_heading] }}">{{ settings[slide_heading] | upcase }}</a></h1>
+              <h2 class="subheading--page slide__subheading"><a class="slide__link" href="{{ settings[slide_link] }}" title="{{ settings[slide_heading] }}"><em>{{ settings[slide_subheading] }}</em></a></h2>
+              <div class="slide__price-point">
+                <div class="slide__price"><a class="slide__link" href="{{ settings[slide_link] }}" title="{{ settings[slide_heading] }}">{{ settings[slide_price] }}</a></div>
+                <div class="slide__desc"><a class="slide__link" href="{{ settings[slide_link] }}" title="{{ settings[slide_heading] }}"><em>{{ settings[slide_price_desc] }}</em></a></div>
+              </div>
+            </div>
+	    	  {% endif %}
+	    	
+	    </li>
+	    
+    {% endfor %}
+  </ul>
+</div>
+<!-- End flexslider -->

@@ -1,0 +1,379 @@
+<!-- *** Footer *** -->
+{% assign social_enable  = false %}
+{% assign payment_enable = false %}
+
+{% for block in section.blocks %}
+	{% if block.type == 'socail' %}
+		{% assign social_enable  = true %}
+	{% endif %}
+
+	{% if block.type == 'payment_methods' %}
+		{% assign payment_enable = true %}
+	{% endif %}
+{% endfor %}
+
+<footer class="footer {% unless social_enable %}social-disable{% endunless %} {% unless payment_enable %}payment-disable{% endunless %} clearfix" style="{% if section.settings.footer_img_enable %}background-image: url({{ section.settings.img_footer_bg | img_url: '2000x' | format: 'jpg' }}); background-repeat: no-repeat; background-position: 50% 50%;{% else %}background-color: {{ section.settings.color_bg }}{% endif %}">
+
+  {% comment %}
+  Instagram feed
+  For setting go to Admin -> Theme -> Customize Theme -> Footer
+  {% endcomment %}
+
+  {% if section.settings.foter_above == 'instagram' %}
+    <div class="instagram-feed-container">
+      <h2 class="heading--page">{{ section.settings.instagram_heading | upcase }}</h2>
+      <h4 class="subheading--page-small"><em>{{ section.settings.instagram_subheading }}</em></h4>
+      <div class="instagram-feed" id="instafeed"></div>
+    </div>
+
+  {% elsif section.settings.foter_above == 'subscribe_form' %}
+    <div class="subscribe-form subscribe-form--footer">
+      <h2 class="heading--page">{{ section.settings.subscribe_heading | upcase }}</h2>
+      <h4 class="subheading--page-small"><em>{{ section.settings.subscribe_subheading }}</em></h4>
+      {% if settings.subscribe_form_variant == 'mailchimp' %}
+        {% comment %}
+        Snippet for MailChimp subscribe form
+        For setting go to Admin -> Theme -> Customize Theme -> Homepage
+        {% endcomment %}
+        {% include 'subscribe-form-mailchimp' %}
+      {% elsif settings.subscribe_form_variant == 'standart' %}
+        {% comment %}
+        Snippet for standart (Shopify) subscribe form
+        For setting go to Admin -> Theme -> Customize Theme -> Homepage
+        {% endcomment %}
+        {% include 'subscribe-form-shopify'%}
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <hr class="hr--clear">
+
+  {% comment %}
+  Choose css grid for columns number
+  {% endcomment %}
+  {% case section.blocks.size %}
+    {% when 0 %}
+    {% when 1 %}
+      {% assign footer_column_width = 'text-center' %}
+    {% when 2 %}
+      {% assign footer_column_width = 'large--one-half medium--one-half one-whole' %}
+    {% when 3 %}
+      {% assign footer_column_width = 'large--one-third medium--one-third one-whole' %}
+    {% when 4 %}
+      {% assign footer_column_width = 'large--one-quarter medium--one-half one-whole' %}
+  {% endcase %}
+
+  <div class="wrapper">
+    <div class="grid">
+
+      {% for block in section.blocks %}
+        {% case block.type %}
+
+          {% when 'address' %}
+      		{% comment %}
+            Contact information.
+            For setting go to Admin -> Theme -> Customize Theme -> Section -> Footer
+            {% endcomment %}
+
+      		<div class="grid__item {{ footer_column_width }} footer__item footer__item--contact {% if settings.footer_show_methods_of_payment %}footer__item--contact-half{% endif %}" {{ block.shopify_attributes }}>
+              {% if block.settings.address_text != blank %}
+                <h4 class="heading--add-small">{{ block.settings.title | upcase }}</h4>
+                <div>{{ block.settings.address_text }}</div>
+              {% endif %}
+            </div>
+		  	<!--   -->
+
+      	  {% when 'latest_blog' %}
+      		{% comment %}
+            Latest from blog.
+            For setting go to Admin -> Theme -> Customize Theme -> Section -> Footer
+            {% endcomment %}
+
+      		<div class="grid__item {{ footer_column_width }} footer__item footer__item--blog ">
+              <h4 class="heading--add-small">{{ block.settings.title | upcase }}</h4>
+              <div class="footer__item--blog-item">
+                {% assign article = blogs[block.settings.blog].articles.first %}
+                {% if article.image %}
+                  {% assign image_alt = article.title | escape %}
+
+                  <a class="article-link" href="{{ article.url }}" title="{{ article.title }}">
+                    <img class="article-image" src="{{ article | img_url: 'compact'  }}" alt="{{ article.title }}">
+                  </a>
+
+                {% endif %}
+                <div class="article-desc">
+                  <h5 class="article-title">{{ article.title | link_to: article.url | truncatewords: 6 }}</h5>
+                </div>
+              </div>
+            </div>
+      		<!--   -->
+
+      	  {% when 'menu' %}
+      		{% comment %}
+            Footer menu.
+            For setting go to Admin -> Theme -> Customize Theme -> Section -> Footer
+            {% endcomment %}
+
+      		<div class="grid__item {{ footer_column_width }} footer__item footer__item--menu">
+              <h4 class="heading--add-small">{{ block.settings.title | upcase }}</h4>
+              <ul class="footer-list">
+                {% for link in linklists[block.settings.linklist].links %}
+                  <li class="footer-list__item">
+                    <a class="footer-list__link" href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+      		<!--   -->
+
+      	  {% when 'social' %}
+      		{% comment %}
+            Social media icons.
+            For setting go to Admin -> Theme -> Customize Theme -> Section -> Footer
+            {% endcomment %}
+
+      		<div class="grid__item {{ footer_column_width }} footer__item footer__item--social">
+              <h4 class="heading--add-small">{{ block.settings.title | upcase }}</h4>
+              {% include 'social-links' %}
+            </div>
+      		<!--   -->
+
+		  {% when 'payment_methods' %}
+      		{% comment %}
+            Payment Methods.
+            For setting go to Admin -> Theme -> Customize Theme -> Section -> Footer
+            {% endcomment %}
+
+      		<div class="grid__item {{ footer_column_width }}  footer__item footer__item--payments">
+              <p class="copyright-mobile">
+                &copy; {{ 'now' | date: "%Y" }}, {{ shop.name }}. {{ 'layout.copyright.right_reserved' | t }}
+                {% if section.settings.copyright_link != blank %}
+                  <a class="text-link--default" href="{{ section.settings.copyright_link }}" target="_blank" title="{{ section.settings.copyright_link_text }}">{{ section.settings.copyright_link_text }}</a>
+                {% endif %}
+              </p>
+
+
+                {% unless shop.enabled_payment_types == empty %}
+                  {% assign enabled_payment_types = 'visa,master,american_express,paypal,diners_club,discover,jcb,google,bitcoin' %}
+                  <h4 class="heading--add-small">{{ block.settings.title | upcase }}</h4>
+                  <ul class="list-payments">
+                    {% for type in shop.enabled_payment_types %}
+                      {% if enabled_payment_types contains type %}
+                        <li class="list-payments__item">
+                          <span>
+                            <span class="icon-payment icon--{{type}}" aria-hidden="true"></span>
+                            <span class="fallback-text">{{ type | replace: '_', ' ' }}</span>
+                          </span>
+                        </li>
+                      {% else %}
+                        <li class="list-payments__item list-payments__item--img">
+                          <img src="{{ type | payment_type_img_url }}" />
+                        </li>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                {% endunless %}
+            </div>
+      		<!--   -->
+
+        {% endcase %}
+      {% endfor %}
+
+    </div><!-- end grid -->
+  </div><!-- end wrapper-->
+
+  <p class="copyright">
+  &copy; {{ 'now' | date: "%Y" }}, {{ shop.name }}. {{ 'layout.copyright.right_reserved' | t }}
+    {% if section.settings.copyright_link != blank %}
+      <a class="text-link--default" href="{{ section.settings.copyright_link }}" target="_blank" title="{{ section.settings.copyright_link_text }}">{{ section.settings.copyright_link_text }}</a>
+    {% endif %}
+  </p>
+
+</footer>
+<!-- *** End footer *** -->
+
+{% schema %}
+  {
+    "name": "Footer",
+    "max_blocks": 4,
+    "settings": [
+	  {
+        "type": "header",
+        "content": "Footer styles"
+      },
+      {
+        "type": "color",
+        "id": "color_bg",
+        "label": "Backgroung color",
+        "default": "#f5f4f4"
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_img_enable",
+        "label": "Use image for background"
+      },
+      {
+        "type": "image_picker",
+        "id": "img_footer_bg",
+        "label": "Upload backgroung image",
+        "info": "Max width 2000px and max height 2000px"
+      },
+	  {
+        "type": "header",
+        "content": "Section before footer"
+      },
+      {
+        "type": "radio",
+        "id": "foter_above",
+        "label": "What show before footer",
+        "options": [
+          {
+            "value": "none",
+            "label": "None"
+          },
+          {
+            "value": "instagram",
+            "label": "Show instagram feed"
+          },
+          {
+            "value": "subscribe_form",
+            "label": "Show subscribe form"
+          }
+        ],
+		"default": "instagram",
+        "info": "Subscribe settings are available in appropriate item"
+      },
+	  {
+        "type": "header",
+        "content": "Subscribe section text"
+      },
+      {
+        "type": "text",
+        "id": "instagram_heading",
+        "label": "Instagram heading",
+        "default": "Instagram"
+      },
+      {
+        "type": "text",
+        "id": "instagram_subheading",
+        "label": "Instagram subheading",
+        "default": "let’s have a look what is behind the scenes"
+      },
+	  {
+        "type": "header",
+        "content": "Subscribe section text"
+      },
+	  {
+        "type": "text",
+        "id": "subscribe_heading",
+        "label": "Subscribe heading",
+        "default": "Get notified"
+      },
+      {
+        "type": "text",
+        "id": "subscribe_subheading",
+        "label": "Subscribe subheading",
+        "default": "joining newsletter from Foodly to get the latest news and offers"
+      },
+	  {
+        "type": "header",
+        "content": "Copyright"
+      },
+      {
+        "type": "text",
+        "id": "copyright_link",
+        "label": "Copyright link",
+        "default": "http:\/\/themeforest.net\/user\/congruityhub\/portfolio"
+      },
+      {
+        "type": "text",
+        "id": "copyright_link_text",
+        "label": "Copyright link text",
+        "default": "Theme by Congruity Hub"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "address",
+        "name": "Contact Information",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Contact info"
+          },
+          {
+            "type": "textarea",
+            "id": "address_text",
+            "label": "Contact info text",
+            "default": "<ul><li><i class='fa fa-envelope'><\/i><a href='mailto:contact@foodly.com'>contact@foodly.com<\/a><\/li><li><i class='fa fa-mobile'><\/i>912-823-5448<\/li><li><i class='fa fa-map-marker'><\/i>Foodly Inc Suite<br>109 273 – 3000 High Way<br>Whistler, BC, V0N 2B5 <\/li><\/ul>",
+            "info": "Use basic HTML to format text"
+          }
+        ]
+      },
+      {
+        "type": "latest_blog",
+        "name": "Show latest blog post",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Latest post"
+          },
+          {
+            "type": "blog",
+            "id": "blog",
+            "label": "Choose blog"
+          }
+        ]
+      },
+      {
+        "type": "menu",
+        "name": "Menu",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Footer Menu"
+          },
+          {
+            "type": "link_list",
+            "id": "linklist",
+            "label": "Choose menu"
+          }
+        ]
+      },
+      {
+        "type": "social",
+        "name": "Social Links",
+		"limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Follow Us"
+          }
+        ]
+      },
+	  {
+        "type": "payment_methods",
+        "name": "Payment methods",
+		"limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Payment methods"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

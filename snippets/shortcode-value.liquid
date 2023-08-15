@@ -1,0 +1,17 @@
+{%-comment-%}
+Usage:
+    {% include 'shortcode-value' with product.content, shortcode_tag: "[description-overview]" %}
+    {% if shortcode-value %} {{shortcode-value}} {%endif%}
+{%-endcomment-%}
+
+
+{% include 'clear-shortcode' with shortcode-value %}
+
+{% assign shortcode_tag_close = shortcode_tag | replace: "[", "[/" %}
+
+{% if cleared_shortcode contains shortcode_tag %}
+  {% assign temp_value  = cleared_shortcode | split: shortcode_tag | last %}
+  {% assign shortcode-value  = temp_value | split: shortcode_tag_close | first %}
+{% else %}
+  {% assign shortcode-value = nil %}
+{% endif %}

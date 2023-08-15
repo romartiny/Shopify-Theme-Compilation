@@ -1,0 +1,88 @@
+<style>
+.section-heading--season:before {
+  content: "{{ section.settings.heading_overlap }}";
+}
+  
+.offer-season__img {
+  background-image: url({{ section.settings.image_bg | img_url: '850x' | format: 'jpg' }});
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+</style>
+<section class="offer-season">
+  <h3 class="section-heading section-heading--season heading--page">offer of strength</h3>
+  <div class="offer-season__content">
+    <div class="offer-season__product-one">
+      {% if section.settings.left_product %}
+        {% assign left_product = all_products[section.settings.left_product] %}
+        <a href="{{ left_product.url  }}" title="{{ left_product.title }}">
+          <span class="img-holder">
+            <img src="{{ left_product.featured_image.src | img_url: "large" }}" alt="{{ left_product.title }}">
+          </span>          
+          <span class="offer-season__product-title">{{ left_product.title }}</span>
+          <span class="arrow arrow--next">
+            <span class="icon icon--arrow-right"></span>
+          </span>
+        </a>
+      {% endif %}
+    </div>
+    <div class="offer-season__img">
+      
+    </div>
+    <div class="offer-season__product-two">
+      {% if section.settings.right_product %}
+        {% assign right_product = all_products[section.settings.right_product] %}
+        <a href="{{ right_product.url  }}" title="{{ right_product.title }}">
+          <span class="img-holder">
+            <img src="{{ right_product.featured_image.src | img_url: "large" }}" alt="{{ right_product.title }}">
+          </span>          
+          <span class="offer-season__product-title">{{ right_product.title }}</span>
+          <span class="arrow arrow--next">
+            <span class="icon icon--arrow-right"></span>
+          </span>
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "Special Offer Season",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "offer of strength"
+      },
+      {
+        "type": "text",
+        "id": "heading_overlap",
+        "label": "Heading Overlap",
+        "default": "Summer"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_bg",
+        "label": "Image for background"
+      },
+      {
+        "type": "product",
+        "id": "left_product",
+        "label": "Left product"
+      },
+      {
+        "type": "product",
+        "id": "right_product",
+        "label": "Right product"
+      }
+    ],
+	"presets": [
+      {
+        "name": "Special Offer Season",
+        "category": "Offers"
+      }
+    ]
+  }
+{% endschema %}

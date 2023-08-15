@@ -1,0 +1,613 @@
+define(['utils', 'dropdowns'], function(utils, dropdowns) {
+
+  console.log('Module blogSorting is loaded');
+
+  var currentPage = 1;
+  var header = document.querySelector('.drawer--menu  .drawer__header');
+
+  // Ajax request
+  ajaxRequestSort = function(url) {
+
+    if (!window.XMLHttpRequest || !url) {
+      return null;
+    }
+
+    var XHR = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
+    var xhr = new XHR();
+    xhr.open('GET', url, true);
+
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        var responseObject = JSON.parse(xhr.responseText);
+        sorting(responseObject.articles);
+      } else {
+        console.log('not loaded');
+      }
+    };
+
+    xhr.send(null); // send request
+  };
+
+
+  // Init sorting
+  sorting = function(itemsToSort) {
+    var sortingContainer = document.getElementById('sorting_toolbar');
+
+    if (!sortingContainer || itemsToSort.length === 0) {
+      return null;
+    }
+
+    var filters = ['', 'none', 'title-ascending', 'title-descending', 'date-old-new', 'date-new-old'];
+    var filtersName = ['Sort by', 'None', 'by title: A-Z', 'by title: Z-A', 'by date: new to old', 'by date: old to new'];
+    var sortSelect = initSortFilters(filters, filtersName);
+    var sortContainer = document.querySelector('.blog-container');
+    var tagContainer = initSortTagsAndContainer(itemsToSort);
+    var tagsContainerWrapper = document.createElement('div');
+    var clearButton = document.createElement('button');
+    var sortingTags = [];
+    var sortingArray = [];
+    var currentFilter;
+    var choosedTagsContainer = document.createElement('ul');
+    var choosedTagsWrapper = document.createElement('div');
+
+    tagContainer.addEventListener('click', function(e) {
+      var target = e.target;
+      var arrayForTags;
+
+      if (target instanceof HTMLLIElement && target.classList.contains('sort-tag') && sortingTags.indexOf(target.textContent) < 0) {
+        sortingTags.push(target.textContent);
+        sortingByTagsCount(sortContainer, getItemsWithTags(itemsToSort, sortingTags, sortingArray));
+        clearButton.classList.remove('display-none');
+        choosedTagsWrapper.appendChild(insertSortingTags(sortingTags, choosedTagsContainer));
+      }
+
+      if (currentFilter) {
+        sortSelect.value = currentFilter;
+        if ("createEvent" in document) {
+          var evt = document.createEvent("HTMLEvents");
+          evt.initEvent("change", false, true);
+          sortSelect.dispatchEvent(evt);
+        } else {
+          sortSelect.fireEvent("onchange");
+        }
+      }
+    });
+
+    choosedTagsContainer.addEventListener('click', function(e) {
+      var target = e.target;
+
+      if ((target instanceof HTMLLIElement && sortingTags.indexOf(target.textContent) > -1) || target instanceof HTMLSpanElement) {
+        sortingTags.splice(sortingTags.indexOf(target.textContent), 1);
+
+
+        if (sortingTags.length === 0) {
+          insertItems(sortContainer, itemsToSort);
+          clearButton.classList.add('display-none');
+          choosedTagsContainer.innerHTML = '';
+        } else {
+          sortingByTagsCount(sortContainer, getItemsWithTags(itemsToSort, sortingTags, sortingArray));
+
+          choosedTagsWrapper.appendChild(insertSortingTags(sortingTags, choosedTagsContainer));
+        }
+
+
+        target.classList.remove('active-tag');
+      }
+    });
+
+    sortSelect.addEventListener('change', function(e) {
+      e.preventDefault();
+      var targetValue = e.target.value;
+
+      currentFilter = e.target.value;
+
+      switch (targetValue) {
+        case filters[2]:
+          if (sortingTags.length > 0) {
+            ascendingTitleSort(sortContainer, getItemsWithTags(itemsToSort, sortingTags, sortingArray));
+          } else {
+            ascendingTitleSort(sortContainer, itemsToSort);
+          }
+
+          break;
+        case filters[3]:
+          if (sortingTags.length > 0) {
+            descendingTitleSort(sortContainer, getItemsWithTags(itemsToSort, sortingTags, sortingArray));
+          } else {
+            descendingTitleSort(sortContainer, itemsToSort);
+          }
+
+          break;
+        case filters[4]:
+          if (sortingTags.length > 0) {
+            oldNewDateSort(sortContainer, getItemsWithTags(itemsToSort, sortingTags, sortingArray));
+          } else {
+            oldNewDateSort(sortContainer, itemsToSort);
+          }
+
+          break;
+        case filters[5]:
+          if (sortingTags.length > 0) {
+            newOldDateSort(sortContainer, getItemsWithTags(itemsToSort, sortingTags, sortingArray));
+          } else {
+            newOldDateSort(sortContainer, itemsToSort);
+          }
+
+          break;
+        default:
+          if (sortingTags.length > 0) {
+            sortingByTagsCount(sortContainer, getItemsWithTags(itemsToSort, sortingTags, sortingArray));
+          } else {
+            newOldDateSort(sortContainer, itemsToSort);
+          }
+      }
+    });
+
+    choosedTagsContainer.className = 'blog-sorting_choosed-tags';
+
+    clearButton.type = 'button';
+    clearButton.className = 'blog-sorting__clear-query display-none';
+    clearButton.innerHTML = '<span class="icon--plus-small"></span>' + '{{ "blogs.sorting.reset_filters" | t }}';
+
+    clearButton.addEventListener('click', function() {
+      var activeTags = tagContainer.querySelectorAll('.active-tag');
+
+      for (var i = 0, max = activeTags.length; i < max; i++) {
+        activeTags[i].classList.remove('active-tag');
+      }
+
+      for (i = 0, max = itemsToSort.length; i < max; i++) {
+        if (itemsToSort[i].sorting_tags) {
+          delete itemsToSort[i].sorting_tags;
+        }
+
+      }
+      this.classList.add('display-none');
+      sortingTags = [];
+      sortSelect.value = filters[1];
+      choosedTagsContainer.innerHTML = '';
+      newOldDateSort(sortContainer, itemsToSort);
+    });
+
+    tagsContainerWrapper.className = 'blog-sort-wrapper';
+    tagsContainerWrapper.appendChild(tagContainer);
+
+    choosedTagsWrapper.appendChild(clearButton);
+    choosedTagsWrapper.appendChild(choosedTagsContainer);
+
+
+    sortingContainer.appendChild(sortSelect);
+    sortingContainer.appendChild(choosedTagsWrapper);
+    sortingContainer.appendChild(tagsContainerWrapper);
+
+    dropdowns.initDropdown(sortSelect);
+
+    if (tagsContainerWrapper.offsetHeight > 100) {
+      var collapseButton = document.createElement('button');
+      collapseButton.type = 'button';
+      tagsContainerWrapper.style.height = '105px';
+      collapseButton.addEventListener('click', function() {
+        if (tagsContainerWrapper.classList.contains('open')) {
+          tagsContainerWrapper.style.height = '105px';
+          tagsContainerWrapper.classList.remove('open');
+          this.innerHTML = '<span class="icon--plus-small"></span>' + '{{ "blogs.sorting.show_more" | t }}';
+        } else {
+          tagsContainerWrapper.style.height = tagContainer.offsetHeight + 'px';
+          tagsContainerWrapper.classList.add('open');
+          this.innerHTML = '<span class="icon--plus-small"></span>' + '{{ "blogs.sorting.hide_tags" | t }}';
+        }
+
+      });
+
+      collapseButton.innerHTML = '<span class="icon--plus-small"></span>' + '{{ "blogs.sorting.show_more" | t }}';
+      collapseButton.className = 'blog-sort__collapse-btn';
+      sortingContainer.appendChild(collapseButton);
+    }
+  };
+
+  function findParent(element, parentConstructor, className) {
+    if (!element || !parentConstructor || !className) {
+      return null;
+    }
+
+    while (!(element instanceof parentConstructor) && !(element.classList.contains(className))) {
+      element = element.parentElement;
+      if (element == document.body) {
+        return null;
+      }
+    }
+    return element;
+  }
+
+  function getItemsWithTags(itemsToSort, sortingTags, sortingArray) {
+    var listOfTags;
+    var listOfTagsArr = [];
+    var sortingUniqueTags = {};
+    var newSortingArray = [];
+
+    for (var i = 0, max = sortingTags.length; i < max; i++) {
+      sortingArray = sortingArray.concat(itemsToSort.filter(function(currVal) {
+
+        listOfTags = currVal.tags.toLowerCase();
+        listOfTagsArr = listOfTags.split(', ');
+
+        if (listOfTagsArr.indexOf(sortingTags[i]) > -1) {
+
+          sortingUniqueTags[currVal.id] += listOfTagsArr[listOfTagsArr.indexOf(sortingTags[i])] + ',';
+
+          if (sortingUniqueTags[currVal.id].indexOf('undefined') === 0) {
+            sortingUniqueTags[currVal.id] = sortingUniqueTags[currVal.id].substr(9);
+          }
+
+          return true;
+        } else {
+          return false;
+        }
+
+      }));
+    }
+
+    first: for (var uniqueId in sortingUniqueTags) {
+      for (i = 0, max = sortingArray.length; i < max; i++) {
+        if (uniqueId === sortingArray[i].id + '') {
+
+          sortingArray[i].sorting_tags = sortingUniqueTags[uniqueId].substring(0, sortingUniqueTags[uniqueId].length - 1);;
+          newSortingArray.push(sortingArray[i]);
+          continue first;
+        }
+      }
+    }
+
+    return newSortingArray;
+  }
+  // Insert tags to HTML
+  function insertSortingTags(sortingTags, choosedTagsContainer) {
+    choosedTagsContainer.innerHTML = '';
+    for (var i = 0, max = sortingTags.length; i < max; i++) {
+      var sortingTag = document.createElement('li');
+      sortingTag.className = 'choosen-tag';
+      sortingTag.innerHTML = '<span class="icon--plus-small"></span>' + sortingTags[i];
+      choosedTagsContainer.appendChild(sortingTag);
+    }
+
+    return choosedTagsContainer;
+  }
+
+  //------------- Title Sorting -------------
+  // ascendingTitleSort
+  function ascendingTitleSort(container, arrayToSort) {
+
+    arrayToSort.sort(function(a, b) {
+      return a.title == b.title ? 0 : (a.title > b.title ? 1 : -1);
+    });
+
+    insertItems(container, arrayToSort);
+  }
+
+  // descendingTitleSort
+  function descendingTitleSort(container, arrayToSort) {
+
+    arrayToSort.sort(function(a, b) {
+      return a.title == b.title ? 0 : (a.title < b.title ? 1 : -1);
+    });
+
+    insertItems(container, arrayToSort);
+  }
+
+  //------------- Date Sorting --------------
+  // from old to new
+  function oldNewDateSort(container, arrayToSort) {
+
+    arrayToSort.sort(function(a, b) {
+      return a.created_at == b.created_at ? 0 : (a.created_at > b.created_at ? 1 : -1);
+    });
+
+    insertItems(container, arrayToSort);
+  }
+
+  // from new to old
+  function newOldDateSort(container, arrayToSort) {
+
+    arrayToSort.sort(function(a, b) {
+      return a.created_at == b.created_at ? 0 : (a.created_at < b.created_at ? 1 : -1);
+    });
+
+    insertItems(container, arrayToSort);
+  }
+
+  //------------- Sorting by filter -----------
+  function sortingByTagsCount(container, arrayToSort) {
+
+    arrayToSort.sort(function(a, b) {
+      return a.sorting_tags.length == b.sorting_tags.length ? 0 : (a.sorting_tags.length < b.sorting_tags.length ? 1 : -1);
+    });
+
+    insertItems(container, arrayToSort);
+  }
+
+  // Insert tags into document
+  function initSortTagsAndContainer(itemsArray) {
+    if (itemsArray.length === 0) {
+      return null;
+    }
+
+    var tagsStringArray = [];
+    var uniqueTagsArray = [];
+    var tagsContainer = document.createElement('ul');
+    tagsContainer.className = 'blog-sort-tags';
+
+    for (var i = 0, max = itemsArray.length; i < max; i++) {
+      tagsStringArray[i] = itemsArray[i].tags.split(', ');
+      for (var j = 0, maxj = tagsStringArray[i].length; j < maxj; j++) {
+        if (tagsStringArray[i][j] !== '' && uniqueTagsArray.indexOf(tagsStringArray[i][j].toLowerCase()) < 0) {
+          uniqueTagsArray.push(tagsStringArray[i][j].toLowerCase());
+        }
+      }
+    }
+
+    // Sort no duplicate items in alphabetically
+    uniqueTagsArray.sort(function(a, b) {
+      return a == b ? 0 : (a > b ? 1 : -1);
+    });
+
+    var tagText, savedChar;
+
+    var alphabeticalOrder = '{{ "blogs.sorting.sorting_alphabet" | t }}';
+    // Insert items into container
+    for (i = 0, max = uniqueTagsArray.length; i < max; i++) {
+      var tag = document.createElement('li');
+      tagText = uniqueTagsArray[i];
+
+      if (alphabeticalOrder.indexOf(tagText.slice(0, 1)) > -1 && savedChar !== tagText.slice(0, 1)) {
+        var charItem = document.createElement('li');
+        savedChar = tagText.slice(0, 1);
+        charItem.textContent = savedChar;
+        charItem.className = 'sort-char';
+        tagsContainer.appendChild(charItem);
+      }
+
+      tag.className = 'sort-tag';
+      tag.textContent = uniqueTagsArray[i];
+      tagsContainer.appendChild(tag);
+    }
+
+    return tagsContainer;
+  }
+
+  // Insert filters into document
+  function initSortFilters(filters, filtersName) {
+    var filterSelect = document.createElement('select');
+    filterSelect.id = 'blog_sorting';
+    filterSelect.className = 'js-dropdown';
+
+    for (var i = 0, max = filters.length; i < max; i++) {
+      var filterOption = document.createElement('option');
+      filterOption.value = filters[i];
+      filterOption.textContent = filtersName[i];
+      filterSelect.appendChild(filterOption);
+    }
+    return filterSelect;
+  }
+
+  function insertItems(container, items) {
+    var itemsPerPage = {{ settings.blog_article_per_page }};
+
+    if (items.length > itemsPerPage) {
+      var paginationItems = {};
+      var arr = [];
+      var counterPage = 1;
+
+      // make pages
+      for (var i = 0, max = items.length; i < max; i++) {
+
+        if (i % itemsPerPage === 0 && i !== 0) {
+          counterPage++;
+          arr = [];
+        }
+
+        arr.push(items[i]);
+        paginationItems['page-' + counterPage] = arr;
+      }
+
+      if (currentPage > Object.keys(paginationItems).length) {
+        currentPage = 1;
+      }
+
+      insertHTML(container, paginationItems['page-' + currentPage]);
+      container.appendChild(initPagination(paginationItems, container, currentPage));
+    } else {
+      insertHTML(container, items);
+    }
+  }
+
+  function insertHTML(container, items) {
+    var itemTemplate, itemURL, date, itemDate;
+    var monthNames = ["{{ 'blogs.months_for_sorting.january' | t }}", "{{ 'blogs.months_for_sorting.february' | t }}", "{{ 'blogs.months_for_sorting.march' | t }}", "{{ 'blogs.months_for_sorting.april' | t }}", "{{ 'blogs.months_for_sorting.may' | t }}", "{{ 'blogs.months_for_sorting.june' | t }}", "{{ 'blogs.months_for_sorting.july' | t }}", "{{ 'blogs.months_for_sorting.august' | t }}", "{{ 'blogs.months_for_sorting.september' | t }}", "{{ 'blogs.months_for_sorting.october' | t }}", "{{ 'blogs.months_for_sorting.november' | t }}", "{{ 'blogs.months_for_sorting.december' | t }}"];
+
+    container.style.height = container.clientHeight + 'px';
+    container.innerHTML = '';
+
+    for (var i = 0, max = items.length; i < max; i++) {
+      itemTemplate = '<article class="article article--blog"><div class="img-holder"><a href="{ARTICLE_URL}" title="{ARTICE_TITLE}"><img class="article__img" src="{IMAGE_URL}" alt="{ARTICE_TITLE}"></a></div><h3 class="heading--add article__title"><a href="{ARTICLE_URL}" title="{ARTICE_TITLE}">{ARTICE_TITLE}</a></h3><p class="article__date"><time class="date">{ARTICLE_DATE}</time></p><div class="rte article__content"></div><p class="article__author">{{ "blogs.general.by_author" | t }} {ARTICLE_AUTHOR}</p></article><hr class="hr--clear-inverse">';
+
+      itemURL = items[i].title.replace(/\s/g, '-');
+      itemURL = location.pathname + '/' + items[i].id + '-' + itemURL.toLowerCase();
+
+      date = new Date(items[i].created_at);
+      itemDate = monthNames[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
+
+      itemTemplate = itemTemplate.replace(/\{ARTICLE_URL}/g, itemURL);
+      itemTemplate = itemTemplate.replace(/\{ARTICE_TITLE\}/g, items[i].title);
+      itemTemplate = itemTemplate.replace(/\{IMAGE_URL\}/g, items[i].image.src);
+      itemTemplate = itemTemplate.replace(/\{ARTICLE_DATE\}/g, itemDate);
+      itemTemplate = itemTemplate.replace(/\{ARTICLE_AUTHOR\}/g, items[i].author);
+      container.innerHTML += itemTemplate;
+    }
+
+    return setTimeout(function() {
+      container.style.height = 'auto';
+    }, 100);
+  }
+
+  // Pagination
+  function initPagination(paginationItems, container, activePage) {
+
+    var paginationItemsLength = Object.keys(paginationItems).length;
+    var pageRangeList = {};
+    var longPagination = false;
+    var currentPageRange = {};
+
+    // Main Container
+    var paginationContainer = document.createElement('ul');
+    paginationContainer.className = "pagination";
+    paginationContainer.addEventListener('click', function(e) {
+      paginationIteraction(e, paginationItems, container);
+    });
+
+    // LI element-container for pages numbers
+    var paginationPartsLiElement = document.createElement('li');
+    paginationPartsLiElement.className = "pagination__item--parts";
+
+    // Prev arrow
+    var prevButtonIcon = document.createElement('span');
+    prevButtonIcon.className = 'icon icon--arrow-left';
+
+    var prevButtonLink = document.createElement('a');
+    prevButtonLink.className = 'pagination__link';
+
+    var prevButton = document.createElement('li');
+    prevButton.className = 'pagination__item pagination__item--prev';
+
+    if (activePage !== 1) {
+      prevButtonLink.setAttribute('data-page', 'page-' + (activePage - 1));
+    } else {
+      prevButtonLink.setAttribute('data-page', 'disable');
+      prevButton.classList.add('disabled');
+    }
+
+    prevButtonLink.appendChild(prevButtonIcon);
+    prevButton.appendChild(prevButtonLink);
+    paginationContainer.appendChild(prevButton);
+
+    currentPageRange.start = (activePage === 1) ? activePage : (activePage - 1);
+    currentPageRange.end = (activePage === paginationItemsLength) ? activePage : (activePage + 1);
+
+    if (paginationItemsLength > 5) {
+      // first digits
+      if (currentPageRange.start <= 3) {
+        for (var i = 1; i <= (currentPageRange.start + 2); i++) {
+          pageRangeList['page-' + i] = paginationItems['page-' + i];
+        }
+      } else {
+        pageRangeList['page-1'] = paginationItems['page-1'];
+        pageRangeList['page-ellipsis-first'] = '...';
+      }
+
+      // middle digits
+      for (var i = currentPageRange.start; i <= currentPageRange.end; i++) {
+        pageRangeList['page-' + i] = paginationItems['page-' + i];
+      }
+
+      // end digits
+      if (currentPageRange.end >= paginationItemsLength - 2) {
+        for (var i = currentPageRange.end + 1; i <= paginationItemsLength; i++) {
+          pageRangeList['page-' + i] = paginationItems['page-' + i];
+        }
+      } else {
+        pageRangeList['page-ellipsis-last'] = '...';
+        pageRangeList['page-' + paginationItemsLength] = paginationItems['page-' + paginationItemsLength];
+      }
+
+      paginationPartsLiElement.appendChild(insertPaginationItem(pageRangeList, activePage));
+    } else {
+      paginationPartsLiElement.appendChild(insertPaginationItem(paginationItems, activePage));
+    }
+
+    paginationContainer.appendChild(paginationPartsLiElement);
+
+    // Next arrow
+    var nextButtonIcon = document.createElement('span');
+    nextButtonIcon.className = 'icon icon--arrow-right';
+
+    var nextButtonLink = document.createElement('a');
+    nextButtonLink.className = 'pagination__link';
+
+    var nextButton = document.createElement('li');
+    nextButton.className = 'pagination__item pagination__item--next';
+
+    if (activePage !== Object.keys(paginationItems).length) {
+      nextButtonLink.setAttribute('data-page', 'page-' + (activePage + 1));
+    } else {
+      nextButtonLink.setAttribute('data-page', 'disable');
+      nextButton.classList.add('disabled');
+    }
+
+    nextButtonLink.appendChild(nextButtonIcon);
+    nextButton.appendChild(nextButtonLink);
+    paginationContainer.appendChild(nextButton);
+
+    return paginationContainer;
+  }
+
+  function insertPaginationItem(paginationItems, activePage) {
+    var pageNumber;
+    var paginationPartLink, paginationPartElement;
+    // UL container for pages numbers
+    var paginationPartsContainer = document.createElement('ul');
+    paginationPartsContainer.className = "pagination__parts";
+
+    for (var page in paginationItems) {
+      pageNumber = parseInt(page.slice(5));
+      paginationPartLink = document.createElement('a');
+      paginationPartElement = document.createElement('li');
+
+      if (page === 'page-' + activePage) {
+        paginationPartElement.className = "pagination__item active";
+      } else {
+        paginationPartElement.className = "pagination__item";
+      }
+
+      paginationPartLink.className = 'pagination__link';
+      paginationPartLink.textContent = pageNumber;
+      paginationPartLink.setAttribute('data-page', page);
+
+      if (page === 'page-ellipsis-first' || page === 'page-ellipsis-last') {
+        paginationPartElement.className += " pagination__item--ellip";
+        paginationPartLink.textContent = '...';
+        paginationPartLink.href = 'javascript:void(0)';
+      }
+
+      paginationPartElement.appendChild(paginationPartLink);
+      paginationPartsContainer.appendChild(paginationPartElement);
+    }
+
+    return paginationPartsContainer;
+  }
+
+
+  function paginationIteraction(e, paginationItems, container) {
+    e.preventDefault();
+    var target = e.target;
+    var newPage;
+    var linkElement = findParent(e.target, HTMLAnchorElement, 'pagination__link');
+
+    if (linkElement) {
+      newPage = linkElement.getAttribute('data-page');
+
+      if (newPage === 'disable') {
+        return 0;
+      }
+
+      insertHTML(container, paginationItems[newPage]);
+      container.appendChild(initPagination(paginationItems, container, parseInt(newPage.slice(5))));
+
+      utils.scrollToY(header.clientHeight, 1500, 'easeInOutQuint');
+      currentPage = parseInt(newPage.slice(5));
+    }
+  }
+
+  return {
+    ajaxRequestSort: ajaxRequestSort,
+    init: sorting
+  }
+});

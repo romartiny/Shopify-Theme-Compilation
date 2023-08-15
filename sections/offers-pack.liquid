@@ -1,0 +1,194 @@
+<style>
+  .section--pack .section-heading:before {
+  	content: "{{ section.settings.heading_overlap }}";
+  }
+</style>
+<section class="section section--pack clearfix">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:900" rel="stylesheet">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item one-whole">
+        
+        {% if section.settings.heading != blank %}
+          <h3 class="section-heading heading--page">{{ section.settings.heading | upcase }}</h3>
+        {% endif %}
+
+        <div class="pack-container product--lg">
+          <div class="pack__image">
+          
+            {% assign pack_products = all_products[section.settings.pack] %}
+          
+            {% if pack_products.featured_image.size > 0 %}
+              <img src="{{ pack_products.featured_image | img_url: 'grande'}}" alt="{{ pack_products.title }}">
+            {% endif %} 
+
+            {% if section.settings.product_lt != blank %}
+              {% assign product_lt = all_products[section.settings.product_lt] %}
+              <div class="pack-offer pack-offer-lt">
+                <h5 class="pack-offer__title">
+                  <a href="{{ product_lt.url }}" title="{{ product_lt.title }}">
+                    {{ product_lt.title }}
+                  </a>
+                </h5>
+                <span class="pack-offer__spec">
+                  {% if product.type != blank %}
+                    {{ product.type | link_to_type }} |
+                  {% endif %}
+                
+                  {% if product_lb.available %}
+                    {{ 'products.general.in_stock' | t }}
+                  {% else %}
+                    {{ 'products.general.out_stock' | t }}
+                  {% endif %}
+                 
+                </span>
+              </div>
+            {% endif %} 
+
+            {% if section.settings.product_lb != blank %}
+              {% assign product_lb = all_products[section.settings.product_lb] %}
+              <div class="pack-offer pack-offer-lb">
+                <h5 class="pack-offer__title">
+                  <a href="{{ product_lb.url }}" title="{{ product_lb.title }}">
+                    {{ product_lb.title }}
+                  </a>
+                </h5>
+                <span class="pack-offer__spec">
+                  {% if product.type != blank %}
+                    {{ product.type | link_to_type }} |
+                  {% endif %}
+                
+                  {% if product_lb.available %}
+                    {{ 'products.general.in_stock' | t }}
+                  {% else %}
+                    {{ 'products.general.out_stock' | t }}
+                  {% endif %}
+                 
+                </span>
+              </div>
+            {% endif %}
+
+            {% if section.settings.product_rt != blank %}
+              {% assign product_rt = all_products[section.settings.product_rt] %}
+              <div class="pack-offer pack-offer-rt">
+                <h5 class="pack-offer__title">
+                  <a href="{{ product_rt.url }}" title="{{ product_rt.title }}">
+                    {{ product_rt.title }}
+                  </a>
+                </h5>
+                <span class="pack-offer__spec">
+                  {% if product.type != blank %}
+                    {{ product.type | link_to_type }} |
+                  {% endif %}
+                
+                  {% if product_lb.available %}
+                    {{ 'products.general.in_stock' | t }}
+                  {% else %}
+                    {{ 'products.general.out_stock' | t }}
+                  {% endif %}
+                 
+                </span>
+              </div>
+            {% endif %}             
+
+            {% if section.settings.product_rb != blank %}
+              {% assign product_rb = all_products[section.settings.product_rb] %}
+              <div class="pack-offer pack-offer-rb">
+                <h5 class="pack-offer__title">
+                  <a href="{{ product_rb.url }}" title="{{ product_rb.title }}">
+                    {{ product_rb.title }}
+                  </a>
+                </h5>
+                <span class="pack-offer__spec">
+                  {% if product.type != blank %}
+                    {{ product.type | link_to_type }} |
+                  {% endif %}
+                
+                  {% if product_lb.available %}
+                    {{ 'products.general.in_stock' | t }}
+                  {% else %}
+                    {{ 'products.general.out_stock' | t }}
+                  {% endif %}
+                 
+                </span>
+              </div>
+            {% endif %}
+
+          </div>
+          
+          <span class="pack__price"><span class="money">{{ pack_products.price | money }}</span></span>
+          
+          <div class="pack__desc">
+            {{ pack_products.description }}
+          </div>
+          <div class="form-wrapper">
+            <form class="form form--default" action="/cart/add" method="post">
+              <div class="form__row">
+                <input type="hidden" name="id" value="{{ pack_products.variants[0].id }}" /> 
+                <div class="quantity-field">
+                  <span class="icon icon--arrow-right js-up-quantity"></span>
+                  <input class="form__field" type="number" id="quantity" name="quantity" value="1" min="1" >
+                  <span class="icon icon--arrow-left js-down-quantity"></span>
+                </div>
+                <span class="js-price-and-value">x <span class="money">{{ pack_products.price | money }}</span> = <span class="js-total-price money">{{ pack_products.price | money }}</span></span>
+              </div>
+              <div class="form__row">
+                <button {% unless pack_products.available %}disabled{% endunless %} class="btn btn--default btn--full btn--submit {% unless pack_products.available %}btn--disabled{% endunless %} js-add-to-card" type="submit" >{% unless pack_products.available %}{{ 'products.general.out_stock' | t }}{% else %} {{ 'layout.general.add_to_cart_button' | t }}{% endunless %}</button>
+              </div>
+            </form>
+          </div> <!-- End form-wrapper -->
+        </div>
+      </div> <!-- End grid__item -->
+    </div> <!-- End grid -->
+  </div> <!-- End wrapper -->
+</section>
+{% schema %}
+  {
+    "name": "Special Offer Pack",
+    "settings": [
+      {
+        "type": "product",
+        "id": "pack",
+        "label": "Choose pack with products"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Balls"
+      },
+      {
+        "type": "text",
+        "id": "heading_overlap",
+        "label": "Overlap subheading",
+        "default": "Veggie"
+      },
+      {
+        "type": "product",
+        "id": "product_lt",
+        "label": "Left top product"
+      },
+      {
+        "type": "product",
+        "id": "product_rt",
+        "label": "Right top product"
+      },
+      {
+        "type": "product",
+        "id": "product_lb",
+        "label": "Left bottom product"
+      },
+      {
+        "type": "product",
+        "id": "product_rb",
+        "label": "Right bottom product"
+      }
+    ],
+	"presets": [
+      {
+        "name": "Special Offer Pack",
+        "category": "Offers"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,9 @@
+{% capture product_title %}{% include 'shortcode-render' render:'title' default:'' %}{% endcapture %}
+{% capture product_desc %}{% include 'shortcode-render' render:'recipe-description' default:'' %}{% endcapture %}
+{% capture product_top %}{% include 'shortcode-render' render:'top' default:'0' %}{% endcapture %}
+{% capture product_left %}{% include 'shortcode-render' render:'left' default:'0' %}{% endcapture %}
+
+{% assign product_title_arr = product_title_arr | append: product_title | append: '|' %}
+{% assign product_desc_arr  = product_desc_arr  | append: product_desc  | append: '|' %}
+{% assign product_top_arr   = product_top_arr   | append: product_top   | append: '|' %}
+{% assign product_left_arr  = product_left_arr  | append: product_left  | append: '|' %}

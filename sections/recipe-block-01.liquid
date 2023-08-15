@@ -1,0 +1,62 @@
+<section class="recipe-block-1 clearfix">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item one-whole">
+        <div class="block">
+          <div class="block__half block__half--bg" style="background-image: url({{ section.settings.image_bg | img_url: '700x' | format: 'jpg' }});">
+            
+          </div>
+          <div class="block__half bg-neutral">
+            <div class="block__content">
+              {% if section.settings.title != blank %}
+                <h3 class="block__title">{{ ection.settings.title }}</h3>
+              {% endif %}
+        
+              {% if section.settings.description!= blank %}
+                <p class="block__desc">{{ section.settings.description }}</p>
+              {% endif %}
+
+              <a class="btn btn--default" href="{{ section.settings.link }}" title="{{ 'additional_blocks.recipe_block_1.button' | t }}">{{ 'additional_blocks.recipe_block_1.button' | t }}</a>
+            </div>      
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Recipe Section",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image_bg",
+        "label": "Image for recipe"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Block Heading",
+        "default": "Nothing Tastes Better"
+      },
+      {
+        "type": "text",
+        "id": "description",
+        "label": "Block description",
+        "default": "than homemade pie made of raspberries & almond"
+      },
+      {
+        "type": "url",
+        "id": "link",
+        "label": "Button link"
+      }
+    ],
+	"presets": [
+      {
+        "name": "Recipe Section v.1",
+        "category": "Special sections"
+      }
+    ]
+  }
+{% endschema %}

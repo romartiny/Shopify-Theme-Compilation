@@ -1,0 +1,20 @@
+{%- comment -%} Strip all tags from shortcode {%- endcomment -%}
+
+{%- assign cleared_shortcode = clear-shortcode | replace: "[", "|*|[" -%}
+{%- assign cleared_shortcode = cleared_shortcode | replace: "]", "]|*|" -%}
+
+{%- assign shortparts = cleared_shortcode | split: '|*|' -%}
+{%- assign cleared_shortcode = '' -%}
+
+{%- for shortpart in shortparts  -%}
+
+  {%- if shortpart contains "[" and shortpart contains "]" -%}
+
+    {%- include "strip-html-tags" with shortpart -%}
+    {%- assign shortpart_temp = striped_html_tags | replace: ' ', '' -%}
+    {%- assign cleared_shortcode  = cleared_shortcode | append: shortpart_temp -%}
+  {%- else -%}
+    {%- assign cleared_shortcode  = cleared_shortcode | append: shortpart -%}
+  {%- endif -%}
+
+{%- endfor -%}

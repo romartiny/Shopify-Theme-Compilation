@@ -1,0 +1,64 @@
+<div>
+  {% assign offered_product = settings.homepage_special_product %}
+  
+  {% if settings.homepage_special_product_heading != blank %}
+    <h3 class="section-heading heading--page">{{ settings.homepage_special_product_heading | upcase }}</h3>
+  {% endif %}
+
+  {% if offered_product != blank %}
+
+    {% assign return = false %}
+    {% if offered_product and collections["all"] %}
+      {% for product in collections["all"].products %}
+        {% if offered_product == product.handle %}
+          {% assign target_product = product %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    <img src="{{ target_product.featured_image | img_url: 'large'}}" alt="{{ target_product.title }}">
+    <h4>{{ target_product.title }}</h4>
+    <span>
+      {{ target_product.type }} |
+
+      {% if target_product.variants.first.inventory_quantity > 0 %}
+        In stock
+      {% else %}
+        Out of stock
+      {% endif %} |          
+    </span>
+
+    <div>
+    	{{ target_product.price | money }}
+    </div>
+
+    <div>
+    	{% if target_product.variants.first.option1 != 'Default Title' %} 
+    	  {% capture weight_unit %}{{ target_product.variants.first.option1 }}{% endcapture %}
+      {% else %}
+        {% capture weight_unit %}{{ target_product.variants.first.weight_unit }}{% endcapture %}
+      {% endif %}
+
+      <p><em>per 
+    	  {% if weight_unit == "kg" %}
+           kilogram
+        {% else %}
+          {{ weight_unit | downcase }}
+    	  {% endif %}
+    	</em></p>  
+    </div>
+
+    <form action="/cart/add" method="post">
+      <div class="form__row">
+        <input type="hidden" name="id" value="{{ target_product.variants[0].id }}"> 
+      	<input type="number" id="quantity" name="quantity" value="1" min="1" >
+      	<span>x {{ target_product.price | money }} = <span class="total-price"></span></span>
+      </div>
+    	<div class="form__row">
+    		<input type="submit" class="btn btn--default js-add-to-card" value="{{ 'layout.general.add_to_cart_button' | t }}">
+    	</div>
+    </form>
+  {% endif %}
+
+</div>
+

@@ -1,0 +1,114 @@
+<style>
+  .section--homepage-recipe .section-heading:before {
+  	content: "{{ section.settings.subheading_overlap }}";
+  }
+</style>
+<section class="section section--homepage-recipe clearfix">
+    <div class="wrapper">
+      <div class="grid">
+        <div class="grid__item one-whole">
+          {% if section.settings.heading != blank %}
+            <h3 class="section-heading heading--page">{{ section.settings.heading | upcase }}</h3>
+          {% endif %}
+
+          {% if section.settings.subheading != blank %}
+            <p class="section__info text-center">{{ section.settings.subheading }}</p>
+          {% endif %}
+
+
+          {% if section.settings.recipes_blog != blank %}
+
+
+            {% capture rundom_article %}{{ 'now' | date: '%S' | times:  blogs[section.settings.recipes_blog].articles_count | divided_by: 60 }}{% endcapture %}
+
+
+            {% for article in blogs[section.settings.recipes_blog].articles offset:rundom_article limit:1 %}
+              <article class="article article--blog">
+                {% if article.image %}
+                  <div class="img-holder">
+                    <a href="{{ article.url }}" title="{{ article.title }}">
+                      <img src="{{ article | img_url: 'large' }}" alt="{{ article.title }}">
+                    </a>
+                  </div>
+                {% endif %}
+                <div class="article__info">
+                  <h5 class="heading--add article__title">
+                    <a href="{{ article.url }}" title="{{ article.title }}">{{ article.title }}</a>
+                  </h5>
+                  <p class="article__date">
+                    <time class="date">{{ article.created_at | date: '%B %-d, %Y' }}</time>
+                  </p>
+                  <div class="rte article__content">
+                    {% assign  content_html =  article.excerpt_or_content %}
+
+                    {% comment %}
+                    Strip unnecessary html
+                    {% endcomment %}
+                    {% include 'strip_html_tags' with content_html %}
+                    {% if content contains '[ingredients]' %}
+
+                      {% assign first_part = content | split: '[ingredients]' | first %}
+
+                      {% if first_part contains 'Ingredients' %}
+                        {% assign f_p_b_ingredients = first_part | split: 'Ingredients' | first %}
+                      {% elsif first_part contains 'ingredients' %}
+                        {% assign f_p_b_ingredients = first_part | split: 'ingredients' | first %}
+                      {% else %}
+                        {% assign f_p_b_ingredients = content %}
+                      {% endif %}
+
+                      {{ f_p_b_ingredients }}
+                    {% else %} 
+                      {{ article.excerpt_or_content |  truncatewords: 50 }}
+                    {% endif %}
+
+                  </div>
+                  <p class="article__author">by {{ article.author }}</p>
+                </div>
+              </article>
+            {% endfor %}
+          {% else %}
+            {% include 'fallback-msg' %}
+          {% endif %}
+      </div> <!-- End grid__item -->
+    </div> <!-- End grid -->
+  </div> <!-- End wrapper -->
+</section>
+  
+
+{% schema %}
+  {
+    "name": "Recipes",
+    "settings": [
+      {
+        "type": "blog",
+        "id": "recipes_blog",
+        "label": "Choose blog with recipes"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Picked recipes"
+      },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "with love from the bottom of Foodly heart"
+      },
+      {
+        "type": "text",
+        "id": "subheading_overlap",
+        "label": "Overlap subheading",
+        "default": "Hand"
+      }
+    ],
+	"presets": [
+      {
+        "name": "Recipes",
+        "category": "Blogs"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,304 @@
+<section class="section product-picker js-product-picker">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item">
+        {% if section.settings.heading != blank %}
+        <h3 class="section-heading heading--page">{{ section.settings.heading | upcase }}</h3>
+        {% endif %}
+
+        {% if section.settings.subheading != blank %}
+        <p class="section__info text-center">{{ section.settings.subheading }}</p>
+        {% endif %}
+
+        <div class="tab-wrapper js-picker-container">
+          <ul class="tab-list">
+            <li class="tab is-active" data-tab="#tab-one" data-next-btn-name="{{ 'tabs.products_picker.first_button_name' | t }}">
+              <a class="tab__link" href="#tab-one">
+                {{ 'tabs.products_picker.tab_one' | t }}
+                <svg class="underline" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="94" height="11" viewBox="0 0 94 11">
+                  <path fill="#5c4b51" d="M93.816,1.151 C71.090,2.543 48.363,3.935 25.637,5.327 C20.167,5.662 13.239,5.918 9.452,5.029 C11.666,3.915 17.736,3.372 23.265,2.934 C43.829,1.306 65.316,-0.351 87.494,0.053 C90.708,0.112 94.987,0.549 93.816,1.151 ZM78.045,5.388 C81.259,5.447 85.538,5.884 84.367,6.486 C61.640,7.878 38.914,9.271 16.188,10.662 C10.718,10.997 3.790,11.254 0.003,10.364 C2.217,9.250 8.287,8.707 13.816,8.269 C34.380,6.641 55.867,4.983 78.045,5.388 Z"/>
+                </svg>
+              </a>
+            </li>
+            <li class="tab disable" data-tab="#tab-two" data-next-btn-name="{{ 'tabs.products_picker.second_button_name' | t }}">
+              <a class="tab__link" href="#tab-two">
+                {{ 'tabs.products_picker.tab_two' | t }}
+                <svg class="underline" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="94" height="11" viewBox="0 0 94 11">
+                  <path fill="#5c4b51" d="M93.816,1.151 C71.090,2.543 48.363,3.935 25.637,5.327 C20.167,5.662 13.239,5.918 9.452,5.029 C11.666,3.915 17.736,3.372 23.265,2.934 C43.829,1.306 65.316,-0.351 87.494,0.053 C90.708,0.112 94.987,0.549 93.816,1.151 ZM78.045,5.388 C81.259,5.447 85.538,5.884 84.367,6.486 C61.640,7.878 38.914,9.271 16.188,10.662 C10.718,10.997 3.790,11.254 0.003,10.364 C2.217,9.250 8.287,8.707 13.816,8.269 C34.380,6.641 55.867,4.983 78.045,5.388 Z"/>
+                </svg>
+              </a>
+            </li>
+            <li class="tab disable" data-tab="#tab-three" data-next-btn-name="{{ 'tabs.products_picker.third_button_name' | t }}">
+              <a class="tab__link" href="#tab-three">
+                {{ 'tabs.products_picker.tab_three' | t }}
+                <svg class="underline" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="94" height="11" viewBox="0 0 94 11">
+                  <path fill="#5c4b51" d="M93.816,1.151 C71.090,2.543 48.363,3.935 25.637,5.327 C20.167,5.662 13.239,5.918 9.452,5.029 C11.666,3.915 17.736,3.372 23.265,2.934 C43.829,1.306 65.316,-0.351 87.494,0.053 C90.708,0.112 94.987,0.549 93.816,1.151 ZM78.045,5.388 C81.259,5.447 85.538,5.884 84.367,6.486 C61.640,7.878 38.914,9.271 16.188,10.662 C10.718,10.997 3.790,11.254 0.003,10.364 C2.217,9.250 8.287,8.707 13.816,8.269 C34.380,6.641 55.867,4.983 78.045,5.388 Z"/>
+                </svg>
+              </a>
+            </li>
+            <li class="tab disable" data-tab="#tab-four" data-next-btn-name="{{ 'tabs.products_picker.fourth_button_name' | t }}">
+              <a class="tab__link" href="#tab-four">
+                {{ 'tabs.products_picker.tab_four' | t }}
+                <svg class="underline" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="94" height="11" viewBox="0 0 94 11">
+                  <path fill="#5c4b51" d="M93.816,1.151 C71.090,2.543 48.363,3.935 25.637,5.327 C20.167,5.662 13.239,5.918 9.452,5.029 C11.666,3.915 17.736,3.372 23.265,2.934 C43.829,1.306 65.316,-0.351 87.494,0.053 C90.708,0.112 94.987,0.549 93.816,1.151 ZM78.045,5.388 C81.259,5.447 85.538,5.884 84.367,6.486 C61.640,7.878 38.914,9.271 16.188,10.662 C10.718,10.997 3.790,11.254 0.003,10.364 C2.217,9.250 8.287,8.707 13.816,8.269 C34.380,6.641 55.867,4.983 78.045,5.388 Z"/>
+                </svg>
+              </a>
+            </li>
+          </ul>
+
+          <div class="tabs-content">
+            <div class="tab-content is-active" id="tab-one">
+              <div class="picker-packs-container js-picker-content">
+
+              {%- for block in section.blocks -%}
+                {% assign pack = articles[block.settings.course_article] %}
+
+                <div class="picker-pack" data-price="{{ pack_price }}" data-image="{{ pack | img_url: 'large' }}" data-author="{{ pack.author }}" data-desc="{{ pack.excerpt }}" data-url="{{ pack.url }}" data-pack-id="{{ pack.id }}" data-title="{{ pack.title | truncatewords: 3 }}">
+                  <div class="image-holder">
+                    <img src="{{ pack | img_url: 'large' }}" alt="{{ pack.title | truncatewords: 3 }}">
+                    <span class="check-icon-wrapper">
+                      <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="24" height="22" viewBox="0 0 24 22">
+                        <path fill="none" d="M2.000,9.000 L9.000,20.000 L22.000,2.000 "/>
+                      </svg>
+                    </span>
+                  </div>
+
+                  <div class="checked-bg">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="401" height="287" viewBox="0 0 401 287">
+                      <path d="M9.615,31.961 C9.615,31.961 37.892,-26.746 216.717,17.344 C367.492,54.519 394.605,129.219 396.921,137.939 C399.037,145.904 403.816,161.608 395.682,184.402 C384.407,215.996 300.504,310.596 183.428,281.465 C70.756,253.429 -12.938,103.545 1.978,49.148 C3.266,44.451 1.762,47.172 9.615,31.961 Z"/>
+                    </svg>
+                  </div>
+
+                  <div class="picker-pack__info">
+                    <div class="title-container">
+                      <h4 class="picker-pack__title">{{ pack.title | truncatewords: 3 }}</h4>
+                      <span class="picker-pack__subtitle">{{ 'tabs.products_picker.ingredient_pack_from' | t }}</span>
+                    </div>
+                    <span class="picker-pack__price">
+                      <span class="money">{{ "0" | money }}</span>
+                    </span>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+
+            </div>
+            {%- comment -%}End tab-content one{%- endcomment -%}
+
+            <div class="tab-content" id="tab-two">
+              {%- for block in section.blocks -%}
+                {%- assign pack = articles[block.settings.course_article] -%}
+
+                  <div class="pack-products" data-pack-id="{{ pack.id }}">
+
+                    {%- assign product_arr = block.settings.course_products | replace: ', ', ',' | split: "," -%}
+
+                    {% for recipe_product in product_arr %}
+                      {% include "find-product" with recipe_product %}
+                      {% if finded_product %}
+                        {%- assign product = finded_product -%}
+                        <div class="pack-product" data-product-price="{{ product.price }}">
+                          <span class="pack-product__checkbox">
+                            <input class="js-product-checkbox" type="checkbox" id="check_{{ pack.id }}_{{ product.first_available_variant.id }}" name="product-check" checked data-price="{{ product.price }}" data-product-id="{{ product.first_available_variant.id }}" data-name="{{ product.title }}" data-pack-id="{{ pack.id }}">
+                            <label for="check_{{ pack.id }}_{{ product.first_available_variant.id }}">
+                              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="12" height="12" viewBox="0 0 12 12">
+                                  <path fill="none" d="M1.000,5.000 L5.000,11.000 L11.000,1.000 "/>
+                                </svg>
+                              </label>
+                          </span>
+                          <div class="image-holder">
+                            <img src="{% if product.featured_image.size > 0 %}{{ product.featured_image | img_url: 'large'}}{% else %}{{ 'img_no_image.jpg' | asset_url }}{% endif %}" alt="">
+                          </div>
+                          <div class="pack-product__info">
+                            <h3 class="pack-product__title">{{ product.title }}</h3>
+                            <span class="product__spec">
+                              1 {{ product.first_available_variant.weight_unit }}
+                              &nbsp;|&nbsp;
+                              {{ product.type }}
+                            </span>
+                          </div>
+                          <span class="pack-product__price">
+                            <span class="money">{{ product.price | money }}</span>
+                          </span>
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+
+                  </div>
+
+              {%- endfor -%}{%- comment -%}End blocks loop{%- endcomment -%}
+
+            </div>
+
+            <div class="tab-content" id="tab-three">
+              {%- for block in section.blocks -%}
+                {%- assign pack = articles[block.settings.course_article] -%}
+
+                  <div class="pack-accessories" data-pack-id="{{ pack.id }}">
+                    {% assign product_arr = block.settings.course_accessories | replace: ', ', ',' | split: "," %}
+
+                    {% for recipe_product in product_arr %}
+                      {% include "find-product" with recipe_product %}
+                      {% if finded_product %}
+                        {%- assign product = finded_product -%}
+                        <div class="pack-product">
+                          <span class="pack-product__checkbox">
+                            <input class="js-product-checkbox" type="checkbox" id="check_{{ pack.id }}_{{ product.first_available_variant.id }}"  name="product-check"  data-price="{{ product.price }}" data-product-id="{{ product.first_available_variant.id }}" data-name="{{ product.title }}" data-pack-id="{{ pack.id }}" data-accessories="true">
+                            <label for="check_{{ pack.id }}_{{ product.first_available_variant.id }}">
+                              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="12" height="12" viewBox="0 0 12 12">
+                                  <path fill="none" d="M1.000,5.000 L5.000,11.000 L11.000,1.000 "/>
+                                </svg>
+                              </label>
+                          </span>
+                          <div class="image-holder">
+                            <img src="{% if product.featured_image.size > 0 %}{{ product.featured_image | img_url: 'large'}}{% else %}{{ 'img_no_image.jpg' | asset_url }}{% endif %}" alt="">
+                          </div>
+                          <div class="pack-product__info">
+                            <h3 class="pack-product__title">{{ product.title }}</h3>
+                            <span class="product__spec">{{ product.type }}</span>
+                          </div>
+                          <span class="pack-product__price">
+                            <span class="money">{{ product.price | money }}</span>
+                          </span>
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+
+                  </div>
+
+              {%- endfor -%}{%- comment -%}End blocks loop{%- endcomment -%}
+            </div>
+
+            <div class="tab-content" id="tab-four">
+              <div class="summary-container js-product-picker-summary">
+                <div class="picker-pack">
+                  <div class="image-holder">
+                    <img class="choosed-pack-image" src="" alt="">
+                  </div>
+                  <div class="checked-bg">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="401" height="287" viewBox="0 0 401 287">
+                      <path d="M9.615,31.961 C9.615,31.961 37.892,-26.746 216.717,17.344 C367.492,54.519 394.605,129.219 396.921,137.939 C399.037,145.904 403.816,161.608 395.682,184.402 C384.407,215.996 300.504,310.596 183.428,281.465 C70.756,253.429 -12.938,103.545 1.978,49.148 C3.266,44.451 1.762,47.172 9.615,31.961 Z"/>
+                    </svg>
+                  </div>
+                  <div class="picker-pack__info">
+                    <div class="title-container">
+                      <h4 class="picker-pack__title"></h4>
+                      <span class="picker-pack__subtitle">{{ 'tabs.products_picker.ingredient_pack_from' | t }}</span>
+                    </div>
+                    <span class="picker-pack__price">
+                      <span class="money"></span>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="ingredients-list-container">
+                </div>
+
+                <div class="accessories-list-container">
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="picker-nav">
+
+    <div class="picker-nav-container">
+      <div class="image-holder">
+        <img class="choosed-pack-image" src="" alt="">
+      </div>
+
+      <div class="choosed-pack-info">
+        <h4 class="total-heading">{{ 'cart.general.total' | t }}</h4>
+        <span class="choosed-pack-total">
+          <span class="money">{{ 0 | money }}</span>
+        </span>
+        <div class="choosed-pack-desc"></div>
+        <span class="choosed-pack-author"></span>
+      </div>
+
+      <div class="picker-nav-btns">
+        <a href="javascript:void(0)" class="btn btn--default btn--clear prev-btn disable" title="Previous Step">
+          <span class="arrow-l"></span>
+        </a>
+
+        <a href="javascript:void(0)" class="btn btn--default next-btn" data-tab="#tab-two" title="Next Step">
+          <span>{{ 'tabs.products_picker.first_button_name' | t }}</span> <span class="arrow-r"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Product builder",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "best dinner courses"
+      },
+      {
+        "type": "text",
+        "id": "heading_overlap",
+        "label": "Overlap subheading",
+        "default": "The"
+      },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "pick direction you’d like to go further and recieve the list of product options"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "course",
+        "name": "Course",
+        "settings": [
+          {
+            "type": "article",
+            "id": "course_article",
+            "label": "Recipe blog post",
+            "info": "Choose a recipe among all blog posts that illustrates this course"
+          },
+          {
+            "id": "course_products",
+            "type": "text",
+            "label": "Ingredians",
+            "default":"Basil,Cucumber,Lime,Asparagus",
+            "info": "Add products related to this course separated by comma and space"
+          },
+          {
+            "id": "course_accessories",
+            "type": "text",
+            "label": "Accessories",
+            "default":"wooden bowls,Wooden Spoon",
+            "info": "Add accessory products related to this course separated by comma and space"
+          }
+        ]
+      }
+    ],
+	  "presets": [
+      {
+        "name": "Hero image",
+        "category": "Hero sections"
+      }
+    ],
+	"presets": [
+      {
+        "name": "Product builder",
+        "category": "Special sections"
+      }
+    ]
+  }
+{% endschema %}

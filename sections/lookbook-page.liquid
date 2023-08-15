@@ -1,0 +1,283 @@
+
+
+<style>
+  .section--lookbook .section-heading:before {
+    content: "{{ section.settings.lookbook_subheading_overlap}}";
+}
+</style>
+  <section class="section section--lookbook animation-start js-lookbook">
+    <noscript>
+      <div class="animation">
+    </noscript>
+
+{% assign article = articles[section.settings.lookbook_blog_post] %}
+      {% if article %}
+        {% assign recipe_img    = article.image.src | img_url: 'grande' %}
+        {% assign recipe_title  = article.title %}
+        {% assign recipe_url    = article.url %}
+        {% assign recipe_author = article.author %}
+        {% assign recipe_desc   = article.excerpt %}
+      {% endif %}
+
+      {% if section.settings.image %}
+        {% assign recipe_img = section.settings.image | img_url: 'grande' %}
+      {% endif %}
+      {% if section.settings.recipe_description %}
+        {% assign recipe_desc = section.settings.recipe_description %}
+      {% endif %}
+
+
+    <div class="lookbook__header">
+      {%- if section.settings.lookbook_heading != blank -%}
+        <h3 class="section-heading heading--page">{{ section.settings.lookbook_heading | upcase }}</h3>
+      {%- endif -%}
+
+      {% if section.settings.lookbook_subheading != blank %}
+        <p class="section__info text-center">{{ section.settings.lookbook_subheading }}</p>
+      {% endif %}
+
+      <div class="lookbook-pick">
+        <div class="lookbook__image">
+          {% if recipe_img != blank %}
+            <img src="{{ recipe_img }}" alt="{{ recipe_title }}">
+          {% else %}
+            <img src="{{ "img_no_image.jpg" | asset_url }}" alt="{{ recipe_title }}">
+          {% endif %}
+        </div>
+
+        {%- assign counter = 1 -%}
+        {%- assign index   = 0 -%}
+        {%- for block in section.blocks -%}
+
+          <div class="lookbook-pick__container" style="top: {{ block.settings.top }}; left: {{ block.settings.left }};">
+            <span class="product__index" style="top: {{ block.settings.top }}; left: {{ block.settings.left }};">{{ counter}}</span>
+            <div class="product__container">
+              <span class="product__counter">{{ counter}}</span>
+              <div class="product__info">
+                <h3 class="product__title">{{ all_products[block.settings.product].title }}</h3>
+                <span class="product__spec">
+                  1 {{ all_products[block.settings.product].first_available_variant.weight_unit }}
+                  &nbsp;|&nbsp;
+                  {{ all_products[block.settings.product].type }}
+                </span>
+                <span class="product__price">
+                  <span class="money">{{ all_products[block.settings.product].price | money }}</span>
+                </span>
+              </div>
+
+              <p class="product__desc">{{ block.settings.product_desc }}<br>
+              <a class="text-link--default" href="{{recipe_url}}" title="Check the full recipe">{{ 'layout.lookbook_page.link_text' | t }}</a> {{ 'layout.lookbook_page.after_link_text' | t }}</p>
+            </div>
+
+            {% assign counter = counter | plus: 1 %}
+            {% assign index = index | plus: 1 %}
+
+            {% assign product_ids = product_ids | append: all_products[block.settings.product].first_available_variant.id | append: "|" %}
+
+          </div>
+        {% endfor %}
+
+        <form class="lookbook-cart lookbook-cart--all js-form-disable" action="/cart/add" method="POST">
+          {% assign product_id_arr = product_ids | split: '|' %}
+          {% for product_id in product_id_arr %}
+            <input type="hidden" name="id[]" value="{{ product_id }}">
+          {% endfor %}
+
+          <button class="btn js-add-to-card" type="submit">
+            <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="16" height="20" viewBox="0 0 16 20">
+              <path fill="#fff" d="M14.000,20.000 L2.000,20.000 C0.895,20.000 -0.000,19.105 -0.000,18.000 L-0.000,7.000 C-0.000,5.895 0.895,5.000 2.000,5.000 L4.000,5.000 L4.000,4.000 C4.000,1.791 5.791,-0.000 8.000,-0.000 C10.209,-0.000 12.000,1.791 12.000,4.000 L12.000,5.000 L14.000,5.000 C15.105,5.000 16.000,5.895 16.000,7.000 L16.000,18.000 C16.000,19.105 15.105,20.000 14.000,20.000 ZM10.000,4.000 C10.000,2.895 9.105,2.000 8.000,2.000 C6.895,2.000 6.000,2.895 6.000,4.000 L6.000,5.000 L10.000,5.000 L10.000,4.000 ZM14.000,8.000 C14.000,7.448 13.552,7.000 13.000,7.000 L3.000,7.000 C2.448,7.000 2.000,7.448 2.000,8.000 L2.000,17.000 C2.000,17.552 2.448,18.000 3.000,18.000 L13.000,18.000 C13.552,18.000 14.000,17.552 14.000,17.000 L14.000,8.000 ZM12.000,17.000 C11.448,17.000 11.000,16.552 11.000,16.000 L11.000,13.000 C11.000,12.448 11.448,12.000 12.000,12.000 C12.552,12.000 13.000,12.448 13.000,13.000 L13.000,16.000 C13.000,16.552 12.552,17.000 12.000,17.000 Z"/>
+            </svg>
+            {{ 'layout.general.add_to_cart_button' | t }}
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="product-section">
+
+
+
+      {%- for block in section.blocks -%}
+          {% if all_products[block.settings.product] %}
+            {% assign product = all_products[block.settings.product] %}
+
+            <div class="product product-grid-item--alt">
+              <div class="img-holder img-holder--product {% unless product.featured_image.size > 0 %}img-holder--no-product{% endunless %}">
+                <img src="{% if product.featured_image.size > 0 %}{{ product.featured_image | img_url: 'grande'}}{% else %}{{ 'img_no_image.jpg' | asset_url }}{% endif %}" alt="{{ product.title }}">
+                <div class="checkbox-lg">
+                  <input class="js-product-checkbox" id="product-check-{{ forloop.index }}" type="checkbox" data-product-id="{{ product.first_available_variant.id }}" data-product-price="{{ product.price }}" checked>
+                  <label for="product-check-{{ forloop.index }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="12" height="12" viewBox="0 0 12 12">
+                      <path d="M1.000,5.000 L5.000,11.000 L11.000,1.000 "/>
+                    </svg>
+                  </label>
+                </div>
+              </div>
+              <div class="product__info">
+                 <h4 class="product__title"><a href="{{ product.url }}" title="{{ product.title }}">{{ product.title | truncatewords: 4 }}</a></h4>
+                 <span class="product__spec">
+                    1 {% if product.first_available_variant.option1 != 'Default Title' %}
+                      {{ product.first_available_variant.option1 }}
+                    {% else %}
+                      {{ product.first_available_variant.weight_unit }}
+                    {% endif %}
+                    &nbsp;|&nbsp;
+
+                    {{ product.type | link_to_type }}
+                  </span>
+                  <span class="product__price"><span class="money">{{ product.price | money }}</span></span>
+              </div>
+            </div>
+
+
+          {% endif %}
+
+      {% endfor %}
+    </div>
+
+    <div class="picker-nav">
+      <div class="wrapper">
+        <div class="grid">
+          <div class="grid__item">
+            <div class="picker-nav-container">
+              <div class="image-holder">
+                <img class="choosed-pack-image" src="{{ recipe_img }}" alt="{{ recipe_title }}">
+              </div>
+
+              <div class="choosed-pack-info">
+                <div class="choosed-pack-desc">{{ recipe_desc }} <a class="text-link--default" href="{{ recipe_url }}">{{ 'layout.lookbook_page.recipe_detail' | t }}</a></div>
+                <span class="choosed-pack-author">{{ recipe_author }}</span>
+              </div>
+
+              <div class="picker-nav__total">
+                <h4 class="total-heading">{{ 'layout.lookbook_page.lookbook_total' | t }}</h4>
+                <span class="choosed-pack-total">
+                  <span class="money">{{ 0 | money }}</span>
+                </span>
+                <form class="lookbook-cart--total js-form-disable" action="/cart/add" method="POST">
+                  {% assign product_id_arr = product_ids | split: '|' %}
+                  {% for product_id in product_id_arr %}
+                    <input type="hidden" name="id[]" value="{{ product_id }}">
+                  {% endfor %}
+                  <button type="submit" class="btn btn--default checkout-btn js-add-to-card">
+                  <span>{{ 'layout.general.add_to_cart_button' | t }}</span>
+                    <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="16" height="20" viewBox="0 0 16 20">
+                      <path fill="#fff" d="M14.000,20.000 L2.000,20.000 C0.895,20.000 -0.000,19.105 -0.000,18.000 L-0.000,7.000 C-0.000,5.895 0.895,5.000 2.000,5.000 L4.000,5.000 L4.000,4.000 C4.000,1.791 5.791,-0.000 8.000,-0.000 C10.209,-0.000 12.000,1.791 12.000,4.000 L12.000,5.000 L14.000,5.000 C15.105,5.000 16.000,5.895 16.000,7.000 L16.000,18.000 C16.000,19.105 15.105,20.000 14.000,20.000 ZM10.000,4.000 C10.000,2.895 9.105,2.000 8.000,2.000 C6.895,2.000 6.000,2.895 6.000,4.000 L6.000,5.000 L10.000,5.000 L10.000,4.000 ZM14.000,8.000 C14.000,7.448 13.552,7.000 13.000,7.000 L3.000,7.000 C2.448,7.000 2.000,7.448 2.000,8.000 L2.000,17.000 C2.000,17.552 2.448,18.000 3.000,18.000 L13.000,18.000 C13.552,18.000 14.000,17.552 14.000,17.000 L14.000,8.000 ZM12.000,17.000 C11.448,17.000 11.000,16.552 11.000,16.000 L11.000,13.000 C11.000,12.448 11.448,12.000 12.000,12.000 C12.552,12.000 13.000,12.448 13.000,13.000 L13.000,16.000 C13.000,16.552 12.552,17.000 12.000,17.000 Z"/>
+                    </svg>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <noscript>
+      </div>
+    </noscript>
+
+  </section>
+
+
+{% schema %}
+  {
+    "name": "Lookbook",
+    "settings": [
+      {
+         "type":"article",
+         "id":"lookbook_blog_post",
+         "label":"Recipe blog post",
+         "info":"Define a link to a recipe blog post that is assotiated with this lookbook. Image and recipe description for lookbook page are pulled out from this recipe blog post unless they are specified below 👇"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Featured lookbook image"
+      },
+      {
+        "type":"textarea",
+        "id":"recipe_description",
+        "label":"Recipe description",
+        "placeholder": "Delicious course served with love",
+        "info":"Add a small review of the recipe up to 25 words. It's displayed in the bottom section of lookbook page"
+      },
+      {
+       "type": "paragraph",
+       "content": "¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯"
+       },
+      {
+         "type":"text",
+         "id":"lookbook_heading",
+         "label":"Page heading",
+         "default":"Full plate lookbook"
+      },
+      {
+         "type":"text",
+         "id":"lookbook_subheading",
+         "label":"Page subheading",
+         "default":"each day we present one featured meal collecting all neccesary products for you to cook it at home"
+      },
+      {
+         "type": "text",
+         "id": "lookbook_subheading_overlap",
+         "label": "Overlapping subheading",
+         "default": "The"
+      },
+      {
+       "type": "paragraph",
+       "content": "¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯"
+       },
+       {
+         "type":"paragraph",
+         "content":"To see the changes that have been done in this panel, save (Cmd/Ctrl + S) and refresh(Cmd + R / F5). After that changes will be applied in live preview on the right. To add points onto featured image, use 'Add product' option in the Content block below 👇 More details how to set up lookbook page is [here ](https://congruityhub.zendesk.com/hc/en-us/articles/115003531325)"
+       }
+    ],
+    "blocks": [
+      {
+        "type": "product",
+        "name": "Product",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product",
+            "info": "Choose a product among all available products in the store to be displayed as a point onto featured image"
+          },
+          {
+            "type":"textarea",
+            "id": "product_desc",
+            "label": "Description",
+            "default": "Desirable product",
+            "info": "Add a few lines of copy that will be displayed in the overlay module once a point is hovered over",
+            "placeholder": "Description text goes here"
+          },
+          {
+            "id": "top",
+            "type": "text",
+            "label": "Top coordinate (Y)",
+            "default":"50%",
+            "info": "Specify top coordinate (vertical) for a point. Both pixels and percents are allowed as measurement units"
+          },
+          {
+            "id": "left",
+            "type": "text",
+            "label": "Left coordinate (X)",
+            "default":"50%",
+            "info": "Specify left coordinate (horizontal) for a point. Both pixels and percents are allowed as measurement units"
+          }
+        ]
+      }
+    ],
+    "default": {
+      "blocks": [
+        {
+          "type": "product",
+          "settings": {
+            "product_desc": "Once upon a time..."
+          }
+        }
+      ]
+    }
+  }
+{% endschema %}

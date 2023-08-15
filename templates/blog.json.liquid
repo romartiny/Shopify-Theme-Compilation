@@ -1,0 +1,20 @@
+{% layout none %}
+{
+  "articles" : [
+    {% for article in blog.articles limit:70 %}
+      {
+        "id" : "{{ article.id }}",
+        "title" : {{ article.title | json }},
+        "created_at" : "{{ article.created_at }}",
+        "body_html" : {% assign articleContent = article.content %}{{ articleContent | replace:'"//cdn','"https://cdn' | json }},
+        "blog_id" : "{{ blog.id }}",
+        "author" : {{ article.author | json }},
+        "tags": "{{ article.tags | join: ', ' }}",
+        "image": {
+          "src": {% if article.image %}{{ article | img_url: 'large' | json }}{% else %}""{% endif %}
+        }
+
+      }{% if forloop.rindex0 > 0 %},{% endif %}
+    {% endfor %}
+  ]
+}

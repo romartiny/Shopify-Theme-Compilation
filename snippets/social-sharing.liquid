@@ -1,0 +1,154 @@
+{% comment %}
+Snippet for social media buttons
+{% endcomment %}
+
+{% if template contains 'article' or template contains 'blog' %}
+
+  {% comment %} If Article or Blog {% endcomment %}
+
+  {% capture permalinkURL %}{{ shop.url }}{{ article.url }}{% endcapture %}
+  {% capture shareTitle %}{{ article.title | url_param_escape }}{% endcapture %}
+
+<div data-permalink="{{ permalinkURL }}">
+
+  {% if settings.article_share_btns_facebook %}
+    <a class="social-sharing__item" href="//www.facebook.com/sharer.php?u={{ permalinkURL }}" target="_blank" >
+      <i class="fa fa-facebook"></i>
+      <span class="fallback-text">Facebook</span>
+    </a>
+  {% endif %}
+
+  {% if settings.article_share_btns_twitter %}
+    <a class="social-sharing__item" href="//twitter.com/share?text={{ shareTitle }}&amp;url={{ permalinkURL }}" target="_blank" >
+      <i class="fa fa-twitter"></i>
+      <span class="fallback-text">Twitter</span>
+    </a>
+  {% endif %}
+
+  {% if article.image and settings.article_share_btns_pinterest %}
+      <a class="social-sharing__item" href="//pinterest.com/pin/create/button/?url={{ permalinkURL }}&amp;media=http:{{ article | img_url: '1024x1024' }}&amp;description={{ shareTitle }}" target="_blank" >
+        <i class="fa fa-pinterest-p"></i>
+        <span class="fallback-text">Pinterest</span>
+      </a>
+
+  {% endif %}
+
+  {% if settings.article_share_btns_google_p %}
+    <a class="social-sharing__item" target="_blank" href="//plus.google.com/share?url={{ permalinkURL }}" class="share-google">
+      <!-- Cannot get Google+ share count with JS yet -->
+      <i class="fa fa-google-plus" aria-hidden="true"></i>
+      <span class="fallback-text">Google+</span>
+    </a>
+  {% endif %}
+
+  {% if article.image and settings.article_share_btns_fancy %}
+      <a class="social-sharing__item" href="//fancy.com/fancyit?ItemURL={{ permalinkURL }}&amp;Title={{ shareTitle }}&amp;Category=Other&amp;ImageURL={{ article | img_url: '1024x1024' }}" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="9" height="16" viewBox="0 0 9 16">
+          <path d="M5.727,11.556 L5.727,16.000 L3.273,16.000 L3.273,11.556 L-0.000,11.556 L-0.000,4.889 C-0.000,2.189 2.015,0.000 4.500,0.000 C6.985,0.000 9.000,2.189 9.000,4.889 L9.000,11.556 L5.727,11.556 Z" class="cls-1"/>
+        </svg>
+        <span class="fallback-text">Fancy</span>
+      </a>
+  {% endif %}
+
+</div>
+
+{% comment %} End If Article or Blog {% endcomment %}
+
+
+{% elsif template contains 'product' %}
+
+  {% comment %} If Product {% endcomment %}
+
+  {% capture permalinkURL %}{{ shop.url }}{{ product.url }}{% endcapture %}
+  {% capture shareTitle %}{{ product.title | url_param_escape }}{% endcapture %}
+
+
+<div class="social-sharing social-sharing--product" data-permalink="{{ permalinkURL }}">
+
+  {% if settings.product_share_btns_heading != blank %}
+  <span class="heading--add-small social-sharing__title">{{ settings.product_share_btns_heading }}</span>
+  {% endif %}
+
+  {% if settings.product_share_btns_facebook %}
+    <a class="social-sharing__item" href="//www.facebook.com/sharer.php?u={{ permalinkURL }}" target="_blank" >
+      <i class="fa fa-facebook"></i>
+      <span class="fallback-text">Facebook</span>
+    </a>
+  {% endif %}
+
+  {% if settings.product_share_btns_twitter %}
+    <a class="social-sharing__item" href="//twitter.com/share?text={{ shareTitle }}&amp;url={{ permalinkURL }}" target="_blank" >
+      <i class="fa fa-twitter"></i>
+      <span class="fallback-text">Twitter</span>
+    </a>
+  {% endif %}
+
+  {% if product.featured_image and settings.product_share_btns_pinterest %}
+
+      <a class="social-sharing__item" href="//pinterest.com/pin/create/button/?url={{ permalinkURL }}&amp;media=http:{{ product | img_url: '1024x1024' }}&amp;description={{ shareTitle }}" target="_blank" >
+        <i class="fa fa-pinterest-p"></i>
+        <span class="fallback-text">Pinterest</span>
+      </a>
+
+  {% endif %}
+
+  {% if settings.product_share_btns_google_p %}
+    <a class="social-sharing__item" target="_blank" href="//plus.google.com/share?url={{ permalinkURL }}" class="share-google">
+      <!-- Cannot get Google+ share count with JS yet -->
+      <i class="fa fa-google-plus" aria-hidden="true"></i>
+      <span class="fallback-text">Google+</span>
+    </a>
+  {% endif %}
+
+  {% if product.featured_image and settings.product_share_btns_fancy%}
+
+      <a class="social-sharing__item" href="//fancy.com/fancyit?ItemURL={{ permalinkURL }}&amp;Title={{ shareTitle }}&amp;Category=Other&amp;ImageURL={% if template contains 'product' %}{{ product | img_url: '1024x1024' }}{% else %}{{ article | img_url: '1024x1024' }}{% endif %}" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="9" height="16" viewBox="0 0 9 16">
+          <path d="M5.727,11.556 L5.727,16.000 L3.273,16.000 L3.273,11.556 L-0.000,11.556 L-0.000,4.889 C-0.000,2.189 2.015,0.000 4.500,0.000 C6.985,0.000 9.000,2.189 9.000,4.889 L9.000,11.556 L5.727,11.556 Z" class="cls-1"/>
+        </svg>
+        <span class="fallback-text">Fancy</span>
+      </a>
+
+  {% endif %}
+
+</div>
+
+  {% comment %} End If Product {% endcomment %}
+
+
+{% elsif template == 'password' %}
+
+  {% comment %} If Password page {% endcomment %}
+
+  {% capture permalinkURL %}{{ shop.url }}{% endcapture %}
+  {% capture shareTitle %}{% unless shop.description == blank %}{{ shop.description | url_param_escape }}{% else %}{{ shop.name | url_param_escape }}{% endunless %}{% endcapture %}
+
+<div data-permalink="{{ permalinkURL }}">
+
+  {% if settings.password_page_share_facebook %}
+    <a class="social-sharing__item" href="//www.facebook.com/sharer.php?u={{ permalinkURL }}" target="_blank" >
+      <i class="fa fa-facebook"></i>
+      <span class="fallback-text">Facebook</span>
+    </a>
+  {% endif %}
+
+  {% if settings.password_page_share_twitter %}
+    <a class="social-sharing__item" href="//twitter.com/share?text={{ shareTitle }}&amp;url={{ permalinkURL }}" target="_blank" >
+      <i class="fa fa-twitter"></i>
+      <span class="fallback-text">Twitter</span>
+    </a>
+  {% endif %}
+
+  {% if  settings.password_page_share_google %}
+    <a class="social-sharing__item" target="_blank" href="//plus.google.com/share?url={{ permalinkURL }}" class="share-google">
+      <!-- Cannot get Google+ share count with JS yet -->
+      <i class="fa fa-google-plus" aria-hidden="true"></i>
+      <span class="fallback-text">Google+</span>
+    </a>
+  {% endif %}
+
+</div>
+
+  {% comment %} If Password page {% endcomment %}
+
+{% endif %}

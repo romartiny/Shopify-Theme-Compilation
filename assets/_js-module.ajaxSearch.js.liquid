@@ -1,0 +1,543 @@
+define(['jquery.currencies', 'scrollbar', 'shopInfo'], function(Currency, scrollbar, shopInfo) {
+  // Ajax Search
+  var currentPage = 1;
+  var popupTimer;
+  var previousRequest;
+
+  function init() {
+
+    var searchUrl = shopInfo.secureUrl + '/search?q=*';
+    var urlQuery = '*&view=json';
+
+    {%- if settings.search_type == 'products' -%}
+      urlQuery = '*&type=product&view=json';
+    {%- endif -%}
+
+    if (document.getElementById('inPageSearch')) {
+
+      var inPageSearchForm = document.getElementById('inPageSearch');
+      var searchInput = inPageSearchForm.querySelector('input[name="q"]');
+
+      searchInput.addEventListener('keyup', function(e) {
+
+        var target = e.target;
+        var targetValue = target.value;
+        var form = target.parentElement;
+        var url = searchUrl + targetValue + urlQuery;
+
+        if (previousRequest) {
+          clearTimeout(previousRequest);
+        }
+
+        previousRequest = setTimeout(function() {
+          ajaxRequestSearch(url, function (err, responseObject) {
+              insertResults(responseObject, form, targetValue);
+          });
+        }, 400);
+
+      });
+    };
+
+    if (document.getElementById('headerSearch')) {
+
+      var headerSearchForm = document.getElementById('headerSearch');
+      var searchInput = headerSearchForm.querySelector('input[name="q"]');
+      var popupContainer = createPopup(headerSearchForm);
+
+      searchInput.addEventListener('keyup', function(e) {
+        var target = e.target;
+        var targetValue = target.value;
+        var form = target.parentElement;
+        var url = searchUrl + targetValue + urlQuery;
+
+        if (targetValue.length < 3) {
+          !form.classList.contains('popup-active') && form.classList.add('popup-active');
+          showEmptySearch(popupContainer,  JSON.parse(JSON.stringify( {{ "layout.search.ajax_search_more_characters" | t | json }} )), form);
+        } else {
+
+          if (previousRequest) {
+            clearTimeout(previousRequest);
+          }
+
+          previousRequest = setTimeout(function() {
+            ajaxRequestSearch(url, function (err, responseObject) {
+              if (responseObject.length === 0 || Object.keys(responseObject).length === 0) {
+                !form.classList.contains('popup-active') && form.classList.add('popup-active');
+                showEmptySearch(popupContainer,  JSON.parse(JSON.stringify( {{ 'layout.search.ajax_search_no_results_html' | t | json }} )), form);
+              } else {
+                popupContainer.innerHTML = '';
+                insertResultsToPopup(responseObject, popupContainer, form);
+              }
+            });
+          }, 400);
+        }
+      }); // end event listener
+    }
+  }
+
+  function createPopup(form) {
+    var popupContainerWrapper = document.createElement('div');
+    var popupScrollWrapper = document.createElement('div');
+    var popupContainer = document.createElement('ul');
+
+    popupContainerWrapper.className = 'search-popup';
+    popupContainer.className = 'search-popup__container';
+    popupScrollWrapper.className = 'search-popup__scroll-container';
+
+    popupScrollWrapper.appendChild(popupContainer);
+    popupContainerWrapper.appendChild(popupScrollWrapper);
+
+    scroll = scrollbar.createScrollbar(popupScrollWrapper, {
+      touchScrollSpeed: 1,
+      preventDefaultScroll: true
+    });
+
+    form.appendChild(popupContainerWrapper);
+    return popupContainer;
+  }
+
+  // Ajax request
+  function ajaxRequestSearch(url, callback) {
+
+    if (!window.XMLHttpRequest || !url) {
+      return null;
+    }
+
+    var XHR = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
+    var xhr = new XHR();
+
+    xhr.open('GET', url, true);
+
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        var responseObject = JSON.parse(xhr.responseText);
+        callback(null, responseObject);
+      }
+    };
+
+    xhr.send(null); // send request
+  }
+
+  function insertResults(responseObject, form, value) {
+
+    var searchContainerLg = form.parentElement.parentElement.parentElement;
+
+    var oldHeading = searchContainerLg.querySelector('.page-description');
+    var oldMessage = searchContainerLg.querySelector('.msg');
+    var oldResult = searchContainerLg.querySelector('.search-results');
+    var oldPagination = searchContainerLg.querySelector('.pagination');
+
+
+    if (oldHeading) {
+      searchContainerLg.removeChild(oldHeading);
+    }
+
+    if (oldMessage) {
+      searchContainerLg.removeChild(oldMessage);
+    }
+
+    if (oldResult) {
+      searchContainerLg.removeChild(oldResult);
+    }
+
+    if (oldPagination) {
+      searchContainerLg.removeChild(oldPagination);
+    }
+
+    var heading = document.createElement('div');
+    heading.className = 'page-description page-description--alt';
+    var headingTemplate = "<h1 class='heading--page'>" + JSON.parse(JSON.stringify( {{ 'layout.search.results' | t | json }} )) + "<strong>'{REQUEST}'</strong></h1><h2 class='subheading--page-small'><em>{ITEMS} " +  JSON.parse(JSON.stringify( {{ 'layout.search.result_count' | t | json }} )) + "</em></h2>";
+
+
+    var message = document.createElement('div');
+    message.className = 'msg msg--no-result';
+    var messageTemplate = '<p>' + JSON.parse(JSON.stringify( {{ "layout.search.nothing_to_found_html" | t | json }} )) + '</p><a class="btn btn--underlines" href="/collections">' + JSON.parse(JSON.stringify( {{"layout.general.check_it_button" | t | json }} )) + '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="61" height="12" viewBox="0 0 61 12"><path d="M60.217,1.433 C45.717,2.825 31.217,4.217 16.717,5.609 C13.227,5.944 8.806,6.200 6.390,5.310 C7.803,4.196 11.676,3.654 15.204,3.216 C28.324,1.587 42.033,-0.069 56.184,0.335 C58.234,0.394 60.964,0.830 60.217,1.433 ZM50.155,5.670 C52.205,5.728 54.936,6.165 54.188,6.767 C39.688,8.160 25.188,9.552 10.688,10.943 C7.198,11.278 2.778,11.535 0.362,10.645 C1.774,9.531 5.647,8.988 9.175,8.551 C22.295,6.922 36.005,5.265 50.155,5.670 Z" class="cls-1"></path></svg></a>';
+
+    if (responseObject.length === 0 || Object.keys(responseObject).length === 0) {
+      headingTemplate = headingTemplate.replace(/\{REQUEST\}/g, value);
+      headingTemplate = headingTemplate.replace(/\{ITEMS\}/g, '0');
+      heading.innerHTML = headingTemplate;
+      message.innerHTML = messageTemplate;
+      searchContainerLg.appendChild(heading);
+      searchContainerLg.appendChild(message);
+    } else {
+      headingTemplate = headingTemplate.replace(/\{REQUEST\}/g, value);
+      headingTemplate = headingTemplate.replace(/\{ITEMS\}/g, Object.keys(responseObject).length);
+      heading.innerHTML = headingTemplate;
+      searchContainerLg.appendChild(heading);
+
+      var itemsPerPage =  JSON.parse(JSON.stringify( {{ settings.search_result_amount | json }} ));
+
+      if (responseObject.length > itemsPerPage) {
+        var paginationItems = {};
+        var arr = [];
+        var counterPage = 1;
+
+        // make pages
+        for (var i = 0, max = responseObject.length; i < max; i++) {
+
+          if (i % itemsPerPage === 0 && i !== 0) {
+            counterPage++;
+            arr = [];
+          }
+
+          arr.push(responseObject[i]);
+          paginationItems['page-' + counterPage] = arr;
+        }
+
+        if (currentPage > Object.keys(paginationItems).length) {
+          currentPage = 1;
+        }
+
+        insertResultHTML(searchContainerLg, paginationItems['page-' + currentPage]);
+        searchContainerLg.appendChild(initPaginationSearch(paginationItems, searchContainerLg, currentPage));
+      } else {
+        insertResultHTML(searchContainerLg, responseObject);
+      }
+
+
+    }
+  }
+
+  function insertResultsToPopup(searchedItems, popupContainer, form) { //console.log(searchedItems);console.log(form);console.log(popupContainer);
+
+    var popupItem, itemImage, itemImageHolder, itemImageLink, itemLink, itemPrice, itemComparePrice, itemSpec, itemTitle, itemTitleLink, itemDescWrapper;
+
+    clearTimeout(popupTimer);
+    form.classList.contains('msg-show') && form.classList.remove('msg-show');
+
+
+    for (var i = 0, max = searchedItems.length; i < max; i++) {
+      // popup item
+      popupItem = document.createElement('li');
+      popupItem.className = 'search-popup__item';
+
+      // Create an item
+      itemTitle = document.createElement('h4');
+      itemTitle.className = 'search-popup__item-title';
+      itemTitle.textContent = searchedItems[i].title;
+
+      itemLink = document.createElement('a');
+      itemLink.className = 'search-popup__item-link';
+      itemLink.href = searchedItems[i].url;
+      itemLink.title = searchedItems[i].title;
+
+      itemImageHolder = document.createElement('div');
+      itemImageHolder.className = 'img-holder';
+
+      itemImage = document.createElement('img');
+      itemImage.className = 'search-popup__item-image';
+      itemImage.src = searchedItems[i].thumb_url;
+      itemImage.alt = searchedItems[i].title;
+
+      itemSpec = document.createElement('span');
+      itemSpec.className = 'product__spec';
+      if (searchedItems[i].page_type == 'product'){
+        itemSpec.textContent = searchedItems[i].type + ' | ' + searchedItems[i].in_stock + ' | ' + searchedItems[i].weight_unit;
+      } else {
+        itemSpec.textContent = searchedItems[i].page_type;
+      }
+
+      if (searchedItems[i].compare_price !== '0') {
+        itemComparePrice = document.createElement('span');
+        itemComparePrice.className = 'search-popup__item-price-compare money';
+
+        {% if settings.show_multiple_currencies %}
+        itemComparePrice.setAttribute('data-currency', shopCurrency);
+        {% endif %}
+
+        itemComparePrice.textContent = searchedItems[i].compare_price;
+      }
+
+      itemPrice = document.createElement('span');
+      itemPrice.className = 'search-popup__item-price money';
+
+      {% if settings.show_multiple_currencies %}
+      itemPrice.setAttribute('data-currency', shopCurrency);
+      {% endif %}
+
+      itemPrice.textContent = searchedItems[i].price;
+
+      itemDescWrapper = document.createElement('div');
+      itemDescWrapper.className = 'search-popup__desc-wrapper';
+
+      itemDescWrapper.appendChild(itemTitle);
+      itemDescWrapper.appendChild(itemSpec);
+      itemDescWrapper.appendChild(itemPrice);
+
+      if (searchedItems[i].compare_price !== '0') {
+        itemDescWrapper.appendChild(itemComparePrice);
+      }
+
+      itemImageHolder.appendChild(itemImage);
+
+      itemLink.appendChild(itemImageHolder);
+      itemLink.appendChild(itemDescWrapper);
+
+      popupItem.appendChild(itemLink);
+
+      popupContainer.appendChild(popupItem);
+    }
+
+    if ("createEvent" in document) {
+      var evt = document.createEvent("HTMLEvents");
+      evt.initEvent("resize", false, true);
+      window.dispatchEvent(evt);
+    } else {
+      window.fireEvent("onresize");
+    }
+
+    if (!form.classList.contains('popup-active')) {
+      form.classList.add('popup-active');
+    }
+
+    {% if settings.show_multiple_currencies %}
+    Currency.convertAll(shopCurrency, Currency.currentCurrency, 'span.money', 'money_format');
+    {% endif %}
+  }
+
+  function showEmptySearch(popupContainer, message, form) {
+    var errorMessage = popupContainer.querySelector('.search-popup__error');
+
+    clearTimeout(popupTimer);
+    form.classList.add('msg-show');
+
+    if (errorMessage) {
+      errorMessage.innerHTML = message;
+      errorMessage.classList.remove('display-none');
+    } else {
+      popupContainer.innerHTML = '';
+      errorMessage = document.createElement('li');
+      errorMessage.className = 'search-popup__error';
+      errorMessage.innerHTML = message;
+      popupContainer.appendChild(errorMessage);
+    }
+
+    if ("createEvent" in document) {
+      var evt = document.createEvent("HTMLEvents");
+      evt.initEvent("resize", false, true);
+      window.dispatchEvent(evt);
+    } else {
+      window.fireEvent("onresize");
+    }
+
+    popupTimer = setTimeout(function() {
+      if (form.classList.contains('popup-active')) {
+        form.classList.remove('popup-active');
+        form.classList.remove('msg-show');
+      }
+    }, 7000);
+  }
+
+  function insertResultHTML(searchContainerLg, responseObject) {
+    var searchResult = searchContainerLg.querySelector('.search-results');
+
+    if (searchResult) {
+      searchResult.innerHTML = '';
+    } else {
+      searchResult = document.createElement('div');
+      searchResult.className = 'search-results';
+    }
+
+    var template = '';
+    for (var i = 0, max = responseObject.length; i < max; i++) {
+      var searchItemTemplate = '<div class="product grid--in-row"><a class="product__link " href="{URL}" title="{TITLE}"><div class="img-holder img-holder--product "><img src="{IMAGE}" alt="{TITLE}"></div></a><span class="product__price-point"><span class="product__price"><span class="money" data-currency="shopCurrency">{PRICE}</span></span><br></span><div class="product__info"><h4 class="product__title"><a href="{URL}" title="{TITLE}">{TITLE}</a></h4><span class="product__spec">{TYPE}&nbsp;|&nbsp;{IN_STOCK}&nbsp;|&nbsp;{UNIT}</span></div> <!-- End product__info --></div>'
+      searchItemTemplate = searchItemTemplate.replace(/\{TITLE\}/g, responseObject[i].title);
+      searchItemTemplate = searchItemTemplate.replace(/\{URL\}/g, responseObject[i].url);
+      searchItemTemplate = searchItemTemplate.replace(/\{IMAGE\}/g, responseObject[i].thumb_url);
+      searchItemTemplate = searchItemTemplate.replace(/\{PRICE\}/g, responseObject[i].price);
+      searchItemTemplate = searchItemTemplate.replace(/\{TYPE\}/g, responseObject[i].type);
+      searchItemTemplate = searchItemTemplate.replace(/\{IN_STOCK\}/g, responseObject[i].in_stock);
+      searchItemTemplate = searchItemTemplate.replace(/\{UNIT\}/g, responseObject[i].weight_unit);
+      template += searchItemTemplate;
+    }
+
+    searchResult.innerHTML = template;
+    searchContainerLg.appendChild(searchResult);
+
+    {% if settings.show_multiple_currencies %}
+    Currency.convertAll(shopCurrency, Currency.currentCurrency, 'span.money', 'money_format');
+    {% endif %}
+  }
+
+
+  // Pagination
+  function initPaginationSearch(paginationItems, container, activePage) {
+
+    var paginationItemsLength = Object.keys(paginationItems).length;
+    var pageRangeList = {};
+    var longPagination = false;
+
+    // Main Container
+    var paginationContainer = container.querySelector('.pagination');
+
+    if (paginationContainer) {
+      paginationContainer.innerHTML = '';
+    } else {
+      paginationContainer = document.createElement('ul');
+      paginationContainer.className = "pagination";
+      paginationContainer.addEventListener('click', function(e) {
+        paginationIteractionSearch(e, paginationItems, container);
+      });
+    }
+
+    // LI element-container for pages numbers
+    var paginationPartsLiElement = document.createElement('li');
+    paginationPartsLiElement.className = "pagination__item--parts";
+
+    // Prev arrow
+    var prevButtonIcon = document.createElement('span');
+    prevButtonIcon.className = 'icon icon--arrow-left';
+
+    var prevButtonLink = document.createElement('a');
+    prevButtonLink.className = 'pagination__link';
+
+    var prevButton = document.createElement('li');
+    prevButton.className = 'pagination__item pagination__item--prev';
+
+    if (activePage !== 1) {
+      prevButtonLink.setAttribute('data-page', 'page-' + (activePage - 1));
+    } else {
+      prevButtonLink.setAttribute('data-page', 'disable');
+      prevButton.classList.add('disabled');
+    }
+
+    prevButtonLink.appendChild(prevButtonIcon);
+    prevButton.appendChild(prevButtonLink);
+    paginationContainer.appendChild(prevButton);
+
+    var currentPageRange = {};
+    currentPageRange.start = (activePage === 1) ? activePage : (activePage - 1);
+    currentPageRange.end = (activePage === paginationItemsLength) ? activePage : (activePage + 1);
+
+    if (paginationItemsLength > 5) {
+      // first digits
+      if (currentPageRange.start <= 3) {
+        for (var i = 1; i <= (currentPageRange.start + 2); i++) {
+          pageRangeList['page-' + i] = paginationItems['page-' + i];
+        }
+      } else {
+        pageRangeList['page-1'] = paginationItems['page-1'];
+        pageRangeList['page-ellipsis-first'] = '...';
+      }
+
+      // middle digits
+      for (var i = currentPageRange.start; i <= currentPageRange.end; i++) {
+        pageRangeList['page-' + i] = paginationItems['page-' + i];
+      }
+
+      // end digits
+      if (currentPageRange.end >= paginationItemsLength - 2) {
+        for (var i = currentPageRange.end + 1; i <= paginationItemsLength; i++) {
+          pageRangeList['page-' + i] = paginationItems['page-' + i];
+        }
+      } else {
+        pageRangeList['page-ellipsis-last'] = '...';
+        pageRangeList['page-' + paginationItemsLength] = paginationItems['page-' + paginationItemsLength];
+      }
+
+      paginationPartsLiElement.appendChild(insertPaginationItemSearch(pageRangeList, activePage));
+    } else {
+      paginationPartsLiElement.appendChild(insertPaginationItemSearch(paginationItems, activePage));
+    }
+
+    paginationContainer.appendChild(paginationPartsLiElement);
+
+    // Next arrow
+    var nextButtonIcon = document.createElement('span');
+    nextButtonIcon.className = 'icon icon--arrow-right';
+
+    var nextButtonLink = document.createElement('a');
+    nextButtonLink.className = 'pagination__link';
+
+    var nextButton = document.createElement('li');
+    nextButton.className = 'pagination__item pagination__item--next';
+
+    if (activePage !== Object.keys(paginationItems).length) {
+      nextButtonLink.setAttribute('data-page', 'page-' + (activePage + 1));
+    } else {
+      nextButtonLink.setAttribute('data-page', 'disable');
+      nextButton.classList.add('disabled');
+    }
+
+    nextButtonLink.appendChild(nextButtonIcon);
+    nextButton.appendChild(nextButtonLink);
+    paginationContainer.appendChild(nextButton);
+
+    return paginationContainer;
+  }
+
+  function insertPaginationItemSearch(paginationItems, activePage) {
+    var pageNumber;
+    var paginationPartLink, paginationPartElement;
+    // UL container for pages numbers
+    var paginationPartsContainer = document.createElement('ul');
+    paginationPartsContainer.className = "pagination__parts";
+
+    for (var page in paginationItems) {
+      pageNumber = parseInt(page.slice(5));
+      paginationPartLink = document.createElement('a');
+      paginationPartElement = document.createElement('li');
+
+      if (page === 'page-' + activePage) {
+        paginationPartElement.className = "pagination__item active";
+      } else {
+        paginationPartElement.className = "pagination__item";
+      }
+
+      paginationPartLink.className = 'pagination__link';
+      paginationPartLink.textContent = pageNumber;
+      paginationPartLink.setAttribute('data-page', page);
+
+      if (page === 'page-ellipsis-first' || page === 'page-ellipsis-last') {
+        paginationPartElement.className += " pagination__item--ellip";
+        paginationPartLink.textContent = '...';
+        paginationPartLink.href = 'javascript:void(0)';
+      }
+
+      paginationPartElement.appendChild(paginationPartLink);
+      paginationPartsContainer.appendChild(paginationPartElement);
+    }
+
+    return paginationPartsContainer;
+  }
+
+
+  function paginationIteractionSearch(e, paginationItems, container) {
+    e.preventDefault();
+    var target = e.target;
+    var newPage;
+    var linkElement = findParent(e.target, HTMLAnchorElement, 'pagination__link');
+
+    if (linkElement) {
+      newPage = linkElement.getAttribute('data-page');
+
+      if (newPage === 'disable') {
+        return 0;
+      }
+
+      insertResultHTML(container, paginationItems[newPage]);
+      container.appendChild(initPaginationSearch(paginationItems, container, parseInt(newPage.slice(5))));
+
+      currentPage = parseInt(newPage.slice(5));
+    }
+  }
+
+  function findParent(element, parentConstructor, className) {
+    if (!element || !parentConstructor || !className) {
+      return null;
+    }
+
+    while (!(element instanceof parentConstructor) && !(element.classList.contains(className))) {
+      element = element.parentElement;
+      if (element == document.body) {
+        return null;
+      }
+    }
+    return element;
+  }
+
+  return {
+    init: init
+  };
+});

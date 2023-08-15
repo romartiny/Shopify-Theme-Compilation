@@ -1,0 +1,97 @@
+<style>
+  .section--staff .section-heading:before {
+  	content: "{{ section.settings.heading_overlap }}";
+  }
+</style>
+<section class="section section--staff clearfix">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item one-whole">
+        {% comment %}
+        Snippet for recipes from blog
+        For settings go to Admin -> Theme -> Customize Theme -> Homepage
+        {% endcomment %}
+        
+        {% if section.settings.heading != blank %}
+          <h3 class="section-heading heading--page">{{ section.settings.heading | upcase }}</h3>
+        {% endif %}
+
+        <div class="employee-container">
+          {% for block in section.blocks %}
+          
+            <div class="employee">
+              {% if block.settings.photo != blank %}
+                <div class="employee__photo bg-cover">
+                  <div class="img-holder">
+                    <img src="{{ block.settings.photo | img_url: '600x' | format: 'jpg' }}" alt="{{ block.settings.name }}">
+                  </div>
+                </div>
+              {% endif %}
+              <div class="employee__desc">
+                <h3 class="employee__name">{{ block.settings.name }}</h3>
+                <p class="employee__passion">{{ block.settings.passion }}</p>
+                <p class="employee__info">{{ block.settings.info }}</p>
+              </div>
+            </div>
+              
+          {% endfor %}
+        </div>
+      </div> <!-- End grid__item -->
+    </div> <!-- End grid -->
+  </div> <!-- End wrapper -->
+</section>
+
+{% schema %}
+  {
+    "name": "Our Team",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "of dedicated farmers"
+      },
+      {
+        "type": "text",
+        "id": "heading_overlap",
+        "label": "Overlap subheading",
+        "default": "Team"
+      }
+    ],
+	"blocks": [
+      {
+        "type": "employee",
+        "name": "Team member",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "photo",
+            "label": "Photo"
+          },
+		  {
+            "type": "text",
+            "id": "name",
+            "label": "Name"
+          },
+          {
+            "type": "text",
+            "id": "passion",
+            "label": "Passion"
+          },
+          {
+            "type": "textarea",
+            "id": "info",
+            "label": "Information",
+            "default": "Works all day long on veggies and fruits in family fields. Has a 20-years experience of harvesting best plants in the province along with his wife Staphanie. Best known for cultivating a new cultivar of tomatoes."
+          }
+        ]
+      }
+    ],
+	"presets": [
+      {
+        "name": "Our Team",
+        "category": "Special sections"
+      }
+    ]
+  }
+{% endschema %}

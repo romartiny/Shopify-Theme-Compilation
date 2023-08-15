@@ -1,0 +1,17 @@
+{% comment %}
+Product slideshow 
+For settings go to Admin -> Theme -> Customize Theme -> Homepage Slideshow
+{% endcomment %}
+<!-- Flexslider -->
+<div class="flexslider flexslider-thumb flexslider-thumb--product">
+  <ul class="slides">
+    {% for image in product.images limit: 3 %}
+
+	    <li class="slide slide--{{ forloop.index }} js-img-holder-cover" data-thumb="{{ image.src | product_img_url: 'compact' }}">
+	    	<img src="{{ image.src | product_img_url: 'master' }}" alt="{{ product.title }}">
+	    </li>
+	    
+    {% endfor %}
+  </ul>
+</div>
+<!-- End flexslider -->

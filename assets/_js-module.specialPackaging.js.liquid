@@ -1,0 +1,65 @@
+define(['jquery', 'ajaxCart', 'shopInfo', 'shopifyCommon'], function(jQuery, ajaxCart, shopInfo){
+  Shopify.Cart = Shopify.Cart || {};
+
+  Shopify.Cart.GiftWrap = {};
+
+  var specialID = shopInfo.specialPackagingID;
+
+  if (!specialID) {
+    throw new Error("specialID isn't defined.");
+  }
+
+  var updatesSet = {};
+  updatesSet[specialID] = 1;
+
+  var updatesRemove = {};
+  updatesRemove[specialID] = 0;
+  
+  Shopify.Cart.GiftWrap.set = function() {
+    
+    jQuery.ajax({
+      type: 'POST',
+      url: '/cart/update.js', 
+      data: {
+        updates: updatesSet,
+        attributes: { 
+          'special_pack': true 
+        } 
+      }, 
+      dataType: 'json',
+      success: function(data) { 
+        ajaxCart.updateDropdownCart();
+      }
+    })
+  }
+
+  Shopify.Cart.GiftWrap.remove = function() {
+
+    jQuery.ajax({
+      type: 'POST',
+      url: '/cart/update.js', 
+      data: { 
+        updates: updatesRemove, 
+        attributes: { 
+          'special_pack': '' 
+        } 
+      }, 
+      dataType: 'json',
+      success: function() { 
+        ajaxCart.updateDropdownCart();
+      }
+    });
+  }
+
+  // When the special packing checkbox is checked or unchecked.
+  jQuery(function() {
+    jQuery('[name="attributes\[choose_package\]"]').change(function() {
+      if (jQuery('#giftWrap').is(':checked')) {
+        Shopify.Cart.GiftWrap.set();    
+      }
+      else {
+        Shopify.Cart.GiftWrap.remove();
+      }
+    });
+  });
+});

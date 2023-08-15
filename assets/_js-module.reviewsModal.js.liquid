@@ -1,0 +1,28 @@
+define([], function(){
+	var reviewsContainer = $('#shopify-product-reviews');
+
+  var interval = setInterval(function(){
+    if ( reviewsContainer.find('.new-review-form').length > 0 ) {
+      clearInterval(interval);
+
+      var $closeButton = $('<button/>').attr('type', 'button').addClass('modal__btn-close btn btn--text').click(function(e){
+        closeForm(e);
+      });
+      $('<span/>').text( JSON.parse(JSON.stringify( {{ "layout.cart.close_cart" | t | json }} )) ).appendTo($closeButton);
+      var $container = reviewsContainer.find('.new-review-form');
+      $closeButton.appendTo($container);
+
+      $('<a/>',{
+        'href': 'javascript:void(0);',
+        'class': 'text-link--default',
+        text: 'Cancel'
+      }).click(function(e){
+        closeForm(e);
+      }).appendTo(reviewsContainer.find('.spr-form-actions'));
+    }
+  }, 200);
+
+  function closeForm (e) {
+    $(e.target).closest('.spr-form').hide();
+  }
+});

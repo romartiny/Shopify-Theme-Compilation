@@ -1,0 +1,83 @@
+
+{% if section.blocks.size == 1 %}
+  {% assign item_width = 'one' %}
+{% elsif section.blocks.size  == 2 %}
+  {% assign item_width = 'two' %}
+{% else %}
+  {% assign item_width = 'three' %}
+{% endif %}
+<section class="featured-collections clearfix">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item">
+        <ul class="featured-collections__list">
+          {% for block in section.blocks %}
+          
+			       {% assign collection_item = collections[block.settings.collection] %}
+          
+              <li class="featured-collections__item item__{{forloop.index}} {{item_width}}">
+                <a class="item__link" href="{{ collection_item.url }}">
+                  <div class="img-holder img-holder--block item__image">
+                    {% if collection_item.image %}
+                      <img src="{{ collection_item | img_url: 'large' }}"  alt="{{ collection_item.title | escape }}" display="block" width="120px" />
+                    {% else %}
+                      <img src="{{ collection_item.products.first | img_url: 'large' }}"  alt="{{ collection_item.title | escape }}" display="block" width="120px" />
+                    {% endif %}
+                  </div>
+                  <h3 class="item__title">{{ collection_item.title }}</h3>
+                </a>
+              </li>
+
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+  {
+    "name": "Feature Collections",
+    "max_blocks": 3,
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+          {
+            "type": "collection",
+            "id": "collection",
+            "label": "Choose collection"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Feature Collections",
+        "category": "Collections",
+        "blocks": [
+          {
+            "type": "collection",
+            "settings": {
+              "collection": "fresh"
+            }
+          },
+          {
+            "type": "collection",
+            "settings": {
+              "collection": "dried"
+            }
+          },
+          {
+            "type": "collection",
+            "settings": {
+              "collection": "frozen"
+            }
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

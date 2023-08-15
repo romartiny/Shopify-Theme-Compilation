@@ -1,0 +1,14 @@
+<!-- Shop logo -->
+{% if settings.logo_use_image %}
+  {% assign image_size = 'x96' %}
+  <a class="site-logo" href="/">
+    {% if settings.logo == nil %}
+      <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}">
+    {% else %}
+    <img src="{{ settings.logo | img_url: image_size }}" srcset="{{ settings.logo | img_url: image_size }} 1x, {{ settings.logo | img_url: image_size, scale: 2 }} 2x" alt="{{ shop.name }}" itemprop="logo">
+    {% endif %}
+  </a>
+{% else %}
+  <a class="site-name" href="/">{{ shop.name }}</a>
+{% endif %}
+<!-- End shop logo -->

@@ -1,0 +1,184 @@
+<style>
+
+  {% for block in section.blocks %}
+
+    {%- capture spesial_offer_img_fallback -%}img_homepage_special_mb_{{ forloop.index }}.jpg{%- endcapture -%}
+    {%- assign mark_pos = block.settings.mark_positionXY | replace: ',', ' ' | replace: ':', ' ' | replace: '%', ' ' | replace: 'px', ' ' -%}
+    {%- assign mark_XY = mark_pos | split: ' ' %}
+
+    .spesial-offer--{{ block.id }} {
+      {%- if block.settings.img__special_offer_lg -%}
+        background-image: url({{ block.settings.img__special_offer_lg | img_url: '1500x', crop: 'center' }});
+      {%- else -%}
+        background-image: url({{ spesial_offer_img_fallback | asset_url }});
+      {%- endif -%}
+    }
+
+    .spesial-offer--{{ block.id }} .spesial-offer__info {
+      left: {{- mark_XY[0] -}}%;
+      top: {{- mark_XY[1] -}}%;
+      width: {{- block.settings.mark_box_width | replace: '%', '' | replace: 'px', '' -}}%;
+    }
+
+    .spesial-offer--{{ block.id }} .spesial-offer__info:before {
+      background-color: {{ block.settings.color_mark  }};
+    }
+
+    .spesial-offer--{{ block.id }} .spesial-offer__desc {
+      color: {{ block.settings.color_mark_text }};
+    }
+
+    .spesial-offer--{{ block.id }} .spesial-offer__mark {
+      color: {{ block.settings.color_mark_text }};
+      background-color: {{ block.settings.color_mark  }};
+    }
+  {% endfor %}
+</style>
+
+
+  <div class="special-offer-container clearfix">
+
+    {% for block in section.blocks %}
+
+      <div class="{% if forloop.first %}spesial-offer--one{% else %}spesial-offer--two{% endif %} spesial-offer spesial-offer--{{ block.id }}">
+        <a href="{{ block.settings.btn_url }}">
+          <h3 class="heading--page">{{ block.settings.heading | upcase }}</h3>
+          <h4 class="subheading--page"><em>{{ block.settings.subheading }}</em></h4>
+
+          {% if block.settings.mark_enable %}
+            <div class="spesial-offer__info">
+              <span class="spesial-offer__mark">
+                <strong>{{ block.settings.mark_price }}</strong>
+              </span>
+              <span class="spesial-offer__desc">
+                <strong>{{ block.settings.mark_title }}</strong>
+              </span>
+            </div>
+          {% endif %}
+
+        </a>
+      </div> <!-- End special-offer -->
+
+    {% endfor %}
+
+  </div> <!-- End special-offer-container -->
+
+
+{% schema %}
+  {
+    "name": "Offer Section",
+    "max_blocks": 2,
+	   "blocks": [
+      {
+          "type": "offer_block",
+          "name": "Offer Block",
+          "settings": [
+              {
+                "type": "image_picker",
+                "id": "img__special_offer_lg",
+                "label": "Background image",
+                "info":"Recomended image size at least 1000x700 px"
+              },
+              {
+                "type": "text",
+                "id": "heading",
+                "label": "Heading",
+                "default": "Start your day"
+              },
+              {
+                "type": "text",
+                "id": "subheading",
+                "label": "Subheading",
+                "default": "with vit-plate"
+              },
+              {
+                "type": "checkbox",
+                "id": "mark_enable",
+                "label": "Show offer point"
+              },
+              {
+                "type": "color",
+                "id": "color_mark",
+                "label": "Point color",
+                "default": "#f3b562"
+              },
+              {
+                "type": "color",
+                "id": "color_mark_text",
+                "label": "Text color",
+                "default": "#5c4b51"
+              },
+              {
+                "type": "text",
+                "id": "mark_title",
+                "label": "Offer point title",
+                "default": "Healthy deal"
+              },
+              {
+                "type": "text",
+                "id": "mark_price",
+                "label": "Offer point price",
+                "default": "special pack"
+              },
+              {
+                "type": "url",
+                "id": "btn_url",
+                "label": "Button link"
+              },
+              {
+                "type": "text",
+                "id": "mark_positionXY",
+                "label": "Mark position X:Y",
+                "default": "50% 50%",
+                "placeholder": "50% 50%",
+                "info": "Values in the field above should be in percentage only"
+              },
+              {
+                "type": "text",
+                "id": "mark_box_width",
+                "label": "Mark box width",
+                "default": "50%",
+                "placeholder": "50%",
+                "info": "Value in the field above should be in percentage only"
+              }
+			]
+		}
+	],
+	"presets": [
+      {
+        "name": "Special Offer Section",
+        "category": "Offers",
+        "blocks": [
+          {
+            "type": "offer_block",
+            "settings": {
+              "heading": "Start your day",
+              "subheading": "with vit-plate",
+              "mark_enable": true,
+              "color_mark": "#f3b562",
+              "color_mark_text": "#5c4b51",
+              "mark_title": "Healthy deal",
+              "mark_price": "special pack",
+              "mark_positionXY": "25 43",
+              "mark_box_width": "50"
+            }
+          },
+          {
+            "type": "offer_block",
+            "settings": {
+              "heading": "C-Overload",
+              "subheading": "",
+              "mark_enable": true,
+              "color_mark": "#8cbeb2",
+              "color_mark_text": "#ffffff",
+              "mark_title": "September deal",
+              "mark_price": "20% discount",
+              "mark_positionXY": "25 43",
+              "mark_box_width": "50"
+            }
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

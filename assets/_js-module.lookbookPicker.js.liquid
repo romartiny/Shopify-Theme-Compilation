@@ -1,0 +1,354 @@
+define(['ajaxCart', 'jquery.currencies', 'shopInfo', 'shopifyCommon'], function(ajaxCart, Currency, shopInfo, Shopify){
+
+  console.log('Module LookBook is loaded');
+
+  function LookBookPicker(options){
+
+    var self = this;
+
+    this.options = options;
+
+    this.total; // settings into init()
+
+    // lb - lookbook
+    this.DOM = {};
+    this.DOM.lbContainer      = document.querySelector(options.lookbookSelector);
+
+    this.DOM.lbNav            = this.DOM.lbContainer.querySelector('.picker-nav');
+    this.DOM.lbInfo           = this.DOM.lbNav.querySelector('.choosed-pack-info');
+    this.DOM.total            = this.DOM.lbNav.querySelector('.choosed-pack-total .money');
+    this.DOM.checkoutBtn      = this.DOM.lbNav.querySelector('.checkout-btn');
+
+    // Two forms 'Add to Cart'
+    this.DOM.addCartFormAll   = this.DOM.lbContainer.querySelector('.lookbook-cart--all');
+    this.DOM.addCartFormTotal = this.DOM.lbContainer.querySelector('.lookbook-cart--total');
+
+    this.checkboxes = this.DOM.lbContainer.querySelectorAll('.js-product-checkbox');
+    // object with choosed product ids
+    this.products   = this.getProducts();
+
+    this.init();
+
+
+    self.loadAnimation();
+
+
+
+    this.DOM.addCartFormAll.addEventListener('submit', function(e){
+      e.preventDefault();
+
+      var form   = this;
+      var inputs = form.querySelectorAll('input[name="id[]"]');
+      var productIdArr = [];
+
+      for ( var i = 0, max = inputs.length; i < max; i++ ) {
+
+        productIdArr.push(inputs[i].value);
+      }
+
+      self.addToCartRequest(productIdArr, form);
+    });
+
+    this.DOM.addCartFormTotal.addEventListener('submit', function(e){
+      e.preventDefault();
+
+      var form   = this;
+      var productIdArr = [];
+
+      for ( productId in self.products ) {
+
+        productIdArr.push(productId);
+      }
+
+      self.addToCartRequest(productIdArr, form);
+    });
+  };
+
+  LookBookPicker.prototype.init = function() {
+
+    var checkbox, productId,
+        totalPrice = 0,
+        self = this;
+
+    // get the total sum and add event listener to all checkboxes
+    for ( var i = 0, max = this.checkboxes.length; i < max; i++) {
+
+      checkbox = this.checkboxes[i];
+      checkbox.addEventListener('change', function(e){
+        self.checkboxEvent(e);
+      });
+
+      productId  = this.checkboxes[i].getAttribute('data-product-id');
+      totalPrice = totalPrice + parseInt(this.products[productId].price);
+    }
+
+    //set the total sum
+    this.total = totalPrice;
+    this.setTotal();
+  };
+
+  LookBookPicker.prototype.getProducts = function() {
+
+    var productId, productPrice,
+        products = {};
+
+    for ( var i = 0, max = this.checkboxes.length; i < max; i++) {
+
+      productId    = this.checkboxes[i].getAttribute('data-product-id');
+      productPrice = this.checkboxes[i].getAttribute('data-product-price'),
+
+      products[productId] = {
+        'price': productPrice,
+        'quantity': 1
+      }
+    }
+
+    return products;
+  };
+
+  LookBookPicker.prototype.checkboxEvent = function(e) {
+    var currentTarget = e.currentTarget,
+        productPrice  = currentTarget.getAttribute('data-product-price'),
+        productId     = currentTarget.getAttribute('data-product-id');
+
+    if ( currentTarget.checked ) {
+
+      this.total = this.total + parseInt(productPrice);
+
+      this.products[productId] = {
+        'price': productPrice,
+        'quantity': 1
+      }
+
+    } else {
+
+      this.total = this.total - parseInt(productPrice);
+      delete this.products[productId];
+    }
+
+    this.setTotal();
+  };
+
+  LookBookPicker.prototype.setTotal = function() {
+
+    if ( this.total >= 0 ) {
+
+      this.DOM.total.innerHTML = Shopify.formatMoney(this.total, shopInfo.moneyFormat);
+
+      {% if settings.show_multiple_currencies %}
+        this.convertCurrency();
+      {% endif %}
+    }
+  };
+
+  // animation for elements after page load
+  LookBookPicker.prototype.loadAnimation = function() {
+
+    var productIndexes = this.DOM.lbContainer.querySelectorAll('.product__index');
+    var counter = 0,
+        self = this,
+        submitBtn;
+
+    this.DOM.lbContainer.classList.add('animation');
+
+    var interval = setInterval(function(){
+
+      if ( counter < productIndexes.length ) {
+
+        productIndexes[counter].classList.add('show');
+        productIndexes[counter].style.animationDelay = counter * 300 + 'ms';
+        counter++;
+      } else {
+
+        self.DOM.addCartFormAll.classList.add('show');
+        self.initScrollAnimation();
+        clearInterval(interval);
+      }
+    }, this.options.animationDelay);
+
+  };
+
+  LookBookPicker.prototype.addToCartRequest = function(productIdArr, form) {
+
+    var self = this;
+
+    var request = function() {
+      if ( productIdArr.length ) {
+
+        $.ajax({
+          type: "post",
+          url: shopInfo.secureUrl + "/cart/add.js",
+          data: 'quantity=1&id=' + productIdArr[0],
+          dataType: 'json',
+          success: function() {
+
+            productIdArr.shift();
+            request();
+          }
+        });
+      } else {
+
+        ajaxCart.updateDropdownCart();
+        self.showFromMsg(form);
+      }
+    }
+
+    request();
+  };
+
+  LookBookPicker.prototype.showFromMsg = function(form) {
+
+    var formMsg   = form.querySelector('.form-cart-message');
+    var submitBtn = form.querySelector('.js-add-to-card');
+
+    if ( formMsg ) {
+
+      formMsg.classList.remove('hide-message', 'hide');
+      formMsg.classList.add('show-message');
+    } else {
+
+      formMsg = document.createElement('p');
+      formMsg.className = 'form-cart-message show-message';
+      formMsg.innerHTML = "{{ 'cart.general.added_to_cart_products_html' | t }}";
+      form.insertBefore(formMsg, submitBtn);
+
+      // Hide message
+      setTimeout(function() {
+        formMsg.classList.remove('show-message');
+        formMsg.classList.add('hide-message');
+        formMsg.addEventListener('animationend', function addClasses() {
+          formMsg.classList.add('hide');
+          formMsg.removeEventListener('animationend', addClasses);
+        });
+      }, 5000);
+
+    }
+  };
+
+  {% if settings.show_multiple_currencies %}
+  LookBookPicker.prototype.convertCurrency = function() {
+
+    if ( this.DOM.total && this.DOM.total.getAttribute('data-currency') !== '' ){
+      this.DOM.total.removeAttribute('data-currency-' + Currency.currentCurrency.toLowerCase());
+      this.DOM.total.removeAttribute('data-currency');
+    }
+
+    if ( window.shopCurrency != Currency.currentCurrency ) {
+      Currency.convertAll(shopCurrency, Currency.currentCurrency, '.choosed-pack-total span.money', 'money_format');
+    }
+  };
+  {% endif %}
+
+  LookBookPicker.prototype.initScrollAnimation = function() {
+
+    var products = this.DOM.lbContainer.querySelectorAll('.product-grid-item--alt');
+
+    var product, startPageCoord,
+        pageObj = [],
+        windowHeight = window.innerHeight;
+
+    var transitionCounter    = 0,
+        counter              = 0,
+        elemOffset           = 50,
+        transitionStep       = 150,
+        latestKnownScrollPos = 0,
+        ticking              = false;
+
+    for ( var i = 0, max = products.length; i < max; i++) {
+
+        product = products[i];
+        productCoord  = calcCoordinates(product);
+
+        // store start pages and top coordinate into object
+        pageObj[i] = {};
+        pageObj[i].product        = product;
+        pageObj[i].productOffsetX = productCoord.top;
+
+        // the first runing of animation or after page refresh
+        if ( (windowHeight +  window.pageYOffset) >= (pageObj[i].productOffsetX + elemOffset) )  {
+
+            product.classList.add('show-in');
+
+            // counter for transition (change transition for every 3 items)
+            if ( transitionCounter < 3 ) {
+                product.style.transitionDelay = transitionStep * transitionCounter + 'ms';
+                transitionCounter++;
+            }
+
+            if ( transitionCounter === 3) {
+                transitionCounter = 0;
+            }
+
+            counter++;
+            pageObj[i].productOffsetX = 0;
+        }
+    }
+
+    function calcCoordinates(el) {
+
+      var box = el.getBoundingClientRect();
+
+      return {
+        top:  box.top  + window.pageYOffset,
+        left: box.left + window.pageXOffset
+      };
+    }
+
+    // store pageYOffset into a variable
+    function onScroll() {
+
+        latestKnownScrollPos = window.pageYOffset;
+        requestTick();
+    }
+
+    // run requestAnimationFrame only during scrolling
+    function requestTick() {
+
+        if ( !ticking ) {
+            requestAnimationFrame(update);
+        }
+
+        ticking = true;
+    }
+
+    // add animation for items
+    function update() {
+
+        ticking = false;
+
+        var currentScrollPos = latestKnownScrollPos;
+
+        for ( var i = 0, max = pageObj.length; i < max; i++ ) {
+
+            if ( pageObj[i].productOffsetX !== 0 && (windowHeight +  currentScrollPos) >= (pageObj[i].productOffsetX + elemOffset) )  {
+
+                pageObj[i].product.classList.add('show-in');
+
+                // counter for transition (change transition for every 3 items)
+                if ( transitionCounter < 3 ) {
+                    pageObj[i].product.style.transitionDelay = transitionStep * transitionCounter + 'ms';
+                    transitionCounter++;
+                }
+
+                if ( transitionCounter === 3) {
+                    transitionCounter = 0;
+                }
+
+                // if all items has been animated remove listener for scroll
+                counter++;
+
+                if ( counter === pageObj.length ) {
+                    window.removeEventListener('scroll', onScroll, false);
+                }
+
+                pageObj[i].productOffsetX = 0;
+            }
+        }
+    }
+
+    window.addEventListener('scroll', onScroll, false);
+  };
+
+
+  return LookBookPicker;
+});

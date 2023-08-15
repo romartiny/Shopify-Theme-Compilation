@@ -1,0 +1,104 @@
+
+{% if section.settings.product != blank %}
+{% assign special_product = all_products[section.settings.product] %}  
+
+<section class="section section--offer-product-options clearfix">
+  <div class="product__block">
+    <div class="product__block-item js-images">
+      <div class="product__images-container">
+        {% if special_product.variants.size > 1 %}
+          {% for variant in special_product.variants limit: 3 %}
+            <a class="{% if forloop.first %}show-in{% endif %}" href="{{special_product.url}}" data-variant-id="{{ variant.id }}">
+              <div class="img-holder img-holder--product">
+                <img src="{{ variant.image | img_url: '1024x1024'}}" alt="{{ special_product.title }}">
+              </div>
+            </a>
+          {% endfor %}
+       	{% else %}
+        	<a class="show-in" href="{{special_product.url}}">
+              <div class="img-holder img-holder--product">
+                <img src="{{ special_product.featured_image | img_url: '1024x1024'}}" alt="{{ special_product.title }}">
+              </div>
+            </a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="product__block-item product">
+      <div class="product__content">
+        <h1 itemprop="name" class="product__title">{{ special_product.title }}</h1>
+        <div class="product__info">
+          <span class="product__spec">
+            {% if special_product.type != blank %}
+              {{ special_product.type | link_to_type }} |
+            {% endif %}
+
+            {% if special_product.variants.first.inventory_quantity > 0 %}
+              {{ 'products.general.in_stock' | t }}
+            {% else %}
+              {{ 'products.general.out_stock' | t }}
+            {% endif %}
+
+            {% if settings.product_size_unit_enable %}
+              | 
+              {{ special_product.first_available_variant.weight_unit }}
+            {% endif %}                      
+          </span>
+          <div class="product__desc">
+            {% assign content_html = special_product.description %}
+            {% include 'strip_html_tags' with content_html %}
+      
+            {% assign split_nutritional = '[Nutritional value]' %}
+              {% if content contains split_nutritional %}
+                {% assign description_text = content | split: split_nutritional | first %}
+                {% assign nutritional_value_text = content | split: split_nutritional | last %}
+              {% endif %}
+              
+              {% comment %}
+              Product decription
+              {% endcomment %}
+              {% if settings.product_description_enable %}
+                <div itemprop="description" class="rte product__desc-content">
+                  {% if description_text != blank %}
+                    {{ description_text | truncatewords: 30 }}
+                  {% else %}
+                    {{ special_product.description | truncatewords: 30 }}
+                  {% endif %}
+                </div>
+              {% endif %}
+          </div>
+          {% if special_product.variants.size > 1 and special_product.available %}
+            
+            <select id="product-variants-offer" name="id">
+              {% for variant in special_product.variants limit: 3 %}
+                <option {% if variant == special_product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }}</option>
+              {% endfor %}
+            </select>
+
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% else %}
+  {% include 'fallback-msg' %}
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Special Offer Product v.3",
+    "settings": [
+      {
+        "type": "product",
+        "id": "product",
+        "label": "Product"
+      }
+    ],
+	"presets": [
+      {
+        "name": "Special Offer Product v.3",
+        "category": "Offers"
+      }
+    ]
+  }
+{% endschema %}

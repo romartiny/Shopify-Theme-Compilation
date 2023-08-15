@@ -1,0 +1,86 @@
+define(['jquery', 'shopInfo', 'shopifyCommon', 'utils'], function($, shopInfo, Shopify, utils){
+
+
+  function QuantityBox(options) {
+    var defOpt = {
+      DOM : {}
+    };
+
+    this.options = utils.mergeOptions(defOpt, options);
+    this.DOM     = utils.domFinder(this.options.DOM);
+
+    for (var i = 0, max = this.DOM.quantityFieldsAll.length; i < max; i++) {
+
+      quantityFieldDOM  = this.DOM.quantityFieldsAll[i];
+
+      QuantityBox.initArrows(quantityFieldDOM.closest('.quantity-field'));
+
+      quantityFieldDOM.addEventListener('change', function(e){
+        this.inputChangeEvent(e);
+      }.bind(this));
+    }
+  }
+
+  QuantityBox.prototype.inputChangeEvent = function(event) {
+
+    var target = event.currentTarget;
+
+    var quantityParentDOM = target.closest('.quantity-field').parentElement;
+
+    var totalPriceDOM     = quantityParentDOM.querySelector('.js-total-price');
+    var productPriceDOM   = quantityParentDOM.querySelector('.js-price-and-value .money');
+    var productPrice      = productPriceDOM.innerHTML;
+
+    productPrice = productPrice.replace(/[^0-9.]/g, '');
+    productPrice = parseFloat(productPrice.replace(/\./g, ''));
+
+    var total = target.value * productPrice;
+
+    totalPriceDOM.textContent = Shopify.formatMoney(total, shopInfo.moneyFormat);
+
+    {% if settings.show_multiple_currencies %}
+      if ( totalPriceDOM && totalPriceDOM.getAttribute('data-currency') !== '' ){
+        totalPriceDOM.removeAttribute('data-currency-' + Currency.currentCurrency.toLowerCase());
+        totalPriceDOM.removeAttribute('data-currency');
+      }
+      if ( window.shopCurrency != Currency.currentCurrency ) {
+        Currency.convertAll(shopCurrency, $('[name=currencies]').val(), '.js-price-and-value span.money', 'money_format');
+      }
+    {% endif %}
+  }
+
+  QuantityBox.initArrows = function(quantityContainer) {
+
+    if (!quantityContainer) {
+      return null;
+    }
+
+    var quantityField, quantityFieldValue, arrowUp, arrowDown;
+
+    quantityField = quantityContainer.querySelector('input');
+    arrowUp       = quantityContainer.querySelector('.js-up-quantity');
+    arrowDown     = quantityContainer.querySelector('.js-down-quantity');
+
+    arrowUp.addEventListener('click', function(e) {
+      quantityFieldValue = parseInt(quantityField.value);
+      quantityFieldValue++;
+      quantityField.value = quantityFieldValue;
+      utils.triggerEvent(quantityField, 'change');
+    });
+
+    arrowDown.addEventListener('click', function(e) {
+      quantityFieldValue = parseInt(quantityField.value);
+
+      if (quantityFieldValue > 0) {
+        quantityFieldValue--;
+      } else {
+        quantityFieldValue = 0;
+      }
+
+      quantityField.value = quantityFieldValue;
+      utils.triggerEvent(quantityField, 'change');
+    });
+  };
+
+  return QuantityBox;
+})

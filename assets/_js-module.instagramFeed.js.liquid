@@ -1,0 +1,29 @@
+define(['instafeed', 'utils'], function(Instafeed, utils){
+
+	console.log('Module Instagram Feed is loaded');
+
+	var DOM = utils.domFinder({
+      instaFeedSelectorID: 'instafeed'
+    });
+    
+    var feed = new Instafeed({
+        get: 'user',
+        userId: '{{ settings.footer_instagram_user_id }}',
+        accessToken: '{{ settings.footer_instagram_access_token }}',
+        clientId: '123',
+        limit: 8,
+        resolution: 'low_resolution',
+        after: function(){
+          var instaLinks = DOM.instaFeedSelectorID.getElementsByTagName('a');
+          for (var i = 0, max = instaLinks.length; i < max; i++) {
+            instaLinks[i].target = "_blank";
+          }
+        }
+    });
+
+    return {
+    	init: function(){
+    		feed.run();
+    	}
+    }
+})

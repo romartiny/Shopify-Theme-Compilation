@@ -1,0 +1,490 @@
+<div id="container" class="parallax">
+  <div class="parallax__back">
+    {% include 'product-slideshow' %}
+  </div>
+
+  <div class="parallax__base">
+    <div class="wrapper">
+      <div class="grid">
+        <div itemscope itemtype="http://schema.org/Product" class="product product--lg grid__item one-whole">
+          <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+          <meta itemprop="image" content="{{ product.featured_image.src | product_img_url: 'grande' }}">
+          <h1 itemprop="name" class="product__title {% if product.featured_image.size > 0 %}fade-up{% endif %}">{{ product.title }}</h1>
+          <div class="product__info {% if product.featured_image.size > 0 %}fade-up{% endif %}">
+            <span class="product__spec">
+
+              {% if product.type != blank %}
+                {{ product.type }} |
+              {% endif %}
+
+              {% if product.available %}
+                {{ 'products.general.in_stock' | t }}
+              {% else %}
+                {{ 'products.general.out_stock' | t }}
+              {% endif %}
+
+              {% if settings.product_size_unit_enable %}
+                |
+                {% if product.first_available_variant.option1 != 'Default Title' %}
+                  {{ product.first_available_variant.option1 }}
+                {% else %}
+                  {{ product.first_available_variant.weight_unit }}
+                {% endif %}
+              {% endif %}
+            </span>
+
+            <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="product__expense">
+              <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+              <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+
+              <span class="product__price"><span itemprop="price" class="money">{{ product.price | money }}</span></span>
+
+              {% if product.variants.first.option1 != 'Default Title' %}
+                {% capture weight_unit %}{{ product.variants.first.option1 }}{% endcapture %}
+              {% else %}
+                {% capture weight_unit %}{{ product.variants.first.weight_unit }}{% endcapture %}
+              {% endif %}
+              {%- if settings.product_size_unit_enable -%}
+                <p class="product__size-unit">
+                  <em>
+                    {{ 'products.general.per' | t }}
+                    {% if weight_unit == "kg" %}
+                      {{ 'products.general.kilogram' | t }}
+                    {% else %}
+                      {{ weight_unit | downcase }}
+                    {% endif %}
+                  </em>
+                </p>
+              {%- endif -%}
+            </div>
+            {% comment %} Add to cart button {% endcomment %}
+
+            <div class="form-wrapper">
+              <form class="form form--default" action="/cart/add" method="post">
+                <div class="form__row">
+
+                  {% if product.variants.size > 1 and product.options.size == 1 %}
+
+                    <select id="product-variants" name="id">
+                      {% for variant in product.variants %}
+                        {%- if variant.available -%}
+                          <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %}
+                            value="{{ variant.id }}"
+                            data-variant-price={{ variant.price }}>{{ variant.title }}</option>
+                        {%- else -%}
+                          <option value="{{ variant.id }}" disabled="disabled" data-variant-price={{ variant.price }}>
+                            {{- variant.title -}} - {{ 'products.product_page.sold_out' | t }}
+                          </option>
+                        {%- endif -%}
+                      {% endfor %}
+                    </select>
+
+                  {% elsif product.options.size > 1 %}
+
+                    <div id="product-multi-variants">
+                        <div id="price-field"></div>
+                        <select id="product-select" name="id">
+                          {% for variant in product.variants %}
+                            {%- if variant.available -%}
+                              <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+                            {%- else -%}
+                              <option value="{{ variant.id }}" disabled="disabled">
+                                {{- variant.title -}} - {{ 'products.product_page.sold_out' | t }}
+                              </option>
+                            {%- endif -%}
+                          {% endfor %}
+                        </select>
+                    </div>
+
+                  {% else %} {% comment %} If there is no more than one product variant {% endcomment %}
+                    <input type="hidden" name="id" value="{{ product.variants[0].id }}" />
+                  {% endif %}
+
+                </div>
+                <div class="form__row">
+                  <div class="quantity-field">
+                    <span class="icon icon--arrow-right js-up-quantity"></span>
+                    <input class="form__field" type="number" id="quantity" name="quantity" value="1" min="1" >
+                    <span class="icon icon--arrow-left js-down-quantity"></span>
+                  </div>
+                  <span class="js-price-and-value">x <span class="money">{{ product.price | money }}</span> = <span class="js-total-price money">{{ product.price | money }}</span></span>
+                </div>
+                <div class="form__row">
+                  <button {% unless product.available %}disabled{% endunless %} class="btn btn--default btn--full btn--submit {% unless product.available %}btn--disabled{% endunless %} js-add-to-card" type="submit" >{% unless product.available %}{{ 'products.general.out_stock' | t }}{% else %} {{ 'layout.general.add_to_cart_button' | t }}{% endunless %}</button>
+                </div>
+              </form>
+            </div> <!-- End form-wrapper -->
+
+            {% if settings.wishlist_enable %}
+
+              <div class="form-wrapper form-wrapper--wishlist js-wishlist-form">
+                {% if customer %}
+                  {% assign value = product.id %}
+                  {% capture productID %}{{ product.id }}{% endcapture %}
+                  {% for tag in customer.tags %}
+                    {% capture tagID %}{{ tag }}{% endcapture %}
+                    {% if tagID contains productID %}
+                      {% capture value %}x{{ tagID }}{% endcapture %}
+                    {% endif %}
+                    {% if value.size == 0 %}{% assign value = productID %}{% endif %}
+                  {% endfor %}
+
+                  {% unless value.size == 0 %}
+                    {% capture check %}{{ value.size | minus:productID.size | money_without_currency | times:100 | divided_by:2 }}{% endcapture %}
+                    {% assign check = check | split:'.' %}
+                    {% if check[1] contains "5" %}{% assign display = false %}{% else %}{% assign display = true %}{% endif %}
+                  {% endunless %}
+
+                  {% if display %}
+                    <form accept-charset="UTF-8" id="add-to-wish-list" action="/contact" method="post">
+                      <input name="form_type" type="hidden" value="customer">
+                      <input name="utf8" type="hidden" value="✓">
+                      <input type="hidden" name="contact[email]" value="{{ customer.email }}"/>
+                      <input id="update-me" type="hidden" name="contact[tags]" value="{{ value }}" />
+                      <button class="text-link--default" type="submit">
+                      <span class="icon icon--plus"></span>
+                      {{ 'layout.wishlist_page.add_to_wishlist' | t }}
+                      </button>
+                    </form>
+                  {% else %}
+                    <p>{{ 'layout.wishlist_page.added_to_wishlist' | t }} <a class="text-link--default" href="/pages/wishlist">{{ 'layout.wishlist_page.wishlist' | t }}</a></p>
+                  {% endif %}
+                {% endif %}
+              </div>
+            {% endif %}
+          </div> <!-- End product__info -->
+        </div> <!-- End grid__item -->
+      </div> <!-- End grid -->
+    </div> <!-- End wrapper -->
+
+    <hr class="hr--clear-inverse hr--desktop">
+
+  <div class="product-description-flex">
+    <div class="wrapper">
+      <div class="grid">
+        <div class="product product--lg product-container grid__item one-whole {% if product.featured_image.size > 0 %}fade-up delay-one{% endif %}">
+          <div class="product__desc fold">
+          {% comment %}
+          Strip unnecessary html
+          {% endcomment %}
+          {% assign content_html = product.description %}
+          {% include 'strip_html_tags' with content_html %}
+
+          {% assign split_nutritional = '[Nutritional value]' %}
+            {% if content contains split_nutritional %}
+              {% assign description_text = content | split: split_nutritional | first %}
+              {% assign nutritional_value_text = content | split: split_nutritional | last %}
+            {% endif %}
+
+            {% comment %}
+            Product decription
+            {% endcomment %}
+            {% if settings.product_description_enable %}
+              <h3 class="heading--add fold__toggle">{{ 'products.product_page.description_title' | t }}</h3>
+              <div itemprop="description" class="rte product__desc-content fold__content">
+                {% if description_text != blank %}
+                  {{ description_text }}
+                {% else %}
+                  {{ product.description }}
+                {% endif %}
+              </div>
+            {% endif %}
+          </div> <!-- End product__desc -->
+        </div> <!-- End grid__item -->
+      </div> <!-- End grid -->
+    </div> <!-- End wrapper -->
+
+
+    {% if settings.product_share_btns_anable %}
+      <div class="{% if product.featured_image.size > 0 %}fade-up delay-two{% endif %}">
+        {% comment %}
+        Snippet for social media buttons
+        For setting go to Admin -> Theme -> Customize Theme -> Product page
+        {% endcomment %}
+        {% include 'social-sharing'%}
+      </div>
+    {% endif %}
+  </div>
+
+    <div class="wrapper">
+      <div class="grid">
+        <div class="product product--lg grid__item one-whole {% if product.featured_image.size > 0 %}fade-up delay-three{% endif %}">
+
+          {% comment %}
+          Product nutritional values
+          {% endcomment %}
+          {% if settings.product_nutritional_enable and  nutritional_value_text != blank %}
+
+            {% comment %}
+            Get string with minerals
+            {% endcomment %}
+            {% if settings.product_nutritional_minerals != blank and nutritional_value_text contains settings.product_nutritional_minerals %}
+              {% assign vitamins_and_energy_text = nutritional_value_text | split: settings.product_nutritional_minerals | first %}
+              {% assign minerals_text = nutritional_value_text | split: settings.product_nutritional_minerals | last %}
+            {% endif %}
+
+            {% comment %}
+            Get strings with energy value and vitamins
+            {% endcomment %}
+            {% if settings.product_nutritional_vitamins != blank and nutritional_value_text contains settings.product_nutritional_vitamins %}
+              {% assign energy_text = vitamins_and_energy_text | split: settings.product_nutritional_vitamins | first  | strip_html %}
+              {% assign vitamins_text = vitamins_and_energy_text | split: settings.product_nutritional_vitamins | last  | strip_html %}
+            {% endif %}
+
+            {% comment %}
+            Get array of energy, vitamins and minerals
+            {% endcomment %}
+            {% assign energy_array = energy_text  | split: ', ' %}
+            {% assign vitamins_array = vitamins_text | split: ',' %}
+            {% assign minerals_array = minerals_text | split: ',' %}
+
+            <div class="product__desc product__desc--components fold">
+              <h3 class="heading--add fold__toggle">{{ 'products.product_page.nutritional_title' | t }}</h3>
+              {% comment %}
+              Show energy values
+              {% endcomment %}
+              <div class="fold__content">
+                <div class="components-container">
+                  <ul class="components-list">
+                    {% for i in (0..energy_array.size) %}
+                      {% if forloop.last %} {% break %} {% endif %}
+                      <li class="components-list__item">
+                        {{ energy_array[i] | split: '|' | first | strip }} <span class="components-list__value" ><strong>{{ energy_array[i] | split: '|' | last | strip }}</strong></span>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+
+                {% comment %}
+                Show vitamins list
+                {% endcomment %}
+                <div class="components-container">
+                  <span class="components__title">{{ settings.product_nutritional_vitamins }}</span>
+                  <ul class="components-list components-list--elements">
+                    {% for i in (0..vitamins_array.size) %}
+                      {% if forloop.last %} {% break %} {% endif %}
+                      <li class="components-list__item">
+                        {{ vitamins_array[i] | strip_html | strip }}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div> <!-- End components-container -->
+
+                {% comment %}
+                Show mineral list
+                {% endcomment %}
+                <div class="components-container">
+                  <span class="components__title">{{ settings.product_nutritional_minerals }}</span>
+                  <ul class="components-list components-list--elements">
+                    {% for i in (0..minerals_array.size) %}
+                      {% if forloop.last %} {% break %} {% endif %}
+                      <li class="components-list__item">
+                        {{ minerals_array[i] | strip_html | strip }}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div> <!-- End components-container -->
+              </div> <!-- End product__desc-content -->
+            </div> <!-- End product__desc -->
+          {% endif %}
+        </div> <!-- End grid__item -->
+      </div> <!-- End grid -->
+    </div> <!-- End wrapper -->
+
+    <hr class="hr--clear-inverse hr--desktop">
+
+
+    {% comment %}
+    Add product review widget, must install Product Review App:
+    https://apps.shopify.com/product-reviews
+    {% endcomment %}
+    {% if settings.product_reviews_recipe == 'reviews' %}
+      <div class="wrapper">
+        <div class="grid paste">
+          <div class="grid__item one-whole fold product-reviews {% if product.featured_image.size > 0 %}fade-up delay-four{% endif %}">
+            <h3 class="heading--add fold__toggle">{{ 'products.product_page.customer_reviews' | t }}</h3>
+            <div class="fold__content">
+              <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+            </div>
+          </div> <!-- End grid__item -->
+        </div> <!-- End grid -->
+      </div> <!-- End wrapper -->
+      <hr class="hr--clear-inverse hr--desktop">
+    {% elsif settings.product_reviews_recipe == 'recipe' %}
+      <div class="wrapper">
+        <div class="grid">
+          <div class="product product--lg grid__item one-whole product-container {% if product.featured_image.size > 0 %}fade-up delay-four{% endif %}">
+
+              {% assign current_product_title = product.title | downcase %}
+
+              {% if settings.product_recipe_blog != blank %}
+                {% assign matched_article = false %}
+                {% assign first_article = false %}
+                {% assign random_article = false %}
+
+                {% for article in blogs[settings.product_recipe_blog].articles %}
+
+                  {% comment %}
+                  Checking if article tags have some word from product title
+                  {% endcomment %}
+                  {% for tag in article.tags %}
+                    {% assign tag = tag | downcase %}
+                    {% assign product_title = product.title | downcase %}
+
+                    {% if product_title contains tag %}
+                      {% assign matched_article = true %}
+                      {% break %}
+                    {% endif %}
+                  {% endfor %}
+
+                  {% if matched_article == true and first_article == false %}
+
+                    {% include 'shortcode-recipe' with article.content %}
+
+                    <div class="product-recipe fold">
+                      <h3 class="heading--add fold__toggle">{{ 'products.product_page.special_recipe_title' | t }}</h3>
+
+                      <div class="fold__content">
+                        <div class="text-center">
+                          <div class="bg-cover">
+                            <div class="img-holder img-holder--block">
+                              {% if settings.product_recipe_blog_ingredients != blank %}
+                                <span class="product-recipe__spec-title left"><strong>{{ settings.product_recipe_blog_ingredients }}</strong></span>
+                              {% endif %}
+
+                              <img src="{{ article.image | img_url: 'large' }}" alt="{{ article.title }}">
+                              <span class="license-mark">{{ license_mark }}</span>
+
+                              {% if settings.product_recipe_blog_directions != blank %}
+                                <span class="product-recipe__spec-title right"><strong>{{ settings.product_recipe_blog_directions }}</strong></span>
+                              {% endif %}
+                            </div> <!-- End img-holder -->
+                          </div> <!-- End bg-cover -->
+                        </div> <!-- End text-center -->
+
+                        <h4 class="product-recipe__title">{{ article.title }}</h4>
+
+
+                        {% comment %}{% if introduction_text != blank %}
+                          {{ introduction_text }}
+                        {% endif %}{% endcomment %}
+
+                        <div class="rte product-recipe__content left">
+                          {{ ingredients_part }}
+                        </div>
+
+                        <div class="rte product-recipe__content right">
+                          {{ directions_part }}
+                        </div>
+
+                        {% comment %}
+                        Show the first matched article
+                        {% endcomment %}
+                        {% assign first_article = true %}
+                        {% assign random_article = true %}
+                      </div> <!-- End fold__content -->
+                    </div> <!-- End product-recipe -->
+                  {% endif %}
+                {% endfor %}
+
+                {% comment %}
+                Random article (if article tags don't have words from product title)
+                {% endcomment %}
+                {% if random_article == false %}
+                  {% capture index %}{{ 'now' | date: '%S' | times: blogs[settings.product_recipe_blog].articles.size | divided_by: 60 }}{% endcapture %}
+                  {% for article in blogs[settings.product_recipe_blog].articles offset:index limit:1 %}
+
+                    {% include 'shortcode-recipe' with article.content %}
+
+                    <div class="product-recipe fold">
+                      <h3 class="heading--add fold__toggle">{{ 'products.product_page.special_recipe_title' | t }}</h3>
+
+                      <div class="fold__content">
+                        <div class="text-center">
+                          <div class="bg-cover">
+                            <div class="img-holder img-holder--block">
+                              {% if settings.product_recipe_blog_ingredients != blank %}
+                                <span class="product-recipe__spec-title left"><strong>{{ settings.product_recipe_blog_ingredients }}</strong></span>
+                              {% endif %}
+
+                              <img src="{{ article.image | img_url: 'large' }}" alt="{{ article.title }}">
+                              <span class="license-mark">{{ license_mark }}</span>
+
+                              {% if settings.product_recipe_blog_directions != blank %}
+                                <span class="product-recipe__spec-title right"><strong>{{ settings.product_recipe_blog_directions }}</strong></span>
+                              {% endif %}
+                            </div> <!-- End img-holder -->
+                          </div> <!-- End bg-cover -->
+                        </div> <!-- End text-center -->
+
+                        <h4 class="product-recipe__title">{{ article.title }}</h4>
+
+
+                        {% comment %}{% if introduction_text != blank %}
+                          {{ introduction_text }}
+                        {% endif %}{% endcomment %}
+
+                        <div class="rte product-recipe__content left">
+                          {{ ingredients_part }}
+                        </div>
+
+                        <div class="rte product-recipe__content right">
+                          {{ directions_part }}
+                        </div>
+
+                        {% comment %}
+                        Show the first matched article
+                        {% endcomment %}
+                        {% assign first_article = true %}
+                        {% assign random_article = true %}
+                      </div> <!-- End fold__content -->
+                    </div> <!-- End product-recipe -->
+
+                  {% endfor %}
+                {% endif %}
+              {% else %}
+                {% include 'fallback-msg' %}
+              {% endif %}
+
+          </div> <!-- End grid__item -->
+        </div> <!-- End grid -->
+      </div> <!-- End wrapper -->
+      <hr class="hr--clear-inverse hr--desktop">
+    {% endif %}
+
+
+
+    {% if settings.product_similar_enable %}
+      <div class="wrapper">
+        <div class="grid">
+          <div class="grid__item">
+            <div class="fold similar-product {% if product.featured_image.size > 0 %}fade-up delay-five{% endif %}">
+              <h3 class="heading heading--add fold__toggle">{{ 'products.product_page.similar_products_title' | t }}</h3>
+
+              <div class="fold__content">
+                {% if settings.product_similar_type == "tags" %}
+                  {% comment %}
+                  Snippet for similar products which are chosen by similar tags
+                  For setting go to Admin -> Theme -> Customize Theme -> Product page
+                  {% endcomment %}
+                  {% include 'similar-product-carousel-tag' %}
+                {% elsif settings.product_similar_type == "collection" %}
+                  {% comment %}
+                  Snippet for similar products which are chosen by similar collection
+                  For setting go to Admin -> Theme -> Customize Theme -> Product page
+                  {% endcomment %}
+                  {% include 'similar-product-carousel-collection' %}
+                {% endif %}
+              </div> <!-- End fold__content -->
+            </div> <!-- End fold -->
+          </div> <!-- End grid__item -->
+        </div> <!-- End grid -->
+      </div> <!-- End wraper -->
+    {% endif %}
+  </div>
+</div>
+{% unless product == empty %}
+  <script type="application/json" id="ProductJson">
+    {{ product | json }}
+  </script>
+{% endunless %}

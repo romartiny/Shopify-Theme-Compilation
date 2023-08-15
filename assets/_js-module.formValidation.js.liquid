@@ -1,0 +1,240 @@
+define(['jquery'], function($) {
+
+  console.log('Module Form Validation is loaded');
+
+  var $inputs;
+
+  // Find forms and init custom validation on form sumbit
+  function init() {
+
+    $('.form-validation').on('submit', function(e) {
+      e.preventDefault();
+
+      var validationStatus;
+      validationStatus = _formErrorValidation(e.target);
+
+      if (validationStatus) {
+        $(this).off('submit');
+        $(this).submit();
+      }
+
+    });
+  }
+
+  function _formErrorValidation(form) {
+    var $form = $(form);
+
+    if ($form.length === 0) {
+      return 0;
+    }
+
+    var $this = this;
+
+    $inputs = $form.find('[class=form__field], [class*=form__field--textarea]');
+
+    for (var i = 0, max = $inputs.length; i < max; i++) {
+      if ($inputs[i].value === '') {
+        $($inputs[i]).one('keyup', function() {
+          var value = $(this).val();
+          if (value.length > 0) {
+            $(this).addClass('hide-border');
+          }
+        });
+      }
+    }
+
+    // General fields
+    var $firstName       = $form.find('[name*=first_name]');
+    var $lastName        = $form.find('[name*=last_name]');
+    var $email           = $form.find('[name*=email]');
+    var $password        = $form.find('[name*=password]');
+    var $passwordConfirm = $form.find('[name*=\\[password_confirmation\\]]');
+    var $message         = $form.find('[name*=body]');
+    var $fullName        = $form.find('[name*=\\[name\\]]');
+    var $author          = $form.find('[name*=author]');
+    var $address1        = $form.find('[name*=address1]');
+    var $city            = $form.find('[name*=city]');
+    var $country         = $form.find('#AddressCountryNew');
+    var $zip             = $form.find('[name*=zip]');
+
+    // Error messages from settings
+    var errorMsgName     = "{{ 'general.form_popup_errors.name_html' | t }}";
+    var errorMsgLastName = "{{ 'general.form_popup_errors.last_name_html' | t }}";
+    var errorMsgEmail    = "{{ 'general.form_popup_errors.email_html' | t }}";
+    var errorMsgPassword = "{{ 'general.form_popup_errors.password_html' | t }}";
+    var errorMsgMessage  = "{{ 'general.form_popup_errors.message_html' | t }}";
+    var errorMsgFullname = "{{ 'general.form_popup_errors.fullname_html' | t }}";
+    var errorMsgAuthor   = "{{ 'general.form_popup_errors.comment_author_html' | t }}";
+    var errorMsgAddress1 = "{{ 'general.form_popup_errors.city_html' | t }}";
+    var errorMsgCity     = "{{ 'general.form_popup_errors.city_html' | t }}";
+    var errorMsgCountry  = "{{ 'general.form_popup_errors.country_html' | t }}";
+    var errorMsgZip      = "{{ 'general.form_popup_errors.zip_html' | t }}";
+
+    var counter = 0;
+
+
+    if ($firstName.length > 0 && $firstName.val() === "") {
+      initErrorMsg($firstName, errorMsgName);
+    } else {
+      $firstName.removeClass('field__error');
+      $firstName.parent().prev('.error').removeClass('show-message').addClass('hide');
+    }
+
+
+    if ($lastName.length > 0 && $lastName.val() === "") {
+      initErrorMsg($lastName, errorMsgLastName);
+    } else {
+      $lastName.removeClass('field__error');
+      $lastName.parent().prev('.error').removeClass('show-message').addClass('hide');
+    }
+
+
+    if ($email.length > 0) {
+      var emailValue = $email.val();
+      if (emailValue.indexOf('@') == -1 || emailValue.indexOf('.') == -1) {
+        initErrorMsg($email, errorMsgEmail);
+      } else {
+        $email.removeClass('field__error');
+        $email.parent().prev('.error').removeClass('show-message').addClass('hide');
+      }
+    }
+
+
+    if ($password.length > 0) {
+      var passwordValue = $password.val();
+      if (passwordValue.length < 6) {
+        initErrorMsg($password, errorMsgPassword);
+      } else {
+        $password.removeClass('field__error');
+        $password.parent().prev('.error').removeClass('show-message').addClass('hide');
+      }
+    }
+
+
+    if ($passwordConfirm.length > 0) {
+      var passwordValue = $passwordConfirm.val();
+      if (passwordValue.length < 6) {
+        initErrorMsg($passwordConfirm, errorMsgPassword);
+      } else {
+        $passwordConfirm.removeClass('field__error');
+        $passwordConfirm.parent().prev('.error').removeClass('show-message').addClass('hide');
+      }
+    }
+
+
+    if ($message.length > 0 && $message.val() === "") {
+      initErrorMsg($message, errorMsgMessage);
+    } else {
+      $message.removeClass('field__error');
+      $message.parent().prev('.error').removeClass('show-message').addClass('hide');
+    }
+
+
+    if ($fullName.length > 0 && $fullName.val() === "") {
+      initErrorMsg($fullName, errorMsgFullname);
+    } else {
+      $fullName.removeClass('field__error');
+      $fullName.parent().prev('.error').removeClass('show-message').addClass('hide');
+    }
+
+
+    if ($author.length > 0 && $author.val() === "") {
+      initErrorMsg($author, errorMsgAuthor);
+    } else {
+      $author.removeClass('field__error');
+      $author.parent().prev('.error').removeClass('show-message').addClass('hide');
+    }
+
+
+    if ($address1.length > 0 && $address1.val() === "") {
+      initErrorMsg($address1, errorMsgAddress1);
+    } else {
+      $address1.removeClass('field__error');
+      $address1.parent().prev('.error').removeClass('show-message').addClass('hide');
+    }
+
+
+    if ($city.length > 0 && $city.val() === "") {
+      initErrorMsg($city, errorMsgCity);
+    } else {
+      $city.removeClass('field__error');
+      $city.parent().prev('.error').removeClass('show-message').addClass('hide');
+    }
+
+
+    if ($country.length > 0 && $country.val() === "---") {
+      initErrorMsg($country, errorMsgCountry);
+    } else {
+      $country.removeClass('field__error');
+      $country.parent().prev('.error').removeClass('show-message').addClass('hide');
+    }
+
+
+    if ($zip.length > 0 && $zip.val() === "") {
+      initErrorMsg($zip, errorMsgZip);
+    } else {
+      $zip.removeClass('field__error');
+      $zip.parent().prev('.error').removeClass('show-message').addClass('hide');
+    }
+
+
+    if ($('.field__error').length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // Erros messages for form validation
+  function initErrorMsg(input, msg) {
+
+    for (var i = 0, max = $inputs.length; i < max; i++) {
+      if (input.is($inputs[i])) {
+        counter = i + 1;
+      }
+    }
+
+    var $errorMsgContainer = input.parent().prev('.error');
+    var counterContainer = $('<span/>').addClass('error__counter');
+
+    input.addClass('field__error');
+
+    if ($errorMsgContainer.length == 0) {
+      $errorMsgContainer = $('<div/>').addClass('error show-message');
+      var errorMessage = $('<p/>').addClass('error__message').html(msg);
+      counterContainer.text(counter);
+      counterContainer.appendTo(errorMessage);
+      errorMessage.appendTo($errorMsgContainer);
+
+      $('<span/>').addClass('icon icon--close').appendTo($errorMsgContainer).click(function(e) {
+        var $targetParent = $(e.target).parent();
+        $targetParent.removeClass('show-message').addClass('hide-message');
+
+        $targetParent.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function addClasses() {
+          $targetParent.addClass('hide');
+          $targetParent.off('webkitAnimationEnd oanimationend msAnimationEnd animationend', addClasses);
+        });
+
+        if ($errorMsgContainer.closest('.modal').length > 0 && window.modalScroll) {
+          window.modalScroll.resize();
+        }
+      });
+
+      input.parent().before($errorMsgContainer);
+
+    } else if ($errorMsgContainer.hasClass('hide-message')) {
+      $errorMsgContainer.removeClass('hide hide-message').addClass('show-message');
+      $errorMsgContainer.find('.error__counter').text(counter);
+    } else {
+      $errorMsgContainer.find('.error__counter').text(counter);
+    }
+
+    if ($errorMsgContainer.closest('.modal').length > 0 && window.modalScroll) {
+      window.modalScroll.resize();
+    }
+  }
+
+  return {
+    init: init
+  }
+});

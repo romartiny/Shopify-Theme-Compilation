@@ -1,0 +1,43 @@
+<section class="hero-image clearfix" style="background-image: url({{ section.settings.image_bg | img_url: '2000x' | format: 'jpg' }});">
+  <div class="hero-image__content text-center">
+    {% if section.settings.title != blank %}
+      <h1 class="hero-image__title">{{ section.settings.title }}</h1>
+    {% endif %}
+    {% if section.settings.description != blank %}
+      <p class="hero-image__desc">{{ section.settings.description }}</p>
+    {% endif %}
+    {% if section.settings.link%}
+      <a class="btn btn--default" href="{{ section.settings.link }}" title="{{ 'general.hero_image.button' | t }}">{{ 'general.hero_image.button' | t }}</a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Hero image",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image_bg",
+        "label": "Background image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Real Food Projects"
+      },
+      {
+        "type": "textarea",
+        "id": "description",
+        "label": "Description",
+        "default": "Featuring 30 Skills and 47 Recipes from Scratch, this book will change the way you cook."
+      },
+      {
+        "type": "url",
+        "id": "link",
+        "label": "Button link"
+      }
+    ]
+  }
+{% endschema %}

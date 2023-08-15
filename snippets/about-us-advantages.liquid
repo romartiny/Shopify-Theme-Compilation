@@ -1,0 +1,41 @@
+{% comment %}
+Snippet for advantages on homepage.
+For settings go to Admin -> Theme -> Customize Theme -> Home page 
+{% endcomment %}
+{% if settings.about_us_blog != blank %}
+  {% if settings.about_us_heading != blank %}
+    <h3 class="section-heading section-heading--advantages heading--page">{{ settings.about_us_heading | upcase }}</h3>
+  {% endif %}
+  <!-- Swiper -->
+  <div class="swiper-container slider-advantages">
+    <div class="swiper-wrapper">
+      {% for article in blogs[settings.about_us_blog].articles %}
+        <div class="swiper-slide swiper-slide--{{ forloop.index }}">
+          {% assign header = article.title | split: '|' %}
+
+          {% if article.image %}
+            <div class="img-holder">
+              <span class="slide-overlay-phrase">{{ header[1] | strip | upcase }}</span>
+              <img src="{{ article | img_url: 'large' }}" alt="{{ aticle.title }}">
+            </div>
+          {% endif %}
+
+          <div class="slide-info">
+            <span class="slide-index">0{{ forloop.index }}</span>
+            <h4 class="heading--add">{{ header[0] | strip }}</h4>
+            <p>{{ article.excerpt_or_content }}</p>
+          </div>
+
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Add Arrows -->
+    <div class="navigation-buttons">
+      <div class="swiper-button-next">{{ 'layout.general.next_button' | t }}</div>
+      <div class="swiper-button-prev">{{ 'layout.general.back_button' | t }}</div>
+    </div>
+  </div>
+{% else %}
+  {% include 'fallback-msg' %}
+{% endif %}

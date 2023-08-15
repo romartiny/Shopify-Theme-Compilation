@@ -1,0 +1,32 @@
+<section class="section section--promobox-info clearfix">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item one-whole text-center">
+          <div class="promobox-msg">
+            {{ section.settings.text  }}
+          </div>
+      </div> <!-- End grid__item -->
+    </div> <!-- End grid -->
+  </div> <!-- End wrapper -->
+</section>
+
+{% schema %}
+  {
+    "name": "Information Box",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "text",
+        "label": "Message",
+        "default": "<h2 class='heading--page'>Have any questions?</h2><p>call to us <strong>1-800-Foodly</strong></p>",
+        "info": "HTML tags could be used"
+      }
+    ],
+	"presets": [
+      {
+        "name": "Information Box",
+        "category": "Special sections"
+      }
+    ]
+  }
+{% endschema %}

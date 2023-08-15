@@ -1,0 +1,134 @@
+{%- comment -%} parsing content_for_header to separate scripts from others {%- endcomment -%}
+
+{%- capture shopify_header -%}  {{ content_for_header }} {%- endcapture -%}
+
+{%- capture shopify_header -%}{{- shopify_header | replace: '</ script', '</script' -}}   {%- endcapture -%}
+{%- capture shopify_header -%}{{- shopify_header | replace: '</script >', '</script>' -}}   {%- endcapture -%}
+{%- capture shopify_header -%}{{- shopify_header | replace: '< script', '<script' -}}       {%- endcapture -%}
+{%- capture shopify_header -%}{{- shopify_header | replace: '<script', '|*|<script' -}}     {%- endcapture -%}
+{%- capture shopify_header -%}{{- shopify_header | replace: '</script>', '</script>|*|' -}} {%- endcapture -%}
+
+{%- assign header_contetnt_arr = shopify_header | split: '|*|' -%}
+{%- assign shopify_header_scripts = '' -%}
+{%- assign shopify_header_non_scripts = '' -%}
+
+{%- for tag_in_header in header_contetnt_arr  -%}
+
+  {%- if tag_in_header contains "script" -%}
+    {%- assign shopify_header_scripts = shopify_header_scripts | append: tag_in_header -%}
+  {%- else -%}
+    {%- assign shopify_header_non_scripts = shopify_header_non_scripts | append: tag_in_header -%}
+  {%- endif -%}
+
+{%- endfor -%}
+
+
+{%- comment -%} parsing content_for_layout to separate sctyle tags from others {%- endcomment -%}
+
+{%- capture  template_output -%}  {{ content_for_layout }} {%- endcapture -%}
+
+{%- capture  template_output -%}{{-  template_output | replace: '</ style', '</style' -}}   {%- endcapture -%}
+{%- capture  template_output -%}{{-  template_output | replace: 'style >', 'style>' -}}   {%- endcapture -%}
+{%- capture  template_output -%}{{-  template_output | replace: '< style', '<style' -}}       {%- endcapture -%}
+{%- capture  template_output -%}{{-  template_output | replace: '<style', '|*|<style' -}}     {%- endcapture -%}
+{%- capture  template_output -%}{{-  template_output | replace: '</style>', '</style>|*|' -}} {%- endcapture -%}
+
+{%- assign  template_output_arr =  template_output | split: '|*|' -%}
+{%- assign  template_output_styles = '' -%}
+{%- assign  template_output_non_styles = '' -%}
+
+{%- for tag_in_layout in  template_output_arr  -%}
+
+  {%- if tag_in_layout contains "<style" and tag_in_layout contains "</style>" -%}
+    {%- assign  template_output_styles =  template_output_styles | append: tag_in_layout -%}
+  {%- else -%}
+    {%- assign  template_output_non_styles =  template_output_non_styles | append: tag_in_layout -%}
+  {%- endif -%}
+
+{%- endfor -%}
+
+
+<!doctype html>
+<html class="no-js">
+<head>
+
+  <!-- Meta Tags ================================================== -->
+  {%- include 'meta-tags' -%}
+
+  <!-- Title and description ================================================== -->
+  <title>
+  {%- if page_title contains "[price:" %}
+    {%- assign page_title_recipe = page_title | split: "[price:" | first -%}
+    {{ page_title_recipe }}
+  {%- else -%}
+    {{ page_title }}
+  {%- endif -%}
+  {%- if current_page != 1 -%} &ndash; {{ 'general.meta.page' | t: page: current_page }}{%- endif -%}{%- unless page_title contains shop.name -%} &ndash; {{ shop.name }}{%- endunless -%}
+  </title>
+
+  <!-- Favicons ================================================== -->
+  {%- include 'favicon' -%}
+
+  <!-- Fonts ================================================== -->
+  {%- include 'google-fonts-ajax' -%}
+
+  <!-- CSS ================================================== -->
+  {%- include 'stylesheets' -%}
+
+  {%- comment -%} Parsed style tags from body {%- endcomment -%}
+  {{template_output_styles}}
+
+  <!-- content_for_header without scripts ======================= -->
+  {{shopify_header_non_scripts | strip_newlines}}
+
+
+  {%- comment -%}
+  If you store has customer accounts disabled, you can remove the following JS file
+  {%- endcomment -%}
+  {%- if template contains 'customers' -%}
+    {{ "shopify_common.js"  | shopify_asset_url | script_tag }}
+    {{ "customer_area.js" | shopify_asset_url  | script_tag }}
+  {%- endif -%}
+</head>
+
+<body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }} {% if settings.show_multiple_currencies %}currency-is-hide{% endif %}">
+
+  <div class="content-wrapper">
+    <noscript>
+      <div class="javascript-is-disabled">
+        <p>JavaScript is <strong>disabled</strong> in your browser, this may cause some limitations to apply, and some functions may not be available.</p>
+      </div>
+    </noscript>
+
+    {%- section 'header' -%}
+
+    <!-- *** Main content *** -->
+    <main class="main-content" role="main">
+      {% if template == 'blog' or template == 'article' %}
+        <div class="js-page-content">
+          {{ template_output_non_styles }}
+        </div>
+      {% else %}
+        {{ template_output_non_styles }}
+      {% endif %}
+    </main>
+    <!-- *** End main content *** -->
+
+    {% comment %}
+    Snippet for footer
+    {% endcomment %}
+    {% section 'footer' %}
+  </div> <!-- End content-wrapper -->
+
+  {%- if settings.popup_enable -%}
+    {% include 'popup-discount-image' -%}
+  {%- endif -%}
+
+  {{shopify_header_scripts}}
+  {% comment %}
+  Snippet for scripts that are used on every page
+  {% endcomment %}
+  {%- include 'scripts' -%}
+
+</body>
+</html>

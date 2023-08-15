@@ -1,0 +1,430 @@
+{% if section.blocks.size > 0 %}
+
+  <style>
+
+    {%- comment -%}fix for flexslider blinking{%- endcomment -%}
+    .flexslider.loading ul.slides > :first-child {
+      opacity: 1 !important;
+    }
+
+    {%- if section.settings.position_y -%}
+      @media (min-width: 769px) {
+        .flexslider-thumb--homepage {
+          margin-top: {{- section.settings.position_y -}}px;
+        }
+      }
+    {%- endif -%}
+
+
+    {%- for block in section.blocks -%}
+
+      {%- assign slide_img = block.settings.image | img_url: '2000x', format: 'pjpg' -%}
+      {%- assign slide_img_small = block.settings.image | img_url: '250x', format: 'pjpg' -%}
+      {%- if block.settings.image == nil -%}
+        {%- assign slide_img = "img_homepage_slide_" | append: forloop.index | append: ".jpg" | asset_img_url: '2000x' -%}
+        {%- assign slide_img_small = "img_homepage_slide_" | append: forloop.index | append: ".jpg" | asset_img_url: '250x' -%}
+      {%- endif -%}
+
+      .slide--{{ forloop.index }} {
+        background-image: url({{slide_img}}), url({{slide_img_small}});
+      }
+
+      {%- assign heading_pos = block.settings.heading_positionXY | replace: ',', ' ' | replace: ':', ' ' | replace: '%', ' ' | replace: 'px', ' ' -%}
+      {%- assign heading_XY = heading_pos | split: ' ' %}
+      {%- assign add_heading_pos = block.settings.heading_add_positionXY | replace: ',', ' ' | replace: ':', ' ' | replace: '%', ' ' | replace: 'px', ' ' -%}
+      {%- assign add_heading_XY = add_heading_pos | split: ' ' %}
+      {%- assign price_badge_pos = block.settings.price_bage_positionXY | replace: ',', ' ' | replace: ':', ' ' | replace: '%', ' ' | replace: 'px', ' ' -%}
+      {%- assign price_XY = price_badge_pos | split: ' ' %}
+
+      {%- assign heading_mob_pos = block.settings.heading_mob_positionXY | replace: ',', ' ' | replace: ':', ' ' | replace: '%', ' ' | replace: 'px', ' ' -%}
+      {%- assign heading_mob_XY = heading_mob_pos | split: ' ' %}
+      {%- assign add_heading_mob_pos = block.settings.heading_add_mob_positionXY | replace: ',', ' ' | replace: ':', ' ' | replace: '%', ' ' | replace: 'px', ' ' -%}
+      {%- assign add_heading_mob_XY = add_heading_mob_pos | split: ' ' %}
+      {%- assign price_badge_mob_pos = block.settings.price_bage_mob_positionXY | replace: ',', ' ' | replace: ':', ' ' | replace: '%', ' ' | replace: 'px', ' ' -%}
+      {%- assign price_mob_XY = price_badge_mob_pos | split: ' ' %}
+
+
+      .flexslider .slide.slide--{{ forloop.index }} .slide__mainhead {
+        left: {{- heading_XY[0] -}}%;
+        top: {{- heading_XY[1] -}}%;
+      }
+      .flexslider .slide.slide--{{ forloop.index }} .slide__add_heading {
+        left: {{- add_heading_XY[0] -}}%;
+        top: {{- add_heading_XY[1] -}}%;
+      }
+      .flexslider .slide.slide--{{ forloop.index }} .slide__price-point {
+        left: {{- price_XY[0] -}}%;
+        top: {{- price_XY[1] -}}%;
+      }
+
+      @media (max-width: 768px) {
+        {%- if block.settings.is_mobile_heading -%}
+          .slide--{{ forloop.index }} .slide__mainhead {
+            display: none;
+          }
+        {%- endif -%}
+        {%- if block.settings.is_mobile_add_heading -%}
+          .slide--{{ forloop.index }} .slide__add_heading {
+            display: none;
+          }
+        {%- endif -%}
+        {%- if block.settings.is_mobile_price_bage -%}
+          .slide--{{ forloop.index }} .slide__price-point {
+            display: none;
+          }
+        {%- endif -%}
+        .flexslider .slide.slide--{{ forloop.index }} .slide__mainhead {
+          left: {{- heading_mob_XY[0] -}}%;
+          top: {{- heading_mob_XY[1] -}}%;
+        }
+        .flexslider .slide.slide--{{ forloop.index }} .slide__add_heading {
+          left: {{- add_heading_mob_XY[0] -}}%;
+          top: {{- add_heading_mob_XY[1] -}}%;
+        }
+        .flexslider .slide.slide--{{ forloop.index }} .slide__price-point {
+          left: {{- price_mob_XY[0] -}}%;
+          top: {{- price_mob_XY[1] -}}%;
+        }
+      }
+
+
+    {%- endfor -%}
+
+  </style>
+
+  {%- assign autoplay = section.settings.slideshow_autoplay -%}
+  {%- assign autoplaySpeed = section.settings.slideshow_time_animation | default: "3000" -%}
+  {%- assign slideshow_effect = section.settings.slideshow_effect | default: 'fade' -%}
+
+  <div class="flexslider flexslider-thumb flexslider-thumb--homepage loading" data-autoplay="{{- autoplay -}}" data-autoplay-speed="{{- autoplaySpeed -}}" data-slideshow-effect="{{- slideshow_effect -}}">
+    <ul class="slides">
+      {%- for block in section.blocks -%}
+
+        {%- assign slide_thumb_img = block.settings.image_thumb | img_url: '150x', format: 'jpg' -%}
+        {%- if block.settings.image_thumb == nil -%}
+          {%- assign slide_thumb_img = "img_thumb_homepage_slide_" | append: forloop.index | append: ".jpg" | asset_img_url: '150x' -%}
+        {%- endif -%}
+
+        <li class="slide slide--{{ forloop.index }}" data-thumb="{{ slide_thumb_img }}">
+
+          {% if block.settings.heading != blank %}
+            <div class="slide__info-part slide__mainhead">
+              <h1 class="heading--page slide__heading"><a class="slide__link" href="{{ block.settings.link }}" title="{{ block.settings.heading }}">{{ block.settings.heading | upcase }}</a></h1>
+              <h2 class="subheading--page slide__subheading"><a class="slide__link" href="{{ block.settings.link }}" title="{{ block.settings.subheading }}"><em>{{ block.settings.subheading }}</em></a></h2>
+            </div>
+          {% endif %}
+
+          {% if block.settings.heading_add != blank %}
+            <div class="slide__info-part slide__add_heading">
+              <h1 class="heading--page slide__heading"><a class="slide__link" href="{{ block.settings.link }}" title="{{ block.settings.heading_add }}">{{ block.settings.heading_add | upcase }}</a></h1>
+              <h2 class="subheading--page slide__subheading"><a class="slide__link" href="{{ block.settings.link }}" title="{{ block.settings.subheading_add }}"><em>{{ block.settings.subheading_add }}</em></a></h2>
+            </div>
+          {% endif %}
+
+          {% if block.settings.price != blank and block.settings.price_desc != blank %} {%- comment -%} Price badge {%-endcomment-%}
+            <div class="slide__price-point" style="background-color: {{block.settings.price_bage_bgcolor}};">
+              <a class="slide__link" href="{{ block.settings.link }}" title="{{ block.settings.heading }}" style="color: {{block.settings.price_bage_textcolor}};">
+                <span class="slide__price"><span class="money">{{ block.settings.price }}</span></span>
+                <span class="slide__desc"><em>{{ block.settings.price_desc }}</em></span>
+              </a>
+            </div>
+          {% endif %}{%- comment -%} End price badge {%-endcomment-%}
+
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Slideshow",
+    "max_blocks": 3,
+    "settings": [
+      {
+        "type": "select",
+        "id": "slideshow_effect",
+        "label": "Slideshow effect",
+        "options": [
+          {
+            "value": "fade",
+            "label": "Fade"
+          },
+          {
+            "value": "slide",
+            "label": "Slide"
+          }
+        ],
+    		"default": "fade"
+      },
+      {
+        "type": "checkbox",
+        "id": "slideshow_autoplay",
+        "label": "Autoplay"
+      },
+  	  {
+          "type": "text",
+          "id": "slideshow_time_animation",
+          "label": "Time for changing slides",
+          "default": "7000",
+          "info": "Works if autoplay is enabled. Time in milliseconds"
+      },
+      {
+        "type": "text",
+        "id": "position_y",
+        "label": "Vertical position",
+        "default": "-223",
+        "placeholder": "-233",
+        "info": "To display slidshow below the header set the value above greater than 0 (default settings is margin-top: -233px)"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "slide",
+        "name": "Slide",
+        "settings": [
+          {
+          "type": "header",
+          "content": "Main heading",
+          "info":   "Add your main catchphrase here"
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "Tomato season"
+          },
+          {
+            "type": "text",
+            "id": "subheading",
+            "label": "Subheading",
+            "default": "nutritious  delicious"
+          },
+          {
+            "type": "text",
+            "id": "heading_positionXY",
+            "label": "Heading position X:Y",
+            "default": "50% 50%",
+            "placeholder": "50% 50%",
+            "info": "Values in the field above should be in percentage only"
+          },
+          {
+            "type": "text",
+            "id": "heading_mob_positionXY",
+            "label": "Heading position X:Y on mobile",
+            "default": "50% 50%",
+            "placeholder": "50% 50%",
+            "info": "Values in the field above should be in percentage only"
+          },
+          {
+            "type":      "checkbox",
+            "id":        "is_mobile_heading",
+            "label":     "Hide on mobile",
+            "default":   false
+          },
+          {
+          "type": "paragraph",
+          "content": "¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯"
+          },
+          {
+          "type": "header",
+          "content": "Additional heading",
+          "info":   "Add extra description to your slide"
+          },
+          {
+            "type": "text",
+            "id": "heading_add",
+            "label": "Additional heading",
+            "default": "Yes, <strong>Please<\/strong>!"
+          },
+          {
+            "type": "text",
+            "id": "subheading_add",
+            "label": "Additional subheading",
+            "default": "Mmmmm..."
+          },
+          {
+            "type": "text",
+            "id": "heading_add_positionXY",
+            "label": "Additional heading position X:Y",
+            "default": "50% 50%",
+            "placeholder": "50% 50%",
+            "info": "Values in the field above should be in percentage only"
+          },
+          {
+            "type": "text",
+            "id": "heading_add_mob_positionXY",
+            "label": "Additional heading position X:Y on mobile",
+            "default": "50% 50%",
+            "placeholder": "50% 50%",
+            "info": "Values in the field above should be in percentage only"
+          },
+          {
+            "type":      "checkbox",
+            "id":        "is_mobile_add_heading",
+            "label":     "Hide on mobile",
+            "default":   false
+          },
+          {
+          "type": "paragraph",
+          "content": "¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯"
+          },
+          {
+          "type": "header",
+          "content": "Slide navigates to",
+          "info":   "Define destination you would like a visitor to navigate from this slide"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Link to"
+          },
+          {
+          "type": "paragraph",
+          "content": "¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯"
+          },
+          {
+          "type": "header",
+          "content": "Price Badge",
+          "info":   "Put data in the next two fields to display price badge in this slide"
+          },
+          {
+            "type": "text",
+            "id": "price",
+            "label": "Price",
+            "default": "$3.05"
+          },
+          {
+            "type": "text",
+            "id": "price_desc",
+            "label": "Price description",
+            "default": "start point"
+          },
+          {
+            "type": "text",
+            "id": "price_bage_positionXY",
+            "label": "Badge position X:Y",
+            "default": "50% 50%",
+            "placeholder": "50% 50%",
+            "info": "Values in the field above should be in percentage only"
+          },
+          {
+            "type": "text",
+            "id": "price_bage_mob_positionXY",
+            "label": "Badge position X:Y on mobile",
+            "default": "50% 50%",
+            "placeholder": "50% 50%",
+            "info": "Values in the field above should be in percentage only"
+          },
+          {
+            "type":      "color",
+            "id":        "price_bage_textcolor",
+            "label":     "Badge text color",
+            "default":   "#fff"
+          },
+          {
+            "type":      "color",
+            "id":        "price_bage_bgcolor",
+            "label":     "Badge background color",
+            "default":   "#f06060"
+          },
+          {
+            "type":      "checkbox",
+            "id":        "is_mobile_price_bage",
+            "label":     "Hide on mobile",
+            "default":   false
+          },
+          {
+          "type": "paragraph",
+          "content": "¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯"
+          },
+          {
+          "type": "header",
+          "content": "Background image & thumbnail",
+          "info":   "Upload image & thumbnail for this slide"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Background image",
+            "info":"Recomended image size at least 2000x1500 px"
+          },
+		      {
+            "type": "image_picker",
+            "id": "image_thumb",
+            "label": "Thumbnail image",
+            "info":"Recomended image size at least 150x150 px"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Homepage Slideshow",
+        "category": "Sliders",
+        "settings": {
+        },
+        "blocks": [
+          {
+            "type": "slide",
+            "settings": {
+              "heading": "Tomato season",
+              "subheading": "nutritious  delicious",
+              "heading_positionXY": "50% 35%",
+              "is_mobile_heading": false,
+              "heading_add": "",
+              "subheading_add": "",
+              "heading_add_positionXY": "50% 50%",
+              "is_mobile_add_heading": true,
+              "price": "$3.05",
+              "price_desc": "start point",
+              "price_bage_positionXY": "33% 45%",
+              "price_bage_textcolor": "#fff",
+              "price_bage_bgcolor": "#f06060",
+              "is_mobile_price_bage": true
+            }
+          },
+          {
+            "type": "slide",
+            "settings": {
+              "heading": "Paella or Pasta?",
+              "subheading": "you’ll need this sweet pepper for both",
+              "heading_positionXY": "50% 35%",
+              "is_mobile_heading": false,
+              "heading_add": "",
+              "subheading_add": "",
+              "heading_add_positionXY": "50% 55%",
+              "is_mobile_add_heading": false,
+              "price": "$6.95",
+              "price_desc": "start point",
+              "price_bage_positionXY": "50% 59%",
+              "price_bage_textcolor": "#fff",
+              "price_bage_bgcolor": "#8cbeb2",
+              "is_mobile_price_bage": true
+            }
+          },
+          {
+            "type": "slide",
+            "settings": {
+              "heading": "Apple Pie?",
+              "subheading": "of Gala Cultivar",
+              "heading_positionXY": "25% 52%",
+              "is_mobile_heading": true,
+              "heading_add": "Yes, <strong>Please!<\/strong>",
+              "subheading_add": "Mmmmm...",
+              "heading_add_positionXY": "75% 52%",
+              "is_mobile_add_heading": true,
+              "price": "$3.05",
+              "price_desc": "start point",
+              "price_bage_positionXY": "50% 50%",
+              "price_bage_textcolor": "#fff",
+              "price_bage_bgcolor": "#8cbeb2",
+              "is_mobile_price_bage": true
+            }
+          }
+        ]
+
+      }
+    ]
+  }
+{% endschema %}

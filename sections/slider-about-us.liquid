@@ -1,0 +1,130 @@
+<style>
+  .section--advantages .section-heading:before {
+  	content: "{{ section.settings.heading_overlap }}";
+  }
+</style>
+<section class="section section--advantages clearfix">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item one-whole">
+
+        {% if section.settings.heading != blank %}
+          <h3 class="section-heading section-heading--advantages heading--page">{{ section.settings.heading | upcase }}</h3>
+        {% endif %}
+
+        {% if section.settings.about_blog != blank %}
+
+        <!-- Swiper -->
+        <div class="swiper-container slider-advantages">
+          <div class="swiper-wrapper">
+            {% for article in blogs[section.settings.about_blog].articles %}
+              <div class="swiper-slide swiper-slide--{{ forloop.index }}">
+                {% assign header = article.title | split: '|' %}
+
+                {% if article.image %}
+                  <div class="img-holder">
+                    <span class="slide-overlay-phrase">{{ header[1] | strip | upcase }}</span>
+                    <img src="{{ article | img_url: 'large' }}" alt="{{ aticle.title }}">
+                  </div>
+                {% endif %}
+
+                <div class="slide-info">
+                  <span class="slide-index">0{{ forloop.index }}</span>
+                  <h4 class="heading--add">{{ header[0] | strip }}</h4>
+                  <p>{{ article.excerpt_or_content }}</p>
+                </div>
+
+              </div>
+            {% endfor %}
+          </div>
+
+          <!-- Add Arrows -->
+          <div class="navigation-buttons">
+            <div class="swiper-button-next">{{ 'layout.general.next_button' | t }}</div>
+            <div class="swiper-button-prev">{{ 'layout.general.back_button' | t }}</div>
+          </div>
+        </div>
+        {% else %}
+
+        <div class="swiper-container slider-advantages">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide swiper-slide--1">
+              <div class="img-holder">
+                    <span class="slide-overlay-phrase">SEEDS</span>
+                    <img src="//cdn.shopify.com/s/files/1/1148/3974/articles/blog_about_us_01_seeds_large.png?v=1456213793" alt="">
+                  </div>
+              <div class="slide-info">
+                  <span class="slide-index">01</span>
+                  <h4 class="heading--add">Hand-picked seeds</h4>
+                  <p>Every type of seeds is sorted carefully via our proven method to choose the best one with exeptional quality index to be strong and enduring.</p>
+                </div>
+            </div>
+            <div class="swiper-slide swiper-slide--2">
+              <div class="img-holder">
+                <span class="slide-overlay-phrase">PLANTS</span>
+                <img src="//cdn.shopify.com/s/files/1/1148/3974/articles/blog_about_us_02_plants_large.png?v=1456213773" alt="">
+              </div>
+              <div class="slide-info">
+                <span class="slide-index">02</span>
+                <h4 class="heading--add">Planting & growth with love</h4>
+                <p>Every member of our family is dedicated to particular type of plants and everyone is pationated about its growth period taking care during it to get the best possible harvest.</p>
+              </div>
+            </div>
+            <div class="swiper-slide swiper-slide--3">
+              <div class="img-holder">
+                <span class="slide-overlay-phrase">HARVEST</span>
+                <img src="//cdn.shopify.com/s/files/1/1148/3974/articles/blog_about_us_03_harvest_large.png?v=1456213735" alt="">
+              </div>
+              <div class="slide-info">
+                <span class="slide-index">03</span>
+                <h4 class="heading--add">Meticilous harvest process</h4>
+                <p>A lot of efforts is put into last pre-harvest and harvest seasons to gather as much products as possible elliminating any demange to the final product.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add Arrows -->
+          <div class="navigation-buttons">
+            <div class="swiper-button-next">{{ 'layout.general.next_button' | t }}</div>
+            <div class="swiper-button-prev">{{ 'layout.general.back_button' | t }}</div>
+          </div>
+        </div>
+
+
+          {% include 'fallback-msg' %}
+        {% endif %}
+      </div> <!-- End grid__item -->
+    </div> <!-- End grid -->
+  </div> <!-- End wrapper -->
+</section>
+
+{% schema %}
+  {
+    "name": "Slider About Us",
+    "settings": [
+      {
+        "type": "blog",
+        "id": "about_blog",
+        "label": "Blog for slider"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Discover &nbsp;origin"
+      },
+      {
+        "type": "text",
+        "id": "heading_overlap",
+        "label": "Overlap subheading",
+        "default": "The"
+      }
+    ],
+	"presets": [
+      {
+        "name": "About Us",
+        "category": "Sliders"
+      }
+    ]
+  }
+{% endschema %}

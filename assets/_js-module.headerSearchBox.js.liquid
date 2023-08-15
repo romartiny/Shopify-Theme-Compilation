@@ -1,0 +1,428 @@
+define(['speechRecognizer', 'ajaxSearch', 'utils', 'shopInfo'], function(SpeechRecognizer, ajaxSearch, utils, shopInfo){
+
+  console.log('Module HeaderSearchBox is loaded');
+
+  var HeaderSearchBox = function(options) {
+
+    var defaultOptions = {
+      DOM : {}
+    };
+
+
+    this.options      = utils.mergeOptions(defaultOptions, options);
+    this.DOM          = utils.domFinder(this.options.DOM);
+    this.DOM.errorMsg = null; 
+
+    this.oldState     = null; // an old state for serch box
+    this.results      = null; // result of audio recognizing
+
+    this.animationEvent  = utils.getAnimationEndEvent();
+    
+    this.init();
+    this.setState('initEnd');
+  };
+
+  HeaderSearchBox.prototype.init = function() {
+
+    this.textContent = {
+      default:         this.DOM.container.getAttribute('data-text-normal-state'),
+      recordState:     this.DOM.container.getAttribute('data-text-record-state'),
+      processingState: this.DOM.container.getAttribute('data-text-processing-state'),
+      unableRecognize: this.DOM.container.getAttribute('data-text-unable-recognize'),
+      blockMessage:    this.DOM.container.getAttribute('data-text-block-msg'),
+    };
+
+    this.StateDOMClasses = {
+      recording:           "recording",
+      processing:          "processing",
+      result:              "result",
+      error:               "error",
+      micPermissionDenied: "mic-is-blocked",
+    }; 
+
+    this.speechRecognizer = new SpeechRecognizer({
+      recordBtnId:     "record-btn",
+      maxTimeRecord:   15,
+      language:        shopInfo.language,
+      maxAlternatives: 15,
+      apiKey:          "{{ settings.search_sr_google_speech_api_key }}",
+    });
+    
+    this.setSearchBox();
+    this.initSpeechRecognizerListeners();
+  };
+
+  HeaderSearchBox.prototype.initSpeechRecognizerListeners = function() {
+
+    var self = this;
+
+    // Mic access denied
+    this.speechRecognizer._on('micDenied', function(){
+
+      this.micPermissionDenied();
+    }.bind(this));
+
+    // Start voice recording
+    this.speechRecognizer._on('recording', function(){
+
+      this.setState('recording');
+    }.bind(this));
+
+    // Start sending the record
+    this.speechRecognizer._on('processing', function(){
+
+      this.setState('processing');
+    }.bind(this));
+
+    // Getting the results
+    this.speechRecognizer._on('result', function(e, results){
+
+      this.setState('result', results);
+    }.bind(this));
+
+    // State with an error
+    this.speechRecognizer._on('error', function(message){
+
+      this.setState('error', message);
+    }.bind(this));
+  };
+
+
+
+  HeaderSearchBox.prototype.setSearchBox = function() {
+
+    // Open SearchBox
+    this.DOM.searchOpenBtn.addEventListener('click', function(e){
+      this.showSearchBox(e);
+    }.bind(this));
+
+    this.DOM.searchCloseBtn.addEventListener('click', function(){
+      this.hideSearchBox();
+    }.bind(this));
+
+    document.addEventListener('keyup', function(e){
+
+      var key = e.which || e.keyCode;
+
+      if (key === 27) { 
+        this.hideSearchBox();
+      }
+
+    }.bind(this));
+
+    this.setOverlay(); // overlay for closing search box
+  };
+  
+  HeaderSearchBox.prototype.showSearchBox = function(event) {
+
+    this.DOM.container.classList.remove('is-closed');
+    this.DOM.container.classList.add('is-opening');
+    this.showSearchBoxBg(event);
+  };
+
+  HeaderSearchBox.prototype.showSearchBoxBg = function(event) {
+
+    var bgCircleDOM, bgCircleAnimationEnd,
+        top  = event.pageY + 'px',
+        left = event.pageX + 'px',
+        self = this;
+
+    bgCircleDOM = this.DOM.container.querySelector('.search-box__bg');
+
+    if (!bgCircleDOM) {
+
+      bgCircleDOM = document.createElement('div');
+      bgCircleDOM.className = 'search-box__bg';
+      this.DOM.container.appendChild(bgCircleDOM);
+    }
+
+    bgCircleDOM.style.top  = top;
+    bgCircleDOM.style.left = left;
+
+    if (this.animationEvent) {
+
+      bgCircleAnimationEnd = function() {
+        this.DOM.container.classList.add('is-open');
+        this.DOM.container.classList.remove('is-opening');
+
+        bgCircleDOM.removeEventListener(this.animationEvent, bgCircleAnimationEnd);
+      }.bind(this);
+
+      bgCircleDOM.addEventListener(this.animationEvent, bgCircleAnimationEnd);
+    } else {
+
+      this.DOM.container.classList.add('is-open');
+    }
+  };
+
+  HeaderSearchBox.prototype.hideSearchBox = function() {
+
+    if (!this.DOM.container.classList.contains('is-open')) {
+      return null;
+    }
+
+    var containerOutAnimationEnd;
+
+    this.DOM.container.classList.add('is-closing');
+    
+    if (this.animationEvent) {
+
+      containerOutAnimationEnd = function (){
+
+        this.DOM.container.classList.remove('is-open');
+        this.DOM.container.classList.remove('is-closing');
+        this.DOM.container.classList.remove('before-closing');
+        this.DOM.container.classList.add('is-closed');
+
+        this.DOM.container.removeEventListener(this.animationEvent, containerOutAnimationEnd);
+      }.bind(this);
+
+      this.DOM.container.addEventListener(this.animationEvent, containerOutAnimationEnd);
+    } else {
+
+      this.DOM.container.classList.add('is-closed');
+      this.DOM.container.classList.remove('is-open');
+    }
+  };
+
+  HeaderSearchBox.prototype.setOverlay = function(event) {
+
+    var overlayDOM;
+
+    overlayDOM = this.DOM.container.querySelector('search-box__overlay');
+
+    if (overlayDOM) {
+      return null;
+    } 
+
+    overlayDOM = document.createElement('div');
+    overlayDOM.className = 'search-box__overlay';
+    this.DOM.container.appendChild(overlayDOM);
+
+    overlayDOM.addEventListener('mouseover', function(e){
+
+      e.stopPropagation();
+
+      if (!this.DOM.container.classList.contains('before-closing')) {
+        this.DOM.container.classList.add('before-closing');
+      }
+    }.bind(this));
+
+    overlayDOM.addEventListener('mouseout', function(e){
+
+      e.stopPropagation();
+
+      if (this.DOM.container.classList.contains('before-closing')) {
+        this.DOM.container.classList.remove('before-closing');
+      }
+    }.bind(this));
+
+    overlayDOM.addEventListener('click', function(){
+
+      this.hideSearchBox();
+    }.bind(this));
+  };
+
+
+  /*
+
+    Methods from SpeechRecognizer
+
+  */
+  HeaderSearchBox.prototype.micPermissionDenied = function(e) {
+
+    var blockMsg = this.DOM.container.querySelector('search-box__block-msg');
+
+    if (blockMsg) {
+      this.setSearchBoxClass('mic-is-blocked');
+      return null;
+    }
+
+    blockMsg = document.createElement('div');
+    blockMsg.className = 'search-box__block-msg';
+    blockMsg.innerHTML = this.textContent.blockMessage;
+
+    this.DOM.container.appendChild(blockMsg);
+
+    this.setSearchBoxClass('mic-is-blocked');
+    this.setState('micDenied');
+  };
+
+  HeaderSearchBox.prototype.setState = function(state, param) {
+    
+    switch (state) {
+      case "recording":
+        this.setSearchBoxClass(state);
+        this.DOM.searchInput.value        = '';
+        this.DOM.searchInput.placeholder  = this.textContent.recordState;
+        this.DOM.altResults.innerHTML     = '';
+
+        this.DOM.searchSubmitBtn.disabled = true;
+        break;
+
+      case "processing":
+        this.setSearchBoxClass(state);
+        //this.DOM.container.classList.remove(this.oldState);
+
+        this.DOM.searchInput.placeholder = this.textContent.processingState;
+        this.DOM.searchSubmitBtn.disabled = true;
+        break;
+      
+        
+      case "result":
+        this.setResults(param);        
+        //this.setSearchBoxClass(state);
+        //this.DOM.container.classList.remove(this.oldState);
+    
+        this.DOM.searchSubmitBtn.disabled = false; 
+        break;
+        
+      case "error":
+        this.DOM.searchInput.placeholder = this.textContent.default;
+        this.showError(param);
+        break;
+
+      default:
+        //this.DOM.container.classList.remove(this.oldState);
+        this.DOM.searchInput.placeholder = this.textContent.default;
+        this.DOM.searchSubmitBtn.disabled = false;
+        break;
+    }
+
+    this.oldState = state;
+  };
+
+  HeaderSearchBox.prototype.setResults = function(response) {
+      
+    var self = this;
+    
+    if (!response.results) {
+      this.setState('error', this.textContent.unableRecognize);
+      return null;
+    }
+
+    this.results = [];
+
+    response.results.forEach(function(result) {
+      result.alternatives.forEach(function(alternative) {
+        self.results.push(alternative.transcript);
+      });
+    });
+    this.setSearchBoxClass('result');
+    this.typewrittenResult();
+
+    console.log(this.results);
+
+    // Show alternatives variants
+    if (this.results.length > 1) {
+      this.setAlternatives();
+    }
+  };
+
+  HeaderSearchBox.prototype.typewrittenResult = function() {
+
+    var text, typedText, typedTextInterval, length;
+
+    text   = this.results[0];
+    length = 0;
+
+    this.DOM.searchInput.focus();
+
+    typedTextInterval = setInterval(function(){
+
+      typedText = text.substr(0, length);
+      this.DOM.searchInput.value = typedText;
+
+      if (typedText === text) {
+
+        var e = document.createEvent('HTMLEvents');
+        e.initEvent('keyup', false, true);
+        this.DOM.searchInput.dispatchEvent(e);
+
+        clearInterval(typedTextInterval);
+      }
+
+      length++;
+    }.bind(this), 120);
+  };
+
+  HeaderSearchBox.prototype.setAlternatives = function() {
+
+    var altResult, altResultsFragment, altResultHidden;
+
+    altResultsFragment = document.createDocumentFragment();
+
+    for (var i =0, max = this.results.length; i < max; i++) {
+
+      altResult = document.createElement('span');
+      altResult.textContent = this.results[i];
+
+      if (i === 0) { 
+        altResult.className   = 'search-box__alt-result is-hide';
+        altResultHidden       = altResult;
+      } else {
+        altResult.className   = 'search-box__alt-result';
+      }
+
+      if (this.results.length >= 11) {
+        altResult.classList.add('search-box__alt-result--sm');
+      }
+      
+      altResult.addEventListener('click', function(e){
+
+        altResultHidden.classList.remove('is-hide');
+        this.DOM.searchInput.value = e.currentTarget.textContent;
+      }.bind(this));
+
+      altResultsFragment.appendChild(altResult);
+    }
+
+    this.DOM.altResults.appendChild(altResultsFragment);
+  };
+
+
+  HeaderSearchBox.prototype.showError = function(textMsg) {
+
+    if (!this.DOM.errorMsg) {
+      this.setErrorContainer();
+    }
+    
+    if (!this.DOM.searchBox.classList.contains('error')) {
+
+      this.DOM.errorMsg.textContent = textMsg;
+      this.setSearchBoxClass('error');
+
+      setTimeout(function(){ 
+        this.DOM.searchBox.classList.remove('error');
+      }.bind(this), 3600);
+    }
+  };
+
+  HeaderSearchBox.prototype.setErrorContainer = function() {
+
+    this.DOM.errorMsg = document.createElement('div');
+    this.DOM.errorMsg.className = 'search-box__error-msg';
+
+    this.DOM.searchBox.appendChild(this.DOM.errorMsg);
+  };
+
+  HeaderSearchBox.prototype.setSearchBoxClass = function (state) {
+    
+    for (var className in this.StateDOMClasses ){ 
+      this.DOM.searchBox.classList.remove(className);
+    }
+    
+    var newClass = this.StateDOMClasses[state];
+    
+    if (newClass) {
+      this.DOM.searchBox.classList.add(newClass);
+    } else {
+      this.DOM.searchBox.classList.add(state);
+      this.StateDOMClasses['state'] = state;
+    }
+  };
+
+
+
+  return HeaderSearchBox;
+});

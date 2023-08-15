@@ -1,0 +1,15 @@
+{%- comment -%} Strip html tags version {%- endcomment -%}
+
+{%- assign striped_html_tags = strip-html-tags | replace: '<', '|*|<' -%}
+{%- assign striped_html_tags = striped_html_tags | replace: '>', '>|*|' -%}
+
+{%- assign codeparts = striped_html_tags | split: '|*|' -%}
+{%- assign striped_html_tags = '' -%}
+
+{%- for codepart in codeparts  -%}
+  {%- unless codepart contains "<" and codepart contains ">" -%}
+    {%- assign striped_html_tags  = striped_html_tags | append: codepart -%}
+  {%- endunless -%}
+{%- endfor -%}
+
+{%- assign striped_html_tags  = striped_html_tags | strip_newlines -%}

@@ -1,0 +1,237 @@
+{% comment %}
+Contact page template.
+To use this template, please, create the menu item with name "Contact" and choose "page.contact" template for your contact page
+For detailed information go:
+- https://docs.shopify.com/manual/configuration/store-customization/communicating-with-customers/provide-contact-points/add-a-contact-form
+{% endcomment %}
+
+
+<div class="parallax parallax--additional">
+  <div class="parallax__back {% unless settings.contact_banner_enable %}background-disabled{% endunless %}">
+    {%- comment -%} Contact page heading {%- endcomment -%}
+    <div class="hero-img {% if settings.contact_banner_enable %}hero-img--contact{% endif %}">
+      <div class="hero-img__content">
+        {% if settings.contact_heading != blank %}
+          <h1 class="heading--page">
+            {% if settings.contact_heading_em != blank %}
+              <em class="heading--accent">{{ settings.contact_heading_em }}</em>
+            {% endif %}
+            {{ settings.contact_heading }}
+          </h1>
+        {% endif %}
+      </div> <!-- End hero-img__content -->
+    </div> <!-- End hero-img -->
+  </div>
+
+  <div class="parallax__base">
+    {% comment %}
+    Block with short contact information: hours, email and phone
+    {% endcomment %}
+    <div class="contact-short">
+      <div class="wrapper">
+        {% comment %}
+        Calculate the number of short contact form columns
+        {% endcomment %}
+        {% assign num_cs_columns = 0 %}
+
+        {% if settings.contact_short_hours_enable %}
+          {% assign num_cs_columns = num_cs_columns | plus: 1 %}
+        {% endif %}
+
+        {% if settings.contact_short_email_enable %}
+          {% assign num_cs_columns = num_cs_columns | plus: 1 %}
+        {% endif %}
+
+        {% if settings.contact_short_phone_enable %}
+          {% assign num_cs_columns = num_cs_columns | plus: 1 %}
+        {% endif %}
+
+
+        {% comment %}
+        Choose css grid for columns number
+        {% endcomment %}
+        {% case num_cs_columns %}
+          {% when 0 %}
+          {% when 1 %}
+            {% assign cs_column_width = 'text-center' %}
+          {% when 2 %}
+            {% assign cs_column_width = 'large--one-half medium--one-half one-whole' %}
+          {% when 3 %}
+            {% assign cs_column_width = 'large--one-third medium--one-whole one-whole' %}
+        {% endcase %}
+
+        <div class="grid">
+          {% if settings.contact_short_hours_enable %}
+            <div class="grid__item {{ cs_column_width }}">
+              <div class="contact-short__block">
+                <span class="heading--add-small contact-short__title">{{ 'contact.short.hours' | t }}</span>
+                {% if settings.contact_short_hours != blank %}
+                  <p class="contact-short__contact">{{ settings.contact_short_hours }}</p>
+                {% endif %}
+              </div> <!-- End contact-short__block -->
+            </div> <!-- End grid__item -->
+          {% endif %}
+
+          {% if settings.contact_short_email_enable %}
+            <div class="grid__item {{ cs_column_width }}">
+              <div class="contact-short__block">
+                <span class="heading--add-small contact-short__title">{{ 'contact.short.email' | t }}</span>
+                {% if settings.contact_short_email != blank %}
+                  <p class="contact-short__contact"><a href="mailto:{{ settings.contact_short_email }}">{{ settings.contact_short_email }}</a></p>
+                {% endif %}
+              </div> <!-- End contact-short__block -->
+            </div> <!-- End grid__item -->
+          {% endif %}
+
+          {% if settings.contact_short_phone_enable %}
+            <div class="grid__item {{ cs_column_width }}">
+              <div class="contact-short__block">
+                <span class="heading--add-small contact-short__title">{{ 'contact.short.phone' | t }}</span>
+                {% if settings.contact_short_phone != blank %}
+                  <p class="contact-short__contact">{{ settings.contact_short_phone }}</p>
+                {% endif %}
+              </div> <!-- End contact-short__block -->
+            </div> <!-- End grid__item -->
+          {% endif %}
+        </div> <!-- End grid -->
+      </div> <!-- End wrapper -->
+    </div> <!-- End contact-short -->
+
+
+    {% if settings.contact_block1_enable or settings.contact_block2_enable %}
+
+      <div class="wrapper">
+        <div class="map-wrapper">
+          <div class="grid">
+            {% comment %}
+            Calculate the number of contact information columns
+            {% endcomment %}
+            {% assign num_contact_columns = 0 %}
+
+            {% if settings.contact_block1_enable %}
+              {% assign num_contact_columns = num_contact_columns | plus: 1 %}
+            {% endif %}
+
+            {% if settings.contact_short_email_enable %}
+              {% assign num_contact_columns = num_contact_columns | plus: 1 %}
+            {% endif %}
+
+            {% comment %}
+            Choose css grid for columns number
+            {% endcomment %}
+            {% case num_contact_columns %}
+              {% when 0 %}
+              {% when 1 %}
+                {% assign contact_column_width = 'text-center' %}
+              {% when 2 %}
+                {% assign contact_column_width = 'large--one-half medium--one-half one-whole' %}
+            {% endcase %}
+
+            {% comment %}
+            First block with detailed information
+            {% endcomment %}
+            {% if settings.contact_block1_enable %}
+              <div class="contact-full grid__item {{ contact_column_width }}">
+                <h3 class="heading--add-small">{{ 'contact.detailed.farm_facilities' | t | upcase }}</h3>
+
+                {% if settings.contact_block1 != blank %}
+                  <address class="address">
+                    {{ settings.contact_block1 }}
+                  </address>
+                {% endif %}
+
+                {% if settings.contact_block1_map != blank %}
+                  {% if settings.contact_google_api != blank %}
+                  <a class="text-link--default js-open-map" href="javascript:void(0)" title="{{ 'contact.detailed.show_map' | t }}">{{ 'contact.detailed.show_map' | t }}</a>
+                  {% endif %}
+                  <div class="map-container elem-hide">
+                    <a class="btn btn--default js-close-map" href="javascript:void(0)">Close</a>
+                    <div id="map-one" class="map">
+
+                    </div>
+                  </div>
+                {% endif %}
+              </div> <!-- End contact-full -->
+            {% endif %}
+
+            {% comment %}
+            Second block with detailed information
+            {% endcomment %}
+            {% if settings.contact_block2_enable %}
+            <div class="contact-full grid__item {{ contact_column_width }}">
+              <h3 class="heading--add-small">{{ 'contact.detailed.grocery_store' | t | upcase }}</h3>
+
+                {% if settings.contact_block2 != blank %}
+                  <address class="address">
+                    {{ settings.contact_block2 }}
+                  </address>
+                {% endif %}
+
+                {% if settings.contact_block2_map != blank %}
+                  {% if settings.contact_google_api != blank %}
+                  <a class="text-link--default js-open-map" href="javascript:void(0)" title="{{ 'contact.detailed.show_map' | t }}">{{ 'contact.detailed.show_map' | t }}</a>
+                  {% endif %}
+                  <div class="map-container elem-hide">
+                    <a class="btn btn--default js-close-map" href="javascript:void(0)">Close</a>
+                    <div id="map-two" class="map">
+
+                    </div>
+                  </div>
+                {% endif %}
+              </div> <!-- End contact-full -->
+            {% endif %}
+
+          </div> <!-- End grid -->
+        </div> <!-- End map-wrapper -->
+      </div> <!-- End wrapper -->
+    {% endif %}
+
+    {% comment %}
+    Contact form.
+    More information:
+    - https://docs.shopify.com/manual/configuration/store-customization/communicating-with-customers/provide-contact-points/add-a-contact-form
+    - https://docs.shopify.com/manual/configuration/store-customization/communicating-with-customers/provide-contact-points/adding-fields-to-the-liquid-contact-form
+    {% endcomment %}
+    {% if settings.contact_form_enable %}
+      <div class="wrapper">
+        <div class="grid">
+          <div class="grid__item one-whole">
+            <hr class="hr--clear-inverse">
+
+
+            {% form 'contact', class: 'form form--default form--contact form-validation' %}
+              <h2 class="heading--page">{{ 'contact.form.heading' | t }}</h2>
+
+              {% if form.posted_successfully? %}
+                <div class="contact-success">
+                  {{ 'contact.form.post_success_html' | t }}
+                </div>
+              {% endif %}
+
+              <div class="form__row">
+                <textarea class="form__field--textarea-neutral form__field--full" id="contactFormMessage" name="contact[body]" rows="10" placeholder="My message..."></textarea>
+                <label class="form__field--placeholder" for="contactFormMessage">{{ 'contact.form.message' | t }}</label>
+              </div>
+
+              <div class="form__row form__row-blocks">
+                <div class="form__row-block">
+                  <input class="form__field" id="contactFormName" type="text" name="contact[name]" placeholder="My name is...">
+                  <label class="form__field--placeholder" for="contactFormName">{{ 'contact.form.name' | t }}</label>
+                </div> <!-- End form__row-block -->
+
+                <div class="form__row-block">
+                  <input class="form__field" id="contactFormEmail" type="email" name="contact[email]" placeholder="Reply me to email...">
+                  <label class="form__field--placeholder" for="contactFormEmail">{{ 'contact.form.email' | t }}</label>
+                </div> <!-- End form__row-block -->
+              </div> <!-- End form__row -->
+
+              <div class="form__row">
+                <button class="btn btn--default btn--full btn--submit" id="contactFormSubmit" type="submit">{{ 'contact.form.send_button' | t }}</button>
+              </div>
+            {% endform %}
+          </div> <!-- End grid__item -->
+        </div> <!-- End grid -->
+      </div> <!-- End wrapper -->
+    {% endif %}
+  </div>
+</div>

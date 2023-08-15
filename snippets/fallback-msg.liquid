@@ -1,0 +1,16 @@
+<style>
+  .fallback-msg-container {              
+    padding-top: 84px;
+    height: 200px;
+    text-align: center;
+    background-color: #f5f4f4;
+    box-sizing: border-box;
+  }
+</style>
+<div class="fallback-msg-container">
+{% if fallback-msg != blank %}
+  <p>{{ fallback-msg }}</p>
+{% else %}
+  <p>Please, visit your <a class="text-link--inverse" href="/admin/themes/{{ theme.id }}/settings">Customize theme page</a> to change this section.</p>
+{% endif %}
+</div>

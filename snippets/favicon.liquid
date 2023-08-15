@@ -1,0 +1,10 @@
+{%- unless settings.favicon_enable -%}
+  <link rel="shortcut icon" href="{{ 'favicon.ico' | asset_url }}">
+  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ 'favicon_apple-touch-icon-152x152.png' | asset_url }}">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ 'favicon_apple-touch-icon-144x144.png' | asset_url }}">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ 'favicon_apple-touch-icon-114x114.png' | asset_url }}">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ 'favicon_apple-touch-icon-72x72.png' | asset_url }}">
+  <link rel="apple-touch-icon-precomposed" href="{{ 'favicon_apple-touch-icon-57x57.png' | asset_url }}">
+{%- else -%}
+  <link rel="shortcut icon" href="{{ settings.favicon | img_url: '16x' | format: 'ico' }}">
+{%- endunless -%}
