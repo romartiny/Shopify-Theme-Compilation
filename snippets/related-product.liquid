@@ -1,0 +1,110 @@
+<div id="related-product">
+
+  {% if collection == null or collection.handle == 'frontpage' or collection.handle == 'all' %}
+  {% assign found_a_collection = false %}
+  {% for c in product.collections %}
+  {% if found_a_collection == false and c.handle != 'frontpage' and c.handle != 'all' and c.all_products_count > 1 %}
+  {% assign found_a_collection = true %}
+  {% assign collection = c %}
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+
+
+  {% assign products = collection.products %}
+  {% if products.size > 0 %}
+  
+  {% if settings.heading_related_product != blank %}
+  <h4 class="title">{{ settings.heading_related_product }}</h4>
+  {% endif %}
+
+  <div class="related-product-item">
+    {% assign current_product = product %}
+    {% assign current_product_found = false %}
+    {% for product in collection.products limit: settings.number_related_product %}
+    {% if product.handle == current_product.handle %}
+    {% assign current_product_found = true %}
+    {% else %}
+    {% unless current_product_found == false and forloop.last %}
+
+    <div class="related-item wow fadeInUp" data-wow-duration="1s" data-wow-delay="{{forloop.index | times:0.2}}s">
+      {% include 'product-item' %}
+    </div>
+
+    {% endunless %}
+    {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+</div>
+
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+    /* Related product in detail page */
+
+    {% if product.template_suffix == 'full' %}
+    if($('.related-product-item').length){
+      $('.related-product-item').owlCarousel({
+        navigation : true,
+        pagination: false,
+        mouseDrag: false,
+        items: 6,
+        itemsDesktop : [1199,5],
+        itemsDesktopSmall : [979,3],
+        itemsTablet: [768,3],
+        itemsMobile : [360,2],
+        navigationText	: ['<span class="icon owl-prev" title="Previous"></span>', '<span class="icon owl-next" title="Next"></span>']
+      });
+    }
+    {% elsif product.template_suffix == 'sidebar-left' or product.template_suffix == 'sidebar-right' %}
+    if($('.related-product-item').length){
+      $('.related-product-item').owlCarousel({
+        navigation : true,
+        pagination: false,
+        mouseDrag: false,
+        items: 4,
+        itemsDesktop : [1199,4],
+        itemsDesktopSmall : [979,3],
+        itemsTablet: [768,3],
+        itemsMobile : [568,2],
+        navigationText	: ['<span class="icon owl-prev" title="Previous"></span>', '<span class="icon owl-next" title="Next"></span>']
+      });
+    }
+    {% else %}
+
+    {% if settings.sidebar_product_page == 'none' %}
+    if($('.related-product-item').length){
+      $('.related-product-item').owlCarousel({
+        navigation : true,
+        pagination: false,
+        mouseDrag: false,
+        items: 6,
+        itemsDesktop : [1199,5],
+        itemsDesktopSmall : [979,3],
+        itemsTablet: [768,3],
+        itemsMobile : [568,2],
+        navigationText	: ['<span class="icon owl-prev" title="Previous"></span>', '<span class="icon owl-next" title="Next"></span>']
+      });
+    }
+    {% else %}
+    if($('.related-product-item').length){
+      $('.related-product-item').owlCarousel({
+        navigation : true,
+        pagination: false,
+        mouseDrag: false,
+        items: 4,
+        itemsDesktop : [1199,4],
+        itemsDesktopSmall : [979,3],
+        itemsTablet: [768,3],
+        itemsMobile : [360,2],
+        navigationText	: ['<span class="icon owl-prev" title="Previous"></span>', '<span class="icon owl-next" title="Next"></span>']
+      });
+    }
+    {% endif %}
+
+    {% endif %}
+
+
+  })
+</script>

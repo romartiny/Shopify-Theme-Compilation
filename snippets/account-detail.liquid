@@ -1,0 +1,11 @@
+<div class="account-detail">
+  <div class="s-title">{{'customer.account.details' | t }}</div>
+  <address class="customer-info clearfix">
+    <p class="author">{{ customer.name }}</p> 
+    <p class="email">{{ customer.email }}</p> 
+    <p class="address">{{ customer.default_address.address1 }}{% if customer.default_address.city != empty and customer.default_address.city != blank %}, {{ customer.default_address.city}}{% endif %}</p>
+    <p class="country">{% if customer.default_address.country != empty and customer.default_address.country != blank %} {{customer.default_address.country}}{% endif %}</p>
+    <p class="phone-number">{{ customer.default_address.phone }}</p>
+  </address>
+  <button class="btn-3" id="view_address" onclick="window.location='/account/addresses'">{{'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</button>
+</div>

@@ -1,0 +1,10 @@
+<div class="comment">
+  <div class="comment-head">
+    <span class="date">{{'blogs.article.posted_on' | t }}{{ article.created_at | date: " %B %d, %Y " }} {{'blogs.article.by' | t }}</span>
+    <span class="author">{{ comment.author }}</span>
+  </div>
+  <div class="comment-content">
+    {{ comment.content }}
+  </div>
+</div>
+

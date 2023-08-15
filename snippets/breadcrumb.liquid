@@ -1,0 +1,75 @@
+<div id="breadcrumb" class="breadcrumb">
+  {% if settings.general_placement != 'boxes' %}
+  <div class="container">
+    {% endif %}
+    <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+      <a itemprop="url" href="/">
+        <span itemprop="title" class="hide">{{ shop.name | escape }}</span>{{ 'general.breadcrumbs.home' | t }}
+      </a>
+    </span>
+
+    {% if template contains 'product' %}
+
+      {% if collection %}
+      <span><i class="fa fa-angle-right"></i></span>
+        {% if collection.handle %}
+        <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="hide">
+          <a href="{{collection.url}}" itemprop="url">
+            <span itemprop="title">{{ collection.title }}</span>
+          </a>
+        </span>
+        {{ collection.title | link_to: collection.url }}
+        {% endif %}
+      {% endif %}
+    
+      <span><i class="fa fa-angle-right"></i></span>
+      <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="hide">
+        <a href="{{product.url}}" itemprop="url">
+          <span itemprop="title">{{ product.title }}</span>
+        </a>
+      </span>
+      <span>{{ product.title }}</span>
+
+    {% elsif template contains 'collection' %}
+
+      {% if current_tags %}
+      <span><i class="fa fa-angle-right"></i></span>
+      {{ collection.title | link_to: collection.url }}
+      <span><i class="fa fa-angle-right"></i></span>
+      <span>{{ current_tags.first }}</span>
+      {% elsif collection.handle %}
+      <span><i class="fa fa-angle-right"></i></span>
+      <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="hide">
+        <a href="{{collection.url}}" itemprop="url">
+          <span itemprop="title">{{ collection.title }}</span>
+        </a>
+      </span>
+      <span class="page-title">{{ collection.title }}</span>
+      {% else %}
+      <span><i class="fa fa-angle-right"></i></span>
+      <span class="page-title">{{ page_title }}</span>
+      {% endif %}
+
+    {% elsif template == 'article' %}
+
+      <span><i class="fa fa-angle-right"></i></span>
+      {{ blog.title | link_to: blog.url }}
+      <span><i class="fa fa-angle-right"></i></span>
+      <span>{{ article.title }}</span>
+
+    {% elsif template contains 'page' %}
+
+      <span><i class="fa fa-angle-right"></i></span>
+      <span>{{ page.title }}</span>
+
+    {% else %}
+
+      <span><i class="fa fa-angle-right"></i></span>
+      <span>{{ page_title }}</span>
+
+    {% endif %}
+
+    {% if settings.general_placement != 'boxes' %}
+  </div>
+  {% endif %}
+</div>

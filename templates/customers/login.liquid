@@ -1,0 +1,139 @@
+{% layout settings.customer_layout %}
+
+<div id="col-main" class="page-login">
+
+  <div class="row">
+
+    <div class="col-sm-6">
+
+      <div id="customer-login" class="content">
+        <h4 class="title">{{ 'customer.login.title' | t }}</h4>
+
+        {% form 'customer_login' %}
+
+        {% if form.errors %}
+        <div class="alert alert-error">
+          <button type="button" class="close" title="{{'customer.general.close' | t }}" data-dismiss="alert">×</button>
+          {{ form.errors | default_errors }}
+        </div>
+        {% endif %}
+
+        <div class="control-wrapper">
+          <label for="customer_email">{{ 'customer.login.email' | t }}<span class="req">*</span></label>
+          <input type="email" required name="customer[email]" id="customer_email" class="col-sm-10 col-xs-12" />
+        </div>
+
+        {% if form.password_needed %}
+        <div class="control-wrapper">
+          <label for="customer_password">{{ 'customer.login.password' | t }}<span class="req">*</span></label>
+          <input type="password" required name="customer[password]" id="customer_password" class="col-sm-10 col-xs-12 password" />
+        </div>
+        {% endif %}
+
+        <div class="control-wrapper last">
+          <button class="btn-3" type="submit">{{ 'customer.login.sign_in' | t }}</button>
+          <div class="action">
+            <a class="forgot-pass" href="javascript:;" onclick="showRecoverPasswordForm()">{{ 'customer.login.forgot_password' | t }}</a>
+            <span>{{'customer.general.or' | t }}</span>
+            <a class="return-store" href="{{ shop.url }}">{{ 'customer.login.cancel' | t }}</a>
+          </div>
+        </div>
+
+        {% endform %}
+
+      </div>
+
+      <div id="recover-password" style="display: none;">
+
+        <h4 class="title">{{ 'customer.recover_password.title' | t }}</h4>
+
+        <p class="note">{{ 'customer.recover_password.subtext' | t }}</p>
+
+        {% form 'recover_customer_password' %}
+
+        {% if form.posted_successfully? %}
+        {% assign reset_success = true %}
+        {% endif %}
+
+        {% if form.errors %}
+        <div class="alert alert-danger">
+          <button type="button" class="close" title="{{'customer.general.close' | t }}" data-dismiss="alert">×</button>
+          {{ form.errors | default_errors }}
+        </div>
+        {% endif %}
+
+        <div class="control-wrapper">
+          <label for="email">{{ 'customer.recover_password.email' | t }}<span class="req">*</span></label>
+          <input type="email" value="" name="email" id="recover-email" class="col-sm-10 col-xs-12" />
+        </div>
+
+        <div class="control-wrapper">
+          <button class="btn-3" type="submit">{{ 'customer.recover_password.submit' | t }}</button>
+          <spa>{{'customer.general.or' | t }}</span>
+          <a class="cancel" href="javascript:;" onclick="hideRecoverPasswordForm();">{{ 'customer.recover_password.cancel' | t }}</a>
+        </div>
+
+        {% endform %}
+      </div>
+
+    </div>
+
+    <div class="col-sm-6">
+
+      <h4 class="title">{{'customer.register.title' | t }}</h4>
+
+      {% form 'create_customer' %}
+
+      {% if form.errors %}
+      <div class="alert alert-danger">
+        <button type="button" class="close" title="{{'customer.general.close' | t }}" data-dismiss="alert">×</button>
+        {{ form.errors | default_errors }}
+      </div>
+      {% endif %}
+
+      <div id="register-form">
+        <div class="control-wrapper">
+          <label for="first_name">{{'customer.register.first_name' | t }}</label>
+          <input type="text" value="{{ form.first_name }}" name="customer[first_name]" id="first_name" class="col-sm-10 col-xs-12" />
+        </div>
+        <div class="control-wrapper">
+          <label for="last_name">{{'customer.register.last_name' | t }}</label>
+          <input type="text" value="{{ form.last_name }}" name="customer[last_name]" id="last_name" class="col-sm-10 col-xs-12{% if form.errors contains 'last_name' %} error{% endif %}" />
+        </div>
+        <div class="control-wrapper{% if form.errors contains 'email' %} has-error{% endif %}">
+          <label for="email">{{'customer.register.email' | t }}<span class="req">*</span></label>
+          <input type="email" value="{{ form.email }}" name="customer[email]" id="email" class="col-sm-10 col-xs-12{% if form.errors contains 'email' %} error{% endif %}" />
+        </div>
+        <div class="control-wrapper{% if form.errors contains 'password' %} has-error{% endif %}">
+          <label for="password">{{'customer.register.password' | t }}<span class="req">*</span></label>
+          <input type="password" value="" name="customer[password]" id="password" class="col-sm-10 col-xs-12 password{% if form.errors contains 'password' %} error{% endif %}" />
+        </div>
+        <div class="control-wrapper last">
+          <button class="btn-3" type="submit">{{'customer.register.submit' | t }}</button>
+        </div>
+      </div>
+      {% endform %}
+    </div>
+
+  </div>
+
+</div>
+
+
+<script type="text/javascript">
+  if (window.location.hash == '#recover') { showRecoverPasswordForm(); }
+
+  function showRecoverPasswordForm() {
+    $('#recover-password').fadeIn();
+    $('#customer-login').hide();
+    window.location.hash = '#recover';
+    return false;
+  }
+
+  function hideRecoverPasswordForm() {
+    $('#recover-password').hide();
+    $('#customer-login').fadeIn();
+    window.location.hash = '';
+    return false;
+  }
+</script>

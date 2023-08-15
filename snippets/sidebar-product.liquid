@@ -1,0 +1,44 @@
+{% comment %} -- Categories -- {% endcomment %}
+{% if settings.show_sbp_categorie %}
+<div class="sb-widget hidden-xs">
+
+  {% if settings.heading_sbp_categorie != blank %}
+  <div class="sb-title">
+    <h4 class="title">{{ settings.heading_sbp_categorie }}</h4>
+  </div>
+  {% endif %}
+
+  <ul class="list-unstyled sb-categories">
+    {% for collection in collections limit: settings.number_sbp_categorie %}
+    {% unless collection.handle == 'frontpage' or collection.handle == 'all' %}
+    <li>
+      <a href="{{ collection.url }}" title="{{ collection.title | escape }}"><span>{{ collection.title | escape }}</span></a>
+    </li>
+    {% endunless %}
+    {% endfor %}
+  </ul>
+
+</div>
+{% endif %}
+
+{% comment %} -- Recently Viewed -- {% endcomment %}
+{% if settings.show_recently_viewed %}
+{% include 'recently-viewed' %}
+{% endif %}
+
+{% comment %} -- Custom Block-- {% endcomment %}
+{% if settings.show_sbp_custom_block and settings.page_sbp_custom_block != blank %}
+<div class="sb-widget hidden-xs">
+
+  {% if settings.heading_sbp_custom_block != blank %}
+  <div class="sb-title">
+    <h4 class="title">{{ settings.heading_sbp_custom_block }}</h4>
+  </div>
+  {% endif %}
+
+  <div class="sb-custom-block">
+    {{pages[settings.page_sbp_custom_block].content}}
+  </div>
+
+</div>
+{% endif %}

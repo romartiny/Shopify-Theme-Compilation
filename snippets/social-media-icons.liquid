@@ -1,0 +1,89 @@
+<div id="widget-social" class="footer-social-icon">
+
+  {% if settings.social_icons_caption != blank %}
+  <h5 class="title">{{ settings.social_icons_caption }}</h5>
+  {% endif %}
+  <ul class="list-inline">
+
+    {% if settings.social_icons_facebook_show %}
+    <li>
+      <a target="_blank" href="{{ settings.social_icons_facebook_link }}" class="social-icon-inner facebook" title="Facebook">
+        <span class="social-icon">
+          <i class="fa fa-facebook-square"></i>
+        </span>
+      </a>
+    </li>
+    {% endif %}
+
+    {% if settings.social_icons_twitter_show %}
+    <li>
+      <a target="_blank" href="{{ settings.social_icons_twitter_link }}" class="social-icon-inner twitter" title="Twitter">
+        <span class="social-icon">
+          <i class="fa fa-twitter"></i>
+        </span>
+      </a>
+    </li>
+    {% endif %}
+
+    {% if settings.social_icons_youtube_show %}
+    <li>
+      <a target="_blank" href="{{ settings.social_icons_youtube_link }}" class="social-icon-inner youtube" title="Youtube">
+        <span class="social-icon">
+          <i class="fa fa-youtube-play"></i>
+        </span>
+      </a>
+    </li>
+    {% endif %}
+
+    {% if settings.social_icons_tumblr_show %}
+    <li>
+      <a target="_blank" href="{{ settings.social_icons_tumblr_link }}" class="social-icon-inner tumblr" title="Tumblr">
+        <span class="social-icon">
+          <i class="fa fa-tumblr-square"></i>
+        </span>
+      </a>
+    </li>
+    {% endif %}
+
+    {% if settings.social_icons_google_show %}
+    <li>
+      <a target="_blank" href="{{ settings.social_icons_google_link }}" class="social-icon-inner google" title="Google">
+        <span class="social-icon">
+          <i class="fa fa-google-plus-square"></i>
+        </span>
+      </a>
+    </li>
+    {% endif %}
+
+    {% if settings.social_icons_pinterest_show %}
+    <li>
+      <a target="_blank" href="{{ settings.social_icons_pinterest_link }}" class="social-icon-inner pinterest" title="Pinterest">
+        <span class="social-icon">
+          <i class="fa fa-pinterest-square"></i>
+        </span>
+      </a>
+    </li>
+    {% endif %}
+
+    {% if settings.social_icons_instagram_show %}
+    <li>
+      <a target="_blank" href="{{ settings.social_icons_instagram_link }}" class="social-icon-inner instagram" title="Instagram">
+        <span class="social-icon">
+          <i class="fa fa-instagram"></i>
+        </span>
+      </a>
+    </li>
+    {% endif %}
+
+    {% if settings.social_icons_rss_show %}
+    <li>
+      <a target="_blank" href="{{ settings.social_icons_rss_link }}" class="social-icon-inner rss" title="Rss">
+        <span class="social-icon">
+          <i class="fa fa-rss-square"></i>
+        </span>
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+
+</div>

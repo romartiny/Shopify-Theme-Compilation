@@ -1,0 +1,239 @@
+<h4 class="title text-center">{{ 'cart.general.title' | t }}</h4>
+
+<div class="row">
+  <div id="col-main" class="col-sm-12 page-cart">
+
+    
+    <div class="text-center cart-empty-wrapper" rv-show="cart.item_count | lt 1">
+      <p class="cart empty">{{ 'cart.general.empty' | t }}</p>
+      <a href="/collections/all"><i class="fa fa-long-arrow-right"></i> {{ 'cart.general.continue_shopping' | t }}</a>
+    </div>
+
+    
+    <form action="/cart" method="post" id="cartform"  rv-show="cart.item_count | gt 0">
+      <div class="cart-table">
+        <table>
+
+          <thead>
+            <tr>
+              <th class="item">{{ 'cart.general.item' | t }}</th>
+              <th class="price">{{ 'cart.general.price' | t }}</th>
+              <th class="qty">{{ 'cart.general.quantity' | t }}</th>
+              <th class="total-price">{{ 'cart.general.total' | t }}</th>
+              <th class="remove">{{ 'cart.general.remove' | t }}</th>              
+            </tr>
+          </thead>
+
+          <tbody>
+            <!--
+            {% for item in cart.items %}
+            <tr class="item {{ item.product.handle }}">
+              <td class="item-title">
+                <ul class="list-inline">
+                  <li class="image">
+                    <a href="{{ item.product.url }}">
+                      <img src="{{ item.product.featured_image | product_img_url: 'small' }}"  alt="{{ item.product.title }}" />
+                    </a>
+                  </li>
+
+                  <li class="link">
+                    <a href="{{item.product.url }}">
+                      <span class="product-name">{{ item.product.title }}</span>
+                    </a>
+                    <br />
+                    {% if item.product.variants.size > 1 %}
+                    <span class="variant_title">{{ item.variant.title }}</span>
+                    {% endif %}
+                  </li>
+                </ul>
+              </td>
+              <td class="item-price">{{ item.price | money }}</td>
+              <td class="item-qty">
+                <div class="quantity">
+                  <input class="replace input-cart-qty" id="updates_{{ item.id }}" name="updates[]" value="{{ item.quantity }}" />
+                  <span class="qty-wrapper">
+                    <span class="qty-inner">
+
+                      <span class="qty-up qty-up-{{ item.id }}" title="Increase" data-src="#quantity">
+                        <i class="fa fa-plus"></i>
+                      </span>
+
+                      <span class="qty-down qty-down-{{ item.id }}" title="Decrease" data-src="#quantity">
+                        <i class="fa fa-minus"></i>
+                      </span>
+
+                    </span>
+                  </span>
+                  <script type="text/javascript">
+                    /*jQuery(document).ready(function($) {
+                      $(".qty-inner .qty-up-{{ item.id }}").on("click", function() {
+                        var oldValue = $("#updates_{{ item.id }}").val(),
+                        newVal = 1;
+                        newVal = parseInt(oldValue) + 1;
+                      $("#updates_{{ item.id }}").val(newVal);
+                        });
+                      $(".qty-inner .qty-down-{{ item.id }}").on("click", function() {
+                        var oldValue = $("#updates_{{ item.id }}").val();
+                        if(oldValue > 1){
+                        newVal = 1;
+                        newVal = parseInt(oldValue) - 1;
+                        $("#updates_{{ item.id }}").val(newVal);
+                          }
+                          });
+                      })*/
+
+                  </script>
+                </div>
+              </td>
+              <td class="item-total">{{ item.line_price | money }}</td>
+              <td class="action"><button type="button" onclick="window.location='/cart/change?line={{ forloop.index }}&quantity=0'" title="{{ 'cart.general.remove' | t }}"><i class="fa fa-times"></i></button></td>
+            </tr>
+            {% endfor %}
+			-->
+            <!--Apply CartJS with Rivet.js-->
+            
+            <tr rv-class="item | append item.handle" rv-each-item="cart.items">
+              <td class="item-title">
+                <ul class="list-inline">
+                  <li class="image">
+                    <a rv-href="item.url">
+                      <img rv-src="item.image | productImageSize small"  rv-alt="item.title" />
+                    </a>
+                  </li>
+
+                  <li class="link">
+                    <a rv-href="item.url">
+                      <span class="product-name" rv-text="item.title"></span>
+                    </a>
+                    <br />
+                    
+                    <span class="variant_title" rv-show="item.variant.title">{item.variant.title}</span>
+                    
+                  </li>
+                </ul>
+              </td>
+              <td class="item-price" rv-html="item.price | money"></td>
+              <td class="item-qty">
+                <div class="quantity">
+                  <input readonly class="replace input-cart-qty" rv-id="item.id | prepend updates_" name="updates[]" rv-value="item.quantity" />
+                  <span class="qty-wrapper">
+                    <span class="qty-inner">
+
+                      <span rv-class="item.id | prepend qty-up- | append | append qty-up" title="Increase" data-src="#quantity" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | plus 1">
+                        <i class="fa fa-plus"></i>
+                      </span>
+
+                      <span rv-class="item.id | prepend qty-down- | append | append qty-down" title="Decrease" data-src="#quantity" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1">
+                        <i class="fa fa-minus"></i>
+                      </span>
+
+                    </span>
+                  </span>
+                  
+                </div>
+              </td>
+              <td class="item-total" rv-html="item.line_price | money"></td>
+              <td class="action"><button type="button" rv-data-cart-remove="index | plus 1" title="{{ 'cart.general.remove' | t }}"><i class="fa fa-times"></i></button></td>
+              
+            </tr>
+            <!---------------------------------------------------------------------------------------------------------->
+          </tbody>
+
+        </table>
+      </div>
+
+      <div class="row">
+
+        {% include 'shipping-calculator' %}
+
+        <div class="col-sm-8">
+          <div class="cart-right">
+
+            <div id="checkout-addnote">
+              <p>{{ 'cart.general.note' | t }}</p>
+              <textarea id="note" rows="9" name="note">{{ cart.note }}</textarea>
+            </div>
+
+            <div class="cart-action-wrapper">
+              <div class="total-price">{{ 'cart.general.subtotal' | t }}: <span rv-html="cart.total_price | money"></span></div>
+              <p>{{ 'cart.general.note_checkout' | t }}</p>
+              <div class="cart-action">
+                <button class="btn-2" type="submit" name="checkout">{{ 'cart.general.checkout' | t }}</button>
+                <a href="/collections/all"><i class="fa fa-long-arrow-right"></i>{{ 'cart.general.continue_shopping' | t }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </form>
+    <script id="shipping-calculator-response-template" type="text/template">
+      <p id="shipping-rates-feedback" <% if (success) { %> class="success" <% } else { %> class="error" <% } %>>
+      <% if (success) { %>
+        <% if (rates.length > 1) { %> 
+        There are <%= rates.length %> shipping rates available for <%= address %>, starting at <%= rates[0].price %>.
+        <% } else if (rates.length == 1) { %>
+        There is one shipping rate available for <%= address %>.
+        <% } else { %>
+        We do not ship to this destination.
+        <% } %>
+      <% } else { %>
+        <%= errorFeedback %>
+      <% } %>
+      </p>
+      <ul id="shipping-rates">
+        <% for (var i=0; i<rates.length; i++) { %>
+        <li><%= rates[i].name %> at <%= rates[i].price %></li>
+        <% } %>
+      </ul> 
+    </script>
+
+    <!--[if lte IE 8]> 
+    <style> #shipping-calculator { display: none; } </style> 
+    <![endif]--> 
+
+    {{ '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js' | script_tag }}
+    {{ '/services/javascripts/countries.js' | script_tag }}
+    {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+    {{ 'jquery.cart.min.js' | asset_url | script_tag }}
+
+    <script>
+
+      Shopify.Cart.ShippingCalculator.show({
+        submitButton: "{{ 'cart.shipping_calculator.submit_button' | t | default: 'Calculate shipping' }}", 
+        submitButtonDisabled: "{{ 'cart.shipping_calculator.submit_button_when_calculating' | t | default: 'Calculating...' }}"{% if customer %},
+        customerIsLoggedIn: true{% endif %},
+        moneyFormat: {{ shop.money_with_currency_format | json }}
+      });
+
+    </script>
+
+    
+
+    {% if settings.show_cart_related_product %}
+    <div class="cart-related">
+      {% assign collection = collections[settings.cart_related_product] %}
+      
+      {% if collection != blank %}
+      
+      {% if settings.cart_related_product_title != blank %}
+      <h4 class="title">{{ settings.cart_related_product_title }}</h4>
+      {% endif %}
+      
+      <div class="cart-related-product">
+        {% for product in collection.products limit: settings.cart_related_product_number %}
+        <div class="cart-product-item">
+          {% include 'product-item' %}
+        </div>
+        {% endfor %}
+      </div>
+      
+      {% endif %}
+      
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+

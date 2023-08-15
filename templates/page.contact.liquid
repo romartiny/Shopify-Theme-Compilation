@@ -1,0 +1,55 @@
+{% if settings.contact_map %}
+<div class="row page-contact">
+
+  <div class="contact-form col-sm-7">
+    {% form 'contact' %}
+
+    <h4 class="title">{{'contact.form.title' | t }}</h4>
+
+    {% if form.posted_successfully? %}
+    <div class="alert alert-success">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      {{'contact.form.post_success' | t }}
+    </div>
+    {% endif %}
+
+    {% if form.errors %}
+    <div class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      {{ form.errors | default_errors }}
+    </div>
+    {% endif %}
+
+    <div id="contact-form">
+      <div class="control-wrapper">
+        <label for="name">{{'contact.form.name' | t }}</label>
+        <input type="text" id="name" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.first_name }} {{ customer.last_name }}{% endif %}" class="col-sm-12 col-xs-12" name="contact[name]" />
+      </div>
+      <div class="control-wrapper">
+        <label for="phone">{{'contact.form.phone' | t }}</label>
+        <input type="text" id="phone" value="{{ form.phone }}" class="col-sm-12 col-xs-12" name="contact[phone]" />
+      </div>
+      <div class="control-wrapper{% if form.errors contains 'email' %} error{% endif %}">
+        <label for="email">{{'contact.form.email' | t }} <span class="req">*</span></label>
+        <input required type="email" id="email" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" class="col-sm-12 col-xs-12 email" name="contact[email]" />
+      </div>
+      <div class="control-wrapper{% if form.errors contains 'body' %} error{% endif %}">
+        <label for="message">{{'contact.form.message' | t }} <span class="req">*</span></label>
+        <textarea required id="message" cols="40" rows="9" class="col-sm-12 col-xs-12" name="contact[body]">{{ form.body }}</textarea>
+      </div>
+      <div class="control-wrapper last">
+        <button type="submit" class="btn-3">{{'contact.form.submit_button' | t }}</button>
+      </div>
+    </div>
+    {% endform %}
+
+  </div>
+
+  {% if settings.select_contact_page !=  none %}
+  <div class="contact-info col-sm-5">
+    {{ pages[settings.select_contact_page].content }}
+  </div>
+  {% endif %}
+
+</div>
+{% endif %}

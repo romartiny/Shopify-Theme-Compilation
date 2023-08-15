@@ -1,0 +1,44 @@
+{% layout settings.customer_layout %}
+
+<div id="col-main" class="page-register">
+  <div class="row">
+    <div class="col-sm-12">
+
+      <h4 class="title">{{'customer.register.title' | t }}</h4>
+
+      {% form 'create_customer' %}
+
+      {% if form.errors %}
+      <div class="alert alert-danger">
+        <button type="button" class="close" title="{{'customer.general.close' | t }}" data-dismiss="alert">×</button>
+        {{ form.errors | default_errors }}
+      </div>
+      {% endif %}
+
+      <div id="register-form">
+        <div class="control-wrapper">
+          <label for="first_name">{{'customer.register.first_name' | t }}</label>
+          <input type="text" value="{{ form.first_name }}" name="customer[first_name]" id="first_name" class="col-sm-5 col-xs-12" />
+        </div>
+        <div class="control-wrapper">
+          <label for="last_name">{{'customer.register.last_name' | t }}</label>
+          <input type="text" value="{{ form.last_name }}" name="customer[last_name]" id="last_name" class="col-sm-5 col-xs-12{% if form.errors contains 'last_name' %} error{% endif %}" />
+        </div>
+        <div class="control-wrapper{% if form.errors contains 'email' %} has-error{% endif %}">
+          <label for="email">{{'customer.register.email' | t }}<span class="req">*</span></label>
+          <input type="email" value="{{ form.email }}" name="customer[email]" id="email" class="col-sm-5 col-xs-12{% if form.errors contains 'email' %} error{% endif %}" />
+        </div>
+        <div class="control-wrapper{% if form.errors contains 'password' %} has-error{% endif %}">
+          <label for="password">{{'customer.register.password' | t }}<span class="req">*</span></label>
+          <input type="password" value="" name="customer[password]" id="password" class="col-sm-5 col-xs-12 password{% if form.errors contains 'password' %} error{% endif %}" />
+        </div>
+        <div class="control-wrapper last">
+          <button class="btn-3" type="submit">{{'customer.register.submit' | t }}</button>
+        </div>
+      </div>
+      {% endform %}
+    </div>
+  </div>
+
+</div>
+

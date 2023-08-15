@@ -1,0 +1,230 @@
+<div role="tabpanel" id="tabs-container">
+
+  <div class="h-title text-center">
+    {% if settings.home_tabs_heading != blank %}
+    <h3>{{ settings.home_tabs_heading }}</h3>
+    {% endif %}
+    {% if settings.home_tabs_caption != blank %}
+    <span>{{ settings.home_tabs_caption }}</span>
+    {% endif %}
+  </div>
+
+  {% assign tabCollection1 = collections[settings.col_tab_1] %}
+  {% assign tabCollection2 = collections[settings.col_tab_2] %}
+  {% assign tabCollection3 = collections[settings.col_tab_3] %}
+  {% assign tabCollection4 = collections[settings.col_tab_4] %}
+  {% assign tabCollection5 = collections[settings.col_tab_5] %}
+  {% assign tabCollection6 = collections[settings.col_tab_6] %}
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs tab-heading hidden-xs" role="tablist">
+    {% if tabCollection1 != blank %}
+    <li role="presentation" class="active tab-title"><a href="#home-tab-1" aria-controls="home-tab-1" role="tab" data-toggle="tab">{{ tabCollection1.title }}</a></li>
+    {% endif %}
+    {% if tabCollection2 != blank %}
+    <li role="presentation" class="tab-title"><a href="#home-tab-2" aria-controls="home-tab-2" role="tab" data-toggle="tab">{{ tabCollection2.title }}</a></li>
+    {% endif %}
+    {% if tabCollection3 != blank %}
+    <li role="presentation" class="tab-title"><a href="#home-tab-3" aria-controls="home-tab-3" role="tab" data-toggle="tab">{{ tabCollection3.title }}</a></li>
+    {% endif %}
+    {% if tabCollection4 != blank %}
+    <li role="presentation" class="tab-title"><a href="#home-tab-4" aria-controls="home-tab-4" role="tab" data-toggle="tab">{{ tabCollection4.title }}</a></li>
+    {% endif %}
+    {% if tabCollection5 != blank %}
+    <li role="presentation" class="tab-title"><a href="#home-tab-5" aria-controls="home-tab-5" role="tab" data-toggle="tab">{{ tabCollection5.title }}</a></li>
+    {% endif %}
+    {% if tabCollection6 != blank %}
+    <li role="presentation" class="tab-title"><a href="#home-tab-6" aria-controls="home-tab-6" role="tab" data-toggle="tab">{{ tabCollection6.title }}</a></li>
+    {% endif %}
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content hidden-xs">
+
+    <div role="tabpanel" class="tab-pane active" id="home-tab-1">
+      <div class="home-tab clearfix">
+        {% for product in tabCollection1.products limit:settings.number_item_home_tabs %}
+        <div class="product-grid-item">
+          {% include 'product-item' %}
+        </div>
+        {% endfor %}
+      </div>
+      <a href="{{ tabCollection1.url }}" class="btn-2">+ View All Product</a>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="home-tab-2">
+      <div class="home-tab clearfix">
+        {% for product in tabCollection2.products limit:settings.number_item_home_tabs %}
+        <div class="product-grid-item">
+          {% include 'product-item' %}
+        </div>
+        {% endfor %}
+      </div>
+      <a href="{{ tabCollection2.url }}" class="btn-2">+ View All Product</a>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="home-tab-3">
+      <div class="home-tab clearfix">
+        {% for product in tabCollection3.products limit:settings.number_item_home_tabs %}
+        <div class="product-grid-item">
+          {% include 'product-item' %}
+        </div>
+        {% endfor %}
+      </div>
+      <a href="{{ tabCollection3.url }}" class="btn-2">+ View All Product</a>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="home-tab-4">
+      <div class="home-tab clearfix">
+        {% for product in tabCollection4.products limit:settings.number_item_home_tabs %}
+        <div class="product-grid-item">
+          {% include 'product-item' %}
+        </div>
+        {% endfor %}
+      </div>
+      <a href="{{ tabCollection4.url }}" class="btn-2">+ View All Product</a>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="home-tab-5">
+      <div class="home-tab clearfix">
+        {% for product in tabCollection5.products limit:settings.number_item_home_tabs %}
+        <div class="product-grid-item">
+          {% include 'product-item' %}
+        </div>
+        {% endfor %}
+      </div>
+      <a href="{{ tabCollection5.url }}" class="btn-2">+ View All Product</a>
+    </div>
+
+    <div role="tabpanel clearfix" class="tab-pane" id="home-tab-6">
+      <div class="home-tab">
+        {% for product in tabCollection6.products limit:settings.number_item_home_tabs %}
+        <div class="product-grid-item">
+          {% include 'product-item' %}
+        </div>
+        {% endfor %}
+      </div>
+      <a href="{{ tabCollection6.url }}" class="btn-2">+ View All Product</a>
+    </div>
+  </div>
+
+  <!-- Tabs Mobile -->
+  <div class="panel-group visible-xs" id="accordion" role="tablist" aria-multiselectable="true">
+
+    {% if tabCollection1 != blank %}
+    <div class="panel panel-default">
+      <div class="panel-heading tab-title" role="tab" id="headingOne">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          {{ tabCollection1.title }}
+        </a>
+      </div>
+      <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+        <div class="panel-body home-tab">
+          {% for product in tabCollection1.products limit:settings.number_item_home_tabs %}
+          <div class="product-grid-item">
+            {% include 'product-item' %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if tabCollection2 != blank %}
+    <div class="panel panel-default">
+      <div class="panel-heading tab-title" role="tab" id="headingTwo">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          {{ tabCollection2.title }}
+        </a>
+      </div>
+      <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+        <div class="panel-body home-tab">
+          {% for product in tabCollection2.products limit:settings.number_item_home_tabs %}
+          <div class="product-grid-item">
+            {% include 'product-item' %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if tabCollection3 != blank %}
+    <div class="panel panel-default">
+      <div class="panel-heading tab-title" role="tab" id="headingThree">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          {{ tabCollection3.title }}
+        </a>
+      </div>
+      <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+        <div class="panel-body home-tab">
+          {% for product in tabCollection3.products limit:settings.number_item_home_tabs %}
+          <div class="product-grid-item">
+            {% include 'product-item' %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if tabCollection4 != blank %}
+    <div class="panel panel-default">
+      <div class="panel-heading tab-title" role="tab" id="headingFour">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          {{ tabCollection4.title }}
+        </a>
+      </div>
+      <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+        <div class="panel-body home-tab">
+          {% for product in tabCollection4.products limit:settings.number_item_home_tabs %}
+          <div class="product-grid-item">
+            {% include 'product-item' %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if tabCollection5 != blank %}
+    <div class="panel panel-default">
+      <div class="panel-heading tab-title" role="tab" id="headingFive">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+          {{ tabCollection5.title }}
+        </a>
+      </div>
+      <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+        <div class="panel-body home-tab">
+          {% for product in tabCollection5.products limit:settings.number_item_home_tabs %}
+          <div class="product-grid-item">
+            {% include 'product-item' %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if tabCollection6 != blank %}
+    <div class="panel panel-default">
+      <div class="panel-heading tab-title" role="tab" id="headingSix">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+          {{ tabCollection6.title }}
+        </a>
+      </div>
+      <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+        <div class="panel-body home-tab">
+          {% for product in tabCollection6.products limit:settings.number_item_home_tabs %}
+          <div class="product-grid-item">
+            {% include 'product-item' %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+
+</div>

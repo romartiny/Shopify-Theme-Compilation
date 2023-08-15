@@ -1,0 +1,46 @@
+{% if product.price_min < product.compare_at_price_min %}
+
+<span class="product-label">
+  {% assign hide_sale = false %}
+
+  {% if settings.use_limited_offers %}
+  {% for i in (1..15) %}
+  {% assign show = 'use_offer_' | append: i %}
+
+  {% if settings[show] %}
+  {% assign offerHandle = 'product_handle_offer_' | append: i %}
+
+  {% if settings[offerHandle] ==  product.handle %}
+
+  {% assign hide_sale = true %}
+
+  {% endif %}
+
+  {% endif %}
+
+  {% endfor %}
+  {% endif %}
+
+  {% if hide_sale == true %}
+  <span class="label-deal">
+    <span class="deal-text">
+      {{ settings.heading_limited_offers }}
+    </span>
+  </span>
+  {% else %}
+  <span class="label-sale">
+    {% if settings.use_saleoff == 'saleoff_txt' %}
+    <span class="sale-text">
+      <span class="sale-percent">
+        {{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}%
+      </span>
+      {{settings.saleoff_txt}}
+    </span>
+    {% else %}
+    <img src="{{'saleoff.png' | asset_url}}" title="{{settings.saleoff_txt}}" alt="{{settings.saleoff_txt}}" />
+    {% endif %}
+  </span>
+  {% endif %}
+</span>
+
+{% endif %}

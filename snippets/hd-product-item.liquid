@@ -1,0 +1,18 @@
+<div class="hd-product-wrapper">
+
+  <div class="product-head">
+    <div class="product-image">
+      <a href="{{ product.url | within: collection }}"> 
+        <img src="{{ 'home_hd_img_2.jpg' | asset_url }}" alt="{{ product.featured_image.alt | escape }}" />
+      </a>
+    </div>
+
+    {% comment %} Deal {% endcomment %}
+
+    {% if product.available %}
+    {% include 'hot-deal' %}
+    {% endif %}
+
+  </div>
+
+</div> 

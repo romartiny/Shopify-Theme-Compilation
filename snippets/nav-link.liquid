@@ -1,0 +1,91 @@
+{% assign submenu = l.title | handleize %}
+{% if linklists[submenu].links.size > 0 %}
+
+{% if settings.use_super_megamenu == false %}
+<li class="dropdown{% if l.active %} active{% endif %}">
+  <a href="{{ l.url }}" class="dropdown-link" data-toggle="dropdown">
+    <span>{{ l.title }}</span>
+    {% if nav-link == 0 %}
+    <i class="fa fa-angle-down"></i>
+    <i class="fa fa-angle-up visible-xs"></i>
+    {% endif %}
+  </a>
+
+  <ul class="dropdown-menu">
+    {% for l in linklists[submenu].links %}
+    {% include 'nav-sub-link' %}
+    {% endfor %}
+  </ul>
+</li>
+{% else %}
+
+{% if settings.mega_linklist_1 == '' and settings.mega_linklist_2 == '' %}
+<li class="dropdown{% if l.active %} active{% endif %}">
+  <a href="{{ l.url }}" class="dropdown-link" data-toggle="dropdown">
+    <span>{{ l.title }}</span>
+    {% if nav-link == 0 %}
+    <i class="fa fa-angle-down"></i>
+    <i class="fa fa-angle-up visible-xs"></i>
+    {% endif %}
+  </a>
+
+  <ul class="dropdown-menu">
+    {% for l in linklists[submenu].links %}
+    {% include 'nav-sub-link' %}
+    {% endfor %}
+  </ul>
+</li>
+{% else %}
+
+{% if settings.mega_linklist_1 == l.handle %}
+<li class="dropdown mega-menu{% if l.active %} active{% endif %}">
+  <a href="{{ l.url }}" class="dropdown-link" data-toggle="dropdown">
+    <span>{{ l.title }}</span>
+    {% if nav-link == 0 %}
+    <i class="fa fa-angle-down"></i>
+    <i class="fa fa-angle-up visible-xs"></i>
+    {% endif %}
+  </a>
+  {% include 'super-mega-menu-1' %}
+</li>
+{% elsif settings.mega_linklist_2 == l.handle  %}
+<li class="dropdown mega-menu{% if l.active %} active{% endif %}">
+  <a href="{{ l.url }}" class="dropdown-link" data-toggle="dropdown">
+    <span>{{ l.title }}</span>
+    {% if nav-link == 0 %}
+    <i class="fa fa-angle-down"></i>
+    <i class="fa fa-angle-up visible-xs"></i>
+    {% endif %}
+  </a>
+  {% include 'super-mega-menu-2' %}
+</li>
+{% else %}
+<li class="dropdown{% if l.active %} active{% endif %}">
+  <a href="{{ l.url }}" class="dropdown-link" data-toggle="dropdown">
+    <span>{{ l.title }}</span>
+    {% if nav-link == 0 %}
+    <i class="fa fa-angle-down"></i>
+    <i class="fa fa-angle-up visible-xs"></i>
+    {% endif %}
+  </a>
+
+  <ul class="dropdown-menu">
+    {% for l in linklists[submenu].links %}
+    {% include 'nav-sub-link' %}
+    {% endfor %}
+  </ul>
+</li>
+{% endif %}
+
+{% endif %}
+
+{% endif %}
+
+{% else %}
+<li class="{% if l.active %}active{% endif %}">
+  <a href="{{ l.url }}">
+    <span>{{ l.title }}</span>
+  </a>
+</li>
+
+{% endif %}

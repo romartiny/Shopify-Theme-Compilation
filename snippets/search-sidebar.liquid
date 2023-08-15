@@ -1,0 +1,16 @@
+<div class="search-sb">
+
+  <h4 class="title">{{ 'general.header.search_info.search' | t }}</h4>
+
+  <div id="search-content" class="search-content">
+    <form id="header-search" class="search-form" action="/search" method="get" style="position: relative;">
+      <input type="hidden" name="type" value="product" />
+      <input id="input-ajax-search" type="text" name="q" class="search_box" placeholder="{{settings.search_placeholder}}" />
+      <button type="submit" class="search-submit">
+        <i class="fa fa-search"></i>
+      </button>
+    </form>
+    <div id="result-ajax-search"><ul class="list-unstyled search-results"></ul></div>
+  </div>
+
+</div>

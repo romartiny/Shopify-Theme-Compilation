@@ -1,0 +1,240 @@
+<div id="home-main-content">
+
+  {% comment %} No Products {% endcomment %}
+  {% include 'if-shop-has-no-products' %}
+
+  <!-- Begin Banner Top-->
+
+  {% if settings.show_home_banner_top %}
+  <div id="home-banner-top" class="container">
+    <div class="row">
+
+      {% if settings.show_hbt_left %}
+      <div class="home-btl col-sm-{{settings.hbt_width_left}}">
+        <div class="bt-item">
+
+          <div class="bt-item-inner">
+            <a href="{{ settings.hbt_link_left }}">
+              <img src="{{ 'hbt_img_left.jpg' | asset_url }}" alt="" />
+            </a>
+          </div>
+
+        </div>
+      </div>
+      {% endif %}
+
+      {% if settings.show_hbt_right %}
+      <div class="home-btr col-sm-{{settings.hbt_width_right}}">
+
+        {% if settings.show_hbt_right_1 or settings.show_hbt_right_2 or settings.show_hbt_right_3 %}
+        <div class="row">
+          {% for i in (1..3) %}
+
+          {% assign show = 'show_hbt_right_' | append: i %}
+          {% assign width = 'hbt_width_right_' | append: i %}
+          {% assign image = 'hbt_img_right_' | append: i %}
+          {% assign link = 'hbt_link_right_' | append: i %}
+
+          {% if settings[show] %}
+          <div class="bt-item col-sm-{{settings[width]}}">
+            <div class="bt-item-inner">
+              <a href="{{ settings[link] }}">
+                <img src="{{ image | append: '.jpg' | asset_url }}" alt="" />
+              </a>
+            </div>
+          </div>
+          {% endif %}
+
+          {% endfor %}
+          {% endif %}
+        </div>
+
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- End Banner Top -->
+
+
+  <!-- Begin Home Tabs-->
+
+  {% if settings.home_tabs_show %}
+  <div class="container">
+    {% include 'home-tabs' %}
+  </div>
+  {% endif %}
+
+  <!-- End Home Tabs-->
+
+
+  <!-- Begin Home Parallax-->
+
+  {% if settings.home_block_parallax_show %}
+  <div class="block-parallax" data-parallax="{{ settings.home_block_parallax_show }}">
+    <div class="container">
+
+      {% if settings.home_bp_heading != blank %}
+      <h3 class="bp-title text-center">{{ settings.home_bp_heading }}</h3>
+      {% endif %}
+      
+      <div class="block-parallax-inner text-center">
+        {% for i in (1..3) %}
+        {% assign show = 'show_home_block_parallax_' | append: i %}
+
+        {% if settings[show] %}
+        
+        {% assign image = 'parallax_author_' | append: i %}
+        {% assign caption = 'home_bp_caption_' | append: i %}
+        {% assign author = 'home_bp_author_' | append: i %}
+        
+        <div class="parallax-item">
+          <img src = "{{ image | append: '.png' | asset_url }}" alt="" />
+
+          {% if settings[caption] != blank %}
+          <p class="bp-caption">{{ settings[caption] }}</p>
+          {% endif %}
+
+          {% if settings[author] != blank %}
+          <h5 class="bp-author">{{ settings[author] }}</h5>
+          {% endif %}
+        </div>
+        
+        {% endif %}
+        
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- End Home Parallax-->
+
+  <!-- Begin Block Sale -->
+  <div class="home-block-sale">
+    <div class="container">
+      <div class="row">
+
+        {% if settings.home_sp_text %}
+        <div class="col-md-3 col-sm-4 col-xs-12 hbs-text">
+          <div class="hbs-text-inner">
+
+            <div class="hbst-content">
+              {% if settings.home_sp_heading_text_1 != '' %}
+              <div class="hbst-title">{{settings.home_sp_heading_text_1}}</div>
+              {% endif %}
+              {% if settings.home_sp_subheading_text_1 != '' %}
+              <h3>{{settings.home_sp_subheading_text_1}}</h3>
+              {% endif %}
+              {% if settings.home_sp_caption_text_1 != '' %}
+              <p>{{settings.home_sp_caption_text_1}}</p>
+              {% endif %}
+            </div>
+
+          </div>
+        </div>
+        {% endif %}
+
+        {% if settings.home_sp %}
+        <div class="col-md-9 col-sm-8 col-xs-12">
+          <div class="row">
+            <div class="hbs-product">
+              {% paginate collections.all.products by 1000 %}
+              {% for product in collections.all.products %}
+              {% if product.handle == settings.home_sp_1 or product.handle == settings.home_sp_2 or product.handle == settings.home_sp_3 or product.handle == settings.home_sp_4 or product.handle == settings.home_sp_5 or product.handle == settings.home_sp_6 %}
+              {% include 'product-item' %}
+              {% endif %}
+              {% endfor %}
+              {% endpaginate %}
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+  <!-- End Block Sale -->
+
+
+  <!-- Begin Block Lastest News -->
+
+  {% if settings.home_blog_show or settings.home_sp %}
+  <div class="home-lastest-news">
+    <div class="container">
+
+      {% if settings.home_blog_show %}
+      <div class="home-our-blog">
+
+        {% if settings.home_blog_heading != blank %}
+        <div class="h-title text-center">
+          <h3>{{ settings.home_blog_heading }}</h3>
+          {% endif %}
+        </div>
+
+        {% if settings.home_blog_select and blogs[settings.home_blog_select].articles.size > 0 %}
+        <div class="row">
+          <div class="our-blog">
+
+            {% assign our_blog = blogs[settings.home_blog_select].articles %}
+            {% assign src = false %}
+
+            {% for article in our_blog limit: settings.home_blog_number  %}
+
+            {% if article.excerpt contains "img" %}
+            {% assign src = article.excerpt | split: 'src="' %}
+            {% assign src = src[1] | split: '"' | first %}
+            {% endif %}
+
+            <div class="our-article">
+              <div class="our-article-inner">
+
+                <div class="our-article-image">
+                  <a href="{{ article.url }}">
+
+                    {% if src %}
+                    {% assign src = src | replace:'_1024x1024','_grande' | replace:'_grande','_grande' | replace:'_2048x2048','_grande'  %}
+                    <img src="{{ src }}" alt="" />
+                    {% else %}
+                    <img src="{{ 'default-image.jpg' | asset_url }}" alt="" />
+                    {% endif %}
+                  </a>
+                  <div class="read-more"><a href="{{ article.url }}" class="btn-3">+ read more</a></div>
+
+                </div>
+
+                <div class="our-article-info">
+                  <div class="our-article-date">
+                    <span class="month">{{ article.created_at | date: " %b " }}</span>
+                    <span class="day">{{ article.created_at | date: " %d " }}</span>
+                  </div>
+                  <div class="our-article-content">
+                    <h4 class="article-title">{{ article.title | link_to: article.url }}</h4>
+                    <p class="article-content">{{ article.content | strip_html | truncatewords: 15 }}</p>
+                  </div>
+                </div>
+
+              </div>      
+            </div>
+
+            {% endfor %}
+
+          </div>
+          {% endif %}
+
+        </div>
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- End Block Lastest News -->
+
+
+
+</div>

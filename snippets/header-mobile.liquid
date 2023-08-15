@@ -1,0 +1,78 @@
+<div class="mobile-version visible-xs">
+
+  <div class="ht-mobile">
+    <ul class="list-inline">
+
+      <li class="mobile-version-menu">
+        <div class="navbar">
+          <div class="btn-navbar" data-toggle="offcanvas">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </div>
+        </div>
+      </li>
+
+      {% if shop.customer_accounts_enabled %}
+      <li class="mobile-version-login">
+        <div class="mobile-login">
+          <div class="dropdown-toggle" data-toggle="dropdown">
+            <span class="icon icon-login"></span>
+          </div>
+          <ul class="customer dropdown-menu">
+            {% if customer %}
+            <li class="account">
+              <a href="/account">{{ 'general.header.my_account' | t }}</a>
+            </li>
+            <li class="logout">
+              <a href="/account/logout">{{ 'general.header.logout' | t }}</a>
+            </li>
+            {% else %}
+            <li class="logout">
+              <a href="/account/login">{{ 'general.header.login' | t }}</a>
+            </li>
+            <li class="account">
+              <a href="/account/register">{{ 'general.header.register' | t }}</a>
+            </li>
+            {% endif %}
+            {% if shop.customer_accounts_optional and settings.wishlist_page %}
+            <li class="mobile-version-wl">
+              <a href="{{pages[settings.select_wishlist_page].url}}">{{ 'general.header.wish_list' | t }}</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </li>
+      {% endif %}
+
+      {% if settings.show_multiple_currencies %}
+      <li class="mobile-version-currency currencies-switcher">
+        {% include 'currencies-switcher' with 'dropdown' %}
+      </li>
+      {% endif %}
+
+      {% if settings.show_cart %}
+      <li class="cart-target">			
+        <a href="javascript:;" class="cart-toggle">        
+          <span class="icon icon-cart"></span>
+          <span class="cart-icon"><span class="number">{{ cart.item_count }}</span>
+        </a>
+      </li>
+      {% endif %}
+
+      {% if settings.show_search %}
+      <li class="search-toggle">
+        <span class="icon icon-search"></span>
+      </li>
+      {% endif %}
+
+    </ul>
+  </div>
+
+  <div class="h-logo">
+    <a href="/" title="{{ shop.name | escape }}">
+      <img class="mobile-logo visible-xs" src="{{ 'mobile_logo.png' | asset_url }}" alt="{{ shop.name | escape }}" />
+    </a>
+  </div>
+
+</div>

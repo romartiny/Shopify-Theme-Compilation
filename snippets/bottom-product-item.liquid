@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="bp-head col-sm-4 col-xs-4">
+    <a href="{{ product.url | within: collection }}">
+      <img src="{% if product.images.size >= 1%}{{ product.featured_image | product_img_url: 'small' }}{% else %}{{ 'default-image.jpg' | asset_url }}{% endif %}" alt="{{ product.featured_image.alt | escape }}" />
+    </a>
+  </div>
+  <div class="bp-content col-sm-8 col-xs-8">
+    <div class="bp-content-inner">
+      <div class="bp-title"><a href="{{ product.url | within: collection }}">{{ product.title }}</a></div>
+      <div class="bp-review">
+        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+      </div>
+      <div class="bp-price">
+        {% if product.available %}
+        {% if product.compare_at_price_max > product.price %}
+
+        <span class="price-compare"> {{ product.compare_at_price | money }}</span>
+        <span class="price-sale">{{ product.price | money }}</span>
+
+        {% else %}
+        <span class="price">
+          {% if product.price_varies %} 
+          {{ product.price | money }}
+          {% else %}
+          {{ product.price | money }}
+          {% endif %}
+        </span>
+        {% endif %}
+        {% else %}
+        <span class="sold-out">{{'products.product.sold_out' | t }}</span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

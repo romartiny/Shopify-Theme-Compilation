@@ -1,0 +1,16 @@
+<!-- Begin Menu Mobile-->
+<div class="mobile-version visible-xs visible-sm">
+  <div class="menu-mobile navbar">
+    <div class="nav-collapse is-mobile-nav">
+      <ul class="main-nav">
+        <li class="li-on-mobile">
+          <span>Shop</span>
+        </li>
+        {% for l in linklists[settings.nav_linklist].links %}
+        {% include 'nav-link' with 0 %}
+        {% endfor %}
+      </ul>   
+    </div>
+  </div>
+</div>
+<!-- End Menu Mobile-->

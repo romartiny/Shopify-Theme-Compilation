@@ -1,0 +1,193 @@
+<footer id="footer-content"{% if settings.footer_placement == 'boxes' or settings.general_placement == 'boxes' %} class="boxes"{% endif %}>
+
+  <!-- Begin Footer Content -->
+
+  <div class="footer-content">
+    <div class="container">
+
+      {% if settings.footer_about_shop_block != 'none' %}
+      <div class="footer-about-shop">
+        {% if settings.footer_about_shop_block == 'default' %}
+
+        <div class="footer-logo">
+          <img src="{{ 'footer_logo.png' | asset_url }}" alt="" />
+        </div>
+
+        {% if settings.footer_about_shop_caption != blank %}
+        <p class="caption">{{ settings.footer_about_shop_caption }}</p>
+        {% endif %}
+        {% else %}
+
+        {% capture my_shop %}{{settings.footer_about_shop_block_snippet}}{% endcapture %}
+        {% include my_shop %}
+
+        {% endif %}
+      </div>
+      {% endif %}
+
+      <div class="row">
+
+        {% comment %} Categories {% endcomment %}
+        {% if settings.footer_categories_block != 'none' %}
+        <div id="footer-categories" class="col-sm-2">
+          <div class="widget-footer">
+            {% if settings.footer_categories_block == 'default' %}
+            {% if settings.footer_categories_heading != blank %}
+            <h5 class="title hidden-xs">{{ settings.footer_categories_heading }}</h5>
+            <a href="javascript:;" class="visible-xs" data-toggle="dropdown">
+              <h5 class="title">{{ settings.footer_categories_heading }}</h5>
+            </a>
+            {% endif %}
+            <ul class="list-unstyled">
+              {% for collection in collections limit:4 %}
+              {% unless collection.handle == 'frontpage' or collection.handle == 'all' %}
+              <li>
+                <a href="{{ collection.url }}" title="{{ collection.title | escape }}">{{ collection.title }}</a>
+              </li>
+              {% endunless %}
+              {% endfor %}
+            </ul>
+            {% else %}
+            {% capture my_cate %}{{settings.footer_categories_block_snippet}}{% endcapture %}
+            {% include my_cate %}
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+
+        {% comment %} About Store {% endcomment %}
+        {% if settings.footer_about_store_block != 'none' %}
+        <div id="about-store" class="col-sm-2">
+          <div class="widget-footer">
+            {% if settings.footer_about_store_block == 'default' %}
+            {% if settings.footer_about_store_heading != blank %}
+            <h5 class="title hidden-xs">{{ settings.footer_about_store_heading }}</h5>
+            <a href="javascript:;" class="visible-xs" data-toggle="dropdown">
+              <h5 class="title">{{ settings.footer_about_store_heading }}</h5>
+            </a>
+            {% endif %}
+            {% assign list = linklists[settings.footer_about_store_linklist] %}
+            <ul class="list-unstyled">
+              {% for link in list.links %}
+              <li>
+                <a href="{{ link.url }}">{{ link.title | escape }}</a>
+              </li>
+              {% endfor %}
+            </ul>
+            {% else %}
+            {% capture my_abs %}{{settings.footer_about_store_block_snippet}}{% endcapture %}
+            {% include my_abs %}
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+
+        {% comment %} Customer Service {% endcomment %}
+        {% if settings.footer_cs_block != 'none' %}
+        <div id="customer-service" class="col-sm-2">
+          <div class="widget-footer">
+            {% if settings.footer_cs_block == 'default' %}
+            {% if settings.footer_cs_heading != blank %}
+            <h5 class="title hidden-xs">{{ settings.footer_cs_heading }}</h5>
+            <a href="javascript:;" class="visible-xs" data-toggle="dropdown">
+              <h5 class="title">{{ settings.footer_cs_heading }}</h5>
+            </a>
+            {% endif %}
+            {% assign list = linklists[settings.footer_cs_linklist] %}
+            <ul class="list-unstyled">
+              {% for link in list.links %}
+              <li>
+                <a href="{{ link.url }}">{{ link.title | escape }}</a>
+              </li>
+              {% endfor %}
+            </ul>
+            {% else %}
+            {% capture my_cs %}{{settings.footer_cs_block_snippet}}{% endcapture %}
+            {% include my_cs %}
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+
+        {% comment %} Information {% endcomment %}
+        {% if settings.footer_info_block != 'none' %}
+        <div id="infomation" class="col-sm-2">
+          <div class="widget-footer">
+            {% if settings.footer_info_block == 'default' %}
+            {% if settings.footer_info_heading != blank %}
+            <h5 class="title hidden-xs">{{ settings.footer_info_heading }}</h5>
+            <a href="javascript:;" class="visible-xs" data-toggle="dropdown">
+              <h5 class="title">{{ settings.footer_info_heading }}</h5>
+            </a>
+            {% endif %}
+            {% assign list = linklists[settings.footer_info_linklist] %}
+            <ul class="list-unstyled">
+              {% for link in list.links %}
+              <li>
+                <a href="{{ link.url }}">{{ link.title | escape }}</a>
+              </li>
+              {% endfor %}
+            </ul>
+            {% else %}
+            {% capture my_info %}{{settings.footer_info_block_snippet}}{% endcapture %}
+            {% include my_info %}
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+
+        {% comment %} Newsletter {% endcomment %}
+        {% if settings.show_mailing_list or settings.show_social_icons %}
+        <div class="col-sm-4">
+
+          {% if settings.show_social_icons %}
+          {% include 'social-media-icons' %}
+          {% endif %}
+
+          {% if settings.show_mailing_list %}
+          <div id="widget-newsletter">
+
+            <form action="{{ settings.mailing_form_action }}" method="post" id="mc-embedded-subscribe-form" class="mailing-form" name="mc-embedded-subscribe-form" target="_blank">
+              <h5 class="title">{{settings.mailing_list_heading}}</h5>
+              <input class="form-mailing" type="email" required placeholder="{{ settings.mailing_list_email_text }}" name="EMAIL" id="email-input" />
+              {% if settings.mailing_list_button != blank %}
+              <button id="email-submit" type="submit" title="{{settings.mailing_list_button}}" class="btn-4">{{settings.mailing_list_button}}</button>
+              {% endif %}
+            </form>
+
+          </div>
+          {% endif %}
+
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+
+  <!-- End  Footer Content -->
+
+  <!-- Begin  Footer Copyright -->
+  <div class="footer-copyright">
+    <div class="container">
+
+      <p>&copy; {{ 'now' | date: '%Y' }} <a href="/">{{ shop.name | escape }}</a>.<a href="http://www.arenathemes.com/">Shopify Themes</a> by <a href="http://www.arenathemes.com/">ArenaThemes</a></p>
+
+      {% comment %}
+      {% if settings.show_payment %}
+      {% include 'payment-method' %}
+      {% endif %}
+      {% endcomment %}
+
+    </div>
+  </div>
+  <!-- End Footer Copyright -->
+
+  <div id="checkLayout">
+    <span class="visible-xs-block"></span>
+    <span class="visible-sm-block"></span>
+    <span class="visible-md-block"></span>
+    <span class="visible-lg-block"></span>
+  </div>
+
+</footer>

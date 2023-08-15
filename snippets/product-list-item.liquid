@@ -1,0 +1,90 @@
+<div class="product-wrapper">
+
+  <div class="product-head">
+
+    <div class="product-image">
+      <a href="{{ product.url | within: collection }}"> 
+        <img class="featured-image" src="{% if product.images.size >= 1%}{{ product.featured_image | product_img_url: 'large' }}{% else %}{{ 'default-image.jpg' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
+        {% include 'label' %}
+      </a>
+    </div>
+
+    {% comment %} -- Deal -- {% endcomment %}
+
+    {% if product.available and settings.use_limited_offers %}
+    {% include 'deals' %}
+    {% endif %}
+
+    {% if settings.use_quick_view %}
+    <div class="product-button hidden-xs">
+      <div class="product-button-inner">
+
+        <div data-handle="{{product.handle}}" data-target="#quick-shop-popup" class="quick_shop quick-shop-button hidden-sm" data-toggle="modal" title="Quick View">
+          <span class="icon icon-quick-view"></span>
+          <span class="json hide">{{ product | json }}</span>
+        </div>
+        
+        {% if shop.customer_accounts_optional and settings.wishlist_page %}
+        {% include 'wishlist-product-item' %}
+        {% endif %}
+
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+
+  <div class="product-content">
+    <div class="pc-inner text-center">
+      <div class="product-title">
+        <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+      </div>
+
+      <div class="product-descrip">
+        <p class="only-list">{{ product.description | strip_html | truncatewords: 50 }}</p>
+      </div>
+
+      <div class="product-review">
+        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+      </div>
+
+      <div class="product-price">
+        {% if product.available %}
+        {% if product.compare_at_price_max > product.price %}
+
+        <span class="price-compare"> {{ product.compare_at_price | money }}</span>
+        <span class="price-sale">{{ product.price | money }}</span>
+
+        {% else %}
+        <span class="price">
+          {% if product.price_varies %} 
+          {{ product.price | money }}
+          {% else %}
+          {{ product.price | money }}
+          {% endif %}
+        </span>
+        {% endif %}  
+        {% else %}
+        <span class="sold-out">{{'products.product.sold_out' | t }}</span>
+        {% endif %}
+      </div>
+
+      <div class="add-cart-button">
+        {% if product.variants.size > 1 %}
+        <a href="{{ product.url | within: collection }}" class="select-options btn-4" title=""><span>{{ 'products.product.select_options' | t }}</span></a>
+        {% else %}
+        <form action="/cart/add" method="post" enctype="multipart/form-data">
+          <a href="{{ product.url | within: collection }}" class="add-to-cart btn-4" title=""><span>{{ 'products.product.add_to_cart' | t }}</span></a>
+          <select class="hide" name="id">
+            {% for variant in product.variants %}
+            <option value="{{ variant.id }}">{{ variant.title | escape }}</option>
+            {% endfor %}
+          </select>
+        </form>
+        {% endif %}
+      </div>
+
+    </div>
+
+  </div>
+</div> 

@@ -1,0 +1,111 @@
+<div class="detail-product-tab style-1">
+
+  {% if settings.show_detail_product_tab %}
+  <div class="panel-group" id="accordion">
+
+    {% if settings.product_tab_description %}
+    <div class="panel panel-default">
+      <div class="panel-heading" id="headingOne">
+        <div class="panel-title active">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+            {{'products.product.detail' | t }} <i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i>
+          </a>
+        </div>
+      </div>
+      <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+        <div class="panel-body">
+          {{ product.content }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if settings.product_tab_shipping != blank %}
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tablist" id="headingTwo">
+        <div class="panel-title">
+          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            {{'products.product.shipping' | t }}<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i>
+          </a>
+        </div>
+      </div>
+      <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+        <div class="panel-body">
+          {{pages[settings.product_tab_shipping].content}}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if settings.product_tab_size_chart != blank %}
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tablist" id="headingThree">
+        <div class="panel-title">
+          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            {{'products.product.size_chart' | t }}<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i>
+          </a>
+        </div>
+      </div>
+      <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+        <div class="panel-body">
+          {{pages[settings.product_tab_size_chart].content}}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if settings.product_tab_review %}
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tablist" id="headingFour">
+        <div class="panel-title">
+          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+            {{'products.product.customer_reviews' | t }}<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i>
+          </a>
+        </div>
+      </div>
+      <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+        <div class="panel-body">
+          <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if settings.product_tab_custom != blank %}
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tablist" id="headingFive">
+        <div class="panel-title">
+          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+            {{'products.product.custom_tab' | t }}<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i>
+          </a>
+        </div>
+      </div>
+      <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+        <div class="panel-body">
+          {{pages[settings.product_tab_custom].content}}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if settings.product_tab_video and product.featured_image.alt contains 'iframe' %}
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tablist" id="headingSix">
+        <div class="panel-title">
+          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+            {{'products.product.video' | t }}<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i>
+          </a>
+        </div>
+      </div>
+      <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+        <div class="panel-body">
+          {{product.featured_image.alt}}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    
+  </div>
+  {% endif %}
+
+</div>

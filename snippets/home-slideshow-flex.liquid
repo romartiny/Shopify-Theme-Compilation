@@ -1,0 +1,79 @@
+<div class="home-slideshow-wrapper" data-nav="{{ settings.home_slideshow_navigator }}" data-auto="{{ settings.home_slideshow_auto }}" data-paging="{{settings.home_slideshow_paging}}" data-animation="{{settings.home_slideshow_flex_animation}}">
+
+  {% if settings.home_slideshow_placement == 'boxes' %}
+  <div class="container">
+    {% endif %}
+
+    <div id="home-slideshow" class="flexslider{% if setings.home_slideshow_flex_animation == 'slide' %} slide-animation{% endif %}">
+      <ul class="slides">
+        {% for i in (1..5) %}
+        {% assign show = 'show_slide_' | append: i %}
+
+        {% if settings[show] %}
+        {% assign textAlign = 'align_slide_' | append: i %}
+        {% assign colorStyle = 'color_style_slide_' | append: i %}
+        {% assign positionLR = 'position_left_slide_' | append: i %}
+        {% assign heading = 'content_layer_first_' | append: i %}
+        {% assign headingText = 'heading_slide_' | append: i %}
+        {% assign headingImage = 'layer_first_image_' | append: i %}
+        {% assign caption = 'content_layer_second_' | append: i %}
+        {% assign captionText = 'caption_slide_' | append: i %}
+        {% assign captionImage = 'layer_second_image_' | append: i %}
+        {% assign textButton = 'button_first_slide_' | append: i %}
+        {% assign linkButton = 'button_first_slide_link_' | append: i %}
+        {% assign textButtonSecond = 'button_second_slide_' | append: i %}
+        {% assign linkButtonSecond = 'button_second_slide_link_' | append: i %}
+        {% assign image = 'image_slide_' | append: i %}
+        {% assign link = 'link_slide_' | append: i %}
+
+        <li class="{{ settings[colorStyle] }}">
+
+          <a href="{{ settings[link] }}">
+            <img src = "{{ image | append: '.jpg' | asset_url }}" alt="" />
+          </a>
+          <div class="camera_caption slide-{{i}}">
+            <div class="container {{settings[textAlign]}}"{% if settings[positionLR] != empty %}{% if settings[textAlign] == 'text-left' %} style="padding-left:{{settings[positionLR]}};"{% elsif settings[textAlign] == 'text-right' %} style="padding-right:{{settings[positionLR]}};"{% endif %}{% endif %}>
+
+              {% if settings[heading] != 'none' %}
+              <div class="heading">
+                {% if settings[heading] == 'image' %}
+                <img src = "{{ headingImage | append: '.png' | asset_url }}" alt="" />
+                {% else %}
+                {{ settings[headingText] }}
+                {% endif %}
+              </div>
+              {% endif %}
+
+              {% if settings[caption] != 'none' %}
+              <div class="caption-content hidden-xs">
+                {% if settings[caption] == 'image' %}
+                <img src = "{{ captionImage | append: '.png' | asset_url }}" alt="" />
+                {% else %}
+                {{ settings[captionText] }}
+                {% endif %}
+              </div>
+              {% endif %}
+
+              <div class="caption-link hidden-xs">
+                {% if settings[textButton] != empty %}
+                <button type="button" class="btn-4" onclick="window.location='{{settings[linkButton]}}'">{{settings[textButton]}}</button>
+                {% endif %}
+                {% if settings[textButtonSecond] != empty %}
+                <button type="button" class="btn-1" onclick="window.location='{{settings[linkButtonSecond]}}'">{{settings[textButtonSecond]}}</button>
+                {% endif %}
+              </div>
+
+            </div>
+          </div>
+
+        </li>
+
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+
+    {% if settings.home_slideshow_placement == 'boxes' %}
+  </div>
+  {% endif %}
+</div>

@@ -1,0 +1,195 @@
+{% comment %} -- Categories -- {% endcomment %}
+{% if settings.show_sb_categorie %}
+<div class="sb-widget hidden-xs">
+
+  {% if settings.heading_sb_categorie != blank %}
+  <div class="sb-title">
+    <h4 class="title">{{ settings.heading_sb_categorie }}</h4>
+  </div>
+  {% endif %}
+
+  <ul class="list-unstyled sb-categories">
+    {% for collection in collections limit: settings.number_sb_categorie %}
+    {% unless collection.handle == 'frontpage' or collection.handle == 'all' %}
+    <li>
+      <a href="{{ collection.url }}" title="{{ collection.title | escape }}"><span>{{ collection.title | escape }}</span></a>
+    </li>
+    {% endunless %}
+    {% endfor %}
+  </ul>
+
+</div>
+{% endif %}
+
+
+{% comment %} -- filter-- {% endcomment %}
+{% if settings.show_sb_filters %}
+
+{% comment %} -- filter by group -- {% endcomment %}
+{% if settings.sb_filters == 'groups' %}
+
+{% if template contains 'collection' and collection.all_tags.size > 0 %}
+{% assign c = 0 %}
+{% for t in collection.all_tags %}
+{% capture cat %}{{ cat }}{% capture temp_cat %}{% if t contains '_' %}{% assign cat_grp = t | split: '_' %}{{ cat_grp.first }}{% endif %}{% endcapture %}{% unless cat contains temp_cat %}{% if t contains '_' %}{% assign new_cat_grp = t | split: '_' %}{{ new_cat_grp.first }}{% endif %}{% unless forloop.last %}+{% endunless %}{% assign c = c | plus: 1 %}{% endunless %}{% endcapture %}
+{% endfor %}
+{% assign cat_array = cat | split: '+' %}
+{% endif %}
+
+{% if collection.all_tags.size > 0 %}
+<div class="sb-widget sbw-filter">
+
+  {% if settings.heading_sb_filters != blank %}
+  <div class="sb-title">
+    <h4 class="title">{{ settings.heading_sb_filters }}</h4>
+  </div>
+  {% endif %}
+
+  <div class="grid-uniform">
+    {% comment %}
+    Loop through tag categories
+    {% endcomment %}
+    {% assign i = 0 %}
+    {% for cat_item in cat_array %}
+    {% assign i = i | plus: 1 %}
+    {% comment %}
+    Ignore if tag category is empty
+    {% endcomment %}
+    {% unless cat_item == '' %}
+    <div class="sb-filter" id="filter-{{ i }}">
+      <div class="ftitle">
+        <span>{{ cat_item }}
+          <i class="fa fa-angle-down"></i>
+          <i class="fa fa-angle-up"></i>
+        </span>
+        <a href="#" class="clear-filter hidden" id="clear-filter-{{ i }}" style="float: right;">Clear</a>
+      </div>
+      {% capture ci %}{{ cat_item | downcase }}{% endcapture %}
+      <ul class="advanced-filters{% if ci == 'color' %} list-inline afs-color{% endif %}">
+        {% comment %}
+        Loop through collection tags
+        {% endcomment %}
+        {% for custom_tag in collection.all_tags %}
+        {% if custom_tag contains cat_item %}
+        {% comment %}
+        Strip out tag category prefix and add/remove link for tag filtering
+        {% endcomment %}  
+
+        {% assign file_extension = 'png' %}
+        {% assign value = custom_tag | remove_first: cat_item | remove: '_' %}
+
+        {% if current_tags contains custom_tag %}
+          
+            {% if ci == 'color' %}
+            <li class="advanced-filter active-filter af-color" data-group="{{ cat_item }}" data-handle="{{ custom_tag | handleize }}" style="background-color:{{ value | handle }}; background-image: url({{ value | handle | append: '.' | append: file_extension | asset_url }});">
+              {{ '' | remove_first: cat_item | remove: '_' | link_to_remove_tag: custom_tag | replace: 'tag Color_', '' }}
+            </li>
+            {% else %}
+            <li class="advanced-filter rt active-filter" data-group="{{ cat_item }}" data-handle="{{ custom_tag | handleize }}">
+              {{ custom_tag | remove_first: cat_item | remove: '_' | link_to_remove_tag: custom_tag }}
+            </li>
+            {% endif %}
+
+          {% else %}
+          
+            {% if ci == 'color' %}
+            <li class="advanced-filter af-color" data-group="{{ cat_item }}" style="background-color:{{ value | handle }}; background-image: url({{ value | handle | append: '.' | append: file_extension | asset_url }});">
+              {{ '' | remove_first: cat_item | remove: '_' | link_to_add_tag: custom_tag | replace: 'Narrow selection to products matching tag Color_', '' }}
+            </li>
+            {% else %}
+            <li class="advanced-filter rt" data-group="{{ cat_item }}">
+              {{ custom_tag | remove_first: cat_item | remove: '_' | link_to_add_tag: custom_tag }}
+            </li>
+            {% endif %}
+          
+          {% endif %}
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+    {% endunless %}
+    {% endfor %}
+  </div>
+
+</div>
+{% endif %}
+
+{% comment %} -- filter by tag -- {% endcomment %}
+{% else %}
+
+{% if collection.all_tags.size > 0 %}
+<div class="sb-widget">
+  {% if settings.heading_sb_filters != blank %}
+  <div class="sb-title">
+    <h4 class="title">{{ settings.heading_sb_filters }}</h4>
+  </div>
+  {% endif %}
+  <ul class="list-unstyled sb-filter-tag">
+    {% unless current_tags %}
+    <li class="active first"><span>All Items</span></li>
+    {% else %}
+    <li class="first">
+      <a href="{{ col_url }}"><span>All Items</span></a>
+    </li>
+    {% endunless %}
+
+    {% for tag in collection.all_tags %}
+    {% if current_tags contains tag %}
+    <li class="active{% if forloop.length == forloop.index %} last{% endif %}">
+      <span>{{ tag }}</span>
+    </li>
+    {% else %}
+    <li {% if forloop.length == forloop.index %}class="last"{% endif %}>
+      <a href="/collections/{% if collection.handle.size > 0 %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handle }}">
+        <span>{{ tag }}</span>
+      </a>
+    </li>
+    {% endif %}
+    {% endfor %}
+  </ul>     
+</div>
+{% endif %}
+
+{% endif %}
+
+{% endif %}
+
+{% comment %} --- Featured Products --- {% endcomment %}
+{% if settings.show_sb_fp %}
+<div class="sb-widget hidden-xs">
+
+  {% if settings.heading_sb_fp != blank %}
+  <div class="sb-title">
+    <h4 class="title">{{ settings.heading_sb_fp }}</h4>
+  </div>
+  {% endif %}
+
+  {% assign fcollection = collections[settings.sb_fp_collection] %}
+  <div class="sb-product-wrapper">
+    {% for product in fcollection.products limit: settings.sb_fp_number %}
+    <div class="sb-product">
+      {% include 'bottom-product-item' %}
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+{% endif %}
+
+
+{% comment %} -- Custom Block-- {% endcomment %}
+{% if settings.show_sb_custom_block and settings.page_sb_custom_block != blank %}
+<div class="sb-widget hidden-xs">
+
+  {% if settings.heading_sb_custom_block != blank %}
+  <div class="sb-title">
+    <h4 class="title">{{ settings.heading_sb_custom_block }}</h4>
+  </div>
+  {% endif %}
+
+  <div class="sb-custom-block">
+    {{pages[settings.page_sb_custom_block].content}}
+  </div>
+
+</div>
+{% endif %}

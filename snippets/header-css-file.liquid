@@ -1,0 +1,21 @@
+{% if template == 'index' %}
+{{ 'jquery.flexslider.css' | asset_url | stylesheet_tag }}
+{% endif %}
+{{ 'bootstrap.3x.css' | asset_url | stylesheet_tag }}
+{{ 'jquery.owl.carousel.css' | asset_url | stylesheet_tag }}
+{{ 'jquery.countdown.css' | asset_url | stylesheet_tag }}
+{{ 'normalize.css' | asset_url | stylesheet_tag }}
+{{ 'jquery.jgrowl.css' | asset_url | stylesheet_tag }}
+
+{% if settings.show_effect_zoom %}
+{{ 'jquery.fancybox-buttons.css' | asset_url | stylesheet_tag }}
+{% endif %}
+
+{{ 'animate.css' | asset_url | stylesheet_tag }}
+
+{{ 'jquery.fancybox.css' | asset_url | stylesheet_tag }}
+{{ 'swatch.css' | asset_url | stylesheet_tag }}
+{{ 'bitcode.toggle.scss.css' | asset_url | stylesheet_tag }}
+{{ 'bitcode.global.scss.css' | asset_url | stylesheet_tag }}
+{{ 'bitcode.style.scss.css' | asset_url | stylesheet_tag }}
+{{ 'bitcode.responsive.scss.css' | asset_url | stylesheet_tag }}

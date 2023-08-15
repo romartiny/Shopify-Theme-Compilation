@@ -1,0 +1,64 @@
+<div class="detail-product-tab style-2">
+
+  {% if settings.show_detail_product_tab %}
+  <div role="tabpanel">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      {% if settings.product_tab_description %}
+      <li role="presentation" class="active"><a href="#tab_detail" aria-controls="tab_detail" role="tab" data-toggle="tab">{{'products.product.detail' | t }}</a></li>
+      {% endif %}
+      {% if settings.product_tab_shipping != blank %}
+      <li role="presentation"><a href="#tab_shipping" aria-controls="tab_shipping" role="tab" data-toggle="tab">{{'products.product.shipping' | t }} </a></li>
+      {% endif %}
+      {% if settings.product_tab_size_chart != blank %}
+      <li role="presentation"><a href="#tab_sc" aria-controls="tab_sc" role="tab" data-toggle="tab">{{'products.product.size_chart' | t }}</a></li>
+      {% endif %}
+      {% if settings.product_tab_review %}
+      <li role="presentation"><a href="#tab_review" aria-controls="tab_review" role="tab" data-toggle="tab">{{'products.product.customer_reviews' | t }}</a></li>
+      {% endif %}
+      {% if settings.product_tab_custom != blank %}
+      <li role="presentation"><a href="#tab_custom" aria-controls="tab_custom" role="tab" data-toggle="tab">{{'products.product.custom_tab' | t }}</a></li>
+      {% endif %}
+      {% if settings.product_tab_video and product.featured_image.alt contains 'iframe' %}
+      <li role="presentation"><a href="#tab_video" aria-controls="tab_video" role="tab" data-toggle="tab">{{'products.product.video' | t }}</a></li>
+      {% endif %}
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      {% if settings.product_tab_description %}
+      <div role="tabpanel" class="tab-pane active" id="tab_detail">
+        {{ product.content }}
+      </div>
+      {% endif %}
+      {% if settings.product_tab_shipping != blank %}
+      <div role="tabpanel" class="tab-pane" id="tab_shipping">
+        {{pages[settings.product_tab_shipping].content}}
+      </div>
+      {% endif %}
+      {% if settings.product_tab_size_chart != blank %}
+      <div role="tabpanel" class="tab-pane" id="tab_sc">
+        {{pages[settings.product_tab_size_chart].content}}
+      </div>
+      {% endif %}
+      {% if settings.product_tab_review %}
+      <div role="tabpanel" class="tab-pane" id="tab_review">
+        <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+      </div>
+      {% endif %}
+      {% if settings.product_tab_custom != blank %}
+      <div role="tabpanel" class="tab-pane" id="tab_custom">
+        {{pages[settings.product_tab_custom].content}}
+      </div>
+      {% endif %}
+      {% if settings.product_tab_video and product.featured_image.alt contains 'iframe' %}
+      <div role="tabpanel" class="tab-pane" id="tab_video">
+        {{product.featured_image.alt}}
+      </div>
+      {% endif %}
+    </div>
+
+  </div>
+  {% endif %}
+</div>

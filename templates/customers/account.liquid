@@ -1,0 +1,51 @@
+{% layout settings.customer_layout %}
+
+<div class="row page-account">
+
+  <div class="col-sm-12">
+    <h4 class="title">{{'customer.account.title' | t }} <a href="/account/logout">[{{ 'general.header.logout' | t }}]</a></h4>
+  </div>
+
+  <div id="col-main" class="col-sm-12">
+
+    <div id="customer_orders">
+      <div class="s-title">{{'customer.orders.order_history' | t }}</div>
+      {% if customer.orders.size != 0 %}
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th class="order_number">{{'customer.orders.order_number' | t }}</th>
+              <th class="date">{{'customer.orders.date' | t }}</th>
+              <th class="payment_status">{{'customer.orders.payment_status' | t }}</th>
+              <th class="fulfillment_status">{{'customer.orders.fulfillment_status' | t }}</th>
+              <th class="total">{{'customer.orders.total' | t }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for order in customer.orders %}
+            <tr class="{% cycle 'odd', 'even' %} {% if order.cancelled %}cancelled_order{% endif %}">
+              <td>{{ order.name | link_to: order.customer_url }}</td>
+              <td><span class="note">{{ order.created_at | date: "%b, %d %Y" }}</span></td>
+              <td><span class="status_{{ order.financial_status }}">{{ order.financial_status }}</span></td>
+              <td><span class="status_{{ order.fulfillment_status }}">{{ order.fulfillment_status }}</span></td>
+              <td><span class="total">{{ order.total_price | money }}</span></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <div class="alert alert-success">
+        <button type="button" class="close" title="{{'customer.general.close' | t }}" data-dismiss="alert">×</button>
+        <p>{{'customer.orders.none' | t }}</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="col-sm-12">
+    {% include 'account-detail' %}
+  </div>
+
+</div>

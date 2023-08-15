@@ -1,0 +1,62 @@
+{{ '//ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js' | script_tag }}
+{{ 'jquery.product.min.js' | asset_url | script_tag }}
+
+<div id="recently-viewed" class="sb-widget" style="display:none">
+
+  {% if settings.heading_sb_custom_block != blank %}
+  <div class="sb-title">
+    <h4 class="title">{{ settings.heading_recently_viewed }}</h4>
+  </div>
+  {% endif %}
+
+  <div id="recently-viewed-products" class="collection clearfix"></div>
+</div>
+
+
+{% raw %}
+<script id="recently-viewed-product-template" type="text/x-jquery-tmpl">
+<div id="product-${handle}" class="product">
+  <div class="product-wrapper">
+     <div class="product-head">
+        <div class="product-image">
+          <div class="front">
+            <a href="${url}">
+              <img src="${Shopify.Products.resizeImage(featured_image, "medium")}" alt="" />
+            </a>
+          </div>
+        </div>
+     </div>
+  </div>
+</div>
+</script>
+{% endraw %}
+
+<script type="text/javascript">
+  Shopify.Products.showRecentlyViewed( {
+    howManyToShow: {% if settings.sidebar_product_page == 'none' or product.template_suffix == 'full' %}2{% else %}3{% endif %},
+    onComplete: function() {
+      
+    {% if settings.show_multiple_currencies == false %}
+      var listPrice = jQuery('#recently-viewed-products .product .money');
+      listPrice.each(function() {
+        var $this = jQuery(this);
+        var $price = Shopify.formatMoney($this.html(), "{{shop.money_format}}");
+        $this.html($price);
+      });
+     {% endif %}
+      
+      jQuery("#recently-viewed-products .sold-out").html("Sold Out");
+      jQuery("#recently-viewed-products .price-percentage .save").html("Save");
+
+      jQuery('#recently-viewed').show();
+      
+      {% if settings.show_multiple_currencies %}
+      Currency.convertAll(
+        shopCurrency, 
+        jQuery('[name=currencies]').val(), 
+        '#recently-viewed-products span.money'
+      );
+      {% endif %}
+    } 
+  });
+</script>

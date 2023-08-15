@@ -1,0 +1,195 @@
+{% if settings.mega_menu_1_col_1 != 'none' or settings.mega_menu_1_col_2 != 'none' or settings.mega_menu_1_col_3 != 'none' or settings.mega_menu_1_col_4 != 'none' %}
+<div class="dropdown-menu dropdown-menu-1 " style="min-height: {{ settings.mega_menu_min_height_1 }};{% if settings.mega_menu_bg_1 == 'bg_image' %}background-image:url({{'mega_menu_bg_img_1.jpg' | asset_url}}){% else %}background: {{ settings.mega_menu_bg_color_1 }}{% endif %};">
+  <div class="row">
+
+    {% if settings.mega_menu_1_col_1 != 'none' %}
+    <div class="mega-col-1 col-sm-{{ settings.mega_menu_1_width_col_1 }}">
+      {% case settings.mega_menu_1_col_1 %}
+      {% when 'linlist' %}
+      {% for ml in linklists[settings.mega_menu_1_ll_col_1].links %}
+      {% assign submenu = ml.title | handleize %}
+      {% if linklists[submenu].links.size > 0 %}
+      <div class="dropdown mega-sub-link">
+        <a href="{{ ml.url }}" class="dropdown-link" data-toggle="dropdown">
+          <span>{{ ml.title }}</span>
+          {% if nav-link == 0 %}
+          <i class="fa fa-angle-down visible-xs"></i>
+          {% endif %}
+        </a>
+        <ul class="dropdown-menu dropdown-menu-sub">
+          {% for l in linklists[submenu].links %}
+          <li><a href="{{ l.url }}">{{ l.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% else %}
+      <div class="mega-sub-link"><a tabindex="-1" href="{{ ml.url }}"><span>{{ ml.title }}</span></a></div>
+      {% endif %}
+      {% endfor %}
+
+      {% when 'product' %}
+      {% paginate collections.all.products by 100 %}
+      {% for product in collections.all.products %}
+      {% if product.handle == settings.mega_menu_1_product_col_1 %}
+      {% include 'product-item' %}
+      {% endif %}
+      {% endfor %}
+      {% endpaginate %}
+
+      {% when 'image' %}
+      <a href="{{ settings.mega_menu_1_image_link_col_1 }}">
+        <img src="{{ 'mega_menu_1_image_col_1.jpg' | asset_url }}" alt="" />
+      </a>
+
+      {% else %}
+      {% capture mm_col_1 %}{{settings.mega_menu_1_cb_col_1}}{% endcapture %}
+      {% include mm_col_1 %}
+
+      {% endcase %}
+    </div>
+    {% endif %}
+
+    {% if settings.mega_menu_1_col_2 != 'none' %}
+    <div class="mega-col-2 col-sm-{{ settings.mega_menu_1_width_col_2 }}">
+      {% case settings.mega_menu_1_col_2 %}
+      {% when 'linlist' %}
+      {% for ml in linklists[settings.mega_menu_1_ll_col_2].links %}
+      {% assign submenu = ml.title | handleize %}
+      {% if linklists[submenu].links.size > 0 %}
+      <div class="dropdown mega-sub-link">
+        <a href="{{ ml.url }}" class="dropdown-link" data-toggle="dropdown">
+          <span>{{ ml.title }}</span>
+          {% if nav-link == 0 %}
+          <i class="fa fa-angle-down visible-xs"></i>
+          {% endif %}
+        </a>
+        <ul class="dropdown-menu dropdown-menu-sub">
+          {% for l in linklists[submenu].links %}
+          <li><a href="{{ l.url }}">{{ l.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% else %}
+      <div class="mega-sub-link"><a tabindex="-2" href="{{ ml.url }}"><span>{{ ml.title }}</span></a></div>
+      {% endif %}
+      {% endfor %}
+
+      {% when 'product' %}
+      {% paginate collections.all.products by 200 %}
+      {% for product in collections.all.products %}
+      {% if product.handle == settings.mega_menu_1_product_col_2 %}
+      {% include 'product-item' %}
+      {% endif %}
+      {% endfor %}
+      {% endpaginate %}
+
+      {% when 'image' %}
+      <a href="{{ settings.mega_menu_1_image_link_col_2 }}">
+        <img src="{{ 'mega_menu_1_image_col_2.jpg' | asset_url }}" alt="" />
+      </a>
+
+      {% else %}
+      {% capture mm_col_2 %}{{settings.mega_menu_1_cb_col_2}}{% endcapture %}
+      {% include mm_col_2 %}
+
+      {% endcase %}
+    </div>
+    {% endif %}
+
+    {% if settings.mega_menu_1_col_3 != 'none' %}
+    <div class="mega-col-3 col-sm-{{ settings.mega_menu_1_width_col_3 }}">
+      {% case settings.mega_menu_1_col_3 %}
+      {% when 'linlist' %}
+      {% for ml in linklists[settings.mega_menu_1_ll_col_3].links %}
+      {% assign submenu = ml.title | handleize %}
+      {% if linklists[submenu].links.size > 0 %}
+      <div class="dropdown mega-sub-link">
+        <a href="{{ ml.url }}" class="dropdown-link" data-toggle="dropdown">
+          <span>{{ ml.title }}</span>
+          {% if nav-link == 0 %}
+          <i class="fa fa-angle-down visible-xs"></i>
+          {% endif %}
+        </a>
+        <ul class="dropdown-menu dropdown-menu-sub">
+          {% for l in linklists[submenu].links %}
+          <li><a href="{{ l.url }}">{{ l.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% else %}
+      <div class="mega-sub-link"><a tabindex="-3" href="{{ ml.url }}"><span>{{ ml.title }}</span></a></div>
+      {% endif %}
+      {% endfor %}
+
+      {% when 'product' %}
+      {% paginate collections.all.products by 300 %}
+      {% for product in collections.all.products %}
+      {% if product.handle == settings.mega_menu_1_product_col_3 %}
+      {% include 'product-item' %}
+      {% endif %}
+      {% endfor %}
+      {% endpaginate %}
+
+      {% when 'image' %}
+      <a href="{{ settings.mega_menu_1_image_link_col_3 }}">
+        <img src="{{ 'mega_menu_1_image_col_3.jpg' | asset_url }}" alt="" />
+      </a>
+
+      {% else %}
+      {% capture mm_col_3 %}{{settings.mega_menu_1_cb_col_3}}{% endcapture %}
+      {% include mm_col_3 %}
+
+      {% endcase %}
+    </div>
+    {% endif %}
+
+    {% if settings.mega_menu_1_col_4 != 'none' %}
+    <div class="mega-col-4 col-sm-{{ settings.mega_menu_1_width_col_4 }}">
+      {% case settings.mega_menu_1_col_4 %}
+      {% when 'linlist' %}
+      {% for ml in linklists[settings.mega_menu_1_ll_col_4].links %}
+      {% assign submenu = ml.title | handleize %}
+      {% if linklists[submenu].links.size > 0 %}
+      <div class="dropdown mega-sub-link">
+        <a href="{{ ml.url }}" class="dropdown-link" data-toggle="dropdown">
+          <span>{{ ml.title }}</span>
+          {% if nav-link == 0 %}
+          <i class="fa fa-angle-down visible-xs"></i>
+          {% endif %}
+        </a>
+        <ul class="dropdown-menu dropdown-menu-sub">
+          {% for l in linklists[submenu].links %}
+          <li><a href="{{ l.url }}">{{ l.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% else %}
+      <div class="mega-sub-link"><a tabindex="-4" href="{{ ml.url }}"><span>{{ ml.title }}</span></a></div>
+      {% endif %}
+      {% endfor %}
+
+      {% when 'product' %}
+      {% paginate collections.all.products by 400 %}
+      {% for product in collections.all.products %}
+      {% if product.handle == settings.mega_menu_1_product_col_4 %}
+      {% include 'product-item' %}
+      {% endif %}
+      {% endfor %}
+      {% endpaginate %}
+
+      {% when 'image' %}
+      <a href="{{ settings.mega_menu_1_image_link_col_4 }}">
+        <img src="{{ 'mega_menu_1_image_col_4.jpg' | asset_url }}" alt="" />
+      </a>
+
+      {% else %}
+      {% capture mm_col_4 %}{{settings.mega_menu_1_cb_col_4}}{% endcapture %}
+      {% include mm_col_4 %}
+
+      {% endcase %}
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+{% endif %}

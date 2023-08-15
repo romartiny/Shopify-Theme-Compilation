@@ -1,0 +1,112 @@
+<!-- Begin Header Top-->
+{% if settings.header_placement == 'boxes' %}
+<div class="boxes">
+  {% endif %}
+
+  <div class="header-top">
+
+    <div class="ht-left">
+      <ul class="list-inline">
+
+        {% if settings.show_multiple_currencies %}
+        <li class="multi-currency">
+          {% include 'currencies-switcher' %}
+        </li>
+        {% endif %}
+
+        {% if settings.top_box_hotline != '' %}
+        <li class="hotline">{{ settings.top_box_hotline }}</li>
+        {% endif %}
+
+      </ul>
+    </div>
+
+    <div class="ht-right">
+      <ul class="list-inline">
+
+        {% if shop.customer_accounts_enabled %}
+        {% if settings.show_header_customer_links %}
+        <li class="customer-links">
+          {% include 'customer-links' %}
+        </li>
+        {% endif %}
+        {% endif %}
+
+        {% if settings.show_cart %}
+        <li class="cart-target">			
+          <a href="javascript:;" class="num-items-in-cart cart-toggle" title="cart">
+            <span class="icon icon-cart"></span>
+            <span class="cart-text">My Cart</span>
+            <span class="cart-icon"><span class="number">{{ cart.item_count }}</span>
+            </span>
+          </a>
+        </li>
+        {% endif %}
+
+      </ul>
+    </div>
+
+  </div>
+
+  {% if settings.header_placement == 'boxes' %}
+</div>
+{% endif %}
+<!--End Header Top-->
+
+<!-- Begin Header Bottom -->
+{% if settings.header_placement == 'boxes' %}
+<div class="boxes">
+  {% endif %}
+
+  <div class="header-bottom">
+    <div class="container">
+      <div class="row">
+
+        <div class="logo-site col-sm-3">
+          <a href="/" title="{{ shop.name | escape }}">
+            {% if settings.site_logo == "logo.png" %}
+            <img class="light-logo hidden-xs" src="{{ 'logo-light.png' | asset_url }}" alt="{{ shop.name | escape }}" />
+            <img class="dark-logo hidden-xs" src="{{ 'logo-dark.png' | asset_url }}" alt="{{ shop.name | escape }}" />
+            {% else %}
+            <span class="hidden-xs">{{ settings.logo_text | escape }}</span>
+            {% endif %}
+          </a>
+        </div>
+
+        <div class="navigation col-sm-9">
+
+          <div class="row">
+            {% if settings.nav_linklist != '' %}
+            <nav class="navbar col-sm-11" role="navigation">
+              <div class="collapse navbar-collapse">
+                <ul class="main-nav">
+                  {% for l in linklists[settings.nav_linklist].links %}
+                  {% include 'nav-link' with 0 %}
+                  {% endfor %}
+                </ul>
+              </div>
+
+            </nav>
+            {% endif %}
+
+            <div class="sc-toggle col-sm-1">
+
+              {% if settings.show_search %}
+              <div class="search-toggle">
+                <span class="icon icon-search"></span>
+              </div>
+              {% endif %}
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  {% if settings.header_placement == 'boxes' %}
+</div>
+{% endif %}
+<!-- End Header Bottom -->

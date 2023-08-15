@@ -1,0 +1,51 @@
+{% if template contains 'customers'%}
+<script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
+<script src="{{ 'bitcode.customerArea.js'  | asset_url }}" defer></script>
+{% endif %}
+
+<script src="{{ 'jquery-1.9.1.min.js' | asset_url }}" ></script>
+
+{% if settings.use_page_preloading %}
+<script src="{{ 'jpreloader.min.js' | asset_url }}"></script>
+{% endif %}
+
+<script src="{{ 'bootstrap.3x.min.js' | asset_url }}" defer></script>
+
+<script src="{{ 'jquery.easing.1.3.js' | asset_url }}" defer></script>
+
+<script src="{{ 'modernizr.js' | asset_url }}"  async></script>
+
+<script src="{{ 'mobile-detect.min.js' | asset_url  }}"  defer></script>
+
+{% if template == 'index' %}
+<script src="{{ 'jquery.flexslider.min.js' | asset_url  }}" defer></script>
+{% endif %}
+
+<script src="{{ 'cookies.js' | asset_url  }}" defer></script>
+<script src="{{ 'wow.min.js' | asset_url }}" defer></script>
+<script src="{{ 'jquery.fancybox.min.js' | asset_url  }}"></script>
+<script src="{{ 'jquery.jgrowl.min.js' | asset_url  }}" defer></script>
+<script src="{{ 'jquery.elevatezoom.min.js' | asset_url  }}" defer></script>
+<script src="{{ 'jquery.owl.carousel.min.js' | asset_url  }}" defer></script>
+<script src="{{ 'jquery.plugin.js' | asset_url  }}" defer></script>
+<script src="{{ 'jquery.countdown.js' | asset_url  }}" defer></script>
+
+<script src="{{ 'cart.js' | asset_url }}" defer></script>
+<script src="{{ 'rivets-cart.min.js' | asset_url }}" defer></script>
+
+
+{% if template == 'page.contact' and settings.contact_map %}
+<script src="{{ '//maps.google.com/maps/api/js?sensor=false' }}"></script>
+<script src="{{ 'jquery.gmap.min.js' | asset_url }}" defer></script>
+{% endif %}
+
+<script src="{{ 'bitcode.ajax-search.js' | asset_url }}" defer></script>
+
+{% if template contains 'collection' %}
+<script src="{{ 'jquery.history.js' | asset_url }}" defer></script>
+<script src="{{ 'bitcode.ajax-filter.js' | asset_url }}" defer></script> 
+{% endif %}
+<script src="{{ 'option_selection.js' | asset_url  }}" defer></script>
+<script src="{{ 'bitcode.global.js' | asset_url  }}" defer></script>
+<script src="{{ 'bitcode.js' | asset_url }}"></script>
+

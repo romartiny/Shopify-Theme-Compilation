@@ -1,0 +1,31 @@
+<div class="special-product-wrapper">
+
+  <div class="special-product-image">
+    <a href="{{ product.url | within: collection }}"> 
+      <img src="{% if product.images.size >= 1%}{{ product.featured_image | product_img_url: 'large' }}{% else %}{{ 'default-image.jpg' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
+      {% include 'label' %}
+    </a>
+  </div>
+
+  <div class="special-product-price">
+    {% if product.available %}
+    {% if product.compare_at_price_max > product.price %}
+
+    <span class="price-compare"> {{ product.compare_at_price | money }}</span>
+    <span class="price-sale">{{ product.price | money }}</span>
+
+    {% else %}
+    <span class="price">
+      {% if product.price_varies %} 
+      {{ product.price | money }}
+      {% else %}
+      {{ product.price | money }}
+      {% endif %}
+    </span>
+    {% endif %}  
+    {% else %}
+    <span class="sold-out">{{'products.product.sold_out' | t }}</span>
+    {% endif %}
+  </div>
+
+</div> 

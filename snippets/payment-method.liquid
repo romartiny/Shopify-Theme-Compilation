@@ -1,0 +1,47 @@
+<div id="widget-payment">
+
+  <ul class="payment-method list-inline">
+    {% if settings.show_paypal %}
+    <li title="Paypal">
+      <a href="javascript:;"><i class="fa fa-cc-paypal"></i></a>
+    </li>
+    {% endif %}
+
+    {% if settings.show_visa %}
+    <li title="Visa">
+      <a href="javascript:;"><i class="fa fa-cc-visa"></i></a>
+    </li>
+    {% endif %}
+
+    {% if settings.show_mastercard %}
+    <li title="Mastercard">
+      <a href="javascript:;"><i class="fa fa-cc-mastercard"></i></a>
+    </li>
+    {% endif %}
+
+    {% if settings.show_amex %}
+    <li title="American Express">
+      <a href="javascript:;"><i class="fa fa-cc-amex"></i></a>
+    </li>
+    {% endif %}
+
+    {% if settings.show_discover %}
+    <li title="Discover">
+      <a href="javascript:;"><i class="fa fa-cc-discover"></i></a>
+    </li>
+    {% endif %}
+
+    {% if settings.show_stripe %}
+    <li title="Stripe">
+      <a href="javascript:;"><i class="fa fa-cc-stripe"></i></a>
+    </li>
+    {% endif %}
+
+    {% if settings.show_google_wallet %}
+    <li title="Google Wallet">
+      <a href="javascript:;"><i class="fa fa-google-wallet"></i></a>
+    </li>
+    {% endif %}
+  </ul>
+
+</div>

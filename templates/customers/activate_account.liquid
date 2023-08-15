@@ -1,0 +1,38 @@
+{% layout settings.customer_layout %}
+<div id="col-main" class="page-active">
+  <div class="row">
+    <div class="col-sm-12">
+
+      <div id="customer-activate">
+        <h4 class="title">{{ 'customer.activate_account.title' | t }}</h4>
+        <p class="note">{{ 'customer.activate_account.subtext' | t }}</p>
+        {% form 'activate_customer_password' %}
+
+        {% if form.errors %}
+        <div class="alert alert-danger">
+          <button type="button" class="close" title="{{'customer.general.close' | t }}" data-dismiss="alert">×</button>
+          {{ form.errors | default_errors }}
+        </div>
+        {% endif %}
+
+        <div class="control-wrapper">
+          <label for="password">{{ 'customer.activate_account.password' | t }}</label>
+          <input type="password" value="" name="customer[password]" id="customer_password" class="col-sm-5 col-xs-12 password" />
+        </div>
+
+        <div class="control-wrapper">
+          <label for="password_confirmation">{{ 'customer.activate_account.password_confirm' | t }}</label>
+          <input type="password" value="" name="customer[password_confirmation]" id="customer_password_confirmation" class="col-sm-5 col-xs-12 password" />
+        </div>
+
+        <div class="control-wrapper">
+          <button class="btn-3" type="submit">{{ 'customer.activate_account.submit' | t }}</button>
+          <button class="btn-3" type="submit" name="decline" id="customer_decline">{{ 'customer.activate_account.cancel' | t }}</button>
+        </div>
+
+        {% endform %}
+      </div>
+
+    </div>
+  </div>
+</div>

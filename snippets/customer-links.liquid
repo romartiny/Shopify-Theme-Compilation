@@ -1,0 +1,22 @@
+{% if customer %}
+
+<a href="/account" id="customer_account_link" title="My Account">
+  <span class="icon icon-login"></span>
+  <span>{{ 'general.header.my_account' | t }}</span>
+</a>
+
+{% else %}
+
+<a href="/account/login" id="customer_login_link" title="Login">
+  <span class="icon icon-login"></span>
+  <span>{{ 'general.header.login' | t }}</span>
+</a>
+
+{% endif %}
+
+{% if shop.customer_accounts_optional and settings.wishlist_page %} 
+<a href="{{pages[settings.select_wishlist_page].url}}" title="Wishlist">
+  <span class="icon icon-wl"></span>
+  <span>{{ 'general.header.wish_list' | t }}</span>
+</a>
+{% endif %}

@@ -1,0 +1,6 @@
+{% layout None %}
+  {% paginate collection.products by 10000 %}
+  {% for product in collection.products %}
+  <div class="s-ajax" data-h="{{product.handle}}" data-t="{{product.title}}" data-src="{{ product.featured_image | product_img_url: small }}"></div>
+  {% endfor %}
+  {% endpaginate %}

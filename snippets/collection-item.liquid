@@ -1,0 +1,32 @@
+<div class="collection-item-inner text-center">
+
+  {% if template != 'index' %}
+  <div class="collection-info">
+    <h4 class="title">{{ collection.title }}</h4>
+    <p>{{collection.products_count}} {{ 'collections.general.items_with_count' | t: count: collections.general.items_with_count }}</p>
+  </div>
+  {% endif %}
+
+  <div class="collection-img">
+    <a href="{{ collection.url }}" title="{{ collection.title | escape }}">
+      {% if collection.image %}
+      <img src="{{ collection.image.src | collection_img_url: 'large' }}" alt="{{ collection.title | escape }}" />
+      {% else %}
+      <img src="{{ 'default-image.jpg' | asset_url }}" alt="{{ collection.title | escape }}" />
+      {% endif %}
+      {% if template == 'index' %}
+      <p class="collection-info">
+        <span>{{ collection.title }}</span>
+      </p>
+      {% endif %}
+    </a>
+
+  </div>
+  
+  {% if template != 'index' %}
+  <div class="collection-action">
+    <a href="{{ collection.url }}" class="btn-1"><i class="fa fa-long-arrow-right"></i> {{ 'collections.general.shop_now' | t }}</a>
+  </div>
+  {% endif %}
+  
+</div>

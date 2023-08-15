@@ -1,0 +1,124 @@
+<div class="row">
+
+  {% if settings.blog_sb_placement == 'left' %}
+  <div id="sidebar-blog" class="col-sm-3">
+    {% include 'sidebar-blog' %}
+  </div>
+  {% endif %}
+
+  {% paginate article.comments by settings.comment_pagination_limit %}
+  <div id="col-main" class="page-blog{% if settings.blog_sb_placement != 'none' %} col-sm-9{% else %} col-sm-12{% endif %}">
+
+    <div class="our-article">
+      <div class="our-article-inner">
+
+        {% if article.excerpt.size > 0 %}
+        <div class="article-image">
+          <a href="{{ article.url }}">
+            {{ article.excerpt }}
+          </a>
+        </div>
+        {% endif %}
+
+        <div class="article-info">
+          <div class="article-date">
+            <span class="day">{{ article.created_at | date: " %d " }}</span>
+            <span class="month">{{ article.created_at | date: " %b " }}</span>
+          </div>
+          <div class="article-title-wrapper">
+            <h3 class="article-title">{{ article.title | link_to: article.url }}</h3>
+            <span class="article-author">{{'blogs.article.posted_on' | t }}{{ article.created_at | date: " %H:%M " }} {{'blogs.article.by' | t }} {{ article.author | escape }} - {{ article.comments_count }} {{ 'blogs.comments.comments_with_count' | t: count: blogs.comments.comments_with_count }}</span>
+            <span class="article-tag"> {{'blogs.article.tag' | t }}:{% for tag in article.tags %} {{tag}}{% if forloop.last %}{% else %},{% endif%} {% endfor %}</span>
+          </div>
+        </div>
+
+        <div class="article-content">{{ article.content }}</div>
+
+      </div>
+    </div>
+
+    {% if article.comments != blank %}
+    {% assign number_of_comments = article.comments_count %}
+    {% if comment and comment.created_at %}
+    {% assign number_of_comments = article.comments_count | plus: 1 %}
+    {% endif %}
+
+    <div id="comments" class="comments-list">
+      <h4 class="title">
+        {{ number_of_comments }} {{ 'blogs.comments.comments_with_count' | t: count: blogs.comments.comments_with_count }}
+      </h4>
+      {% comment %} Loop through approved comments: {% endcomment %}        
+      {% for comment in article.comments reversed %}
+      {% include 'comment-template' %}
+      {% endfor %}  
+
+      {% comment %} Show a comment that was *just* submitted {% endcomment %}
+      {% if comment and comment.created_at %}
+      {% include 'comment-template' %}
+      {% endif %}
+      {% include 'pagination-bottom' %}
+    </div>
+    {% endif %}
+
+    {% form article %}
+    <div id="comment-form" class="comments">
+
+      <h4 class="title">{{ 'blogs.comments.title' | t }}</h4>
+
+      {% comment %}
+      {% if blog.moderated? %}
+      <div class="alert alert-success">{{ 'blogs.comments.moderated' | t }}</div>
+      {% endif %}
+      {% endcomment %}
+
+      {% if form.posted_successfully? %}
+      {% if blog.moderated? %}
+      <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        {{ 'blogs.comments.success_moderated' | t }}
+      </div>
+      {% else %}
+      <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        {{ 'blogs.comments.success' | t }}
+      </div>
+      {% endif %}
+      {% endif %}
+
+      {% if form.errors %}
+      <div class="alert alert-error">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        {{ form.errors | default_errors }}
+      </div>
+      {% endif %}
+
+      <div class="control-wrapper{% if form.errors contains 'author' %} error{% endif %}">
+        <label for="comment_author">{{ 'blogs.comments.name' | t }} <span class="req">*</span></label>
+        <input required type="text" id="comment_author" name="comment[author]" value="{% if form.author %}{{ form.author }}{% elsif customer %}{{ customer.first_name }} {{ customer.last_name }}{% endif %}" class="col-sm-5 col-xs-12" />
+      </div>
+      <div class="control-wrapper{% if form.errors contains 'email' %} error{% endif %}">
+        <label for="comment_email">{{ 'blogs.comments.email' | t }} <span class="req">*</span></label>
+        <input required type="text" id="comment_email" name="comment[email]" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" class="col-sm-5 col-xs-12" />
+      </div>
+      <div class="control-wrapper{% if form.errors contains 'body' %} error{% endif %}">
+        <label for="comment_body">{{ 'blogs.comments.message' | t }} <span class="req">*</span></label>
+        <textarea required id="comment_body" name="comment[body]" cols="40" rows="12" class="col-xs-12">{{form.body}}</textarea>
+      </div> 
+
+      <div class="control-wrapper last">
+        <button type="submit" id="comment-submit" class="btn-3">{{ 'blogs.comments.submit' | t }}</button>
+      </div>
+
+    </div>
+    {% endform %}
+
+  </div>
+  {% endpaginate %}
+
+  {% if settings.blog_sb_placement == 'right' %}
+  <div id="sidebar-blog" class="col-sm-3">
+    {% include 'sidebar-blog' %}
+  </div>
+  {% endif %}
+
+</div>

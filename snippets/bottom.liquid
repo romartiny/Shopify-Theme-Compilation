@@ -1,0 +1,76 @@
+{% if settings.show_instagram %}
+<div class="bottom-instagram">
+  <div class="container">
+
+    {% if settings.instagram_heading != '' or settings.instagram_caption != '' %}
+    <div class="instagram-head text-center">
+      <div>
+      <img src="{{ 'instagram-img.png' | asset_url }}" alt="" /> 
+      {% if settings.instagram_heading != '' %}
+      <h3>{{settings.instagram_heading}}</h3>
+      {% endif %}
+      </div>
+      {% if settings.instagram_caption != blank %}
+      <p class="caption">{{settings.instagram_caption}}</p>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    {% include 'instafeed' %}
+
+    {% if settings.instagram_button != '' %}
+    <div class="instagram-button text-center">
+      <a href="{{settings.instagram_button_link}}" class="btn-3">{{settings.instagram_button}} <i class="fa fa-toggle-right"></i></a>
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+{% endif %}
+
+{% if settings.show_brands %}
+<div id="brands" class="bottom-brands">
+  <div class="brands-item">
+    {% if settings.brands_logo_show_1 %}
+    <div class="brand-item">
+      <a href="{{ settings.brands_link_1 }}"><img src="{{ 'brands_logo_1.png' | asset_url }}" alt="" /></a>
+    </div>
+    {% endif %}
+    {% if settings.brands_logo_show_2 %}
+    <div class="brand-item">
+      <a href="{{ settings.brands_link_2 }}"><img src="{{ 'brands_logo_2.png' | asset_url }}" alt="" /></a>
+    </div>
+    {% endif %}
+    {% if settings.brands_logo_show_3 %}
+    <div class="brand-item">
+      <a href="{{ settings.brands_link_3 }}"><img src="{{ 'brands_logo_3.png' | asset_url }}" alt="" /></a>
+    </div>
+    {% endif %}
+    {% if settings.brands_logo_show_4 %}
+    <div class="brand-item">
+      <a href="{{ settings.brands_link_4 }}"><img src="{{ 'brands_logo_4.png' | asset_url }}" alt="" /></a>
+    </div>
+    {% endif %}
+    {% if settings.brands_logo_show_5 %}
+    <div class="brand-item">
+      <a href="{{ settings.brands_link_5 }}"><img src="{{ 'brands_logo_5.png' | asset_url }}" alt="" /></a>
+    </div>
+    {% endif %}
+    {% if settings.brands_logo_show_6 %}
+    <div class="brand-item">
+      <a href="{{ settings.brands_link_6 }}"><img src="{{ 'brands_logo_6.png' | asset_url }}" alt="" /></a>
+    </div>
+    {% endif %}
+    {% if settings.brands_logo_show_7 %}
+    <div class="brand-item">
+      <a href="{{ settings.brands_link_7 }}"><img src="{{ 'brands_logo_7.png' | asset_url }}" alt="" /></a>
+    </div>
+    {% endif %}
+    {% if settings.brands_logo_show_8 %}
+    <div class="brand-item">
+      <a href="{{ settings.brands_link_8 }}"><img src="{{ 'brands_logo_8.png' | asset_url }}" alt="" /></a>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endif %}

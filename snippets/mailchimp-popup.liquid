@@ -1,0 +1,105 @@
+{% if settings.show_mailchip_popup %}
+<div id="mailchimp-popup" style="display:none;" data-expires="{{settings.mailchip_popup_expires}}">
+  
+  {% if settings.mailchip_popup_bg %}
+  <div class="mailchimp-popup-img">
+    <img alt="" src="{{'mailchip_popup_bg.jpg' | asset_url}}" />
+  </div>
+  {% endif %}
+
+  <div class="mailchimp-popup-content">
+    {% if settings.mailchip_popup_heading != blank %}
+    <h4 class="title">{{settings.mailchip_popup_heading}}</h4>
+    {% endif %}
+
+    {% if settings.mailchip_popup_content_1 != blank %}
+    <div class="mailchimp-caption-1">
+      <span>{{settings.mailchip_popup_content_1}}</span>
+    </div>
+    {% endif %}
+
+    <form id="mc-form" action="{{ settings.mailchip_popup_action }}" method="post" name="mc-embedded-subscribe-form" target="_blank">
+      <input id="mc-email" class="input-block-level" type="email" name="EMAIL" placeholder="{{ settings.mailchip_popup_placeholder }}" required />
+      <button class="btn-3" type="submit">{{ settings.mailchip_popup_button }}</button>
+    </form>
+
+    {% if settings.mailchip_popup_content_2 != blank %}
+    <div class="mailchimp-caption-2">
+      <span>{{settings.mailchip_popup_content_2}}</span>
+    </div>
+    {% endif %}
+
+    {% if settings.mailchip_popup_social_show %}
+    <div class="social-sharing">
+      {% if settings.social_icons_facebook_show %}
+      <a target="_blank" href="{{ settings.social_icons_facebook_link }}" class="share facebook" title="Facebook">
+        <span class="social-icon">
+          <i class="fa fa-facebook-square"></i>
+        </span>
+      </a>
+      {% endif %}
+
+      {% if settings.social_icons_twitter_show %}
+      <a target="_blank" href="{{ settings.social_icons_twitter_link }}" class="share twitter" title="Twitter">
+        <span class="social-icon">
+          <i class="fa fa-twitter"></i>
+        </span>
+      </a>
+      {% endif %}
+
+      {% if settings.social_icons_youtube_show %}
+      <a target="_blank" href="{{ settings.social_icons_youtube_link }}" class="share youtube" title="Youtube">
+        <span class="social-icon">
+          <i class="fa fa-youtube-play"></i>
+        </span>
+      </a>
+      {% endif %}
+
+      {% if settings.social_icons_tumblr_show %}
+      <a target="_blank" href="{{ settings.social_icons_tumblr_link }}" class="share tumblr" title="Tumblr">
+        <span class="social-icon">
+          <i class="fa fa-tumblr-square"></i>
+        </span>
+      </a>
+      {% endif %}
+
+      {% if settings.social_icons_google_show %}
+      <a target="_blank" href="{{ settings.social_icons_google_link }}" class="share google" title="Google">
+        <span class="social-icon">
+          <i class="fa fa-google-plus-square"></i>
+        </span>
+      </a>
+      {% endif %}
+
+      {% if settings.social_icons_pinterest_show %}
+      <a target="_blank" href="{{ settings.social_icons_pinterest_link }}" class="share pinterest" title="Pinterest">
+        <span class="social-icon">
+          <i class="fa fa-pinterest-square"></i>
+        </span>
+      </a>
+      {% endif %}
+
+      {% if settings.social_icons_instagram_show %}
+      <a target="_blank" href="{{ settings.social_icons_instagram_link }}" class="share instagram" title="Instagram">
+        <span class="social-icon">
+          <i class="fa fa-instagram"></i>
+        </span>
+      </a>
+      {% endif %}
+
+      {% if settings.social_icons_rss_show %}
+      <a target="_blank" href="{{ settings.social_icons_rss_link }}" class="share rss" title="Rss">
+        <span class="social-icon">
+          <i class="fa fa-rss-square"></i>
+        </span>
+      </a>
+      {% endif %}
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+
+{{ 'jquery.cookie.js' | asset_url | script_tag }}
+
+{% endif %}

@@ -1,0 +1,15 @@
+<div id="col-main">
+  
+  <h4 class="title">Collections</h4>
+  
+  <div id="collections" class="row">
+    {% for collection in collections %}
+    {% unless collection.handle == 'frontpage' or collection.handle == 'all' %}
+    <div class="collection-item col-sm-4">
+      {% include 'collection-item' %}
+    </div>
+    {% endunless %}
+    {% endfor %}
+  </div>
+
+</div>

@@ -1,0 +1,111 @@
+{% if settings.blog_sb_placement != 'none' %}
+<div class="row page-blog">
+
+  {% if settings.blog_sb_placement == 'left' %}
+  <div id="sidebar-blog" class="col-sm-3">
+    {% include 'sidebar-blog' %}
+  </div>
+  {% endif %}
+
+  <div id="col-main" class="col-sm-9">
+    {% paginate blog.articles by settings.blog_pagination_limit %}
+
+    {% if blog.articles.size > 0 %}
+    {% for article in blog.articles %}
+    <div class="our-article">
+      <div class="our-article-inner">
+
+        {% if article.excerpt.size > 0 %}
+        <div class="article-image">
+          <a href="{{ article.url }}">
+            {{ article.excerpt }}
+          </a>
+        </div>
+        {% endif %}
+
+        <div class="article-info">
+          <div class="article-date">
+            <span class="day">{{ article.created_at | date: " %d " }}</span>
+            <span class="month">{{ article.created_at | date: " %b " }}</span>
+          </div>
+          <div class="article-title-wrapper">
+            <h4 class="title">{{ article.title | link_to: article.url }}</h4>
+            <span class="article-author">{{'blogs.article.posted_on' | t }}{{ article.created_at | date: " %H:%M " }} {{'blogs.article.by' | t }} {{ article.author | escape }} - {{ article.comments_count }} {{ 'blogs.comments.comments_with_count' | t: count: blogs.comments.comments_with_count }}</span>
+            <span class="article-tag"> {{'blogs.article.tag' | t }}:{% for tag in article.tags %} {{tag}}{% if forloop.last %}{% else %},{% endif%} {% endfor %}</span>
+          </div>
+        </div>
+
+        <div class="article-content">{{ article.content | strip_html | truncatewords: 50 }}</div>
+
+        <a class="read-more" href="{{ article.url}}"><i class="fa fa-long-arrow-right"></i>{{'blogs.article.read_more' | t }}</a>
+
+      </div>
+    </div>
+    {% endfor %}
+
+    {% include 'pagination-bottom' %}
+
+    {% else %}
+    <p>
+      {{'blogs.article.no_acticles' | t }}
+    </p>
+    {% endif %}
+
+    {% endpaginate %}
+  </div>
+
+  {% if settings.blog_sb_placement == 'right' %}
+  <div id="sidebar-blog" class="col-sm-3">
+    {% include 'sidebar-blog' %}
+  </div>
+  {% endif %}
+
+</div>
+{% else %}
+<div id="col-main" class="page-blog-full">
+
+  {% paginate blog.articles by settings.blog_pagination_limit %}
+
+  {% if blog.articles.size > 0 %}
+  {% for article in blog.articles %}
+  <div class="our-article">
+    <div class="our-article-inner row">
+
+      {% if article.excerpt.size > 0 %}
+      <div class="article-image col-sm-6">
+        <a href="{{ article.url }}">
+          {{ article.excerpt }}
+        </a>
+      </div>
+      {% endif %}
+
+      <div class="article-info col-sm-6">
+        <div class="article-date">
+          <span class="day">{{ article.created_at | date: " %d " }}</span>
+          <span class="month">{{ article.created_at | date: " %b " }}</span>
+        </div>
+        <div class="article-title-wrapper">
+          <h4 class="title">{{ article.title | link_to: article.url }}</h4>
+          <span class="article-author">{{'blogs.article.posted_on' | t }}{{ article.created_at | date: " %H:%M " }} {{'blogs.article.by' | t }} {{ article.author | escape }} - {{ article.comments_count }} {{ 'blogs.comments.comments_with_count' | t: count: blogs.comments.comments_with_count }}</span>
+          <span class="article-tag"> {{'blogs.article.tag' | t }}:{% for tag in article.tags %} {{tag}}{% if forloop.last %}{% else %},{% endif%} {% endfor %}</span>
+        </div>
+        <div class="article-content">{{ article.content | strip_html | truncatewords: 50 }}</div>
+        <a class="read-more" href="{{ article.url}}"><i class="fa fa-long-arrow-right"></i>{{'blogs.article.read_more' | t }}</a>
+      </div>
+
+    </div>
+  </div>
+  {% endfor %} 
+
+  {% include 'pagination-bottom' %}
+
+  {% else %}
+  <p>
+    {{'blogs.article.no_acticles' | t }}
+  </p>
+  {% endif %}
+
+  {% endpaginate %}
+
+</div>
+{% endif %}

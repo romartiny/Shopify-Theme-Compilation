@@ -1,0 +1,161 @@
+<!doctype html>
+<!--[if IE 8]><html lang="en" class="ie8 js"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en" class="js{% if template == 'index' %} templateIndex{% endif %}"> <!--<![endif]-->
+<head>
+  {% if settings.favicon != empty %}
+  <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png" />
+  {% endif %}
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+  <link rel="canonical" href="{{ canonical_url }}" />
+  {% if page_description != '' %}
+  <meta name="description" content="{{ page_description }}" />
+  {% endif %}
+
+  {% if template == 'index' %}
+  <title>{{ shop.name }}</title>
+  {% elsif template == '404' %}
+  <title>Page Not Found | {{ shop.name }}</title>
+  {% elsif template == 'collection' %}
+  <title> {{ page_title }}{% if current_tags %} &ndash; {{ current_tags | join: ', ' }}{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %} </title>
+  {% else %}
+  <title>{{ page_title }} | {{ shop.name }}</title>
+  {% endif %}  
+
+  {% include 'fb-open-graph' %}
+  {% include 'header-css-file' %}
+  {% include 'header-font' %}
+  {% include 'header-js-file' %}
+
+  {{ content_for_header }}
+
+</head>
+
+<body class="{% if customer %}customer-logged-in {% endif %}template{{ template | split: '.' | first | camelize }}" data-preloading="{{ settings.use_page_preloading }}">
+  
+  <div id="site-loader" class="load-complete">
+    <div class="load-position">
+      <div class="logo">
+        <h1>{{settings.logo_text}}</h1>
+      </div>
+      <h6>Please wait, loading...</h6>
+      <div class="loading-page">
+        <div class="loading-line"></div>
+        <div class="loading-break loading-dot-1"></div>
+        <div class="loading-break loading-dot-2"></div>
+        <div class="loading-break loading-dot-3"></div>
+      </div>
+    </div>
+  </div>
+    
+  <div class="boxes-wrapper">
+    
+    {% include 'navigation-mobile' %}
+    
+    {% include 'search-sidebar' %}
+    
+    {% include 'cart-sidebar' %}
+    
+    <div id="page-body"{% if settings.general_placement == 'boxes' %} class="boxes"{% endif %}>
+
+      {% include 'header-mobile' %}
+
+      <!-- Begin Header -->
+      <header class="header-content hidden-xs{% if settings.general_placement == 'boxes' %} boxes{% endif %}" data-stick="{{ settings.show_sticky_menu }}" data-distance-top="{{ settings.distance_top_sticky_menu }}">
+        {% include 'header-content' %}
+      </header>
+      <!-- End Header -->
+
+      <section id="body-content" class="clearfix">
+
+        <!-- Begin Slideshow -->
+        {% if template == 'index' %}
+        {% include 'home-slideshow-flex' %}
+        {% endif %}
+        <!-- End Slideshow -->
+
+        {% if template == 'page.contact' and settings.contact_map %}
+        <div id="page-contact-map" class="map"></div>
+        {% endif %}
+
+        <!-- Begin Breadcrumb-->
+        {% if template != 'index' %}
+        {% include 'breadcrumb' %}
+        {% endif %}
+        <!-- End Breadcrumb-->
+
+        <!-- Begin Main Content -->
+        <div id="main-content">
+
+          <div class="main-content{% if template != 'index' %} container{% endif %}">        
+            {% if template == 'list-collections' %}
+            {% include 'collections' %}
+            {% else %}
+            {{ content_for_layout }}
+            {% endif %}          
+          </div>        
+        </div> 
+        <!-- End Main Content -->
+
+        {% if template == 'index' %}
+        <!-- Begin Bottom -->
+        <div id="bottom">
+          {% include 'bottom' %}
+        </div>
+        <!-- End Bottom -->
+        {% endif %}
+
+      </section>
+
+      <!-- Begin Footer -->
+      {% include 'footer' %} 
+      <!-- End Footer -->
+
+    </div>
+    
+    {% if settings.show_back_to_top %}
+    <div id="scroll-to-top" title="{{ settings.title_back_to_top }}">
+      <a href="javascript:;"><i class="fa fa-angle-up"></i></a>
+    </div>
+    {% endif %}
+    
+    <div class="loading" style="display: none;"></div>
+    
+    {{ "api.jquery.js" | shopify_asset_url | script_tag }}
+
+    {% include 'cart-sb-custom' %}
+    {% include 'quick-shop' %}
+    {% include 'currencies' %}
+    {% include 'mailchimp-popup' %}
+    
+    {% comment %} Linked Product Options {% endcomment %}
+    {% include 'linked-options' %}
+    
+    {% if template contains 'product' %}
+    <!-- Begin Recently Viewed Products -->
+    {{ '//ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js' | script_tag }}
+    {{ 'jquery.product.min.js' | asset_url | script_tag }}
+    <script>
+      Shopify.Products.recordRecentlyViewed();
+    </script>
+    <!-- End Recently Viewed Products -->
+    {% endif %}
+    
+    
+    <script type="text/javascript">
+      jQuery(function() {
+        CartJS.init({{ cart | json }}, {
+            dataAPI: true,
+          	moneyFormat: "{{ shop.money_format }}",
+            moneyWithCurrencyFormat: "{{ shop.money_with_currency_format }}",
+            requestBodyClass: "cart-loading"
+        });
+        
+      });
+    </script>
+
+  </div>
+
+</body>
+</html>

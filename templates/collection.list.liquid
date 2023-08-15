@@ -1,0 +1,51 @@
+<div class="row">
+
+  {% if settings.sidebar_collection_page == 'left' %}
+  <div id="sidebar" class="sidebar col-sm-3 clearfix">
+    {% include 'sidebar-catalog' %}
+  </div>
+  {% endif %}
+
+  {% paginate collection.products by settings.number_product_per_page %}
+  <div id="col-main" class="{% if settings.sidebar_collection_page == 'left' or settings.sidebar_collection_page == 'right'  %}col-sm-9{% else %} col-sm-12{% endif %}">
+
+    {% if collection.handle == 'all' %}
+    {% if settings.show_col_all_banner %}
+    <div class="cata-descrip"><img src="{{ 'collection_all.jpg' | asset_url }}" alt="" /></div>
+    {% endif %}
+    {% else %}
+    {% if settings.show_col_descrip %}
+    <div class="cata-descrip">{{ collection.description }}</div>
+    {% endif %}
+    {% endif %}
+
+    {% if collection.products.size > 0 %}
+
+    {% include 'cata-list-toolbar' %}
+
+    <div class="cata-product cp-list">
+      {% for product in collection.products %}
+      <div class="product-list-item">
+        {% include 'product-list-item' %}
+      </div>
+      {% endfor %}
+    </div>
+
+    {% include 'pagination-bottom' %}
+
+    {% else %}
+
+    <p>{{ 'collections.general.no_product' | t }}</p>
+
+    {% endif %}
+
+  </div>
+  {% endpaginate %}
+
+  {% if settings.sidebar_collection_page == 'right' %}
+  <div id="sidebar" class="sidebar col-sm-3 clearfix">
+    {% include 'sidebar-catalog' %}
+  </div>
+  {% endif %}
+
+</div>

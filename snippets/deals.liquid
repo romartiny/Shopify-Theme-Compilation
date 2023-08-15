@@ -1,0 +1,37 @@
+{% if product.compare_at_price > product.price %}
+{% for i in (1..15) %}
+{% assign show = 'use_offer_' | append: i %}
+
+{% if settings[show] %}
+{% assign offerHandle = 'product_handle_offer_' | append: i %}
+
+{% if settings[offerHandle] ==  product.handle %}
+{% assign expire = 'expire_offer_' | append: i %}
+
+{% assign dueDate = settings[expire] | split: '-' %}
+
+<div class="wrapper-countdown">
+  <div class="countdown_{{ product.id }}"></div>
+</div>
+
+<script type="text/javascript">
+
+  jQuery(document).ready(function($){
+
+    var currentDate = new Date();
+    var dueDate = new Date( {{ dueDate[2] }}, {{ dueDate[0] | plus:0 }} - 1, {{ dueDate[1] | plus:0 }} );
+    if(currentDate < dueDate){
+      $('.countdown_{{ product.id }}').countdown({until: dueDate, layout: '{dn} DAY | {hn} H | {mn} M | {sn} S'});
+    }
+    else{
+      $('.countdown_{{ product.id }}').parent().hide();
+    }
+  });
+
+</script>
+
+{% endif %}
+{% endif %}
+
+{% endfor %}
+{% endif %}

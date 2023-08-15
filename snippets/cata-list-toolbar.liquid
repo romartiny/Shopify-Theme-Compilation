@@ -1,0 +1,74 @@
+<div class="cata-toolbar">
+
+  {% if settings.show_col_gl %}
+  <div class="grid-list">
+    <label>{{ 'collections.general.view_as' | t }}</label>
+    <a class="grid" href="?view=grid" title="{{ 'collections.general.title_grid' | t }}"><i class="fa fa-th-large"></i></a>
+    <span class="list active" title="{{ 'collections.general.title_list' | t }}"><i class="fa fa-navicon"></i></span>
+  </div>
+  {% endif %}
+
+  {% if settings.show_col_sort_by %}
+
+  <div class="sort-by">
+    <label>{{ 'collections.sorting.title' | t }}</label>
+    <div class="sort-by-inner">
+      <div id="cata_sort_by" class="dropdown-toggle" data-toggle="dropdown">
+        <button id="sort_by_button">
+          <span class="visible-xs">{{ 'collections.sorting.title' | t }}</span>
+          <span class="name hidden-xs"></span>
+          <i class="fa fa-angle-down"></i>
+        </button>
+      </div>
+      <ul id="sort_by_box" class="dropdown-menu">
+        <li class="sort-action title-ascending" data-sort="title-ascending"><a href="javascript:;">{{ 'collections.sorting.az' | t }}</a></li>
+        <li class="sort-action title-descending" data-sort="title-descending"><a href="javascript:;">{{ 'collections.sorting.za' | t }}</a></li>
+        <li class="sort-action manual" data-sort="manual"><a href="javascript:;">{{ 'collections.sorting.featured' | t }}</a></li>
+        <li class="sort-action price-ascending" data-sort="price-ascending"><a href="javascript:;">{{ 'collections.sorting.price_ascending' | t }}</a></li>
+        <li class="sort-action price-descending" data-sort="price-descending"><a href="javascript:;">{{ 'collections.sorting.price_descending' | t }}</a></li>
+        <li class="sort-action created-ascending" data-sort="created-ascending"><a href="javascript:;">{{ 'collections.sorting.date_ascending' | t }}</a></li>
+        <li class="sort-action created-descending" data-sort="created-descending"><a href="javascript:;">{{ 'collections.sorting.date_descending' | t }}</a></li>
+        <li class="sort-action best-selling" data-sort="best-selling"><a href="javascript:;">{{ 'collections.sorting.best_selling' | t }}</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="visible-xs">
+    <span class="filter-toggle"><i class="fa fa-filter"></i> {{ settings.heading_sb_filters }}</span>
+  </div>
+
+  {% include 'pagination-top' %}
+
+  {% endif %}
+
+</div>
+<script type="text/javascript">
+  Shopify.queryParams = {};
+  if (location.search.length) {
+    for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
+      aKeyValue = aCouples[i].split('=');
+      if (aKeyValue.length > 1) {
+        Shopify.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
+      }
+    }
+  }
+
+  var val_default = '{{ collection.sort_by | default: collection.default_sort_by }}';
+
+  jQuery('.sort-by li.' + val_default).addClass('active');
+  var s = $('#sort_by_box li.sort-action.active');
+  jQuery('.sort-by .name').html(s.html());
+
+  //jQuery('.sort-by .name').html(' {{ collection.sort_by | default: collection.default_sort_by }} ');
+
+  jQuery('.sort-by li.sort-action').click(function(){
+
+    $('.sort-by .name').html($(this).html()); 
+
+    if(!$(this).hasClass('active')){
+      var value = jQuery(this).attr('data-sort');
+      Shopify.queryParams.sort_by = value;
+      location.search = jQuery.param(Shopify.queryParams);
+    }
+  });
+</script>
