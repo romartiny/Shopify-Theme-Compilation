@@ -1,0 +1,20 @@
+{% paginate collections by 30 %}
+{% if collections.size > 0 %}
+<div class="desktop-12 tablet-6 mobile-3">
+  <div id="product-loop">  
+    <div id="product-loop">
+      {% for collection in collections %}
+      {% assign products-per-row = settings.products-per-row %}      
+      <div class="collection-index {% if products-per-row == "6" %}desktop-2{% cycle ' first', '', '', '', '', ' last' %}{% elsif products-per-row == "4" %}desktop-3{% cycle ' first', '', '', ' last' %}{% elsif products-per-row == "3" %}desktop-4{% cycle ' first', '', ' last' %}{% elsif products-per-row == "5" %}desktop-fifth{% cycle ' first', '', '', '', ' last' %}{% elsif products-per-row == "2" %}desktop-6{% cycle ' first', ' last' %}{% endif %} tablet-half mobile-half" data-alpha="{{ collection.title }}">           
+        {% include 'collection-grid-item' %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% else %}
+<p>{{ 'collections.general.no_matches' | t }}</p>
+{% endif %}
+{% include 'pagination' %}
+{% endpaginate %}
+

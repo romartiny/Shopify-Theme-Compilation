@@ -1,0 +1,204 @@
+<div id="page" class="desktop-12 tablet-6 mobile-3">
+  <h2>{{ 'general.search.title' | t }}</h2>
+
+  {% case section.settings.grid %}
+  {% when '2' %}
+  {%- assign grid_item_width = 'desktop-6 tablet-3 mobile-half' -%}    
+  {% when '3' %}
+  {%- assign grid_item_width = 'desktop-4 tablet-2 mobile-half' -%}
+  {% when '4' %}
+  {%- assign grid_item_width = 'desktop-3 tablet-2 mobile-half' -%}
+  {% endcase %} 
+
+  {%- assign product_limit = section.settings.grid | times: section.settings.rows -%}    
+  {% paginate search.results by product_limit %}  	
+  
+  <div id="search-bar">
+    <form action="/search" method="get">
+      {% if search.performed %}
+      {% if search.results_count == 0 %}
+      <p>{{ 'general.search.no_results_html' | t: terms: search.terms }}</p>
+      {% else %}
+      <p>{{ 'general.search.results_for_html' | t: terms: search.terms }}</p>
+      {% endif %}
+      {% endif %}
+      <input type="text" name="q" id="q" placeholder="{{ 'general.search.placeholder' | t }}"/>
+    </form>
+  </div>
+</div>
+
+{% if search.performed %}
+
+<div class="desktop-12 tablet-6 mobile-3">
+  <div id="product-loop">
+    {% for item in search.results %} 
+    {% assign products-per-row = section.settings.products-per-row %}
+
+    <div id="product-{{ item.id }}" class="product-index {{ grid_item_width }}" data-alpha="{{ item.title }}" data-price="{{ item.price }}">
+      <div class="product-index-inner">    
+
+        {% if item.object_type == 'article' %}
+        <!--'item' is an article All article object properties can be accessed. -->
+        {% if item.image %}
+        <div class="prod-image">
+          <a href="{{ item.url }}" title="{{ item.title | escape }}">
+            <img src="{{ item.image | img_url: 'grande' }}" alt="{{ item.title }}">
+          </a>
+        </div>
+        {% endif %}
+        {% elsif item.object_type == 'page' %}
+
+
+        <!--'item' is a page. All page object properties can be accessed. -->
+
+        {% if item.content contains "img" %}
+        {% assign feat_image = item.content | split: 'src="' %}
+        {% assign feat_image = feat_image[1] | split: '"' | first | replace: '//cdn', 'http://cdn' | replace: 'http:http://', 'http://' | remove: 'https:'  %}
+        <div class="prod-image">
+          <a href="{{ item.url }}" title="{{ item.title | escape }}">
+            <img src="{{ feat_image }}" alt="{{ item.title }}">
+          </a>
+        </div>
+        {% else %}
+        <div class="search-content prod-image">
+          {{ item.content | strip_html | trancate: 200 }}
+        </div>
+        {% endif %}
+
+        {% else %}
+        <!-- 'item' is a product. All product object properties can be accessed.-->
+        {% if item.available %}
+        {% for col in item.collections %}
+        {% if col.handle == 'new' %}
+        <div class="new icn">{{ 'products.general.new' | t }}</div>
+        {% endif %}
+        {% endfor %}        
+        {% if item.price < item.compare_at_price %}
+        <div class="sale-item icn">{{ 'products.general.sale' | t }}</div>
+        {% endif %}
+        {% else %}
+        <div class="so icn">{{ 'products.general.sold' | t }}</div>
+        {% endif %}  
+        <div class="prod-image">
+          <a href="{{ item.url }}" title="{{ item.title | escape }}">
+            {{ item.featured_image | img_url: 'grande' | img_tag: item.featured_image.alt }}
+          </a>
+        </div>
+        {% endif %} 
+
+      </div> <!-- Close product-index-inner class -->
+
+
+      <div class="product-info"> 
+        <div class="product-info-inner">
+          <a href="{{ item.url }}"> 
+            {% if item.object_type == 'product' %} {% if settings.vendor %}<span class="prod-vendor">{{ item.vendor }}</span>{% endif %} {% endif %}
+            <span class="prod-title">{{ item.title }}</span>
+          </a>        
+          {% if item.object_type == 'product' %}
+          <div class="price">
+            {% if item.price < item.compare_at_price %}
+            <div class="onsale">{{ item.price | money }}</div>
+            <div class="was">{{ item.compare_at_price | money }}</div>
+            {% else %}
+            <div class="prod-price">{% if item.price_varies %} {{ 'products.general.from' | t }} {{ item.price_min | money }} - {{ item.price_max | money }} {% else %}{{ item.price | money }}{% endif %}</div>
+            {% endif %}	
+          </div>
+          {% if settings.alternate_colors %}
+          <div class="prod-colors">
+            {% include 'product-listing-swatches' %}
+          </div> 
+          {% endif %} 
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% include 'pagination' %}
+
+  {% endif %}
+
+  {% endpaginate %}  
+
+</div>
+
+
+
+
+{% schema %}
+  {
+    "name": "Search",
+    "settings": [
+	 {
+      "type": "select",
+      "id": "grid",
+      "label": "Items per row",
+      "default": "4",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        }
+      ]
+    },
+	{
+      "type": "select",
+      "id": "rows",
+      "label": "Rows",
+      "default": "2",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        },
+        {
+          "value": "6",
+          "label": "6"
+        },
+        {
+          "value": "7",
+          "label": "7"
+        },
+        {
+          "value": "8",
+          "label": "8"
+        },
+        {
+          "value": "9",
+          "label": "9"
+        },
+        {
+          "value": "10",
+          "label": "10"
+        }
+      ]
+    }    
+  ]
+}
+{% endschema %}

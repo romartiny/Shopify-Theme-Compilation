@@ -1,0 +1,31 @@
+{%- assign image_size = '600x' -%}
+{% if collection.empty? %}
+  {% comment %}add default state for collection block in storefront editor{% endcomment %}
+  {% capture collection_title %}{{ 'homepage.onboarding.collection_title' | t }}{% endcapture %}
+  {% capture collection_image_url %}{% endcapture %}
+{% else %}
+  {% if collection.image %}
+    {% capture collection_image_url %}{{ collection | img_url: image_size }}{% endcapture %}
+  {% elsif collection.products.first %}
+    {% capture collection_image_url %}{{ collection.products.first | img_url: image_size }}{% endcapture %}
+  {% endif %}
+  {% capture collection_title %}{{ collection.title }}{% endcapture %}
+{% endif %}
+
+<div class="collection-image">
+  <a href="{{ collection.url }}" title="{{ collection_title }}">
+    {% if collection.image %}
+    <img src="{{ collection_image_url }}">
+    {% else %}
+    <img src="{{ collection.products.first | img_url: image_size }}">
+    {% endif %}
+  </a>     
+</div>
+<div class="collect{% if template == 'index' %}ion{% endif %}-info">
+  <a href="{{ collection.url }}" title="{{ collection.title }}">
+    <p>{{ collection.title }}</p>
+    {% if section.settings.collection_count %}
+    <p>{{ 'collections.general.items_count' | t: count: collection.products_count }}</p>
+    {% endif %}
+  </a>
+</div>

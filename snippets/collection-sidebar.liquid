@@ -1,0 +1,59 @@
+<a class="show mobile-3" href="#"><i class="icon-align-justify icon-2x"></i></a>
+<div class="desktop-3 tablet-4 tablet-push-1 mobile-3" id="sidebar">
+  {% if collection.image %}
+  {{ collection.image.src | collection_img_url: '220x' | img_tag: collection_title }}
+  {% endif %}   
+  {% for block in section.blocks %}
+  
+
+  {% if block.type == 'vendor_list' %}
+  {% if collection.handle == "all" %}
+  <ul>
+    <h4>{{ block.settings.shop_by_designer_title }}</h4>
+    {% for product_vendor in shop.vendors %}
+    <li>{{ product_vendor | link_to_vendor  }}</li>
+    {% endfor %}
+  </ul>
+
+  {% else %}
+
+  <ul>
+    <h4>{{ block.settings.shop_by_designer_title }}</h4>
+    {% for product_vendor in collection.all_vendors %}
+    <li class="{{ product_vendor | handelize }}">{{ product_vendor | link_to_vendor }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% else %}
+<h4>{{ block.settings.title }}</h4>
+  <ul {{ block.shopify_attributes }}>
+    {% for link in linklists[block.settings.side_nav].links %}
+    <li>{{ link.title | link_to: link.url }}</li>
+    {% endfor %}
+  </ul>
+
+  {% endif %}
+
+  {% endfor %}
+  <!-- Start Filtering -->
+  <div id="side-filter">
+    {% include 'dropdown-filter' %}
+  </div>
+
+  {% if section.settings.shop_by_designer %}
+  <h4>{{ section.settings.shop_by_designer_title }}</h4>
+  {% if collection.handle == "all" %}
+  <ul>
+    {% for product_vendor in shop.vendors %}
+    <li>{{ product_vendor | link_to_vendor  }}</li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <ul>
+    {% for product_vendor in collection.all_vendors %}
+    <li class="{{ product_vendor | handelize }}">{{ product_vendor | link_to_vendor }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% endif %}
+</div>

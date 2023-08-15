@@ -1,0 +1,335 @@
+<section class="index-section homepage-section animate wow fadeIn no-fouc" data-section-id="{{ section.id }}" >
+  <div class="row"> 
+    {%- assign image_size = '1200x' -%}    
+    {% for block in section.blocks %}
+    {% case block.settings.image_width %}
+    {% when '25%' %}
+    {%- assign image_width = 'desktop-3 tablet-fourth' -%}
+    {% when '33%' %}
+    {%- assign image_width = 'desktop-4 tablet-2' -%}
+    {% when '50%' %}
+    {%- assign image_width = 'desktop-6 tablet-3' -%}
+    {% when '66%' %}
+    {%- assign image_width = 'desktop-8 tablet-4' -%}
+    {% when '75%' %}
+    {%- assign image_width = 'desktop-9 tablet-three-fourths' -%} 
+    {% when '100%' %}
+    {%- assign image_width = 'desktop-12 tablet-6' -%}     
+    {% endcase %}      
+    
+   {%- assign img_url = block.settings.image | img_url: image_size -%}
+    <div class="homepage-promo {{ image_width }} mobile-3 promo-{{ block.id }}" {{ block.shopify_attributes }}>       
+      <div class="promo-inner">
+        {% if block.settings.link != blank %}<a href="{{ block.settings.link }}">{% endif %}
+          {% if block.settings.image != blank %}
+          <img src="{{ img_url }}">
+          {% else %}
+          <div class="onboard">
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+          {% endif %}
+          <div class="caption">
+            {% if block.settings.title_text != blank %}
+            <h3>{{ block.settings.title_text }}</h3>
+            {% endif %}
+            {% if block.settings.hidden_text != blank %}
+            <p>{{ block.settings.hidden_text }}</p>
+            {% endif %}
+          </div>
+        {% if block.settings.link != blank %}</a>{% endif %}
+      </div>       
+    </div>
+    {% if block.settings.image != blank %}
+    <style>
+      .homepage-promo.promo-{{ block.id }} .promo-inner h3 {
+        color: {{ block.settings.promo_color }};
+      }
+      .homepage-promo.promo-{{ block.id }} .promo-inner p {
+        color: {{ block.settings.hidden_color }};  
+      }
+      
+      #shopify-section-{{ section.id }} .homepage-promo .promo-inner h3 {
+        font-size: {{ section.settings.promo_size }};  
+      }
+
+      #shopify-section-{{ section.id }} .homepage-promo .promo-inner p {
+        font-size: {{ section.settings.hidden_size }};  
+      }            
+    </style>
+    {% else %}
+    <style>
+      .promo-{{ block.id }} .promo-inner { float: none; }
+    </style>
+    {% endif %}
+    {% if section.blocks.size == 0 %}
+    {% include 'no-blocks' %}
+    {% endif %}
+    {% endfor %}
+    
+  </div>
+</section>
+<div class="clear"></div>
+
+
+{% schema %}
+{
+  "name": "Image Gallery",
+  "max_blocks": 4,
+  "settings": [
+	{
+        "type": "select",
+        "id": "promo_size",
+        "label": "Promo image title size",
+        "options": [
+          {
+            "value": "12px",
+            "label": "12px"
+          },
+          {
+            "value": "13px",
+            "label": "13px"
+          },
+          {
+            "value": "14px",
+            "label": "14px"
+          },
+          {
+            "value": "15px",
+            "label": "15px"
+          },
+          {
+            "value": "16px",
+            "label": "16px"
+          },
+          {
+            "value": "17px",
+            "label": "17px"
+          },
+          {
+            "value": "18px",
+            "label": "18px"
+          },
+          {
+            "value": "19px",
+            "label": "19px"
+          },
+          {
+            "value": "20px",
+            "label": "20px"
+          },
+          {
+            "value": "21px",
+            "label": "21px"
+          },
+          {
+            "value": "22px",
+            "label": "22px"
+          },
+          {
+            "value": "23px",
+            "label": "23px"
+          },
+          {
+            "value": "24px",
+            "label": "24px"
+          },
+          {
+            "value": "25px",
+            "label": "25px"
+          },
+          {
+            "value": "26px",
+            "label": "26px"
+          },
+          {
+            "value": "27px",
+            "label": "27px"
+          },
+          {
+            "value": "28px",
+            "label": "28px"
+          },
+          {
+            "value": "29px",
+            "label": "29px"
+          },
+          {
+            "value": "30px",
+            "label": "30px"
+          },
+          {
+            "value": "31px",
+            "label": "31px"
+          },
+          {
+            "value": "32px",
+            "label": "32px"
+          },
+          {
+            "value": "33px",
+            "label": "33px"
+          },
+          {
+            "value": "34px",
+            "label": "34px"
+          },
+          {
+            "value": "35px",
+            "label": "35px"
+          },
+          {
+            "value": "36px",
+            "label": "36px"
+		  }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "hidden_size",
+        "label": "Promo image hover text size",
+        "options": [
+          {
+            "value": "12px",
+            "label": "12px"
+          },
+          {
+            "value": "14px",
+            "label": "14px"
+          },
+          {
+            "value": "16px",
+            "label": "16px"
+          },
+          {
+            "value": "18px",
+            "label": "18px"
+          },
+          {
+            "value": "20px",
+            "label": "20px"
+          },
+          {
+            "value": "24px",
+            "label": "24px"
+          },
+          {
+            "value": "28px",
+            "label": "28px"
+          },
+          {
+            "value": "32px",
+            "label": "32px"
+          },
+          {
+            "value": "36px",
+            "label": "36px"
+          },
+          {
+            "value": "40px",
+            "label": "40px"
+          },
+          {
+            "value": "44px",
+            "label": "44px"
+          },
+          {
+            "value": "48px",
+            "label": "48px"
+          }
+        ]
+      }
+	],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+    	{
+          "type": "select",
+          "id": "image_width",
+          "label": "Image width",
+          "default": "33%",
+          "options": [
+			{  
+               "value":"25%",
+               "label":"25%"
+            },
+            {  
+               "value":"33%",
+               "label":"33%"
+            },
+            {  
+               "value":"50%",
+               "label":"50%"
+            },
+            {  
+               "value":"66%",
+               "label":"66%"
+            },
+            {  
+               "value":"75%",
+               "label":"75%"
+            },
+            {  
+               "value":"100%",
+               "label":"100%"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link",
+          "info": "Optional"
+        },
+       {
+        "type": "text",
+        "id": "title_text",
+        "label": "Image title",
+        "default": "Our collections"
+       },
+       {
+        "type": "text",
+        "id": "hidden_text",
+        "label": "Shown on hover",
+        "default": "Shop now"
+       },
+      {
+        "type": "color",
+        "id": "promo_color",
+        "label": "Text color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "hidden_color",
+        "label": "Hover text color",
+        "default": "#ffffff"
+      }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gallery",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

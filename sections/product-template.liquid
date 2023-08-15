@@ -1,0 +1,224 @@
+<div itemscope itemtype="http://schema.org/Product" id="product-{{ product.id }}" class="product-section" data-section-id="{{ section.id }}" data-section-type="product-section">
+
+  <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+  <meta itemprop="image" content="{{ product.featured_image.src | img_url: 'grande' }}">
+  
+<!-- For Mobile -->
+  <div id="mobile-product" class="mobile-3">
+    <div class="mobile-gallery">
+      <ul class="slides">    
+        {% for image in product.images %}
+        <li data-thumb="{{ image | product_img_url: 'small' }}" data-image-id="{{ image.id }}"><img data-image-id="{{ image.id }}" src="{{ image.src | product_img_url: 'grande' }}" alt="{{ image.alt | escape }}"></li>
+        {% endfor %}
+      </ul>
+    </div>  
+  </div>    
+  <!-- For Desktop -->
+	<div id="product-photos" class="desktop-7 tablet-3 mobile-3">
+    {% assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
+    <div class="bigimage desktop-10 tablet-5">
+      <img id="product-main-image" src="{{ featured_image | img_url: '1024x1024' }}" data-image-id="{{ image.id }}" data-zoom-image="{{ featured_image | img_url: 'master' }}" alt='{{ image.alt }}' title="{{ product.title }}"/>
+    </div>
+    <div id="product-gallery" class="desktop-2 tablet-1">	
+      <div class="thumbnail-slider">
+        {% for image in product.images %}
+        <div class="slide">
+          <a href="#" data-image="{{ image | product_img_url: '1024x1024' }}" data-image-id="{{ image.id }}" data-zoom-image="{{ image | product_img_url: 'master' }}">
+            <img class="thumbnail" src="{{ image | product_img_url: 'compact' }}" data-image-id="{{ image.id }}" alt="{{ image.alt }}" data-image-id="{{ image.id }}" />
+          </a>
+        </div>
+        {% endfor %} 
+      </div>
+    </div>
+  </div>
+
+  <div id="product-right" class="desktop-5 tablet-3 mobile-3">
+    <div id="product-description">
+      {% if section.settings.vendor %}<h3>{{ product.vendor }}</h3>{% endif %}
+      <h1 itemprop="name">{{ product.title }}</h1>
+      {% if section.settings.subtitle %}<p>{{ page_title }}</p>{% endif %}      
+	  <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+      <p id="product-price">
+        {% if product.available %}
+        {% if product.compare_at_price > product.price %}
+        <span class="product-price" itemprop="price">{{ product.price | money }}</span>&nbsp;<span class="was">{{ product.compare_at_price | money }}</span>
+        {% else %}
+        <span class="product-price" itemprop="price">{{ product.price | money }}</span>
+        {% endif %}
+        {% else %}
+        <span class="product-price" itemprop="price">{{ 'products.product.sold_out' | t }}</span>
+        {% endif %}
+      </p>        
+        <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+        <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+      {% include 'short-form' %}          
+        {% if section.settings.product-description == 'right' %}
+        <div class="rte" itemprop="description">{{ product.description }}</div> 
+        {% endif %}        
+      </div>
+      <div class="desc">
+        {% include 'social' with product %}
+      </div>
+    </div>
+    <ul id="popups">
+      {% if section.settings.popup-one != blank %}<li class="first"><a href="#pop-one" class="fancybox">{{ pages[section.settings.popup-one].title }}</a></li>{% endif %}
+      {% if section.settings.popup-two != blank %}<li><a href="#pop-two" class="fancybox">{{ pages[section.settings.popup-two].title }}</a></li>{% endif %}
+      {% if section.settings.popup-three != blank %}<li><a href="#pop-three" class="fancybox">{{ pages[section.settings.popup-three].title }}</a></li>{% endif %}
+      {% if section.settings.popup-4 %}<li class="last"><a href="#pop-four" class="fancybox">{{ 'products.product.popup_question' | t }}</a></li>{% endif %}
+    </ul>
+     {% if section.settings.popup-one != blank %}<div id="pop-one" style="display: none">{{ pages[section.settings.popup-one].content }}</div>{% endif %}
+     {% if section.settings.popup-two != blank %}<div id="pop-two" style="display: none">{{ pages[section.settings.popup-two].content }}</div>{% endif %}
+     {% if section.settings.popup-three != blank %}<div id="pop-three" style="display: none">{{ pages[section.settings.popup-three].content }}</div>{% endif %}
+     {% if section.settings.popup-4 %}<div id="pop-four" style="display: none">{% include 'question' %}</div>{% endif %}
+  </div>
+  {% if section.settings.product-description == 'bottom' %}
+  <div class="clear"></div>
+  <div id="lower-description" class="desktop-8 desktop-push-2 tablet-6 mobile-3">
+    <div class="section-title lines"><h2>{{ 'products.product.details' | t }}</h2></div>  
+    <div class="rte" itemprop="description">{{ product.description }}</div> 
+  </div>
+  {% endif %}
+  <div class="clear"></div>
+  {% if collection %}
+  {% include 'related-products' %}
+  {% endif %}
+  <div class="clear"></div>
+  {% if collection %} 
+  <div id="product-navigation" class="desktop-12 tablet-6 mobile-3">
+    <span class="backto">
+      {{ 'products.product.back_to' | t }} {{ collection.title | link_to: collection.url }}
+    </span>
+    <div id="back-forth">
+      {% if collection.previous_product %}
+      {% capture prev_url %}{{ collection.previous_product}}#content{% endcapture %}
+      <span class="prev-prod"> 
+        {{ 'products.product.previous_product_html' | t | link_to: prev_url }}
+        <img id="previous-product-image" />
+        {% endif %}
+      </span>
+      {% if collection.next_product %} 
+      {% capture next_url %}{{ collection.next_product}}#content{% endcapture %}
+      <span class="next-prod">
+        <img id="next-product-image" />
+        {{ 'products.product.next_product_html' | t | link_to: next_url }}
+      </span>
+      {% endif %}
+    </div>
+  </div>
+  <script>
+    jQuery.getJSON('{{ collection.next_product | append: '.js' }}', function(product) {
+                   jQuery('#next-product-image').attr('src', product.images[0].replace(/(\.jpg|\.png|\.jpeg|\.gif)/, '_small$1'));
+    });
+    jQuery.getJSON('{{ collection.previous_product | append: '.js' }}', function(product) {
+                   jQuery('#previous-product-image').attr('src', product.images[0].replace(/(\.jpg|\.png|\.jpeg|\.gif)/, '_small$1'));
+    });
+  </script>   
+  {% endif %}  
+</div>
+<style>
+  #product-right { background: {{ section.settings.product-form-background }}; padding: 20px; border: 7px double {{ section.settings.product-page-border }}; }
+  {% if section.settings.thumbnail-position == 'left' %}
+  .bigimage { float: right! important; }
+  {% endif %}
+</style>
+{% schema %}
+  {
+    "name": "Product page",
+    "settings": [
+      {
+        "type": "select",
+        "id": "thumbnail-position",
+        "label": "Thunbnail position",
+        "options": [
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          }
+        ]
+      },
+      {
+        "type": "color",
+        "id": "product-page-border",
+        "label": "Product options border",
+        "default": "#f0f0f0"
+      },
+      {
+        "type": "color",
+        "id": "product-form-background",
+        "label": "Product options background",
+        "default": "#fff"
+      },
+      {
+        "type": "checkbox",
+        "id": "subtitle",
+        "label": "Show page sub title",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "product_quantity",
+        "label": "Show quantity selector"
+      },
+      {
+        "type": "checkbox",
+        "id": "show-sku",
+        "label": "Show variant SKU",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "product-description",
+        "label": "Description position",
+        "options": [
+          {
+            "value": "right",
+            "label": "Right Side"
+          },
+          {
+            "value": "bottom",
+            "label": "Below Images and Product Options"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "use-swatch-images",
+        "label": "Show custom swatch images",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Additional info popups"
+      },
+      {
+        "type": "paragraph",
+        "content": "Add some more content to your product pages, each will popup in a lightbox window"
+      },
+      {
+        "type": "page",
+        "id": "popup-one",
+        "label": "Choose content for first popup"
+      },
+      {
+        "type": "page",
+        "id": "popup-two",
+        "label": "Choose content for second popup"
+      },
+      {
+        "type": "page",
+        "id": "popup-three",
+        "label": "Choose content for third popup"
+      },
+      {
+        "type": "checkbox",
+        "id": "popup-4",
+        "label": "Show contact form",
+        "default": true
+      }
+	]
+  }
+{% endschema %}

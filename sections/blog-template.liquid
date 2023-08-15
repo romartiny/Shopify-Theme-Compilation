@@ -1,0 +1,140 @@
+<div id="page" data-section-id="{{ section.id }}" data-section-type="blog-section">
+
+  {% if section.settings.image != blank %}
+  {%- assign image_size = '1920x' -%}
+  {%- assign img_url = section.settings.image | img_url: image_size -%}
+  <div class="collection-banner">
+    <img src="{{ img_url }}">
+  </div>
+  {% endif %}  
+
+  <div id="content" class="row">	
+    {% if settings.breadcrumb %}
+    {% include 'breadcrumb' %}	
+    {% endif %}	
+
+    <h1 class="page-title desktop-12 tablet-6 mobile-3">{% if current_tags %}{{ blog.title | link_to: blog.url }} &raquo; {{ current_tags.first }}{% else %}{{ blog.title }}{% endif %}</h1>
+    
+    {% if section.settings.text != blank %}
+    <div class="desktop-12 tablet-6 mobile-3">
+      {{ section.settings.text }}
+    </div>
+    {% endif %}
+    
+    {% paginate blog.articles by 18 %}
+    <div class="clear"></div>
+
+    {% if section.settings.tiled-blog-layout %}
+    <div class="desktop-12 tablet-6 mobile-3">
+      <div id="article-loop">
+        {% for article in blog.articles  %}   
+        {% include 'article-loop' %}
+        {% endfor %} 
+      </div>
+    </div>
+    {% else %}
+
+    <ul id="blog-articles" class="desktop-9 tablet-6 mobile-3">
+      {% for article in blog.articles  %}
+      <li class="single-article">
+        <div class="article-body desktop-12 tablet-6 mobile-3">
+          <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>      
+          {% if section.settings.show-author %}
+          <p class="posted author">{{ article.author }}</p>
+          {% endif %}
+          {% if section.settings.show-date %}
+          {% assign published_at = article.published_at | date: format: 'month_date_year' %}
+          <p class="posted">{{ 'blogs.article.posted_on_date_html' | t: date: published_at }}</p>
+          {% endif %}
+          <div class="article-content">
+            {% if article.image %}<a href="{{ article.url }}"><img class="article-image" src="{{ article.image | img_url: '800x' }}" alt="{{ article.title }}"></a>{% endif %}
+            <div class="clear"></div>          
+            {% if article.excerpt == blank %}
+            {{ article.content | strip_html | truncatewords: 30 }}
+            {% else %}
+            {{ article.excerpt }}
+            {% endif %}
+          </div>        
+          {% if article.tags.size > 0 %}
+          <p class="post-tags">{{ 'blogs.article.tags' | t }}:
+            {% for tag in article.tags %} 
+            <a href="{{ blog.url }}/tagged/{{ tag | handle }}">
+              {{ tag }}
+            </a>
+            {% endfor %}
+          </p>
+          {% endif %}
+          <div class="readmore">
+            <a href="{{ article.url }}">{{ 'blogs.article.read_more' | t }}</a>
+          </div>
+        </div>
+      </li>
+      {% endfor %}
+    </ul> 
+    <div id="blog-sidebar" class="desktop-3 tablet-6 mobile-3">
+      <h2>{{ 'blogs.sidebar.social_title' | t }}</h2>
+      {% if section.settings.show-social-icons %}
+      <ul id="social-icons">
+        {% if settings.facebook_url != blank %}<li><a href="{{ settings.facebook_url }}" target="_blank"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a></li>{% endif %}
+        {% if settings.instagram-id != blank %}<li><a href="//instagram.com/{{ settings.instagram-id }}" target="_blank"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a></li>{% endif %}      
+        {% if settings.twittername != blank %}<li><a href="{{ settings.twittername }}" target="_blank"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a></li>{% endif %}
+        {% if settings.pinterest_url != blank %}<li><a href="{{ settings.pinterest_url }}" target="_blank"><i class="fa fa-pinterest fa-2x" aria-hidden="true"></i></a></li>{% endif %}
+        {% if settings.tumblr_url != blank %}<li><a href="{{ settings.tumblr_url }}" target="_blank"><i class="fa fa-tumblr fa-2x" aria-hidden="true"></i></a></li>{% endif %}
+        {% if settings.youtube_url != blank %}<li><a href="{{ settings.youtube_url }}" target="_blank"><i class="fa fa-youtube fa-2x" aria-hidden="true"></i></a></li>{% endif %}
+        {% if settings.googleplus_url != blank %}<li><a href="{{ settings.googleplus_url }}" target="_blank"><i class="fa fa-google-plus-official fa-2x" aria-hidden="true"></i></a></li>{% endif %}
+        {% if settings.snapchat-id != blank %}<li><a href="//snapchat.com/add/{{ settings.snapchat-id }}" target="_blank"><i class="fa fa-snapchat-ghost fa-2x" aria-hidden="true"></i></a></li>{% endif %}
+        {% if settings.weibo-id != blank %}<li><a href="//weibo.com/{{ settings.weibo-id }}" target="_blank"><i class="fa fa-weibo fa-2x" aria-hidden="true"></i></a></li>{% endif %}
+      </ul>
+      {% endif %}
+    </div>
+    <div class="clear"></div>
+    {% endif %}
+    {% include 'pagination' %}
+    {% endpaginate %}
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Blog page",
+    "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+    {
+        "id": "text",
+        "type": "richtext",
+        "label": "Text",
+        "default": "<p>Add some descriptive text to your Blog page.</p>"
+     },
+      {
+        "type": "checkbox",
+        "id": "tiled-blog-layout",
+        "label": "Show blog posts as tiles",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show-date",
+        "label": "Show published date",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show-author",
+        "label": "Show Author",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show-social-icons",
+        "label": "Show social icons",
+        "default": true,
+		"info": "When posts not tiled only"
+      }
+    ]
+  }
+{% endschema %}

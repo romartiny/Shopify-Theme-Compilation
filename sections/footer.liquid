@@ -1,0 +1,315 @@
+<div class="footer-section" data-section-id="{{ section.id }}" data-section-type="footer-section">
+{% if section.settings.bottom_logo != blank %}
+<div class="row">
+  <div id="bottom-logo" class="desktop-12 tablet-6 mobile-3">       
+      {%- assign image_size = '800x' -%}
+      <a href="/">
+        <img src="{{ section.settings.bottom_logo | img_url: image_size }}" alt="{{ section.settings.bottom_logo.alt | default: shop.name }}">        
+      </a>         
+  </div> 
+</div>    
+<style>
+  @media screen and ( min-width: 740px ) {
+  #bottom-logo img { max-width: {{ section.settings.bottom_logo_max_width }}px; }
+  }
+</style>
+{% endif %}
+
+<footer>
+  <div id="footer-wrapper">	
+    <div id="footer" class="row">     
+    {% case section.blocks.size %}
+      {% when 0 %}
+      {% when 1 %}
+        {% assign column_width = 'desktop-12 tablet-6 mobile-3' %}
+      {% when 2 %}
+        {% assign column_width = 'desktop-6 tablet-3 mobile-3' %}
+      {% when 3 %}
+        {% assign column_width = 'desktop-4 tablet-3 mobile-3' %}
+      {% when 4 %}
+        {% assign column_width = 'desktop-3 tablet-3 mobile-3' %}
+    {% endcase %}      
+      {% for block in section.blocks %}   
+      {% case block.type %}
+      {% when 'menu' %}
+      <div class="{{ column_width }}">
+        <h4>{{ block.settings.title }}</h4>
+        <ul {{ block.shopify_attributes }}>
+          {% for link in linklists[block.settings.footer_nav].links %}
+          <li>{{ link.title | link_to: link.url }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% when 'newsletter' %}
+      <div class="{{ column_width }}">
+        <h4>{{ block.settings.title }}</h4>
+        <div id="footer_signup">
+          <p>{{ settings.footer_signup_text }}</p>
+            {% form 'customer' %}
+            {{ form.errors | default_errors }}
+            {% if form.posted_successfully? %}
+            <p class="success">{{ 'password.general.thanks' | t }}</p>
+            {% else %}
+            <input type="hidden" name="contact[tags]" value="prospect, password page">
+            <input type="email" name="contact[email]" id="footer-EMAIL" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}">
+            <input type="submit" id="footer-subscribe" value="{{ 'general.newsletter_form.submit' | t }}">
+            {% endif %}
+            {% endform %}                   
+        </div> 
+      </div>  
+      {% endcase %}
+      {% endfor %}
+      <div class="clear"></div>
+      <ul id="footer-icons" class="desktop-12 tablet-6 mobile-3">
+          {% if settings.facebook_url != blank %}<li><a href="{{ settings.facebook_url }}" target="_blank"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a></li>{% endif %}
+          {% if settings.instagram-id != blank %}<li><a href="//instagram.com/{{ settings.instagram-id }}" target="_blank"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a></li>{% endif %}      
+          {% if settings.twittername != blank %}<li><a href="{{ settings.twittername }}" target="_blank"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a></li>{% endif %}
+          {% if settings.pinterest_url != blank %}<li><a href="{{ settings.pinterest_url }}" target="_blank"><i class="fa fa-pinterest fa-2x" aria-hidden="true"></i></a></li>{% endif %}
+          {% if settings.tumblr_url != blank %}<li><a href="{{ settings.tumblr_url }}" target="_blank"><i class="fa fa-tumblr fa-2x" aria-hidden="true"></i></a></li>{% endif %}
+          {% if settings.youtube_url != blank %}<li><a href="{{ settings.youtube_url }}" target="_blank"><i class="fa fa-youtube fa-2x" aria-hidden="true"></i></a></li>{% endif %}
+          {% if settings.googleplus_url != blank %}<li><a href="{{ settings.googleplus_url }}" target="_blank"><i class="fa fa-google-plus-official fa-2x" aria-hidden="true"></i></a></li>{% endif %}
+          {% if settings.snapchat-id != blank %}<li><a href="//snapchat.com/add/{{ settings.snapchat-id }}" target="_blank"><i class="fa fa-snapchat-ghost fa-2x" aria-hidden="true"></i></a></li>{% endif %}
+          {% if settings.weibo-id != blank %}<li><a href="//weibo.com/{{ settings.weibo-id }}" target="_blank"><i class="fa fa-weibo fa-2x" aria-hidden="true"></i></a></li>{% endif %}
+      </ul>      
+      <div class="clear"></div>
+      <div class="credit desktop-12 tablet-6 mobile-3">
+        {% for type in shop.enabled_payment_types %}
+        <img src="{{ type | payment_type_img_url }}" />
+        {% endfor %}  
+        <p>
+          {{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }} {{ shop.name | link_to: '/' }} • 
+        </p>
+      </div>
+    </div> 
+  </div>
+</footer>
+
+<style>
+  #footer-wrapper { 
+    text-align: {{ section.settings.footer_text_align }};
+  }
+
+  #footer-wrapper h4 {
+    text-transform: {{ section.settings.footer_title_transform }};
+    font-size: {{ section.settings.footer_title_size }};
+    font-weight: {{ section.settings.footer_title_weight }};
+  }
+</style>
+</div>
+{% schema %}
+{
+    "name": "Footer",
+	"max_blocks": 4,
+    "settings": [
+    {
+      "type": "image_picker",
+      "id": "bottom_logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "text",
+      "id": "bottom_logo_max_width",
+      "label": "Custom logo width (in pixels)",
+      "default": "600"
+     },
+     {
+        "type": "select",
+        "id": "footer_text_align",
+        "label": "Footer text align",
+        "options": [
+          {
+            "value": "left",
+            "label": "left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "footer_title_weight",
+        "label": "Footer title weight",
+        "options": [
+          {
+            "value": "300",
+            "label": "Light"
+          },
+          {
+            "value": "500",
+            "label": "Normal"
+          },
+          {
+            "value": "700",
+            "label": "Bold"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "footer_title_transform",
+        "label": "Footer title case",
+        "options": [
+          {
+            "value": "uppercase",
+            "label": "Uppercase"
+          },
+          {
+            "value": "inherit",
+            "label": "regular"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "footer_title_size",
+        "label": "Footer title size",
+        "options": [
+          {
+            "value": "12px",
+            "label": "12px"
+          },
+          {
+            "value": "13px",
+            "label": "13px"
+          },
+          {
+            "value": "14px",
+            "label": "14px"
+          },
+          {
+            "value": "15px",
+            "label": "15px"
+          },
+          {
+            "value": "16px",
+            "label": "16px"
+          },
+          {
+            "value": "17px",
+            "label": "17px"
+          },
+          {
+            "value": "18px",
+            "label": "18px"
+          },
+          {
+            "value": "19px",
+            "label": "19px"
+          },
+          {
+            "value": "20px",
+            "label": "20px"
+          },
+          {
+            "value": "21px",
+            "label": "21px"
+          },
+          {
+            "value": "22px",
+            "label": "22px"
+          },
+          {
+            "value": "23px",
+            "label": "23px"
+          },
+          {
+            "value": "24px",
+            "label": "24px"
+          },
+          {
+            "value": "25px",
+            "label": "25px"
+          },
+          {
+            "value": "26px",
+            "label": "26px"
+          },
+          {
+            "value": "27px",
+            "label": "27px"
+          },
+          {
+            "value": "28px",
+            "label": "28px"
+          },
+          {
+            "value": "29px",
+            "label": "29px"
+          },
+          {
+            "value": "30px",
+            "label": "30px"
+          },
+          {
+            "value": "31px",
+            "label": "31px"
+          },
+          {
+            "value": "32px",
+            "label": "32px"
+          },
+          {
+            "value": "33px",
+            "label": "33px"
+          },
+          {
+            "value": "34px",
+            "label": "34px"
+          },
+          {
+            "value": "35px",
+            "label": "35px"
+          },
+          {
+            "value": "36px",
+            "label": "36px"
+		  }
+        ]
+      }
+    ],
+   "blocks":[  
+      {  
+         "type":"menu",
+         "name":"Menu",
+         "settings":[  
+            {
+               "type": "link_list",
+               "id": "footer_nav",
+               "label": "Choose a menu"
+            },
+           {
+            "type": "text",
+            "id": "title",
+            "label": "Menu title",
+            "default": "Explore"
+           }
+         ]
+      },
+      {
+        "type": "newsletter",
+        "name": "Newsletter signup",
+        "limit": 1,
+		"settings":[
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Mailing list section title",
+            "default": "Connect"
+           },
+          {
+            "type": "textarea",
+            "id": "mailchimp",
+            "label": "Your Mailchimp form action code",
+            "info": "Connect your Mailchimp account [click for instructions](http:\/\/support.undergroundmedia.co.uk\/customer\/portal\/articles\/1695167-social-media-and-email-signup)"
+          }
+		]
+	  }
+   ]
+  }
+{% endschema %}

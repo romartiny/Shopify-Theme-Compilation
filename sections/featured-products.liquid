@@ -1,0 +1,159 @@
+<section class="index-section homepage-section animate wow fadeIn no-fouc" data-section-id="{{ section.id }}" data-section-type="homepage-products" >
+  <div class="row">
+    {% if section.settings.title != blank %}
+    <div class="section-title lines desktop-12 tablet-6 mobile-3"><h2>{{ section.settings.title | escape }}</h2></div>
+    {% endif %}
+    
+    {%- assign collection = collections[section.settings.collection] -%}
+    {%- assign prod_limit = section.settings.limit -%}
+    
+    <div class="collection-carousel desktop-12 tablet-6 mobile-3" id="carousel-{{ section.id }}">
+      {% for product in collection.products limit: prod_limit %}
+      <div class="lazyOwl" id="product-listing-{{ product.id }}" data-alpha="{{ product.title }}" data-price="{{ product.price }}">
+        {% include 'product-listing' %}
+      </div>
+      {% endfor %}
+    </div>
+    
+    {% if section.settings.collection == blank %}
+    {% include 'onboard-product' %}
+    {% endif %}
+    
+  </div>
+</section>
+<div class="clear"></div>
+
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Featured collection"
+    },
+    {
+      "id": "collection",
+      "type": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "select",
+      "id": "limit",
+      "label": "Products shown on large screen",
+      "default": "6",
+	  "info": "shows 4 on small desktop, 2 on mobile", 
+      "options": [
+		  {
+            "value": "6",
+            "label": "6"
+          },
+          {
+            "value": "7",
+            "label": "7"
+          },
+          {
+            "value": "8",
+            "label": "8"
+          },
+          {
+            "value": "9",
+            "label": "9"
+          },
+          {
+            "value": "10",
+            "label": "10"
+          },
+          {
+            "value": "11",
+            "label": "11"
+          },
+          {
+            "value": "12",
+            "label": "12"
+          },
+          {
+            "value": "13",
+            "label": "13"
+          },
+          {
+            "value": "14",
+            "label": "14"
+          },
+          {
+            "value": "15",
+            "label": "15"
+          },
+          {
+            "value": "16",
+            "label": "16"
+          },
+          {
+            "value": "17",
+            "label": "17"
+          },
+          {
+            "value": "18",
+            "label": "18"
+          },
+          {
+            "value": "19",
+            "label": "19"
+          },
+          {
+            "value": "20",
+            "label": "20"
+          },
+          {
+            "value": "21",
+            "label": "21"
+          },
+          {
+            "value": "22",
+            "label": "22"
+          },
+          {
+            "value": "23",
+            "label": "23"
+          },
+          {
+            "value": "24",
+            "label": "24"
+          },
+          {
+            "value": "25",
+            "label": "25"
+          },
+          {
+            "value": "26",
+            "label": "26"
+          },
+          {
+            "value": "27",
+            "label": "27"
+          },
+          {
+            "value": "28",
+            "label": "28"
+          },
+          {
+            "value": "29",
+            "label": "29"
+          },
+          {
+            "value": "30",
+            "label": "30"
+          }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collection",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}

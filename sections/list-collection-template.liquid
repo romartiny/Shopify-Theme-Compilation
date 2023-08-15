@@ -1,0 +1,95 @@
+<div class="collection-list-section" data-section-id="{{ section.id }}" data-section-type="collection-list">
+
+  {% if section.settings.image != blank %}
+  {%- assign image_size = '2048x' -%}
+  {%- assign img_url = section.settings.image | img_url: image_size -%}
+  <div class="collection-banner">
+    <img src="{{ img_url }}">
+  </div>
+  {% endif %}    
+
+  <div id="content" class="row">	
+    {% if settings.breadcrumb %}
+    {% include 'breadcrumb' %}	
+    {% endif %}	
+
+    <div id="collection-description" class="desktop-12 tablet-6 mobile-3">
+      <h1>{{ 'collections.general.all_collections' | t }}</h1>
+      {% if section.settings.text != blank %}
+      {{ section.settings.text }}
+      {% endif %}
+    </div>    
+
+      {% paginate collections by 48 %}
+      {% if collections.size > 0 %}
+
+      {% case section.settings.grid %}
+      {% when '2' %}
+      {%- assign grid_item_width = 'desktop-6 tablet-3 mobile-half' -%}
+      {% when '3' %}
+      {%- assign grid_item_width = 'desktop-4 tablet-2 mobile-half' -%}
+      {% when '4' %}
+      {%- assign grid_item_width = 'desktop-3 tablet-2 mobile-half' -%}
+      {% endcase %}    
+
+
+      <div id="product-loop">
+        {% for collection in collections %}
+        <div class="collection-index {{ grid_item_width }}" data-alpha="{{ collection.title }}" {{ block.shopify_attributes }}>
+          {% include 'collection-grid-item' %}
+        </div>
+        {% endfor %}
+      </div>
+
+      {% else %}
+      <p>{{ 'collections.general.no_matches' | t }}</p>
+      {% endif %}
+      {% include 'pagination' %}
+      {% endpaginate %}
+
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Collection list",
+    "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+    {
+        "id": "text",
+        "type": "richtext",
+        "label": "Text",
+        "default": "<p>Add some descriptive text to your all collections page.</p>"
+     },
+    {
+      "type": "select",
+      "id": "grid",
+      "label": "Collections per row",
+      "default": "3",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        }
+      ]
+    },
+      {
+        "type": "checkbox",
+        "id": "collection_count",
+        "label": "Show collection product count"
+      }
+	]
+  }
+{% endschema %}

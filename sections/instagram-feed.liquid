@@ -1,0 +1,47 @@
+<section class="index-section homepage-section animate wow fadeIn no-fouc" data-section-id="{{ section.id }}" data-section-type="instagram">
+    <div id="instagram-card" class="row">
+      {% if section.settings.title != blank %}
+      <div class="section-title lines desktop-12 tablet-6 mobile-3"><h2><a href="//instagram.com/{{ settings.instagram-id }}" target="_blank">{{ section.settings.title | escape }}</a></h2></div>
+      {% endif %}
+      
+    {% assign token = section.settings.instagram-access-token %}
+    {% capture userid %}
+    {{- token | truncate: 9, "" -}}
+    {% endcapture %}
+      
+      {% if section.settings.instagram-access-token != blank %}
+      <div id="instafeed-{{ section.id }}" data-access-token="{{ token }}"></div> 
+      {% else %}
+      
+      {% include 'onboard-instagram' %}
+      {% endif %}
+    </div>
+</section>
+<div class="clear"></div>
+
+
+{% schema %}
+{
+	"name": "Instagram feed",
+	"settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Follow us on Instagram"
+    },
+      {
+          "type": "textarea",
+          "id": "instagram-access-token",
+          "label": "Instagram access token",
+      	  "info": "Required for permission to show your Instagram content [instructions here](http://support.undergroundmedia.co.uk/customer/en/portal/articles/2386318-home-page---instagram-feed) for setup."
+      }
+  ],
+  "presets": [
+    {
+      "name": "Instagram feed",
+      "category": "Social media"
+    }
+  ]
+}
+{% endschema %}
