@@ -1,0 +1,11 @@
+<header class="page-header">
+  <h2>
+    {% include 'multilang' with collection.title %}
+  </h2>
+
+  {% if collection.description != ''  %}
+  	<div class="rte">
+      {% include 'multilang-paragraph' with collection.description %}
+  	</div>
+  {% endif %}      
+</header>

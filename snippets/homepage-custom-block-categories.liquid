@@ -1,0 +1,29 @@
+<section class="slider-brand-wrapper container wow fadeIn">
+  <div id="custom_block_categories" class="owl-carousel slide_brand col-xs-12">
+    {% for i in (1..15) %}
+      {% capture custom_block_categories_item_link %}custom_block_categories_item_{{ i }}_link{% endcapture %}
+      {% capture custom_block_categories_item_title %}custom_block_categories_item_{{ i }}_title{% endcapture %}
+      {% capture custom_block_categories_item_image %}custom_block_categories_item_{{ i }}_image.png{% endcapture %}
+      
+    {% if settings[custom_block_categories_item_title] != blank and settings[custom_block_categories_item_image] != empty %}
+        <div class="item">
+          <a href="{{ settings[custom_block_categories_item_link] }}">
+            {{ custom_block_categories_item_image | asset_url | img_tag }}
+            <b>{% include 'multilang' with settings[custom_block_categories_item_title] %}</b>
+          </a>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+<script>
+  jQuery(document).ready(function() {
+    jQuery("#custom_block_categories").owlCarousel({
+      navigation : true,
+      items: 8,
+      itemsTablet: [768,3],
+      itemsTabletSmall: [650,2],
+      itemsMobile : [479,2]
+    });
+  });
+</script>

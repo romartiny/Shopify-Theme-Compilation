@@ -1,0 +1,19 @@
+<div id="payment-methods">
+  {% for i in (1..10) %}
+    {% capture display_payment_method %}display_payment_method-{{ i }}{% endcapture %}
+    {% capture payment_method_image %}payment_method_image-{{ i }}.png{% endcapture %}
+    {% capture payment_method_title %}payment_method_title-{{ i }}{% endcapture %}
+    {% capture payment_method_link %}payment_method_link-{{ i }}{% endcapture %}
+    {% if settings[display_payment_method] %}
+    <span class="payment-method">
+      {% if settings[payment_method_link] != blank %}
+      <a href="{{ settings[payment_method_link] }}" title="{{ settings[payment_method_title] }}" target="_blank">
+        {{ payment_method_image | asset_url | img_tag: settings[payment_method_title] }}
+      </a>
+      {% else %}
+      {{ payment_method_image | asset_url | img_tag: settings[payment_method_title] }}
+      {% endif %}
+    </span>
+    {% endif %}
+  {% endfor %}
+</div>

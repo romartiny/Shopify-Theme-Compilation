@@ -1,0 +1,43 @@
+<div class="col-1 parent-mega-menu">
+  {% for l in linklists[link_child].links %}
+  <div class="inner">
+    <!-- Menu level 2 -->
+    <a href="{{ l.url }}">
+      {% include 'multilang' with l.title %}
+    </a>
+    {% if  linklists[l.handle] != empty %}
+      <ul class="dropdown">
+      {% for child_l in linklists[l.handle].links %}
+      <!-- Menu level 3 -->
+        <li>
+          <a href="{{ child_l.url }}" {% if child_l.active %}class="current"{% endif %}>
+            {% include 'multilang' with child_l.title %}
+          </a>
+        </li>
+      {% endfor %}
+      </ul>
+      {% endif %}
+  </div>
+  {% endfor %}
+</div>
+
+<!-- mega menu featured product -->
+{% capture show_featured_product_menu %}show_featured_product_menu-{{ indexOf }}{% endcapture %}
+{% if settings[show_featured_product_menu] %}
+<div class="col-2">
+  {% include 'mega-menu-featured-product' %}
+</div>
+{% endif %}
+
+<!-- mega menu banner -->
+{% capture show_megamenu_image %}show_megamenu_image-{{ indexOf }}{% endcapture %}
+{% if settings[show_megamenu_image] %}
+<div class="col-3">
+  {% capture megamenu_image %}megamenu_image-{{ indexOf }}.jpg{% endcapture %}
+  {% capture megamenu_link_image %}megamenu_link_image-{{ indexOf }}{% endcapture %}
+  
+  <a href="{{ settings[megamenu_link_image] }}">
+    <img src="{{ megamenu_image | asset_url }}" alt=""/>
+  </a>
+</div>
+{% endif %}

@@ -1,0 +1,14 @@
+{% form 'customer_login' %}
+{{ form.errors | default_errors }}
+<label for="customer_email"><span {% if settings.enable_multilang %}data-translate="customer.login.email"{%endif%}>{{ 'customer.login.email' | t }}</span><em>*</em></label>
+<input type="email" value="" name="customer[email]" id="customer_email" {% if form.errors contains "email" %}class="error"{% endif %} >
+
+{% if form.password_needed %}
+<label for="customer_password"><span {% if settings.enable_multilang %}data-translate="customer.login.password"{%endif%}>{{ 'customer.login.password' | t }}</span><em>*</em></label>
+<input type="password" value="" name="customer[password]" id="customer_password" {% if form.errors contains "password" %}class="error"{% endif %}>
+{% endif %}
+
+<div class="action-btn">
+  <p><input type="submit" {% if settings.enable_multilang %}data-translate="customer.login.login"{%endif%} class="btn btn-1" value="{{ 'customer.login.login' | t }}"></p>
+</div>
+{% endform %}

@@ -1,0 +1,36 @@
+<section class="block-four-banner container">
+  <div class="row">
+    {% for i in (1..4) %}
+      {% capture display_block_four_banner_bottom %}display_block_four_banner_bottom_{{ i }}{% endcapture %}
+      {% if settings[display_block_four_banner_bottom] %}
+        {% assign delayTime = settings.time_lazy_load | times : forloop.index %}
+        {% capture block_four_banner_bottom_title %}block_four_banner_bottom_{{ i }}_title{% endcapture %}
+        {% capture block_four_banner_bottom_description %}block_four_banner_bottom_{{ i }}_description{% endcapture %}
+        {% capture block_four_banner_bottom_link %}block_four_banner_bottom_{{ i }}_link{% endcapture %}
+        {% capture block_four_banner_bottom_link_text %}block_four_banner_bottom_{{ i }}_link_text{% endcapture %}
+        {% capture block_four_banner_bottom_image %}block_four_banner_bottom_{{ i }}_image.jpg{% endcapture %}
+
+        <div class="col-sm-6 wow fadeInUp" data-wow-delay="{{ delayTime }}ms">
+          <div class="block-four-banner-item">
+            <figure class="cover">
+              {{ block_four_banner_bottom_image | asset_url | img_tag }}
+            </figure>
+            <div class="block-info">
+              {% if settings[block_four_banner_bottom_title] != blank %}
+              <h3 class="title">{% include 'multilang' with settings[block_four_banner_bottom_title] %}</h3>
+              {% endif %}
+
+              {% if settings[block_four_banner_bottom_description] != blank %}
+              <p class="des">{% include 'multilang' with settings[block_four_banner_bottom_description] %}</p>
+              {% endif %}
+
+              {% if settings[block_four_banner_bottom_link] != blank and settings[block_four_banner_bottom_link_text] != blank %}
+              <a href="{{ settings[block_four_banner_bottom_link] }}" class="btn-link">{% include 'multilang' with settings[block_four_banner_bottom_link_text] %}</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>

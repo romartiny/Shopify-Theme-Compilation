@@ -1,0 +1,29 @@
+<div class="col-xs-3 sidebar collection-sidebar">
+  
+  {% if collection.handle == blank %}
+    {% if settings.display_sidebar_list_categories %}
+    {% include 'sidebar_categories' %}
+    {% endif %}
+  {% else %}
+    {% if settings.display_sidebar_categories %}
+    {% include 'sidebar_categories' %}
+    {% endif %}
+  {% endif %}  
+  
+  {% if settings.enable_sidebar_multiple_choice and collection.handle != blank %}
+  {% include 'collection-sidebar-shop-by-blocks' %}
+  {% endif %}
+  
+  {% if settings.show_featured_product %}
+  {% include 'collection-sidebar-featured-products' %}
+  {% endif %}
+  
+  {% if settings.display_banner_sidebar %}
+  {% include 'collection-sidebar-banner-block' %}
+  {% endif %}
+  
+  {% if settings.display_sidebar_custom %}
+  {% include 'collection-sidebar-custom-cms-block' %}
+  {% endif %}
+  
+</div>

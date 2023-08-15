@@ -1,0 +1,34 @@
+<section class="banner-home-top-new container">
+  {% if settings.block_three_collections_title_text != blank %}
+  <div class="widget-title wow fadeIn">   
+    <fieldset class="box-title">
+      <legend align="center">
+        {% include 'multilang' with settings.block_three_collections_title_text %}
+      </legend>
+    </fieldset>
+  </div>
+  {% endif %}
+
+  <ul class="row">
+    {% for i in (1..3) %}
+      {% assign delayTime = settings.time_lazy_load | times : forloop.index %}
+      {% capture block_three_collections_collection %}block_three_collections_collection_{{ i }}{% endcapture %}
+      {% capture block_three_collections_collection_cover %}block_three_collections_collection_{{ i }}_cover.jpg{% endcapture %}
+
+      <li class="col-xs-4 wow fadeInUp" data-wow-delay="{{ delayTime }}">
+        {% if settings[block_three_collections_collection] == blank %}
+        <p>Please select collection for block {{ i }}</p>
+        {% else %}
+          {% assign collection_temp = settings[block_three_collections_collection] %}
+          {% assign collection = collections[collection_temp] %}
+          <a href="{{ collection.url }}" title="{{ collection.title }}">
+            {{ block_three_collections_collection_cover | asset_url | img_tag }}
+            <h4><span>{% include 'multilang' with collection.title %}</span></h4>
+          </a>
+          <div class="item_count">{{ collection.products_count }} {{ collection.products_count | pluralize: 'item', 'items' }}</div>
+          <div class="des">{% include 'multilang-paragraph' with collection.description %}</div>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</section>

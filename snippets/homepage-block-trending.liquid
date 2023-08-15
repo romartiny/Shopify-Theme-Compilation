@@ -1,0 +1,33 @@
+{% if settings.show_slider_trending_collection == blank %}
+<p style="margin-bottom: 30px;" class="container">Please select a collection in Theme Setting to display the products (Home Page section -> Home Page Trending Now Slider)</p>
+{% else %}
+<section class="widget-trending-product container">
+  {% if settings.slider_trending_title != blank %}
+  <div class="widget-title wow fadeIn">
+    <fieldset class="box-title">
+      <legend align="center">{% include 'multilang' with settings.slider_trending_title %}</legend>
+    </fieldset>
+  </div>
+  {% endif %}
+  
+  <div class="widget-product">
+    <div class="products-grid owl-carousel">
+      {% for product in collections[settings.show_slider_trending_collection].products limit:settings.slider_trending_limit_all %}
+      {% include 'product-grid-item' %}
+      {% endfor %}
+    </div> 
+  </div>
+</section>
+
+<script>
+  jQuery(document).ready(function() {
+    jQuery(".widget-trending-product .products-grid").owlCarousel({
+      navigation : true,
+      items : {{ settings.trending_collection_results_per_row }},
+      itemsTablet: [767,3],
+      itemsTabletSmall: [721,2],
+      itemsMobile : [479,2]
+    });
+  });
+</script>
+{% endif %}

@@ -1,0 +1,54 @@
+<div class="container homepage-tabs-products">
+  <div role="tabpanel" class="tabpanel">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active">
+        <a href="#homepage-tab1" role="tab" data-toggle="tab">{% include 'multilang' with settings.block_two_collection_tab_1_title %}</a>
+      </li>
+      <li role="presentation">
+        <a href="#homepage-tab2" role="tab" data-toggle="tab">{% include 'multilang' with settings.block_two_collection_tab_2_title %}</a>
+      </li>
+    </ul>
+    <!-- End Nav tabs -->
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="homepage-tab1">
+       <div class="products-grid owl-carousel">
+          {% if settings.block_two_collection_tab_1 == blank %}
+            <p>Please select the collection for tab 1</p>
+          {% else %}
+         	{% assign collection = collections[settings.block_two_collection_tab_1] %}
+            {% for product in collection.products limit:settings.block_two_collection_tab_number_show %}
+              {% include 'product-grid-item' %}
+            {% endfor %}
+          {% endif %}
+       </div>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="homepage-tab2">
+        <div class="products-grid owl-carousel">
+          {% if settings.block_two_collection_tab_2 == blank %}
+            <p>Please select the collection for tab 2</p>
+          {% else %}
+         	{% assign collection = collections[settings.block_two_collection_tab_2] %}
+            {% for product in collection.products limit:settings.block_two_collection_tab_number_show %}
+              {% include 'product-grid-item' %}
+            {% endfor %}
+          {% endif %}
+       </div>
+      </div>
+    </div>
+    <!-- End Tab panes -->
+  </div>
+</div>
+
+<script>
+jQuery(document).ready(function() {
+  jQuery(".homepage-tabs-products .products-grid").owlCarousel({
+    navigation : true,
+    items : {{ settings.block_two_collection_tab_results_per_row }},
+    itemsTablet: [767,3],
+    itemsTabletSmall: [721,2],
+    itemsMobile : [479,2]
+  });
+});
+</script>

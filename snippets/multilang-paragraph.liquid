@@ -1,0 +1,6 @@
+{% if settings.enable_multilang %}
+<div class="lang1">{{ multilang-paragraph | split: '[lang2]' | first }}</div>
+<div class="lang2">{{ multilang-paragraph | split: '[lang2]' | last }}</div>
+{% else %}
+{{ multilang-paragraph | split: '[lang2]' | first }}
+{% endif %}

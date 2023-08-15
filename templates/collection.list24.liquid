@@ -1,0 +1,40 @@
+{% include 'breadcrumb' %}
+
+{% include 'collection-header' %}
+
+<div class="row">
+  {% include 'collection-sidebar' %}
+  <div class="block-row col-xs-9 col-main">
+    
+    {% if collection.products.size > 0 %}
+      {% paginate collection.products by 24 %}
+    
+        {% include 'toolbar-list' %}
+
+        {% comment %}
+        Use class grid-uniform to have evenly sized columns clear
+        each other properly at each breakpoint.
+        {% endcomment %}
+
+        <div class="product-list">
+          {% for product in collection.products %}
+          {% include 'product-list-item' %}
+          {% endfor %}
+        </div>
+
+        {% if paginate.pages > 1 %}
+        <div class="padding">
+          {% include 'pagination-page' %}
+        </div>
+        {% endif %}
+
+      {% endpaginate %}    
+    {% else %}
+    <p style="text-align: center;" {% if settings.enable_multilang %}data-translate="collections.general.no_matches"{%endif%}>{{ 'collections.general.no_matches' | t }}</p>
+    {% endif %}
+  </div>
+</div>
+
+{% if settings.display_recently_viewed_products %}
+{% include 'recently-viewed-products' %}
+{% endif %}

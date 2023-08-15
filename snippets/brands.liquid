@@ -1,0 +1,18 @@
+<section class="brands-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-6 col-sm-4 col-md-2">
+        <h4 class="title">{% include 'multilang' with settings.featured_brand_title %}</h4>
+        <p><a href="{{ settings.featured_brand_link }}">{% include 'multilang' with settings.featured_brand_link_text %}</a></p>
+      </div>
+      {% for i in (1..5) %}
+        {% capture featured_brand_link %}featured_brand_link_{{ i }}{% endcapture %}
+        {% capture featured_brand_title %}featured_brand_title_{{ i }}{% endcapture %}
+        {% capture featured_brand_image %}featured_brand_image_{{ i }}.png{% endcapture %}
+        {% if settings[featured_brand_title] != blank and settings[featured_brand_image] != empty %}
+          <a href="{{ settings[featured_brand_link] }}" title="{{ settings[featured_brand_title] }}" class="col-xs-12 col-sm-4 col-md-2">{{ featured_brand_image | asset_url | img_tag }}</a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

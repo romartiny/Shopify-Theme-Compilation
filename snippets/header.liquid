@@ -1,0 +1,210 @@
+<header class="site-header" role="banner">
+  {% if settings.display_header_top_text and settings.header_top_text != blank %}
+    <div class="header-top">
+      <div class="container">
+        <p>
+          {% include 'multilang' with settings.header_top_text %}
+
+          {% if settings.header_top_link_text != blank %}
+          <a href="{{ settings.header_top_link }}" class="link">{% include 'multilang' with settings.header_top_link_text %}</a>
+          {% endif %}
+          <a href="javascript:void(0)" class="close">close</a>
+        </p>
+      </div>
+  </div>
+  <script>
+    if (jQuery.cookie('headerTop') == 'closed') {
+      jQuery('.header-top').remove();
+    }
+
+    jQuery('.header-top a.close').bind('click',function(){
+      jQuery('.header-top').remove();
+      jQuery.cookie('headerTop', 'closed', {expires:1, path:'/'});
+    });  
+  </script>
+  {% endif %}
+  
+  <div class="header-bottom">
+    <div class="container">
+
+      <div class="header-mobile">
+        <div class="menu-block visible-phone"><!-- start Navigation Mobile  -->
+          <div id="showLeftPush"></div>
+        </div><!-- end Navigation Mobile  --> 
+
+        <div class="customer-area dropdown">
+          <a data-toggle="dropdown" href="#">Dropdown trigger</a>
+          <div class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <p {% if customer %}class="login"{% endif %}>
+              <a href="/account" {% if settings.enable_multilang %}data-translate="customer.account.title"{% endif %}>{{ 'customer.account.title' | t }}</a>
+            </p>
+            <div class="wishlist">
+              <a href="/pages/wish-list" {% if settings.enable_multilang %}data-translate="wishlist.general.my_wishlist"{% endif %}>
+              {{ 'wishlist.general.my_wishlist' | t }}
+              </a>
+            </div>
+            <p>
+              {% if settings.display_header_text_order and settings.header_text_order != blank %}
+              <a href="{{ settings.header_text_order_link }}" class="text_order">
+                {% include 'multilang' with settings.header_text_order %}
+              </a>
+              {% endif %}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-panel-top">
+        {% if settings.enable_multilang or settings.enable_multiple_currencies %}
+        <button type="button" class="multiple-setting-btn visible-xs" id="multiple-setting-toggle"></button>
+        <script>
+          $('#multiple-setting-toggle').click(function(){
+            $(this).toggleClass('in');
+            $('.lang-block').toggleClass('in');
+            $('.currency').toggleClass('in');
+          });
+        </script>
+        {% endif %}
+        
+        {% if settings.enable_multilang %}
+        <div class="lang-block">
+          <select id="lang-switcher">
+            <option value="1">{{ settings.lange_1 }}</option>
+            <option value="2">{{ settings.lange_2 }}</option>
+          </select>
+        </div>
+        <script>
+          translator.updateLangSwitcher();
+          jQuery('#lang-switcher').selectize();          
+        </script>
+        <style>
+        .selectize-control div[data-value~="1"] {background: url({{ "i-lang-1.png" | asset_url }}) no-repeat;}
+        .selectize-control div[data-value~="2"] {background: url({{ "i-lang-2.png" | asset_url }}) no-repeat;}
+        </style>
+        {% endif %}
+                
+        {% if settings.enable_multiple_currencies %}<div class="currency">{% include 'new-currency-picker' %}</div>{% endif %}
+        
+        {% if settings.display_header_text_order and settings.header_text_order != blank %}
+        <a href="{{ settings.header_text_order_link }}" class="text_order">
+          {% include 'multilang' with settings.header_text_order %}
+        </a>
+        {% endif %}
+        
+        <!-- Begin Top Header -->
+        <div class="top-header ">
+          <div class="wrapper-top-cart">
+            <p class="top-cart">
+              <a href="javascript:void(0)" id="cartToggle">
+                <span class="icon">&nbsp;</span>
+                <span class="first" {% if settings.enable_multilang %}data-translate="cart.general.shopping_cart"{% endif %}>{{ 'cart.general.shopping_cart' | t }}</span>
+                <span id="cartCount">{{ cart.item_count }}</span>
+              </a> 
+            </p>
+            <div id="dropdown-cart" style="display:none"> 
+              <div class="no-items">
+                <p>{{ 'cart.general.empty' | t }}</p>
+                <p class="text-continue"><a href="javascript:void(0)" class="btn btn-1" {% if settings.enable_multilang %}data-translate="cart.ajax_cart.continue_shopping"{% endif %}>{{ 'cart.ajax_cart.continue_shopping' | t }}</a></p>
+              </div>
+              <div class="has-items">
+                <ol class="mini-products-list">  
+                  {% for item in cart.items %}
+                  <li class="item" id="cart-item-{{item.id}}">
+                    <a href="{{item.url}}" class="product-image">
+                      <img src="{{ item.image | product_img_url: 'small' }}" alt="{{item.title}}">
+                    </a>
+                    <div class="product-details">
+                      <a href="javascript:void(0)" title="{{ 'cart.general.remove' | t }}" class="btn-remove">X</a>
+                      <p class="product-name">
+                        <a href="{{item.url}}">
+                          {% include 'multilang' with item.title %}
+                        </a>
+                      </p>
+                      <div class="option">
+                        {% if item.product.variants.size != 0 %}
+                        {% unless item.variant.title contains 'Default' %}
+                        <small>{{ item.variant.title }}</small>
+                        {% endunless %}
+                        {% endif %}
+                      </div>
+                      <div class="cart-collateral">{{item.quantity}} x <span class="price">{{item.price | money}}</span></div>
+                    </div>
+                  </li>
+                  {% endfor %}
+                </ol>
+                <div class="summary">                
+                  <p class="total">
+                    <span class="label" {% if settings.enable_multilang %}data-translate="cart.label.total"{% endif %}>{{ 'cart.label.total' | t }}</span>
+                    <span class="price">{{cart.total_price | money}}</span> 
+                  </p>
+                </div>
+                <div class="actions">
+                  <button class="btn btn-1" onclick="window.location='/checkout'" {% if settings.enable_multilang %}data-translate="cart.general.checkout"{% endif %}>{{ 'cart.general.checkout' | t }}</button>
+                </div>
+                <p class="text-cart"><a href="/cart" {% if settings.enable_multilang %}data-translate="cart.general.view_cart"{% endif %}>{{ 'cart.general.view_cart' | t }}</a></p>
+              </div>
+            </div>
+          </div>
+
+          {% comment %}
+          If customer accounts are enabled, provide login and create account links
+          {% endcomment %}
+        </div>
+        <!-- End Top Header -->
+        
+        {% include 'customer_links' %}
+        
+      </div>
+      
+      <div class="header-panel">
+        <div class="row">
+          <div class="header-panel-bottom col-sm-4 col-md-3">
+            <p class="sale-off">{% include 'multilang' with settings.saleoff_text_1 %} <small>{% include 'multilang' with settings.saleoff_text_2 %}</small></p>
+          </div>
+          <h1 class="header-logo col-sm-4 col-md-6">
+            {% if settings.brand_type == 'image' %}
+            <a href="/">
+              {{ 'logo.png' | asset_url | img_tag: shop.name }}
+              {% comment %}
+              {% if settings.enable_retina %}
+              {{ 'logo_2x.png' | asset_url | img_tag: shop.name }}
+              {% endif %}
+              {% endcomment %}
+            </a>
+            {% elsif settings.brand_text != "" %}
+            <a class="logo-title" href="/">{{ settings.brand_text }}</a>
+            {% else %}
+            <a class="logo-title" href="/">{{shop.name}}</a>
+            {% endif %}
+          </h1>
+          <div class="nav-search">{% include 'search-bar' %}</div>
+        </div>
+      </div>
+    </div>
+    
+    <nav class="nav-bar" role="navigation">
+      <div class="header-logo-fix">
+        <a href="/">{{ 'logo_fix.png' | asset_url | img_tag: shop.name }}</a>
+      </div>
+      <div class="container">
+        {% include 'site-nav' %}
+      </div>
+    </nav>
+    
+    {% if settings.display_header_free_shipping and settings.header_free_shipping != blank %}
+    <div class="container">
+      <p class="free_shipping">
+        {% include 'multilang' with settings.header_free_shipping %}
+        {% if settings.header_free_shipping_link != blank and settings.header_free_shipping_link_text != blank %}
+        <a href="{{ settings.header_free_shipping_link }}">{% include 'multilang' with settings.header_free_shipping_link_text %}</a>
+        {% endif %}
+      </p>    
+    </div>
+    {% endif %}
+  </div>
+</header>
+{% if settings.enable_multilang %}
+<script>
+  translator.doTranslate(".site-header");
+</script>
+{% endif %}

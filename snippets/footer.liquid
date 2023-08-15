@@ -1,0 +1,71 @@
+<footer class="site-footer" role="contentinfo">
+  {% if settings.display_footer_top %}
+  <div class="footer-top">
+    <div class="container">
+      <div>{% include 'multilang' with settings.footer_top_text %}<a href="{{ settings.footer_top_link }}">{% include 'multilang' with settings.footer_top_link_text %}</a></div>
+    </div>
+  </div>
+  {% endif %}
+  <div class="container">
+    <div class="footer-middle">
+      <div class="row">
+        {% if settings.footer_column_1_title != blank %}
+        <div class="col-1 wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load }}ms">
+          <h3><span>{% include 'multilang' with settings.footer_column_1_title %}</span></h3>
+          <ul>
+            {% for link in linklists[settings.footer_column_1_linklist].links %}
+            <li><a href="{{ link.url}}">{% include 'multilang' with link.title %}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+        
+        {% if settings.footer_column_2_title != blank %}
+        <div class="col-2 wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load | times: 2 }}ms">
+          <h3><span>{% include 'multilang' with settings.footer_column_2_title %}</span></h3>
+          <ul>
+            {% for link in linklists[settings.footer_column_2_linklist].links %}
+            <li><a href="{{ link.url}}">{% include 'multilang' with link.title %}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+        
+        {% if settings.footer_column_3_title != blank %}
+        <div class="col-3 wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load | times: 3 }}ms">
+          <h3><span>{% include 'multilang' with settings.footer_column_3_title %}</span></h3>
+          <ul>
+            {% for link in linklists[settings.footer_column_3_linklist].links %}
+            <li><a href="{{ link.url}}">{% include 'multilang' with link.title %}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+        
+        <div class="col-4 wow fadeInUp last" data-wow-delay="{{ settings.time_lazy_load | times: 4 }}ms">
+          {% include 'homepage-block-newsletter' %}
+          <h3><span>{% include 'multilang' with settings.footer_column_4_title %}</span></h3>
+          {% include 'social' %}
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom  wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load | times: 5 }}ms">
+      {% if settings.display_footer_address and settings.footer_address_code != blank %}
+        {% if settings.enable_multilang %}
+          <address class="lang1">{{ settings.footer_address_code | split: '|' | first }}</address>
+          <address class="lang2">{{ settings.footer_address_code | split: '|' | last }}</address>
+        {% else %}
+      	  <address>{{ settings.footer_address_code | split: '|' | first }}</address>
+        {% endif %}
+      {% endif %}
+      
+      {% if settings.display_payment_methods %}
+        {% comment %}
+          Loop through available payment methods and show their icons.
+        {% endcomment %}
+        {% include 'payment_methods' %}
+      {% endif %}    
+    </div>
+  </div>
+</footer>
+{% include 'message-modal' %}

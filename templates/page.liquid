@@ -1,0 +1,11 @@
+{% include 'breadcrumb' %}
+<header class="page-header">
+  <h2>{% include 'multilang' with page.title %}</h2>
+</header>
+
+{% comment %}
+  Regular page content goes here.
+{% endcomment %}
+<div class="rte">
+{% include 'multilang-paragraph' with page.content %}
+</div>

@@ -1,0 +1,46 @@
+{% if settings.display_popup_newsletter %}
+{% include 'newsletter' %}
+{% endif %}
+
+
+{% if template == "index" and settings.display_slideshow %}
+{% comment  %} Block SlideShow {% endcomment %}
+{% include 'homepage-flexslider' %}
+{% endif %}
+
+{% if settings.display_block_three_collections %}
+{% comment  %} Block Three Featured Collection {% endcomment %}
+{% include 'homepage-block-three-featured-collection' %}
+{% endif %}
+
+{% if settings.display_block_two_collection_tab %}
+{% comment  %} Block Two Collections Tabs {% endcomment %}
+{% include 'homepage-block-tabs' %}
+{% endif %}
+
+{% if settings.show_slider_trending %}
+{% comment %} Block Trending Now {% endcomment %}
+{% include 'homepage-block-trending' %}
+{% endif %}
+
+{% if settings.display_block_four_banner_bottom %}
+{% comment %} Block Four Banner {% endcomment %}
+{% include 'homepage-block-four-banner' %} 
+{% endif %}
+
+{% if settings.display_custom_block_categories %}
+{% comment %} Block Custom categories Slider {% endcomment %}
+{% include 'homepage-custom-block-categories' %}
+{% endif %}
+
+{% if settings.display_block_home_intro %}
+{% comment %} Block Home Intro {% endcomment %}
+<section class="home-intro-text container">
+  {% include 'multilang' with settings.block_home_intro_text %}
+</section>
+{% endif %}
+
+{% if settings.display_featured_brand %}
+{% comment %} Block Brands Slider {% endcomment %}
+{% include 'brands' %}
+{% endif %}

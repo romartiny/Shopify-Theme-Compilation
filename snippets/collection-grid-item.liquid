@@ -1,0 +1,35 @@
+{% comment %}
+  This snippet is used to showcase each collection during the loop,
+  'for product in collection.products' in list-collections.liquid.
+{% endcomment %}
+
+{% assign delayTime = settings.time_lazy_load | times : forloop.index %}
+<div class="grid-item wow fadeIn col-xs-3" data-wow-delay="{{delayTime}}ms">
+
+  {% comment %}
+    Use capture to put the collection title in a variable that is used in liquid filters
+  {% endcomment %}
+  
+  {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
+  <div class="product-top">
+    <a href="{{ collection.url }}" title="{{ collection_title }}">
+      {% if collection.image %}
+        {{ collection.image.src | collection_img_url: 'large' | img_tag: collection_title }}
+      {% else %}
+        {{ collection.products.first.featured_image | product_img_url: 'large' | img_tag: collection_title }}
+      {% endif %}
+      <div class="hover"></div>
+    </a>
+    <a href="{{ collection.url }}" class="view">&nbsp;</a>
+  </div>
+  <div class="collection-title-wrapper">
+    <div class="collection-title">
+      <p class="count-products" {% if settings.enable_multilang %}data-translate="collections.general.items_with_count|count:{{collection.all_products_count}}"{% endif %}>{{ 'collections.general.items_with_count' | t: count: collection.all_products_count }}</p>
+      <h3 class="h5">
+        <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}" {% if settings.enable_multilang %}data-translate="collections.general.link_title|title:{{collection_title}}" translate-item="title"{% endif %}>
+          {% include 'multilang' with collection.title %}
+        </a>
+      </h3>
+    </div>
+  </div>
+</div>

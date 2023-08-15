@@ -1,0 +1,42 @@
+<div class="widget sidebar-accordion">
+  {% if settings.sidebar_categories_title != blank %}
+  <div class="widget-title"><h3>{% include 'multilang' with settings.sidebar_categories_title %}</h3></div>
+  {% endif %}
+  <div class="widget-content">
+    {% if settings.style_categories == 'style_show_all' %}
+    <ul>
+      {% for category in collections %}
+      <li><a href="{{ category.url }}" {% if collection.handle == category.handle %} class="active" {% endif %}>{{ category.title }}</a></li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <div class="panel-group" id="sidebar-accordion">
+      {% assign items = settings.categories_items | split:"," %}
+      
+      {% for item in items %}
+      	{% assign item_handle = item | handle %}
+        {% if collections[item_handle] %}
+      	{% assign category = collections[item_handle] %}
+        <div class="panel">
+          <div class="panel-title">
+            <a href="{{ category.url }}">{% include 'multilang' with category.title %}</a>
+            {% if linklists[category.handle] != empty %}
+            <a data-toggle="collapse" data-parent="#sidebar-accordion" href="#{{ category.handle }}" class="pull-right{% unless forloop.first %} collapsed{% endunless %}"><span class="caret"></span></a>
+            {% endif %}
+          </div>
+          {% if  linklists[category.handle] != empty %}
+          <ul class="list-group collapse {% if forloop.first %}in{% endif %}" id="{{ category.handle }}">
+            {% for child_l in linklists[category.handle].links %}
+            <li class="list-group-item">
+              <a href="{{ child_l.url }}">{% include 'multilang' with child_l.title %}</a>
+            </li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</div>

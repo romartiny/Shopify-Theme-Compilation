@@ -1,0 +1,58 @@
+{% if settings.display_breadcrumb %}
+{% comment %}
+Documentation - http://docs.shopify.com/support/your-website/navigation/creating-a-breadcrumb-navigation
+{% endcomment %}
+{% unless template == 'index' %}
+<div class="breadcrumb">
+  <a href="/" data-translate="general.breadcrumbs.home">{{ 'general.breadcrumbs.home' | t }}</a>
+  
+  {% if template contains 'product' %}
+  
+    {% if collection %}
+      <span class="arrow">/</span>
+      {% if collection.handle %}
+        {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+        <a href="{{ url }}">{% include 'multilang' with collection.title %}</a>
+      {% endif %}  
+    {% endif %}
+    <span class="arrow">/</span>
+    <span>{% include 'multilang' with product.title %}</span>
+
+  {% elsif template contains 'collection' and collection.handle %}
+
+    {% if current_tags %}
+      <span class="arrow">/</span>
+      {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+      <a href="{{ url }}">{% include 'multilang' with collection.title %}</a>
+      <span class="arrow">/</span>
+      <span>{% include 'multilang' with current_tags.first %}</span>
+    {% else %}
+      <span class="arrow">/</span>
+      <a href="{{ url }}">{% include 'multilang' with collection.title %}</a>
+    {% endif %}
+
+  {% elsif template == 'cart' %}
+  
+    <span class="arrow">/</span>  	
+    <span {% if settings.enable_multilang %}data-translate="general.breadcrumbs.cart"{% endif %}>{{ 'general.breadcrumbs.cart' | t }}</span>
+  
+  {% elsif template == 'article' %}
+
+    <span class="arrow">/</span>
+    <a href="{{ blog.url }}">{% include 'multilang' with blog.title %}</a>
+  
+    <span class="arrow">/</span>
+    <span>{% include 'multilang' with article.title %}</span>
+
+  {% elsif template contains 'page' %}
+
+    <span class="arrow">/</span>
+    <span>{% include 'multilang' with page.title %}</span>
+
+  {% else %}
+    <span class="arrow">/</span>
+    <span>{% include 'multilang' with page_title %}</span>
+  {% endif %}
+</div>
+{% endunless %}
+{% endif %}

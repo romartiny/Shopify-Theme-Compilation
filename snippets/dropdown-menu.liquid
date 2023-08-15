@@ -1,0 +1,15 @@
+<ul class="site-nav-dropdown">
+  {% for link_child_item in linklists[link_child].links %}
+  <li {% if linklists[link_child_item.handle] != empty %}class="dropdown"{% endif %}>
+    <a href="{{ link_child_item.url }}">
+      <span>
+        {% include 'multilang' with link_child_item.title %}
+      </span>
+    </a>
+    {% if linklists[link_child_item.handle] != empty %}
+      {% assign link_child = link_child_item.handle %}
+      {% include 'dropdown-menu' with link_child %}
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>

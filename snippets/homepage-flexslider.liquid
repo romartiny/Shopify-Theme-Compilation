@@ -1,0 +1,93 @@
+<section class="main-slideshow">
+  <div class="flexslider">
+    <ul class="slides">
+      
+      {% for i in (1..10) %}
+        {% capture display_slideitem %}display_slideitem-{{ i }}{% endcapture %}
+        {% capture slideitem_image %}slideitem_image-{{ i }}.jpg{% endcapture %}
+        {% capture slideitem_image_mb %}slideitem_image_mb-{{ i }}.jpg{% endcapture %}
+        {% capture slideitem_image_alt %}slideitem_image_alt-{{ i }}{% endcapture %}
+        {% capture slideitem_link %}slideitem_link-{{ i }}{% endcapture %}
+      
+      	{% capture display_slideitem_text %}display_slideitem_text-{{ i }}{% endcapture %}
+      	{% capture slideitem_text_position %}slideitem_text_position-{{ i }}{% endcapture %}
+      	{% capture slideitem_text_alignment %}slideitem_text_alignment-{{ i }}{% endcapture %}
+      	
+        {% capture slideitem_heading_text %}slideitem_heading_text-{{ i }}{% endcapture %}
+        {% capture slideitem_heading_color %}slideitem_heading_color-{{ i }}{% endcapture %}
+        {% capture slideitem_heading_size %}slideitem_heading_size-{{ i }}{% endcapture %}
+      	{% capture enalbe_slideitem_heading_image %}enalbe_slideitem_heading_image-{{ i }}{% endcapture %}
+      	{% capture slideitem_heading_image %}slideitem_heading_image-{{ i }}.png{% endcapture %}
+      	{% capture slideitem_heading_image_height %}slideitem_heading_image_height-{{ i }}{% endcapture %}
+      
+        {% capture slideitem_description_text %}slideitem_description_text-{{ i }}{% endcapture %}
+        {% capture slideitem_description_color %}slideitem_description_color-{{ i }}{% endcapture %}
+        {% capture slideitem_description_size %}slideitem_description_size-{{ i }}{% endcapture %}
+      
+        {% capture slideitem_button_text %}slideitem_button_text-{{ i }}{% endcapture %}
+        {% capture slideitem_button_style %}slideitem_button_style-{{ i }}{% endcapture %}
+      
+      	{% if settings[display_slideitem] %}
+      	<li class="slide">
+          <img src="{{ slideitem_image | asset_url }}" data-url="{{ settings[slideitem_link] }}" class="slide-img" alt="{{ settings[slideitem_image_alt] }}" />
+          <img src="{{ slideitem_image_mb | asset_url }}" data-url="{{ settings[slideitem_link] }}" class="slide-img-mb" alt="{{ settings[slideitem_image_alt] }}" />
+
+          {% if settings[display_slideitem_text] %}
+          <div class="slide-des" style="{% if settings[slideitem_text_position] == 'left' %} margin-left: 0; {% endif %}
+                                        {% if settings[slideitem_text_position] == 'right' %} margin-right: 0; {% endif %}
+                                        {% if settings[slideitem_text_alignment] == 'left' %} text-align: left; {% endif %}
+                                        {% if settings[slideitem_text_alignment] == 'right' %} text-align: right; {% endif %}">
+            {% if settings[enalbe_slideitem_heading_image] == false %}
+              {% if settings[slideitem_heading_text] != blank %}
+                <h2 class="slide-heading" style="{% if settings[slideitem_heading_color] != blank %} color: {{ settings[slideitem_heading_color] }}; {% endif %}
+                                                 {% if settings[slideitem_heading_size] != blank %} size: {{ settings[slideitem_heading_size] }}px; {% endif %}">
+                  {% include 'multilang' with settings[slideitem_heading_text] %}
+                </h2>
+              {% endif %}
+            {% else %}
+              <h2 class="slide-heading">
+                <img src="{{ slideitem_heading_image | asset_url }}" alt="{{ settings[slideitem_heading_text] }}" />
+              </h2>
+            {% endif %}
+            
+            {% if settings[slideitem_description_text] != blank %}
+              <p class="slide-text" style="{% if settings[slideitem_description_color] != blank %} color: {{ settings[slideitem_description_color] }}; {% endif %}
+                                           {% if settings[slideitem_description_size] != blank %} size: {{ settings[slideitem_description_size] }}px; {% endif %}">
+                {% include 'multilang' with settings[slideitem_description_text] %}
+              </p>
+            {% endif %}
+            
+            {% if settings[slideitem_button_text] != blank %}
+              <a href="{{ settings[slideitem_link] }}" class="btn btn-2">
+                {% include 'multilang' with settings[slideitem_button_text] %}
+              </a>
+            {% endif %}
+            
+          </div>
+          {% endif %}
+      	</li>
+      	{% endif %}
+      {% endfor %}
+    </ul>
+  </div><!-- /.flexslider -->
+</section> <!-- /#slideshow.row -->
+<script>
+  /* Flex Slider */
+  jQuery('.flexslider').flexslider({
+    directionNav: true,
+    controlNav: true,
+    keyboardNav: true,
+    slideshowSpeed: {{ settings.slideshow_speed }},
+    animation: "{{ settings.slideshow_transition }}",
+    {% if settings.slideshow_transition == "slide" %}
+    animationLoop: false,
+    {% endif %}
+    prevText: 'Previous',
+    nextText: 'Next'
+  });
+  jQuery('.flexslider li img').click(function(){
+    var url = jQuery(this).attr('data-url');
+    if (url.length > 0) {window.location.href = url;}
+  });		  
+  /* End Flex Slider */
+</script>

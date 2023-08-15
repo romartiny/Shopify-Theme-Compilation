@@ -1,0 +1,34 @@
+<div class="widget widget-flickr">
+  {% if settings.sidebar_flickr_title != blank %}
+  <div class="widget-title">
+    <h3><span>{% include 'multilang' with settings.sidebar_flickr_title %}</span></h3>
+  </div>
+  {% endif %}
+  <div class="widget-content">
+    <ul id="flickr" class="thumbs"></ul>
+  </div>
+</div>
+    {{ 'jflickrfeed.js' | asset_url | script_tag }}
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $('#flickr').jflickrfeed({
+          limit: 12,
+          qstrings: {
+            id: '{{ settings.sidebar_flickr_id }}'
+          },
+          itemTemplate: '<li>'+
+                            '<a class="flickr_fancybox" data-fancybox-group="flickr_button" href="{flickr}image{/flickr}" title="{flickr}title{/flickr}">' +
+                                '<img src="{flickr}image_s{/flickr}" alt="{flickr}title{/flickr}" />' +
+                            '</a>' +
+                          '</li>'
+        }, function(data) {
+          $('#flickr .flickr_fancybox').fancybox({
+            closeBtn  : true,
+            helpers : {
+            	buttons	: {}
+            }
+          });
+        });
+
+      });
+    </script>

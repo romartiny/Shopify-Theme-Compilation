@@ -1,0 +1,12 @@
+<div class="sidebar-cms-custom">
+  {% if settings.custom_cms_title != blank %}
+  <div class="widget-title">
+    <h3>
+      {% include 'multilang' with settings.custom_cms_title %}
+    </h3>
+  </div>
+  {% endif %}
+  <div class="widget-content">
+    {% include 'multilang' with settings.custom_cms_text %}
+  </div>
+</div>
