@@ -1,2 +1,2 @@
-# Streamline Shopify Theme
+# Booster Shopify Theme
 ![Screenshot](booster-screenshot.png)
