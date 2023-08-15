@@ -1,0 +1,1 @@
+{% if product-description-tabs %}{% assign description = product-description-tabs | replace: "<h5></h5>", "" %}{% else %}{% assign description = product.description | replace: "<h5></h5>", "" %}{% endif %}{{ description }}

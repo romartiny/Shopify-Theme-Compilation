@@ -1,0 +1,68 @@
+{%- capture tabs -%}
+  5861^^Product Details^^<p><strong>Show off your love for your country with this canvas set!&nbsp;</strong></p>
+<p>This&nbsp;premium, original canvas set will become the focal point of your home the moment you put it up and the compliments won't stop!</p>
+<ul>
+  <li>Made-to-order in our <strong>Florida, USA facility</strong>.</li>
+  <li>High quality U.S. made 342 GSM and 14 mill canvas with a satin finish.</li>
+  <li>Our&nbsp;archival canvas contains no optical brighteners and will not yellow over time.</li>
+  <li>Our premium latex water-based ink is Greenguard and Ecologo certified for low chemical emissions and reduced environmental impact.</li>
+  <li>Latex inks are superior to solvent inks when it comes to image quality, scratch resistance, and durability.</li>
+  <li>Framed sets are made with mirrored edges and <strong>stretched by hand</strong> by our experts and gallery wrapped over high quality SPF wooden frames. NOT hazardous MDF!&nbsp;</li>
+  <li>Framed sets come&nbsp;<strong>ready to hang</strong> with 1.5 inch industrial sawtooth hangers!</li>
+  <li><strong>Ships in 3-5 business days!</strong></li>
+</ul>
+<p>*Mockups represent XL size. Please use sizing chart.</p>
+<p>*Everything is HAND framed so there may be a VERY SLIGHT discrepancy between the pictured image and the final product. Rest assured we will NEVER send anything out that isn't as close to perfect as possible.</p>^^|57038995527|~~
+{%- endcapture -%}
+
+{%- assign tabs_array = tabs | strip | split: '~~' -%}
+{%- assign p_id_str = product.id | downcase -%}
+
+{%- for item in tabs_array -%}
+  {%- assign tab = item | split: '^^' -%}
+  {%- assign asn = tab[3] | split: '|' -%}
+  {%- assign h_t = false -%}
+
+  {%- assign p_ids = asn[0] | split: ',' -%}
+
+  {%- if asn[0] == '0' or p_ids contains p_id_str -%}
+    {%- assign h_t = true -%}
+  {%- endif -%}
+
+  {%- unless h_t -%}
+    {%- if asn[1] == '0' and product.collections.size > 0 -%}
+      {%- assign h_t = true -%}
+    {%- endif -%}
+  {%- endunless -%}
+
+  {%- unless h_t -%}
+    {%- assign col_ids = asn[1] | split: ',' -%}
+
+    {%- for c in product.collections -%}
+      {% assign c_id = c.id | downcase %}
+      {%- if col_ids contains c_id %}
+        {%- assign h_t = true -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endunless -%}
+
+  {%- unless h_t -%}
+    {%- assign tags = asn[2] | split: ',' -%}
+    {%- for t in tags -%}
+      {%- if product.tags contains t -%}
+        {%- assign h_t = true -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endunless -%}
+
+  {% if h_t %}
+  <div id="station-tabs-data-{{ tab[0] }}" class="station-tabs-data-item" style="display:none;">
+    <a id="st-link-{{ tab[1] | handleize }}" class="station-tabs-link" href="#{{ tab[1] | handleize }}"><span>{{ tab[1] }}</span></a>
+    <div id="st-{{ tab[1] | handleize }}" class="station-tabs-content">
+      <div class="station-tabs-content-inner">{{ tab[2] }}</div>
+    </div>
+  </div>
+  {% endif %}
+{%- endfor -%}
