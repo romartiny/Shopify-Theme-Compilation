@@ -1,0 +1,82 @@
+<div class="our-product-section clearboth" data-section="three_image">
+  <div class="wrapper text-center">
+    {% if section.settings.title != blank %}
+    <h2 class="h1 section-header__title">{{ section.settings.title }}</h2>
+    {% endif %}
+    <div class="grid clearboth">
+      {% for block in section.blocks limit: collection_limit %}
+      <div class="grid__item large--one-third medium--one-whole">
+        <div class="col-our-prod">
+          <a href="{{ block.settings.link }}">
+            <img src="{{ block.settings.image | img_url : 'master'}}" alt="" />
+          </a>
+          {% if block.settings.title != blank %}
+          <p><a href="{{ block.settings.link }}">{{ block.settings.title }}</a></p>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% if section.settings.btntext != blank %}
+    <div class="shop-more">
+      <a href="{{ block.settings.more_btn_ink }}" class="btn">{{section.settings.btntext}}</a>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Three Images",
+    "max_blocks": 3,
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Collection list"
+      },
+	  {
+         "type": "header",
+         "content": "Bottom Button"
+      },
+	  {
+        "type": "text",
+        "id": "btntext",
+        "label": "More Button Text",
+        "default": "Shop More"
+      },
+	  {
+        "type": "url",
+		"id": "more_btn_ink",
+		"label": "More BUtton Link"
+      }
+    ],
+    "presets": [{
+      "name": "Three Images",
+      "category": "Three Images"
+    }],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Product",
+        "settings": [
+          {
+            "id": "image",
+            "type": "image_picker",
+            "label": "Image"
+          },
+		  {
+            "id": "title",
+            "type": "text",
+            "label": "Title"
+          },
+		  {
+            "id": "link",
+            "type": "url",
+            "label": "Link"
+          }
+        ]
+       }
+	]
+  }
+{% endschema %}

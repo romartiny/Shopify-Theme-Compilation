@@ -1,0 +1,55 @@
+<section class="featured-section" data-section="featured-section">
+  <div class="container wrapper">
+    <div class="display_flex align-items-center">
+      
+      {% if section.settings.feacture_title != blank %}
+      <div class="featured_cols">
+        <p>{{ section.settings.feacture_title }}</p>
+      </div>
+      {% endif %}
+      
+      {% for block in section.blocks %}
+      {% if block.settings.image != blank %}
+      <div class="featured_cols">
+        <img src="{{ block.settings.image | img_url : 'master'}}" alt="{{ block.settings.image.alt }}">
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+  {
+    "name": "featured-logo",
+	"settings": [
+	  {
+		"type": "header",
+		"content": "Header top Section"
+	  },
+	  {
+		"type": "text",
+		"id": "feacture_title",
+		"label": "Featured Title"
+	  }
+	],
+	"blocks": [
+      {
+        "name": "featured-logo",
+		"type": "featured-logo",
+        "settings": [
+          {
+            "id": "image",
+            "type": "image_picker",
+            "label": "Image"
+          }
+        ]
+       }
+	],
+    "presets": [{
+      "name": "featured-logo",
+      "category": "Content"
+    }]
+  }
+{% endschema %}

@@ -1,0 +1,101 @@
+<div class="product-single__features">
+  <div class="table-wrapper">
+    <div class="table-wrapper">
+      <table>
+        <tbody>
+          <tr class="product-single__feature">
+            {% if section.settings.main_title != blank %}
+            <th>{{ section.settings.main_title }}</th>
+            {% endif %}
+            {% if section.settings.main_desc != blank %}
+            <td class="product-shipping__feature">{{ section.settings.main_desc }}</td>
+            {% endif %}
+          </tr>
+          {% for block in section.blocks %}
+          {% if block.type == 'only_image' %}
+          <tr class="product-single__feature">
+            {% if block.settings.sub_title1 != blank %}
+            <th>{{ block.settings.sub_title1 }}</th>
+            {% endif %}
+
+            {% if block.settings.sub_desc1 != blank %}
+            <td>{{ block.settings.sub_desc1 }}</td>
+            {% endif %}
+          </tr>
+          {% elsif block.type == 'first_image' %}
+          <tr class="product-single__feature product-single__feature--with-image">
+            {% if block.settings.sub_title2 != blank %}
+            <th>{{ block.settings.sub_title2 }}</th>
+            {% endif %}
+            {% if block.settings.sub_desc2 != blank %}                        
+            <td>{{ block.settings.sub_desc2 }}</td>
+            {% endif %}
+          </tr>
+          {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Cart Shipping Table",
+    "settings": [
+      {
+          "content":"Shipping table",
+          "type":"header"
+      },
+      {
+          "type":"text",
+          "id":"main_title",
+          "label":"Main Title"
+      },
+      {
+          "type":"html",
+          "id":"main_desc",
+          "label":"Main Description"
+      }
+	],
+    "blocks":[
+          {
+              "type":"only_image",
+              "name":"Shipping desc Only Image",
+              "settings":[
+                  {
+                      "type":"text",
+                      "id":"sub_title1",
+                      "label":"Sub Title1"
+                  },
+                  {
+                      "type":"html",
+                      "id":"sub_desc1",
+                      "label":"Sub Description1"
+                  }
+              ]
+          },
+          {
+              "type":"first_image",
+              "name":"Shipping desc First Image",
+              "settings":[
+                  {
+                      "type":"text",
+                      "id":"sub_title2",
+                      "label":"Sub Title2"
+                  },
+                  {
+                      "type":"html",
+                      "id":"sub_desc2",
+                      "label":"Sub Description2"
+                  }
+              ]
+          }
+      ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

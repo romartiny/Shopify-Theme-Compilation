@@ -1,0 +1,71 @@
+{% if settings.promo_enbl %}
+{% assign dp = selected_variant.price | times: settings.promo_amount | divided_by: 100.00 %}
+{% assign dp = selected_variant.price | minus: dp | money %}
+<div class="promoBox">
+  {% if settings.promo_img != blank %}
+  <img src="{{ settings.promo_img | img_url: '100x' }}" alt="" style="padding:10px;max-width:40px;" />
+  {% endif %}
+  {% if settings.promo_text != blank %}
+  <div>
+    {% if settings.promo_text contains '[timer]' %}
+    {{ settings.promo_text | replace: '#', dp | replace: '[timer]', '<span id="finalCountdown"></span>' }}
+    {% else %}
+    {{ settings.promo_text | replace: '#', dp  }}
+    {% endif %}
+  </div>
+  {% endif %}
+</div>
+{% if settings.promo_text contains '[timer]' %}
+<script>
+  $(document).ready(function(){
+    var time_in_h = {{ settings.reset_every }};
+    var current_time = Date.parse(new Date());
+    if(localStorage.getItem("counttimer")) {
+       var deadline = localStorage.getItem("counttimer");
+    } else {
+      var deadline = new Date(current_time + time_in_h*60*60*1000);
+    }
+    
+    function time_remaining(endtime){
+      var t = Date.parse(endtime) - Date.parse(new Date());
+      var seconds = Math.floor( (t/1000) % 60 );
+      var minutes = Math.floor( (t/1000/60) % 60 );
+      var hours = Math.floor( (t/(1000*60*60)) % 24 );
+      var days = Math.floor( t/(1000*60*60*24) );
+      return {'total':t, 'days':days, 'hours':hours, 'minutes':minutes, 'seconds':seconds};
+    }
+    function run_clock(id,endtime){
+      var clock = document.getElementById(id);
+      function update_clock(){
+        var t = time_remaining(endtime);
+        var hs = t.hours;
+        if((hs + '').length == 1){
+          hs = '0' + hs;
+        }
+        var ms = t.minutes;
+        if((ms + '').length == 1){
+          ms = '0' + ms;
+        }
+        var ss = t.seconds;
+        if((ss + '').length == 1){
+          ss = '0' + ss;
+        }
+        clock.innerHTML = '<b>'+hs+'</b><i>h</i> <b>'+ms+'</b><i>m</i> <b>'+ss+'</b><i>s</i>' ;
+        if(t.total <= 0) { 
+          clearInterval(timeinterval);
+          var time_in_h = {{ settings.reset_every }};
+          var current_time = Date.parse(new Date());
+          var deadline = new Date(current_time + time_in_h*60*60*1000);
+          run_clock('finalCountdown',deadline);
+        }
+        localStorage.setItem("counttimer", endtime);
+        //console.log(localStorage.getItem("counttimer"));
+      }
+      update_clock();  
+      var timeinterval = setInterval(update_clock,1000);
+    }
+    run_clock('finalCountdown',deadline);
+  });
+</script>
+{% endif %}
+{% endif %}

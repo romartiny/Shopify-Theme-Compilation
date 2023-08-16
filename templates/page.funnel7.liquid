@@ -1,0 +1,25 @@
+<!-- /templates/page.liquid -->
+{% section 'row1-funnel7' %}
+{% section 'row2-funnel7' %}
+{% section 'row3-funnel7' %}
+{% section 'row4-funnel7' %}
+{% section 'USP-funnel7' %}
+{% section 'video-funnel7' %}
+{% section 'FAQ7' %}
+{% section 'triple-product-funnel7' %}
+{% section 'product-funnel7' %}
+
+<script src="{{ 'option_selection.js' | shopify_asset_url }}" async></script>
+<script src="//cdn.shopify.com/s/assets/themes_support/api.jquery-e94e010e92e659b566dbc436fdfe5242764380e00398907a14955ba301a4749f.js" type="text/javascript"></script>
+<script>
+	$(document).on('click', '.feature-row a[href^="#"].btn', function (event) {
+    event.preventDefault();
+
+    $('html, body').animate({
+        scrollTop: $($.attr(this, 'href')).offset().top
+    }, 500);
+});
+</script>
+<script>
+    fbq('track', 'ViewContent');
+  </script>

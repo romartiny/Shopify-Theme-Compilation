@@ -1,0 +1,39 @@
+<section class="{% if block.settings.background == 'grey-bg' %} grey-bg {% else %} white-bg {% endif %} {% if block.settings.toppadding != blank %}top-pdm{% endif %}">
+  <div class="container">
+    <div class="row align-items-center">
+      {% if block.settings.image_alignment == "left" %}
+      {% if block.settings.image != blank %}
+      <div class="col-md-6">
+        <div class="side-img wow fadeInUp">
+          <img src="{{ block.settings.image | img_url:'master' }}" class="img-fluid" alt="{{ block.settings.image.alt }}">
+        </div>
+      </div>
+      {% endif %}
+      {% endif %}
+      <div class="col-md-6">
+        {% if block.settings.title != blank %}
+        <h2 class="mt-4">
+          {{ block.settings.title }}
+        </h2>
+        {% endif %}
+        {% if block.settings.dexcription != blank %}
+        <div class="gray_sec">
+          {{ block.settings.dexcription }}
+        </div>
+        {% endif %}
+        {% if block.settings.btnUrl != blank %}
+        <div class="call-button1 text-left"><a href="{{ block.settings.btnUrl }}" class="hvr-sweep-to-top  wow flipInX">{{ block.settings.btntitle }}</a></div>
+        {% endif %}
+      </div>
+      {% if block.settings.image_alignment == "right" %}
+      {% if block.settings.image != blank %}
+      <div class="col-md-6 order-rev">
+        <div class="side-img wow fadeInUp">
+          <img src="{{ block.settings.image | img_url:'master' }}" class="img-fluid" alt="{{ block.settings.image.alt }}">
+        </div>
+      </div>
+      {% endif %}
+      {% endif %}
+    </div>
+  </div>
+</section>

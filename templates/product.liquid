@@ -1,0 +1,15 @@
+{% include 'shogun-products', content: product %}
+{{product.metafields.shogun.above}}
+<!-- /templates/product.liquid -->
+{% comment %}
+  The contents of the product.liquid template can be found in /sections/product-template.liquid
+{% endcomment %}
+
+{% section 'product-template' %}
+
+
+
+{{product.metafields.shogun.below}}
+
+
+{% include 'judgeme_widgets', widget_type: 'judgeme_preview_badge', concierge_install: true, auto_install: true %}

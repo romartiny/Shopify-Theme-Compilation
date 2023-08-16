@@ -1,0 +1,190 @@
+{%- assign product = all_products[block.settings.featured_product] -%}
+<section class="top-product">
+  <div class="container">
+    <div class="row">
+      {% if product.featured_image != blank %}
+      <div class="col-md-5">
+        <div class="product-img">
+          <img src="{{ product.featured_image | product_img_url: 'master' }}" class="img-fluid" alt="product">
+          <div class="aft_discount wow zoomInUp"><span class="font-bold">{{ product.compare_at_price_min | minus: product.price | times: 100.0 | divided_by: product.compare_at_price_min | money_without_currency | times: 100 | replace: '.0', '' | append: '%'}}</span> <br> <span>OFF</span> </div>
+        </div>
+      </div>
+      {% endif %}
+      <div class="col-md-1">&nbsp;</div>
+      <div class="col-md-6">
+        <div class="section-heading">
+          {% if block.settings.subtext != blank %}<h3>{{ block.settings.subtext }}</h3>{% endif %}
+          {% if product.title != blank %}<h2 class="mt-4">{{ product.title }}</h2>{% endif %}
+          {% if block.settings.productLabel != blank %}<div class="best-seller">{{ block.settings.productLabel }}</div>{% endif %}
+        </div>
+        {% if product.description != blank %}
+        <div class="feature-list mt-4">
+
+          {%- if block.settings.checklist_1 != blank -%}
+          <ul>
+            {%- if block.settings.checklist_1 != blank -%}
+            <li class="wow fadeIn" data-wow-delay="0.1"><i class="fa fa-check"></i> {{ block.settings.checklist_1 }}</li>
+            {%- endif -%}
+            {%- if block.settings.checklist_2 != blank -%}
+            <li class="wow fadeIn" data-wow-delay="0.2"><i class="fa fa-check"></i> {{ block.settings.checklist_2 }}</li>
+            {%- endif -%}
+            {%- if block.settings.checklist_3 != blank -%}
+            <li class="wow fadeIn" data-wow-delay="0.3"><i class="fa fa-check"></i> {{ block.settings.checklist_3 }}</li>
+            {%- endif -%}
+            {%- if block.settings.checklist_4 != blank -%}
+            <li class="wow fadeIn" data-wow-delay="0.4"><i class="fa fa-check"></i> {{ block.settings.checklist_4 }}</li>
+            {%- endif -%}
+            {%- if block.settings.checklist_5 != blank -%}
+            <li class="wow fadeIn" data-wow-delay="0.4"><i class="fa fa-check"></i> {{ block.settings.checklist_5 }}</li>
+            {%- endif -%}
+          </ul>
+          {%- endif -%}
+
+        </div>
+        {% endif %}
+
+
+        {%- assign current_variant = product.selected_or_first_available_variant -%}
+        <form action="/cart/add" class="addtocartForm" data-productid="{{product.id}}" method="post"> 
+          {% if product.price != blank %}
+          <div class="price-tag mt-2">
+            {% if current_variant.compare_at_price > current_variant.price %}
+            <div id="ComparePrice" class="regular-price d-inline-block">{{ current_variant.compare_at_price | money }}</div>
+            <div id="ProductPrice" class="sale-price d-inline-block">{{ current_variant.price | money }}</div>
+            {% else %}
+            <div id="ProductPrice" class="regular-price d-inline-block">{{ current_variant.price | money }}</div>
+            {% endif %}
+          </div>
+
+          {% endif %}
+          <div class="call-button mt-3">
+            <div class="row">
+              <div class="col-md-6">
+
+
+
+                <div class="productOPtoins clearboth customDesignSelect productoptionsize{{product.options.size}}"{% if hide_default_title %} style="display:none"{% endif %} >
+                  {% if product.variants.size > 1 %}
+                  <select id="productSelect-{{ forloop.index }}" name="id" data-productid="{{product.id }}">
+                    {% for variant in product.variants %}
+                    <option value="{{ variant.id }}"{% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %}>{{ variant.title }} - {{ variant.price | money }}</option>
+                    {% endfor %}
+                  </select>
+                  {% else %}
+                  <input type="hidden" value="{{ current_variant.id }}" name="id" />
+                  {% endif %}
+                </div>
+                <div class="cart-secs pro-btn productformOuter clearboth">
+                  <button type="submit" name="add" id="AddToCart" {% unless current_variant.available %}disabled="disabled"{% endunless %} class="hvr-sweep-to-top  wow flipInX addtocart btn-d btn02 animated addtocart btn-d btn02{% if product.options.size == 1 and product.variants[0].title == 'Default Title' %} product-form__cart-submit--small{% endif %}">
+                    {% unless current_variant.available %}
+                    <span>Sold out</span>
+                    {% else %}
+                    <span>Order Now</span>
+                    {% endunless %}
+                  </button>
+                </div>
+              </div>
+              {% if block.settings.paymentlogo != blank %}
+              <div class="col-md-6 payments">
+                <img src="{{ block.settings.paymentlogo | img_url: 'master' }}" class="img-fluid wow flipInX" data-wow-delay="0.3s" alt="{{ block.settings.paymentlogo.alt }}">
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </form>
+        
+        
+        {% unless current_variant.inventory_management == 'shopify'  and current_variant.inventory_policy == 'continue' and  current_variant.inventory_quantity <= 0 %}
+        <div class="stockAlert"><i>Only <strong class="qty_inv">8</strong> left in stock – order soon.</i></div>
+        {% endunless %}
+
+        {% if block.settings.reviewtext != blnak %}
+        <div class="review-one mt-4">
+          {% if block.settings.reviewtext != blank %}
+          <div class="review-text">
+            <h4>{{ block.settings.reviewtext }}</h4>
+          </div>
+          {% endif %}
+          {% if block.settings.user_name != blank %}
+          <div class="review-image">
+            {% if block.settings.user_img != blank %}
+            <img src="{{ block.settings.user_img | img_url: '50x50' }}" alt="{{ block.settings.user_img.alt }}" class="d-inline">
+            {% endif %}
+            {% if block.settings.user_name != blank %}<p class="user_name d-inline pl-4 pr-4">{{ block.settings.user_name }}</p>{% endif %}
+            <div class="rating-user d-inline">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if product.variants.size > 1 %}
+
+<script>
+  var varInvMng = {};
+  var varInvQty = {};
+  var varInvPlcy = {};
+  {% for variant in product.variants %}
+  varInvMng[{{variant.id}}] = "{{ variant.inventory_management }}";
+  varInvQty[{{variant.id}}] = "{{ variant.inventory_quantity }}";
+  varInvPlcy[{{variant.id}}] = "{{ variant.inventory_policy }}";
+  {% endfor %}
+
+  var selectCallback = function(variant, selector) {
+    var mf = "{{ shop.money_format }}";
+    //alert('Heloo');
+    if (variant && variant.available) {
+      
+      if(varInvMng[variant.id] == 'shopify' && varInvPlcy[variant.id] == 'continue' && varInvQty[variant.id] <= 0 ) {
+        $('.stockAlert').hide();
+      } else {
+        $('.qty_inv').text(varInvQty[variant.id])
+      }
+      
+      jQuery('#AddToCart').removeAttr('disabled').removeClass('disabled').find('span').text('Order Now'); 
+      jQuery('.stockStatus').html('InStock');
+      if(variant.price < variant.compare_at_price){
+        jQuery('#ProductPrice').html(Shopify.formatMoney(variant.price, mf));
+        $('#ComparePrice').html(Shopify.formatMoney(variant.compare_at_price, mf));
+      } else {
+        jQuery('#ProductPrice').html(Shopify.formatMoney(variant.price, mf));
+      }
+    } else {
+      jQuery('#AddToCart').addClass('disabled').attr('disabled', 'disabled').find('span').text('Sold out'); 
+      var message = variant ? 'Sold out' : 'Unavailable';
+      jQuery('.stockStatus').html(message);
+      $('.qty_inv').text(varInvQty[variant.id]);
+      
+    }
+
+
+    if(variant && variant.featured_image) {
+      if($('.product-img .product-feacture-slider').length) {
+        if($('.product-img .product-feacture-slider').hasClass('slick-initialized')) {
+          var pts = Shopify.resizeImage(variant.featured_image.src,'medium');
+          var ti = $('.inner-slider[data-src="'+pts+'"]').index();
+          console.log(ti);
+          $('.product-img .product-feacture-slider').slick('slickGoTo', ti);
+        }
+      }
+    }
+  };
+
+  jQuery(document).ready(function(jQuery){
+    new Shopify.OptionSelectors("productSelect-{{ forloop.index }}", { product: {{ product | json }}, onVariantSelected: selectCallback, enableHistoryState: false });
+
+    {% if product.options.size == 1 and product.options.first != 'Title' %}
+    jQuery('.selector-wrapper:eq(0)').prepend('<label>{{ product.options.first | escape }}</label>');
+                                              {% endif %}                                       
+                                              });
+</script>
+{% endif %}

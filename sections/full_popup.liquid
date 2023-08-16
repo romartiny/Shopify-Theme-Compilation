@@ -1,0 +1,340 @@
+{% if section.settings.enbl_popup %}
+<div class="full_popup {% if section.settings.popup_small %}small_size{% else %}full_size{% endif %}">
+  <div class="popupContent">
+    <div class="text-center">
+      {% if section.settings.text_1 != blank %}<h3>{{ section.settings.text_1 }}</h3>{% endif %}
+      {% if section.settings.title != blank %}<h2>{{ section.settings.title | newline_to_br }}</h2>{% endif %}
+      {% if section.settings.text_2 != blank %}<h3>{{ section.settings.text_2 }}</h3>{% endif %}
+      <div class="buttonContent">
+        {% if section.settings.btn_1_url %}<a href="{{ section.settings.btn_1_url }}" class="btn button">{{ section.settings.btn_1 }}</a>{% endif %}
+        {% if section.settings.btn_2_url %}<a href="{{ section.settings.btn_2_url }}" class="btn button">{{ section.settings.btn_2 }}</a>{% endif %}
+      </div>
+
+      <div class="circle-animation start">
+        <div class="cross-icon"></div>
+        <div id="halfclip">
+          <div class="halfcircle" id="clipped">
+          </div>
+        </div>
+        <div class="halfcircle" id="fixed">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function(){
+    function getCookie(cname) {
+      var name = cname + "=";
+      var decodedCookie = document.cookie;
+      var ca = decodedCookie.split(';');
+      for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+    function setCookie(cname, cvalue, exdays) {
+      var d = new Date();
+      d.setTime(d.getTime() + (exdays*24*60*60*1000));
+      var expires = "expires="+ d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    $('.halfcircle').on('click', function(){
+      $('.full_popup').fadeOut();
+      setCookie('deal_popup', 'yes', 365);
+    });
+    
+    {% if section.settings.popup_close != 0 %}
+    setTimeout(function(){
+      $('.full_popup').fadeOut();
+      setCookie('deal_popup', 'yes', 365);
+    },{{ section.settings.popup_close | plus: section.settings.popup_after_load | times: 1000 }}); 
+    {% endif %}
+    
+    if(getCookie('deal_popup') != 'yes') {
+      setTimeout(function(){
+        $('.full_popup').fadeIn();
+        setCookie('deal_popup', 'yes', 365);
+      },{{ section.settings.popup_after_load | times: 1000 }});
+    }        
+  });
+</script>
+<style>
+  .full_size, .small_size .popupContent {
+    background: {{ section.settings.bg_color }} url({{ section.settings.bg_image | img_url: 'master' }}) no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  .small_size {
+    background: rgba(0,0,0,0.5);
+  }
+  .full_popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99999;
+    display: none;
+  }
+  .popupContent {
+    position: absolute;
+    width: 100%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+    padding: 20px;
+  }
+  .small_size .popupContent {
+    max-width: 800px;
+  }
+  .popupContent h2, .popupContent h3 {
+    margin: 0;
+    text-transform: uppercase !important;
+    font-weight: bold;
+    color: {{ section.settings.text_color }};
+  }
+  .full_size .popupContent h3 {
+    font-size: 60px;
+  }
+  .full_size .popupContent h2 {
+    font-size: 140px;
+    line-height: 0.9;
+  }
+  .small_size .popupContent h2 {
+    font-size: 100px;
+    line-height: 0.9;
+  }
+  .small_size .popupContent h3 {
+    font-size: 50px;
+  }
+  .buttonContent .btn {
+    font-size: 16px;
+    background: #000;
+    padding: 10px 20px;
+    color: #fff;
+    min-width: 150px;
+    display: inline-block;
+    margin: 10px 3px;
+    font-weight: bold;
+    border: 2px solid #000;
+  }
+  .buttonContent .btn {
+    border: 2px solid #000;
+    background: none;
+    color: #000;
+  }
+  .halfcircle {
+    cursor: pointer;
+  }
+  
+  .circle-animation {
+    width: 46px;
+    height: 46px;
+    position: relative;
+    margin: 10px auto 0;
+  }
+  .cross-icon{
+    position: absolute;
+    width: 36px;
+    height:36px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #000000;
+    border-radius: 100%;
+    overflow: hidden;
+  }
+  .cross-icon:before{
+    content: '';
+    position: absolute;
+    width: 18px;
+    left: 50%;
+    top: 49%;
+    height:2px;
+    display: block;
+    transform:translate(-50%) rotate(-45deg);
+    background: #ffffff;
+  }
+  .cross-icon:after{
+    content: '';
+    position: absolute;
+    width:18px;
+    display: block;
+    left: 50%;
+    top: 49%;
+    height: 2px;
+    transform:translate(-49%) rotate(45deg);
+    background: #ffffff;
+  }
+  #halfclip {
+    width: 50%;
+    height: 100%;
+    right: 0px;
+    position: absolute;
+    overflow: hidden;
+    transform-origin: left center;
+    animation: cliprotate {{ section.settings.popup_close  }}s steps(2) infinite;
+    -webkit-animation: cliprotate {{ section.settings.popup_close  }}s steps(2) infinite;
+  }
+
+  .halfcircle {
+    box-sizing: border-box;
+    height: 100%;
+    right: 0px;
+    position: absolute;
+    border: solid 2px transparent;
+    border-top-color: #000000;
+    border-left-color: #000000;
+    border-radius: 50%;
+  }
+  #clipped {
+    width: 200%;
+    animation: rotate {{ section.settings.popup_close | plus: section.settings.popup_after_load | divided_by: 2.0 }}s linear infinite;
+    -webkit-animation: rotate {{ section.settings.popup_close  | divided_by: 2.0 }}s linear infinite;
+  }
+  #fixed {
+    width: 100%;
+    transform: rotate(135deg);
+    animation: showfixed {{ section.settings.popup_close }}s steps(2) infinite;
+    -webkit-animation: showfixed {{ section.settings.popup_close  }}s linear infinite;
+  }
+
+  @-webkit-keyframes cliprotate {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+  }
+
+  @keyframes cliprotate {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+  }
+
+
+  @-webkit-keyframes rotate {
+    0% {transform: rotate(-45deg);}
+    100% {transform: rotate(135deg);}
+  }
+
+  @keyframes rotate {
+    0% {transform: rotate(-45deg);}
+    100% {transform: rotate(135deg);}
+  }
+
+  @-webkit-keyframes showfixed {
+    0% {opacity: 0;}
+    49.9% {opacity: 0;}
+    50% {opacity: 1;}
+    100% {opacity: 1;}
+  }
+  @media(max-width: 767px) {
+    .full_size .popupContent h3, .small_size .popupContent h3 {
+      font-size: 30px;
+    }
+    .full_size .popupContent h2, .small_size .popupContent h2 {
+      font-size: 50px;
+      line-height: 0.9;
+    }
+  }
+  
+</style>
+{% endif %}
+{% schema %}
+{
+  "name": "Full popup",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enbl_popup",
+      "label": "Enable popup?"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Popup background color"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Popup background image"
+    },
+    {
+      "type": "header",
+      "content": "Popup content"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Popup text color"
+    },
+    {
+      "id": "text_1",
+      "type": "text",
+      "label": "Add top sub text"
+    }, 
+    {
+      "id": "title",
+      "type": "textarea",
+      "label": "Add main title"
+    }, 
+    {
+      "id": "text_2",
+      "type": "text",
+      "label": "Add bottom sub text"
+    }, 
+
+    {
+      "id": "btn_1",
+      "type": "text",
+      "label": "Add Button 1 Text"
+    },     
+    {
+      "id": "btn_1_url",
+      "type": "url",
+      "label": "Add Button 1 Url"
+    },
+    {
+      "id": "btn_2",
+      "type": "text",
+      "label": "Add Button 2 Text"
+    },     
+    {
+      "id": "btn_2_url",
+      "type": "url",
+      "label": "Add Button 1 Url"
+    },
+    {
+      "type": "checkbox",
+      "id": "popup_small",
+      "label": "Does this popup small screen?"
+    },
+    {
+      "type": "number",
+      "id": "popup_after_load",
+      "label": "Popup display after time"
+    },
+    {
+      "type": "number",
+      "id": "popup_close",
+      "label": "Popup close time",
+      "info": "set 0 for close until click"
+    }
+
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,100 @@
+<section class="reviews-carousel" {% if block.settings.color_body_bg %}style="background: {{ block.settings.color_body_bg }};"{% endif %}>
+  <div class="container">
+    <div class="section-heading text-center">
+      {% if block.settings.title != blank %}<h3 class="clr-wh">{{ block.settings.title }}</h3>{% endif %}
+      {% if block.settings.reviewtitle != blank %}<h2 class="clr-wh mt-2 mb-5 pb-3">{{ block.settings.reviewtitle }}</h2>{% endif %}
+    </div>
+    <div class="row align-items-center">
+      {% if block.settings.videoUrl1 != blank %}
+      <div class="col-md-4">
+        <div class="white_box2  wow fadeIn" data-wow-delay="0.2s">
+          <div class="rev-video">
+            <iframe src="{{ block.settings.videoUrl1 }}" width="200" height="400" frameborder="0" allow="fullscreen" allowfullscreen></iframe>
+          </div>
+          {% if block.settings.user_name1 != blank %}
+          <div class="review-image mt-3">
+            {% if block.settings.user_img1 != blank %}<img src="{{ block.settings.user_img1 | img_url: '50x50' }}" alt="{{ block.settings.user_img1.alt }}" class="d-inline">{% endif %}
+            {% if block.settings.user_name1 != blank %}<p class="user_name d-inline  pl-4 pr-4">{{ block.settings.user_name1 }}</p>{% endif %}
+            <div class="rating-user d-block mt-3">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+            </div>
+            {% if block.settings.video_desc_1 != blank %}{{ block.settings.video_desc_1 }}{% endif %}
+          </div>
+          {% endif %}
+          
+        </div>
+      </div>
+      {% endif %}
+      {% if block.settings.videoUrl2 != blank %}
+      <div class="col-md-4">
+        <div class="white_box2  wow fadeIn" data-wow-delay="0.2s">
+          <div class="rev-video">
+            <iframe src="{{ block.settings.videoUrl2 }}" width="200" height="400" frameborder="0" allow="fullscreen" allowfullscreen></iframe>
+          </div>
+          {% if block.settings.user_name2 != blank %}
+          <div class="review-image mt-3">
+            {% if block.settings.user_img2 != blank %}<img src="{{ block.settings.user_img2 | img_url: '50x50' }}" alt="{{ block.settings.user_img2.alt }}" class="d-inline">{% endif %}
+            {% if block.settings.user_name2 != blank %}<p class="user_name d-inline  pl-4 pr-4">{{ block.settings.user_name2 }}</p>{% endif %}
+            <div class="rating-user d-block mt-3">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+            </div>
+            {% if block.settings.video_desc_2 != blank %}{{ block.settings.video_desc_2 }}{% endif %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+      {% if block.settings.videoUrl3 != blank %}
+      <div class="col-md-4">
+        <div class="white_box2  wow fadeIn" data-wow-delay="0.2s">
+          <div class="rev-video">
+            <iframe src="{{ block.settings.videoUrl3 }}" width="200" height="400" frameborder="0" allow="fullscreen" allowfullscreen></iframe>
+          </div>
+          {% if block.settings.user_name3 != blank %}
+          <div class="review-image mt-3">
+            {% if block.settings.user_img3 != blank %} <img src="{{ block.settings.user_img3 | img_url: '50x50' }}" alt="{{ block.settings.user_img3.alt }}" class="d-inline">{% endif %}
+            {% if block.settings.user_name3 != blank %}<p class="user_name d-inline  pl-4 pr-4">{{ block.settings.user_name3 }}</p>{% endif %}
+            <div class="rating-user d-block mt-3">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+            </div>
+            {% if block.settings.video_desc_3 != blank %}{{ block.settings.video_desc_3 }}{% endif %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+    {% if block.settings.btnUrl != blank %}
+    <div class="call-button1 mt-5">
+      <div class="row justify-content-md-center">
+        <div class="col-md-4">
+          <a href="{{ block.settings.btnUrl }}" class="hvr-sweep-to-top  wow flipInX animated" data-wow-delay="0.4s" {% if block.settings.color_btn_bg %}style="background: {{ block.settings.color_btn_bg }};"{% endif %}>{{ block.settings.btntitle }}</a>
+          <div class="review-count text-center mt-4 wow fadeIn animated" data-wow-delay="0.5s">
+            <div class="rating-user d-inline">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+            </div>
+            <p class="user_name d-inline pl-4 pr-4">400+ Reviews</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+</section>

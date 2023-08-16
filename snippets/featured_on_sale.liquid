@@ -1,0 +1,16 @@
+<section class="featured-section">
+  <div class="container">
+    <div class="row align-items-center">
+      {% if block.settings.title != blank %}
+      <div class="col-md-2 col-sm-6 col-6">
+        <h6>{{ block.settings.title }}</h6>
+      </div>
+      {% endif %}
+      {% if block.settings.logo1 != blank %}<div class="col-md-2 col-sm-6 col-6"><img src="{{ block.settings.logo1 | img_url:'master' }}" alt="{{ block.settings.logo1.alt }}"></div>{% endif %}
+      {% if block.settings.logo2 != blank %}<div class="col-md-2 col-sm-6 col-6"><img src="{{ block.settings.logo2 | img_url:'master' }}" alt="{{ block.settings.logo2.alt }}"></div>{% endif %}
+      {% if block.settings.logo3 != blank %}<div class="col-md-2 col-sm-6 col-6"><img src="{{ block.settings.logo3 | img_url:'master' }}" alt="{{ block.settings.logo3.alt }}"></div>{% endif %}
+      {% if block.settings.logo4 != blank %}<div class="col-md-2 col-sm-6 col-6"><img src="{{ block.settings.logo4 | img_url:'master' }}" alt="{{ block.settings.logo4.alt }}"></div>{% endif %}
+      {% if block.settings.logo5 != blank %}<div class="col-md-2 col-sm-6 col-6"><img src="{{ block.settings.logo5 | img_url:'master' }}" alt="{{ block.settings.logo5.alt }}"></div>{% endif %}
+    </div>
+  </div>
+</section>

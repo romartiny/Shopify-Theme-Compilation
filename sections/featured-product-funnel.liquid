@@ -1,0 +1,284 @@
+<div itemscope itemtype="http://schema.org/Product" id="ProductSection-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="product" data-image-zoom-type="true" data-enable-history-state="true">
+  <div class="wrapper">
+    {% if section.settings.enable %}
+    {% if section.settings.title != blank %}<h1 class="pro-heading">{{ section.settings.title }}</h1>{% endif %}
+    
+    <div class="featured-product">
+      <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+      <meta itemprop="image" content="{{ product.featured_image.src | img_url: 'grande' }}">
+      {% for block in section.blocks %}
+      {%- assign product = all_products[block.settings.featured_product] -%}
+      {%- assign current_variant = product.selected_or_first_available_variant -%}
+
+      {%- if product == empty -%}
+      {%- assign section_onboarding = true -%}
+      {%- assign vendor = Vendor -%}
+      {%- assign title = 'homepage.onboarding.product_title' | t -%}
+      {%- assign compare_at_price = 2999 -%}
+      {%- assign price = 1999 -%}
+      {%- else -%}
+      {%- assign section_onboarding = false -%}
+      {%- assign vendor = product.vendor -%}
+      {%- assign title = product.title -%}
+      {%- assign compare_at_price = current_variant.compare_at_price -%}
+      {%- assign price = current_variant.price -%}
+      {%- endif -%}
+      <div class="featured-product-single">
+        {% if block.settings.enable %}
+        <div class="BestChoice"><h4>Best Choice</h4></div>
+        {% endif %}
+        <div class="product_dtl {% if block.settings.enable %}product_dt3{% endif %}">
+          
+          <h2 class="qty_stock"><strong>{{forloop.index}} {%- if forloop.index == 1 -%}PIECE{%- else -%}PIECES{%- endif -%}</strong></h2>
+          <h1 class="product_title" itemprop="name">{{ title }}</h1>
+          {% form 'product', product, class:form_classes, novalidate: 'novalidate' %}
+          {% if block.settings.offer_text != blank %}
+          <div class="featured_offer">{{ block.settings.offer_text }}</div>
+          {% endif %}
+          {% unless section_onboarding %}
+          {% assign featured_image = product.featured_image | default: product.featured_image %}
+          <div id="{{ img_wrapper_id }}" class="featured_image" data-image-id="{{ image.id }}">
+            <div>
+              <img class="lazyload lazypreload {{ img_id_class }}"
+                   src="{{ featured_image | img_url: 'master' }}"
+                   alt="{{ image.alt | escape }}">
+            </div>
+          </div>
+
+          <div class="qty_rate" {% if forloop.first %}style="display:none;"{% endif %}>{{forloop.index}}X</div>
+          {% else %}
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endunless %}
+
+
+          <div class="featured_detail" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            <div data-price-container>
+              <div class="price">
+                {% assign compare = compare_at_price | times:forloop.index %}
+                {% if compare_at_price > price %}
+                <span id="PriceA11y" class="visually-hidden" {% unless current_variant.available %}aria-hidden="true"{% endunless %}>{{ 'products.general.regular_price' | t }}</span>
+                <span class="product-single__price--wrapper product-price__price-{{ section.id }} product-single__price-{{ section.id }}" aria-hidden="false">
+                  <span id="ComparePrice-{{ section.id }}" class="product-single__price--compare-at">
+                    <del> {{ compare | money }}</del>
+                  </span>
+                </span>
+                <span id="ComparePriceA11y" class="visually-hidden" aria-hidden="false">{{ 'products.general.sale_price' | t }}</span>
+                {% else %}
+                <span id="PriceA11y" class="visually-hidden" {% unless current_variant.available %}aria-hidden="true"{% endunless %}>{{ 'products.general.regular_price' | t }}</span>
+                <span class="product-single__price--wrapper hide" aria-hidden="true">
+                  <span id="ComparePrice-{{ section.id }}" class="product-single__price--compare-at"></span>
+                </span>
+                <span id="ComparePriceA11y" class="visually-hidden" aria-hidden="true">{{ 'products.general.sale_price' | t }}</span>
+                {% endif %}
+                {% assign p_price = price | times: forloop.index %}
+                {% assign discount = block.settings.discount  %}
+                {% assign d_price = price | times:forloop.index | times:discount  | divided_by: 100.00 %}
+                {% assign product_price = p_price | minus : d_price %}
+
+                <span id="ProductPrice-{{ section.id }}"
+                      class="product-single__price{% if compare_at_price > price %} on-sale{% endif %} product-price__price-{{ section.id }}"
+                      itemprop="price"
+                      content="{{ price | divided_by: 100.00 }}"
+                      {% unless current_variant.available %}aria-hidden="true"{% endunless %}>
+                  {{ product_price | money }}
+                </span>
+				{% assign product_p =  product.compare_at_price_max | times:forloop.index %}
+                {% capture discount_percentage %}
+                {{ product.compare_at_price_max | minus:product.price | times:100 | divided_by:product.compare_at_price_max }}%
+                {% endcapture %}
+                {% capture discount_dollar %}
+                {{ product.compare_at_price_max | minus:product_price | times: forloop.index | money }}
+                {% endcapture %}
+                {% if product.compare_at_price_max > product.price %}            
+                <div class="you-save" id="SaveAmount-{{ section.id }}">Save {{ product_p  | minus: product_price | money}} </div>
+                {% endif %} 
+              </div>
+            </div>
+
+            <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+            <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+
+
+            {% capture "form_classes" %}
+            product-single__form{% if product.has_only_default_variant %} product-single__form--no-variants{% endif %}
+            {%- endcapture %}
+
+            {% capture "form_id" %}AddToCartForm--{{ section.id }}{%- endcapture %}
+            {%- capture "form_classes" -%}product-form-{{ product.id }} productForm{% if settings.show_swatch %} hidedropdown{% endif %}{% if settings.enable_payment_button and product.has_only_default_variant%} product-form--payment-button-no-variants{% endif %}{%- endcapture %}
+
+            {% if product.variants.size > 1 %}
+            <div class="product-form mfp-link">
+              <select name="id" id="product-selecta-{{ forloop.index }}" class="product-form__variants selectbox no-js">
+                {% for variant in product.variants %}
+                {% if variant.available %}
+                <option{% if variant == current_variant %} selected="selected"{% endif %} value="{{ variant.id }}">{{ variant.title }}</option>
+                {% else %}
+                <option disabled="disabled">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>
+                {% endif %}
+                {% endfor %}
+              </select>
+            </div>
+            {% endif %}
+            <script>
+              // initialize multi selector for product
+              jQuery(function($) {
+                new Shopify.OptionSelectors("product-selecta-{{ forloop.index }}", { product:  {{ product | json }} , onVariantSelected: selectCallback });
+              });
+            </script>
+            <!-- add to cart -->
+            <div class="product-action">
+              {% if forloop.index == 1 %}
+              <input type="hidden" id="quantity" name="quantity" value="1" class="product-form__input qty" />
+              {% elsif forloop.index == 2 %}
+              <input type="hidden" id="quantity" name="quantity" value="2" class="product-form__input qty" />
+              {% elsif forloop.index == 3 %}
+              <input type="hidden" id="quantity" name="quantity" value="3" class="product-form__input qty" />
+              {% endif %}
+
+
+              <div class="product-form__item--submit">
+                <button type="submit" name="checkout" id="AddToCart-{{ section.id }}" {% unless current_variant.available %}disabled="disabled"{% endunless %} class="btn product-form__cart-submit{% if product.options.size == 1 and product.variants[0].title == 'Default Title' %} product-form__cart-submit--small{% endif %}">
+                  <span id="AddToCartText-{{ section.id }}">{% unless current_variant.available %}{{ 'products.product.sold_out' | t }}{% else %}{{ 'products.product.add_to_cart' | t }}{% endunless %}</span>
+                </button>
+                {% if forloop.index == 1 %}
+                <a  data-pro="1" data-discount="" class="btn but_it_now" href="/cart/{{ current_variant.id }}:{{ forloop.index }}?discount=BUY2">
+                  <span id="AddToCartText-{{ section.id }}">{% unless current_variant.available %}{{ 'products.product.sold_out' | t }}{% else %}{{ 'products.product.add_to_cart' | t }}{% endunless %}</span>
+                </a>
+
+                {% elsif forloop.index == 2 %}
+                <a  data-pro="2" data-discount="BUY2" class="btn but_it_now" href="/cart/{{ current_variant.id }}:{{ forloop.index }}?discount=BUY2">
+                  <span id="AddToCartText-{{ section.id }}">{% unless current_variant.available %}{{ 'products.product.sold_out' | t }}{% else %}{{ 'products.product.add_to_cart' | t }}{% endunless %}</span>
+                </a>
+                {% elsif forloop.index == 3 %}
+                <a data-pro="3" data-discount="BUY3" class="btn but_it_now" href="/cart/{{ current_variant.id }}:{{ forloop.index }}?discount=BUY3">
+                  <span id="AddToCartText-{{ section.id }}">{% unless current_variant.available %}{{ 'products.product.sold_out' | t }}{% else %}{{ 'products.product.add_to_cart' | t }}{% endunless %}</span>
+                </a>
+                {% endif %}
+
+
+
+              </div>
+            </div>
+
+          </div>
+          {% endform %}
+          <div class="product_payment">
+            <img src="//cdn.shopify.com/s/files/1/2560/1012/files/paymentmethod-v2.png?1479307129020704333">
+          </div>
+        </div>
+      </div>
+      {%- unless product.empty? -%}<script type="application/json" id="ProductJson-{{ section.id }}-{{ forloop.index }}">{{ product | json }}</script>{%- endunless -%}
+      {% endfor %}
+    </div>
+ {% endif %}
+{% include 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: false %}
+     </div>
+</div>
+<script>
+  $(document).ready(function(){
+    var rn = Math.floor(Math.random() * 6) + 6;
+
+    if($.cookie('stockNo')) {
+      rn = $.cookie('stockNo');
+    } else {
+      $.cookie('stockNo', rn, { expires: 1 });
+    }
+    $('.stockAlert').html('<i>Only <strong>'+rn+'</strong> left in stock!</i>');
+  });
+
+
+</script>
+<script>
+  var selectCallback = function(variant, selector) {
+    var form = jQuery('#' + selector.domIdPrefix).closest('form');
+    if (variant) {
+      if (variant.available) {
+        var pro_var = variant.id;
+        var Qty = form.find('.but_it_now').attr('data-pro');
+        //console.log('777', pro_var);
+        //console.log('Qty', Qty);
+        var BUY2 = form.find('.but_it_now').attr('data-discount');
+        var d = '{{ shop.url }}/cart/'+pro_var+':'+Qty+'?discount='+ BUY2;
+        form.find('.but_it_now').attr('href',d);
+      }
+    }
+        
+    if(variant && variant.featured_image) {
+      var pts = Shopify.resizeImage(variant.featured_image.src,'grande');
+        form.find('.featured_image img').attr("src",pts);
+        form.find('.featured_image img').css('background', 'red');
+    }
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Multiple Products Promo",
+  "settings": [ 
+    {
+      "type": "checkbox",
+      "id": "enable",
+      "label": "Section Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": {
+        "de": "Überschrift",
+        "en": "Heading",
+        "es": "Título",
+        "fr": "Titre",
+        "it": "Heading",
+        "ja": "見出し",
+        "pt-BR": "Título"
+      }
+    }
+    
+  ],
+  "blocks": [
+    {
+      "name": "Featured products",
+      "type": "products",
+      "limit" : 3,
+      "settings": [
+        {
+          "type": "product",
+          "id": "featured_product",
+          "label": {
+            "de": "Produkt",
+            "en": "Product",
+            "es": "Producto",
+            "fr": "Produit",
+            "it": "Prodotto",
+            "ja": "商品",
+            "pt-BR": "Produto"
+          }
+        },
+        {
+          "type": "text",
+          "id": "offer_text",
+          "label": "Offer Text"
+        },
+        {
+          "type": "text",
+          "id": "discount",
+          "label": "discount percentage"
+        },
+		{
+          "type": "checkbox",
+          "id": "enable",
+          "label": "Best Choice"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
+<style>
+  .featured-product button.btn {
+    display: none;
+  }
+</style>

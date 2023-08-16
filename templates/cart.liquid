@@ -1,0 +1,247 @@
+<!-- /templates/cart.liquid -->
+{% comment %}
+
+  For info on test orders:
+    - General http://docs.shopify.com/manual/your-store/orders/test-orders
+    - Shopify Payments - http://docs.shopify.com/manual/more/shopify-payments/testing-shopify-payments
+
+{% endcomment %}
+<script>
+pintrk('track', 'addtocart');
+</script>
+<div class="grid">
+  <div class="grid__item large--five-sixths push--large--one-twelfth">
+    {% if cart.item_count > 0 %}
+      <header class="section-header text-center">
+        <div class="con_btn text-left">
+          <a href="/"><< Continue Shopping</a>
+        </div>
+        <h1 class="text-center">{{ 'cart.general.title' | t }}</h1>
+        <hr class="hr--small">
+      </header>
+    <div style="text-align:right;margin-bottom:20px;">         
+
+    </div>
+      <form action="/cart" method="post" novalidate class="cart">
+
+        <div class="cart__row medium-down--hide cart__header-labels">
+          <div class="grid--full">
+            <div class="grid__item large--two-fifths push--large--three-fifths">
+              <div class="grid--full">
+                <div class="grid__item one-third medium-down--half text-center">
+                  {{ 'cart.label.quantity' | t }}
+                </div>
+                <div class="grid__item two-thirds medium-down--half text-right">
+                  {{ 'cart.label.total' | t }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% comment %}
+          Loop through products in the cart
+        {% endcomment %}
+        {% for item in cart.items %}
+          <div class="cart__row">
+            <div class="grid--full cart__row--table-large">
+
+              <div class="grid__item large--three-fifths">
+                <div class="grid">
+
+                  <div class="grid__item one-third">
+                    <a href="{{ item.url | within: collections.all }}" class="cart__image">
+
+                      {% comment %}
+                        More image size options at:
+                          - http://docs.shopify.com/themes/filters/product-img-url
+                      {% endcomment %}
+                      <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
+                    </a>
+                  </div>
+
+                  <div class="grid__item two-thirds">
+                    <a href="{{ item.url }}" class="h6 cart__product-name">
+                      {{ item.product.title }}
+                    </a>
+                    
+                    
+
+                    {% unless item.variant.title contains 'Default' %}
+                      <p class="cart__product-meta">
+                        Variant: {{ item.variant.title }}
+                      </p>
+                    {% endunless %}
+
+                    {% if settings.product_vendor_enable %}
+                      <p class="cart__product-meta">{{ item.vendor }}</p>
+                    {% endif %}
+<div class="cart-stock">
+                      <span>Low stock</span>
+                    </div>
+                    {% assign property_size = item.properties | size %}
+                    {% if property_size > 0 %}
+                      {% for p in item.properties %}
+                        {% assign first_character_in_key = p.first | truncate: 1, '' %}
+                        {% unless p.last == blank or first_character_in_key == '_' %}
+                          {{ p.first }}:
+
+                          {% if p.last contains '/uploads/' %}
+                            <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+                          {% else %}
+                            {{ p.last }}
+                          {% endif %}
+
+                          <br>
+                        {% endunless %}
+                      {% endfor %}
+                    {% endif %}
+
+                    <p class="cart__product-meta">
+                      <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">
+                        {{ 'cart.general.remove' | t }}
+                      </a>
+                    </p>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="grid__item large--two-fifths">
+                <div class="grid--full cart__row--table">
+
+                  <div class="grid__item one-third text-center">
+
+                    <label for="updates_{{ item.key }}" class="visually-hidden">{{ 'cart.label.quantity' | t }}</label>
+                    <input type="number" name="updates[]" id="updates_{{ item.key }}" class="cart__product-qty" value="{{ item.quantity }}" min="0" data-id="{{ item.key }}">
+
+                  </div>
+
+                  <div class="grid__item two-thirds text-right">
+                    {% if item.variant.compare_at_price > item.line_price %}
+                      <small class="cart__price cart__price--strikethrough">{{ item.variant.compare_at_price | money }}</small>
+                    {% endif %}
+
+                    <span class="cart__price">
+<span class='revy-cart-line-item-price' data-product-id='{{item.product_id}}' data-variant-id='{{item.variant_id}}' data-key='{{item.key}}'>
+{{ item.line_price | money }}
+</span>
+</span>
+
+                    {% assign discounts_size = item.discounts | size %}
+                    {% if discounts_size > 0 %}
+                      {% for discount in item.discounts %}
+                        <small class="cart__discount">{{ discount.title }}</small>
+                      {% endfor %}
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        {% endfor %}
+
+        <div class="cart__row cart__row--last">
+          <div class="grid--full cart__row--table-large">
+            {% comment %}
+              Optional, add a textarea for special notes
+                - Your theme settings can turn this on or off. Default is on.
+                - Make sure you have name="note" for the message to be submitted properly
+            {% endcomment %}
+            {% if settings.cart_notes_enable %}
+              <div class="grid__item large--seven-twelfths cart__note-container">
+                <div class="cart__note">
+                  <label for="CartSpecialInstructions">{{ 'cart.general.note' | t }}</label>
+                  <textarea name="note" class="input-full" id="CartSpecialInstructions">{{ cart.note }}</textarea>
+                </div>
+              </div>
+            {% endif %}
+            <div class="grid__item large--five-twelfths text-center large--text-right{% if settings.cart_notes_enable %} cart__subtotal-container{% else %} push--large--seven-twelfths{% endif %}">
+              <div class="grid--full cart__row--table">
+                <div class="grid__item one-half large--two-thirds large--text-center">
+                  <p class="cart__subtotal"><span id="revy-cart-subtotal-label">{{ 'cart.general.subtotal' | t }}</span></p>
+                </div>
+                <div class="grid__item one-half large--one-third">
+                  <p class="cart__subtotal"><span id="revy-cart-subtotal-price">{{ cart.total_price | money }}</span></p>
+                </div>
+              </div>
+              <div class="grid--full cart__row--table">
+                <div class="grid__item one-half large--two-thirds large--text-center">
+                  <p class="cart__subtotal">SHIPPING</p>
+                </div>
+                <div class="grid__item one-half large--one-third">
+                  <p class="cart__subtotal cart_free">FREE</p>
+                </div>
+              </div>
+
+              {% if cart.total_discounts > 0 %}
+                {% assign cartTotalDiscounts = cart.total_discounts | money %}
+                <p class="cart__savings">{{ 'cart.general.savings_html' | t: savings: cartTotalDiscounts }}</p>
+              {% endif %}
+
+
+              <p class="rte"><em>{{ taxes_shipping_checkout }}</em></p>
+              <button type="submit" name="update" class="btn--secondary update-cart">{{ 'cart.general.update' | t }}</button>
+              <button type="submit" name="checkout" class="btn cart__checkout">
+                {{ 'cart.general.checkout' | t }} <span class="icon icon-arrow-right" aria-hidden="true"></span>
+              </button>
+
+              {% if additional_checkout_buttons and settings.cart_type != 'drawer' %}
+                <div class="additional_checkout_buttons">{{ content_for_additional_checkout_buttons }}</div>
+              {% endif %}
+              
+              <div class="product-single__features">
+                <div class="table-wrapper"><div class="table-wrapper"><table>
+                  <tbody>
+                    <tr class="product-single__feature">
+                      <th>Secure Payment</th>
+                      <td>Orders are processed securely in {{ cart.currency.iso_code }}. No additional fees are charged.</td>
+                    </tr>
+                    <tr class="product-single__feature">
+                      <th>Payment Methods</th>
+                      <td><img src="//cdn.shopify.com/s/files/1/2560/1012/files/paymentmethod-v2.png?1479307129020704333" class="desk-payment">
+                        <img src="//cdn.shopify.com/s/files/1/2560/1012/files/paymentmethod-mobile-v2.png?1479307129020704333" class="mobile-payment">
+                      </td>
+                    </tr>
+                    <tr class="product-single__feature product-single__feature--with-image">
+                      <th>Guarantee</th>
+                      <td><img src="//cdn.shopify.com/s/files/1/2560/1012/files/product_guarantee.png?7516454658225735423">We offer a 1-year limited warranty and a 30-day money-back guarantee.</td>
+                    </tr>
+                  </tbody></table></div></div>
+              </div>
+              
+              {% comment %}
+            {% section 'cart_page_shipping_table' %}
+              {% endcomment %}
+            </div>
+          </div>
+
+        </div>
+
+      </form>
+
+    {% else %}
+      {% comment %}
+    The cart is empty. 
+      {% endcomment %}
+      <header class="section-header text-center">
+        <div class="con_btn text-left">
+          <a href="/collections/all"  class="btn">Continue Shopping</a>
+        </div>
+        <h1 class="text-center">{{ 'cart.general.title' | t }}</h1>
+        <hr class="hr--small">
+        <p class="cart--empty-message">{{ 'cart.general.empty' | t }}</p> 
+        <p class="cart--continue-browsing"><span ><a href="/" style="color:#213793">Return to homepage.</a></span></p>
+        <p class="cookie-message">{{ 'cart.general.cookies_required' | t }}</p>
+      </header>
+
+    {% endif %}
+  </div>
+</div>
+
+{% if settings.mlvedaACS_isMessageDisplay %}
+<p class="mlvedaCartNote" style="display:none">
+  {{ settings.mlvedaACS_messageContent | replace: "<<shop.name>>", shop.name | replace:"<<shop.currency>>",shop.currency|replace:"<<shop.selected_currency>>","<span class='selected-currency'></span>"}}
+</p>
+{% endif %}
