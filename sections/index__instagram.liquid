@@ -1,0 +1,160 @@
+{% comment %}
+** Instagram feed - dynamic **
+- Draggable section
+{% endcomment %}
+
+{% include 'include-instagram' %}
+
+{% schema %}
+{
+  "name": "Instagram feed",
+  "class": "instagram-feed jsInstagram",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Instagram"
+    },
+    {
+      "type": "text",
+      "id": "instagram_client_id",
+      "label": "Instagram access token",
+      "info": "[Learn more](http:\/\/outofthesandbox.com\/pages\/instagram-access-token)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "Show date posted on hover",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "images_per_row",
+      "label": "Images per row",
+      "min": 3,
+      "max": 8,
+      "step": 1,
+      "default": 4,
+      "info": "A maximum of 20 images total can be displayed."
+    },
+    {
+      "type": "range",
+      "id": "instagram_count",
+      "label": "Number of rows",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Width",
+      "default": "standard",
+      "options": [
+        {
+          "value": "standard",
+          "label": "Standard"
+        },
+        {
+          "value": "wide",
+          "label": "Wide"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_gutter",
+      "label": "Show gutter",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top spacing",
+      "min": 0,
+      "max": 80,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom spacing",
+      "min": 0,
+      "max": 80,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "animation",
+      "label": "Animation",
+      "default": "none",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "fadeIn",
+          "label": "Fade in"
+        },
+        {
+          "value": "fadeInDown",
+          "label": "Fade in down"
+        },
+        {
+          "value": "fadeInLeft",
+          "label": "Fade in left"
+        },
+        {
+          "value": "fadeInRight",
+          "label": "Fade in right"
+        },
+        {
+          "value": "slideInLeft",
+          "label": "Slide in left"
+        },
+        {
+          "value": "slideInRight",
+          "label": "Slide in right"
+        },
+        {
+          "value": "zoomIn",
+          "label": "Zoom in"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Advanced"
+    },
+    {
+      "type": "paragraph",
+      "content": "[Learn more](https://help.outofthesandbox.com/hc/en-us/articles/360022329373)"
+    },
+    {
+      "type": "text",
+      "id": "css_class",
+      "label": "CSS Class"
+    },
+    {
+      "type": "textarea",
+      "id": "custom_css",
+      "label": "Custom CSS"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instagram feed",
+      "category": "Social"
+    }
+  ]
+}
+{% endschema %}

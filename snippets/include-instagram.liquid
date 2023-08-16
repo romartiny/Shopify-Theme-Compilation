@@ -1,0 +1,95 @@
+{% comment %}
+  Snippet can be used in section or block
+  eg. {% include 'include-instagram' %}
+{% endcomment %}
+
+{% comment %}Assign object as block or section{% endcomment %}
+{% if type == 'block' %}
+  {% assign object = block %}
+{% else %}
+  {% assign object = section %}
+{% endif %}
+
+{% assign id = object.id %}
+{% assign images_per_row = object.settings.images_per_row %}
+{% assign show_date = object.settings.show_date %}
+{% assign instagram_count = object.settings.instagram_count | times: images_per_row  %}
+{% capture column_width %}{% include 'column-width', value: images_per_row %}{% endcapture %}
+{% comment %} Layout {% endcomment %}
+{% assign show_gutter = object.settings.show_gutter %}
+{% assign width = object.settings.width %}
+{% assign padding_top = object.settings.padding_top %}
+{% assign padding_bottom = object.settings.padding_bottom %}
+{% assign animation = object.settings.animation | default: 'none' %}
+{% comment %} Advanced {% endcomment %}
+{% assign css_class = object.settings.css_class %}
+{% assign custom_css = object.settings.custom_css %}
+
+{% comment %} Section specific CSS {% endcomment %}
+{% style %}
+  #shopify-section-{{ id }} {
+    padding-top: {{ padding_top }}px;
+    padding-bottom: {{ padding_bottom }}px;
+    {% if width == 'wide' %}
+      width: 100%;
+    {% endif %}
+  }
+  {% include 'css-loop', css: custom_css, id: id %}
+{% endstyle %}
+
+{% comment %} HTML markup {% endcomment %}
+<section class="section
+                {{ css_class }}
+                is-width-{{ width }}"
+                {% if animation != "none" %}
+                  data-scroll-class="{{ animation }}"
+                {% endif %}>
+
+  {% if object.settings.title != blank %}
+    <div class="container">
+      {% include 'heading', title: object.settings.title, heading_tag: 'h2', context: 'instagram', text_alignment: 'center' %}
+    </div>
+  {% endif %}
+
+  {% if object.settings.instagram_client_id != blank %}
+    <div id="instafeed" class="instagram__blocks container
+                              {% if show_gutter == false %}
+                                has-no-side-gutter
+                                has-background
+                              {% else %}
+                                has-gutter-enabled
+                              {% endif %}"
+                              data-instafeed></div>
+  {% else %}
+    <div id="instafeed" class="instagram__blocks container
+                              {% if show_gutter == false %}
+                                has-no-side-gutter
+                                has-background
+                              {% else %}
+                                has-gutter-enabled
+                              {% endif %}">
+      {% for i in (1..instagram_count) %}
+        <div class="{% include 'column-width', value: images_per_row %} medium-down--one-half columns instagram__placeholder">
+          <a href="#">
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg placeholder-svg--instagram' }}
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</section>
+
+{% comment %}JavaScript{% endcomment %}
+<script
+  type="application/json"
+  data-section-id="{{ object.id }}"
+  data-section-data
+>
+  {
+    "instagram_client_id": {{ object.settings.instagram_client_id | strip | json }},
+    "instagram_count": {{ instagram_count }},
+    "column_width": {{ column_width | strip | json }},
+    "show_date": {{ show_date | json }}
+  }
+</script>
+<script data-theme-editor-load-script src="{{ 'z__jsInstagram.js' | asset_url }}"></script>

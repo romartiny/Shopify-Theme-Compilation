@@ -1,0 +1,49 @@
+{% for link in main_menu.links %}
+  <li>
+    {% if link.links == blank %}
+      <input class="visuallyhidden submenu__input has-no-menu" type="checkbox" id="mobile-submenu-{{ link.title | handleize }}">
+      <label class="submenu__label has-no-menu" for="mobile-submenu-{{ link.title | handleize }}" data-navlink-handle="{{ link.title | handleize }}">
+        <a class="mobile-menu__item {% if link.active %}is-active{% endif %}" href="{{ link.url }}" >
+          {{ link.title }}
+        </a>
+      </label>
+    {% else %}
+      <div class="has-submenu">
+        <input class="visuallyhidden submenu__input" type="checkbox" id="mobile-submenu-{{ forloop.index }}">
+        <label class="submenu__label" for="mobile-submenu-{{ forloop.index }}" data-navlink-handle="{{ link.title | handleize }}">
+          <a {% unless link.url == 'http://' or link.url == '' or link.url == '/' or link.url == 'https://' or link.url == '#' %}href="{{ link.url }}"{% endunless %} class="mobile-menu-link {% if link.active %}is-active{% endif %}">
+            {{ link.title }}
+          </a>
+          <span class="close-dropdown" data-submenu-open="false"></span>
+        </label>
+        <ul class="mobile-menu__submenu has-dropdown">
+          {% assign currentIndex = forloop.index %}
+          {% for sub_link in link.links %}
+            <li>
+              {% if sub_link.links == blank %}
+                <a class="mobile-menu__item" href="{{ sub_link.url }}">{{ sub_link.title }}</a>
+              {% else %}
+                <div class="has-submenu">
+                  <input class="visuallyhidden submenu__input" type="checkbox" id="mobile-sub-submenu-{{ forloop.index }}-{{ currentIndex }}">
+                  <label class="submenu__label" for="mobile-sub-submenu-{{ forloop.index }}-{{ currentIndex }}">
+                    <a {% unless sub_link.url == 'http://' or sub_link.url == '' or sub_link.url == '/' or sub_link.url == 'https://' or sub_link.url == '#' %}href="{{ sub_link.url }}"{% endunless %} class="mobile-menu-link {% if sub_link.active %}is-active{% endif %}">
+                      {{ sub_link.title }}
+                    </a>
+                  <span class="close-sub-dropdown"></span>
+                  </label>
+                  <ul class="mobile-menu__submenu">
+                    {% for sub-sub_link in sub_link.links %}
+                      <li>
+                        <a class="mobile-menu__item" href="{{ sub-sub_link.url }}">{{ sub-sub_link.title }}</a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+  </li>
+{% endfor %}
